@@ -15,5 +15,5 @@
 
 ```shell
 py -3.8 -m pip install -r requirements.txt
-py -3.8 -m auto-derby
+py -3.8 -m auto_derby
 ```
