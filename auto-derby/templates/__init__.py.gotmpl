@@ -1,0 +1,11 @@
+# Code Generated from {{ templateFiles }}, DO NOT EDIT.
+
+{{- define "stem" }}
+{{- $name := base . }}
+{{- $ext := ext $name }}
+{{- $name | substr 0 (sub (len $name) (len $ext) | int) }}
+{{- end }}
+{{ "" }}
+{{- range .Files }}
+{{ template "stem" . | snakecase | upper }} = "{{.}}"
+{{- end }}

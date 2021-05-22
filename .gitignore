@@ -1,0 +1,6 @@
+__pycache__
+
+*.local
+
+.vscode/*
+!.vscode/cspell.json
