@@ -25,7 +25,7 @@ def cursor_at(point: Tuple[int, int]):
 
 def click_at_window(h_wnd: int, point: Tuple[int, int]):
     point = win32gui.ClientToScreen(h_wnd, point)
-    with window.topmost(h_wnd), cursor_at(point):
+    with window.topmost(h_wnd), window.recover_foreground(), cursor_at(point):
         mouse.click()
         time.sleep(0.2)
 
@@ -45,6 +45,7 @@ def count_image(*name: Text) -> bool:
 
 def wait_image(*name: Text) -> Tuple[Text, Tuple[int, int]]:
     h_wnd = window.get_game()
+    # TODO: implement game screen mask
     while True:
         match = template.match(template.screenshot(h_wnd), *name)
         if match:
@@ -62,8 +63,8 @@ def click_image(name: Text, *, x: int = 0, y: int = 0) -> bool:
 
 
 def wait_click_image(name: Text, *, x: int = 0, y: int = 0) -> None:
-    wait_image(name)
-    click_image(name, x=x, y=y)
+    _, pos = wait_image(name)
+    click((pos[0]+x, pos[1]+y))
 
 
 def move(h_wnd: int, x: int, y: int):

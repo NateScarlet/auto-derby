@@ -45,14 +45,10 @@ def topmost(h_wnd: int):
 
 
 @contextlib.contextmanager
-def foreground(h_wnd: int):
+def recover_foreground():
     fg_h_wnd = win32gui.GetForegroundWindow()
-    if fg_h_wnd == h_wnd:
-        yield
-    else:
-        win32gui.SetForegroundWindow(h_wnd)
-        yield
-        try:
-            win32gui.SetForegroundWindow(fg_h_wnd)
-        except Exception as ex:
-            LOGGER.warn("recover foreground window failed: %s", ex)
+    yield
+    try:
+        win32gui.SetForegroundWindow(fg_h_wnd)
+    except Exception as ex:
+        LOGGER.warn("recover foreground window failed: %s", ex)

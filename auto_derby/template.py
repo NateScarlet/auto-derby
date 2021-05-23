@@ -19,9 +19,9 @@ LOGGER = logging.getLogger(__name__)
 
 
 def screenshot(h_wnd: int) -> Image:
-    # XXX: BitBlt capture not work, only foreground window is supportted
+    # XXX: BitBlt capture not work, background window is not supportted
     # Maybe use WindowsGraphicsCapture like obs do
-    with window.foreground(h_wnd):
+    with window.topmost(h_wnd):
         # not use GetWindowRect to exclude border
         _, _, w, h = win32gui.GetClientRect(h_wnd)
         x, y = win32gui.ClientToScreen(h_wnd, (0, 0))
