@@ -36,29 +36,25 @@ def click(point: Tuple[int, int]):
 
 
 def count_image(*name: Text) -> int:
-    h_wnd = window.get_game()
-    match = template.match(template.screenshot(h_wnd), *name)
+    match = template.match(template.screenshot(), *name)
     if not match:
         return 0
     return 1
 
 
 def wait_image(*name: Text) -> Tuple[Text, Tuple[int, int]]:
-    h_wnd = window.get_game()
-    # TODO: implement game screen mask
     while True:
-        match = template.match(template.screenshot(h_wnd), *name)
+        match = template.match(template.screenshot(), *name)
         if match:
             return match
         time.sleep(0.5)
 
 
 def click_image(name: Text, *, x: int = 0, y: int = 0) -> bool:
-    h_wnd = window.get_game()
-    match = template.match(template.screenshot(h_wnd), name)
+    match = template.match(template.screenshot(), name)
     if not match:
         return False
-    click_at_window(h_wnd, (match[1][0] + x, match[1][1] + y))
+    click((match[1][0] + x, match[1][1] + y))
     return True
 
 
@@ -70,3 +66,13 @@ def wait_click_image(name: Text, *, x: int = 0, y: int = 0) -> None:
 def move(h_wnd: int, x: int, y: int):
     x, y = win32gui.ClientToScreen(h_wnd, (x, y))
     mouse.move(x, y)
+
+
+def drag_at_window(h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1):
+    x, y = win32gui.ClientToScreen(h_wnd, point)
+    with window.topmost(h_wnd), window.recover_foreground():
+        mouse.drag(x, y, x+dx, y+dy, duration=duration)
+
+
+def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.3):
+    drag_at_window(window.get_game(), point, dx=dx, dy=dy, duration=duration)

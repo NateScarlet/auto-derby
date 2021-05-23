@@ -269,7 +269,7 @@ def double_click(button: typing.Text = 'left') -> None:
     ...
 
 
-def drag(start_x, start_y, end_x, end_y, absolute=True, duration=0):
+def drag(start_x: int, start_y: int, end_x: int, end_y: int, absolute: bool=True, duration: float=0) -> None:
     """
     Holds the left mouse button, moving from start to end position, then
     releases. `absolute` and `duration` are parameters regarding the mouse

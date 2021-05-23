@@ -18,7 +18,7 @@ from . import window
 LOGGER = logging.getLogger(__name__)
 
 
-def screenshot(h_wnd: int) -> Image:
+def screenshot_window(h_wnd: int) -> Image:
     # XXX: BitBlt capture not work, background window is not supportted
     # Maybe use WindowsGraphicsCapture like obs do
     with window.topmost(h_wnd):
@@ -28,6 +28,9 @@ def screenshot(h_wnd: int) -> Image:
         left, top, right, bottom = x, y, x+w, y+h
         bbox = (left, top, right, bottom)
         return ImageGrab.grab(bbox, True, True)
+
+def screenshot() -> Image:
+    return screenshot_window(window.get_game())
 
 
 _LOADED_TEMPLATES: Dict[Text, Image] = {}

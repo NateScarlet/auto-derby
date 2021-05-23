@@ -33,7 +33,7 @@ def _latest_file():
 
 def create_pos_mask(name: Text):
 
-    game_img = template.screenshot(window.get_game())
+    game_img = template.screenshot()
     match_img = template.load(name)
     match = template.match(game_img, name)
     last_match = template.DEBUG_DATA["last_match"]

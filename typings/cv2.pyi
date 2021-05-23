@@ -15438,7 +15438,7 @@ def checkRange(a[, quiet[, minVal[, maxVal]]]) -> retval, pos:
     ...
 
 
-def circle(img, center, radius, color[, thickness[, lineType[, shift]]]) -> img:
+def circle(img: ndarray, center: Tuple[int, int], radius: int, color: Tuple[int, ...], thickness: int =..., lineType: int =..., shift: int = ...) -> ndarray:
     """
     .   @brief Draws a circle.
     .
