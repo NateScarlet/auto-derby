@@ -1,14 +1,5 @@
 # Code Generated from {{ templateFiles }}, DO NOT EDIT.
 
-{{- define "stem" }}
-{{- $name := base . }}
-{{- $ext := ext $name }}
-{{- $name | substr 0 (sub (len $name) (len $ext) | int) }}
-{{- end }}
-{{ "" }}
 {{- range .Files }}
-    {{- if . | hasSuffix ".pos.png" }}
-    {{- else }}
-{{ template "stem" . | snakecase | upper }} = "{{.}}"
-    {{- end }}
+{{ . | snakecase | upper | replace "." "_" | trimSuffix "_PNG" }} = "{{.}}"
 {{- end }}

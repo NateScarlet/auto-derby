@@ -4,7 +4,7 @@
 
 import logging
 import pathlib
-from typing import Dict, Optional, Text, Tuple, TypedDict
+from typing import Dict, Optional, Text, Tuple, TypedDict, Union
 
 import cv2
 import numpy as np
@@ -74,15 +74,28 @@ class DebugDict(TypedDict):
 
 DEBUG_DATA = DebugDict(last_match=None)
 
+class Specification():
+    def __init__(self, name: Text, pos: Optional[Text] = None):
+        self.name = name
+        self.pos = pos
 
-def _match_one(img: Image, name: Text, threshold: float = 0.95) -> Optional[Tuple[Text, Tuple[int, int]]]:
+    def load_pos(self) -> Optional[Image]:
+        return try_load(self.pos or add_middle_ext(self.name, "pos"))
+    
+    def __str__(self):
+        return f"tmpl<{self.name}&{self.pos}>"
+
+def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 0.95) -> Optional[Tuple[Text, Tuple[int, int]]]:
     cv_img = _cv_image(img)
-    img_mask = try_load(add_middle_ext(name, "pos"))
+    if not isinstance(tmpl, Specification):
+        tmpl = Specification(tmpl)
+
+    img_mask = tmpl.load_pos()
     if img_mask:
         cv_img = _cv_mask(cv_img, img_mask)
     res = cv2.matchTemplate(
-        _cv_image(img),
-        _cv_image(load(name)),
+        cv_img,
+        _cv_image(load(tmpl.name)),
         cv2.TM_SQDIFF_NORMED,
     )
     res = 1 - res
@@ -92,13 +105,13 @@ def _match_one(img: Image, name: Text, threshold: float = 0.95) -> Optional[Tupl
     if max_val > threshold:
         x, y = max_loc
         LOGGER.info(
-            "match: name=%s, pos=%s, similarity=%.2f", name, max_loc, max_val)
-        return (name, (x, y))
+            "match: name=%s, pos=%s, similarity=%.2f", tmpl.name, max_loc, max_val)
+        return (tmpl.name, (x, y))
     return None
 
 
-def match(img: Image, *name: Text, threshold: float = 0.95) -> Optional[Tuple[Text, Tuple[int, int]]]:
-    for i in name:
+def match(img: Image, *tmpl: Union[Text, Specification], threshold: float = 0.95) -> Optional[Tuple[Text, Tuple[int, int]]]:
+    for i in tmpl:
         match = _match_one(
             img,
             i,
@@ -106,5 +119,5 @@ def match(img: Image, *name: Text, threshold: float = 0.95) -> Optional[Tuple[Te
         )
         if match:
             return match
-    LOGGER.info("no match: name=%s", name)
+    LOGGER.info("no match: name=%s", tmpl)
     return None

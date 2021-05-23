@@ -4,7 +4,7 @@
 
 from . import template
 import time
-from typing import Text, Tuple
+from typing import Text, Tuple, Union
 
 import mouse
 import win32gui
@@ -42,9 +42,9 @@ def count_image(*name: Text) -> int:
     return 1
 
 
-def wait_image(*name: Text) -> Tuple[Text, Tuple[int, int]]:
+def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[Text, Tuple[int, int]]:
     while True:
-        match = template.match(template.screenshot(), *name)
+        match = template.match(template.screenshot(), *tmpl)
         if match:
             return match
         time.sleep(0.5)
@@ -74,5 +74,5 @@ def drag_at_window(h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, dura
         mouse.drag(x, y, x+dx, y+dy, duration=duration)
 
 
-def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.3):
+def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.1):
     drag_at_window(window.get_game(), point, dx=dx, dy=dy, duration=duration)

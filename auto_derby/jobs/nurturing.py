@@ -1,39 +1,63 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
+import time
 
-import cv2
-import numpy as np
-from .. import action, templates, template
+from auto_derby import template
 
-
-ALL_OPTIONS = [
-    templates.NURTURING_OPTION1,
-    templates.NURTURING_OPTION2,
-]
+from .. import action, templates
 
 
-def _count_friend() -> int:
 
-    img = template.screenshot()
-    img = img.crop((325, 105, 395, 460))
+def _handle_training():
+    _, pos = action.wait_image(
+        template.Specification(templates.NURTURING_STATUS_F,
+                               templates.NURTURING_STATUS_SPEED_POS),
+        template.Specification(templates.NURTURING_STATUS_F,
+                               templates.NURTURING_STATUS_STAMINA_POS),
+        template.Specification(templates.NURTURING_STATUS_E,
+                               templates.NURTURING_STATUS_SPEED_POS),
+        template.Specification(templates.NURTURING_STATUS_E,
+                               templates.NURTURING_STATUS_STAMINA_POS),
+        template.Specification(templates.NURTURING_STATUS_D,
+                               templates.NURTURING_STATUS_SPEED_POS),
+        template.Specification(templates.NURTURING_STATUS_D,
+                               templates.NURTURING_STATUS_STAMINA_POS),
+        template.Specification(templates.NURTURING_STATUS_F,
+                               templates.NURTURING_STATUS_INTELLIGENCE_POS),
+        template.Specification(templates.NURTURING_STATUS_C,
+                               templates.NURTURING_STATUS_SPEED_POS),
+        template.Specification(templates.NURTURING_STATUS_C,
+                               templates.NURTURING_STATUS_STAMINA_POS),
+        template.Specification(templates.NURTURING_STATUS_F,
+                               templates.NURTURING_STATUS_PERSEVERANCE_POS),
+    )
+    x, y = pos
+    x += 30
+    action.drag((x, y), dy=100)  # select course
+    action.click((x, y+100))
 
-    cv_img = cv2.cvtColor(np.asarray(img.convert("RGB")), cv2.COLOR_RGB2GRAY)
-    # cv_img = cv2.Canny(cv_img, 20, 40)
-    cv_img = cv2.adaptiveThreshold(cv_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 10, 15)
-    # cv_img = cv2.boxFilter(cv_img, -1, (80, 1))
-    # cv_img = cv2.medianBlur(cv_img, 5)
-    res =  cv2.HoughCircles(cv_img, cv2.HOUGH_GRADIENT, 4, 1, minRadius=25, maxRadius=30)
-    print(res)
-    preview_img = cv2.cvtColor(cv_img, cv2.COLOR_GRAY2BGR)
-    for x, y, r in res[0]:
-        cv2.circle(preview_img, (int(x), int(y)), int(r), (0, 0, 255))
-    # _, cv_img = cv2.threshold(cv_img, 220, 255, cv2.THRESH_BINARY)
-    # cv_img = cv2.sqrBoxFilter(cv_img, -1, (1, 1))
-    # cv_img = cv2.GaussianBlur(cv_img, (0, 21), sigmaX=100, sigmaY=0)
-    cv2.imshow("friends", preview_img)
-    cv2.waitKey()
-    exit(1)
+
+def _handle_race():
+    action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
+    action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
+    action.wait_click_image(templates.RACE_RESULT_BUTTON)
+
+    _, pos = action.wait_image(
+        templates.RACE_RESULT_NO1,
+        templates.RACE_RESULT_NO2,
+        templates.RACE_RESULT_NO8,
+        templates.RACE_RESULT_NO10,
+    )
+    while True:
+        time.sleep(1)
+        if (
+            action.click_image(templates.GREEN_NEXT_BUTTON) or
+            action.click_image(templates.NURTURING_END_BUTTON)
+        ):
+            break
+        action.click(pos)
+    action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
 
 def nurturing():
@@ -48,10 +72,9 @@ def nurturing():
             templates.NURTURING_RACE_NEXT_BUTTON,
             templates.NURTURING_OPTION1,
             templates.NURTURING_OPTION2,
-            templates.NURTURING_REST,
             templates.GREEN_NEXT_BUTTON,
+            templates.NURTURING_URA_FINALS,
             templates.NURTURING_GENE_INHERIT,
-            templates.NURTURING_END_BUTTON,
         )
         if name == templates.CONNECTING:
             pass
@@ -63,28 +86,36 @@ def nurturing():
             x, y = pos
             y += 60
             action.click((x, y))
-            action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
-            action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
-            action.wait_click_image(templates.RACE_RESULT_BUTTON)
-
-            _, pos = action.wait_image(
-                templates.RACE_RESULT_NO1,
-                templates.RACE_RESULT_FAIL,
-            )
+            _handle_race()
+        elif name == templates.NURTURING_URA_FINALS:
             action.click(pos)
-            action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
+            _handle_race()
         elif name == templates.NURTURING_TRAINING:
             if action.count_image(templates.NURTURING_STAMINA_HALF_EMPTY):
-                action.click_image(templates.NURTURING_REST)
-                continue
-            action.click(pos)
-            action.drag((60, 400), dy=200)  # select speed
-            action.click((60, 600))
-            # action.drag((60, 600), dx=300)
-        elif name == templates.NURTURING_REST:
-            if action.count_image(templates.NURTURING_MOOD_NORMAL):
-                action.click_image(templates.NURTURING_GO_OUT)
+                if action.click_image(templates.NURTURING_HEALTH_CARE):
+                    time.sleep(2)
+                    if action.count_image(templates.NURTURING_HEALTH_CARE_CONFIRM):
+                        action.click_image(templates.GREEN_OK_BUTTON)
+                    continue
+
+                if action.count_image(
+                    templates.NURTURING_MOOD_NORMAL,
+                    templates.NURTURING_MOOD_BAD,
+                    templates.NURTURING_MOOD_VERY_BAD,
+                ):
+                    _, pos = action.wait_image(
+                        templates.NURTURING_GO_OUT,
+                        templates.NURTURING_SUMMER_REST,
+                    )
+                    action.click(pos)
+                else:
+                    _, pos = action.wait_image(
+                        templates.NURTURING_REST,
+                        templates.NURTURING_SUMMER_REST,
+                    )
+                    action.click(pos)
             else:
                 action.click(pos)
+                _handle_training()
         else:
             action.click(pos)
