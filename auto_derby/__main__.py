@@ -3,7 +3,9 @@
 """umamusume pertty derby automation.  """
 
 
+from auto_derby import templates
 import ctypes
+from os import name
 import time
 import webbrowser
 
@@ -16,8 +18,22 @@ import logging
 
 LOGGER = logging.getLogger(__name__)
 
-
+import argparse
 def main():
+    avaliable_jobs = {
+        "team_race": jobs.team_race,
+        "daily_race_money": lambda : jobs.daily_race(templates.MOONLIGHT_PRIZE),
+        "daily_race_sp": lambda : jobs.daily_race(templates.JUPITER_CUP),
+    }
+    parser = argparse.ArgumentParser()
+    parser.add_argument("job")
+    args = parser.parse_args()
+    job = avaliable_jobs.get(args.job)
+
+    if not job:
+        LOGGER.error("unknown job: %s\navaliable jobs:\n  %s", args.job, "\n  ".join(avaliable_jobs.keys()))
+        exit(1)
+
     h_wnd = window.get_game()
     if not h_wnd:
         if win32gui.MessageBox(0, "启动DMM赛马娘？", "找不到窗口", win32con.MB_YESNO):
@@ -28,7 +44,7 @@ def main():
         else:
             exit(1)
     LOGGER.info("game window: %s", h_wnd)
-    jobs.team_race()
+    job()
 
 
 def is_admin():

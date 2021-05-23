@@ -13,7 +13,7 @@ def team_race():
             templates.TEAM_RACE_BUTTON,
             templates.GREEN_NEXT_BUTTON,
             templates.TEAM_RACE_CHOOSE_COMPETITOR,
-            templates.TEAM_RACE_START_BUTTON,
+            templates.RACE_START_BUTTON,
             templates.TEAM_RACE_SEE_RESULT_BUTTON,
             templates.TEAM_RACE_WIN,
             templates.TEAM_RACE_LOSE,
