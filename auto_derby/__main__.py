@@ -21,6 +21,7 @@ import argparse
 def main():
     avaliable_jobs = {
         "team_race": jobs.team_race,
+        "nurturing": jobs.nurturing,
         "daily_race_money": lambda : jobs.daily_race(templates.MOONLIGHT_PRIZE),
         "daily_race_sp": lambda : jobs.daily_race(templates.JUPITER_CUP),
     }

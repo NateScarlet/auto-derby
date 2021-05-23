@@ -6,6 +6,9 @@ numpy
 
 from typing import *
 
+Scalar = Union[int, float, complex, int, bool, bytes, str, memoryview]
+ArrayLike = Union[ndarray, List[Any], Scalar]
+
 """
 NumPy
 =====
@@ -7882,7 +7885,7 @@ class ndarray(object):
         """
         ...
 
-    def __getitem__(self, key, /):
+    def __getitem__(self, key, /) -> ndarray:
         """
         Return self[key].
         """
@@ -8026,67 +8029,67 @@ class ndarray(object):
         """
         ...
 
-    def __mod__(self, value, /):
+    def __mod__(self, value, /)-> ndarray:
         """
         Return self%value.
         """
         ...
 
-    def __mul__(self, value, /):
+    def __mul__(self, value, /) -> ndarray:
         """
         Return self*value.
         """
         ...
 
-    def __ne__(self, value, /):
+    def __ne__(self, value, /) -> ndarray:
         """
         Return self!=value.
         """
         ...
 
-    def __neg__(self, /):
+    def __neg__(self, /) -> ndarray:
         """
         -self
         """
         ...
 
-    def __or__(self, value, /):
+    def __or__(self, value, /)-> ndarray:
         """
         Return self|value.
         """
         ...
 
-    def __pos__(self, /):
+    def __pos__(self, /) -> ndarray:
         """
         +self
         """
         ...
 
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None, /) -> ndarray:
         """
         Return pow(self, value, mod).
         """
         ...
 
-    def __radd__(self, value, /):
+    def __radd__(self, value, /) -> ndarray:
         """
         Return value+self.
         """
         ...
 
-    def __rand__(self, value, /):
+    def __rand__(self, value, /) -> ndarray:
         """
         Return value&self.
         """
         ...
 
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value, /) -> ndarray:
         """
         Return divmod(value, self).
         """
         ...
 
-    def __reduce__(self, *args, **kwargs):
+    def __reduce__(self, *args, **kwargs) -> ndarray:
         """
         a.__reduce__()
 
@@ -8094,7 +8097,7 @@ class ndarray(object):
         """
         ...
 
-    def __reduce_ex__(self, *args, **kwargs):
+    def __reduce_ex__(self, *args, **kwargs) -> ndarray:
         """
         Helper for pickle.
         """
@@ -8106,55 +8109,55 @@ class ndarray(object):
         """
         ...
 
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value, /)-> ndarray:
         """
         Return value//self.
         """
         ...
 
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value, /)-> ndarray:
         """
         Return value<<self.
         """
         ...
 
-    def __rmatmul__(self, value, /):
+    def __rmatmul__(self, value, /)-> ndarray:
         """
         Return value@self.
         """
         ...
 
-    def __rmod__(self, value, /):
+    def __rmod__(self, value, /)-> ndarray:
         """
         Return value%self.
         """
         ...
 
-    def __rmul__(self, value, /):
+    def __rmul__(self, value, /)-> ndarray:
         """
         Return value*self.
         """
         ...
 
-    def __ror__(self, value, /):
+    def __ror__(self, value, /)-> ndarray:
         """
         Return value|self.
         """
         ...
 
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None, /)-> ndarray:
         """
         Return pow(value, self, mod).
         """
         ...
 
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value, /)-> ndarray:
         """
         Return value>>self.
         """
         ...
 
-    def __rshift__(self, value, /):
+    def __rshift__(self, value, /)-> ndarray:
         """
         Return self>>value.
         """
@@ -8166,13 +8169,13 @@ class ndarray(object):
         """
         ...
 
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value, /)-> ndarray:
         """
         Return value/self.
         """
         ...
 
-    def __rxor__(self, value, /):
+    def __rxor__(self, value, /)-> ndarray:
         """
         Return value^self.
         """
@@ -8223,7 +8226,7 @@ class ndarray(object):
         """
         ...
 
-    def __truediv__(self, value, /):
+    def __truediv__(self, value, /) -> ndarray:
         """
         Return self/value.
         """
@@ -8321,7 +8324,7 @@ class ndarray(object):
         """
         ...
 
-    def astype(self, *args, **kwargs):
+    def astype(self, *args: Any, **kwargs: Any) -> ndarray:
         """
         a.astype(dtype, order='K', casting='unsafe', subok=True, copy=True)
 
@@ -8882,7 +8885,7 @@ class ndarray(object):
         """
         ...
 
-    def mean(self, *args, **kwargs):
+    def mean(self, *args:Any, **kwargs: Any) -> Any:
         """
         a.mean(axis=None, dtype=None, out=None, keepdims=False, *, where=True)
 
@@ -15647,7 +15650,7 @@ def asanyarray(a, dtype=None, order=None, *, like=None):
     ...
 
 
-def asarray(a, dtype=None, order=None, *, like=None):
+def asarray(a: object, dtype: Type[Any]=None, order: Text=None, *, like: object=None) -> ndarray:
     """
     Convert the input to an array.
 
@@ -17380,7 +17383,7 @@ def choose(a, choices, out=None, mode='raise'):
     ...
 
 
-def clip(a, a_min, a_max, out=None, **kwargs):
+def clip(a: ArrayLike, a_min: ArrayLike, a_max: ArrayLike, out: ArrayLike=None, **kwargs: Any) -> ndarray:
     """
     Clip (limit) the values in an array.
 
@@ -27845,7 +27848,7 @@ def partition(a, kth, axis=-1, kind='introselect', order=None):
     ...
 
 
-def percentile(a, q, axis=None, out=None, overwrite_input=False, interpolation='linear', keepdims=False):
+def percentile(a: ndarray, q: int, axis: Union[int, Tuple[int, ...]] =None, out: ndarray=None, overwrite_input: bool=False, interpolation: Text='linear', keepdims:bool=False) -> Union[ndarray, Any]:
     """
     Compute the q-th percentile of the data along the specified axis.
 

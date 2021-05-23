@@ -14271,7 +14271,7 @@ def accumulateWeighted(src, dst, alpha[, mask]) -> dst:
     ...
 
 
-def adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C[, dst]) -> dst:
+def adaptiveThreshold(src: ndarray, maxValue: float, adaptiveMethod: int, thresholdType: int, blockSize: int, C: float, dst: ndarray = ...) -> ndarray:
     """
     .   @brief Applies an adaptive threshold to an array.
     .
@@ -14663,7 +14663,7 @@ def borderInterpolate(p, len, borderType) -> retval:
     ...
 
 
-def boundingRect(array) -> retval:
+def boundingRect(array: ndarray) -> Tuple[int, int, int, int]:
     """
     .   @brief Calculates the up-right bounding rectangle of a point set or non-zero pixels of gray-scale image.
     .
@@ -18357,7 +18357,7 @@ def findHomography(srcPoints, dstPoints[, method[, ransacReprojThreshold[, mask[
     ...
 
 
-def findNonZero(src[, idx]) -> idx:
+def findNonZero(src: ndarray, idx: ndarray = ...) -> ndarray:
     """
     .   @brief Returns the list of locations of non-zero pixels
     .
@@ -22916,7 +22916,7 @@ def textureFlattening(src, mask[, dst[, low_threshold[, high_threshold[, kernel_
     ...
 
 
-def threshold(src, thresh, maxval, type[, dst]) -> retval, dst:
+def threshold(src: ndarray, thresh: float, maxval: float, type: int, dst: ndarray =...) -> Tuple[float, ndarray]:
     """
     .   @brief Applies a fixed-level threshold to each array element.
     .
