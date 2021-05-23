@@ -24,6 +24,7 @@ def main():
         "team_race": jobs.team_race,
         "daily_race_money": lambda : jobs.daily_race(templates.MOONLIGHT_PRIZE),
         "daily_race_sp": lambda : jobs.daily_race(templates.JUPITER_CUP),
+        "create_pos_mask": jobs.create_pos_mask,
     }
     parser = argparse.ArgumentParser()
     parser.add_argument("job")
@@ -43,6 +44,8 @@ def main():
                 h_wnd = window.get_game()
         else:
             exit(1)
+    # Need fixed height for easy template matching
+    window.set_client_height(h_wnd, 720)
     LOGGER.info("game window: %s", h_wnd)
     job()
 

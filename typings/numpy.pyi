@@ -15100,7 +15100,7 @@ def around(a, decimals=0, out=None):
     ...
 
 
-def array(obj: object, dtype:Text=None, *, copy: bool=True, order: Text='K', subok:bool=False, ndmin: int=0,
+def array(obj: object, dtype:Type[Any]=None, *, copy: bool=True, order: Text='K', subok:bool=False, ndmin: int=0,
           like: object=None) -> ndarray:
     """
     array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0,
@@ -34143,7 +34143,7 @@ def zeros(shape: Union[Tuple[int, ...], int], dtype: Type[Any]=float, order: Tex
     ...
 
 
-def zeros_like(a: ndarray, dtype: Type[Any]=None, order: Text='K', subok: bool=True, shape: Union[int, Tuple[int, ...]]=None):
+def zeros_like(a: ndarray, dtype: Type[Any]=None, order: Text='K', subok: bool=True, shape: Union[int, Tuple[int, ...]]=None) -> ndarray:
     """
     Return an array of zeros with the same shape and type as a given array.
 

@@ -4,14 +4,14 @@
 
 import logging
 import pathlib
-from typing import Dict, Optional, Text, Tuple
+from typing import Dict, Optional, Text, Tuple, TypedDict
 
 import cv2
 import numpy as np
 import win32gui
 from PIL import ImageGrab
 from PIL.Image import Image
-from PIL.Image import open as openImage
+from PIL.Image import open as open_image
 
 from . import window
 
@@ -37,28 +37,71 @@ def _cv_image(img: Image):
     return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
 
-# def _cv_gray_image(img: Image):
-#     return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2GRAY)
+def _cv_gray_image(img: Image):
+    return np.array(img.convert("L"))
 
 
 def load(name: Text) -> Image:
     if name not in _LOADED_TEMPLATES:
-        _LOADED_TEMPLATES[name] = openImage(
+        _LOADED_TEMPLATES[name] = open_image(
             pathlib.Path(__file__).parent / "templates" / name)
     return _LOADED_TEMPLATES[name]
 
 
+def try_load(name: Text) -> Optional[Image]:
+    try:
+        return load(name)
+    except Exception as ex:
+        LOGGER.debug("can not load: %s: %s", name, ex)
+        return None
+
+
+def _cv_mask(cv_img: np.ndarray, mask: Image) -> np.ndarray:
+    cv_mask = _cv_gray_image(mask)
+    return cv2.bitwise_and(cv_img, cv_img, mask=cv_mask)
+
+
+def add_middle_ext(name: Text, value: Text) -> Text:
+    parts = name.split(".")
+    parts.insert(max(len(parts) - 1, 1), value)
+    return ".".join(parts)
+
+class DebugDict(TypedDict):
+    last_match: Optional[np.ndarray]
+
+DEBUG_DATA = DebugDict(last_match=None)
+
+
+def _match_one(img: Image, name: Text, threshold: float = 0.95) -> Optional[Tuple[Text, Tuple[int, int]]]:
+    cv_img = _cv_image(img)
+    img_mask = try_load(add_middle_ext(name, "pos"))
+    if img_mask:
+        cv_img = _cv_mask(cv_img, img_mask)
+    res = cv2.matchTemplate(
+        _cv_image(img),
+        _cv_image(load(name)),
+        cv2.TM_SQDIFF_NORMED,
+    )
+    res = 1 - res
+    DEBUG_DATA['last_match'] = res
+    _, max_val, _, max_loc = cv2.minMaxLoc(res)
+
+    if max_val > threshold:
+        x, y = max_loc
+        LOGGER.info(
+            "match: name=%s, pos=%s, similarity=%.2f", name, max_loc, max_val)
+        return (name, (x, y))
+    return None
+
+
 def match(img: Image, *name: Text, threshold: float = 0.95) -> Optional[Tuple[Text, Tuple[int, int]]]:
     for i in name:
-        res = cv2.matchTemplate(_cv_image(img), _cv_image(
-            load(i)), cv2.TM_SQDIFF_NORMED)
-        res = 1 - res
-        _, max_val, _, max_loc = cv2.minMaxLoc(res)
-
-        if max_val > threshold:
-            x, y = max_loc
-            LOGGER.info(
-                "found image: name=%s, pos=%s, similarity=%.2f", i, max_loc, max_val)
-            return (i, (x, y))
-    LOGGER.info("not found image: name=%s", name)
+        match = _match_one(
+            img,
+            i,
+            threshold=threshold
+        )
+        if match:
+            return match
+    LOGGER.info("no match: name=%s", name)
     return None

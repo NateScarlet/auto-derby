@@ -14499,7 +14499,7 @@ def bilateralFilter(src, d, sigmaColor, sigmaSpace[, dst[, borderType]]) -> dst:
     ...
 
 
-def bitwise_and(src1, src2[, dst[, mask]]) -> dst:
+def bitwise_and(src1: ndarray, src2: ndarray, dst: ndarray =..., mask: ndarray=...) -> ndarray:
     """
     .   @brief computes bitwise conjunction of the two arrays (dst = src1 & src2)
     .   Calculates the per-element bit-wise conjunction of two arrays or an
@@ -21251,7 +21251,7 @@ def recoverPose(E, points1, points2, cameraMatrix[, R[, t[, mask]]]) -> retval, 
     ...
 
 
-def rectangle(img, pt1, pt2, color[, thickness[, lineType[, shift]]]) -> img:
+def rectangle(img: ndarray, pt1: Tuple[int, int], pt2: Tuple[int, int], color: Tuple[int, ...], thickness: int = ..., lineType: int =..., shift: int = ...) -> ndarray:
     """
     .   @brief Draws a simple, thick, or filled up-right rectangle.
     .
