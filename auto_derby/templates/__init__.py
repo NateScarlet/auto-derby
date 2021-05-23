@@ -1,6 +1,7 @@
 # Code Generated from [__init__.py.gotmpl], DO NOT EDIT.
 
 CANCEL_BUTTON = "cancel_button.png"
+CIRCLE_ITEM_REQUEST = "circle_item_request.png"
 CONNECTING = "connecting.png"
 DAILY_RACE = "daily_race.png"
 DAILY_RACE_HARD = "daily_race_hard.png"
@@ -25,5 +26,5 @@ TEAM_RACE_CHOOSE_COMPETITOR = "team_race_choose_competitor.png"
 TEAM_RACE_GUARANTEED_WIN_REWARD = "team_race_guaranteed_win_reward.png"
 TEAM_RACE_LOSE = "team_race_lose.png"
 TEAM_RACE_NEXT_BUTTON = "team_race_next_button.png"
-TEAM_RACE_SEE_RESULT_BUTTON = "team_race_see_result_button.png"
+TEAM_RACE_RESULT_BUTTON = "team_race_result_button.png"
 TEAM_RACE_WIN = "team_race_win.png"

@@ -5,7 +5,6 @@
 
 from auto_derby import templates
 import ctypes
-from os import name
 import time
 import webbrowser
 
@@ -24,7 +23,6 @@ def main():
         "team_race": jobs.team_race,
         "daily_race_money": lambda : jobs.daily_race(templates.MOONLIGHT_PRIZE),
         "daily_race_sp": lambda : jobs.daily_race(templates.JUPITER_CUP),
-        "create_pos_mask": jobs.create_pos_mask,
     }
     parser = argparse.ArgumentParser()
     parser.add_argument("job")

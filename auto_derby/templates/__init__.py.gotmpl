@@ -7,7 +7,7 @@
 {{- end }}
 {{ "" }}
 {{- range .Files }}
-    {{- if . | hassuffix ".pos.png" }}
+    {{- if . | hasSuffix ".pos.png" }}
     {{- else }}
 {{ template "stem" . | snakecase | upper }} = "{{.}}"
     {{- end }}
