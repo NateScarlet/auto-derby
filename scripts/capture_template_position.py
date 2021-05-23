@@ -42,11 +42,12 @@ def create_pos_mask(name: Text):
 
     out_img = np.zeros((game_img.height, game_img.width), dtype=float)
 
-    if match:
-        _, pos = match
-        x, y = pos
-        cv2.rectangle(out_img, pos, (x+match_img.width,
-                                     y+match_img.height), (255,), -1)
+    if not match:
+        raise ValueError("no match on screen")
+    _, pos = match
+    x, y = pos
+    cv2.rectangle(out_img, pos, (x+match_img.width,
+                                    y+match_img.height), (255,), -1)
 
     img = PIL.Image.fromarray(out_img).convert("1")
     dest = str(_TEMPLATES_PATH / template.add_middle_ext(name, "pos"))

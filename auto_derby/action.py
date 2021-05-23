@@ -35,12 +35,12 @@ def click(point: Tuple[int, int]):
     click_at_window(h_wnd, point)
 
 
-def count_image(*name: Text) -> bool:
+def count_image(*name: Text) -> int:
     h_wnd = window.get_game()
     match = template.match(template.screenshot(h_wnd), *name)
     if not match:
-        return False
-    return True
+        return 0
+    return 1
 
 
 def wait_image(*name: Text) -> Tuple[Text, Tuple[int, int]]:
