@@ -16125,7 +16125,7 @@ def atleast_3d(*arys):
     ...
 
 
-def average(a, axis=None, weights=None, returned=False):
+def average(a: ndarray, axis: Optional[Tuple[int, ...]]=None, weights: Optional[ArrayLike]=None, returned: Optional[bool]=False) -> Any:
     """
     Compute the weighted average along the specified axis.
 

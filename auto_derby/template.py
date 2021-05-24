@@ -71,13 +71,29 @@ def add_middle_ext(name: Text, value: Text) -> Text:
 
 
 class Specification():
-    def __init__(self, name: Text, pos: Optional[Text] = None, *, threshold: float = 0.9):
+    def __init__(self, name: Text, pos: Optional[Text] = None, *, threshold: float = 0.9, lightness_sensitive: bool = False):
         self.name = name
         self.pos = pos
         self.threshold = threshold
+        self.lightness_sensitive = lightness_sensitive
 
     def load_pos(self) -> Optional[Image]:
         return try_load(self.pos or add_middle_ext(self.name, "pos"))
+
+    def match(self, img: Image, pos: Tuple[int, int]) -> bool:
+        x, y = pos
+        if self.lightness_sensitive:
+            tmpl_img = load(self.name)
+            match_img = img.crop((x, y, x + tmpl_img.width, y+tmpl_img.height))
+            if (
+                np.average(
+                    np.asarray(match_img.convert("L")) -
+                    np.asarray(tmpl_img.convert("L"))
+                ) / 255.0 >
+                1 - self.threshold
+            ):
+                return False
+        return True
 
     def __repr__(self):
         return self.__str__()
@@ -119,11 +135,11 @@ def _match_one(img: Image, tmpl: Union[Text, Specification]) -> Iterator[Tuple[S
             res,
             mask=mask,
         )
-        if max_val < tmpl.threshold:
+        x, y = max_loc
+        if max_val < tmpl.threshold or not tmpl.match(img, (x, y)):
             LOGGER.debug(
                 "not match: tmpl=%s, pos=%s, similarity=%.3f", tmpl, max_loc, max_val)
             break
-        x, y = max_loc
         LOGGER.info(
             "match: tmpl=%s, pos=%s, similarity=%.2f", tmpl, max_loc, max_val)
         yield (tmpl, (x, y))
