@@ -42,7 +42,7 @@ def count_image(*name: Text) -> int:
     return ret
 
 
-def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[Text, Tuple[int, int]]:
+def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[template.Specification, Tuple[int, int]]:
     while True:
         try:
             return next(template.match(template.screenshot(), *tmpl))
@@ -50,7 +50,7 @@ def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[Text, Tuple[
             time.sleep(0.5)
 
 
-def click_image(name: Text, *, x: int = 0, y: int = 0) -> bool:
+def click_image(name: Union[Text, template.Specification], *, x: int = 0, y: int = 0) -> bool:
     try:
         name, pos = next(template.match(template.screenshot(), name))
         click((pos[0] + x, pos[1] + y))

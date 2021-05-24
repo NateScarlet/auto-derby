@@ -3,6 +3,7 @@
 """umamusume pertty derby automation.  """
 
 
+import os
 from auto_derby import templates
 import ctypes
 import time
@@ -61,9 +62,11 @@ def is_admin():
 if __name__ == '__main__':
     logging.basicConfig(
         format="%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
-        level=logging.INFO,
+        level=logging.DEBUG if os.getenv("DEBUG") == "auto-derby" else logging.INFO,
         datefmt="%Y-%m-%d %H:%M:%S",
     )
+
+
     if not is_admin():
         LOGGER.error("需要用管理员权限运行此脚本，不然无法进行点击")
         exit(1)

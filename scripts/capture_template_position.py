@@ -43,7 +43,8 @@ def create_pos_mask(name: Text):
         out_img = np.zeros((game_img.height, game_img.width), dtype=np.uint8)
 
     padding = 2
-    for _, pos in template.match(game_img, name):
+    for _, pos in template.match(game_img, template.Specification(name, templates.ANY_POS)):
+        print(pos)
         x, y = pos
         out_img[
             y-padding: y+padding,

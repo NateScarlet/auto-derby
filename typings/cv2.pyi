@@ -16652,7 +16652,7 @@ def destroyAllWindows() -> None:
     ...
 
 
-def destroyWindow(winname) -> None:
+def destroyWindow(winname: Text) -> None:
     """
     .   @brief Destroys the specified window.
     .

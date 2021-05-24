@@ -8,7 +8,7 @@ from .. import action, templates
 
 def daily_race(race_name: Text):
     while True:
-        name, pos = action.wait_image(
+        tmpl, pos = action.wait_image(
             templates.DAILY_RACE_TICKET_NOT_ENOUGH,
             templates.CONNECTING,
             templates.RETRY_BUTTON,
@@ -23,6 +23,7 @@ def daily_race(race_name: Text):
             race_name,
             templates.RACE_BUTTON,
         )
+        name = tmpl.name
         if name == templates.CONNECTING:
             pass
         elif name == templates.DAILY_RACE_TICKET_NOT_ENOUGH:

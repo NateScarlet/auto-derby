@@ -7,7 +7,7 @@ import win32gui
 
 def legend_race():
     while True:
-        name, pos = action.wait_image(
+        tmpl, pos = action.wait_image(
             templates.CONNECTING,
             templates.RETRY_BUTTON,
             templates.TEAM_RACE_BUTTON,
@@ -21,6 +21,7 @@ def legend_race():
             templates.LEGEND_RACE_REWARD,
             templates.LEGEND_RACE_COLLECT_ALL_REWARD,
         )
+        name = tmpl.name
         if name == templates.TEAM_RACE_CHOOSE_COMPETITOR:
             if action.click_image(templates.TEAM_RACE_GUARANTEED_WIN_REWARD):
                 action.wait_click_image(templates.GREEN_NEXT_BUTTON)

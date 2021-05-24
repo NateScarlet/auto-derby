@@ -7,7 +7,7 @@ import win32gui
 
 def team_race():
     while True:
-        name, pos = action.wait_image(
+        tmpl, pos = action.wait_image(
             templates.CONNECTING,
             templates.RETRY_BUTTON,
             templates.TEAM_RACE_BUTTON,
@@ -23,6 +23,7 @@ def team_race():
             templates.LIMITED_SALE_OPEN,
             templates.RP_NOT_ENOUGH,
         )
+        name = tmpl.name
         if name == templates.TEAM_RACE_CHOOSE_COMPETITOR:
             if action.click_image(templates.TEAM_RACE_GUARANTEED_WIN_REWARD):
                 action.wait_click_image(templates.GREEN_NEXT_BUTTON)

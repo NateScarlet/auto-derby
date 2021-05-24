@@ -10,7 +10,7 @@ from .. import action, templates
 
 
 def _handle_training():
-    _, pos = action.wait_image(
+    tmpl, pos = action.wait_image(
         template.Specification(templates.NURTURING_STATUS_F,
                                templates.NURTURING_STATUS_SPEED_POS),
         template.Specification(templates.NURTURING_STATUS_F,
@@ -33,7 +33,17 @@ def _handle_training():
                                templates.NURTURING_STATUS_PERSEVERANCE_POS),
     )
     x, y = pos
-    x += 30
+    if tmpl.pos == templates.NURTURING_STATUS_SPEED_POS:
+        x += 45
+    elif tmpl.pos == templates.NURTURING_STATUS_STAMINA_POS:
+        x += 60
+    elif tmpl.pos == templates.NURTURING_STATUS_POWER_POS:
+        x += 70
+    elif tmpl.pos == templates.NURTURING_STATUS_PERSEVERANCE_POS:
+        x += 75
+    elif tmpl.pos == templates.NURTURING_STATUS_INTELLIGENCE_POS:
+        x += 80
+
     action.drag((x, y), dy=100)  # select course
     action.click((x, y+100))
 
@@ -46,6 +56,7 @@ def _handle_race():
     _, pos = action.wait_image(
         templates.RACE_RESULT_NO1,
         templates.RACE_RESULT_NO2,
+        templates.RACE_RESULT_NO4,
         templates.RACE_RESULT_NO8,
         templates.RACE_RESULT_NO10,
     )
@@ -62,7 +73,7 @@ def _handle_race():
 
 def nurturing():
     while True:
-        name, pos = action.wait_image(
+        tmpl, pos = action.wait_image(
             templates.CONNECTING,
             templates.RETRY_BUTTON,
             templates.NURTURING_TRAINING,
@@ -76,6 +87,7 @@ def nurturing():
             templates.NURTURING_URA_FINALS,
             templates.NURTURING_GENE_INHERIT,
         )
+        name = tmpl.name
         if name == templates.CONNECTING:
             pass
         elif name == templates.NURTURING_FANS_NOT_ENOUGH:
@@ -92,7 +104,7 @@ def nurturing():
             _handle_race()
         elif name == templates.NURTURING_TRAINING:
             if action.count_image(templates.NURTURING_STAMINA_HALF_EMPTY):
-                if action.click_image(templates.NURTURING_HEALTH_CARE):
+                if action.click_image(template.Specification(templates.NURTURING_HEALTH_CARE, threshold=0.97)):
                     time.sleep(2)
                     if action.count_image(templates.NURTURING_HEALTH_CARE_CONFIRM):
                         action.click_image(templates.GREEN_OK_BUTTON)

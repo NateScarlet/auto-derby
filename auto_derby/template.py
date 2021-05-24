@@ -5,7 +5,7 @@
 import os
 import logging
 import pathlib
-from typing import Dict, Iterator, Optional, Text, Tuple, Union
+from typing import Dict, Iterator, List, Optional, Set, Text, Tuple, Union
 
 import cv2
 import numpy as np
@@ -44,16 +44,23 @@ def _cv_image(img: Image):
 
 def load(name: Text) -> Image:
     if name not in _LOADED_TEMPLATES:
+        LOGGER.debug("load: %s", name)
         _LOADED_TEMPLATES[name] = open_image(
             pathlib.Path(__file__).parent / "templates" / name)
     return _LOADED_TEMPLATES[name]
 
 
+_NOT_EXISTED_NAMES: Set[Text] = set()
+
+
 def try_load(name: Text) -> Optional[Image]:
+    if name in _NOT_EXISTED_NAMES:
+        return None
     try:
         return load(name)
     except Exception as ex:
         LOGGER.debug("can not load: %s: %s", name, ex)
+        _NOT_EXISTED_NAMES.add(name)
         return None
 
 
@@ -64,20 +71,22 @@ def add_middle_ext(name: Text, value: Text) -> Text:
 
 
 class Specification():
-    def __init__(self, name: Text, pos: Optional[Text] = None):
+    def __init__(self, name: Text, pos: Optional[Text] = None, *, threshold: float = 0.9):
         self.name = name
         self.pos = pos
+        self.threshold = threshold
 
     def load_pos(self) -> Optional[Image]:
         return try_load(self.pos or add_middle_ext(self.name, "pos"))
 
     def __str__(self):
-        return f"tmpl<{self.name}&{self.pos}>"
+        return f"tmpl<{self.name}+{self.pos}>" if self.pos else f"tmpl<{self.name}>"
 
 
-_DEBUG_TMPL =  os.getenv("DEBUG_TMPL") or "debug.png"
+_DEBUG_TMPL = os.getenv("DEBUG_TMPL") or "debug.png"
 
-def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 0.9) -> Iterator[Tuple[Text, Tuple[int, int]]]:
+
+def _match_one(img: Image, tmpl: Union[Text, Specification]) -> Iterator[Tuple[Specification, Tuple[int, int]]]:
     cv_img = _cv_image(img)
     if not isinstance(tmpl, Specification):
         tmpl = Specification(tmpl)
@@ -97,6 +106,7 @@ def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 
     if tmpl.name == _DEBUG_TMPL:
         cv2.imshow("match", res)
         cv2.waitKey()
+        cv2.destroyWindow("match")
     while True:
         mask = cv_pos[
             0:res.shape[0],
@@ -106,12 +116,14 @@ def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 
             res,
             mask=mask,
         )
-        if max_val < threshold:
+        if max_val < tmpl.threshold:
+            LOGGER.debug(
+                "not match: tmpl=%s, pos=%s, similarity=%.3f", tmpl, max_loc, max_val)
             break
         x, y = max_loc
         LOGGER.info(
-            "match: name=%s, pos=%s, similarity=%.2f", tmpl.name, max_loc, max_val)
-        yield (tmpl.name, (x, y))
+            "match: tmpl=%s, pos=%s, similarity=%.2f", tmpl, max_loc, max_val)
+        yield (tmpl, (x, y))
 
         # mark position unavailable to avoid overlap
         cv_pos[
@@ -120,14 +132,10 @@ def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 
         ] = 0
 
 
-def match(img: Image, *tmpl: Union[Text, Specification], threshold: float = 0.9) -> Iterator[Tuple[Text, Tuple[int, int]]]:
+def match(img: Image, *tmpl: Union[Text, Specification]) -> Iterator[Tuple[Specification, Tuple[int, int]]]:
     match_count = 0
     for i in tmpl:
-        for j in _match_one(
-            img,
-            i,
-            threshold=threshold
-        ):
+        for j in _match_one(img, i):
             match_count += 1
             yield j
     if match_count == 0:
