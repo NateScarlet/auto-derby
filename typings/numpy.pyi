@@ -21317,7 +21317,7 @@ def fromstring(*args, **kwargs):
     ...
 
 
-def full(shape, fill_value, dtype=None, order='C', *, like=None):
+def full(shape: Tuple[int, ...], fill_value: Scalar, dtype: Type[Any]=None, order: Text='C', *, like: ndarray=None) -> ndarray:
     """
     Return a new array of given shape and type, filled with `fill_value`.
 
@@ -21374,7 +21374,7 @@ def full(shape, fill_value, dtype=None, order='C', *, like=None):
     ...
 
 
-def full_like(a, fill_value, dtype=None, order='K', subok=True, shape=None):
+def full_like(a: ndarray, fill_value: Scalar, dtype: Type[Any]=None, order: Text='K', subok: bool=True, shape: Tuple[int, ...]=None) -> ndarray:
     """
     Return a full array with the same shape and type as a given array.
 

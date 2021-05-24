@@ -36,26 +36,27 @@ def click(point: Tuple[int, int]):
 
 
 def count_image(*name: Text) -> int:
-    match = template.match(template.screenshot(), *name)
-    if not match:
-        return 0
-    return 1
+    ret = 0
+    for _ in template.match(template.screenshot(), *name):
+        ret += 1
+    return ret
 
 
 def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[Text, Tuple[int, int]]:
     while True:
-        match = template.match(template.screenshot(), *tmpl)
-        if match:
-            return match
-        time.sleep(0.5)
+        try:
+            return next(template.match(template.screenshot(), *tmpl))
+        except StopIteration:
+            time.sleep(0.5)
 
 
 def click_image(name: Text, *, x: int = 0, y: int = 0) -> bool:
-    match = template.match(template.screenshot(), name)
-    if not match:
+    try:
+        name, pos = next(template.match(template.screenshot(), name))
+        click((pos[0] + x, pos[1] + y))
+        return True
+    except StopIteration:
         return False
-    click((match[1][0] + x, match[1][1] + y))
-    return True
 
 
 def wait_click_image(name: Text, *, x: int = 0, y: int = 0) -> None:

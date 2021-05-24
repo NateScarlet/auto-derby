@@ -4,7 +4,7 @@
 
 import logging
 import pathlib
-from typing import Dict, Optional, Text, Tuple, TypedDict, Union
+from typing import Dict, Iterator, Optional, Text, Tuple, TypedDict, Union
 
 import cv2
 import numpy as np
@@ -41,10 +41,6 @@ def _cv_image(img: Image):
     return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
 
-def _cv_gray_image(img: Image):
-    return np.array(img.convert("L"))
-
-
 def load(name: Text) -> Image:
     if name not in _LOADED_TEMPLATES:
         _LOADED_TEMPLATES[name] = open_image(
@@ -58,11 +54,6 @@ def try_load(name: Text) -> Optional[Image]:
     except Exception as ex:
         LOGGER.debug("can not load: %s: %s", name, ex)
         return None
-
-
-def _cv_mask(cv_img: np.ndarray, mask: Image) -> np.ndarray:
-    cv_mask = _cv_gray_image(mask)
-    return cv2.bitwise_and(cv_img, cv_img, mask=cv_mask)
 
 
 def add_middle_ext(name: Text, value: Text) -> Text:
@@ -90,46 +81,56 @@ class Specification():
         return f"tmpl<{self.name}&{self.pos}>"
 
 
-def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 0.9) -> Optional[Tuple[Text, Tuple[int, int]]]:
+def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 0.9) -> Iterator[Tuple[Text, Tuple[int, int]]]:
     cv_img = _cv_image(img)
     if not isinstance(tmpl, Specification):
         tmpl = Specification(tmpl)
 
     pos = tmpl.load_pos()
     cv_tmpl = _cv_image(load(tmpl.name))
-    res = cv2.matchTemplate(
-        cv_img,
-        cv_tmpl,
-        cv2.TM_CCOEFF_NORMED,
-    )
-    DEBUG_DATA['last_match'] = res
-    cv_pos = None
+    tmpl_h, tmpl_w = cv_tmpl.shape[:2]
     if pos:
-        cv_pos = np.asarray(pos.convert("L"))[
-            0: res.shape[0],
-            0: res.shape[1],
+        cv_pos = np.asarray(pos.convert("L"))
+    else:
+        cv_pos = np.full(
+            cv_img.shape[:2],
+            255.0,
+            dtype=np.uint8,
+        )
+    res = cv2.matchTemplate(cv_img, cv_tmpl, cv2.TM_CCOEFF_NORMED)
+    while True:
+        mask = cv_pos[
+            0:res.shape[0],
+            0:res.shape[1],
         ]
-    _, max_val, _, max_loc = cv2.minMaxLoc(
-        res,
-        mask=cv_pos,
-    )
-
-    if max_val > threshold:
+        _, max_val, _, max_loc = cv2.minMaxLoc(
+            res,
+            mask=mask,
+        )
+        if max_val < threshold:
+            break
+        DEBUG_DATA['last_match'] = res
         x, y = max_loc
         LOGGER.info(
             "match: name=%s, pos=%s, similarity=%.2f", tmpl.name, max_loc, max_val)
-        return (tmpl.name, (x, y))
-    return None
+        yield (tmpl.name, (x, y))
+
+        # mark position unavailable to avoid overlap
+        cv_pos[
+            max(0, y-tmpl_h): y+tmpl_h,
+            max(0, x-tmpl_w): x+tmpl_w,
+        ] = 0
 
 
-def match(img: Image, *tmpl: Union[Text, Specification], threshold: float = 0.9) -> Optional[Tuple[Text, Tuple[int, int]]]:
+def match(img: Image, *tmpl: Union[Text, Specification], threshold: float = 0.9) -> Iterator[Tuple[Text, Tuple[int, int]]]:
+    match_count = 0
     for i in tmpl:
-        match = _match_one(
+        for j in _match_one(
             img,
             i,
             threshold=threshold
-        )
-        if match:
-            return match
-    LOGGER.info("no match: name=%s", tmpl)
-    return None
+        ):
+            match_count += 1
+            yield j
+    if match_count == 0:
+        LOGGER.info("no match: name=%s", tmpl)
