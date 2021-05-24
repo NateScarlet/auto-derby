@@ -29,6 +29,7 @@ def screenshot_window(h_wnd: int) -> Image:
         bbox = (left, top, right, bottom)
         return ImageGrab.grab(bbox, True, True)
 
+
 def screenshot() -> Image:
     return screenshot_window(window.get_game())
 
@@ -69,10 +70,13 @@ def add_middle_ext(name: Text, value: Text) -> Text:
     parts.insert(max(len(parts) - 1, 1), value)
     return ".".join(parts)
 
+
 class DebugDict(TypedDict):
     last_match: Optional[np.ndarray]
 
+
 DEBUG_DATA = DebugDict(last_match=None)
+
 
 class Specification():
     def __init__(self, name: Text, pos: Optional[Text] = None):
@@ -81,26 +85,34 @@ class Specification():
 
     def load_pos(self) -> Optional[Image]:
         return try_load(self.pos or add_middle_ext(self.name, "pos"))
-    
+
     def __str__(self):
         return f"tmpl<{self.name}&{self.pos}>"
 
-def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 0.95) -> Optional[Tuple[Text, Tuple[int, int]]]:
+
+def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 0.9) -> Optional[Tuple[Text, Tuple[int, int]]]:
     cv_img = _cv_image(img)
     if not isinstance(tmpl, Specification):
         tmpl = Specification(tmpl)
 
-    img_mask = tmpl.load_pos()
-    if img_mask:
-        cv_img = _cv_mask(cv_img, img_mask)
+    pos = tmpl.load_pos()
+    cv_tmpl = _cv_image(load(tmpl.name))
     res = cv2.matchTemplate(
         cv_img,
-        _cv_image(load(tmpl.name)),
-        cv2.TM_SQDIFF_NORMED,
+        cv_tmpl,
+        cv2.TM_CCOEFF_NORMED,
     )
-    res = 1 - res
     DEBUG_DATA['last_match'] = res
-    _, max_val, _, max_loc = cv2.minMaxLoc(res)
+    cv_pos = None
+    if pos:
+        cv_pos = np.asarray(pos.convert("L"))[
+            0: res.shape[0],
+            0: res.shape[1],
+        ]
+    _, max_val, _, max_loc = cv2.minMaxLoc(
+        res,
+        mask=cv_pos,
+    )
 
     if max_val > threshold:
         x, y = max_loc
@@ -110,7 +122,7 @@ def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 
     return None
 
 
-def match(img: Image, *tmpl: Union[Text, Specification], threshold: float = 0.95) -> Optional[Tuple[Text, Tuple[int, int]]]:
+def match(img: Image, *tmpl: Union[Text, Specification], threshold: float = 0.9) -> Optional[Tuple[Text, Tuple[int, int]]]:
     for i in tmpl:
         match = _match_one(
             img,

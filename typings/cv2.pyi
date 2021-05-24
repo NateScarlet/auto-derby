@@ -20346,7 +20346,7 @@ def minEnclosingTriangle(points[, triangle]) -> retval, triangle:
     ...
 
 
-def minMaxLoc(src: ndarray, mask: ndarray = ...) -> Tuple[float, float, Tuple[int, ...], Tuple[int, ...]]:
+def minMaxLoc(src: ndarray, mask: Optional[ndarray] = ...) -> Tuple[float, float, Tuple[int, ...], Tuple[int, ...]]:
     """
     .   @brief Finds the global minimum and maximum in an array.
     .

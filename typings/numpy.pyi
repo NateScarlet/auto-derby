@@ -7737,7 +7737,7 @@ class ndarray(object):
 
     T : ndarray
     data : object
-    dtype : object
+    dtype : Type[Any]
     flags : dict
     flat : object
     imag : ndarray
