@@ -79,6 +79,9 @@ class Specification():
     def load_pos(self) -> Optional[Image]:
         return try_load(self.pos or add_middle_ext(self.name, "pos"))
 
+    def __repr__(self):
+        return self.__str__()
+
     def __str__(self):
         return f"tmpl<{self.name}+{self.pos}>" if self.pos else f"tmpl<{self.name}>"
 
@@ -139,4 +142,4 @@ def match(img: Image, *tmpl: Union[Text, Specification]) -> Iterator[Tuple[Speci
             match_count += 1
             yield j
     if match_count == 0:
-        LOGGER.info("no match: name=%s", tmpl)
+        LOGGER.info("no match: tmpl=%s", tmpl)

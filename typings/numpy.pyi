@@ -9495,7 +9495,7 @@ class ndarray(object):
         """
         ...
 
-    def tobytes(self, *args, **kwargs):
+    def tobytes(self) -> bytes:
         """
         a.tobytes(order='C')
 
