@@ -2,6 +2,7 @@
 # pyright: strict
 """template matching.  """
 
+import os
 import logging
 import pathlib
 from typing import Dict, Iterator, Optional, Text, Tuple, Union
@@ -74,6 +75,8 @@ class Specification():
         return f"tmpl<{self.name}&{self.pos}>"
 
 
+_DEBUG_TMPL =  os.getenv("DEBUG_TMPL") or "debug.png"
+
 def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 0.9) -> Iterator[Tuple[Text, Tuple[int, int]]]:
     cv_img = _cv_image(img)
     if not isinstance(tmpl, Specification):
@@ -91,6 +94,9 @@ def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 
             dtype=np.uint8,
         )
     res = cv2.matchTemplate(cv_img, cv_tmpl, cv2.TM_CCOEFF_NORMED)
+    if tmpl.name == _DEBUG_TMPL:
+        cv2.imshow("match", res)
+        cv2.waitKey()
     while True:
         mask = cv_pos[
             0:res.shape[0],
