@@ -18,6 +18,9 @@ def set_client_height(h_wnd: int, height: int):
     left, top, right, bottom = win32gui.GetWindowRect(h_wnd)
     _, _, w, h = win32gui.GetClientRect(h_wnd)
     LOGGER.info("width=%s height=%s", w, h)
+    if h == height:
+        LOGGER.info("already in wanted height")
+        return
     borderWidth = right - left - w
     borderHeight = bottom - top - h
     width = int(height / h * w)
