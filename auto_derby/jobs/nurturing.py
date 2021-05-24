@@ -47,9 +47,7 @@ def _handle_training():
     action.click((x, y+100))
 
 
-def _handle_race():
-    action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
-    action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
+def _handle_race_result():
     action.wait_click_image(templates.RACE_RESULT_BUTTON)
 
     _, pos = action.wait_image(
@@ -57,17 +55,24 @@ def _handle_race():
         templates.RACE_RESULT_NO2,
         templates.RACE_RESULT_NO3,
         templates.RACE_RESULT_NO4,
+        templates.RACE_RESULT_NO6,
         templates.RACE_RESULT_NO8,
         templates.RACE_RESULT_NO10,
     )
     while True:
         time.sleep(1)
-        if (
-            action.click_image(templates.GREEN_NEXT_BUTTON) or
-            action.click_image(templates.NURTURING_END_BUTTON)
-        ):
+        if action.click_image(templates.GREEN_NEXT_BUTTON):
             break
+        if action.click_image(templates.NURTURING_CONTINUE):
+            _handle_race_result()
+            return
         action.click(pos)
+
+
+def _handle_race():
+    action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
+    action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
+    _handle_race_result()
     action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
 
