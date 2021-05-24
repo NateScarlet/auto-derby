@@ -4,7 +4,7 @@
 
 import logging
 import pathlib
-from typing import Dict, Iterator, Optional, Text, Tuple, TypedDict, Union
+from typing import Dict, Iterator, Optional, Text, Tuple, Union
 
 import cv2
 import numpy as np
@@ -62,13 +62,6 @@ def add_middle_ext(name: Text, value: Text) -> Text:
     return ".".join(parts)
 
 
-class DebugDict(TypedDict):
-    last_match: Optional[np.ndarray]
-
-
-DEBUG_DATA = DebugDict(last_match=None)
-
-
 class Specification():
     def __init__(self, name: Text, pos: Optional[Text] = None):
         self.name = name
@@ -109,7 +102,6 @@ def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 
         )
         if max_val < threshold:
             break
-        DEBUG_DATA['last_match'] = res
         x, y = max_loc
         LOGGER.info(
             "match: name=%s, pos=%s, similarity=%.2f", tmpl.name, max_loc, max_val)

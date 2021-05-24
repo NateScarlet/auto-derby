@@ -9,7 +9,7 @@ if True:
 
 from typing import Text
 import cv2
-from auto_derby import window, template, templates
+from auto_derby import template, templates
 import pathlib
 import PIL.Image
 import numpy as np
@@ -34,20 +34,21 @@ def _latest_file():
 def create_pos_mask(name: Text):
 
     game_img = template.screenshot()
-    match_img = template.load(name)
-    match = template.match(game_img, name)
-    last_match = template.DEBUG_DATA["last_match"]
-    if last_match is None:
-        raise ValueError("missing debug data")
+    pos_name = template.add_middle_ext(name, "pos")
+    pos_img = template.try_load(pos_name)
 
-    out_img = np.zeros((game_img.height, game_img.width), dtype=float)
+    if pos_img:
+        out_img = np.asarray(pos_img.convert("1"))
+    else:
+        out_img = np.zeros((game_img.height, game_img.width), dtype=np.uint8)
 
-    if not match:
-        raise ValueError("no match on screen")
-    _, pos = match
-    x, y = pos
-    cv2.rectangle(out_img, pos, (x+match_img.width,
-                                    y+match_img.height), (255,), -1)
+    padding = 2
+    for _, pos in template.match(game_img, name):
+        x, y = pos
+        out_img[
+            y-padding: y+padding,
+            x-padding: x+padding,
+        ] = 255
 
     img = PIL.Image.fromarray(out_img).convert("1")
     dest = str(_TEMPLATES_PATH / template.add_middle_ext(name, "pos"))
