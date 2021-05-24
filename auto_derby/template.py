@@ -5,7 +5,7 @@
 import os
 import logging
 import pathlib
-from typing import Dict, Iterator, List, Optional, Set, Text, Tuple, Union
+from typing import Dict, Iterator, Optional, Set, Text, Tuple, Union
 
 import cv2
 import numpy as np

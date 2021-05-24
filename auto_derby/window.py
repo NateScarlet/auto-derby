@@ -2,6 +2,7 @@
 # pyright: strict
 """umamusume pertty derby automation.  """
 
+from typing import Text
 import win32con
 import contextlib
 
@@ -55,3 +56,7 @@ def recover_foreground():
         win32gui.SetForegroundWindow(fg_h_wnd)
     except Exception as ex:
         LOGGER.warn("recover foreground window failed: %s", ex)
+
+
+def info(msg: Text):
+    win32gui.MessageBox(get_game(), msg, "auto-derby", 0)

@@ -4,16 +4,18 @@
 # pyright: strict
 
 
-import cv2
 import hashlib
 import json
 import logging
 import os
+from pathlib import Path
 from typing import Dict, Text
 
+import cv2
 import numpy as np
-import win32gui
 from PIL.Image import Image, fromarray
+
+from auto_derby import window
 
 LOGGER = logging.getLogger(__name__)
 
@@ -55,9 +57,10 @@ def _binary_img(img: Image) -> np.ndarray:
     return binary_img
 
 
-EVENT_IMAGE_PATH = os.getenv("AUTO_DERBY_NURTURING_EVENT_IMAGE_PATH") or "nurturing_event_images.local"
+EVENT_IMAGE_PATH = os.getenv(
+    "AUTO_DERBY_NURTURING_EVENT_IMAGE_PATH") or "nurturing_event_images.local"
 
-from pathlib import Path
+
 def image_id(img: Image) -> Text:
     b_img = _binary_img(img)
     _id = hashlib.md5(b_img.tobytes()).hexdigest()
@@ -68,13 +71,12 @@ def image_id(img: Image) -> Text:
             dst.parent.mkdir(parents=True, exist_ok=True)
             fromarray(b_img).convert("1").save(dst)
 
-    return  _id
+    return _id
 
 
 DATA_PATH = os.getenv(
     "AUTO_DERBY_NURTURING_CHOICE_PATH"
 ) or "nurturing_choices.json"
-
 
 
 def _load() -> Dict[Text, int]:
@@ -96,7 +98,7 @@ _CHOICES = _load()
 def get(event_name: Image) -> int:
     event_id = image_id(event_name)
     if event_id not in _CHOICES:
-        win32gui.MessageBox(0, "请在终端中输入选项编号", "出现新选项", 0)
+        window.info("出现新选项\n请在终端中输入选项编号")
         while True:
             ans = input("选项编号(1/2/3/4/5）：")
             if ans in ["1", "2", "3", "4", "5"]:

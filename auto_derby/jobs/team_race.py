@@ -1,8 +1,8 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
+from auto_derby import window
 from .. import action, templates
-import win32gui
 
 
 def team_race():
@@ -40,7 +40,7 @@ def team_race():
             pass
         elif name == templates.LIMITED_SALE_OPEN:
             # TODO: better handle
-            win32gui.MessageBox(0, "自动终止", "限定商店出现", 0)
+            window.info("限定商店出现\n自动终止")
             break
         else:
             action.click(pos)
