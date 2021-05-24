@@ -1,5 +1,3 @@
-
-
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
@@ -19,50 +17,11 @@ from auto_derby import window
 
 LOGGER = logging.getLogger(__name__)
 
-
-def _auto_level(img: np.ndarray) -> np.ndarray:
-    black = np.percentile(img, 5)
-    white = np.percentile(img, 95)
-
-    return np.clip((img - black) / (white - black) * 255, 0, 255).astype(np.uint8)
-
-
-def _crop_non_zero(img: np.ndarray) -> np.ndarray:
-    points = cv2.findNonZero(img)
-    x, y, w, h = cv2.boundingRect(points)
-    h += 4
-    w += 4
-    x = max(0, x - 2)
-    y = max(0, y - 2)
-    return img[y:y+h, x:x+w]
-
-
-def _binary_img(img: Image) -> np.ndarray:
-    cv_img = np.asarray(img.convert("L"))
-    cv_img = _auto_level(cv_img)
-    if cv_img[0, 0] == 255:
-        cv_img = 255 - cv_img
-
-    _, binary_img = cv2.threshold(
-        cv_img,
-        220,
-        255,
-        cv2.THRESH_BINARY,
-    )
-    binary_img = _crop_non_zero(binary_img)
-    assert binary_img.size > 0
-    if os.getenv("DEBUG") == "nurturing_choice":
-        cv2.imshow("binary", binary_img)
-        cv2.waitKey()
-    return binary_img
-
-
 EVENT_IMAGE_PATH = os.getenv(
     "AUTO_DERBY_NURTURING_EVENT_IMAGE_PATH") or "nurturing_event_images.local"
 
 
-def image_id(img: Image) -> Text:
-    b_img = _binary_img(img)
+def _image_id(b_img: np.ndarray) -> Text:
     _id = hashlib.md5(b_img.tobytes()).hexdigest()
 
     if os.getenv("AUTO_DERBY_ID_IMAGE_SKIP_SAVE", "").lower() != "true":
@@ -95,8 +54,47 @@ def _save() -> None:
 _CHOICES = _load()
 
 
-def get(event_name: Image) -> int:
-    event_id = image_id(event_name)
+def get(event_screen: Image) -> int:
+    b_img = np.zeros((event_screen.height, event_screen.width))
+    event_name_bbox = (75, 155, 305, 180)
+    options_bbox = (50, 200, 400, 570)
+    cv_event_name_img = np.asarray(
+        event_screen.crop(event_name_bbox).convert("L"))
+    _, cv_event_name_img = cv2.threshold(
+        cv_event_name_img, 220, 255, cv2.THRESH_TOZERO)
+
+    l, t, r, b = event_name_bbox
+    b_img[
+        t: b,
+        l: r,
+    ] = cv_event_name_img
+
+    cv_options_img = np.asarray(event_screen.crop(options_bbox).convert("L"))
+
+    def _has_white(x: np.ndarray) -> bool:
+        return (x == 255).any()
+    option_rows = np.apply_along_axis(
+        _has_white, 1, cv_options_img).astype(np.uint8)
+    option_mask = np.repeat(np.vstack(option_rows),
+                            cv_options_img.shape[1], axis=1)
+
+    cv_options_img = 255-cv_options_img
+    cv_options_img *= option_mask
+
+    _, cv_options_img = cv2.threshold(
+        cv_options_img,
+        128,
+        255,
+        cv2.THRESH_BINARY,
+    )
+
+    l, t, r, b = options_bbox
+    b_img[
+        t: b,
+        l: r,
+    ] = cv_options_img
+
+    event_id = _image_id(b_img)
     if event_id not in _CHOICES:
         window.info("出现新选项\n请在终端中输入选项编号")
         while True:

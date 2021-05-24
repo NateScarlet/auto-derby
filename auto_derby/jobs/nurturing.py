@@ -81,8 +81,7 @@ ALL_OPTIONS = [
 
 
 def _handle_option():
-    event_name_img = template.screenshot().crop((75, 155, 305, 180))
-    ans = nurturing_choice.get(event_name_img)
+    ans = nurturing_choice.get(template.screenshot())
     action.click_image(ALL_OPTIONS[ans-1])
 
 

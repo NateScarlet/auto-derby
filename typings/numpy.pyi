@@ -7855,7 +7855,7 @@ class ndarray(object):
         """
         ...
 
-    def __eq__(self, value, /):
+    def __eq__(self, value, /) -> ndarray:
         """
         Return self==value.
         """
@@ -7897,43 +7897,43 @@ class ndarray(object):
         """
         ...
 
-    def __iadd__(self, value, /) :
+    def __iadd__(self, value, /) -> ndarray:
         """
         Return self+=value.
         """
         ...
 
-    def __iand__(self, value, /):
+    def __iand__(self, value, /)-> ndarray:
         """
         Return self&=value.
         """
         ...
 
-    def __ifloordiv__(self, value, /):
+    def __ifloordiv__(self, value, /)-> ndarray:
         """
         Return self//=value.
         """
         ...
 
-    def __ilshift__(self, value, /):
+    def __ilshift__(self, value, /)-> ndarray:
         """
         Return self<<=value.
         """
         ...
 
-    def __imatmul__(self, value, /):
+    def __imatmul__(self, value, /)-> ndarray:
         """
         Return self@=value.
         """
         ...
 
-    def __imod__(self, value, /):
+    def __imod__(self, value, /)-> ndarray:
         """
         Return self%=value.
         """
         ...
 
-    def __imul__(self, value, /):
+    def __imul__(self, value, /) -> ndarray:
         """
         Return self*=value.
         """
@@ -7957,25 +7957,25 @@ class ndarray(object):
         """
         ...
 
-    def __ior__(self, value, /):
+    def __ior__(self, value, /)-> ndarray:
         """
         Return self|=value.
         """
         ...
 
-    def __ipow__(self, value, /):
+    def __ipow__(self, value, /)-> ndarray:
         """
         Return self**=value.
         """
         ...
 
-    def __irshift__(self, value, /):
+    def __irshift__(self, value, /)-> ndarray:
         """
         Return self>>=value.
         """
         ...
 
-    def __isub__(self, value, /):
+    def __isub__(self, value, /)-> ndarray:
         """
         Return self-=value.
         """
@@ -7987,19 +7987,19 @@ class ndarray(object):
         """
         ...
 
-    def __itruediv__(self, value, /):
+    def __itruediv__(self, value, /)-> ndarray:
         """
         Return self/=value.
         """
         ...
 
-    def __ixor__(self, value, /):
+    def __ixor__(self, value, /)-> ndarray:
         """
         Return self^=value.
         """
         ...
 
-    def __le__(self, value, /):
+    def __le__(self, value, /)-> ndarray:
         """
         Return self<=value.
         """
@@ -8011,19 +8011,19 @@ class ndarray(object):
         """
         ...
 
-    def __lshift__(self, value, /):
+    def __lshift__(self, value, /)-> ndarray:
         """
         Return self<<value.
         """
         ...
 
-    def __lt__(self, value, /):
+    def __lt__(self, value, /)-> ndarray:
         """
         Return self<value.
         """
         ...
 
-    def __matmul__(self, value, /):
+    def __matmul__(self, value, /)-> ndarray:
         """
         Return self@value.
         """
@@ -8252,7 +8252,7 @@ class ndarray(object):
         """
         ...
 
-    def any(self, *args, **kwargs):
+    def any(self) -> bool:
         """
         a.any(axis=None, out=None, keepdims=False, *, where=True)
 
@@ -14395,7 +14395,7 @@ def append(arr, values, axis=None):
     ...
 
 
-def apply_along_axis(func1d, axis, arr, *args, **kwargs):
+def apply_along_axis(func1d: Callable[[ndarray], Any], axis: int, arr: ndarray, *args: Any, **kwargs: Any) -> ndarray:
     """
     Apply a function to 1-D slices along the given axis.
 
@@ -29644,7 +29644,7 @@ def recfromtxt(fname, **kwargs):
     ...
 
 
-def repeat(a, repeats, axis=None):
+def repeat(a: ndarray, repeats: int, axis: int=None) -> ndarray:
     """
     Repeat elements of an array.
 
@@ -33905,7 +33905,7 @@ def vsplit(ary, indices_or_sections):
     ...
 
 
-def vstack(tup):
+def vstack(tup: ndarray) -> ndarray:
     """
     Stack arrays in sequence vertically (row wise).
 
