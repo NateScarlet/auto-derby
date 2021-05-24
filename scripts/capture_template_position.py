@@ -38,7 +38,7 @@ def create_pos_mask(name: Text):
     pos_img = template.try_load(pos_name)
 
     if pos_img:
-        out_img = np.asarray(pos_img.convert("1"))
+        out_img = np.array(pos_img.convert("L"), dtype=np.uint8)
     else:
         out_img = np.zeros((game_img.height, game_img.width), dtype=np.uint8)
 

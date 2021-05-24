@@ -83,7 +83,7 @@ def _match_one(img: Image, tmpl: Union[Text, Specification], threshold: float = 
     cv_tmpl = _cv_image(load(tmpl.name))
     tmpl_h, tmpl_w = cv_tmpl.shape[:2]
     if pos:
-        cv_pos = np.asarray(pos.convert("L"))
+        cv_pos = np.array(pos.convert("L"))
     else:
         cv_pos = np.full(
             cv_img.shape[:2],
