@@ -18,6 +18,7 @@ def team_race():
             templates.RACE_AGAIN_BUTTON,
             templates.TEAM_RACE_WIN,
             templates.TEAM_RACE_LOSE,
+            templates.TEAM_RACE_HIGH_SCORE_UPDATED,
             templates.TEAM_RACE_NEXT_BUTTON,
             templates.LIMITED_SALE_OPEN,
             templates.RP_NOT_ENOUGH,
