@@ -534,7 +534,7 @@ def EnumPropsEx(*args, **kwargs):
     ...
 
 
-def EnumThreadWindows(*args, **kwargs):
+def EnumThreadWindows(dwThreadId: int, callback : Callable[[int, T], None], extra: T) -> None:
     """
     """
     ...
@@ -691,7 +691,7 @@ def GetClassLong(*args, **kwargs):
     ...
 
 
-def GetClassName(*args, **kwargs):
+def GetClassName(hwnd: int) -> Text:
     """
     """
     ...
@@ -1298,7 +1298,7 @@ def IsIconic(*args, **kwargs):
     ...
 
 
-def IsWindow(*args, **kwargs):
+def IsWindow(hWnd: int) -> bool:
     """
     """
     ...
@@ -1490,7 +1490,7 @@ def PolylineTo(*args, **kwargs):
     ...
 
 
-def PostMessage(*args, **kwargs):
+def PostMessage(hwnd: int, message: int, wparam: int, lparam: int) -> None:
     """
     """
     ...

@@ -2,13 +2,50 @@
 # pyright: strict
 """umamusume pertty derby automation.  """
 
-from typing import Text
-import win32con
 import contextlib
-
-import win32gui
 import logging
+import threading
+import time
+from typing import Callable, Optional, Set, Text
+
+import win32con
+import win32gui
+
 LOGGER = logging.getLogger(__name__)
+
+
+def message_box(
+    msg: Text,
+    caption: Text,
+    *,
+    flags: int = 0,
+    h_wnd: int = 0,
+    on_close: Optional[Callable[[], None]] = None,
+) -> Callable[[], None]:
+    def _run():
+        win32gui.MessageBox(h_wnd, msg, caption, flags)
+        if callable(on_close):
+            on_close()
+    t = threading.Thread(target=_run)
+    t.start()
+    h_wnd_set: Set[int] = set()
+
+    def _iter_window(h_wnd: int, _: None):
+        if win32gui.GetClassName(h_wnd) != "#32770":  # message box
+            return
+        h_wnd_set.add(h_wnd)
+    assert t.ident is not None
+    while not h_wnd_set:
+        time.sleep(0.01)
+        win32gui.EnumThreadWindows(t.ident, _iter_window, None)
+    assert len(h_wnd_set) == 1, h_wnd_set
+
+    def _close():
+        for i in h_wnd_set:
+            if win32gui.IsWindow(i):
+                win32gui.PostMessage(i, win32con.WM_CLOSE, 0, 0)
+        t.join()
+    return _close
 
 
 def get_game() -> int:
@@ -58,5 +95,5 @@ def recover_foreground():
         LOGGER.warn("recover foreground window failed: %s", ex)
 
 
-def info(msg: Text):
-    win32gui.MessageBox(get_game(), msg, "auto-derby", 0)
+def info(msg: Text) -> Callable[[], None]:
+    return message_box(msg, "auto-derby", h_wnd=get_game())

@@ -96,12 +96,13 @@ def get(event_screen: Image) -> int:
 
     event_id = _image_id(b_img)
     if event_id not in _CHOICES:
-        window.info("出现新选项\n请在终端中输入选项编号")
+        close = window.info("出现新选项\n请在终端中输入选项编号")
         while True:
             ans = input("选项编号(1/2/3/4/5）：")
             if ans in ["1", "2", "3", "4", "5"]:
                 _CHOICES[event_id] = int(ans)
                 _save()
+                close()
                 break
     ret = _CHOICES[event_id]
     LOGGER.info("event: id=%s choice=%d", event_id, ret)
