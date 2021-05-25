@@ -69,6 +69,7 @@ def _handle_race_result():
         templates.RACE_RESULT_NO2,
         templates.RACE_RESULT_NO3,
         templates.RACE_RESULT_NO4,
+        templates.RACE_RESULT_NO5,
         templates.RACE_RESULT_NO6,
         templates.RACE_RESULT_NO8,
         templates.RACE_RESULT_NO10,

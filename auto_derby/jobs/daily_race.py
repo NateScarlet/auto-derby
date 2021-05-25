@@ -20,6 +20,13 @@ def daily_race(race_name: Text):
             templates.RACE_RESULT_BUTTON,
             templates.RACE_AGAIN_BUTTON,
             templates.RACE_RESULT_NO1,
+            templates.RACE_RESULT_NO2,
+            templates.RACE_RESULT_NO3,
+            templates.RACE_RESULT_NO4,
+            templates.RACE_RESULT_NO5,
+            templates.RACE_RESULT_NO6,
+            templates.RACE_RESULT_NO8,
+            templates.RACE_RESULT_NO10,
             race_name,
             templates.RACE_BUTTON,
         )
