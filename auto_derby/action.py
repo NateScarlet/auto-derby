@@ -15,17 +15,16 @@ import contextlib
 
 
 @contextlib.contextmanager
-def cursor_at(point: Tuple[int, int]):
+def recover_cursor():
     ox, oy = win32gui.GetCursorPos()
-    x, y = point
-    mouse.move(x, y)
     yield
     mouse.move(ox, oy)
 
 
 def click_at_window(h_wnd: int, point: Tuple[int, int]):
     point = win32gui.ClientToScreen(h_wnd, point)
-    with window.topmost(h_wnd), window.recover_foreground(), cursor_at(point):
+    with window.topmost(h_wnd), window.recover_foreground(), recover_cursor():
+        mouse.move(point[0], point[1])
         mouse.click()
         time.sleep(0.2)
 
@@ -71,7 +70,7 @@ def move(h_wnd: int, x: int, y: int):
 
 def drag_at_window(h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1):
     x, y = win32gui.ClientToScreen(h_wnd, point)
-    with window.topmost(h_wnd), window.recover_foreground():
+    with window.topmost(h_wnd), window.recover_foreground(), recover_cursor():
         mouse.drag(x, y, x+dx, y+dy, duration=duration)
 
 
