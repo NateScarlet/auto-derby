@@ -169,7 +169,7 @@ def nurturing():
             # status = Status.from_screen(template.screenshot())
             # print(status) # TODO: use status
             if action.count_image(templates.NURTURING_STAMINA_HALF_EMPTY):
-                if action.click_image(template.Specification(templates.NURTURING_HEALTH_CARE, lightness_sensitive=True)):
+                if action.click_image(templates.NURTURING_HEALTH_CARE):
                     time.sleep(2)
                     if action.count_image(templates.NURTURING_HEALTH_CARE_CONFIRM):
                         action.click_image(templates.GREEN_OK_BUTTON)

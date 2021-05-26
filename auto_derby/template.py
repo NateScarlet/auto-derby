@@ -70,8 +70,23 @@ def add_middle_ext(name: Text, value: Text) -> Text:
     return ".".join(parts)
 
 
+def _hist_match(a: Image, b: Image) -> float:
+    cv_a = cv2.cvtColor(np.asarray(a.convert("RGB")), cv2.COLOR_RGB2HSV)
+    cv_b = cv2.cvtColor(np.asarray(b.convert("RGB")), cv2.COLOR_RGB2HSV)
+    a_hist_h = cv2.calcHist(cv_a, (0,), None, (256,), (0, 256))
+    a_hist_s = cv2.calcHist(cv_a, (1,), None, (256,), (0, 256))
+    a_hist_v = cv2.calcHist(cv_a, (2,), None, (256,), (0, 256))
+    b_hist_h = cv2.calcHist(cv_b, (0,), None, (256,), (0, 256))
+    b_hist_s = cv2.calcHist(cv_b, (1,), None, (256,), (0, 256))
+    b_hist_v = cv2.calcHist(cv_b, (2,), None, (256,), (0, 256))
+    hist_match_h = cv2.compareHist(a_hist_h, b_hist_h, cv2.HISTCMP_CORREL)
+    hist_match_s = cv2.compareHist(a_hist_s, b_hist_s, cv2.HISTCMP_CORREL)
+    hist_match_v = cv2.compareHist(a_hist_v, b_hist_v, cv2.HISTCMP_CORREL)
+    return hist_match_h * 0.3 + hist_match_s * 0.3 + hist_match_v * 0.4
+
+
 class Specification():
-    def __init__(self, name: Text, pos: Optional[Text] = None, *, threshold: float = 0.9, lightness_sensitive: bool = False):
+    def __init__(self, name: Text, pos: Optional[Text] = None, *, threshold: float = 0.9, lightness_sensitive: bool = True):
         self.name = name
         self.pos = pos
         self.threshold = threshold
@@ -85,13 +100,21 @@ class Specification():
         if self.lightness_sensitive:
             tmpl_img = load(self.name)
             match_img = img.crop((x, y, x + tmpl_img.width, y+tmpl_img.height))
-            if (
-                np.average(
-                    np.asarray(match_img.convert("L")) -
-                    np.asarray(tmpl_img.convert("L"))
-                ) / 255.0 >
-                1 - self.threshold
-            ):
+
+            cv_tmpl_img = np.asarray(tmpl_img.convert("L"))
+            cv_match_img = np.asarray(match_img.convert("L"))
+            match_min, match_max, _, _ = cv2.minMaxLoc(cv_match_img)
+            tmpl_min, tmpl_max, _, _ = cv2.minMaxLoc(cv_tmpl_img)
+
+            max_diff = (match_max - tmpl_max) / 255.0
+            min_diff = (match_min - tmpl_min) / 255.0
+            if max_diff < 0:
+                max_diff *= -1
+                min_diff *= -1
+
+            lightness_similarity = 1 - (abs(max_diff + min_diff) / 2)
+            LOGGER.debug("lightness match: tmpl=%s, similarity=%s", self, lightness_similarity)
+            if lightness_similarity < self.threshold:
                 return False
         return True
 

@@ -62,9 +62,12 @@ def is_admin():
 if __name__ == '__main__':
     logging.basicConfig(
         format="%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
-        level=logging.DEBUG if os.getenv("DEBUG") == "auto-derby" else logging.INFO,
+        level=logging.INFO,
         datefmt="%Y-%m-%d %H:%M:%S",
     )
+    for i in  os.getenv("DEBUG", "").split(","):
+        logging.getLogger(i).setLevel(logging.DEBUG)
+    
 
 
     if not is_admin():

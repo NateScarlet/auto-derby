@@ -1950,7 +1950,7 @@ class DescriptorMatcher(Algorithm):
         """
         ...
 
-    def match(self, queryDescriptors, trainDescriptors[, mask]) -> matches:
+    def match(self, queryDescriptors: Any, trainDescriptors: Any, mask: Optional[ndarray] = ...) -> List[Any]:
         """
         .   @brief Finds the best match for each descriptor from a query set.
         .
@@ -2322,7 +2322,7 @@ class Feature2D(builtins.object):
         """
         ...
 
-    def detectAndCompute(self, image, mask[, descriptors[, useProvidedKeypoints]]) -> keypoints, descriptors:
+    def detectAndCompute(self, image: ndarray, mask: Optional[ndarray], descriptors: Any = ..., useProvidedKeypoints: Any = ...) -> Tuple[ndarray, Any]:
         """
         .   Detects keypoints and computes the descriptors
         """
@@ -13730,7 +13730,17 @@ def Mahalanobis(v1, v2, icovar) -> retval:
     ...
 
 
-def ORB_create([, nfeatures[, scaleFactor[, nlevels[, edgeThreshold[, firstLevel[, WTA_K[, scoreType[, patchSize[, fastThreshold]]]]]]]]]) -> retval:
+def ORB_create(
+    features: int = ..., 
+    scaleFactor: float = ...,
+    nlevels: int = ..., 
+    edgeThreshold: int = ...,
+    firstLevel: int = ...,
+    WTA_K: int = ...,
+    scoreType: int = ..., 
+    patchSize: int = ...,
+    fastThreshold: int = ...,
+) -> ORB:
     """
     .   @brief The ORB constructor
     .
@@ -14758,7 +14768,7 @@ def calcCovarMatrix(samples, mean, flags[, covar[, ctype]]) -> covar, mean:
     ...
 
 
-def calcHist(images, channels, mask, histSize, ranges[, hist[, accumulate]]) -> hist:
+def calcHist(images: ndarray, channels: Tuple[int, ...], mask: Optional[ndarray], histSize:  Tuple[int] , ranges: Tuple[int, int], hist: ndarray = ..., accumulate: bool = ...) -> ndarray:
     """
     .   @overload
     """
@@ -15513,7 +15523,7 @@ def compare(src1, src2, cmpop[, dst]) -> dst:
     ...
 
 
-def compareHist(H1, H2, method) -> retval:
+def compareHist(H1:ndarray, H2: ndarray, method: int) -> float:
     """
     .   @brief Compares two histograms.
     .

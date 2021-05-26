@@ -8902,7 +8902,7 @@ class ndarray(object):
         """
         ...
 
-    def min(self, *args, **kwargs):
+    def min(self, axis: Optional[int]=None, out: Optional[Any]=None, keepdims: bool=False, initial: Optional[Any]=..., where: bool=True) -> Any:
         """
         a.min(axis=None, out=None, keepdims=False, initial=<no value>, where=True)
 
