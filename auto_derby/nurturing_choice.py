@@ -2,36 +2,21 @@
 # pyright: strict
 
 
-import hashlib
 import json
 import logging
 import os
-from pathlib import Path
 from typing import Dict, Text
 
 import cv2
 import numpy as np
-from PIL.Image import Image, fromarray
+from PIL.Image import Image
 
-from auto_derby import window
+from auto_derby import window, imagetools
 
 LOGGER = logging.getLogger(__name__)
 
 EVENT_IMAGE_PATH = os.getenv(
     "AUTO_DERBY_NURTURING_EVENT_IMAGE_PATH") or "nurturing_event_images.local"
-
-
-def _image_id(b_img: np.ndarray) -> Text:
-    _id = hashlib.md5(b_img.tobytes()).hexdigest()
-
-    if os.getenv("AUTO_DERBY_ID_IMAGE_SKIP_SAVE", "").lower() != "true":
-        dst = Path(EVENT_IMAGE_PATH) / _id[0] / _id[1:3] / (_id[3:] + ".png")
-        if not dst.exists():
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            fromarray(b_img).convert("1").save(dst)
-
-    return _id
-
 
 DATA_PATH = os.getenv(
     "AUTO_DERBY_NURTURING_CHOICE_PATH"
@@ -94,7 +79,7 @@ def get(event_screen: Image) -> int:
         l: r,
     ] = cv_options_img
 
-    event_id = _image_id(b_img)
+    event_id = imagetools.md5(b_img, save_path=EVENT_IMAGE_PATH)
     if event_id not in _CHOICES:
         close = window.info("出现新选项\n请在终端中输入选项编号")
         while True:
