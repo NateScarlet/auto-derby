@@ -52,16 +52,15 @@ def get_game() -> int:
     return win32gui.FindWindow("UnityWndClass", "umamusume")
 
 
-def set_client_height(h_wnd: int, height: int):
+def set_client_size(h_wnd: int, width: int, height: int):
     left, top, right, bottom = win32gui.GetWindowRect(h_wnd)
     _, _, w, h = win32gui.GetClientRect(h_wnd)
     LOGGER.info("width=%s height=%s", w, h)
-    if h == height:
-        LOGGER.info("already in wanted height")
+    if h == height and w == width:
+        LOGGER.info("already in wanted size")
         return
     borderWidth = right - left - w
     borderHeight = bottom - top - h
-    width = int(height / h * w)
     win32gui.SetWindowPos(
         h_wnd,
         0,
@@ -71,6 +70,7 @@ def set_client_height(h_wnd: int, height: int):
         height + borderHeight,
         0,
     )
+    set_client_size(h_wnd, width, height) # repeat until exact match
     return
 
 
