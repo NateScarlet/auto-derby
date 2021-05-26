@@ -7981,7 +7981,7 @@ class ndarray(object):
         """
         ...
 
-    def __iter__(self, /):
+    def __iter__(self, /) -> ndarray:
         """
         Implement iter(self).
         """
@@ -8045,6 +8045,9 @@ class ndarray(object):
         """
         Return self!=value.
         """
+        ...
+    
+    def __next__(self, /) -> ndarray:
         ...
 
     def __neg__(self, /) -> ndarray:
@@ -8521,7 +8524,7 @@ class ndarray(object):
         """
         ...
 
-    def copy(self, *args, **kwargs):
+    def copy(self, *, order: Text = ...) -> ndarray:
         """
         a.copy(order='C')
 

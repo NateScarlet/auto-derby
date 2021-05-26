@@ -15962,7 +15962,7 @@ def copyMakeBorder(src, top, bottom, left, right, borderType[, dst[, value]]) ->
     ...
 
 
-def copyTo(src, mask[, dst]) -> dst:
+def copyTo(src: ndarray, mask: ndarray = ..., dst: ndarray = ...) -> ndarray:
     """
     .   @brief  This is an overloaded member function, provided for convenience (python)
     .   Copies the matrix to another one.
@@ -17030,7 +17030,7 @@ def drawChessboardCorners(image, patternSize, corners, patternWasFound) -> image
     ...
 
 
-def drawContours(image, contours, contourIdx, color[, thickness[, lineType[, hierarchy[, maxLevel[, offset]]]]]) -> image:
+def drawContours(image: ndarray, contours: ndarray, contourIdx: int, color: Tuple[int,...] = ..., thickness: int= ..., lineType: int =..., hierarchy: Optional[ndarray] = ..., maxLevel: int = ..., offset: int = ...) -> ndarray:
     """
     .   @brief Draws contours outlines or filled contours.
     .
@@ -18071,7 +18071,7 @@ def findCirclesGrid(image, patternSize, flags, blobDetector, parameters[, center
     ...
 
 
-def findContours(image, mode, method[, contours[, hierarchy[, offset]]]) -> contours, hierarchy:
+def findContours(image: ndarray, mode: int, method: int, contours: ndarray =..., hierarchy: ndarray = ..., offset: int = ...) -> Tuple[ndarray, ndarray]:
     """
     .   @brief Finds contours in a binary image.
     .
@@ -19246,7 +19246,7 @@ def getWindowImageRect(winname) -> retval:
     ...
 
 
-def getWindowProperty(winname, prop_id) -> retval:
+def getWindowProperty(winname: Text, prop_id: int) -> int:
     """
     .   @brief Provides parameters of a window.
     .
@@ -20529,7 +20529,7 @@ def multiply(src1, src2[, dst[, scale[, dtype]]]) -> dst:
     ...
 
 
-def namedWindow(winname[, flags]) -> None:
+def namedWindow(winname: Text, flags: int= ...) -> None:
     """
     .   @brief Creates a window.
     .
@@ -21419,7 +21419,7 @@ def reprojectImageTo3D(disparity, Q[, _3dImage[, handleMissingValues[, ddepth]]]
     ...
 
 
-def resize(src, dsize[, dst[, fx[, fy[, interpolation]]]]) -> dst:
+def resize(src: ndarray, dsize: Tuple[int, int], dst: ndarray =..., fx: float = ..., fy: float =..., interpolation: int = ...) -> ndarray:
     """
     .   @brief Resizes an image.
     .

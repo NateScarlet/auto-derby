@@ -1,11 +1,14 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
+from __future__ import annotations
 
 import time
 
+from PIL.Image import Image
+
 from auto_derby import template, nurturing_choice
 
-from .. import action, templates
+from .. import action, templates, ocr
 
 
 def _handle_training():
@@ -90,6 +93,33 @@ def _handle_race():
     _handle_race_result()
     action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
+class Status:
+    
+    def __init__(self) -> None:
+        self.speed = 0
+        self.stamina = 0
+        self.power = 0
+        self.perservance = 0
+        self.intelligence = 0
+
+    @classmethod
+    def from_screen(cls, img: Image) -> Status:
+        speed_bbox = (45, 553, 90, 572)
+        stamina_bbox = (125, 553, 162, 572)
+        power_bbox = (192, 553, 234, 572)
+        perservance_bbox = (260, 553, 308, 572)
+        intelligence_bbox = (332, 553, 381, 572)
+        self = cls()
+        self.speed = int(ocr.text(template.screenshot().crop(speed_bbox)))
+        self.stamina = int(ocr.text(template.screenshot().crop(stamina_bbox)))
+        self.power = int(ocr.text(template.screenshot().crop(power_bbox)))
+        self.perservance = int(ocr.text(template.screenshot().crop(perservance_bbox)))
+        self.intelligence = int(ocr.text(template.screenshot().crop(intelligence_bbox)))
+        return self
+
+    def __str__(self):
+        return f"Status<spd={self.speed}, sta={self.stamina}, pow={self.power}, per={self.perservance}, int={self.intelligence}>"
+
 
 ALL_OPTIONS = [
     templates.NURTURING_OPTION1,
@@ -136,6 +166,8 @@ def nurturing():
             action.click(pos)
             _handle_race()
         elif name == templates.NURTURING_TRAINING:
+            # status = Status.from_screen(template.screenshot())
+            # print(status) # TODO: use status
             if action.count_image(templates.NURTURING_STAMINA_HALF_EMPTY):
                 if action.click_image(template.Specification(templates.NURTURING_HEALTH_CARE, lightness_sensitive=True)):
                     time.sleep(2)
