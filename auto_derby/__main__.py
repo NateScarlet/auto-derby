@@ -66,6 +66,8 @@ if __name__ == '__main__':
         datefmt="%Y-%m-%d %H:%M:%S",
     )
     for i in  os.getenv("DEBUG", "").split(","):
+        if not i:
+            continue
         logging.getLogger(i).setLevel(logging.DEBUG)
     
 

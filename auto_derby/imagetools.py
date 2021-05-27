@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Callable, Dict, Literal, Optional, Text
 
 import cv2
+import cv2.img_hash
 import numpy as np
 from PIL.Image import Image, fromarray
 
@@ -32,7 +33,33 @@ def md5(b_img: np.ndarray, *, save_path: Optional[Text] = None) -> Text:
     return _id
 
 
-_WINDOW_ID: Dict[Literal["value"], int] = { "value": 0}
+_HASH_ALGORITHM = cv2.img_hash.BlockMeanHash_create()
+
+
+def image_hash(img: Image, *, save_path: Optional[Text] = None) -> Text:
+    cv_img = np.asarray(img.convert("L"))
+    h = _HASH_ALGORITHM.compute(cv_img).tobytes().hex()
+
+    if save_path and not SKIP_SAVE:
+        md5_hash = hashlib.md5(img.tobytes()).hexdigest()
+        dst = Path(save_path) / h[0] / h[1:3] / h[3:] / (md5_hash + ".png")
+        if not dst.exists():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            img.convert("RGB").save(dst)
+
+    return h
+
+
+def compare_hash(a: Text, b: Text) -> float:
+    if a == b:
+        return 1.0
+    cv_a = np.array(list(bytes.fromhex(a)), np.uint8)
+    cv_b = np.array(list(bytes.fromhex(b)), np.uint8)
+    res = _HASH_ALGORITHM.compare(cv_a, cv_b)
+    return 1 - (res / (len(a) * 2))
+
+
+_WINDOW_ID: Dict[Literal["value"], int] = {"value": 0}
 
 
 def show(img: Image, title: Text = "") -> Callable[[], None]:
@@ -40,7 +67,7 @@ def show(img: Image, title: Text = "") -> Callable[[], None]:
     stop_event = threading.Event()
     stop_event.is_set()
     _WINDOW_ID["value"] += 1
-    title = f"{title} - {_WINDOW_ID}"
+    title = f"{title} - {_WINDOW_ID['value']}"
 
     def _run():
         cv_img = np.asarray(img)

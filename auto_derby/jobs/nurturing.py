@@ -107,8 +107,8 @@ class Status:
         speed_bbox = (45, 553, 90, 572)
         stamina_bbox = (125, 553, 162, 572)
         power_bbox = (192, 553, 234, 572)
-        perservance_bbox = (260, 553, 308, 572)
-        intelligence_bbox = (332, 553, 381, 572)
+        perservance_bbox = (264, 553, 308, 572)
+        intelligence_bbox = (337, 553, 381, 572)
         self = cls()
         self.speed = int(ocr.text(template.screenshot().crop(speed_bbox)))
         self.stamina = int(ocr.text(template.screenshot().crop(stamina_bbox)))
@@ -166,8 +166,8 @@ def nurturing():
             action.click(pos)
             _handle_race()
         elif name == templates.NURTURING_TRAINING:
-            # status = Status.from_screen(template.screenshot())
-            # print(status) # TODO: use status
+            status = Status.from_screen(template.screenshot())
+            print(status) # TODO: use status
             if action.count_image(templates.NURTURING_STAMINA_HALF_EMPTY):
                 if action.click_image(templates.NURTURING_HEALTH_CARE):
                     time.sleep(2)
