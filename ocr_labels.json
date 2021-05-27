@@ -37,5 +37,7 @@
   "000fc01ff03ffc3ffc3ff83fe03f803f807f80ff80ff80ff80ff80ff80ff003f": "1",
   "f01ffc3ffc7f3cfc00f800f800fc007fc03fe00ff803fc00fe00fe03ff7ffe7f": "2",
   "e00ff83f3c1c1e001f001f00ff1fff3f3f3c1f7c1f7c1e7c7c3efc3ff81fe007": "6",
-  "f03ff87f78fe00fc00fc007ec07fe07fc0ff00fc00f800f83efefe7ff83fe00f": "3"
+  "f03ff87f78fe00fc00fc007ec07fe07fc0ff00fc00f800f83efefe7ff83fe00f": "3",
+  "001c807ff0fffcfffffff8ffc0ff80ff80ffc0ffc0ffc0ffc0ffc0ff807f001f": "1",
+  "f81ffc3ffc1ffe033f03ff07ff3ffe7f00f800f800f000f81efcfe7ff81fc003": "5"
 }
