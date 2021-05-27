@@ -1,9 +1,9 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from auto_derby import window
 from .. import action, templates
 
+from . import limited_sale
 
 def team_race():
     while True:
@@ -39,8 +39,6 @@ def team_race():
         elif name == templates.CONNECTING:
             pass
         elif name == templates.LIMITED_SALE_OPEN:
-            # TODO: better handle
-            window.info("限定商店出现\n自动终止")
-            break
+            limited_sale.buy_everything()
         else:
             action.click(pos)

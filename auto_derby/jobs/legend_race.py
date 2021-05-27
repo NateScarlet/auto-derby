@@ -1,7 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from auto_derby import window
+from auto_derby.jobs import limited_sale
 from .. import action, templates
 
 
@@ -35,9 +35,7 @@ def legend_race():
         elif name == templates.CONNECTING:
             pass
         elif name == templates.LIMITED_SALE_OPEN:
-            # TODO: better handle
-            window.info("限定商店出现\n自动终止")
-            break
+            limited_sale.buy_everything()
         elif name == templates.LEGEND_RACE_COLLECT_ALL_REWARD:
             action.click(pos)
             return

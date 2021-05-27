@@ -419,7 +419,7 @@ def wait(button: typing.Text = 'left', target_types=('up', 'down', 'double')):
     ...
 
 
-def wheel(delta=1):
+def wheel(delta: int =1) -> None:
     """
     Scrolls the wheel `delta` clicks. Sign indicates direction.
     """

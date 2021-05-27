@@ -85,6 +85,10 @@ def topmost(h_wnd: int):
                           left, top, right - left, bottom - top, 0)
 
 
+def set_forground(h_wnd: int) -> None:
+    win32gui.SetForegroundWindow(h_wnd)
+
+
 @contextlib.contextmanager
 def recover_foreground():
     fg_h_wnd = win32gui.GetForegroundWindow()
@@ -93,6 +97,7 @@ def recover_foreground():
         win32gui.SetForegroundWindow(fg_h_wnd)
     except Exception as ex:
         LOGGER.warn("recover foreground window failed: %s", ex)
+
 
 
 def info(msg: Text) -> Callable[[], None]:
