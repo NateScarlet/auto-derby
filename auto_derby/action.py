@@ -65,8 +65,6 @@ def wait_image_disappear(*tmpl: Union[Text, template.Specification]) -> None:
         except StopIteration:
             break
 
-
-
 def click_image(name: Union[Text, template.Specification], *, x: int = 0, y: int = 0) -> bool:
     try:
         name, pos = next(template.match(template.screenshot(), name))

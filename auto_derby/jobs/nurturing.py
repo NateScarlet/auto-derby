@@ -149,6 +149,7 @@ def nurturing():
             templates.GREEN_NEXT_BUTTON,
             templates.NURTURING_URA_FINALS,
             templates.NURTURING_GENE_INHERIT,
+            templates.NURTURING_SCHEDULED_RACE_OPENING,
         )
         name = tmpl.name
         if name == templates.CONNECTING:
@@ -164,6 +165,9 @@ def nurturing():
             _handle_race()
         elif name == templates.NURTURING_URA_FINALS:
             action.click(pos)
+            _handle_race()
+        elif name == templates.NURTURING_SCHEDULED_RACE_OPENING:
+            action.click_image(templates.NURTURING_GO_TO_SCHEDULED_RACE_BUTTON)
             _handle_race()
         elif name == templates.NURTURING_TRAINING:
             status = Status.from_screen(template.screenshot())
