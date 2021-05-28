@@ -94,7 +94,8 @@ def _handle_race():
     action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
 def _schedule_next_race():
-    action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
+    return
+    # action.wait_click_image(templates.NURTURING_COMMAND_RACE)
 
 class Status:
     
