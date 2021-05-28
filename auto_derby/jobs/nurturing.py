@@ -93,12 +93,14 @@ def _handle_race():
     _handle_race_result()
     action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
+
 def _schedule_next_race():
     return
     # action.wait_click_image(templates.NURTURING_COMMAND_RACE)
 
+
 class Status:
-    
+
     def __init__(self) -> None:
         self.speed = 0
         self.stamina = 0
@@ -114,11 +116,12 @@ class Status:
         perservance_bbox = (264, 553, 308, 572)
         intelligence_bbox = (337, 553, 381, 572)
         self = cls()
-        self.speed = int(ocr.text(template.screenshot().crop(speed_bbox)))
-        self.stamina = int(ocr.text(template.screenshot().crop(stamina_bbox)))
-        self.power = int(ocr.text(template.screenshot().crop(power_bbox)))
-        self.perservance = int(ocr.text(template.screenshot().crop(perservance_bbox)))
-        self.intelligence = int(ocr.text(template.screenshot().crop(intelligence_bbox)))
+        screnshot = template.screenshot()
+        self.speed = int(ocr.text(screnshot.crop(speed_bbox)))
+        self.stamina = int(ocr.text(screnshot.crop(stamina_bbox)))
+        self.power = int(ocr.text(screnshot.crop(power_bbox)))
+        self.perservance = int(ocr.text(screnshot.crop(perservance_bbox)))
+        self.intelligence = int(ocr.text(screnshot.crop(intelligence_bbox)))
         return self
 
     def __str__(self):
@@ -177,7 +180,7 @@ def nurturing():
             _schedule_next_race()
         elif name == templates.NURTURING_COMMAND_TRAINING:
             status = Status.from_screen(template.screenshot())
-            print(status) # TODO: use status
+            print(status)  # TODO: use status
             if action.count_image(templates.NURTURING_VITALITY_HALF_EMPTY):
                 if action.click_image(templates.NURTURING_COMMAND_HEALTH_CARE):
                     time.sleep(2)
