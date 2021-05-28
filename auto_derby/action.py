@@ -4,7 +4,7 @@
 
 from . import template
 import time
-from typing import Iterator, Text, Tuple, Union
+from typing import Callable, Iterable, Iterator, Text, Tuple, Union
 
 import mouse
 import win32gui
@@ -40,15 +40,23 @@ def count_image(*tmpl: Union[Text, template.Specification]) -> int:
         ret += 1
     return ret
 
-def match_image_until_disappear(*tmpl: Union[Text, template.Specification]) -> Iterator[Tuple[template.Specification, Tuple[int, int]]]:
+
+def match_image_until_disappear(
+    *tmpl: Union[Text, template.Specification],
+    sort: Callable[
+        [Iterator[Tuple[template.Specification, Tuple[int, int]]]],
+        Iterable[Tuple[template.Specification, Tuple[int, int]]],
+    ] = lambda x: x,
+) -> Iterator[Tuple[template.Specification, Tuple[int, int]]]:
     while True:
         count = 0
-        for i in template.match(template.screenshot(), *tmpl):
+        for i in sort(template.match(template.screenshot(), *tmpl)):
             count += 1
             yield i
-            break # actions will make screenshot outdate
+            break  # actions will make screenshot outdate
         if count == 0:
             break
+
 
 def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[template.Specification, Tuple[int, int]]:
     while True:
@@ -57,6 +65,7 @@ def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[template.Spe
         except StopIteration:
             time.sleep(0.5)
 
+
 def wait_image_disappear(*tmpl: Union[Text, template.Specification]) -> None:
     while True:
         try:
@@ -64,6 +73,7 @@ def wait_image_disappear(*tmpl: Union[Text, template.Specification]) -> None:
             time.sleep(0.5)
         except StopIteration:
             break
+
 
 def click_image(name: Union[Text, template.Specification], *, x: int = 0, y: int = 0) -> bool:
     try:
@@ -78,6 +88,7 @@ def wait_click_image(name: Text, *, x: int = 0, y: int = 0) -> None:
     _, pos = wait_image(name)
     click((pos[0]+x, pos[1]+y))
 
+
 def move_at_window(h_wnd: int,  point: Tuple[int, int]):
     x, y = win32gui.ClientToScreen(h_wnd, point)
     mouse.move(x, y)
@@ -87,13 +98,14 @@ def move(point: Tuple[int, int]):
     move_at_window(window.get_game(), point)
 
 
-def wheel_at_window(h_wnd: int,delta: int) -> None:
+def wheel_at_window(h_wnd: int, delta: int) -> None:
     with window.recover_foreground():
         window.set_forground(h_wnd)
         for _ in range(abs(delta)):
             mouse.wheel(1 if delta > 0 else -1)
             time.sleep(1 / 120.0)
         time.sleep(1)
+
 
 def wheel(delta: int) -> None:
     wheel_at_window(window.get_game(), delta)
