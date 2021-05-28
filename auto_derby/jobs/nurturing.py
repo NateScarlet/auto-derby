@@ -93,6 +93,9 @@ def _handle_race():
     _handle_race_result()
     action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
+def _schedule_next_race():
+    pass
+
 class Status:
     
     def __init__(self) -> None:
@@ -143,7 +146,7 @@ def nurturing():
             templates.NURTURING_TRAINING,
             templates.NURTURING_FANS_NOT_ENOUGH,
             templates.NURTURING_FINISH_BUTTON,
-            templates.NURTURING_TARGET_RACE_BANNER,
+            templates.NURTURING_FORMAL_RACE_BANNER,
             templates.NURTURING_RACE_NEXT_BUTTON,
             templates.NURTURING_OPTION1,
             templates.GREEN_NEXT_BUTTON,
@@ -158,21 +161,23 @@ def nurturing():
             action.click_image(templates.CANCEL_BUTTON)
         elif name == templates.NURTURING_FINISH_BUTTON:
             break
-        elif name == templates.NURTURING_TARGET_RACE_BANNER:
+        elif name == templates.NURTURING_FORMAL_RACE_BANNER:
             x, y = pos
             y += 60
             action.click((x, y))
             _handle_race()
+            _schedule_next_race()
         elif name == templates.NURTURING_URA_FINALS:
             action.click(pos)
             _handle_race()
         elif name == templates.NURTURING_SCHEDULED_RACE_OPENING:
             action.click_image(templates.NURTURING_GO_TO_SCHEDULED_RACE_BUTTON)
             _handle_race()
+            _schedule_next_race()
         elif name == templates.NURTURING_TRAINING:
             status = Status.from_screen(template.screenshot())
             print(status) # TODO: use status
-            if action.count_image(templates.NURTURING_STAMINA_HALF_EMPTY):
+            if action.count_image(templates.NURTURING_VITALITY_HALF_EMPTY):
                 if action.click_image(templates.NURTURING_HEALTH_CARE):
                     time.sleep(2)
                     if action.count_image(templates.NURTURING_HEALTH_CARE_CONFIRM):
