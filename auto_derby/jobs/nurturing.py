@@ -94,7 +94,7 @@ def _handle_race():
     action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
 def _schedule_next_race():
-    pass
+    action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
 class Status:
     
@@ -143,7 +143,7 @@ def nurturing():
         tmpl, pos = action.wait_image(
             templates.CONNECTING,
             templates.RETRY_BUTTON,
-            templates.NURTURING_TRAINING,
+            templates.NURTURING_COMMAND_TRAINING,
             templates.NURTURING_FANS_NOT_ENOUGH,
             templates.NURTURING_FINISH_BUTTON,
             templates.NURTURING_FORMAL_RACE_BANNER,
@@ -174,11 +174,11 @@ def nurturing():
             action.click_image(templates.NURTURING_GO_TO_SCHEDULED_RACE_BUTTON)
             _handle_race()
             _schedule_next_race()
-        elif name == templates.NURTURING_TRAINING:
+        elif name == templates.NURTURING_COMMAND_TRAINING:
             status = Status.from_screen(template.screenshot())
             print(status) # TODO: use status
             if action.count_image(templates.NURTURING_VITALITY_HALF_EMPTY):
-                if action.click_image(templates.NURTURING_HEALTH_CARE):
+                if action.click_image(templates.NURTURING_COMMAND_HEALTH_CARE):
                     time.sleep(2)
                     if action.count_image(templates.NURTURING_HEALTH_CARE_CONFIRM):
                         action.click_image(templates.GREEN_OK_BUTTON)
@@ -190,14 +190,14 @@ def nurturing():
                     templates.NURTURING_MOOD_VERY_BAD,
                 ):
                     _, pos = action.wait_image(
-                        templates.NURTURING_GO_OUT,
-                        templates.NURTURING_SUMMER_REST,
+                        templates.NURTURING_COMMAND_GO_OUT,
+                        templates.NURTURING_COMMAND_SUMMER_REST,
                     )
                     action.click(pos)
                 else:
                     _, pos = action.wait_image(
                         templates.NURTURING_REST,
-                        templates.NURTURING_SUMMER_REST,
+                        templates.NURTURING_COMMAND_SUMMER_REST,
                     )
                     action.click(pos)
             else:
