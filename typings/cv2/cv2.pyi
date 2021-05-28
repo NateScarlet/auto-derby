@@ -6,7 +6,7 @@ cv2.cv2 - Python wrapper for OpenCV.
 
 from typing import *
 
-from numpy import Scalar, ndarray
+from numpy import ArrayLike, Scalar, ndarray
 
 
 class AKAZE(Feature2D):
@@ -17040,7 +17040,7 @@ def drawChessboardCorners(image, patternSize, corners, patternWasFound) -> image
     ...
 
 
-def drawContours(image: ndarray, contours: ndarray, contourIdx: int, color: Tuple[int,...] = ..., thickness: int= ..., lineType: int =..., hierarchy: Optional[ndarray] = ..., maxLevel: int = ..., offset: int = ...) -> ndarray:
+def drawContours(image: ndarray, contours: ArrayLike, contourIdx: int, color: Tuple[int,...] = ..., thickness: int= ..., lineType: int =..., hierarchy: Optional[ndarray] = ..., maxLevel: int = ..., offset: int = ...) -> ndarray:
     """
     .   @brief Draws contours outlines or filled contours.
     .
@@ -18081,7 +18081,7 @@ def findCirclesGrid(image, patternSize, flags, blobDetector, parameters[, center
     ...
 
 
-def findContours(image: ndarray, mode: int, method: int, contours: ndarray =..., hierarchy: ndarray = ..., offset: int = ...) -> Tuple[ndarray, ndarray]:
+def findContours(image: ndarray, mode: int, method: int, contours: ndarray =..., hierarchy: ndarray = ..., offset: int = ...) -> Tuple[ndarray, List[ndarray]]:
     """
     .   @brief Finds contours in a binary image.
     .

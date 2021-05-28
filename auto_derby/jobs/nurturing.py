@@ -1,14 +1,17 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
+import cv2
+import numpy as np
 
 import time
+from typing import Tuple
 
+from auto_derby import nurturing_choice, template
 from PIL.Image import Image
+from PIL.Image import fromarray as image_from_array
 
-from auto_derby import template, nurturing_choice
-
-from .. import action, templates, ocr
+from .. import action, ocr, templates
 
 
 def _handle_training():
@@ -96,7 +99,41 @@ def _handle_race():
 
 def _schedule_next_race():
     return
-    # action.wait_click_image(templates.NURTURING_COMMAND_RACE)
+
+
+def _ocr_date(img: Image) -> Tuple[int, int, int]:
+    text = ocr.text(
+        image_from_array(
+            cv2.threshold(
+                1 - np.asarray(img.convert("L")),
+                128,
+                255,
+                cv2.THRESH_TOZERO,
+            )[1],
+        ),
+    )
+
+    if text == 'ジュニア級デビュー前':
+        return (1, 0, 0)
+    if text == 'ファイナルズ開催中':
+        return (4, 0, 0)
+    year_end = text.index("級") + 1
+    month_end = year_end + text[year_end:].index("月") + 1
+    year_text = text[:year_end]
+    month_text = text[year_end:month_end]
+    date_text = text[month_end:]
+
+    year = {
+        'ジュニア級': 1,
+        'クラシック級': 2,
+        'シニア級': 3,
+    }[year_text]
+    month = int(month_text[:-1])
+    date = {
+        '前半': 1,
+        '後半': 2,
+    }[date_text]
+    return (year, month, date)
 
 
 class Status:
@@ -107,6 +144,8 @@ class Status:
         self.power = 0
         self.perservance = 0
         self.intelligence = 0
+        # (year, month, half-month), 1-base
+        self.date = (0, 0, 0)
 
     @classmethod
     def from_screen(cls, img: Image) -> Status:
@@ -115,8 +154,10 @@ class Status:
         power_bbox = (192, 553, 234, 572)
         perservance_bbox = (264, 553, 308, 572)
         intelligence_bbox = (337, 553, 381, 572)
+        date_bbox = (10, 28, 140, 43)
         self = cls()
         screnshot = template.screenshot()
+        self.date = _ocr_date(screnshot.crop(date_bbox))
         self.speed = int(ocr.text(screnshot.crop(speed_bbox)))
         self.stamina = int(ocr.text(screnshot.crop(stamina_bbox)))
         self.power = int(ocr.text(screnshot.crop(power_bbox)))
@@ -125,7 +166,16 @@ class Status:
         return self
 
     def __str__(self):
-        return f"Status<spd={self.speed}, sta={self.stamina}, pow={self.power}, per={self.perservance}, int={self.intelligence}>"
+        return (
+            "Status<"
+            f"date={self.date},"
+            f"spd={self.speed},"
+            f"sta={self.stamina},"
+            f"pow={self.power},"
+            f"per={self.perservance},"
+            f"int={self.intelligence}"
+            ">"
+        )
 
 
 ALL_OPTIONS = [

@@ -30996,35 +30996,6 @@ def findCirclesGrid(image, patternSize, flags, blobDetector, parameters[, center
     ...
 
 
-def findContours(image, mode, method[, contours[, hierarchy[, offset]]]) -> contours, hierarchy:
-    """
-    .   @brief Finds contours in a binary image.
-    .
-    .   The function retrieves contours from the binary image using the algorithm @cite Suzuki85 . The contours
-    .   are a useful tool for shape analysis and object detection and recognition. See squares.cpp in the
-    .   OpenCV sample directory.
-    .   @note Since opencv 3.2 source image is not modified by this function.
-    .
-    .   @param image Source, an 8-bit single-channel image. Non-zero pixels are treated as 1's. Zero
-    .   pixels remain 0's, so the image is treated as binary . You can use #compare, #inRange, #threshold ,
-    .   #adaptiveThreshold, #Canny, and others to create a binary image out of a grayscale or color one.
-    .   If mode equals to #RETR_CCOMP or #RETR_FLOODFILL, the input can also be a 32-bit integer image of labels (CV_32SC1).
-    .   @param contours Detected contours. Each contour is stored as a vector of points (e.g.
-    .   std::vector<std::vector<cv::Point> >).
-    .   @param hierarchy Optional output vector (e.g. std::vector<cv::Vec4i>), containing information about the image topology. It has
-    .   as many elements as the number of contours. For each i-th contour contours[i], the elements
-    .   hierarchy[i][0] , hierarchy[i][1] , hierarchy[i][2] , and hierarchy[i][3] are set to 0-based indices
-    .   in contours of the next and previous contours at the same hierarchical level, the first child
-    .   contour and the parent contour, respectively. If for the contour i there are no next, previous,
-    .   parent, or nested contours, the corresponding elements of hierarchy[i] will be negative.
-    .   @param mode Contour retrieval mode, see #RetrievalModes
-    .   @param method Contour approximation method, see #ContourApproximationModes
-    .   @param offset Optional offset by which every contour point is shifted. This is useful if the
-    .   contours are extracted from the image ROI and then they should be analyzed in the whole image
-    .   context.
-    """
-    ...
-
 
 def findEssentialMat(points1, points2, cameraMatrix[, method[, prob[, threshold[, mask]]]]) -> retval, mask:
     """

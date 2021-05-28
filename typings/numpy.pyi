@@ -14859,7 +14859,12 @@ def argpartition(a, kth, axis=-1, kind='introselect', order=None):
     ...
 
 
-def argsort(a, axis=-1, kind=None, order=None):
+def argsort(
+    a: ArrayLike,
+    axis: int =-1, 
+    kind: Optional[Text]=None,
+    order: Optional[Union[Text, Tuple[Text]]]=None,
+) -> Union[ndarray, int]:
     """
     Returns the indices that would sort an array.
 
