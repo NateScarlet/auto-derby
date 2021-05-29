@@ -31,7 +31,7 @@ def _latest_file():
     return str((sorted(_all_templates(), key=lambda x: x.stat().st_mtime, reverse=True))[0].name)
 
 
-def create_pos_mask(name: Text):
+def create_pos_mask(name: Text, threshold: float):
 
     game_img = template.screenshot()
     pos_name = template.add_middle_ext(name, "pos")
@@ -43,7 +43,7 @@ def create_pos_mask(name: Text):
         out_img = np.zeros((game_img.height, game_img.width), dtype=np.uint8)
 
     padding = 2
-    for _, pos in template.match(game_img, template.Specification(name, templates.ANY_POS)):
+    for _, pos in template.match(game_img, template.Specification(name, templates.ANY_POS, threshold=threshold)):
         print(pos)
         x, y = pos
         out_img[
@@ -63,11 +63,13 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--name", "-n", dest="name")
+    parser.add_argument("--threshold", "-t", dest="threshold", type=float, default=0.9)
     args = parser.parse_args()
     name = args.name
+    threshold = args.threshold
     if not name:
         name = _latest_file()
-    create_pos_mask(name)
+    create_pos_mask(name, threshold)
 
 
 if __name__ == '__main__':

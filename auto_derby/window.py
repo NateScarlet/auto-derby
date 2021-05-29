@@ -93,6 +93,7 @@ def set_forground(h_wnd: int) -> None:
 def recover_foreground():
     fg_h_wnd = win32gui.GetForegroundWindow()
     yield
+    time.sleep(0.1) # switch too fast may cause issue
     try:
         win32gui.SetForegroundWindow(fg_h_wnd)
     except Exception as ex:
@@ -102,3 +103,5 @@ def recover_foreground():
 
 def info(msg: Text) -> Callable[[], None]:
     return message_box(msg, "auto-derby", h_wnd=get_game())
+
+# TODO: move client inside visible area

@@ -14166,7 +14166,7 @@ def VideoWriter_fourcc(c1, c2, c3, c4) -> retval:
     ...
 
 
-def absdiff(src1, src2[, dst]) -> dst:
+def absdiff(src1: ndarray, src2: ndarray, dst: ndarray =...) -> ndarray:
     """
     .   @brief Calculates the per-element absolute difference between two arrays or between an array and a scalar.
     .
@@ -15728,7 +15728,7 @@ def connectedComponentsWithStatsWithAlgorithm(image, connectivity, ltype, ccltyp
     ...
 
 
-def contourArea(contour[, oriented]) -> retval:
+def contourArea(contour: ndarray, oriented: bool = ...) -> int:
     """
     .   @brief Calculates a contour area.
     .
@@ -15924,7 +15924,7 @@ def convexityDefects(contour, convexhull[, convexityDefects]) -> convexityDefect
     ...
 
 
-def copyMakeBorder(src: ndarray, top: int, bottom: int, left: int, right: int, borderType: int = ..., dst: ndarray =..., value: Scalar =...) -> ndarray:
+def copyMakeBorder(src: ndarray, top: int, bottom: int, left: int, right: int, borderType: int , dst: ndarray =..., value: Any =...) -> ndarray:
     """
     .   @brief Forms a border around an image.
     .
@@ -16840,7 +16840,7 @@ def dft(src[, dst[, flags[, nonzeroRows]]]) -> dst:
     ...
 
 
-def dilate(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) -> dst:
+def dilate(src: ndarray, kernel: Tuple[int, int], dst: ndarray =..., anchor: Tuple[int, int] = ..., iterations: int = ..., borderType: int =..., borderValue: Any = ...) -> ndarray:
     """
     .   @brief Dilates an image by using a specific structuring element.
     .
@@ -17325,7 +17325,7 @@ def equalizeHist(src[, dst]) -> dst:
     ...
 
 
-def erode(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) -> dst:
+def erode(src: ndarray, kernel: Tuple[int, int], dst: ndarray =..., anchor: Tuple[int, int] = ..., iterations: int = ..., borderType: int =..., borderValue: Any = ...) -> ndarray:
     """
     .   @brief Erodes an image by using a specific structuring element.
     .
@@ -17843,7 +17843,7 @@ def fillPoly(img, pts, color[, lineType[, shift[, offset]]]) -> img:
     ...
 
 
-def filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]]) -> dst:
+def filter2D(src: ndarray, ddepth: int, kernel: ndarray, dst: ndarray =..., anchor: Tuple[int, int] = ..., delta: Any =..., borderType: int = ...) -> ndarray:
     """
     .   @brief Convolves an image with the kernel.
     .
@@ -18637,7 +18637,8 @@ def flip(src, flipCode[, dst]) -> dst:
     ...
 
 
-def floodFill(image, mask, seedPoint, newVal[, loDiff[, upDiff[, flags]]]) -> retval, image, mask, rect:
+def floodFill(image: ndarray, mask: ndarray, seedPoint: Tuple[int, int], newVal: Any, loDiff: float =..., upDiff: float =..., flags: int = ...
+) -> Tuple[ndarray, ndarray, ndarray,Tuple[int, int, int,int]]:
     """
     .   @brief Fills a connected component with the given color.
     .
@@ -19976,7 +19977,7 @@ def kmeans(data, K, bestLabels, criteria, attempts, flags[, centers]) -> retval,
     ...
 
 
-def line(img, pt1, pt2, color[, thickness[, lineType[, shift]]]) -> img:
+def line(img: ndarray, pt1: Tuple[int, int], pt2: Tuple[int, int], color: Any, thickness: int = ..., lineType: int =..., shift: int =...) -> ndarray:
     """
     .   @brief Draws a line segment connecting two points.
     .

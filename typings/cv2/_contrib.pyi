@@ -27072,33 +27072,6 @@ def VideoWriter_fourcc(c1, c2, c3, c4) -> retval:
     ...
 
 
-def absdiff(src1, src2[, dst]) -> dst:
-    """
-    .   @brief Calculates the per-element absolute difference between two arrays or between an array and a scalar.
-    .
-    .   The function cv::absdiff calculates:
-    .   *   Absolute difference between two arrays when they have the same
-    .       size and type:
-    .       \f[\texttt{dst}(I) =  \texttt{saturate} (| \texttt{src1}(I) -  \texttt{src2}(I)|)\f]
-    .   *   Absolute difference between an array and a scalar when the second
-    .       array is constructed from Scalar or has as many elements as the
-    .       number of channels in `src1`:
-    .       \f[\texttt{dst}(I) =  \texttt{saturate} (| \texttt{src1}(I) -  \texttt{src2} |)\f]
-    .   *   Absolute difference between a scalar and an array when the first
-    .       array is constructed from Scalar or has as many elements as the
-    .       number of channels in `src2`:
-    .       \f[\texttt{dst}(I) =  \texttt{saturate} (| \texttt{src1} -  \texttt{src2}(I) |)\f]
-    .       where I is a multi-dimensional index of array elements. In case of
-    .       multi-channel arrays, each channel is processed independently.
-    .   @note Saturation is not applied when the arrays have the depth CV_32S.
-    .   You may even get a negative value in the case of overflow.
-    .   @param src1 first input array or a scalar.
-    .   @param src2 second input array or a scalar.
-    .   @param dst output array that has the same size and type as input arrays.
-    .   @sa cv::abs(const Mat&)
-    """
-    ...
-
 
 def accumulate(src, dst[, mask]) -> dst:
     """
@@ -28634,40 +28607,6 @@ def connectedComponentsWithStatsWithAlgorithm(image, connectivity, ltype, ccltyp
     ...
 
 
-def contourArea(contour[, oriented]) -> retval:
-    """
-    .   @brief Calculates a contour area.
-    .
-    .   The function computes a contour area. Similarly to moments , the area is computed using the Green
-    .   formula. Thus, the returned area and the number of non-zero pixels, if you draw the contour using
-    .   #drawContours or #fillPoly , can be different. Also, the function will most certainly give a wrong
-    .   results for contours with self-intersections.
-    .
-    .   Example:
-    .   @code
-    .       vector<Point> contour;
-    .       contour.push_back(Point2f(0, 0));
-    .       contour.push_back(Point2f(10, 0));
-    .       contour.push_back(Point2f(10, 10));
-    .       contour.push_back(Point2f(5, 4));
-    .
-    .       double area0 = contourArea(contour);
-    .       vector<Point> approx;
-    .       approxPolyDP(contour, approx, 5, true);
-    .       double area1 = contourArea(approx);
-    .
-    .       cout << "area0 =" << area0 << endl <<
-    .               "area1 =" << area1 << endl <<
-    .               "approx poly vertices" << approx.size() << endl;
-    .   @endcode
-    .   @param contour Input vector of 2D points (contour vertices), stored in std::vector or Mat.
-    .   @param oriented Oriented area flag. If it is true, the function returns a signed area value,
-    .   depending on the contour orientation (clockwise or counter-clockwise). Using this feature you can
-    .   determine orientation of a contour by taking the sign of an area. By default, the parameter is
-    .   false, which means that the absolute value is returned.
-    """
-    ...
-
 
 def convertFp16(src[, dst]) -> dst:
     """
@@ -29755,31 +29694,6 @@ def dft(src[, dst[, flags[, nonzeroRows]]]) -> dst:
     ...
 
 
-def dilate(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) -> dst:
-    """
-    .   @brief Dilates an image by using a specific structuring element.
-    .
-    .   The function dilates the source image using the specified structuring element that determines the
-    .   shape of a pixel neighborhood over which the maximum is taken:
-    .   \f[\texttt{dst} (x,y) =  \max _{(x',y'):  \, \texttt{element} (x',y') \ne0 } \texttt{src} (x+x',y+y')\f]
-    .
-    .   The function supports the in-place mode. Dilation can be applied several ( iterations ) times. In
-    .   case of multi-channel images, each channel is processed independently.
-    .
-    .   @param src input image; the number of channels can be arbitrary, but the depth should be one of
-    .   CV_8U, CV_16U, CV_16S, CV_32F or CV_64F.
-    .   @param dst output image of the same size and type as src.
-    .   @param kernel structuring element used for dilation; if elemenat=Mat(), a 3 x 3 rectangular
-    .   structuring element is used. Kernel can be created using #getStructuringElement
-    .   @param anchor position of the anchor within the element; default value (-1, -1) means that the
-    .   anchor is at the element center.
-    .   @param iterations number of times dilation is applied.
-    .   @param borderType pixel extrapolation method, see #BorderTypes. #BORDER_WRAP is not suported.
-    .   @param borderValue border value in case of a constant border
-    .   @sa  erode, morphologyEx, getStructuringElement
-    """
-    ...
-
 
 def displayOverlay(winname, text[, delayms]) -> None:
     """
@@ -30236,33 +30150,6 @@ def equalizeHist(src[, dst]) -> dst:
     .
     .   @param src Source 8-bit single channel image.
     .   @param dst Destination image of the same size and type as src .
-    """
-    ...
-
-
-def erode(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) -> dst:
-    """
-    .   @brief Erodes an image by using a specific structuring element.
-    .
-    .   The function erodes the source image using the specified structuring element that determines the
-    .   shape of a pixel neighborhood over which the minimum is taken:
-    .
-    .   \f[\texttt{dst} (x,y) =  \min _{(x',y'):  \, \texttt{element} (x',y') \ne0 } \texttt{src} (x+x',y+y')\f]
-    .
-    .   The function supports the in-place mode. Erosion can be applied several ( iterations ) times. In
-    .   case of multi-channel images, each channel is processed independently.
-    .
-    .   @param src input image; the number of channels can be arbitrary, but the depth should be one of
-    .   CV_8U, CV_16U, CV_16S, CV_32F or CV_64F.
-    .   @param dst output image of the same size and type as src.
-    .   @param kernel structuring element used for erosion; if `element=Mat()`, a `3 x 3` rectangular
-    .   structuring element is used. Kernel can be created using #getStructuringElement.
-    .   @param anchor position of the anchor within the element; default value (-1, -1) means that the
-    .   anchor is at the element center.
-    .   @param iterations number of times erosion is applied.
-    .   @param borderType pixel extrapolation method, see #BorderTypes. #BORDER_WRAP is not supported.
-    .   @param borderValue border value in case of a constant border
-    .   @sa  dilate, morphologyEx, getStructuringElement
     """
     ...
 
@@ -30757,40 +30644,6 @@ def fillPoly(img, pts, color[, lineType[, shift[, offset]]]) -> img:
     """
     ...
 
-
-def filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]]) -> dst:
-    """
-    .   @brief Convolves an image with the kernel.
-    .
-    .   The function applies an arbitrary linear filter to an image. In-place operation is supported. When
-    .   the aperture is partially outside the image, the function interpolates outlier pixel values
-    .   according to the specified border mode.
-    .
-    .   The function does actually compute correlation, not the convolution:
-    .
-    .   \f[\texttt{dst} (x,y) =  \sum _{ \substack{0\leq x' < \texttt{kernel.cols}\\{0\leq y' < \texttt{kernel.rows}}}}  \texttt{kernel} (x',y')* \texttt{src} (x+x'- \texttt{anchor.x} ,y+y'- \texttt{anchor.y} )\f]
-    .
-    .   That is, the kernel is not mirrored around the anchor point. If you need a real convolution, flip
-    .   the kernel using #flip and set the new anchor to `(kernel.cols - anchor.x - 1, kernel.rows -
-    .   anchor.y - 1)`.
-    .
-    .   The function uses the DFT-based algorithm in case of sufficiently large kernels (~`11 x 11` or
-    .   larger) and the direct algorithm for small kernels.
-    .
-    .   @param src input image.
-    .   @param dst output image of the same size and the same number of channels as src.
-    .   @param ddepth desired depth of the destination image, see @ref filter_depths "combinations"
-    .   @param kernel convolution kernel (or rather a correlation kernel), a single-channel floating point
-    .   matrix; if you want to apply different kernels to different channels, split the image into
-    .   separate color planes using split and process them individually.
-    .   @param anchor anchor of the kernel that indicates the relative position of a filtered point within
-    .   the kernel; the anchor should lie within the kernel; default value (-1,-1) means that the anchor
-    .   is at the kernel center.
-    .   @param delta optional value added to the filtered pixels before storing them in dst.
-    .   @param borderType pixel extrapolation method, see #BorderTypes. #BORDER_WRAP is not supported.
-    .   @sa  sepFilter2D, dft, matchTemplate
-    """
-    ...
 
 
 def filterHomographyDecompByVisibleRefpoints(rotations, normals, beforePoints, afterPoints[, possibleSolutions[, pointsMask]]) -> possibleSolutions:
@@ -31519,82 +31372,6 @@ def flip(src, flipCode[, dst]) -> dst:
     .   flipping around y-axis. Negative value (for example, -1) means flipping
     .   around both axes.
     .   @sa transpose , repeat , completeSymm
-    """
-    ...
-
-
-def floodFill(image, mask, seedPoint, newVal[, loDiff[, upDiff[, flags]]]) -> retval, image, mask, rect:
-    """
-    .   @brief Fills a connected component with the given color.
-    .
-    .   The function cv::floodFill fills a connected component starting from the seed point with the specified
-    .   color. The connectivity is determined by the color/brightness closeness of the neighbor pixels. The
-    .   pixel at \f$(x,y)\f$ is considered to belong to the repainted domain if:
-    .
-    .   - in case of a grayscale image and floating range
-    .   \f[\texttt{src} (x',y')- \texttt{loDiff} \leq \texttt{src} (x,y)  \leq \texttt{src} (x',y')+ \texttt{upDiff}\f]
-    .
-    .
-    .   - in case of a grayscale image and fixed range
-    .   \f[\texttt{src} ( \texttt{seedPoint} .x, \texttt{seedPoint} .y)- \texttt{loDiff} \leq \texttt{src} (x,y)  \leq \texttt{src} ( \texttt{seedPoint} .x, \texttt{seedPoint} .y)+ \texttt{upDiff}\f]
-    .
-    .
-    .   - in case of a color image and floating range
-    .   \f[\texttt{src} (x',y')_r- \texttt{loDiff} _r \leq \texttt{src} (x,y)_r \leq \texttt{src} (x',y')_r+ \texttt{upDiff} _r,\f]
-    .   \f[\texttt{src} (x',y')_g- \texttt{loDiff} _g \leq \texttt{src} (x,y)_g \leq \texttt{src} (x',y')_g+ \texttt{upDiff} _g\f]
-    .   and
-    .   \f[\texttt{src} (x',y')_b- \texttt{loDiff} _b \leq \texttt{src} (x,y)_b \leq \texttt{src} (x',y')_b+ \texttt{upDiff} _b\f]
-    .
-    .
-    .   - in case of a color image and fixed range
-    .   \f[\texttt{src} ( \texttt{seedPoint} .x, \texttt{seedPoint} .y)_r- \texttt{loDiff} _r \leq \texttt{src} (x,y)_r \leq \texttt{src} ( \texttt{seedPoint} .x, \texttt{seedPoint} .y)_r+ \texttt{upDiff} _r,\f]
-    .   \f[\texttt{src} ( \texttt{seedPoint} .x, \texttt{seedPoint} .y)_g- \texttt{loDiff} _g \leq \texttt{src} (x,y)_g \leq \texttt{src} ( \texttt{seedPoint} .x, \texttt{seedPoint} .y)_g+ \texttt{upDiff} _g\f]
-    .   and
-    .   \f[\texttt{src} ( \texttt{seedPoint} .x, \texttt{seedPoint} .y)_b- \texttt{loDiff} _b \leq \texttt{src} (x,y)_b \leq \texttt{src} ( \texttt{seedPoint} .x, \texttt{seedPoint} .y)_b+ \texttt{upDiff} _b\f]
-    .
-    .
-    .   where \f$src(x',y')\f$ is the value of one of pixel neighbors that is already known to belong to the
-    .   component. That is, to be added to the connected component, a color/brightness of the pixel should
-    .   be close enough to:
-    .   - Color/brightness of one of its neighbors that already belong to the connected component in case
-    .   of a floating range.
-    .   - Color/brightness of the seed point in case of a fixed range.
-    .
-    .   Use these functions to either mark a connected component with the specified color in-place, or build
-    .   a mask and then extract the contour, or copy the region to another image, and so on.
-    .
-    .   @param image Input/output 1- or 3-channel, 8-bit, or floating-point image. It is modified by the
-    .   function unless the #FLOODFILL_MASK_ONLY flag is set in the second variant of the function. See
-    .   the details below.
-    .   @param mask Operation mask that should be a single-channel 8-bit image, 2 pixels wider and 2 pixels
-    .   taller than image. Since this is both an input and output parameter, you must take responsibility
-    .   of initializing it. Flood-filling cannot go across non-zero pixels in the input mask. For example,
-    .   an edge detector output can be used as a mask to stop filling at edges. On output, pixels in the
-    .   mask corresponding to filled pixels in the image are set to 1 or to the a value specified in flags
-    .   as described below. Additionally, the function fills the border of the mask with ones to simplify
-    .   internal processing. It is therefore possible to use the same mask in multiple calls to the function
-    .   to make sure the filled areas do not overlap.
-    .   @param seedPoint Starting point.
-    .   @param newVal New value of the repainted domain pixels.
-    .   @param loDiff Maximal lower brightness/color difference between the currently observed pixel and
-    .   one of its neighbors belonging to the component, or a seed pixel being added to the component.
-    .   @param upDiff Maximal upper brightness/color difference between the currently observed pixel and
-    .   one of its neighbors belonging to the component, or a seed pixel being added to the component.
-    .   @param rect Optional output parameter set by the function to the minimum bounding rectangle of the
-    .   repainted domain.
-    .   @param flags Operation flags. The first 8 bits contain a connectivity value. The default value of
-    .   4 means that only the four nearest neighbor pixels (those that share an edge) are considered. A
-    .   connectivity value of 8 means that the eight nearest neighbor pixels (those that share a corner)
-    .   will be considered. The next 8 bits (8-16) contain a value between 1 and 255 with which to fill
-    .   the mask (the default value is 1). For example, 4 | ( 255 \<\< 8 ) will consider 4 nearest
-    .   neighbours and fill the mask with a value of 255. The following additional options occupy higher
-    .   bits and therefore may be further combined with the connectivity and mask fill values using
-    .   bit-wise or (|), see #FloodFillFlags.
-    .
-    .   @note Since the mask is larger than the filled image, a pixel \f$(x, y)\f$ in image corresponds to the
-    .   pixel \f$(x+1, y+1)\f$ in the mask .
-    .
-    .   @sa findContours
     """
     ...
 
@@ -32858,26 +32635,6 @@ def kmeans(data, K, bestLabels, criteria, attempts, flags[, centers]) -> retval,
     .   function, set the number of attempts to 1, initialize labels each time using a custom algorithm,
     .   pass them with the ( flags = #KMEANS_USE_INITIAL_LABELS ) flag, and then choose the best
     .   (most-compact) clustering.
-    """
-    ...
-
-
-def line(img, pt1, pt2, color[, thickness[, lineType[, shift]]]) -> img:
-    """
-    .   @brief Draws a line segment connecting two points.
-    .
-    .   The function line draws the line segment between pt1 and pt2 points in the image. The line is
-    .   clipped by the image boundaries. For non-antialiased lines with integer coordinates, the 8-connected
-    .   or 4-connected Bresenham algorithm is used. Thick lines are drawn with rounding endings. Antialiased
-    .   lines are drawn using Gaussian filtering.
-    .
-    .   @param img Image.
-    .   @param pt1 First point of the line segment.
-    .   @param pt2 Second point of the line segment.
-    .   @param color Line color.
-    .   @param thickness Line thickness.
-    .   @param lineType Type of the line. See #LineTypes.
-    .   @param shift Number of fractional bits in the point coordinates.
     """
     ...
 

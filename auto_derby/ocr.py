@@ -11,7 +11,7 @@ from PIL.Image import Image, fromarray
 
 from auto_derby import imagetools
 
-from . import window
+from . import window, action
 import json
 
 import logging
@@ -49,6 +49,8 @@ def _pad_img(img: np.ndarray, padding: int = _PREVIEW_PADDING) -> np.ndarray:
 def _auto_level(img: np.ndarray) -> np.ndarray:
     black = np.percentile(img, 5)
     white = np.percentile(img, 95)
+    if black == white:
+        return img
 
     return np.clip((img - black) / (white - black) * 255, 0, 255).astype(np.uint8)
 
@@ -72,8 +74,9 @@ def _text_from_image(img: np.ndarray) -> Text:
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     close_msg = window.info("遇到新文本\n请在终端中标注")
     try:
-        while len(ans) != 1:
-            ans = input("请输入当前显示图片对应的文本：")
+        with action.recover_cursor(), window.recover_foreground(): # may during a drag
+            while len(ans) != 1:
+                ans = input("请输入当前显示图片对应的文本：")
         _LABELS[h] = ans
         LOGGER.info("labeled: hash=%s, value=%s", h, ans)
     finally:
@@ -140,6 +143,10 @@ def text(img: Image) -> Text:
         cv2.CHAIN_APPROX_NONE,
     )
 
+    if len(contours) == 0:
+        LOGGER.debug("ocr result is empty")
+        return ''
+
     contours_with_bbox = sorted(((i, _rect2bbox(cv2.boundingRect(i)))
                                  for i in contours), key=lambda x: x[1][0])
 
@@ -196,10 +203,9 @@ def text(img: Image) -> Text:
                           (0, 0, 255), thickness=1)
         cv2.imshow("ocr input", cv_img)
         cv2.imshow("ocr binary", binary_img)
-        # cv2.imshow("ocr thin result", thin_img)
         cv2.imshow("ocr segmentation", segmentation_img)
         cv2.imshow("ocr chars", chars_img)
-        cv2.waitKey()
+        cv2.waitKey(200)
         cv2.destroyAllWindows()
 
     for _, i in char_img_list:

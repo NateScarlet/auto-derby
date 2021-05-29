@@ -7,7 +7,7 @@ numpy
 from typing import *
 
 Scalar = Union[int, float, complex, int, bool, bytes, str, memoryview]
-ArrayLike = Union[ndarray, List[Any], Scalar]
+ArrayLike = Union[ndarray, Iterable[Any], Scalar]
 
 """
 NumPy
@@ -17624,7 +17624,12 @@ def compress(condition, a, axis=None, out=None):
     ...
 
 
-def concatenate(*args, **kwargs):
+def concatenate(
+    arrays: ArrayLike,
+    axis: Optional[int] =..., 
+    out: Optional[ndarray] =... ,
+    dtype: Union[Text, Type[Any]]= ...,
+) -> ndarray:
     """
     concatenate((a1, a2, ...), axis=0, out=None, dtype=None, casting="same_kind")
 
@@ -20124,7 +20129,7 @@ def empty_like(*args, **kwargs):
     ...
 
 
-def expand_dims(a, axis):
+def expand_dims(a: ArrayLike, axis: int) -> ndarray:
     """
     Expand the shape of an array.
 
@@ -21028,7 +21033,7 @@ def fromfile(*args, **kwargs):
     ...
 
 
-def fromfunction(function, shape, *, dtype=<class 'float'>, like=None, **kwargs):
+def fromfunction(function, shape, *, dtype=float, like=None, **kwargs):
     """
     Construct an array by executing a function over each coordinate.
 
@@ -21093,7 +21098,7 @@ def fromfunction(function, shape, *, dtype=<class 'float'>, like=None, **kwargs)
     ...
 
 
-def fromiter(*args, **kwargs):
+def fromiter(iterable: Iterable[Any], dtype: Type[Any], count: int=-1, *, like: ArrayLike=None) -> ndarray:
     """
     fromiter(iterable, dtype, count=-1, *, like=None)
 
@@ -22880,7 +22885,7 @@ def hsplit(ary, indices_or_sections):
     ...
 
 
-def hstack(tup):
+def hstack(tup: ndarray) -> ndarray:
     """
     Stack arrays in sequence horizontally (column wise).
 
@@ -24739,7 +24744,15 @@ def lexsort(*args, **kwargs):
     ...
 
 
-def linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0):
+def linspace(
+    start: ArrayLike,
+    stop: ArrayLike,
+    num: int = 50,
+    endpoint: bool=True,
+    retstep: bool=False,
+    dtype: Type[Any]=None,
+    axis: int=0,
+) -> ndarray:
     """
     Return evenly spaced numbers over a specified interval.
 

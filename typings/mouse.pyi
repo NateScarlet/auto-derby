@@ -300,14 +300,14 @@ def hook(callback):
     ...
 
 
-def is_pressed(button: typing.Text = 'left'):
+def is_pressed(button: typing.Text = 'left') -> bool:
     """
     Returns True if the given button is currently pressed.
     """
     ...
 
 
-def move(x: int, y: int, absolute: bool = True, duration: int = 0) -> None:
+def move(x: int, y: int, absolute: bool = True, duration: float = 0) -> None:
     """
     Moves the mouse. If `absolute`, to position (x, y), otherwise move relative
     to the current position. If `duration` is non-zero, animates the movement.
@@ -362,7 +362,7 @@ def play(events, speed_factor=1.0, include_clicks=True, include_moves=True, incl
     ...
 
 
-def press(button: typing.Text = 'left'):
+def press(button: typing.Text = 'left') -> None:
     """
     Presses the given button (but doesn't release).
     """
@@ -380,7 +380,7 @@ def record(button='right', target_types=('down', )):
     ...
 
 
-def release(button: typing.Text = 'left'):
+def release(button: typing.Text = 'left') -> None:
     """
     Releases the given button.
     """
