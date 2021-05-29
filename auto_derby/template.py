@@ -5,7 +5,7 @@
 import os
 import logging
 import pathlib
-from typing import Dict, Iterator, Optional, Set, Text, Tuple, Union
+from typing import Dict, Iterator, Literal, Optional, Set, Text, Tuple, Union
 
 import cv2
 import numpy as np
@@ -15,6 +15,8 @@ from PIL.Image import Image
 from PIL.Image import open as open_image
 
 from . import window
+import datetime as dt
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -31,8 +33,21 @@ def screenshot_window(h_wnd: int) -> Image:
         return ImageGrab.grab(bbox, True, True)
 
 
-def screenshot() -> Image:
-    return screenshot_window(window.get_game())
+_CACHED_SCREENSHOT: Dict[Literal["value"], Tuple[dt.datetime, Image]] = {
+    "value": (dt.datetime.fromtimestamp(0), Image()),
+}
+
+
+def invalidate_screeshot():
+    _CACHED_SCREENSHOT["value"] = (dt.datetime.fromtimestamp(0), Image())
+
+
+def screenshot(*, max_age: float = 1) -> Image:
+    cached_time, _ = _CACHED_SCREENSHOT["value"]
+    if cached_time < dt.datetime.now() - dt.timedelta(seconds=max_age):
+        new_img = screenshot_window(window.get_game())
+        _CACHED_SCREENSHOT["value"] = (dt.datetime.now(), new_img)
+    return _CACHED_SCREENSHOT["value"][1]
 
 
 _LOADED_TEMPLATES: Dict[Text, Image] = {}
@@ -70,21 +85,6 @@ def add_middle_ext(name: Text, value: Text) -> Text:
     return ".".join(parts)
 
 
-def _hist_match(a: Image, b: Image) -> float:
-    cv_a = cv2.cvtColor(np.asarray(a.convert("RGB")), cv2.COLOR_RGB2HSV)
-    cv_b = cv2.cvtColor(np.asarray(b.convert("RGB")), cv2.COLOR_RGB2HSV)
-    a_hist_h = cv2.calcHist(cv_a, (0,), None, (256,), (0, 256))
-    a_hist_s = cv2.calcHist(cv_a, (1,), None, (256,), (0, 256))
-    a_hist_v = cv2.calcHist(cv_a, (2,), None, (256,), (0, 256))
-    b_hist_h = cv2.calcHist(cv_b, (0,), None, (256,), (0, 256))
-    b_hist_s = cv2.calcHist(cv_b, (1,), None, (256,), (0, 256))
-    b_hist_v = cv2.calcHist(cv_b, (2,), None, (256,), (0, 256))
-    hist_match_h = cv2.compareHist(a_hist_h, b_hist_h, cv2.HISTCMP_CORREL)
-    hist_match_s = cv2.compareHist(a_hist_s, b_hist_s, cv2.HISTCMP_CORREL)
-    hist_match_v = cv2.compareHist(a_hist_v, b_hist_v, cv2.HISTCMP_CORREL)
-    return hist_match_h * 0.3 + hist_match_s * 0.3 + hist_match_v * 0.4
-
-
 class Specification():
     def __init__(self, name: Text, pos: Optional[Text] = None, *, threshold: float = 0.9, lightness_sensitive: bool = True):
         self.name = name
@@ -113,7 +113,8 @@ class Specification():
                 min_diff *= -1
 
             lightness_similarity = 1 - (abs(max_diff + min_diff) / 2)
-            LOGGER.debug("lightness match: tmpl=%s, similarity=%s", self, lightness_similarity)
+            LOGGER.debug("lightness match: tmpl=%s, similarity=%s",
+                         self, lightness_similarity)
             if lightness_similarity < self.threshold:
                 return False
         return True

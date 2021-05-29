@@ -32,6 +32,7 @@ def click_at_window(h_wnd: int, point: Tuple[int, int]):
 def click(point: Tuple[int, int]):
     h_wnd = window.get_game()
     click_at_window(h_wnd, point)
+    template.invalidate_screeshot()
 
 
 def count_image(*tmpl: Union[Text, template.Specification]) -> int:
@@ -106,10 +107,9 @@ def wheel_at_window(h_wnd: int, delta: int) -> None:
             time.sleep(1 / 120.0)
         time.sleep(1)
 
-
 def wheel(delta: int) -> None:
     wheel_at_window(window.get_game(), delta)
-
+    template.invalidate_screeshot()
 
 def drag_at_window(h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1):
     x, y = win32gui.ClientToScreen(h_wnd, point)
@@ -119,3 +119,4 @@ def drag_at_window(h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, dura
 
 def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.1):
     drag_at_window(window.get_game(), point, dx=dx, dy=dy, duration=duration)
+    template.invalidate_screeshot()
