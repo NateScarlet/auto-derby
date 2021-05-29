@@ -51,7 +51,7 @@ def match_image_until_disappear(
 ) -> Iterator[Tuple[template.Specification, Tuple[int, int]]]:
     while True:
         count = 0
-        for i in sort(template.match(template.screenshot(), *tmpl)):
+        for i in sort(template.match(template.screenshot(max_age=0), *tmpl)):
             count += 1
             yield i
             break  # actions will make screenshot outdate
@@ -62,7 +62,7 @@ def match_image_until_disappear(
 def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[template.Specification, Tuple[int, int]]:
     while True:
         try:
-            return next(template.match(template.screenshot(), *tmpl))
+            return next(template.match(template.screenshot(max_age=0), *tmpl,))
         except StopIteration:
             time.sleep(0.5)
 
@@ -70,7 +70,7 @@ def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[template.Spe
 def wait_image_disappear(*tmpl: Union[Text, template.Specification]) -> None:
     while True:
         try:
-            next(template.match(template.screenshot(), *tmpl))
+            next(template.match(template.screenshot(max_age=0), *tmpl))
             time.sleep(0.5)
         except StopIteration:
             break
