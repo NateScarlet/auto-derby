@@ -136,7 +136,7 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     return (year, month, date)
 
 
-class Status:
+class Context:
 
     def __init__(self) -> None:
         self.speed = 0
@@ -147,23 +147,19 @@ class Status:
         # (year, month, half-month), 1-base
         self.date = (0, 0, 0)
 
-    @classmethod
-    def from_screen(cls, img: Image) -> Status:
+    def update_by_command_scene(self, screnshot: Image) -> None:
         speed_bbox = (45, 553, 90, 572)
         stamina_bbox = (125, 553, 162, 572)
         power_bbox = (192, 553, 234, 572)
         perservance_bbox = (264, 553, 308, 572)
         intelligence_bbox = (337, 553, 381, 572)
         date_bbox = (10, 28, 140, 43)
-        self = cls()
-        screnshot = template.screenshot()
         self.date = _ocr_date(screnshot.crop(date_bbox))
         self.speed = int(ocr.text(screnshot.crop(speed_bbox)))
         self.stamina = int(ocr.text(screnshot.crop(stamina_bbox)))
         self.power = int(ocr.text(screnshot.crop(power_bbox)))
         self.perservance = int(ocr.text(screnshot.crop(perservance_bbox)))
         self.intelligence = int(ocr.text(screnshot.crop(intelligence_bbox)))
-        return self
 
     def __str__(self):
         return (
@@ -193,6 +189,7 @@ def _handle_option():
 
 
 def nurturing():
+    ctx = Context()
     while True:
         tmpl, pos = action.wait_image(
             templates.CONNECTING,
@@ -229,8 +226,8 @@ def nurturing():
             _handle_race()
             _schedule_next_race()
         elif name == templates.NURTURING_COMMAND_TRAINING:
-            status = Status.from_screen(template.screenshot())
-            print(status)  # TODO: use status
+            ctx.update_by_command_scene(template.screenshot())
+            print(ctx)  # TODO: use status
             if action.count_image(templates.NURTURING_VITALITY_HALF_EMPTY):
                 if action.click_image(templates.NURTURING_COMMAND_HEALTH_CARE):
                     time.sleep(2)
