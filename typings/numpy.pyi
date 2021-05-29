@@ -8876,7 +8876,7 @@ class ndarray(object):
 
     def max(self, *args, **kwargs):
         """
-        a.max(axis=None, out=None, keepdims=False, initial=<no value>, where=True)
+        a.max(axis=None, out=None, keepdims=False, initial=None, where=True)
 
         Return the maximum along a given axis.
 
@@ -8904,7 +8904,7 @@ class ndarray(object):
 
     def min(self, axis: Optional[int]=None, out: Optional[Any]=None, keepdims: bool=False, initial: Optional[Any]=..., where: bool=True) -> Any:
         """
-        a.min(axis=None, out=None, keepdims=False, initial=<no value>, where=True)
+        a.min(axis=None, out=None, keepdims=False, initial=None, where=True)
 
         Return the minimum along a given axis.
 
@@ -11729,7 +11729,7 @@ class ufunc(object):
 
     def reduce(self, *args, **kwargs):
         """
-        reduce(array, axis=0, dtype=None, out=None, keepdims=False, initial=<no value>, where=True)
+        reduce(array, axis=0, dtype=None, out=None, keepdims=False, initial=None, where=True)
 
         Reduces `array`'s dimension by one, by applying ufunc along one axis.
 
@@ -13817,7 +13817,7 @@ def alen(a):
     ...
 
 
-def all(a, axis=None, out=None, keepdims=<no value>, *, where=<no value>):
+def all(a, axis=None, out=None, keepdims=None, *, where=None):
     """
     Test whether all array elements along a given axis evaluate to True.
 
@@ -13983,7 +13983,7 @@ def alltrue(*args, **kwargs):
     ...
 
 
-def amax(a, axis=None, out=None, keepdims=<no value>, initial=<no value>, where=<no value>):
+def amax(a, axis=None, out=None, keepdims=None, initial=None, where=None):
     """
     Return the maximum of an array or maximum along an axis.
 
@@ -14100,7 +14100,7 @@ def amax(a, axis=None, out=None, keepdims=<no value>, initial=<no value>, where=
     ...
 
 
-def amin(a, axis=None, out=None, keepdims=<no value>, initial=<no value>, where=<no value>):
+def amin(a, axis=None, out=None, keepdims=None, initial=None, where=None):
     """
     Return the minimum of an array or minimum along an axis.
 
@@ -14257,7 +14257,7 @@ def angle(z, deg=False):
     ...
 
 
-def any(a, axis=None, out=None, keepdims=<no value>, *, where=<no value>):
+def any(a, axis=None, out=None, keepdims=None, *, where=None):
     """
     Test whether any array element along a given axis evaluates to True.
 
@@ -15239,7 +15239,7 @@ def array(obj: object, dtype:Type[Any]=None, *, copy: bool=True, order: Text='K'
     ...
 
 
-def array2string(a, max_line_width=None, precision=None, suppress_small=None, separator=' ', prefix='', style=<no value>, formatter=None, threshold=None, edgeitems=None, sign=None, floatmode=None, suffix='', *, legacy=None):
+def array2string(a, max_line_width=None, precision=None, suppress_small=None, separator=' ', prefix='', style=None, formatter=None, threshold=None, edgeitems=None, sign=None, floatmode=None, suffix='', *, legacy=None):
     """
     Return a string representation of an array.
 
@@ -17922,7 +17922,7 @@ def copyto(*args, **kwargs):
     ...
 
 
-def corrcoef(x, y=None, rowvar=True, bias=<no value>, ddof=<no value>, *, dtype=None):
+def corrcoef(x, y=None, rowvar=True, bias=None, ddof=None, *, dtype=None):
     """
     Return Pearson product-moment correlation coefficients.
 
@@ -19083,7 +19083,7 @@ def diagonal(a, offset=0, axis1=0, axis2=1):
     ...
 
 
-def diff(a, n=1, axis=-1, prepend=<no value>, append=<no value>):
+def diff(a, n=1, axis=-1, prepend=None, append=None):
     """
     Calculate the n-th discrete difference along the given axis.
 
@@ -25403,7 +25403,7 @@ def may_share_memory(*args, **kwargs):
     ...
 
 
-def mean(a, axis=None, dtype=None, out=None, keepdims=<no value>, *, where=<no value>):
+def mean(a, axis=None, dtype=None, out=None, keepdims=None, *, where=None):
     """
     Compute the arithmetic mean along the specified axis.
 
@@ -26162,7 +26162,7 @@ def nancumsum(a, axis=None, dtype=None, out=None):
     ...
 
 
-def nanmax(a, axis=None, out=None, keepdims=<no value>):
+def nanmax(a, axis=None, out=None, keepdims=None):
     """
     Return the maximum of an array or maximum along an axis, ignoring any
     NaNs.  When all-NaN slices are encountered a ``RuntimeWarning`` is
@@ -26248,7 +26248,7 @@ def nanmax(a, axis=None, out=None, keepdims=<no value>):
     ...
 
 
-def nanmean(a, axis=None, dtype=None, out=None, keepdims=<no value>):
+def nanmean(a, axis=None, dtype=None, out=None, keepdims=None):
     """
     Compute the arithmetic mean along the specified axis, ignoring NaNs.
 
@@ -26324,7 +26324,7 @@ def nanmean(a, axis=None, dtype=None, out=None, keepdims=<no value>):
     ...
 
 
-def nanmedian(a, axis=None, out=None, overwrite_input=False, keepdims=<no value>):
+def nanmedian(a, axis=None, out=None, overwrite_input=False, keepdims=None):
     """
     Compute the median along the specified axis, while ignoring NaNs.
 
@@ -26410,7 +26410,7 @@ def nanmedian(a, axis=None, out=None, overwrite_input=False, keepdims=<no value>
     ...
 
 
-def nanmin(a, axis=None, out=None, keepdims=<no value>):
+def nanmin(a, axis=None, out=None, keepdims=None):
     """
     Return minimum of an array or minimum along an axis, ignoring any NaNs.
     When all-NaN slices are encountered a ``RuntimeWarning`` is raised and
@@ -26496,7 +26496,7 @@ def nanmin(a, axis=None, out=None, keepdims=<no value>):
     ...
 
 
-def nanpercentile(a, q, axis=None, out=None, overwrite_input=False, interpolation='linear', keepdims=<no value>):
+def nanpercentile(a, q, axis=None, out=None, overwrite_input=False, interpolation='linear', keepdims=None):
     """
     Compute the qth percentile of the data along the specified axis,
     while ignoring nan values.
@@ -26609,7 +26609,7 @@ def nanpercentile(a, q, axis=None, out=None, overwrite_input=False, interpolatio
     ...
 
 
-def nanprod(a, axis=None, dtype=None, out=None, keepdims=<no value>):
+def nanprod(a, axis=None, dtype=None, out=None, keepdims=None):
     """
     Return the product of array elements over a given axis treating Not a
     Numbers (NaNs) as ones.
@@ -26672,7 +26672,7 @@ def nanprod(a, axis=None, dtype=None, out=None, keepdims=<no value>):
     ...
 
 
-def nanquantile(a, q, axis=None, out=None, overwrite_input=False, interpolation='linear', keepdims=<no value>):
+def nanquantile(a, q, axis=None, out=None, overwrite_input=False, interpolation='linear', keepdims=None):
     """
     Compute the qth quantile of the data along the specified axis,
     while ignoring nan values.
@@ -26773,7 +26773,7 @@ def nanquantile(a, q, axis=None, out=None, overwrite_input=False, interpolation=
     ...
 
 
-def nanstd(a, axis=None, dtype=None, out=None, ddof=0, keepdims=<no value>):
+def nanstd(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None):
     """
     Compute the standard deviation along the specified axis, while
     ignoring NaNs.
@@ -26869,7 +26869,7 @@ def nanstd(a, axis=None, dtype=None, out=None, ddof=0, keepdims=<no value>):
     ...
 
 
-def nansum(a, axis=None, dtype=None, out=None, keepdims=<no value>):
+def nansum(a, axis=None, dtype=None, out=None, keepdims=None):
     """
     Return the sum of array elements over a given axis treating Not a
     Numbers (NaNs) as zero.
@@ -26960,7 +26960,7 @@ def nansum(a, axis=None, dtype=None, out=None, keepdims=<no value>):
     ...
 
 
-def nanvar(a, axis=None, dtype=None, out=None, ddof=0, keepdims=<no value>):
+def nanvar(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None):
     """
     Compute the variance along the specified axis, while ignoring NaNs.
 
@@ -28816,7 +28816,7 @@ def printoptions(*args, **kwargs):
     ...
 
 
-def prod(a, axis=None, dtype=None, out=None, keepdims=<no value>, initial=<no value>, where=<no value>):
+def prod(a, axis=None, dtype=None, out=None, keepdims=None, initial=None, where=None):
     """
     Return the product of array elements over a given axis.
 
@@ -29007,7 +29007,7 @@ def promote_types(*args, **kwargs):
     ...
 
 
-def ptp(a, axis=None, out=None, keepdims=<no value>):
+def ptp(a, axis=None, out=None, keepdims=None):
     """
     Range of values (maximum - minimum) along an axis.
 
@@ -32009,7 +32009,7 @@ def stack(arrays, axis=0, out=None):
     ...
 
 
-def std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=<no value>, *, where=<no value>):
+def std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None, *, where=None):
     """
     Compute the standard deviation along the specified axis.
 
@@ -32128,7 +32128,15 @@ def std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=<no value>, *, wher
     ...
 
 
-def sum(a, axis=None, dtype=None, out=None, keepdims=<no value>, initial=<no value>, where=<no value>):
+def sum(
+    a: ArrayLike,
+    axis: Optional[Union[int, Tuple[int, ...]]]=None,
+    dtype: Optional[Type[Any]]=None,
+    out: Optional[ndarray]=None, 
+    keepdims: Optional[bool]=...,
+    initial: Optional[Scalar]=...,
+    where: Optional[ArrayLike]=...,
+) -> ndarray :
     """
     Sum of array elements over a given axis.
 
@@ -33694,7 +33702,7 @@ def vander(x, N=None, increasing=False):
     ...
 
 
-def var(a, axis=None, dtype=None, out=None, ddof=0, keepdims=<no value>, *, where=<no value>):
+def var(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None, *, where=None):
     """
     Compute the variance along the specified axis.
 
@@ -34305,7 +34313,7 @@ WRAP: int = 1
 
 _NoValue: ...
 """
-<no value>
+None
 """
 
 _UFUNC_API: ...
@@ -34755,7 +34763,7 @@ oldnumeric: Text
 'removed'
 """
 
-pi: int = 3.141592653589793
+pi: float = 3.141592653589793
 
 positive: ...
 """

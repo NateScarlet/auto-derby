@@ -1,9 +1,11 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from .. import action, templates
+from auto_derby import imagetools
+from .. import action, templates, template
 
 from . import limited_sale
+
 
 def team_race():
     while True:
@@ -25,7 +27,13 @@ def team_race():
         )
         name = tmpl.name
         if name == templates.TEAM_RACE_CHOOSE_COMPETITOR:
-            if action.click_image(templates.TEAM_RACE_GUARANTEED_WIN_REWARD):
+            granted_reward_pos = (300, 300)
+            has_granted_reward = imagetools.compare_color(
+                (0, 0, 0), 
+                template.screenshot().getpixel(granted_reward_pos),
+            ) > 0.99 and False # TODO: need color sample
+            if has_granted_reward:
+                action.click(granted_reward_pos)
                 action.wait_click_image(templates.GREEN_NEXT_BUTTON)
                 action.wait_click_image(templates.RACE_ITEM_PARFAIT)
             else:

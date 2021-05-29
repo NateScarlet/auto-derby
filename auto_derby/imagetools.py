@@ -3,12 +3,14 @@
 """tools for image processing.  """
 
 
+import colorsys
 import hashlib
 import os
 import threading
 from pathlib import Path
-from typing import Callable, Dict, Literal, Optional, Text
+from typing import Callable, Dict, Literal, Optional, Text, Tuple, Union
 
+import cast_unknown as cast
 import cv2
 import cv2.img_hash
 import numpy as np
@@ -57,6 +59,23 @@ def compare_hash(a: Text, b: Text) -> float:
     cv_b = np.array(list(bytes.fromhex(b)), np.uint8)
     res = _HASH_ALGORITHM.compare(cv_a, cv_b)
     return 1 - (res / (len(a) * 2))
+
+
+def _rgb_to_hsv(v: Tuple[int, int, int]) -> Tuple[int, int, int]:
+    h, l, s = colorsys.rgb_to_hsv(v[0] / 255.0, v[1] / 255.0, v[2] / 255.0)
+    return int(h * 255), int(l * 255), int(s * 255)
+
+
+def compare_color(a: Union[Tuple[int, ...], int], b: Union[Tuple[int, ...], int]) -> float:
+    t_a = tuple(cast.list_(a, (int,)))
+    t_b = tuple(cast.list_(b, (int,)))
+    if len(t_a) != len(t_b):
+        return 0
+
+    if len(t_a) == 3:
+        t_a = _rgb_to_hsv((t_a[0], t_a[1], t_a[2]))
+        t_b = _rgb_to_hsv((t_b[0], t_b[1], t_b[2]))
+    return 1 - np.sqrt(np.sum((np.array(t_a)-np.array(t_b)) ** 2, axis=0)) / 255.0
 
 
 _WINDOW_ID: Dict[Literal["value"], int] = {"value": 0}
