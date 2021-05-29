@@ -61,21 +61,23 @@ def compare_hash(a: Text, b: Text) -> float:
     return 1 - (res / (len(a) * 2))
 
 
-def _rgb_to_hsv(v: Tuple[int, int, int]) -> Tuple[int, int, int]:
-    h, l, s = colorsys.rgb_to_hsv(v[0] / 255.0, v[1] / 255.0, v[2] / 255.0)
-    return int(h * 255), int(l * 255), int(s * 255)
+def _rgb_to_hsv(v: Tuple[int, int, int], max_value: int) -> Tuple[int, int, int]:
+    h, l, s = colorsys.rgb_to_hsv(
+        v[0] / max_value, v[1] / max_value, v[2] / max_value)
+    return int(h * max_value), int(l * max_value), int(s * max_value)
 
 
-def compare_color(a: Union[Tuple[int, ...], int], b: Union[Tuple[int, ...], int]) -> float:
+def compare_color(a: Union[Tuple[int, ...], int], b: Union[Tuple[int, ...], int], *, bit_size: int = 8) -> float:
+    max_value = (1 << bit_size) - 1
     t_a = tuple(cast.list_(a, (int,)))
     t_b = tuple(cast.list_(b, (int,)))
     if len(t_a) != len(t_b):
         return 0
 
     if len(t_a) == 3:
-        t_a = _rgb_to_hsv((t_a[0], t_a[1], t_a[2]))
-        t_b = _rgb_to_hsv((t_b[0], t_b[1], t_b[2]))
-    return 1 - np.sqrt(np.sum((np.array(t_a)-np.array(t_b)) ** 2, axis=0)) / 255.0
+        t_a = _rgb_to_hsv((t_a[0], t_a[1], t_a[2]), max_value)
+        t_b = _rgb_to_hsv((t_b[0], t_b[1], t_b[2]), max_value)
+    return 1 - np.sqrt(np.sum((np.array(t_a)-np.array(t_b)) ** 2, axis=0)) / max_value
 
 
 _WINDOW_ID: Dict[Literal["value"], int] = {"value": 0}
