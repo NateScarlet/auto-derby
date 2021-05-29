@@ -22,15 +22,7 @@ def legend_race():
             templates.LEGEND_RACE_COLLECT_ALL_REWARD,
         )
         name = tmpl.name
-        if name == templates.TEAM_RACE_CHOOSE_COMPETITOR:
-            if action.click_image(templates.TEAM_RACE_GUARANTEED_WIN_REWARD):
-                action.wait_click_image(templates.GREEN_NEXT_BUTTON)
-                action.wait_click_image(templates.RACE_ITEM_PARFAIT)
-            else:
-                x, y = pos
-                y += 300
-                action.click((x, y))
-        elif name == templates.TEAM_RACE_NEXT_BUTTON:
+        if name == templates.TEAM_RACE_NEXT_BUTTON:
             action.click(pos)
         elif name == templates.CONNECTING:
             pass
