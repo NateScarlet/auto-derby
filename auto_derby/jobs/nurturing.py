@@ -7,7 +7,7 @@ import numpy as np
 import time
 from typing import Tuple
 
-from auto_derby import nurturing_choice, template
+from auto_derby import imagetools, nurturing_choice, template
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
@@ -136,6 +136,19 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     return (year, month, date)
 
 
+def _recognize_vitality(img: Image) -> float:
+    cv_img = np.asarray(img)
+
+    def _is_empty(v: np.ndarray) -> bool:
+        assert v.shape == (3,), v.shape
+        return imagetools.compare_color(
+            (118, 117, 118),
+            (int(v[0]), int(v[1]), int(v[2])),
+        ) > 0.99
+
+    return 1 - np.average(np.apply_along_axis(_is_empty, 1, cv_img[0, :]))
+
+
 class Context:
 
     def __init__(self) -> None:
@@ -146,6 +159,7 @@ class Context:
         self.intelligence = 0
         # (year, month, half-month), 1-base
         self.date = (0, 0, 0)
+        self.vitality = 0.0
 
     def update_by_command_scene(self, screnshot: Image) -> None:
         speed_bbox = (45, 553, 90, 572)
@@ -154,17 +168,20 @@ class Context:
         perservance_bbox = (264, 553, 308, 572)
         intelligence_bbox = (337, 553, 381, 572)
         date_bbox = (10, 28, 140, 43)
+        vitality_bbox = (148, 106, 327, 108)
         self.date = _ocr_date(screnshot.crop(date_bbox))
         self.speed = int(ocr.text(screnshot.crop(speed_bbox)))
         self.stamina = int(ocr.text(screnshot.crop(stamina_bbox)))
         self.power = int(ocr.text(screnshot.crop(power_bbox)))
         self.perservance = int(ocr.text(screnshot.crop(perservance_bbox)))
         self.intelligence = int(ocr.text(screnshot.crop(intelligence_bbox)))
+        self.vitality = _recognize_vitality(screnshot.crop(vitality_bbox))
 
     def __str__(self):
         return (
             "Status<"
             f"date={self.date},"
+            f"vitality={self.vitality*100:.1f}%,"
             f"spd={self.speed},"
             f"sta={self.stamina},"
             f"pow={self.power},"
@@ -228,7 +245,7 @@ def nurturing():
         elif name == templates.NURTURING_COMMAND_TRAINING:
             ctx.update_by_command_scene(template.screenshot())
             print(ctx)  # TODO: use status
-            if action.count_image(templates.NURTURING_VITALITY_HALF_EMPTY):
+            if ctx.vitality <= 0.5:
                 if action.click_image(templates.NURTURING_COMMAND_HEALTH_CARE):
                     time.sleep(2)
                     if action.count_image(templates.NURTURING_HEALTH_CARE_CONFIRM):
