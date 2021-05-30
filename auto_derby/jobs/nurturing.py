@@ -17,14 +17,14 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-def _interpolate_weight(value: int, weight_map: Tuple[Tuple[int, float], ...]) -> float:
-    if len(weight_map) == 0:
+def _interpolate(value: int, value_map: Tuple[Tuple[int, float], ...]) -> float:
+    if len(value_map) == 0:
         return 0
-    if len(weight_map) == 1:
-        return weight_map[0][1]
+    if len(value_map) == 1:
+        return value_map[0][1]
     low = (0, 0.0)
     high = (0, 0.0)
-    for v, w in weight_map:
+    for v, w in value_map:
         if v >= value:
             high = (v, w)
             break
@@ -38,13 +38,13 @@ def _interpolate_weight(value: int, weight_map: Tuple[Tuple[int, float], ...]) -
     return weight
 
 
-def _training_single_score(current: int, delta: int, weight_map: Tuple[Tuple[int, float], ...]) -> float:
+def _training_single_score(current: int, delta: int, value_map: Tuple[Tuple[int, float], ...]) -> float:
 
     ret = 0
     for i in range(current, current+delta):
-        ret += _interpolate_weight(
+        ret += _interpolate(
             i,
-            weight_map
+            value_map
         )
     return ret
 
