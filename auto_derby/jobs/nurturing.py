@@ -70,9 +70,9 @@ def _training_score(ctx: Context, training: Training) -> float:
             (0, 2.0),
             (300, ctx.speed / 600 + 0.3 *
              ctx.date[0] if ctx.speed > 600 else 1.0),
-            (600, ctx.speed / 900 + 0.1 *
-             ctx.date[0] if ctx.speed > 600 else 0.6),
-            (900, ctx.speed / 900 / 3),
+            (600, ctx.speed / 900 * 0.6 + 0.1 *
+             ctx.date[0] if ctx.speed > 900 else 0.6),
+            (900, ctx.speed / 900 * 0.3),
         )
     )
     pow = _training_single_score(
