@@ -174,7 +174,7 @@ def _handle_training(ctx: Context):
     if ctx.date in (
         (4, 0, 0)
     ):
-        expected_score -= 10
+        expected_score -= 20
     LOGGER.info("expected score:\t%2.2f", expected_score)
 
     trainings_with_score = [(i, _training_score(ctx, i)) for i in trainings]
