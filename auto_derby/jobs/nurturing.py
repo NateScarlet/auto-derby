@@ -541,7 +541,8 @@ def nurturing():
         if name == templates.CONNECTING:
             pass
         elif name == templates.NURTURING_FANS_NOT_ENOUGH:
-            action.click_image(templates.CANCEL_BUTTON)
+            # TODO: handle this
+            exit(1)
         elif name == templates.NURTURING_FINISH_BUTTON:
             break
         elif name == templates.NURTURING_FORMAL_RACE_BANNER:
