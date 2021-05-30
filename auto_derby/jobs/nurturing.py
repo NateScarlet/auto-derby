@@ -42,10 +42,10 @@ def _traning_score(ctx: Context, training: Training) -> float:
     spd = _interpolate_weight(
         ctx.speed,
         (
-            (0, 1.0),
-            (300, 0.8),
-            (600, 0.7),
-            (900, 0.4),
+            (0, 2.0),
+            (300, 1.4),
+            (600, 1.0),
+            (900, 0.5),
             (1100, 0.2),
         )
     ) * training.speed
@@ -53,13 +53,13 @@ def _traning_score(ctx: Context, training: Training) -> float:
     sta = _interpolate_weight(
         ctx.stamina,
         (
-            (0, 1.2),
-            (300, 1.0),
-            (600, 0.8),
-            (900, 0.0),
+            (0, 1.5),
+            (300, 1.2),
+            (600, 1),
+            (900, 0.2),
         ) if ctx.speed > ctx.stamina else (
-            (0, 0.8),
-            (300, 0.6),
+            (0, 1),
+            (300, 0.8),
             (600, 0.5),
             (900, 0.0),
         )
@@ -67,10 +67,10 @@ def _traning_score(ctx: Context, training: Training) -> float:
     pow = _interpolate_weight(
         ctx.power,
         (
-            (0, 0.8),
-            (300, 0.5),
-            (600, 0.3),
-            (900, 0.2),
+            (0, 1.2),
+            (300, 1.0),
+            (600, 0.6),
+            (900, 0.3),
             (1100, 0.1),
         ) if ctx.speed > 300 else (
             (0, 0.4),
@@ -80,19 +80,19 @@ def _traning_score(ctx: Context, training: Training) -> float:
     per = _interpolate_weight(
         ctx.perservance,
         (
-            (0, 0.5),
-            (300, 0.2),
-            (600, 0.0),
+            (0, 0.7),
+            (300, 0.5),
+            (600, 0.2),
         ) if ctx.speed > 600 else (
-            (0, 0.2),
+            (0, 0.3),
         )
     ) * training.perservance
     int_ = _interpolate_weight(
         ctx.intelligence,
         (
-            (0, 0.9),
-            (300, 0.8),
-            (600, 0.2),
+            (0, 1.2),
+            (300, 1),
+            (600, 0.5),
         ) if ctx.vitality < 0.9 else (
             (0, 0.6),
             (300, 0.3),
