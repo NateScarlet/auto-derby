@@ -298,11 +298,16 @@ class Context:
         date_bbox = (10, 28, 140, 43)
         vitality_bbox = (148, 106, 327, 108)
         self.date = _ocr_date(screnshot.crop(date_bbox))
-        self.speed = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(speed_bbox))))
-        self.stamina = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(stamina_bbox))))
-        self.power = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(power_bbox))))
-        self.perservance = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(perservance_bbox))))
-        self.intelligence = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(intelligence_bbox))))
+        self.speed = int(
+            ocr.text(PIL.ImageOps.invert(screnshot.crop(speed_bbox))))
+        self.stamina = int(
+            ocr.text(PIL.ImageOps.invert(screnshot.crop(stamina_bbox))))
+        self.power = int(
+            ocr.text(PIL.ImageOps.invert(screnshot.crop(power_bbox))))
+        self.perservance = int(
+            ocr.text(PIL.ImageOps.invert(screnshot.crop(perservance_bbox))))
+        self.intelligence = int(
+            ocr.text(PIL.ImageOps.invert(screnshot.crop(intelligence_bbox))))
         self.vitality = _recognize_vitality(screnshot.crop(vitality_bbox))
 
     def __str__(self):
@@ -356,12 +361,15 @@ def _color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_s
     max_value = (1 << bit_size) - 1
     assert img.shape == color.shape, (img.shape, color.shape)
 
+    # do this is somehow faster than
+    # `numpy.linalg.norm(img.astype(int) - color.astype(int), axis=2,).clip(0, 255).astype(np.uint8)`
     diff_img = np.sqrt(
         np.sum(
             (img.astype(int) - color.astype(int)) ** 2,
             axis=2,
         ),
     ).clip(0, 255).astype(np.uint8)
+
     ret = max_value - diff_img
     mask_img = (ret > (max_value * threshold)).astype(np.uint8)
     ret *= mask_img
