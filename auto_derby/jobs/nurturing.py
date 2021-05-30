@@ -228,10 +228,6 @@ def _handle_race():
     action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
 
-def _schedule_next_race():
-    return
-
-
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
     text = ocr.text(
         image_from_array(
@@ -522,7 +518,6 @@ def nurturing():
             templates.GREEN_NEXT_BUTTON,
             templates.NURTURING_URA_FINALS,
             templates.NURTURING_GENE_INHERIT,
-            templates.NURTURING_SCHEDULED_RACE_OPENING,
         )
         name = tmpl.name
         if name == templates.CONNECTING:
@@ -536,22 +531,18 @@ def nurturing():
             y += 60
             action.click((x, y))
             _handle_race()
-            _schedule_next_race()
         elif name == templates.NURTURING_URA_FINALS:
             action.click(pos)
             _handle_race()
-        elif name == templates.NURTURING_SCHEDULED_RACE_OPENING:
-            action.click_image(templates.NURTURING_GO_TO_SCHEDULED_RACE_BUTTON)
-            _handle_race()
-            _schedule_next_race()
         elif name == templates.NURTURING_COMMAND_TRAINING:
-            time.sleep(2)  # pop up may show after enter command scene
-            if not action.count_image(
-                templates.NURTURING_COMMAND_TRAINING
-            ):
-                continue
             ctx.update_by_command_scene(template.screenshot())
             LOGGER.info("update context: %s", ctx)
+            if action.click_image(templates.NURTURING_SCHEDULED_RACE_OPENING_BANNER):
+                action.wait_click_image(
+                    templates.NURTURING_GO_TO_SCHEDULED_RACE_BUTTON)
+                _handle_race()
+                continue
+
             if ctx.vitality <= 0.5:
                 if action.click_image(templates.NURTURING_COMMAND_HEALTH_CARE):
                     time.sleep(2)
