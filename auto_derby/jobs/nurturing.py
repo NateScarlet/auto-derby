@@ -38,20 +38,33 @@ def _interpolate_weight(value: int, weight_map: Tuple[Tuple[int, float], ...]) -
     return weight
 
 
-def _traning_score(ctx: Context, training: Training) -> float:
-    spd = _interpolate_weight(
+def _training_single_score(current: int, delta: int, weight_map: Tuple[Tuple[int, float], ...]) -> float:
+
+    ret = 0
+    for i in range(current, current+delta):
+        ret += _interpolate_weight(
+            i,
+            weight_map
+        )
+    return ret
+
+
+def _training_score(ctx: Context, training: Training) -> float:
+    spd = _training_single_score(
         ctx.speed,
+        training.speed,
         (
             (0, 2.0),
-            (300, 1.4),
-            (600, 1.0),
+            (300, 1.2),
+            (600, 0.8),
             (900, 0.5),
             (1100, 0.2),
         )
-    ) * training.speed
+    )
 
-    sta = _interpolate_weight(
+    sta = _training_single_score(
         ctx.stamina,
+        training.stamina,
         (
             (0, 1.5),
             (300, 1.2),
@@ -63,9 +76,10 @@ def _traning_score(ctx: Context, training: Training) -> float:
             (600, 0.5),
             (900, 0.0),
         )
-    ) * training.stamina
-    pow = _interpolate_weight(
+    )
+    pow = _training_single_score(
         ctx.power,
+        training.power,
         (
             (0, 1.2),
             (300, 1.0),
@@ -76,9 +90,10 @@ def _traning_score(ctx: Context, training: Training) -> float:
             (0, 0.4),
             (300, 0.1),
         )
-    ) * training.power
-    per = _interpolate_weight(
+    )
+    per = _training_single_score(
         ctx.perservance,
+        training.perservance,
         (
             (0, 0.7),
             (300, 0.5),
@@ -86,9 +101,10 @@ def _traning_score(ctx: Context, training: Training) -> float:
         ) if ctx.speed > 600 else (
             (0, 0.3),
         )
-    ) * training.perservance
-    int_ = _interpolate_weight(
+    )
+    int_ = _training_single_score(
         ctx.intelligence,
+        training.intelligence,
         (
             (0, 1.2),
             (300, 1),
@@ -98,8 +114,21 @@ def _traning_score(ctx: Context, training: Training) -> float:
             (300, 0.3),
             (600, 0.1),
         )
-    ) * training.intelligence
-    return spd + sta + pow + per + int_
+    )
+    if ctx.date[1:] in (
+        (7, 1),
+        (7, 2),
+        (8, 1),
+    ) and ctx.vitality < 0.8:
+        int_ += 5
+    skill = training.skill * \
+        (1.0 if any(i <= 300 for i in (
+            ctx.speed,
+            ctx.stamina,
+            ctx.power,
+            ctx.intelligence,
+        )) else 0.5)
+    return spd + sta + pow + per + int_ + skill
 
 
 def _handle_training(ctx: Context):
@@ -116,20 +145,43 @@ def _handle_training(ctx: Context):
     ):
         if y == 600:
             continue
-        action.wait_image(template.Specification(templates.NURTURING_TRAINING_CONFIRM, threshold=0.8))
+        action.wait_image(template.Specification(
+            templates.NURTURING_TRAINING_CONFIRM, threshold=0.8))
         screenshots.append(template.screenshot())
     for name, screenshot in zip(names, screenshots):
         t = Training.from_traning_scene(screenshot)
         t.name = name
         trainings.append(t)
 
-    trainings_with_score = [(i, _traning_score(ctx, i)) for i in trainings]
+    expected_score = 5 + ctx.date[0] * 6
+    if ctx.vitality > 0.9:
+        expected_score *= 0.5
+    if ctx.date[1:] in (
+        (6, 1),
+    ) and ctx.vitality < 0.8:
+        expected_score += 10
+    if ctx.date[1:] in (
+        (6, 2),
+    ) and ctx.vitality < 0.9:
+        expected_score += 20
+    if ctx.date[1:] in (
+        (7, 1),
+        (7, 2),
+        (8, 1),
+    ) and ctx.vitality < 0.8:
+        expected_score += 10
+    if ctx.date in (
+        (4, 0, 0)
+    ):
+        expected_score -= 10
+    LOGGER.info("expected score:\t%2.2f", expected_score)
+
+    trainings_with_score = [(i, _training_score(ctx, i)) for i in trainings]
     trainings_with_score = sorted(
         trainings_with_score, key=lambda x: x[1], reverse=True)
     for t, s in trainings_with_score:
         LOGGER.info("score:\t%2.2f:\t%s", s, t)
     training, score = trainings_with_score[0]
-    expected_score = 5 + ctx.date[0] * 4 * (0.5 if ctx.vitality > 0.9 else 1)
     if score < expected_score:
         # not worth, go rest
         action.click_image(templates.RETURN_BUTTON)
@@ -484,7 +536,7 @@ def nurturing():
             _handle_race()
             _schedule_next_race()
         elif name == templates.NURTURING_COMMAND_TRAINING:
-            time.sleep(1) # pop up may show after enter command scene
+            time.sleep(1)  # pop up may show after enter command scene
             if not action.count_image(
                 templates.NURTURING_COMMAND_TRAINING
             ):
