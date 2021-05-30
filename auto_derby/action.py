@@ -143,7 +143,7 @@ def drag_through_at_window(h_wnd: int, *points: Tuple[int, int], duration: float
                 mouse.move(x, y, duration=duration)
                 yield p
 
-def drag_through(*points: Tuple[int, int], duration: float = 0.05) -> Iterator[Tuple[int, int]]:
+def drag_through(*points: Tuple[int, int], duration: float = 0.02) -> Iterator[Tuple[int, int]]:
     for i in drag_through_at_window(window.get_game(), *points, duration=duration):
         template.invalidate_screeshot()
         yield i
