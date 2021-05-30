@@ -565,6 +565,7 @@ def nurturing():
                 if ctx.vitality < 0.4:
                     action.click_image(templates.NURTURING_COMMAND_GO_OUT)
                 else:
+                    action.click(pos)
                     _handle_training(ctx)
             elif ctx.vitality <= 0.5:
                 if action.click_image(templates.NURTURING_COMMAND_HEALTH_CARE):
