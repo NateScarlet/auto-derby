@@ -66,10 +66,10 @@ def _training_score(ctx: Context, training: Training) -> float:
         ctx.stamina,
         training.stamina,
         (
-            (0, 1.5),
-            (300, 1.2),
-            (600, 1),
-            (900, 0.2),
+            (0, 1.5 * ctx.date[0]),
+            (300, 1.2 * ctx.date[0]),
+            (600, 0.1 * ctx.date[0]),
+            (900, 0.1),
         ) if ctx.speed > ctx.stamina else (
             (0, 1),
             (300, 0.8),
@@ -536,7 +536,7 @@ def nurturing():
             _handle_race()
             _schedule_next_race()
         elif name == templates.NURTURING_COMMAND_TRAINING:
-            time.sleep(1)  # pop up may show after enter command scene
+            time.sleep(2)  # pop up may show after enter command scene
             if not action.count_image(
                 templates.NURTURING_COMMAND_TRAINING
             ):
