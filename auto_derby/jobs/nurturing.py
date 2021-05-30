@@ -56,10 +56,10 @@ def _training_score(ctx: Context, training: Training) -> float:
         training.speed,
         (
             (0, 2.0),
-            (300, 1.2),
+            (300, 1.0),
             (600, 0.8),
-            (900, 0.5),
-            (1100, 0.2),
+            (900, 0.6),
+            (1100, 0.5),
         )
     )
 
@@ -67,68 +67,58 @@ def _training_score(ctx: Context, training: Training) -> float:
         ctx.stamina,
         training.stamina,
         (
-            (0, 1.5 * ctx.date[0]),
-            (300, 1.2 * ctx.date[0]),
-            (600, 0.1 * ctx.date[0]),
-            (900, 0.1),
-        ) if ctx.speed > ctx.stamina else (
-            (0, 1),
-            (300, 0.8),
-            (600, 0.5),
-            (900, 0.0),
+            (0, 2.0),
+            (300, ctx.speed / 600 + 0.3 *
+             ctx.date[0] if ctx.speed > 600 else 1.0),
+            (600, ctx.speed / 900 + 0.1 *
+             ctx.date[0] if ctx.speed > 600 else 0.6),
+            (900, ctx.speed / 900 / 3),
         )
     )
     pow = _training_single_score(
         ctx.power,
         training.power,
         (
-            (0, 1.2),
-            (300, 1.0),
-            (600, 0.6),
-            (900, 0.3),
-            (1100, 0.1),
-        ) if ctx.speed > 300 else (
-            (0, 0.4),
-            (300, 0.1),
+            (0, 1.0),
+            (300, 0.2 + ctx.speed / 600),
+            (600, 0.1 + ctx.speed / 900),
+            (900, ctx.speed / 900 / 3),
         )
     )
     per = _training_single_score(
         ctx.perservance,
         training.perservance,
         (
-            (0, 0.7),
+            (0, 2.0),
+            (300, 1.0),
+            (600, 0.1),
+        ) if ctx.speed > 400 / 24 * ctx.turn_count() else (
+            (0, 2.0),
             (300, 0.5),
-            (600, 0.2),
-        ) if ctx.speed > 600 else (
-            (0, 0.3),
         )
     )
     int_ = _training_single_score(
         ctx.intelligence,
         training.intelligence,
         (
-            (0, 1.2),
-            (300, 1),
-            (600, 0.5),
+            (0, 3.0),
+            (300, 1.0),
+            (600, 0.3),
         ) if ctx.vitality < 0.9 else (
-            (0, 0.6),
-            (300, 0.3),
+            (0, 2.0),
+            (300, 0.8),
             (600, 0.1),
         )
     )
-    if ctx.date[1:] in (
-        (7, 1),
-        (7, 2),
-        (8, 1),
-    ) and ctx.vitality < 0.8:
-        int_ += 5
-    skill = training.skill * \
-        (1.0 if any(i <= 300 for i in (
-            ctx.speed,
-            ctx.stamina,
-            ctx.power,
-            ctx.intelligence,
-        )) else 0.5)
+
+    if ctx.vitality < 0.9:
+        int_ += 5 if ctx.date[1:] in (
+            (7, 1),
+            (7, 2),
+            (8, 1),
+        ) else 3
+
+    skill = training.skill * 0.5
     return spd + sta + pow + per + int_ + skill
 
 
@@ -136,6 +126,12 @@ def _handle_training(ctx: Context):
     trainings: List[Training] = []
     names = iter(["spd", "sta", "pow", "per", "int"])
     screenshots: List[Image] = []
+    action.wait_image(
+        template.Specification(
+            templates.NURTURING_TRAINING_CONFIRM,
+            threshold=0.8
+        )
+    )
     for x, y in (
         (78, 700),
         (158, 700),
@@ -150,9 +146,11 @@ def _handle_training(ctx: Context):
         t.name = name
         trainings.append(t)
 
-    expected_score = 5 + ctx.date[0] * 6
-    if ctx.vitality > 0.9:
+    expected_score = 15 + ctx.turn_count() * 10 / 24
+    if ctx.vitality > 0.5:
         expected_score *= 0.5
+    if ctx.turn_count() == 75:
+        expected_score *= 0.1
     if ctx.date[1:] in (
         (6, 1),
     ) and ctx.vitality < 0.8:
@@ -283,6 +281,7 @@ class Context:
         # (year, month, half-month), 1-base
         self.date = (0, 0, 0)
         self.vitality = 0.0
+        self._extra_turn_count = 0
 
     def update_by_command_scene(self, screnshot: Image) -> None:
         speed_bbox = (45, 553, 90, 572)
@@ -305,10 +304,15 @@ class Context:
             ocr.text(PIL.ImageOps.invert(screnshot.crop(intelligence_bbox))))
         self.vitality = _recognize_vitality(screnshot.crop(vitality_bbox))
 
+        if self.date in ((1, 0, 0), (4, 0, 0)):
+            self._extra_turn_count += 1
+        else:
+            self._extra_turn_count = 0
+
     def __str__(self):
         return (
             "Context<"
-            f"date={self.date},"
+            f"turn={self.turn_count()},"
             f"vit={self.vitality*100:.1f}%,"
             f"spd={self.speed},"
             f"sta={self.stamina},"
@@ -317,6 +321,16 @@ class Context:
             f"int={self.intelligence}"
             ">"
         )
+
+    def turn_count(self) -> int:
+        if self.date == (1, 0, 0):
+            return self._extra_turn_count
+        if self.date == (4, 0, 0):
+            return self._extra_turn_count + 24 * 3
+        return (self.date[0] - 1) * 24 + (self.date[1] - 1) * 2 + (self.date[2] - 1)
+
+    def total_turn_count(self) -> int:
+        return 24 * 3 + 3
 
 
 def _gradient(colors: Tuple[
@@ -547,7 +561,12 @@ def nurturing():
                 _handle_race()
                 continue
 
-            if ctx.vitality <= 0.5:
+            if ctx.turn_count() == 75:
+                if ctx.vitality < 0.4:
+                    action.click_image(templates.NURTURING_COMMAND_GO_OUT)
+                else:
+                    _handle_training(ctx)
+            elif ctx.vitality <= 0.5:
                 if action.click_image(templates.NURTURING_COMMAND_HEALTH_CARE):
                     time.sleep(2)
                     if action.count_image(templates.NURTURING_HEALTH_CARE_CONFIRM):
