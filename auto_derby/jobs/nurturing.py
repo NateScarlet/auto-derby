@@ -58,7 +58,7 @@ def _training_score(ctx: Context, training: Training) -> float:
             (0, 2.0),
             (300, 1.0),
             (600, 0.8),
-            (900, 0.6),
+            (900, 0.7),
             (1100, 0.5),
         )
     )
@@ -91,10 +91,12 @@ def _training_score(ctx: Context, training: Training) -> float:
         (
             (0, 2.0),
             (300, 1.0),
+            (400, 0.3),
             (600, 0.1),
         ) if ctx.speed > 400 / 24 * ctx.turn_count() else (
             (0, 2.0),
             (300, 0.5),
+            (400, 0.1),
         )
     )
     int_ = _training_single_score(
@@ -103,11 +105,12 @@ def _training_score(ctx: Context, training: Training) -> float:
         (
             (0, 3.0),
             (300, 1.0),
-            (600, 0.3),
+            (400, 0.4),
+            (600, 0.2),
         ) if ctx.vitality < 0.9 else (
             (0, 2.0),
             (300, 0.8),
-            (600, 0.1),
+            (400, 0.1),
         )
     )
 
