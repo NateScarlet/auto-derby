@@ -118,7 +118,7 @@ def drag_at_window(h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, dura
         mouse.drag(x, y, x+dx, y+dy, duration=duration)
 
 
-def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.05):
+def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.02):
     drag_at_window(window.get_game(), point, dx=dx, dy=dy, duration=duration)
     template.invalidate_screeshot()
 

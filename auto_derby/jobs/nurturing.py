@@ -136,18 +136,14 @@ def _handle_training(ctx: Context):
     trainings: List[Training] = []
     names = iter(["spd", "sta", "pow", "per", "int"])
     screenshots: List[Image] = []
-    for _, y in action.drag_through(
-        (78, 600),
+    for x, y in (
         (78, 700),
         (158, 700),
         (234, 700),
         (314, 700),
         (402, 700),
     ):
-        if y == 600:
-            continue
-        action.wait_image(template.Specification(
-            templates.NURTURING_TRAINING_CONFIRM, threshold=0.8))
+        action.drag((x, y-100), dy=100)
         screenshots.append(template.screenshot())
     for name, screenshot in zip(names, screenshots):
         t = Training.from_traning_scene(screenshot)
@@ -176,7 +172,6 @@ def _handle_training(ctx: Context):
     ):
         expected_score -= 20
     LOGGER.info("expected score:\t%2.2f", expected_score)
-
     trainings_with_score = [(i, _training_score(ctx, i)) for i in trainings]
     trainings_with_score = sorted(
         trainings_with_score, key=lambda x: x[1], reverse=True)
