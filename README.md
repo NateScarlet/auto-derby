@@ -27,5 +27,7 @@
 
 ```shell
 py -3.8 -m pip install -r requirements.txt
-py -3.8 -m auto_derby
+py -3.8 -m auto_derby 工作名称
 ```
+
+工作名称随便输入错误的名字会提示当前支持的工作
