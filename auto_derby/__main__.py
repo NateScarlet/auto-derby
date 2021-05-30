@@ -3,6 +3,7 @@
 """umamusume pertty derby automation.  """
 
 
+import argparse
 import os
 from auto_derby import templates
 import ctypes
@@ -18,14 +19,14 @@ import logging
 
 LOGGER = logging.getLogger(__name__)
 
-import argparse
+
 def main():
     avaliable_jobs = {
         "team_race": jobs.team_race,
         "legend_race": jobs.legend_race,
         "nurturing": jobs.nurturing,
-        "daily_race_money": lambda : jobs.daily_race(templates.MOONLIGHT_PRIZE),
-        "daily_race_sp": lambda : jobs.daily_race(templates.JUPITER_CUP),
+        "daily_race_money": lambda: jobs.daily_race(templates.MOONLIGHT_PRIZE),
+        "daily_race_sp": lambda: jobs.daily_race(templates.JUPITER_CUP),
     }
     parser = argparse.ArgumentParser()
     parser.add_argument("job")
@@ -33,12 +34,13 @@ def main():
     job = avaliable_jobs.get(args.job)
 
     if not job:
-        LOGGER.error("unknown job: %s\navaliable jobs:\n  %s", args.job, "\n  ".join(avaliable_jobs.keys()))
+        LOGGER.error("unknown job: %s\navaliable jobs:\n  %s",
+                     args.job, "\n  ".join(avaliable_jobs.keys()))
         exit(1)
 
     h_wnd = window.get_game()
     if not h_wnd:
-        if win32gui.MessageBox(0, "启动DMM赛马娘？", "找不到窗口", win32con.MB_YESNO):
+        if win32gui.MessageBox(0, "Launch DMM umamusume?", "Can not found window", win32con.MB_YESNO):
             webbrowser.open('dmmgameplayer://umamusume/cl/general/umamusume')
             while not h_wnd:
                 time.sleep(1)
@@ -65,14 +67,14 @@ if __name__ == '__main__':
         level=logging.INFO,
         datefmt="%Y-%m-%d %H:%M:%S",
     )
-    for i in  os.getenv("DEBUG", "").split(","):
+    for i in os.getenv("DEBUG", "").split(","):
         if not i:
             continue
         logging.getLogger(i).setLevel(logging.DEBUG)
-    
-
 
     if not is_admin():
-        LOGGER.error("需要用管理员权限运行此脚本，不然无法进行点击")
+        LOGGER.error(
+            "admin permission is required, otherwise mouse event will be ignored by the game.",
+        )
         exit(1)
     main()

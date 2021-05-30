@@ -81,9 +81,9 @@ def get(event_screen: Image) -> int:
 
     event_id = imagetools.md5(b_img, save_path=EVENT_IMAGE_PATH)
     if event_id not in _CHOICES:
-        close = window.info("出现新选项\n请在终端中输入选项编号")
+        close = window.info("New event encountered\nplease do choice in terminal")
         while True:
-            ans = input("选项编号(1/2/3/4/5）：")
+            ans = input("Choose event option(1/2/3/4/5):")
             if ans in ["1", "2", "3", "4", "5"]:
                 _CHOICES[event_id] = int(ans)
                 _save()

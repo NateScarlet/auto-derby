@@ -258,9 +258,9 @@ class Context:
 
     def __str__(self):
         return (
-            "Status<"
+            "Context<"
             f"date={self.date},"
-            f"vitality={self.vitality*100:.1f}%,"
+            f"vit={self.vitality*100:.1f}%,"
             f"spd={self.speed},"
             f"sta={self.stamina},"
             f"pow={self.power},"

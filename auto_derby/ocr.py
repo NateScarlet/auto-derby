@@ -72,11 +72,11 @@ def _text_from_image(img: np.ndarray) -> Text:
         return match
     ans = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
-    close_msg = window.info("遇到新文本\n请在终端中标注")
+    close_msg = window.info("New text encountered\nplease do annotation in terminal")
     try:
         with action.recover_cursor(), window.recover_foreground(): # may during a drag
             while len(ans) != 1:
-                ans = input("请输入当前显示图片对应的文本：")
+                ans = input("Corresponding text for current displaying image:")
         _LABELS[h] = ans
         LOGGER.info("labeled: hash=%s, value=%s", h, ans)
     finally:
