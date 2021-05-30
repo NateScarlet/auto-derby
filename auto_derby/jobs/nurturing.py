@@ -355,14 +355,22 @@ def _remove_area(img: np.ndarray, *, size_lt: int):
             cv2.drawContours(img, [i], -1, (0,), cv2.FILLED)
 
 
-def _color_keyer(rgb_color: Tuple[int, int, int], threshold: float = 0.8):
-    def _keyer(bgr: np.ndarray):
-        b, g, r = bgr
-        similarity = imagetools.compare_color(
-            (int(r), int(g), int(b)), rgb_color)
-        return np.uint8((similarity if similarity > threshold else 0.0) * 255)
+def _color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_size: int = 8) -> np.ndarray:
+    max_value = (1 << bit_size) - 1
+    assert img.shape == color.shape, (img.shape, color.shape)
 
-    return _keyer
+    diff_img = np.sqrt(
+        np.sum(
+            (img.astype(int) - color.astype(int)) ** 2,
+            axis=2,
+        ),
+    ).clip(0, 255).astype(np.uint8)
+    ret = max_value - diff_img
+    mask_img = (ret > (max_value * threshold)).astype(np.uint8)
+    ret *= mask_img
+    ret = ret.clip(0, 255)
+    ret = ret.astype(np.uint8)
+    return ret
 
 
 def _ocr_traning_effect(img: Image) -> int:
@@ -380,10 +388,13 @@ def _ocr_traning_effect(img: Image) -> int:
         )
     )
 
-    outline_img = np.apply_along_axis(
-        _color_keyer((255, 255, 255), 0.9),
-        2,
+    outline_img = _color_key(
         sharpened_img,
+        np.full_like(
+            sharpened_img,
+            (255, 255, 255),
+        ),
+        0.9,
     )
 
     border_points = (
@@ -424,12 +435,10 @@ def _ocr_traning_effect(img: Image) -> int:
 
     masked_img = cv2.copyTo(cv_img, cv2.dilate(
         255 - bg_mask_img, (3, 3), iterations=3))
-    diff_img = cv2.absdiff(masked_img, fill_img)
 
-    text_img = np.apply_along_axis(
-        _color_keyer((0, 0, 0)),
-        2,
-        diff_img,
+    text_img = _color_key(
+        masked_img,
+        fill_img,
     )
     text_img = cv2.erode(text_img, (5, 5))
     _remove_area(text_img, size_lt=20)

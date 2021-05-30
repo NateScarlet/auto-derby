@@ -7764,7 +7764,7 @@ class ndarray(object):
         """
         ...
 
-    def __add__(self, value, /):
+    def __add__(self, value: ArrayLike, /) -> ndarray:
         """
         Return self+value.
         """
@@ -8467,7 +8467,7 @@ class ndarray(object):
         """
         ...
 
-    def clip(self, *args, **kwargs):
+    def clip(self, min: Optional[Scalar]=None, max: Optional[Scalar]=None, out: Optional[ndarray]=None, **kwargs: Any) -> ndarray:
         """
         a.clip(min=None, max=None, out=None, **kwargs)
 
@@ -21387,7 +21387,7 @@ def full(shape: Tuple[int, ...], fill_value: Scalar, dtype: Type[Any]=None, orde
     ...
 
 
-def full_like(a: ndarray, fill_value: Scalar, dtype: Type[Any]=None, order: Text='K', subok: bool=True, shape: Tuple[int, ...]=None) -> ndarray:
+def full_like(a: ndarray, fill_value: ArrayLike, dtype: Type[Any]=None, order: Text='K', subok: bool=True, shape: Tuple[int, ...]=None) -> ndarray:
     """
     Return a full array with the same shape and type as a given array.
 
@@ -29790,7 +29790,7 @@ def require(a, dtype=None, requirements=None, *, like=None):
     ...
 
 
-def reshape(a, newshape, order='C'):
+def reshape(a: ArrayLike, newshape: Union[int, Tuple[int, ...]], order: Text='C') -> ndarray:
     """
     Gives a new shape to an array without changing its data.
 
@@ -34364,75 +34364,89 @@ _financial_names: ...
 ['fv', 'ipmt', 'irr', 'mirr', 'nper', 'npv', 'pmt',...
 """
 
-abs: ...
-"""
-<ufunc 'absolute'>
-"""
+def abs(*args, **kwargs):
+    """
+    <ufunc 'absolute'>
+    """
+    ...
 
-absolute: ...
-"""
-<ufunc 'absolute'>
-"""
+def absolute(*args, **kwargs):
+    """
+    <ufunc 'absolute'>
+    """
+    ...
 
-add: ...
-"""
-<ufunc 'add'>
-"""
+def add(*args, **kwargs):
+    """
+    <ufunc 'add'>
+    """
+    ...
 
-arccos: ...
-"""
-<ufunc 'arccos'>
-"""
+def arccos(*args, **kwargs):
+    """
+    <ufunc 'arccos'>
+    """
+    ...
 
-arccosh: ...
-"""
-<ufunc 'arccosh'>
-"""
+def arccosh(*args, **kwargs):
+    """
+    <ufunc 'arccosh'>
+    """
+    ...
 
-arcsin: ...
-"""
-<ufunc 'arcsin'>
-"""
+def arcsin(*args, **kwargs):
+    """
+    <ufunc 'arcsin'>
+    """
+    ...
 
-arcsinh: ...
-"""
-<ufunc 'arcsinh'>
-"""
+def arcsinh(*args, **kwargs):
+    """
+    <ufunc 'arcsinh'>
+    """
+    ...
 
-arctan: ...
-"""
-<ufunc 'arctan'>
-"""
+def arctan(*args, **kwargs):
+    """
+    <ufunc 'arctan'>
+    """
+    ...
 
-arctan2: ...
-"""
-<ufunc 'arctan2'>
-"""
+def arctan2(*args, **kwargs):
+    """
+    <ufunc 'arctan2'>
+    """
+    ...
 
-arctanh: ...
-"""
-<ufunc 'arctanh'>
-"""
+def arctanh(*args, **kwargs):
+    """
+    <ufunc 'arctanh'>
+    """
+    ...
 
-bitwise_and: ...
-"""
-<ufunc 'bitwise_and'>
-"""
+def bitwise_and(*args, **kwargs):
+    """
+    <ufunc 'bitwise_and'>
+    """
+    ...
 
-bitwise_not: ...
-"""
-<ufunc 'invert'>
-"""
+def bitwise_not(*args, **kwargs):
+    """
+    <ufunc 'invert'>
+    """
+    ...
 
-bitwise_or: ...
-"""
-<ufunc 'bitwise_or'>
-"""
+def bitwise_or(*args, **kwargs):
+    """
+    <ufunc 'bitwise_or'>
+    """
+    ...
 
-bitwise_xor: ...
-"""
-<ufunc 'bitwise_xor'>
-"""
+def bitwise_xor(*args, **kwargs):
+    """
+    <ufunc 'bitwise_xor'>
+    """
+    ...
 
 c_: ...
 """
@@ -34444,149 +34458,177 @@ cast: ...
 {<class 'numpy.uint8'>: <function <lambda> at 0x...nt8'>: <func...
 """
 
-cbrt: ...
-"""
-<ufunc 'cbrt'>
-"""
+def cbrt(*args, **kwargs):
+    """
+    <ufunc 'cbrt'>
+    """
+    ...
 
-ceil: ...
-"""
-<ufunc 'ceil'>
-"""
+def ceil(*args, **kwargs):
+    """
+    <ufunc 'ceil'>
+    """
+    ...
 
-conj: ...
-"""
-<ufunc 'conjugate'>
-"""
+def conj(*args, **kwargs):
+    """
+    <ufunc 'conjugate'>
+    """
+    ...
 
-conjugate: ...
-"""
-<ufunc 'conjugate'>
-"""
+def conjugate(*args, **kwargs):
+    """
+    <ufunc 'conjugate'>
+    """
+    ...
 
-copysign: ...
-"""
-<ufunc 'copysign'>
-"""
+def copysign(*args, **kwargs):
+    """
+    <ufunc 'copysign'>
+    """
+    ...
 
-cos: ...
-"""
-<ufunc 'cos'>
-"""
+def cos(*args, **kwargs):
+    """
+    <ufunc 'cos'>
+    """
+    ...
 
-cosh: ...
-"""
-<ufunc 'cosh'>
-"""
+def cosh(*args, **kwargs):
+    """
+    <ufunc 'cosh'>
+    """
+    ...
 
-deg2rad: ...
-"""
-<ufunc 'deg2rad'>
-"""
+def deg2rad(*args, **kwargs):
+    """
+    <ufunc 'deg2rad'>
+    """
+    ...
 
-degrees: ...
-"""
-<ufunc 'degrees'>
-"""
+def degrees(*args, **kwargs):
+    """
+    <ufunc 'degrees'>
+    """
+    ...
 
-divide: ...
-"""
-<ufunc 'true_divide'>
-"""
+def divide(*args, **kwargs):
+    """
+    <ufunc 'true_divide'>
+    """
+    ...
 
-divmod: ...
-"""
-<ufunc 'divmod'>
-"""
+def divmod(*args, **kwargs):
+    """
+    <ufunc 'divmod'>
+    """
+    ...
 
 e: int = 2.718281828459045
 
-equal: ...
-"""
-<ufunc 'equal'>
-"""
+def equal(*args, **kwargs):
+    """
+    <ufunc 'equal'>
+    """
+    ...
 
 euler_gamma: int = 0.5772156649015329
 
-exp: ...
-"""
-<ufunc 'exp'>
-"""
+def exp(*args, **kwargs):
+    """
+    <ufunc 'exp'>
+    """
+    ...
 
-exp2: ...
-"""
-<ufunc 'exp2'>
-"""
+def exp2(*args, **kwargs):
+    """
+    <ufunc 'exp2'>
+    """
+    ...
 
-expm1: ...
-"""
-<ufunc 'expm1'>
-"""
+def expm1(*args, **kwargs):
+    """
+    <ufunc 'expm1'>
+    """
+    ...
 
-fabs: ...
-"""
-<ufunc 'fabs'>
-"""
+def fabs(*args, **kwargs):
+    """
+    <ufunc 'fabs'>
+    """
+    ...
 
-float_power: ...
-"""
-<ufunc 'float_power'>
-"""
+def float_power(*args, **kwargs):
+    """
+    <ufunc 'float_power'>
+    """
+    ...
 
-floor: ...
-"""
-<ufunc 'floor'>
-"""
+def floor(*args, **kwargs):
+    """
+    <ufunc 'floor'>
+    """
+    ...
 
-floor_divide: ...
-"""
-<ufunc 'floor_divide'>
-"""
+def floor_divide(*args, **kwargs):
+    """
+    <ufunc 'floor_divide'>
+    """
+    ...
 
-fmax: ...
-"""
-<ufunc 'fmax'>
-"""
+def fmax(*args, **kwargs):
+    """
+    <ufunc 'fmax'>
+    """
+    ...
 
-fmin: ...
-"""
-<ufunc 'fmin'>
-"""
+def fmin(*args, **kwargs):
+    """
+    <ufunc 'fmin'>
+    """
+    ...
 
-fmod: ...
-"""
-<ufunc 'fmod'>
-"""
+def fmod(*args, **kwargs):
+    """
+    <ufunc 'fmod'>
+    """
+    ...
 
-frexp: ...
-"""
-<ufunc 'frexp'>
-"""
+def frexp(*args, **kwargs):
+    """
+    <ufunc 'frexp'>
+    """
+    ...
 
-gcd: ...
-"""
-<ufunc 'gcd'>
-"""
+def gcd(*args, **kwargs):
+    """
+    <ufunc 'gcd'>
+    """
+    ...
 
-greater: ...
-"""
-<ufunc 'greater'>
-"""
+def greater(*args, **kwargs):
+    """
+    <ufunc 'greater'>
+    """
+    ...
 
-greater_equal: ...
-"""
-<ufunc 'greater_equal'>
-"""
+def greater_equal(*args, **kwargs):
+    """
+    <ufunc 'greater_equal'>
+    """
+    ...
 
-heaviside: ...
-"""
-<ufunc 'heaviside'>
-"""
+def heaviside(*args, **kwargs):
+    """
+    <ufunc 'heaviside'>
+    """
+    ...
 
-hypot: ...
-"""
-<ufunc 'hypot'>
-"""
+def hypot(*args, **kwargs):
+    """
+    <ufunc 'hypot'>
+    """
+    ...
 
 index_exp: ...
 """
@@ -34597,145 +34639,171 @@ inf: ... = inf
 
 infty: ... = inf
 
-invert: ...
-"""
-<ufunc 'invert'>
-"""
+def invert(*args, **kwargs):
+    """
+    <ufunc 'invert'>
+    """
+    ...
 
-isfinite: ...
-"""
-<ufunc 'isfinite'>
-"""
+def isfinite(*args, **kwargs):
+    """
+    <ufunc 'isfinite'>
+    """
+    ...
 
-isinf: ...
-"""
-<ufunc 'isinf'>
-"""
+def isinf(*args, **kwargs):
+    """
+    <ufunc 'isinf'>
+    """
+    ...
 
-isnan: ...
-"""
-<ufunc 'isnan'>
-"""
+def isnan(*args, **kwargs):
+    """
+    <ufunc 'isnan'>
+    """
+    ...
 
-isnat: ...
-"""
-<ufunc 'isnat'>
-"""
+def isnat(*args, **kwargs):
+    """
+    <ufunc 'isnat'>
+    """
+    ...
 
-lcm: ...
-"""
-<ufunc 'lcm'>
-"""
+def lcm(*args, **kwargs):
+    """
+    <ufunc 'lcm'>
+    """
+    ...
 
-ldexp: ...
-"""
-<ufunc 'ldexp'>
-"""
+def ldexp(*args, **kwargs):
+    """
+    <ufunc 'ldexp'>
+    """
+    ...
 
-left_shift: ...
-"""
-<ufunc 'left_shift'>
-"""
+def left_shift(*args, **kwargs):
+    """
+    <ufunc 'left_shift'>
+    """
+    ...
 
-less: ...
-"""
-<ufunc 'less'>
-"""
+def less(*args, **kwargs):
+    """
+    <ufunc 'less'>
+    """
+    ...
 
-less_equal: ...
-"""
-<ufunc 'less_equal'>
-"""
+def less_equal(*args, **kwargs):
+    """
+    <ufunc 'less_equal'>
+    """
+    ...
 
 little_endian: bool
 """
 True
 """
 
-log: ...
-"""
-<ufunc 'log'>
-"""
+def log(*args, **kwargs):
+    """
+    <ufunc 'log'>
+    """
+    ...
 
-log10: ...
-"""
-<ufunc 'log10'>
-"""
+def log10(*args, **kwargs):
+    """
+    <ufunc 'log10'>
+    """
+    ...
 
-log1p: ...
-"""
-<ufunc 'log1p'>
-"""
+def log1p(*args, **kwargs):
+    """
+    <ufunc 'log1p'>
+    """
+    ...
 
-log2: ...
-"""
-<ufunc 'log2'>
-"""
+def log2(*args, **kwargs):
+    """
+    <ufunc 'log2'>
+    """
+    ...
 
-logaddexp: ...
-"""
-<ufunc 'logaddexp'>
-"""
+def logaddexp(*args, **kwargs):
+    """
+    <ufunc 'logaddexp'>
+    """
+    ...
 
-logaddexp2: ...
-"""
-<ufunc 'logaddexp2'>
-"""
+def logaddexp2(*args, **kwargs):
+    """
+    <ufunc 'logaddexp2'>
+    """
+    ...
 
-logical_and: ...
-"""
-<ufunc 'logical_and'>
-"""
+def logical_and(*args, **kwargs):
+    """
+    <ufunc 'logical_and'>
+    """
+    ...
 
-logical_not: ...
-"""
-<ufunc 'logical_not'>
-"""
+def logical_not(*args, **kwargs):
+    """
+    <ufunc 'logical_not'>
+    """
+    ...
 
-logical_or: ...
-"""
-<ufunc 'logical_or'>
-"""
+def logical_or(*args, **kwargs):
+    """
+    <ufunc 'logical_or'>
+    """
+    ...
 
-logical_xor: ...
-"""
-<ufunc 'logical_xor'>
-"""
+def logical_xor(*args, **kwargs):
+    """
+    <ufunc 'logical_xor'>
+    """
+    ...
 
-matmul: ...
-"""
-<ufunc 'matmul'>
-"""
+def matmul(*args, **kwargs):
+    """
+    <ufunc 'matmul'>
+    """
+    ...
 
-maximum: ...
-"""
-<ufunc 'maximum'>
-"""
+def maximum(*args, **kwargs):
+    """
+    <ufunc 'maximum'>
+    """
+    ...
 
 mgrid: ...
 """
 <numpy.lib.index_tricks.MGridClass object>
 """
 
-minimum: ...
-"""
-<ufunc 'minimum'>
-"""
+def minimum(*args, **kwargs):
+    """
+    <ufunc 'minimum'>
+    """
+    ...
 
-mod: ...
-"""
-<ufunc 'remainder'>
-"""
+def mod(*args, **kwargs):
+    """
+    <ufunc 'remainder'>
+    """
+    ...
 
-modf: ...
-"""
-<ufunc 'modf'>
-"""
+def modf(*args, **kwargs):
+    """
+    <ufunc 'modf'>
+    """
+    ...
 
-multiply: ...
-"""
-<ufunc 'multiply'>
-"""
+def multiply(*args, **kwargs):
+    """
+    <ufunc 'multiply'>
+    """
+    ...
 
 nan: ... = nan
 
@@ -34744,22 +34812,25 @@ nbytes: ...
 {<class 'numpy.bool_'>: 1, <class 'numpy.int8'>:....datetime6...
 """
 
-negative: ...
-"""
-<ufunc 'negative'>
-"""
+def negative(*args, **kwargs):
+    """
+    <ufunc 'negative'>
+    """
+    ...
 
 newaxis: ... = None
 
-nextafter: ...
-"""
-<ufunc 'nextafter'>
-"""
+def nextafter(*args, **kwargs):
+    """
+    <ufunc 'nextafter'>
+    """
+    ...
 
-not_equal: ...
-"""
-<ufunc 'not_equal'>
-"""
+def not_equal(*args, **kwargs):
+    """
+    <ufunc 'not_equal'>
+    """
+    ...
 
 numarray: Text
 """
@@ -34778,50 +34849,58 @@ oldnumeric: Text
 
 pi: float = 3.141592653589793
 
-positive: ...
-"""
-<ufunc 'positive'>
-"""
+def positive(*args, **kwargs):
+    """
+    <ufunc 'positive'>
+    """
+    ...
 
-power: ...
-"""
-<ufunc 'power'>
-"""
+def power(*args, **kwargs):
+    """
+    <ufunc 'power'>
+    """
+    ...
 
 r_: ...
 """
 <numpy.lib.index_tricks.RClass object>
 """
 
-rad2deg: ...
-"""
-<ufunc 'rad2deg'>
-"""
+def rad2deg(*args, **kwargs):
+    """
+    <ufunc 'rad2deg'>
+    """
+    ...
 
-radians: ...
-"""
-<ufunc 'radians'>
-"""
+def radians(*args, **kwargs):
+    """
+    <ufunc 'radians'>
+    """
+    ...
 
-reciprocal: ...
-"""
-<ufunc 'reciprocal'>
-"""
+def reciprocal(*args, **kwargs):
+    """
+    <ufunc 'reciprocal'>
+    """
+    ...
 
-remainder: ...
-"""
-<ufunc 'remainder'>
-"""
+def remainder(*args, **kwargs):
+    """
+    <ufunc 'remainder'>
+    """
+    ...
 
-right_shift: ...
-"""
-<ufunc 'right_shift'>
-"""
+def right_shift(*args, **kwargs):
+    """
+    <ufunc 'right_shift'>
+    """
+    ...
 
-rint: ...
-"""
-<ufunc 'rint'>
-"""
+def rint(*args, **kwargs):
+    """
+    <ufunc 'rint'>
+    """
+    ...
 
 s_: ...
 """
@@ -34838,55 +34917,134 @@ sctypes: ...
 {'complex': [<class 'numpy.complex64'>, <class 'numpy.comple...
 """
 
-sign: ...
-"""
-<ufunc 'sign'>
-"""
+def sign(*args, **kwargs):
+    """
+    <ufunc 'sign'>
+    """
+    ...
 
-signbit: ...
-"""
-<ufunc 'signbit'>
-"""
+def signbit(*args, **kwargs):
+    """
+    <ufunc 'signbit'>
+    """
+    ...
 
-sin: ...
-"""
-<ufunc 'sin'>
-"""
+def sin(*args, **kwargs):
+    """
+    <ufunc 'sin'>
+    """
+    ...
 
-sinh: ...
-"""
-<ufunc 'sinh'>
-"""
+def sinh(*args, **kwargs):
+    """
+    <ufunc 'sinh'>
+    """
+    ...
 
-spacing: ...
-"""
-<ufunc 'spacing'>
-"""
+def spacing(*args, **kwargs):
+    """
+    <ufunc 'spacing'>
+    """
+    ...
 
-sqrt: ...
-"""
-<ufunc 'sqrt'>
-"""
+def sqrt(
+    x: ArrayLike,
+    /,
+    out: ndarray=...,
+    *,
+    where: Optional[ArrayLike]=...,
+    casting: Any=..., 
+    order: Text=...,
+    dtype: Text=...,
+    subok: bool=...,
+    signature: Any=...,
+    extobj: Any=...,
+) -> ndarray:
+    """
+    sqrt(x, /, out=None, *, where=True, casting=\'same_kind\', order=\'K\', dtype=None, subok=True[, signature, extobj])
 
-square: ...
-"""
-<ufunc 'square'>
-"""
+    Return the non-negative square-root of an array, element-wise.
 
-subtract: ...
-"""
-<ufunc 'subtract'>
-"""
+    Parameters
+    ----------
+    x : array_like
+        The values whose square-roots are required.
+    out : ndarray, None, or tuple of ndarray and None, optional
+        A location into which the result is stored. If provided, it must have
+        a shape that the inputs broadcast to. If not provided or None,
+        a freshly-allocated array is returned. A tuple (possible only as a
+        keyword argument) must have length equal to the number of outputs.
+    where : array_like, optional
+        This condition is broadcast over the input. At locations where the
+        condition is True, the `out` array will be set to the ufunc result.
+        Elsewhere, the `out` array will retain its original value.
+        Note that if an uninitialized `out` array is created via the default
+        ``out=None``, locations within it where the condition is False will
+        remain uninitialized.
+    **kwargs
+        For other keyword-only arguments, see the
+        :ref:`ufunc docs <ufuncs.kwargs>`.
 
-tan: ...
-"""
-<ufunc 'tan'>
-"""
+    Returns
+    -------
+    y : ndarray
+        An array of the same shape as `x`, containing the positive
+        square-root of each element in `x`.  If any element in `x` is
+        complex, a complex array is returned (and the square-roots of
+        negative reals are calculated).  If all of the elements in `x`
+        are real, so is `y`, with negative elements returning ``nan``.
+        If `out` was provided, `y` is a reference to it.
+        This is a scalar if `x` is a scalar.
 
-tanh: ...
-"""
-<ufunc 'tanh'>
-"""
+    See Also
+    --------
+    lib.scimath.sqrt
+        A version which returns complex numbers when given negative reals.
+
+    Notes
+    -----
+    *sqrt* has--consistent with common convention--as its branch cut the
+    real "interval" [`-inf`, 0), and is continuous from above on it.
+    A branch cut is a curve in the complex plane across which a given
+    complex function fails to be continuous.
+
+    Examples
+    --------
+    >>> np.sqrt([1,4,9])
+    array([ 1.,  2.,  3.])
+
+    >>> np.sqrt([4, -1, -3+4J])
+    array([ 2.+0.j,  0.+1.j,  1.+2.j])
+
+    >>> np.sqrt([4, -1, np.inf])
+    array([ 2., nan, inf])'
+    """
+    ...
+
+
+def square(*args, **kwargs):
+    """
+    <ufunc 'square'>
+    """
+    ...
+
+def subtract(*args, **kwargs):
+    """
+    <ufunc 'subtract'>
+    """
+    ...
+
+def tan(*args, **kwargs):
+    """
+    <ufunc 'tan'>
+    """
+    ...
+
+def tanh(*args, **kwargs):
+    """
+    <ufunc 'tanh'>
+    """
+    ...
 
 test: ...
 """
@@ -34895,15 +35053,17 @@ test: ...
 
 tracemalloc_domain: int = 389047
 
-true_divide: ...
-"""
-<ufunc 'true_divide'>
-"""
+def true_divide(*args, **kwargs):
+    """
+    <ufunc 'true_divide'>
+    """
+    ...
 
-trunc: ...
-"""
-<ufunc 'trunc'>
-"""
+def trunc(*args, **kwargs):
+    """
+    <ufunc 'trunc'>
+    """
+    ...
 
 typeDict: ...
 """
