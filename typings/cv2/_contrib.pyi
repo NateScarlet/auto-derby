@@ -33880,35 +33880,6 @@ def redirectError(onError) -> None:
     ...
 
 
-def reduce(src, dim, rtype[, dst[, dtype]]) -> dst:
-    """
-    .   @brief Reduces a matrix to a vector.
-    .
-    .   The function #reduce reduces the matrix to a vector by treating the matrix rows/columns as a set of
-    .   1D vectors and performing the specified operation on the vectors until a single row/column is
-    .   obtained. For example, the function can be used to compute horizontal and vertical projections of a
-    .   raster image. In case of #REDUCE_MAX and #REDUCE_MIN , the output image should have the same type as the source one.
-    .   In case of #REDUCE_SUM and #REDUCE_AVG , the output may have a larger element bit-depth to preserve accuracy.
-    .   And multi-channel arrays are also supported in these two reduction modes.
-    .
-    .   The following code demonstrates its usage for a single channel matrix.
-    .   @snippet snippets/core_reduce.cpp example
-    .
-    .   And the following code demonstrates its usage for a two-channel matrix.
-    .   @snippet snippets/core_reduce.cpp example2
-    .
-    .   @param src input 2D matrix.
-    .   @param dst output vector. Its size and type is defined by dim and dtype parameters.
-    .   @param dim dimension index along which the matrix is reduced. 0 means that the matrix is reduced to
-    .   a single row. 1 means that the matrix is reduced to a single column.
-    .   @param rtype reduction operation that could be one of #ReduceTypes
-    .   @param dtype when negative, the output vector will have the same type as the input matrix,
-    .   otherwise, its type will be CV_MAKE_TYPE(CV_MAT_DEPTH(dtype), src.channels()).
-    .   @sa repeat
-    """
-    ...
-
-
 def remap(src, map1, map2, interpolation[, dst[, borderMode[, borderValue]]]) -> dst:
     """
     .   @brief Applies a generic geometrical transformation to an image.

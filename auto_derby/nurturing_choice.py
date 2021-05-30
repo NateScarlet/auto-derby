@@ -1,7 +1,6 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-
 import json
 import logging
 import os
@@ -56,12 +55,15 @@ def get(event_screen: Image) -> int:
 
     cv_options_img = np.asarray(event_screen.crop(options_bbox).convert("L"))
 
-    def _has_white(x: np.ndarray) -> bool:
-        return (x == 255).any()
-    option_rows = np.apply_along_axis(
-        _has_white, 1, cv_options_img).astype(np.uint8)
-    option_mask = np.repeat(np.vstack(option_rows),
-                            cv_options_img.shape[1], axis=1)
+    option_rows = (
+        cv2.reduce(cv_options_img, 1, cv2.REDUCE_MAX) == 255
+    ).astype(np.uint8)
+
+    option_mask = np.repeat(
+        option_rows,
+        cv_options_img.shape[1],
+        axis=1,
+    )
 
     cv_options_img = 255-cv_options_img
     cv_options_img *= option_mask
@@ -81,7 +83,8 @@ def get(event_screen: Image) -> int:
 
     event_id = imagetools.md5(b_img, save_path=EVENT_IMAGE_PATH)
     if event_id not in _CHOICES:
-        close = window.info("New event encountered\nplease do choice in terminal")
+        close = window.info(
+            "New event encountered\nplease do choice in terminal")
         while True:
             ans = input("Choose event option(1/2/3/4/5):")
             if ans in ["1", "2", "3", "4", "5"]:

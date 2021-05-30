@@ -21302,7 +21302,7 @@ def redirectError(onError) -> None:
     ...
 
 
-def reduce(src, dim, rtype[, dst[, dtype]]) -> dst:
+def reduce(src: ndarray, dim: int, rtype: int, dst: ndarray = ..., dtype: int = ...) -> ndarray:
     """
     .   @brief Reduces a matrix to a vector.
     .
