@@ -72,9 +72,10 @@ def _text_from_image(img: np.ndarray) -> Text:
         return match
     ans = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
-    close_msg = window.info("New text encountered\nplease do annotation in terminal")
+    close_msg = window.info(
+        "New text encountered\nplease do annotation in terminal")
     try:
-        with action.recover_cursor(), window.recover_foreground(): # may during a drag
+        with action.recover_cursor(), window.recover_foreground():  # may during a drag
             while len(ans) != 1:
                 ans = input("Corresponding text for current displaying image:")
         _LABELS[h] = ans
@@ -115,21 +116,28 @@ def _bbox_contains(a: Tuple[int, int, int, int], b: Tuple[int, int, int, int]) -
         a[3] >= b[3]
     )
 
+
 _LINE_HEIGHT = 32
 
+
 def text(img: Image) -> Text:
+    """Regcognize text line, background color should be black.
+
+    Args:
+        img (Image): Preprocessed text line.
+
+    Returns:
+        Text: Text content
+    """
     ret = ""
 
     w, h = img.width, img.height
-    
+
     if img.height < _LINE_HEIGHT:
         w = round(_LINE_HEIGHT / h * w)
         h = _LINE_HEIGHT
         img = img.resize((w, h))
     cv_img = np.asarray(img.convert("L"))
-    cv_img = _auto_level(cv_img)
-    if cv_img[0, 0] == 255:
-        cv_img = 255 - cv_img
     _, binary_img = cv2.threshold(
         cv_img,
         0,

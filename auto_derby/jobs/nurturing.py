@@ -9,6 +9,7 @@ from typing import List, Text, Tuple
 
 from auto_derby import imagetools, nurturing_choice, template
 from PIL.Image import Image
+import PIL.ImageOps
 from PIL.Image import fromarray as image_from_array
 
 from .. import action, ocr, templates
@@ -232,7 +233,7 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     text = ocr.text(
         image_from_array(
             cv2.threshold(
-                1 - np.asarray(img.convert("L")),
+                255 - np.asarray(img.convert("L")),
                 128,
                 255,
                 cv2.THRESH_TOZERO,
@@ -297,11 +298,11 @@ class Context:
         date_bbox = (10, 28, 140, 43)
         vitality_bbox = (148, 106, 327, 108)
         self.date = _ocr_date(screnshot.crop(date_bbox))
-        self.speed = int(ocr.text(screnshot.crop(speed_bbox)))
-        self.stamina = int(ocr.text(screnshot.crop(stamina_bbox)))
-        self.power = int(ocr.text(screnshot.crop(power_bbox)))
-        self.perservance = int(ocr.text(screnshot.crop(perservance_bbox)))
-        self.intelligence = int(ocr.text(screnshot.crop(intelligence_bbox)))
+        self.speed = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(speed_bbox))))
+        self.stamina = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(stamina_bbox))))
+        self.power = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(power_bbox))))
+        self.perservance = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(perservance_bbox))))
+        self.intelligence = int(ocr.text(PIL.ImageOps.invert(screnshot.crop(intelligence_bbox))))
         self.vitality = _recognize_vitality(screnshot.crop(vitality_bbox))
 
     def __str__(self):
