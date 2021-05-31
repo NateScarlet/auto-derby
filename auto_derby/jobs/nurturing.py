@@ -128,7 +128,6 @@ def _training_score(ctx: Context, training: Training) -> float:
 def _handle_training(ctx: Context):
     trainings: List[Training] = []
     names = iter(["spd", "sta", "pow", "per", "int"])
-    screenshots: List[Image] = []
     action.wait_image(
         template.Specification(
             templates.NURTURING_TRAINING_CONFIRM,
@@ -143,10 +142,8 @@ def _handle_training(ctx: Context):
         (402, 700),
     ):
         action.drag((x, y-100), dy=100)
-        screenshots.append(template.screenshot())
-    for name, screenshot in zip(names, screenshots):
-        t = Training.from_training_scene(screenshot)
-        t.name = name
+        t = Training.from_training_scene(template.screenshot())
+        t.name = next(names)
         trainings.append(t)
 
     expected_score = 15 + ctx.turn_count() * 10 / 24
