@@ -8,9 +8,8 @@ from typing import Dict, Text
 
 import cv2
 import numpy as np
+from auto_derby import imagetools, window
 from PIL.Image import Image
-
-from auto_derby import window, imagetools
 
 LOGGER = logging.getLogger(__name__)
 
