@@ -62,7 +62,6 @@ def is_admin():
 
 
 if __name__ == '__main__':
-
     logging.basicConfig(
         format="%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
         level=logging.INFO,
