@@ -145,7 +145,7 @@ def _handle_training(ctx: Context):
         action.drag((x, y-100), dy=100)
         screenshots.append(template.screenshot())
     for name, screenshot in zip(names, screenshots):
-        t = Training.from_traning_scene(screenshot)
+        t = Training.from_training_scene(screenshot)
         t.name = name
         trainings.append(t)
 
@@ -390,7 +390,7 @@ def _color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_s
     return ret
 
 
-def _ocr_traning_effect(img: Image) -> int:
+def _ocr_training_effect(img: Image) -> int:
     cv_img = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
 
     sharpened_img = cv2.filter2D(
@@ -480,7 +480,7 @@ class Training:
         self.confirm_position: Tuple[int, int] = (0, 0)
 
     @classmethod
-    def from_traning_scene(cls, img: Image) -> Training:
+    def from_training_scene(cls, img: Image) -> Training:
         self = cls()
         self.confirm_position = next(template.match(img, template.Specification(
             templates.NURTURING_TRAINING_CONFIRM,
@@ -488,17 +488,17 @@ class Training:
         )))[1]
 
         t, b = 503, 532
-        self.speed = _ocr_traning_effect(img.crop((18, t, 91, b)))
-        self.stamina = _ocr_traning_effect(img.crop((91, t, 163, b)))
-        self.power = _ocr_traning_effect(img.crop((163, t, 237, b)))
-        self.perservance = _ocr_traning_effect(img.crop((237, t, 309, b)))
-        self.intelligence = _ocr_traning_effect(img.crop((309, t, 382, b)))
-        self.skill = _ocr_traning_effect(img.crop((387, t, 450, b)))
+        self.speed = _ocr_training_effect(img.crop((18, t, 91, b)))
+        self.stamina = _ocr_training_effect(img.crop((91, t, 163, b)))
+        self.power = _ocr_training_effect(img.crop((163, t, 237, b)))
+        self.perservance = _ocr_training_effect(img.crop((237, t, 309, b)))
+        self.intelligence = _ocr_training_effect(img.crop((309, t, 382, b)))
+        self.skill = _ocr_training_effect(img.crop((387, t, 450, b)))
         return self
 
     def __str__(self):
         return (
-            "Traning<"
+            "Training<"
             f"name={self.name},"
             f"spd={self.speed},"
             f"sta={self.stamina},"

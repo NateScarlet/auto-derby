@@ -25,8 +25,7 @@ def test_context_update_by_command_scene_issue7():
 def test_training_update_by_command_scene_issue9():
     img = PIL.Image.open(
         _TEST_DATA_PATH / "nurturing_training_scene_issue9.png").convert("RGB")
-    # TODO: fix typo traning -> training
-    training = Training.from_traning_scene(img)
+    training = Training.from_training_scene(img)
     assert training.speed == 12
     assert training.stamina == 0
     assert training.power == 7
