@@ -62,7 +62,7 @@ def _recognize_vitality(img: Image) -> float:
 
 
 def _recognize_mood(rgb_color: Tuple[int, int, int]) -> float:
-    if imagetools.compare_color((238, 60, 112),  rgb_color) > 0.9:
+    if imagetools.compare_color((255, 114, 148),  rgb_color) > 0.9:
         return Context.MOOD_VERY_GOOD
     if imagetools.compare_color((254, 157, 60),  rgb_color) > 0.9:
         return Context.MOOD_GOOD
