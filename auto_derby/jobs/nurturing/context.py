@@ -62,15 +62,15 @@ def _recognize_vitality(img: Image) -> float:
 
 
 def _recognize_mood(rgb_color: Tuple[int, int, int]) -> float:
-    if imagetools.compare_color((255, 114, 148),  rgb_color) > 0.9:
+    if imagetools.compare_color((250, 68, 126),  rgb_color) > 0.9:
         return Context.MOOD_VERY_GOOD
-    if imagetools.compare_color((254, 157, 60),  rgb_color) > 0.9:
+    if imagetools.compare_color((255, 124, 57),  rgb_color) > 0.9:
         return Context.MOOD_GOOD
-    if imagetools.compare_color((255, 251, 233),  rgb_color) > 0.9:
+    if imagetools.compare_color((255, 162, 0),  rgb_color) > 0.9:
         return Context.MOOD_NORMAL
-    if imagetools.compare_color((5, 107, 223),  rgb_color) > 0.9:
+    if imagetools.compare_color((16, 136, 247),  rgb_color) > 0.9:
         return Context.MOOD_BAD
-    if imagetools.compare_color((194, 115, 255),  rgb_color) > 0.9:
+    if imagetools.compare_color((170, 81, 255),  rgb_color) > 0.9:
         return Context.MOOD_VERY_BAD
     raise ValueError("_recognize_mood: unknown mood color: %s" % (rgb_color,))
 
@@ -113,7 +113,7 @@ class Context:
 
         self.vitality = _recognize_vitality(screenshot.crop(vitality_bbox))
 
-        mood_color = screenshot.getpixel((360, 100))
+        mood_color = screenshot.getpixel((395, 113))
         assert isinstance(mood_color, tuple), mood_color
         self.mood = _recognize_mood(
             (mood_color[0], mood_color[1], mood_color[2]),
