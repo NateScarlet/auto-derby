@@ -32177,7 +32177,7 @@ def imencode(ext, img[, params]) -> retval, buf:
     ...
 
 
-def imread(filename[, flags]) -> retval:
+def imread(filename: Text, flags: int) -> ndarray:
     """
     .   @brief Loads an image from a file.
     .
