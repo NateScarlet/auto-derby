@@ -19,3 +19,4 @@ def test_update_by_command_scene_issue7():
     assert ctx.power == 67
     assert ctx.perservance == 95
     assert ctx.intelligence == 90
+    assert ctx.mood == ctx.MOOD_NORMAL

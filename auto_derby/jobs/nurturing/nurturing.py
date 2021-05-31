@@ -284,11 +284,7 @@ def nurturing():
                         action.click_image(templates.GREEN_OK_BUTTON)
                     continue
 
-                if action.count_image(
-                    templates.NURTURING_MOOD_NORMAL,
-                    templates.NURTURING_MOOD_BAD,
-                    templates.NURTURING_MOOD_VERY_BAD,
-                ):
+                if ctx.mood < ctx.MOOD_GOOD:
                     _, pos = action.wait_image(
                         templates.NURTURING_COMMAND_GO_OUT,
                         templates.NURTURING_COMMAND_SUMMER_REST,
