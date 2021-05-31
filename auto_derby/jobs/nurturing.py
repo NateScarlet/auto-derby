@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 
 import time
-from typing import List, Text, Tuple
+from typing import List, Tuple
 
 from auto_derby import imagetools, nurturing_choice, template
 from PIL.Image import Image
@@ -127,7 +127,6 @@ def _training_score(ctx: Context, training: Training) -> float:
 
 def _handle_training(ctx: Context):
     trainings: List[Training] = []
-    names = iter(["spd", "sta", "pow", "per", "int"])
     action.wait_image(
         template.Specification(
             templates.NURTURING_TRAINING_CONFIRM,
@@ -143,7 +142,6 @@ def _handle_training(ctx: Context):
     ):
         action.drag((x, y-100), dy=100)
         t = Training.from_training_scene(template.screenshot())
-        t.name = next(names)
         trainings.append(t)
 
     expected_score = 15 + ctx.turn_count() * 10 / 24
@@ -465,7 +463,6 @@ def _ocr_training_effect(img: Image) -> int:
 
 class Training:
     def __init__(self):
-        self.name: Text = ""
         self.speed: int = 0
         self.stamina: int = 0
         self.power: int = 0
@@ -494,15 +491,29 @@ class Training:
         return self
 
     def __str__(self):
+
+        named_data = (
+            ("spd", self.speed,),
+            ("sta", self.stamina,),
+            ("pow", self.power,),
+            ("per", self.perservance,),
+            ("int", self.intelligence,),
+            ("ski", self.skill,)
+        )
         return (
-            "Training<"
-            f"name={self.name},"
-            f"spd={self.speed},"
-            f"sta={self.stamina},"
-            f"pow={self.power},"
-            f"per={self.perservance},"
-            f"int={self.intelligence},"
-            f"skill={self.skill}"
+            "Training<" +
+            ", ".join(
+                (
+                    f"{name}={value}"
+                    for name, value in
+                    sorted(
+                        named_data,
+                        key=lambda x: x[1],
+                        reverse=True,
+                    )
+                    if value
+                ),
+            ) +
             ">"
         )
 
