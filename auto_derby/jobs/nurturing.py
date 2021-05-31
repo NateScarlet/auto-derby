@@ -398,9 +398,9 @@ def _ocr_traning_effect(img: Image) -> int:
         8,
         np.array(
             (
-                (0, -1, 0),
-                (-1, 5, -1),
-                (0, -1, 0),
+                (-1, -1, -1),
+                (-1, 9, -1),
+                (-1, -1, -1),
             ),
         )
     )
@@ -487,7 +487,7 @@ class Training:
             threshold=0.8
         )))[1]
 
-        t, b = 505, 530
+        t, b = 503, 532
         self.speed = _ocr_traning_effect(img.crop((18, t, 91, b)))
         self.stamina = _ocr_traning_effect(img.crop((91, t, 163, b)))
         self.power = _ocr_traning_effect(img.crop((163, t, 237, b)))
