@@ -316,7 +316,7 @@ class Context:
         return (
             "Context<"
             f"turn={self.turn_count()},"
-            f"vit={self.vitality*100:.1f}%,"
+            f"vit={self.vitality:.3f},"
             f"spd={self.speed},"
             f"sta={self.stamina},"
             f"pow={self.power},"
