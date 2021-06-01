@@ -36,7 +36,14 @@ Add-Type -Language CSharp ([string](Get-Content "$PSScriptRoot\launcher.cs"))
 
 $data = New-Object NateScarlet.AutoDerby.DataContext -Property @{
     DefaultNurturingChoicesDataPath = [System.IO.Path]::GetFullPath("nurturing_choices.json")
-    DefaultPythonExecutablePath = $(& py.exe -3.8 -c 'import sys; print(sys.executable)')
+    DefaultPythonExecutablePath     = . {
+        try {
+            & py.exe -3.8 -c 'import sys; print(sys.executable)'
+        }
+        catch {
+            
+        }
+    }
 }
 $mainWindow.DataContext = $data
 
@@ -49,11 +56,11 @@ $mainWindow.Content.FindName('startButton').add_Click(
 $mainWindow.Content.FindName('chooseNurturingChoicesDataPathButton').add_Click( 
     {
         $dialog = New-Object Microsoft.Win32.SaveFileDialog -Property @{
-            Title        = "Choose nurturing choices"
-            AddExtension = $true
-            DefaultExt   = ".json"
-            Filter       = "JSON data Files|*.json"
-            FileName     = $data.NurturingChoicesDataPath
+            Title            = "Choose nurturing choices"
+            AddExtension     = $true
+            DefaultExt       = ".json"
+            Filter           = "JSON data Files|*.json"
+            FileName         = $data.NurturingChoicesDataPath
             InitialDirectory = (Split-Path $data.NurturingChoicesDataPath -Parent)
         }
         if ($dialog.ShowDialog()) {
@@ -64,9 +71,9 @@ $mainWindow.Content.FindName('chooseNurturingChoicesDataPathButton').add_Click(
 $mainWindow.Content.FindName('choosePythonExecutablePathButton').add_Click( 
     {
         $dialog = New-Object Microsoft.Win32.OpenFileDialog -Property @{
-            Title        = "Choose python executable"
-            Filter       = "Executable|*.exe|Any File|*.*"
-            FileName     = $data.PythonExecutablePath
+            Title            = "Choose python executable"
+            Filter           = "Executable|*.exe|Any File|*.*"
+            FileName         = $data.PythonExecutablePath
             InitialDirectory = (Split-Path $data.PythonExecutablePath -Parent)
         }
         if ($dialog.ShowDialog()) {
@@ -92,7 +99,7 @@ if ($dialogResult) {
     $startTime = Get-Date
     "Auto exit in 10 seconds, press any key to pause."
     while ((Get-Date) -lt $startTime.AddSeconds(10)) {
-        if ($Host.UI.RawUI.KeyAvailable){
+        if ($Host.UI.RawUI.KeyAvailable) {
             Pause
             Exit $exitCode
         }
