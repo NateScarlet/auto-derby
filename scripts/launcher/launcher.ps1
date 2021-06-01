@@ -98,6 +98,7 @@ if ($dialogResult) {
         }
         Start-Sleep 0.1
     }
+    Exit $exitCode
 }
 else {
     "Cancelled"
