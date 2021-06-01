@@ -56,8 +56,20 @@ $mainWindow.Content.FindName('chooseNurturingChoicesDataPathButton').add_Click(
             FileName     = $data.NurturingChoicesDataPath
         }
         if ($dialog.ShowDialog()) {
-
             $data.NurturingChoicesDataPath = $dialog.FileName
+        }
+    }
+)
+$mainWindow.Content.FindName('choosePythonExecutablePathButton').add_Click( 
+    {
+        $dialog = New-Object Microsoft.Win32.OpenFileDialog -Property @{
+            Title        = "Choose python executable"
+            Filter       = "Executable|*.exe|Any File|*.*"
+            FileName     = $data.PythonExecutablePath
+            InitialDirectory = (Split-Path $data.PythonExecutablePath -Parent)
+        }
+        if ($dialog.ShowDialog()) {
+            $data.PythonExecutablePath = $dialog.FileName
         }
     }
 )
@@ -74,7 +86,7 @@ if ($data.NurturingChoicesDataPath) {
 }
 
 if ($dialogResult) {
-    & $data.PythonExecutablePath -m auto_derby $data.Job
+    & "$($data.PythonExecutablePath)" -m auto_derby $data.Job
     $exitCode = $?
     $startTime = Get-Date
     "Auto exit in 10 seconds, press any key to pause."
