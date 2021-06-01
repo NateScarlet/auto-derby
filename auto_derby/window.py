@@ -3,10 +3,11 @@
 """umamusume pertty derby automation.  """
 
 import contextlib
+from ctypes import windll
 import logging
 import threading
 import time
-from typing import Callable, Optional, Set, Text
+from typing import Callable, Dict, Literal, Optional, Set, Text
 
 import win32con
 import win32gui
@@ -52,7 +53,22 @@ def get_game() -> int:
     return win32gui.FindWindow("UnityWndClass", "umamusume")
 
 
+
+_INIT_ONCE: Dict[Literal['value'], bool] = {'value': False}
+
+
+def init():
+    if _INIT_ONCE["value"]:
+        return 
+    _INIT_ONCE["value"] = True
+    # Window size related function will returns incorrect result
+    # if we don't make python process dpi aware
+    # https://github.com/NateScarlet/auto-derby/issues/11
+    windll.user32.SetProcessDPIAware()
+
+
 def set_client_size(h_wnd: int, width: int, height: int):
+    init()
     left, top, right, bottom = win32gui.GetWindowRect(h_wnd)
     _, _, w, h = win32gui.GetClientRect(h_wnd)
     LOGGER.info("width=%s height=%s", w, h)
@@ -76,6 +92,7 @@ def set_client_size(h_wnd: int, width: int, height: int):
 
 @contextlib.contextmanager
 def topmost(h_wnd: int):
+    init()
     left, top, right, bottom = win32gui.GetWindowRect(h_wnd)
     win32gui.SetWindowPos(h_wnd, win32con.HWND_TOPMOST,
                           left, top, right - left, bottom - top, 0)

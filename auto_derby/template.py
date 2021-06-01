@@ -22,6 +22,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 def screenshot_window(h_wnd: int) -> Image:
+    window.init()
     # XXX: BitBlt capture not work, background window is not supportted
     # Maybe use WindowsGraphicsCapture like obs do
     with window.topmost(h_wnd):
