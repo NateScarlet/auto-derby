@@ -54,6 +54,7 @@ $mainWindow.Content.FindName('chooseNurturingChoicesDataPathButton').add_Click(
             DefaultExt   = ".json"
             Filter       = "JSON data Files|*.json"
             FileName     = $data.NurturingChoicesDataPath
+            InitialDirectory = (Split-Path $data.NurturingChoicesDataPath -Parent)
         }
         if ($dialog.ShowDialog()) {
             $data.NurturingChoicesDataPath = $dialog.FileName
