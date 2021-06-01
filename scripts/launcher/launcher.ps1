@@ -67,7 +67,7 @@ $dialogResult = $mainWindow.ShowDialog()
 $data | Format-List -Property @("Job", "Debug", "PythonExecutablePath", "NurturingChoicesDataPath")
 
 if ($data.Debug) {
-    $env:DEBUG = "auto-derby"
+    $env:DEBUG = "auto_derby"
 }
 if ($data.NurturingChoicesDataPath) {
     $env:AUTO_DERBY_NURTURING_CHOICE_PATH = $data.NurturingChoicesDataPath
