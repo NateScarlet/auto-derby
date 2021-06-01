@@ -30,8 +30,17 @@
 
 需求 DMM 版 和 python3.8
 
+安装依赖
+
 ```shell
 py -3.8 -m pip install -r requirements.txt
+```
+
+双击 `launcher.cmd` 可通过一个简单的 GUI 进行启动
+
+或者手动调用模块：
+
+```shell
 py -3.8 -m auto_derby 工作名称
 ```
 

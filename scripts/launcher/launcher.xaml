@@ -1,0 +1,65 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  Title="Auto Derby Launcher"
+  Height="300"
+  Width="500"
+  Topmost="True">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="60" />
+      <RowDefinition Height="60" />
+      <RowDefinition Height="60" />
+      <RowDefinition />
+      <RowDefinition Height="40" />
+    </Grid.RowDefinitions>
+
+    <StackPanel>
+      <Label>Python executable</Label>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition Width="80" />
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Column="0"
+          Text="{Binding PythonExecutablePath}"
+          MaxLines="1" />
+        <Button x:Name="choosePythonExecutablePathButton"
+          Grid.Column="1">choose...</Button>
+      </Grid>
+    </StackPanel>
+
+    <StackPanel Grid.Row="1">
+      <Label>Nurturing choices</Label>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition Width="80" />
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Column="0"
+          Text="{Binding NurturingChoicesDataPath}"
+          MaxLines="1" />
+        <Button x:Name="chooseNurturingChoicesDataPathButton"
+          Grid.Column="1">choose...</Button>
+      </Grid>
+    </StackPanel>
+
+    <StackPanel Grid.Row="2">
+      <Label>Job</Label>
+      <ComboBox x:Name="comboBox1"
+        ItemsSource="{Binding JobOptions1}"
+        SelectedValuePath="Value"
+        DisplayMemberPath="Label"
+        SelectedValue="{Binding Job}" />
+    </StackPanel>
+
+    <Button x:Name="startButton"
+      Grid.Row="3">Start</Button>
+
+    <StackPanel Grid.Row="4"
+      Margin="8"
+      VerticalAlignment="Center">
+      <CheckBox IsChecked="{Binding Debug}"
+        HorizontalAlignment="Right">Debug</CheckBox>
+    </StackPanel>
+  </Grid>
+</Window>
