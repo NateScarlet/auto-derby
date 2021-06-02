@@ -1,4 +1,5 @@
-﻿Start-Transcript launcher.log
+﻿$WorkspaceFolder = $PSScriptRoot | Split-Path -Parent | Split-Path -Parent
+Start-Transcript "$WorkspaceFolder\launcher.log"
 
 # https://stackoverflow.com/a/11440595
 if (-not (
@@ -14,11 +15,11 @@ if (-not (
     )
     return
 }
+            
 
 $ErrorActionPreference = "Stop"
-$WorkSpaceFolder = "$PSScriptRoot\..\.."
-Set-Location $WorkSpaceFolder
-[System.Environment]::CurrentDirectory = $WorkSpaceFolder
+Set-Location $WorkspaceFolder
+[System.Environment]::CurrentDirectory = $WorkspaceFolder
 
 
 try {
