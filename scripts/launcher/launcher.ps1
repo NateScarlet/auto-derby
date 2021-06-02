@@ -1,4 +1,6 @@
-﻿# https://stackoverflow.com/a/11440595
+﻿Start-Transcript launcher.log
+
+# https://stackoverflow.com/a/11440595
 if (-not (
         [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
     ).IsInRole(
@@ -84,7 +86,13 @@ $mainWindow.Content.FindName('choosePythonExecutablePathButton').add_Click(
 
 
 $dialogResult = $mainWindow.ShowDialog()
-$data | Format-List -Property @("Job", "Debug", "PythonExecutablePath", "NurturingChoicesDataPath")
+$data | Format-List -Property "Job", "Debug", "PythonExecutablePath", "NurturingChoicesDataPath", @{
+    Name       = "Version"
+    Expression = { $version }
+}, @{
+    Name       = "Python Version"
+    Expression = { & $Data.PythonExecutablePath -VV }
+}
 
 if ($data.Debug) {
     $env:DEBUG = "auto_derby"
@@ -94,20 +102,22 @@ if ($data.NurturingChoicesDataPath) {
 }
 
 if ($dialogResult) {
-    & "$($data.PythonExecutablePath)" -m auto_derby $data.Job
-    $exitCode = $?
-    $startTime = Get-Date
-    "Auto exit in 10 seconds, press any key to pause."
-    while ((Get-Date) -lt $startTime.AddSeconds(10)) {
-        if ($Host.UI.RawUI.KeyAvailable) {
-            Pause
-            Exit $exitCode
+    $ErrorActionPreference = ""
+    &  "$($data.PythonExecutablePath)" -m auto_derby $data.Job *>&1 | ForEach-Object { 
+
+        if ($_.GetType() -eq [System.Management.Automation.ErrorRecord]) {
+            Write-Host -ForegroundColor ([ConsoleColor]::Cyan)  $_ 
         }
-        Start-Sleep 0.1
+        else {
+            Write-Host $_
+        }
     }
-    Exit $exitCode
+    Exit $?
 }
 else {
     "Cancelled"
     Exit 0
 }
+
+
+Stop-Transcript

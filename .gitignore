@@ -4,3 +4,5 @@ __pycache__
 
 .vscode/*
 !.vscode/cspell.json
+
+*.log
