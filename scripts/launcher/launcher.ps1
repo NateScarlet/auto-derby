@@ -92,18 +92,33 @@ $data | Format-List -Property "Job", "Debug", "PythonExecutablePath", "Nurturing
     Expression = { $version }
 }, @{
     Name       = "Python Version"
-    Expression = { & $Data.PythonExecutablePath -VV }
+    Expression = { & "$($Data.PythonExecutablePath)" -VV }
 }
 
+# XXX: Powershell throw error if stderr of external command is redirected
+$ErrorActionPreference = ""
+
 if ($data.Debug) {
+    "Installed packages: "
+    
+    & "$($Data.PythonExecutablePath)" -m pip list *>&1 | Select-String (
+        '^opencv-python\b',
+        '^opencv-contrib-python\b', 
+        '^pywin32\b', 
+        '^numpy\b',
+        '^Pillow\b',
+        '^mouse\b',
+        '^cast-unknown\b'
+    )
+    ""
     $env:DEBUG = "auto_derby"
 }
+
 if ($data.NurturingChoicesDataPath) {
     $env:AUTO_DERBY_NURTURING_CHOICE_PATH = $data.NurturingChoicesDataPath
 }
 
 if ($dialogResult) {
-    $ErrorActionPreference = ""
     &  "$($data.PythonExecutablePath)" -m auto_derby $data.Job *>&1 | ForEach-Object { 
 
         if ($_.GetType() -eq [System.Management.Automation.ErrorRecord]) {
