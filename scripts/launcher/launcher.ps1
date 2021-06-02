@@ -87,7 +87,11 @@ $mainWindow.Content.FindName('choosePythonExecutablePathButton').add_Click(
 )
 
 
-$dialogResult = $mainWindow.ShowDialog()
+if (-not $mainWindow.ShowDialog()) {
+    "Cancelled"
+    Exit 0
+}
+
 $data | Format-List -Property "Job", "Debug", "PythonExecutablePath", "NurturingChoicesDataPath", @{
     Name       = "Version"
     Expression = { $version }
@@ -119,22 +123,13 @@ if ($data.NurturingChoicesDataPath) {
     $env:AUTO_DERBY_NURTURING_CHOICE_PATH = $data.NurturingChoicesDataPath
 }
 
-if ($dialogResult) {
-    &  "$($data.PythonExecutablePath)" -m auto_derby $data.Job *>&1 | ForEach-Object { 
-
-        if ($_.GetType() -eq [System.Management.Automation.ErrorRecord]) {
-            Write-Host -ForegroundColor ([ConsoleColor]::Cyan)  $_ 
-        }
-        else {
-            Write-Host $_
-        }
+& "$($data.PythonExecutablePath)" -m auto_derby $data.Job *>&1 | ForEach-Object { 
+    if ($_.GetType() -eq [System.Management.Automation.ErrorRecord]) {
+        Write-Host -ForegroundColor ([ConsoleColor]::Cyan)  $_ 
     }
-    Exit $?
+    else {
+        Write-Host $_
+    }
 }
-else {
-    "Cancelled"
-    Exit 0
-}
-
 
 Stop-Transcript
