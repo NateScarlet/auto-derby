@@ -24,11 +24,14 @@ Set-Location $WorkspaceFolder
 
 
 try {
-    $version = git.exe describe --dirty --always
+    $version = & git.exe describe --dirty --always 
 }
 catch {
+}
+if (-not $version) {
     $version = Get-Date -Format "yyyy-MM-dd HH:mm"
 }
+
 $host.ui.RawUI.WindowTitle = "auto-derby: $version"
 
 
