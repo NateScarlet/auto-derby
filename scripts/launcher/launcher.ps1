@@ -1,4 +1,5 @@
 ﻿$WorkspaceFolder = $PSScriptRoot | Split-Path -Parent | Split-Path -Parent
+$env:PYTHONIOENCODING = ""
 Start-Transcript "$WorkspaceFolder\launcher.log"
 
 # https://stackoverflow.com/a/11440595
