@@ -82,7 +82,7 @@ def main():
     data = [
         i.to_dict() for i in _read_master_mdb(path)
     ]
-    with pathlib.Path("nurturing_races.json") .open("w", encoding="utf-8") as f:
+    with pathlib.Path("single_mode_races.json").open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 

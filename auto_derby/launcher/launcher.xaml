@@ -29,16 +29,16 @@
     </StackPanel>
 
     <StackPanel Grid.Row="1">
-      <Label>Nurturing choices</Label>
+      <Label>Single mode choices</Label>
       <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition />
           <ColumnDefinition Width="80" />
         </Grid.ColumnDefinitions>
         <TextBox Grid.Column="0"
-          Text="{Binding NurturingChoicesDataPath}"
+          Text="{Binding SingleModeChoicesDataPath}"
           MaxLines="1" />
-        <Button x:Name="chooseNurturingChoicesDataPathButton"
+        <Button x:Name="chooseSingleModeChoicesDataPathButton"
           Grid.Column="1">choose...</Button>
       </Grid>
     </StackPanel>

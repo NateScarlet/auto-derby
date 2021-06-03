@@ -68,17 +68,17 @@ namespace NateScarlet.AutoDerby {
       key.Dispose();
     }
 
-    public string DefaultNurturingChoicesDataPath;
-    public string NurturingChoicesDataPath
+    public string DefaultSingleModeChoicesDataPath;
+    public string SingleModeChoicesDataPath
     {
         get
         {
-            return (string)key.GetValue("NurturingChoicesDataPath", DefaultNurturingChoicesDataPath);
+            return (string)key.GetValue("SingleModeChoicesDataPath", DefaultSingleModeChoicesDataPath);
         }
         set
         {
-            key.SetValue("NurturingChoicesDataPath", value);
-            OnPropertyChanged("NurturingChoicesDataPath");
+            key.SetValue("SingleModeChoicesDataPath", value);
+            OnPropertyChanged("SingleModeChoicesDataPath");
         }
     }
 

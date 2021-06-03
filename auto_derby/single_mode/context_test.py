@@ -9,7 +9,7 @@ _TEST_DATA_PATH = Path(__file__).parent / "test_data"
 
 def test_update_by_command_scene_issue7():
     img = PIL.Image.open(
-        _TEST_DATA_PATH / "nurturing_command_scene_issue7.png").convert("RGB")
+        _TEST_DATA_PATH / "command_scene_issue7.png").convert("RGB")
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 0, 0)

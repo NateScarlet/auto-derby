@@ -42,7 +42,7 @@ Add-Type –AssemblyName PresentationFramework
 Add-Type -Language CSharp ([string](Get-Content "$PSScriptRoot\launcher.cs"))
 
 $data = New-Object NateScarlet.AutoDerby.DataContext -Property @{
-    DefaultNurturingChoicesDataPath = [System.IO.Path]::GetFullPath("nurturing_choices.json")
+    DefaultSingleModeChoicesDataPath = [System.IO.Path]::GetFullPath("single_mode_choices.json")
     DefaultPythonExecutablePath     = . {
         try {
             & py.exe -3.8 -c 'import sys; print(sys.executable)'
@@ -60,18 +60,18 @@ $mainWindow.Content.FindName('startButton').add_Click(
         $mainWindow.Close()
     }
 )
-$mainWindow.Content.FindName('chooseNurturingChoicesDataPathButton').add_Click( 
+$mainWindow.Content.FindName('chooseSingleModeChoicesDataPathButton').add_Click( 
     {
         $dialog = New-Object Microsoft.Win32.SaveFileDialog -Property @{
             Title            = "Choose nurturing choices"
             AddExtension     = $true
             DefaultExt       = ".json"
             Filter           = "JSON data Files|*.json"
-            FileName         = $data.NurturingChoicesDataPath
-            InitialDirectory = (Split-Path $data.NurturingChoicesDataPath -Parent)
+            FileName         = $data.SingleModeChoicesDataPath
+            InitialDirectory = (Split-Path $data.SingleModeChoicesDataPath -Parent)
         }
         if ($dialog.ShowDialog()) {
-            $data.NurturingChoicesDataPath = $dialog.FileName
+            $data.SingleModeChoicesDataPath = $dialog.FileName
         }
     }
 )
@@ -95,7 +95,7 @@ if (-not $mainWindow.ShowDialog()) {
     Exit 0
 }
 
-$data | Format-List -Property "Job", "Debug", "PythonExecutablePath", "NurturingChoicesDataPath", @{
+$data | Format-List -Property "Job", "Debug", "PythonExecutablePath", "SingleModeChoicesDataPath", @{
     Name       = "Version"
     Expression = { $version }
 }, @{
@@ -120,8 +120,8 @@ if ($data.Debug) {
     $env:DEBUG = "auto_derby"
 }
 
-if ($data.NurturingChoicesDataPath) {
-    $env:AUTO_DERBY_NURTURING_CHOICE_PATH = $data.NurturingChoicesDataPath
+if ($data.SingleModeChoicesDataPath) {
+    $env:AUTO_DERBY_SINGLE_MODE_CHOICE_PATH = $data.SingleModeChoicesDataPath
 }
 
 & cmd.exe /c "`"$($Data.PythonExecutablePath)`" -m auto_derby $($data.Job) 2>&1"
