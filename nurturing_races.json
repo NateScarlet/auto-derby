@@ -1,0 +1,9078 @@
+[
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 6,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級新馬",
+    "permission": 1,
+    "month": 6,
+    "half": 2,
+    "grade": 900,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 7,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1150,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 7,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 7,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 7,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 7,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "中京ジュニアステークス",
+    "permission": 1,
+    "month": 7,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "函館ジュニアステークス",
+    "permission": 1,
+    "month": 7,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1000,
+    "ground": 1,
+    "track": 1,
+    "turn": 4,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ダリア賞",
+    "permission": 1,
+    "month": 8,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "フェニックス賞",
+    "permission": 1,
+    "month": 8,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "コスモス賞",
+    "permission": 1,
+    "month": 8,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 14,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1000,
+    "ground": 1,
+    "track": 1,
+    "turn": 4,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      5
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クローバー賞",
+    "permission": 1,
+    "month": 8,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 14,
+    "distance": 1500,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "新潟ジュニアステークス",
+    "permission": 1,
+    "month": 8,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "アスター賞",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "すずらん賞",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "野路菊ステークス",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "札幌ジュニアステークス",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 14,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "小倉ジュニアステークス",
+    "permission": 1,
+    "month": 9,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "サフラン賞",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ききょうステークス",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "芙蓉ステークス",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "カンナステークス",
+    "permission": 1,
+    "month": 9,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "りんどう賞",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "紫菊賞",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "プラタナス賞",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "もみじステークス",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "サウジアラビアロイヤルカップ",
+    "permission": 1,
+    "month": 10,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "なでしこ賞",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "アイビーステークス",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "萩ステークス",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "アルテミスステークス",
+    "permission": 1,
+    "month": 10,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "百日草特別",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "きんもくせい特別",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "オキザリス賞",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "黄菊賞",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "福島ジュニアステークス",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 14,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ファンタジーステークス",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "京王杯ジュニアステークス",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 375
+  },
+  {
+    "name": "デイリー杯ジュニアステークス",
+    "permission": 1,
+    "month": 11,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 375
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "もちの木賞",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "赤松賞",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "秋明菊賞",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "カトレア賞",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ベゴニア賞",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "白菊賞",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "葉牡丹賞",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "こうやまき賞",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "東京スポーツ杯ジュニアステークス",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "京都ジュニアステークス",
+    "permission": 1,
+    "month": 11,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "万両賞",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "黒松賞",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "エリカ賞",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "つわぶき賞",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ひいらぎ賞",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "さざんか賞",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "寒椿賞",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 700,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "阪神ジュベナイルフィリーズ",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "朝日杯フューチュリティステークス",
+    "permission": 1,
+    "month": 12,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニア級未勝利",
+    "permission": 1,
+    "month": 12,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "千両賞",
+    "permission": 1,
+    "month": 12,
+    "half": 2,
+    "grade": 700,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "クリスマスローズステークス",
+    "permission": 1,
+    "month": 12,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ホープフルステークス",
+    "permission": 1,
+    "month": 12,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ジュニアカップ",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "紅梅ステークス",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "シンザン記念",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "フェアリーステークス",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 750
+  },
+  {
+    "name": "京成杯",
+    "permission": 2,
+    "month": 1,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 1,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 1,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 1,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 1,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "若駒ステークス",
+    "permission": 2,
+    "month": 1,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "クロッカスステークス",
+    "permission": 2,
+    "month": 1,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "エルフィンステークス",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "きさらぎ賞",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1000
+  },
+  {
+    "name": "クイーンカップ",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 750
+  },
+  {
+    "name": "共同通信杯",
+    "permission": 2,
+    "month": 2,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 2,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ヒヤシンスステークス",
+    "permission": 2,
+    "month": 2,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "すみれステークス",
+    "permission": 2,
+    "month": 2,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "マーガレットステークス",
+    "permission": 2,
+    "month": 2,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "アネモネステークス",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "昇竜ステークス",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "弥生賞",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1750
+  },
+  {
+    "name": "フィリーズレビュー",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1750
+  },
+  {
+    "name": "チューリップ賞",
+    "permission": 2,
+    "month": 3,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1750
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "若葉ステークス",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ファルコンステークス",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 1250
+  },
+  {
+    "name": "フラワーカップ",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 750
+  },
+  {
+    "name": "毎日杯",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "スプリングステークス",
+    "permission": 2,
+    "month": 3,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1750
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "伏竜ステークス",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "忘れな草賞",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "アーリントンカップ",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "ニュージーランドトロフィー",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1750
+  },
+  {
+    "name": "桜花賞",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 4500
+  },
+  {
+    "name": "皐月賞",
+    "permission": 2,
+    "month": 4,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 4500
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "橘ステークス",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "端午ステークス",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "スイートピーステークス",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "フローラステークス",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 1750
+  },
+  {
+    "name": "青葉賞",
+    "permission": 2,
+    "month": 4,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 1800
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2300,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "プリンシパルステークス",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "青竜ステークス",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "京都新聞杯",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1750
+  },
+  {
+    "name": "NHKマイルカップ",
+    "permission": 2,
+    "month": 5,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 5000
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "鳳雛ステークス",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "白百合ステークス",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "葵ステークス",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1250
+  },
+  {
+    "name": "オークス",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 6000
+  },
+  {
+    "name": "東京優駿（日本ダービー）",
+    "permission": 2,
+    "month": 5,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 6000
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1300,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 6,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "ユニコーンステークス",
+    "permission": 2,
+    "month": 6,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 750
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1150,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1700,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2600,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "ラジオNIKKEI賞",
+    "permission": 2,
+    "month": 7,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "ジャパンダートダービー",
+    "permission": 2,
+    "month": 7,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 4000
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1700,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1150,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 7,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1000,
+    "ground": 1,
+    "track": 1,
+    "turn": 4,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      5
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 1,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "レパードステークス",
+    "permission": 2,
+    "month": 8,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 15,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      5
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      5
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 1000,
+    "ground": 1,
+    "track": 1,
+    "turn": 4,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "クラシック級未勝利",
+    "permission": 2,
+    "month": 8,
+    "half": 2,
+    "grade": 800,
+    "entryCount": 9,
+    "distance": 2400,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "紫苑ステークス",
+    "permission": 2,
+    "month": 9,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "ローズステークス",
+    "permission": 2,
+    "month": 9,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1750
+  },
+  {
+    "name": "神戸新聞杯",
+    "permission": 2,
+    "month": 9,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1750
+  },
+  {
+    "name": "セントライト記念",
+    "permission": 2,
+    "month": 9,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 1750
+  },
+  {
+    "name": "秋華賞",
+    "permission": 2,
+    "month": 10,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 7500
+  },
+  {
+    "name": "菊花賞",
+    "permission": 2,
+    "month": 10,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3000,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3,
+      5
+    ],
+    "minFanCount": 7500
+  },
+  {
+    "name": "天保山ステークス",
+    "permission": 3,
+    "month": 6,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "スレイプニルステークス",
+    "permission": 3,
+    "month": 6,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "鳴尾記念",
+    "permission": 3,
+    "month": 6,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "マーメイドステークス",
+    "permission": 3,
+    "month": 6,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "エプソムカップ",
+    "permission": 3,
+    "month": 6,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "安田記念",
+    "permission": 3,
+    "month": 6,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 15000
+  },
+  {
+    "name": "アハルテケステークス",
+    "permission": 3,
+    "month": 6,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "米子ステークス",
+    "permission": 3,
+    "month": 6,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "大沼ステークス",
+    "permission": 3,
+    "month": 6,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 14,
+    "distance": 1700,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "パラダイスステークス",
+    "permission": 3,
+    "month": 6,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "三宮ステークス",
+    "permission": 3,
+    "month": 6,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "函館スプリントステークス",
+    "permission": 3,
+    "month": 6,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1250
+  },
+  {
+    "name": "宝塚記念",
+    "permission": 3,
+    "month": 6,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 20000
+  },
+  {
+    "name": "巴賞",
+    "permission": 3,
+    "month": 7,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "マリーンステークス",
+    "permission": 3,
+    "month": 7,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 14,
+    "distance": 1700,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "名鉄杯",
+    "permission": 3,
+    "month": 7,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "CBC賞",
+    "permission": 3,
+    "month": 7,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 1250
+  },
+  {
+    "name": "プロキオンステークス",
+    "permission": 3,
+    "month": 7,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 1000
+  },
+  {
+    "name": "七夕賞",
+    "permission": 3,
+    "month": 7,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "函館記念",
+    "permission": 3,
+    "month": 7,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "福島テレビオープン",
+    "permission": 3,
+    "month": 7,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 14,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "中京記念",
+    "permission": 3,
+    "month": 7,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "アイビスサマーダッシュ",
+    "permission": 3,
+    "month": 7,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1000,
+    "ground": 1,
+    "track": 1,
+    "turn": 4,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "クイーンステークス",
+    "permission": 3,
+    "month": 7,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 14,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1000
+  },
+  {
+    "name": "札幌日経オープン",
+    "permission": 3,
+    "month": 8,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 14,
+    "distance": 2600,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "UHB賞",
+    "permission": 3,
+    "month": 8,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "阿蘇ステークス",
+    "permission": 3,
+    "month": 8,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1700,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "関越ステークス",
+    "permission": 3,
+    "month": 8,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "小倉記念",
+    "permission": 3,
+    "month": 8,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "関屋記念",
+    "permission": 3,
+    "month": 8,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 1250
+  },
+  {
+    "name": "エルムステークス",
+    "permission": 3,
+    "month": 8,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 14,
+    "distance": 1700,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "NST賞",
+    "permission": 3,
+    "month": 8,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 15,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "BSN賞",
+    "permission": 3,
+    "month": 8,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 15,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      5
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "小倉日経オープン",
+    "permission": 3,
+    "month": 8,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "朱鷺ステークス",
+    "permission": 3,
+    "month": 8,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "北九州記念",
+    "permission": 3,
+    "month": 8,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "キーンランドカップ",
+    "permission": 3,
+    "month": 8,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1500
+  },
+  {
+    "name": "札幌記念",
+    "permission": 3,
+    "month": 8,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 2000
+  },
+  {
+    "name": "丹頂ステークス",
+    "permission": 3,
+    "month": 9,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 14,
+    "distance": 2600,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "エニフステークス",
+    "permission": 3,
+    "month": 9,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ラジオ日本賞",
+    "permission": 3,
+    "month": 9,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "新潟記念",
+    "permission": 3,
+    "month": 9,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "京成杯オータムハンデキャップ",
+    "permission": 3,
+    "month": 9,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "セントウルステークス",
+    "permission": 3,
+    "month": 9,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1900
+  },
+  {
+    "name": "ポートアイランドステークス",
+    "permission": 3,
+    "month": 9,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ながつきステークス",
+    "permission": 3,
+    "month": 9,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "シリウスステークス",
+    "permission": 3,
+    "month": 9,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "オールカマー",
+    "permission": 3,
+    "month": 9,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 2000
+  },
+  {
+    "name": "スプリンターズステークス",
+    "permission": 3,
+    "month": 9,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 15000
+  },
+  {
+    "name": "オパールステークス",
+    "permission": 3,
+    "month": 10,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "グリーンチャンネルカップ",
+    "permission": 3,
+    "month": 10,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "オクトーバーステークス",
+    "permission": 3,
+    "month": 10,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "信越ステークス",
+    "permission": 3,
+    "month": 10,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "太秦ステークス",
+    "permission": 3,
+    "month": 10,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "毎日王冠",
+    "permission": 3,
+    "month": 10,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 2000
+  },
+  {
+    "name": "京都大賞典",
+    "permission": 3,
+    "month": 10,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 2000
+  },
+  {
+    "name": "府中ウマ娘ステークス",
+    "permission": 3,
+    "month": 10,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1800
+  },
+  {
+    "name": "室町ステークス",
+    "permission": 3,
+    "month": 10,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ブラジルカップ",
+    "permission": 3,
+    "month": 10,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "カシオペアステークス",
+    "permission": 3,
+    "month": 10,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ルミエールオータムダッシュ",
+    "permission": 3,
+    "month": 10,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1000,
+    "ground": 1,
+    "track": 1,
+    "turn": 4,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "スワンステークス",
+    "permission": 3,
+    "month": 10,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1900
+  },
+  {
+    "name": "富士ステークス",
+    "permission": 3,
+    "month": 10,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 1900
+  },
+  {
+    "name": "天皇賞（秋）",
+    "permission": 3,
+    "month": 10,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 20000
+  },
+  {
+    "name": "オーロカップ",
+    "permission": 3,
+    "month": 11,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "みやこステークス",
+    "permission": 3,
+    "month": 11,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 750
+  },
+  {
+    "name": "武蔵野ステークス",
+    "permission": 3,
+    "month": 11,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "福島記念",
+    "permission": 3,
+    "month": 11,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "アルゼンチン共和国杯",
+    "permission": 3,
+    "month": 11,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2500,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 1900
+  },
+  {
+    "name": "エリザベス女王杯",
+    "permission": 3,
+    "month": 11,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 10000
+  },
+  {
+    "name": "JBCレディスクラシック",
+    "permission": 3,
+    "month": 11,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 12000
+  },
+  {
+    "name": "JBCスプリント",
+    "permission": 3,
+    "month": 11,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 12000
+  },
+  {
+    "name": "JBCクラシック",
+    "permission": 3,
+    "month": 11,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 12000
+  },
+  {
+    "name": "アンドロメダステークス",
+    "permission": 3,
+    "month": 11,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "霜月ステークス",
+    "permission": 3,
+    "month": 11,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "福島民友カップ",
+    "permission": 3,
+    "month": 11,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 15,
+    "distance": 1700,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "キャピタルステークス",
+    "permission": 3,
+    "month": 11,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "オータムリーフステークス",
+    "permission": 3,
+    "month": 11,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "京阪杯",
+    "permission": 3,
+    "month": 11,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1250
+  },
+  {
+    "name": "マイルチャンピオンシップ",
+    "permission": 3,
+    "month": 11,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 15000
+  },
+  {
+    "name": "ジャパンカップ",
+    "permission": 3,
+    "month": 11,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 25000
+  },
+  {
+    "name": "ラピスラズリステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "師走ステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "リゲルステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "タンザナイトステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ディセンバーステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "チャレンジカップ",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "中日新聞杯",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 1500
+  },
+  {
+    "name": "カペラステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "ターコイズステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "ステイヤーズステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 16,
+    "distance": 3600,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 2000
+  },
+  {
+    "name": "チャンピオンズカップ",
+    "permission": 3,
+    "month": 12,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 12000
+  },
+  {
+    "name": "ギャラクシーステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ベテルギウスステークス",
+    "permission": 3,
+    "month": 12,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "阪神カップ",
+    "permission": 3,
+    "month": 12,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 2000
+  },
+  {
+    "name": "有馬記念",
+    "permission": 3,
+    "month": 12,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2500,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 25000
+  },
+  {
+    "name": "東京大賞典",
+    "permission": 3,
+    "month": 12,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 12000
+  },
+  {
+    "name": "万葉ステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 3000,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3,
+      5
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "淀短距離ステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ポルックスステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ジャニュアリーステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ニューイヤーステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "カーバンクルステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "京都金杯",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "中山金杯",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "愛知杯",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 750
+  },
+  {
+    "name": "日経新春杯",
+    "permission": 4,
+    "month": 1,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1800
+  },
+  {
+    "name": "すばるステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "白富士ステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "シルクロードステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1250
+  },
+  {
+    "name": "根岸ステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "東海ステークス",
+    "permission": 4,
+    "month": 1,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 1800
+  },
+  {
+    "name": "アメリカJCC",
+    "permission": 4,
+    "month": 1,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 1900
+  },
+  {
+    "name": "大和ステークス",
+    "permission": 4,
+    "month": 2,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "洛陽ステークス",
+    "permission": 4,
+    "month": 2,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "アルデバランステークス",
+    "permission": 4,
+    "month": 2,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1900,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "バレンタインステークス",
+    "permission": 4,
+    "month": 2,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "東京新聞杯",
+    "permission": 4,
+    "month": 2,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "京都記念",
+    "permission": 4,
+    "month": 2,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1900
+  },
+  {
+    "name": "総武ステークス",
+    "permission": 4,
+    "month": 2,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "北九州短距離ステークス",
+    "permission": 4,
+    "month": 2,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "京都ウマ娘ステークス",
+    "permission": 4,
+    "month": 2,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 750
+  },
+  {
+    "name": "ダイヤモンドステークス",
+    "permission": 4,
+    "month": 2,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 3400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 1500
+  },
+  {
+    "name": "小倉大賞典",
+    "permission": 4,
+    "month": 2,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1500
+  },
+  {
+    "name": "阪急杯",
+    "permission": 4,
+    "month": 2,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1500
+  },
+  {
+    "name": "中山記念",
+    "permission": 4,
+    "month": 2,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1900
+  },
+  {
+    "name": "フェブラリーステークス",
+    "permission": 4,
+    "month": 2,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 12000
+  },
+  {
+    "name": "大阪城ステークス",
+    "permission": 4,
+    "month": 3,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ポラリスステークス",
+    "permission": 4,
+    "month": 3,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "仁川ステークス",
+    "permission": 4,
+    "month": 3,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "東風ステークス",
+    "permission": 4,
+    "month": 3,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "オーシャンステークス",
+    "permission": 4,
+    "month": 3,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1500
+  },
+  {
+    "name": "中山ウマ娘ステークス",
+    "permission": 4,
+    "month": 3,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1000
+  },
+  {
+    "name": "金鯱賞",
+    "permission": 4,
+    "month": 3,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 2000
+  },
+  {
+    "name": "千葉ステークス",
+    "permission": 4,
+    "month": 3,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "六甲ステークス",
+    "permission": 4,
+    "month": 3,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "マーチステークス",
+    "permission": 4,
+    "month": 3,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1000
+  },
+  {
+    "name": "阪神大賞典",
+    "permission": 4,
+    "month": 3,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 16,
+    "distance": 3000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 2000
+  },
+  {
+    "name": "日経賞",
+    "permission": 4,
+    "month": 3,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 16,
+    "distance": 2500,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 2000
+  },
+  {
+    "name": "高松宮記念",
+    "permission": 4,
+    "month": 3,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 15000
+  },
+  {
+    "name": "大阪杯",
+    "permission": 4,
+    "month": 3,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 20000
+  },
+  {
+    "name": "コーラルステークス",
+    "permission": 4,
+    "month": 4,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "京葉ステークス",
+    "permission": 4,
+    "month": 4,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "春雷ステークス",
+    "permission": 4,
+    "month": 4,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "福島民報杯",
+    "permission": 4,
+    "month": 4,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "吾妻小富士ステークス",
+    "permission": 4,
+    "month": 4,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 15,
+    "distance": 1700,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "ダービー卿チャレンジトロフィー",
+    "permission": 4,
+    "month": 4,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "アンタレスステークス",
+    "permission": 4,
+    "month": 4,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1000
+  },
+  {
+    "name": "阪神ウマ娘ステークス",
+    "permission": 4,
+    "month": 4,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 1800
+  },
+  {
+    "name": "オアシスステークス",
+    "permission": 4,
+    "month": 4,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "天王山ステークス",
+    "permission": 4,
+    "month": 4,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "福島ウマ娘ステークス",
+    "permission": 4,
+    "month": 4,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 1250
+  },
+  {
+    "name": "マイラーズカップ",
+    "permission": 4,
+    "month": 4,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 1900
+  },
+  {
+    "name": "天皇賞（春）",
+    "permission": 4,
+    "month": 4,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 20000
+  },
+  {
+    "name": "谷川岳ステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "メトロポリタンステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "鞍馬ステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "ブリリアントステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "都大路ステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "栗東ステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 1,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "新潟大賞典",
+    "permission": 4,
+    "month": 5,
+    "half": 1,
+    "grade": 300,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 3,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 1500
+  },
+  {
+    "name": "京王杯スプリングカップ",
+    "permission": 4,
+    "month": 5,
+    "half": 1,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 1900
+  },
+  {
+    "name": "ヴィクトリアマイル",
+    "permission": 4,
+    "month": 5,
+    "half": 1,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 10000
+  },
+  {
+    "name": "メイステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "韋駄天ステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1000,
+    "ground": 1,
+    "track": 1,
+    "turn": 4,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "欅ステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 350
+  },
+  {
+    "name": "安土城ステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 2,
+    "grade": 400,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 350
+  },
+  {
+    "name": "平安ステークス",
+    "permission": 4,
+    "month": 5,
+    "half": 2,
+    "grade": 300,
+    "entryCount": 16,
+    "distance": 1900,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 1000
+  },
+  {
+    "name": "目黒記念",
+    "permission": 4,
+    "month": 5,
+    "half": 2,
+    "grade": 200,
+    "entryCount": 18,
+    "distance": 2500,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 1800
+  },
+  {
+    "name": "帝王賞",
+    "permission": 4,
+    "month": 6,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 12000
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3000,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3,
+      5
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2500,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 3600,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2500,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 3000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 予選",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1900,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3000,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3,
+      5
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2500,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 3600,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2500,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 3000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 準決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1900,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 1800,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      1
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2400,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2000,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3200,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3000,
+    "ground": 1,
+    "track": 3,
+    "turn": 1,
+    "targetStatuses": [
+      3,
+      5
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2500,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      2,
+      4
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 3600,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 2500,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 18,
+    "distance": 3400,
+    "ground": 1,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 3000,
+    "ground": 1,
+    "track": 2,
+    "turn": 1,
+    "targetStatuses": [
+      3
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1200,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1400,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1600,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      1,
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [
+      2
+    ],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1800,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 2100,
+    "ground": 2,
+    "track": 1,
+    "turn": 2,
+    "targetStatuses": [],
+    "minFanCount": 0
+  },
+  {
+    "name": "URAファイナルズ 決勝",
+    "permission": 5,
+    "month": 1,
+    "half": 2,
+    "grade": 100,
+    "entryCount": 16,
+    "distance": 1900,
+    "ground": 2,
+    "track": 1,
+    "turn": 1,
+    "targetStatuses": [],
+    "minFanCount": 0
+  }
+]
