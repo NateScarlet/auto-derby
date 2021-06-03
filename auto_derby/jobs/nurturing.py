@@ -119,14 +119,16 @@ def _training_score(ctx: Context, training: Training) -> float:
     return spd + sta + pow + per + int_ + skill
 
 
+_TRAINING_CONFIRM = template.Specification(
+    templates.NURTURING_TRAINING_CONFIRM,
+    threshold=0.8
+)
+
+
 def _handle_training(ctx: Context):
     trainings: List[Training] = []
-    action.wait_image(
-        template.Specification(
-            templates.NURTURING_TRAINING_CONFIRM,
-            threshold=0.8
-        )
-    )
+
+    action.wait_image(_TRAINING_CONFIRM)
     for x, y in (
         (78, 700),
         (158, 700),
@@ -135,6 +137,7 @@ def _handle_training(ctx: Context):
         (402, 700),
     ):
         action.drag((x, y-100), dy=100)
+        action.wait_image(_TRAINING_CONFIRM)
         t = Training.from_training_scene(template.screenshot())
         trainings.append(t)
 
