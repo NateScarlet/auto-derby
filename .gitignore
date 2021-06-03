@@ -6,3 +6,4 @@ __pycache__
 !.vscode/cspell.json
 
 *.log
+*.log.*

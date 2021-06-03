@@ -16,6 +16,7 @@ import win32gui
 from . import window, jobs
 
 import logging
+import logging.handlers
 
 LOGGER = logging.getLogger(__name__)
 
@@ -67,9 +68,10 @@ if __name__ == '__main__':
         level=logging.INFO,
         datefmt="%H:%M:%S",
     )
-    LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH") or 'auto_derby.log'
-    if LOG_PATH:
-        handler = logging.FileHandler(LOG_PATH)
+    LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", 'auto_derby.log')
+    if LOG_PATH and LOG_PATH != "-":
+        handler = logging.handlers.RotatingFileHandler(LOG_PATH, backupCount=3)
+        handler.doRollover()
         formatter = logging.Formatter(
             "%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
             '%Y-%m-%d %H:%M:%S',
