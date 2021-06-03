@@ -1,1 +1,1 @@
-PowerShell -Version 3 -NoProfile "%~dp0scripts\launcher\launcher.ps1"
+"%~dp0auto_derby\launcher\launcher.cmd"
