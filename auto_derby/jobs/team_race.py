@@ -27,11 +27,16 @@ def team_race():
         )
         name = tmpl.name
         if name == templates.TEAM_RACE_CHOOSE_COMPETITOR:
-            granted_reward_pos = (300, 300)
+            granted_reward_pos = (358, 300)
+            granted_reward_pos_color = template.screenshot().getpixel(granted_reward_pos)
+
             has_granted_reward = imagetools.compare_color(
-                (0, 0, 0), 
-                template.screenshot().getpixel(granted_reward_pos),
-            ) > 0.99 and False # TODO: need color sample
+                (209, 43, 36),
+                granted_reward_pos_color,
+            ) > 0.99 or imagetools.compare_color(
+                (255, 255, 255),
+                granted_reward_pos_color,
+            ) > 0.99
             if has_granted_reward:
                 action.click(granted_reward_pos)
                 action.wait_click_image(templates.GREEN_NEXT_BUTTON)
