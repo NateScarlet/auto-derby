@@ -103,13 +103,11 @@ $data | Format-List -Property "Job", "Debug", "PythonExecutablePath", "Nurturing
     Expression = { & "$($Data.PythonExecutablePath)" -VV }
 }
 
-# XXX: Powershell throw error if stderr of external command is redirected
-$ErrorActionPreference = ""
 
 if ($data.Debug) {
     "Installed packages: "
     
-    & "$($Data.PythonExecutablePath)" -m pip list *>&1 | Select-String (
+    & cmd.exe /c "`"$($Data.PythonExecutablePath)`" -m pip list 2>&1" | Select-String (
         '^opencv-python\b',
         '^opencv-contrib-python\b', 
         '^pywin32\b', 
@@ -126,13 +124,6 @@ if ($data.NurturingChoicesDataPath) {
     $env:AUTO_DERBY_NURTURING_CHOICE_PATH = $data.NurturingChoicesDataPath
 }
 
-& "$($data.PythonExecutablePath)" -m auto_derby $data.Job *>&1 | ForEach-Object { 
-    if ($_.GetType() -eq [System.Management.Automation.ErrorRecord]) {
-        Write-Host -ForegroundColor ([ConsoleColor]::Cyan)  $_ 
-    }
-    else {
-        Write-Host $_
-    }
-}
+& cmd.exe /c "`"$($Data.PythonExecutablePath)`" -m auto_derby $($data.Job) 2>&1"
 
 Stop-Transcript
