@@ -10,7 +10,7 @@ from PIL.Image import Image
 import PIL.ImageOps
 from PIL.Image import fromarray as image_from_array
 
-from ... import ocr, imagetools
+from .. import ocr, imagetools
 
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:

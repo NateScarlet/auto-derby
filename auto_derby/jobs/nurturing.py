@@ -6,10 +6,8 @@ import logging
 import time
 from typing import List, Tuple
 
-from ... import action, template, templates
-from . import choice
-from .context import Context
-from .training import Training
+from .. import action, template, templates
+from ..single_mode import Context, Training, choice
 
 LOGGER = logging.getLogger(__name__)
 

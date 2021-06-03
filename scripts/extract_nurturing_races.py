@@ -13,7 +13,7 @@ import sqlite3
 import argparse
 import os
 import contextlib
-from auto_derby.jobs.nurturing.race import Race
+from auto_derby.single_mode import Race
 import json
 import pathlib
 

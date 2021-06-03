@@ -9,7 +9,7 @@ from typing import Tuple
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from ... import ocr, templates, template
+from .. import ocr, templates, template
 
 
 def _gradient(colors: Tuple[
