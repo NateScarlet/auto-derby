@@ -65,8 +65,18 @@ if __name__ == '__main__':
     logging.basicConfig(
         format="%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
         level=logging.INFO,
-        datefmt="%Y-%m-%d %H:%M:%S",
+        datefmt="%H:%M:%S",
     )
+    LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH") or 'auto_derby.log'
+    if LOG_PATH:
+        handler = logging.FileHandler(LOG_PATH)
+        formatter = logging.Formatter(
+            "%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
+            '%Y-%m-%d %H:%M:%S',
+        )
+        handler.setFormatter(formatter)
+        logging.root.addHandler(handler)
+
     for i in os.getenv("DEBUG", "").split(","):
         if not i:
             continue
