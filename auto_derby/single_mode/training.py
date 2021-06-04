@@ -1,6 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
+from auto_derby import imagetools
 import cv2
 import numpy as np
 
@@ -45,27 +46,6 @@ def _remove_area(img: np.ndarray, *, size_lt: int):
             cv2.drawContours(img, [i], -1, (0,), cv2.FILLED)
 
 
-def _color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_size: int = 8) -> np.ndarray:
-    max_value = (1 << bit_size) - 1
-    assert img.shape == color.shape, (img.shape, color.shape)
-
-    # do this is somehow faster than
-    # `numpy.linalg.norm(img.astype(int) - color.astype(int), axis=2,).clip(0, 255).astype(np.uint8)`
-    diff_img = np.sqrt(
-        np.sum(
-            (img.astype(int) - color.astype(int)) ** 2,
-            axis=2,
-        ),
-    ).clip(0, 255).astype(np.uint8)
-
-    ret = max_value - diff_img
-    mask_img = (ret > (max_value * threshold)).astype(np.uint8)
-    ret *= mask_img
-    ret = ret.clip(0, 255)
-    ret = ret.astype(np.uint8)
-    return ret
-
-
 def _ocr_training_effect(img: Image) -> int:
     cv_img = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
 
@@ -81,7 +61,7 @@ def _ocr_training_effect(img: Image) -> int:
         )
     )
 
-    outline_img = _color_key(
+    outline_img = imagetools.color_key(
         sharpened_img,
         np.full_like(
             sharpened_img,
@@ -129,7 +109,7 @@ def _ocr_training_effect(img: Image) -> int:
     masked_img = cv2.copyTo(cv_img, cv2.dilate(
         255 - bg_mask_img, (3, 3), iterations=3))
 
-    text_img = _color_key(
+    text_img = imagetools.color_key(
         masked_img,
         fill_img,
     )

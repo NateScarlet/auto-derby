@@ -6,7 +6,7 @@ import hashlib
 import os
 import threading
 from pathlib import Path
-from typing import Callable, Dict, Literal, Optional, Text, Tuple, Union
+from typing import Any, Callable, Dict, Literal, Optional, Text, Tuple, Union
 
 import cast_unknown as cast
 import cv2
@@ -59,6 +59,10 @@ def compare_hash(a: Text, b: Text) -> float:
     return 1 - (res / (len(a) * 2))
 
 
+def _cast_float(v: Any) -> float:
+    return float(v)
+
+
 def compare_color(a: Union[Tuple[int, ...], int], b: Union[Tuple[int, ...], int], *, bit_size: int = 8) -> float:
     max_value = (1 << bit_size) - 1
     t_a = tuple(cast.list_(a, (int,)))
@@ -66,7 +70,28 @@ def compare_color(a: Union[Tuple[int, ...], int], b: Union[Tuple[int, ...], int]
     if len(t_a) != len(t_b):
         return 0
 
-    return max(1 - np.sqrt(np.sum((np.array(t_a)-np.array(t_b)) ** 2, axis=0)) / max_value, 0)
+    return max(1 - _cast_float(np.sqrt(_cast_float(np.sum((np.array(t_a)-np.array(t_b)) ** 2, axis=0)))) / max_value, 0)
+
+
+def color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_size: int = 8) -> np.ndarray:
+    max_value = (1 << bit_size) - 1
+    assert img.shape == color.shape, (img.shape, color.shape)
+
+    # do this is somehow faster than
+    # `numpy.linalg.norm(img.astype(int) - color.astype(int), axis=2,).clip(0, 255).astype(np.uint8)`
+    diff_img = np.asarray(np.sqrt(
+        np.asarray(np.sum(
+            (img.astype(int) - color.astype(int)) ** 2,
+            axis=2,
+        )),
+    )).clip(0, 255).astype(np.uint8)
+
+    ret = max_value - diff_img
+    mask_img = (ret > (max_value * threshold)).astype(np.uint8)
+    ret *= mask_img
+    ret = ret.clip(0, 255)
+    ret = ret.astype(np.uint8)
+    return ret
 
 
 _WINDOW_ID: Dict[Literal["value"], int] = {"value": 0}

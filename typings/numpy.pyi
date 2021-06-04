@@ -32149,7 +32149,7 @@ def sum(
     keepdims: Optional[bool]=...,
     initial: Optional[Scalar]=...,
     where: Optional[ArrayLike]=...,
-) -> ndarray :
+) -> Union[ndarray, Scalar] :
     """
     Sum of array elements over a given axis.
 
@@ -34959,7 +34959,7 @@ def sqrt(
     subok: bool=...,
     signature: Any=...,
     extobj: Any=...,
-) -> ndarray:
+) -> Union[ndarray, Scalar]:
     """
     sqrt(x, /, out=None, *, where=True, casting=\'same_kind\', order=\'K\', dtype=None, subok=True[, signature, extobj])
 
