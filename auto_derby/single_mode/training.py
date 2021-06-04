@@ -49,17 +49,7 @@ def _remove_area(img: np.ndarray, *, size_lt: int):
 def _ocr_training_effect(img: Image) -> int:
     cv_img = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
 
-    sharpened_img = cv2.filter2D(
-        cv_img,
-        8,
-        np.array(
-            (
-                (-1, -1, -1),
-                (-1, 9, -1),
-                (-1, -1, -1),
-            ),
-        )
-    )
+    sharpened_img = imagetools.sharpen(cv_img)
 
     outline_img = imagetools.color_key(
         sharpened_img,
@@ -69,29 +59,7 @@ def _ocr_training_effect(img: Image) -> int:
         ),
         0.9,
     )
-
-    border_points = (
-        *((0, i) for i in range(img.height)),
-        *((i, 0) for i in range(img.width)),
-        *((img.width-1, i) for i in range(img.height)),
-        *((i, img.height-1) for i in range(img.width)),
-    )
-
-    fill_mask_img = cv2.copyMakeBorder(
-        outline_img, 1, 1, 1, 1, cv2.BORDER_CONSTANT)
-    bg_mask_img = outline_img.copy()
-    for i in border_points:
-        x, y = i
-        if outline_img[y, x] != 0:
-            continue
-        cv2.floodFill(
-            bg_mask_img,
-            fill_mask_img,
-            (x, y),
-            (255, ),
-            0,
-            0,
-        )
+    bg_mask_img = imagetools.bg_mask_by_outline(outline_img)
 
     fill_gradient = _gradient((
         ((140, 236, 255), 0),

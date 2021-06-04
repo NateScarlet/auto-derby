@@ -94,6 +94,56 @@ def color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_si
     return ret
 
 
+def sharpen(img: np.ndarray, size: float = 1, *, bit_size: int = 8) -> np.ndarray:
+    return cv2.filter2D(
+        img,
+        bit_size,
+        np.array(
+            (
+                (-1, -1, -1),
+                (-1, 9, -1),
+                (-1, -1, -1),
+            ),
+        ) * size
+    )
+
+
+def bg_mask_by_outline(outline_img: np.ndarray) -> np.ndarray:
+    h, w = outline_img.shape[:2]
+
+    border_points = (
+        *((0, i) for i in range(h)),
+        *((i, 0) for i in range(w)),
+        *((w-1, i) for i in range(h)),
+        *((i, h-1) for i in range(w)),
+    )
+
+    fill_mask_img = cv2.copyMakeBorder(
+        outline_img, 1, 1, 1, 1, cv2.BORDER_CONSTANT)
+    bg_mask_img = outline_img.copy()
+    for i in border_points:
+        x, y = i
+        if outline_img[y, x] != 0:
+            continue
+        cv2.floodFill(
+            bg_mask_img,
+            fill_mask_img,
+            (x, y),
+            (255, ),
+            0,
+            0,
+        )
+
+    return bg_mask_img
+
+
+def resize_by_heihgt(img: Image, height: int) -> Image:
+    w, h = img.width, img.height
+    w = round(height / h * w)
+    h = height
+    return img.resize((w, h))
+
+
 _WINDOW_ID: Dict[Literal["value"], int] = {"value": 0}
 
 

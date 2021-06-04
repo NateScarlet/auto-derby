@@ -108,6 +108,15 @@ def _rect2bbox(rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
     return l, t, r, b
 
 
+def _pad_bbox(v: Tuple[int, int, int, int], padding: int) -> Tuple[int, int, int, int]:
+    l, t, r, b = v
+    l -= padding
+    t -= padding
+    r += padding
+    b += padding
+    return (l, t, r, b)
+
+
 def _bbox_contains(a: Tuple[int, int, int, int], b: Tuple[int, int, int, int]) -> bool:
     return (
         a[0] <= b[0] and
@@ -188,7 +197,7 @@ def text(img: Image) -> Text:
         is_new_char = (
             char_parts_bbox and
             bbox[0] > char_parts_bbox[0] + max_char_width * 0.6 and
-            not _bbox_contains(char_parts_bbox, bbox)
+            not _bbox_contains(_pad_bbox(char_parts_bbox, 2), bbox)
         )
         if is_new_char:
             _push_char()
@@ -213,7 +222,7 @@ def text(img: Image) -> Text:
         cv2.imshow("ocr binary", binary_img)
         cv2.imshow("ocr segmentation", segmentation_img)
         cv2.imshow("ocr chars", chars_img)
-        cv2.waitKey(200)
+        cv2.waitKey()
         cv2.destroyAllWindows()
 
     for _, i in char_img_list:

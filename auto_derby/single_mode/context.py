@@ -14,14 +14,25 @@ from .. import ocr, imagetools
 
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
+    img = imagetools.resize_by_heihgt(img, 32)
+    cv_img = np.asarray(img.convert("L"))
+    sharpened_img = imagetools.sharpen(cv_img)
+    _, outline_img = cv2.threshold(imagetools.sharpen(cv_img, 1.2), 200, 255, cv2.THRESH_BINARY)
+    bg_mask_img = imagetools.bg_mask_by_outline(
+        outline_img,
+    )
+
+    _, binary_img = cv2.threshold(
+        sharpened_img,
+        100,
+        255,
+        cv2.THRESH_BINARY_INV,
+    )
+    masked_img = cv2.copyTo(binary_img, 255 - bg_mask_img)
+
     text = ocr.text(
         image_from_array(
-            cv2.threshold(
-                255 - np.asarray(img.convert("L")),
-                128,
-                255,
-                cv2.THRESH_TOZERO,
-            )[1],
+            masked_img,
         ),
     )
 
@@ -103,7 +114,7 @@ class Context:
         power_bbox = (192, 553, 234, 572)
         perservance_bbox = (264, 553, 308, 572)
         intelligence_bbox = (337, 553, 381, 572)
-        date_bbox = (10, 28, 140, 43)
+        date_bbox = (10, 27, 140, 43)
 
         self.date = _ocr_date(screenshot.crop(date_bbox))
         if self.date in ((1, 0, 0), (4, 0, 0)):
@@ -129,7 +140,6 @@ class Context:
             ocr.text(PIL.ImageOps.invert(screenshot.crop(perservance_bbox))))
         self.intelligence = int(
             ocr.text(PIL.ImageOps.invert(screenshot.crop(intelligence_bbox))))
-
 
     def __str__(self):
         return (
