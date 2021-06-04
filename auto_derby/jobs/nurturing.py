@@ -264,7 +264,8 @@ def nurturing():
             action.click(pos)
             _handle_race()
         elif name == templates.NURTURING_COMMAND_TRAINING:
-            ctx.update_by_command_scene(template.screenshot())
+            time.sleep(0.2) # wait animation
+            ctx.update_by_command_scene(template.screenshot(max_age=0))
             LOGGER.info("update context: %s", ctx)
             if action.click_image(templates.NURTURING_SCHEDULED_RACE_OPENING_BANNER):
                 action.wait_click_image(
