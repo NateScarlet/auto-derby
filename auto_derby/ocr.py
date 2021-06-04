@@ -55,21 +55,21 @@ def _auto_level(img: np.ndarray) -> np.ndarray:
     return np.clip((img - black) / (white - black) * 255, 0, 255).astype(np.uint8)
 
 
-def _query(h: Text) -> Tuple[Text, float]:
+def _query(h: Text) -> Tuple[Text, Text, float]:
     # TODO: use a more efficient data structure, maybe vp-tree
     if not _LABELS:
-        return "", 0
-    return sorted(((v, imagetools.compare_hash(h, k)) for k, v in _LABELS.items()), key=lambda x: x[1],  reverse=True)[0]
+        return "", "", 0
+    return sorted(((k, v, imagetools.compare_hash(h, k)) for k, v in _LABELS.items()), key=lambda x: x[2],  reverse=True)[0]
 
 
 def _text_from_image(img: np.ndarray) -> Text:
     hash_img = cv2.GaussianBlur(img, (7, 7), 1, borderType=cv2.BORDER_CONSTANT)
     h = imagetools.image_hash(fromarray(hash_img), save_path=IMAGE_PATH)
-    match, similarity = _query(h)
-    LOGGER.debug("match label: hash=%s, value=%s, similarity=%0.3f",
-                 h, match, similarity)
+    match, value, similarity = _query(h)
+    LOGGER.debug("match label: value=%s, current=%s, match=%s, similarity=%0.3f",
+                 value, h, match, similarity)
     if similarity > 0.8:
-        return match
+        return value
     ans = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     close_msg = window.info(
