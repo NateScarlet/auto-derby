@@ -1,1 +1,1 @@
-PowerShell -Version 3 -NoProfile -ExecutionPolicy Unrestricted "%~dp0\launcher.ps1"
+PowerShell -Version 3 -NoProfile -ExecutionPolicy Bypass "%~dp0\launcher.ps1"
