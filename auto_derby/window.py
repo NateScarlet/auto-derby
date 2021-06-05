@@ -13,6 +13,7 @@ import win32con
 import win32gui
 
 LOGGER = logging.getLogger(__name__)
+_IS_ADMIN = bool(windll.shell32.IsUserAnAdmin())
 
 
 def message_box(
@@ -53,13 +54,12 @@ def get_game() -> int:
     return win32gui.FindWindow("UnityWndClass", "umamusume")
 
 
-
 _INIT_ONCE: Dict[Literal['value'], bool] = {'value': False}
 
 
 def init():
     if _INIT_ONCE["value"]:
-        return 
+        return
     _INIT_ONCE["value"] = True
     # Window size related function will returns incorrect result
     # if we don't make python process dpi aware
@@ -86,7 +86,7 @@ def set_client_size(h_wnd: int, width: int, height: int):
         height + borderHeight,
         0,
     )
-    set_client_size(h_wnd, width, height) # repeat until exact match
+    set_client_size(h_wnd, width, height)  # repeat until exact match
     return
 
 
@@ -110,15 +110,14 @@ def set_forground(h_wnd: int) -> None:
 def recover_foreground():
     fg_h_wnd = win32gui.GetForegroundWindow()
     yield
-    time.sleep(0.1) # switch too fast may cause issue
+    time.sleep(0.1)  # switch too fast may cause issue
     try:
         win32gui.SetForegroundWindow(fg_h_wnd)
     except Exception as ex:
         LOGGER.warn("recover foreground window failed: %s", ex)
 
 
-
 def info(msg: Text) -> Callable[[], None]:
-    return message_box(msg, "auto-derby", h_wnd=get_game())
+    return message_box(msg, "auto-derby", h_wnd=get_game() if _IS_ADMIN else 0)
 
 # TODO: move client inside visible area

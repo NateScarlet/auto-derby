@@ -9,7 +9,7 @@ from typing import Tuple
 
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
-
+import os
 from .. import ocr, templates, template
 
 
@@ -34,18 +34,6 @@ def _gradient(colors: Tuple[
     return ret
 
 
-def _remove_area(img: np.ndarray, *, size_lt: int):
-    contours, _ = cv2.findContours(
-        (img * 255).astype(np.uint8),
-        cv2.RETR_EXTERNAL,
-        cv2.CHAIN_APPROX_NONE,
-    )
-    for i in contours:
-        size = cv2.contourArea(i)
-        if size < size_lt:
-            cv2.drawContours(img, [i], -1, (0,), cv2.FILLED)
-
-
 def _ocr_training_effect(img: Image) -> int:
     cv_img = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
 
@@ -57,8 +45,9 @@ def _ocr_training_effect(img: Image) -> int:
             sharpened_img,
             (255, 255, 255),
         ),
-        0.9,
-    )
+        0.95,
+    ).clip(0, 255)
+
     bg_mask_img = imagetools.bg_mask_by_outline(outline_img)
 
     fill_gradient = _gradient((
@@ -74,15 +63,32 @@ def _ocr_training_effect(img: Image) -> int:
     fill_img = np.repeat(np.expand_dims(fill_gradient, 1), img.width, axis=1)
     assert fill_img.shape == cv_img.shape
 
-    masked_img = cv2.copyTo(cv_img, cv2.dilate(
-        255 - bg_mask_img, (3, 3), iterations=3))
+    fg_mask_img = 255 - bg_mask_img
+    masked_img = cv2.copyTo(cv_img, fg_mask_img)
 
     text_img = imagetools.color_key(
         masked_img,
         fill_img,
     )
-    text_img = cv2.erode(text_img, (5, 5))
-    _remove_area(text_img, size_lt=20)
+    text_img_extra = imagetools.constant_color_key(
+        masked_img,
+        (175, 214, 255),
+        threshold=0.95,
+    )
+    text_img = np.array(np.maximum(text_img, text_img_extra))
+    imagetools.fill_area(text_img, (0,), size_lt=20)
+
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("sharpened_img", sharpened_img)
+        cv2.imshow("outline_img", outline_img)
+        cv2.imshow("bg_mask_img", bg_mask_img)
+        cv2.imshow("fg_mask_img", fg_mask_img)
+        cv2.imshow("masked_img", masked_img)
+        cv2.imshow("text_img_extra", text_img_extra)
+        cv2.imshow("text_img", text_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
 
     text = ocr.text(image_from_array(text_img))
     if not text:

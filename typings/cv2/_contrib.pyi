@@ -29869,39 +29869,6 @@ def drawChessboardCorners(image, patternSize, corners, patternWasFound) -> image
     ...
 
 
-def drawContours(image, contours, contourIdx, color[, thickness[, lineType[, hierarchy[, maxLevel[, offset]]]]]) -> image:
-    """
-    .   @brief Draws contours outlines or filled contours.
-    .
-    .   The function draws contour outlines in the image if \f$\texttt{thickness} \ge 0\f$ or fills the area
-    .   bounded by the contours if \f$\texttt{thickness}<0\f$ . The example below shows how to retrieve
-    .   connected components from the binary image and label them: :
-    .   @include snippets/imgproc_drawContours.cpp
-    .
-    .   @param image Destination image.
-    .   @param contours All the input contours. Each contour is stored as a point vector.
-    .   @param contourIdx Parameter indicating a contour to draw. If it is negative, all the contours are drawn.
-    .   @param color Color of the contours.
-    .   @param thickness Thickness of lines the contours are drawn with. If it is negative (for example,
-    .   thickness=#FILLED ), the contour interiors are drawn.
-    .   @param lineType Line connectivity. See #LineTypes
-    .   @param hierarchy Optional information about hierarchy. It is only needed if you want to draw only
-    .   some of the contours (see maxLevel ).
-    .   @param maxLevel Maximal level for drawn contours. If it is 0, only the specified contour is drawn.
-    .   If it is 1, the function draws the contour(s) and all the nested contours. If it is 2, the function
-    .   draws the contours, all the nested contours, all the nested-to-nested contours, and so on. This
-    .   parameter is only taken into account when there is hierarchy available.
-    .   @param offset Optional contour shift parameter. Shift all the drawn contours by the specified
-    .   \f$\texttt{offset}=(dx,dy)\f$ .
-    .   @note When thickness=#FILLED, the function is designed to handle connected components with holes correctly
-    .   even when no hierarchy date is provided. This is done by analyzing all the outlines together
-    .   using even-odd rule. This may give incorrect results if you have a joint collection of separately retrieved
-    .   contours. In order to solve this problem, you need to call #drawContours separately for each sub-group
-    .   of contours, or iterate over the collection using contourIdx parameter.
-    """
-    ...
-
-
 def drawFrameAxes(image, cameraMatrix, distCoeffs, rvec, tvec, length[, thickness]) -> image:
     """
     .   @brief Draw axes of the world/object coordinate system from pose estimation. @sa solvePnP

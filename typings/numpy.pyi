@@ -34770,9 +34770,42 @@ def matmul(*args, **kwargs):
     """
     ...
 
-def maximum(*args, **kwargs):
+def maximum(
+    x1: ndarray, x2: ndarray, /, 
+    out: Optional[ndarray]=None, *,
+    where: bool=True, 
+    casting: Text='same_kind', 
+    order:Text='K',
+    dtype: Optional[Type[Any]]=None,
+    subok: bool=True,
+    signature: Any = ...,
+    extobj: Any=...,
+) -> Union[ndarray, Scalar]:
     """
-    <ufunc 'maximum'>
+    Element-wise maximum of array elements.
+
+    Compare two arrays and returns a new array containing the element-wise maxima. If one of the elements being compared is a NaN, then that element is returned. If both elements are NaNs then the first is returned. The latter distinction is important for complex NaNs, which are defined as at least one of the real or imaginary parts being a NaN. The net effect is that NaNs are propagated.
+
+    Parameters
+
+        x1, x2: array_like
+
+            The arrays holding the elements to be compared. If x1.shape != x2.shape, they must be broadcastable to a common shape (which becomes the shape of the output).
+        out: ndarray, None, or tuple of ndarray and None, optional
+
+            A location into which the result is stored. If provided, it must have a shape that the inputs broadcast to. If not provided or None, a freshly-allocated array is returned. A tuple (possible only as a keyword argument) must have length equal to the number of outputs.
+        where: array_like, optional
+
+            This condition is broadcast over the input. At locations where the condition is True, the out array will be set to the ufunc result. Elsewhere, the out array will retain its original value. Note that if an uninitialized out array is created via the default out=None, locations within it where the condition is False will remain uninitialized.
+        **kwargs
+
+            For other keyword-only arguments, see the ufunc docs.
+
+    Returns
+
+        yndarray or scalar
+
+            The maximum of x1 and x2, element-wise. This is a scalar if both x1 and x2 are scalars.
     """
     ...
 

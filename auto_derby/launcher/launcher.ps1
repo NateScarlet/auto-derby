@@ -118,6 +118,7 @@ if ($data.Debug) {
     )
     ""
     $env:DEBUG = "auto_derby"
+    $env:AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH = "last_screenshot.local.png"
 }
 
 if ($data.SingleModeChoicesDataPath) {

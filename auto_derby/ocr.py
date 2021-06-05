@@ -46,15 +46,6 @@ def _pad_img(img: np.ndarray, padding: int = _PREVIEW_PADDING) -> np.ndarray:
     return cv2.copyMakeBorder(img, p, p, p, p, cv2.BORDER_CONSTANT)
 
 
-def _auto_level(img: np.ndarray) -> np.ndarray:
-    black = np.percentile(img, 5)
-    white = np.percentile(img, 95)
-    if black == white:
-        return img
-
-    return np.clip((img - black) / (white - black) * 255, 0, 255).astype(np.uint8)
-
-
 def _query(h: Text) -> Tuple[Text, Text, float]:
     # TODO: use a more efficient data structure, maybe vp-tree
     if not _LABELS:
@@ -168,10 +159,11 @@ def text(img: Image) -> Text:
                                  for i in contours), key=lambda x: x[1][0])
 
     max_char_width = max(bbox[2] - bbox[0] for _, bbox in contours_with_bbox)
+    max_char_height = max(bbox[3] - bbox[1] for _, bbox in contours_with_bbox)
 
     char_img_list: List[Tuple[Tuple[int, int, int, int], np.ndarray]] = []
     char_parts: List[np.ndarray] = []
-    char_parts_bbox = None
+    char_parts_bbox = contours_with_bbox[0][1]
 
     def _push_char():
         if not char_parts:
@@ -194,15 +186,29 @@ def text(img: Image) -> Text:
         char_img_list.append((char_parts_bbox, char_img))
 
     for i, bbox in contours_with_bbox:
+        l, t, r, b = bbox
         is_new_char = (
-            char_parts_bbox and
-            bbox[0] > char_parts_bbox[0] + max_char_width * 0.6 and
+            char_parts and
+            l > char_parts_bbox[2] and
+            l > char_parts_bbox[0] + max_char_width * 0.5 and
             not _bbox_contains(_pad_bbox(char_parts_bbox, 2), bbox)
         )
         if is_new_char:
+            space_w = l - char_parts_bbox[2]
+            divide_x = int(l-space_w * 0.5 - 1)
+            last_r = min(divide_x, char_parts_bbox[0] + max_char_width)
+            char_parts_bbox = _union_bbox(
+                char_parts_bbox,
+                (last_r, t, last_r, t),
+            )
             _push_char()
             char_parts = []
-            char_parts_bbox = None
+            char_parts_bbox = (
+                max(divide_x + 1, r-max_char_width),
+                char_parts_bbox[1],
+                r,
+                int(char_parts_bbox[1] + max_char_height),
+            )
         char_parts.append(i)
         char_parts_bbox = _union_bbox(char_parts_bbox, bbox)
     _push_char()

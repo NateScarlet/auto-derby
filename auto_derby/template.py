@@ -43,10 +43,17 @@ def invalidate_screeshot():
     _CACHED_SCREENSHOT["value"] = (dt.datetime.fromtimestamp(0), Image())
 
 
+_LAST_SCREENSHOT_SAVE_PATH = os.getenv(
+    "AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH",
+)
+
+
 def screenshot(*, max_age: float = 1) -> Image:
     cached_time, _ = _CACHED_SCREENSHOT["value"]
     if cached_time < dt.datetime.now() - dt.timedelta(seconds=max_age):
         new_img = screenshot_window(window.get_game())
+        if _LAST_SCREENSHOT_SAVE_PATH:
+            new_img.save(_LAST_SCREENSHOT_SAVE_PATH)
         LOGGER.debug("screenshot")
         _CACHED_SCREENSHOT["value"] = (dt.datetime.now(), new_img)
     return _CACHED_SCREENSHOT["value"][1]

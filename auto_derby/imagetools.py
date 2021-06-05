@@ -87,12 +87,26 @@ def color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_si
     )).clip(0, 255).astype(np.uint8)
 
     ret = max_value - diff_img
-    mask_img = (ret > (max_value * threshold)).astype(np.uint8)
-    ret *= mask_img
+    if threshold > 0:
+        mask_img = (ret > (max_value * threshold)).astype(np.uint8)
+        ret *= mask_img
     ret = ret.clip(0, 255)
     ret = ret.astype(np.uint8)
     return ret
 
+def constant_color_key(img: np.ndarray, *colors: Tuple[int, ...], threshold: float = 0.8, bit_size: int = 8) -> np.ndarray:
+    ret = np.zeros(img.shape[:2])
+    
+    for color in colors:
+        match_img = color_key(
+            img,
+            np.full_like(img, color),
+            threshold=threshold,
+            bit_size=bit_size,
+        )
+        ret = np.array(np.maximum(ret, match_img))
+
+    return ret
 
 def sharpen(img: np.ndarray, size: float = 1, *, bit_size: int = 8) -> np.ndarray:
     return cv2.filter2D(
@@ -120,7 +134,7 @@ def bg_mask_by_outline(outline_img: np.ndarray) -> np.ndarray:
 
     fill_mask_img = cv2.copyMakeBorder(
         outline_img, 1, 1, 1, 1, cv2.BORDER_CONSTANT)
-    bg_mask_img = outline_img.copy()
+    bg_mask_img = np.zeros_like(outline_img)
     for i in border_points:
         x, y = i
         if outline_img[y, x] != 0:
@@ -142,6 +156,18 @@ def resize_by_heihgt(img: Image, height: int) -> Image:
     w = round(height / h * w)
     h = height
     return img.resize((w, h))
+
+
+def fill_area(img: np.ndarray, color: Tuple[int, ...], *, size_lt: int):
+    contours, _ = cv2.findContours(
+        (img * 255).astype(np.uint8),
+        cv2.RETR_EXTERNAL,
+        cv2.CHAIN_APPROX_NONE,
+    )
+    for i in contours:
+        size = cv2.contourArea(i)
+        if size < size_lt:
+            cv2.drawContours(img, [i], -1, color, cv2.FILLED)
 
 
 _WINDOW_ID: Dict[Literal["value"], int] = {"value": 0}

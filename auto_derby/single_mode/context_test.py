@@ -7,6 +7,51 @@ import PIL.Image
 _TEST_DATA_PATH = Path(__file__).parent / "test_data"
 
 
+def test_update_by_command_scene():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "command_scene.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_command_scene(img)
+    assert ctx.date == (1, 12, 2), ctx.date
+    assert ctx.vitality == 0.9162011173184358, ctx.vitality
+    assert ctx.speed == 281, ctx.speed
+    assert ctx.stamina == 217, ctx.stamina
+    assert ctx.power == 210, ctx.power
+    assert ctx.perservance == 187, ctx.perservance
+    assert ctx.intelligence == 266, ctx.intelligence
+    assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+
+
+def test_update_by_command_scene_2():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "command_scene_2.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_command_scene(img)
+    assert ctx.date == (2, 1, 1), ctx.date
+    assert ctx.vitality == 0.9162011173184358, ctx.vitality
+    assert ctx.speed == 281, ctx.speed
+    assert ctx.stamina == 217, ctx.stamina
+    assert ctx.power == 210, ctx.power
+    assert ctx.perservance == 198, ctx.perservance
+    assert ctx.intelligence == 266, ctx.intelligence
+    assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+
+
+def test_update_by_command_scene_3():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "command_scene_3.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_command_scene(img)
+    assert ctx.date == (3, 1, 1), ctx.date
+    assert ctx.vitality == 1, ctx.vitality
+    assert ctx.speed == 589, ctx.speed
+    assert ctx.stamina == 375, ctx.stamina
+    assert ctx.power == 461, ctx.power
+    assert ctx.perservance == 263, ctx.perservance
+    assert ctx.intelligence == 386, ctx.intelligence
+    assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+
+
 def test_update_by_command_scene_issue7():
     img = PIL.Image.open(
         _TEST_DATA_PATH / "command_scene_issue7.png").convert("RGB")
@@ -80,3 +125,27 @@ def test_update_by_command_scene_issue17_2():
     assert ctx.perservance == 156, ctx.perservance
     assert ctx.intelligence == 233, ctx.intelligence
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+
+
+def test_update_by_race_result_scene():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "race_result_scene.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_race_result_scene(img)
+    assert ctx.fan_count == 1179
+
+
+def test_update_by_race_result_scene_2():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "race_result_scene_2.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_race_result_scene(img)
+    assert ctx.fan_count == 4073
+
+
+def test_update_by_race_result_scene_3():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "race_result_scene_3.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_race_result_scene(img)
+    assert ctx.fan_count == 134344

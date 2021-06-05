@@ -12,16 +12,13 @@ from PIL.Image import fromarray as image_from_array
 
 from .. import ocr, imagetools
 
+import os
+
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
     img = imagetools.resize_by_heihgt(img, 32)
     cv_img = np.asarray(img.convert("L"))
     sharpened_img = imagetools.sharpen(cv_img)
-    _, outline_img = cv2.threshold(imagetools.sharpen(
-        cv_img, 1.2), 200, 255, cv2.THRESH_BINARY)
-    bg_mask_img = imagetools.bg_mask_by_outline(
-        outline_img,
-    )
 
     _, binary_img = cv2.threshold(
         sharpened_img,
@@ -29,11 +26,18 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
         255,
         cv2.THRESH_BINARY_INV,
     )
-    masked_img = cv2.copyTo(binary_img, 255 - bg_mask_img)
+    imagetools.fill_area(binary_img, (0,), size_lt=3)
+
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("sharpened_img", sharpened_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
 
     text = ocr.text(
         image_from_array(
-            masked_img,
+            binary_img,
         ),
     )
 
@@ -87,6 +91,16 @@ def _recognize_mood(rgb_color: Tuple[int, int, int]) -> float:
     raise ValueError("_recognize_mood: unknown mood color: %s" % (rgb_color,))
 
 
+def _recognize_fan_count(img: Image) -> int:
+    cv_img = cv2.cvtColor(np.asarray(img.convert("RGB")), cv2.COLOR_RGB2BGR)
+    mask_img = imagetools.color_key(
+        cv_img,
+        np.full_like(cv_img, (29, 69, 125))
+    )
+    text = ocr.text(image_from_array(mask_img))
+    return int(text.replace(",", ""))
+
+
 class Context:
     MOOD_VERY_BAD: float = 0.8
     MOOD_BAD: float = 0.9
@@ -104,6 +118,7 @@ class Context:
         self.date = (0, 0, 0)
         self.vitality = 0.0
         self.mood = Context.MOOD_NORMAL
+        self.fan_count = 0
 
         self._extra_turn_count = 0
 
@@ -143,6 +158,10 @@ class Context:
         self.intelligence = int(
             ocr.text(PIL.ImageOps.invert(screenshot.crop(intelligence_bbox))))
 
+    def update_by_race_result_scene(self, screenshot: Image) -> None:
+        fan_count_bbox = (128, 698, 330, 716)
+        self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
+
     def __str__(self):
         return (
             "Context<"
@@ -153,7 +172,8 @@ class Context:
             f"sta={self.stamina},"
             f"pow={self.power},"
             f"per={self.perservance},"
-            f"int={self.intelligence}"
+            f"int={self.intelligence},"
+            f"fan={self.fan_count}"
             ">"
         )
 

@@ -210,11 +210,17 @@ def _handle_race_result():
         action.click(pos)
 
 
-def _handle_race():
+def _handle_race(ctx: Context):
     action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
     action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
     _handle_race_result()
-    action.wait_click_image(templates.NURTURING_RACE_NEXT_BUTTON)
+    _, pos = action.wait_image(templates.NURTURING_RACE_NEXT_BUTTON)
+
+    with action.recover_cursor():
+        action.move((pos[0], pos[1]-100))
+        action.wheel(10)
+        ctx.update_by_race_result_scene(template.screenshot())
+        action.click(pos)
 
 
 ALL_OPTIONS = [
@@ -259,11 +265,11 @@ def nurturing():
             x, y = pos
             y += 60
             action.click((x, y))
-            _handle_race()
+            _handle_race(ctx)
         elif name == templates.NURTURING_URA_FINALS:
             ctx.next_turn()
             action.click(pos)
-            _handle_race()
+            _handle_race(ctx)
         elif name == templates.NURTURING_COMMAND_TRAINING:
             time.sleep(0.2)  # wait animation
             ctx.update_by_command_scene(template.screenshot(max_age=0))
@@ -272,7 +278,7 @@ def nurturing():
             if action.click_image(templates.NURTURING_SCHEDULED_RACE_OPENING_BANNER):
                 action.wait_click_image(
                     templates.NURTURING_GO_TO_SCHEDULED_RACE_BUTTON)
-                _handle_race()
+                _handle_race(ctx)
                 continue
 
             if ctx.turn_count() >= ctx.total_turn_count() - 2:
