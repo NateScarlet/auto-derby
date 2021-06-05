@@ -9,7 +9,7 @@ if True:
 
 from typing import Text
 import cv2
-from auto_derby import template, templates
+from auto_derby import template, templates, window
 import pathlib
 import PIL.Image
 import numpy as np
@@ -70,6 +70,7 @@ def main():
     game_image_path = args.game_image
     if not name:
         name = _latest_file()
+    window.set_game_size()
     if game_image_path:
         game_image = PIL.Image.open(game_image_path)
     else:

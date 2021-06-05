@@ -54,6 +54,11 @@ def get_game() -> int:
     return win32gui.FindWindow("UnityWndClass", "umamusume")
 
 
+def set_game_size() -> None:
+    # Need fixed height for easy template matching
+    set_client_size(get_game(), 466, 828)
+
+
 _INIT_ONCE: Dict[Literal['value'], bool] = {'value': False}
 
 

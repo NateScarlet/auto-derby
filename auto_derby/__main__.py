@@ -49,8 +49,7 @@ def main():
                 h_wnd = window.get_game()
         else:
             exit(1)
-    # Need fixed height for easy template matching
-    window.set_client_size(h_wnd, 466, 828)
+    window.set_game_size()
     LOGGER.info("game window: %s", h_wnd)
     job()
 
