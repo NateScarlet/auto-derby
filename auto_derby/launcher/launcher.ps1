@@ -43,7 +43,7 @@ Add-Type -Language CSharp ([string](Get-Content "$PSScriptRoot\launcher.cs"))
 
 $data = New-Object NateScarlet.AutoDerby.DataContext -Property @{
     DefaultSingleModeChoicesDataPath = [System.IO.Path]::GetFullPath("single_mode_choices.json")
-    DefaultPythonExecutablePath     = . {
+    DefaultPythonExecutablePath      = . {
         try {
             & py.exe -3.8 -c 'import sys; print(sys.executable)'
         }
@@ -119,6 +119,8 @@ if ($data.Debug) {
     ""
     $env:DEBUG = "auto_derby"
     $env:AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH = "last_screenshot.local.png"
+    $env:AUTO_DERBY_OCR_IMAGE_PATH = "ocr_images.local"
+    $env:AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH = "single_mode_event_images.local"
 }
 
 if ($data.SingleModeChoicesDataPath) {

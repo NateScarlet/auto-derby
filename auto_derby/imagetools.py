@@ -3,7 +3,6 @@
 """tools for image processing.  """
 
 import hashlib
-import os
 import threading
 from pathlib import Path
 from typing import Any, Callable, Dict, Literal, Optional, Text, Tuple, Union
@@ -14,18 +13,12 @@ import cv2.img_hash
 import numpy as np
 from PIL.Image import Image, fromarray
 
-SKIP_SAVE = os.getenv("AUTO_DERBY_IMAGE_SKIP_SAVE", "").lower() == "true"
-
-
-def image_path(save_path: Text, _id: Text) -> Path:
-    return Path(save_path) / _id[0] / _id[1:3] / (_id[3:] + ".png")
-
 
 def md5(b_img: np.ndarray, *, save_path: Optional[Text] = None) -> Text:
     _id = hashlib.md5(b_img.tobytes()).hexdigest()
 
-    if save_path and not SKIP_SAVE:
-        dst = image_path(save_path, _id)
+    if save_path:
+        dst = Path(save_path) / _id[0] / _id[1:3] / (_id[3:] + ".png")
         if not dst.exists():
             dst.parent.mkdir(parents=True, exist_ok=True)
             fromarray(b_img).convert("1").save(dst)
@@ -40,7 +33,7 @@ def image_hash(img: Image, *, save_path: Optional[Text] = None) -> Text:
     cv_img = np.asarray(img.convert("L"))
     h = _HASH_ALGORITHM.compute(cv_img).tobytes().hex()
 
-    if save_path and not SKIP_SAVE:
+    if save_path:
         md5_hash = hashlib.md5(img.tobytes()).hexdigest()
         dst = Path(save_path) / h[0] / h[1:3] / h[3:] / (md5_hash + ".png")
         if not dst.exists():
@@ -94,9 +87,10 @@ def color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_si
     ret = ret.astype(np.uint8)
     return ret
 
+
 def constant_color_key(img: np.ndarray, *colors: Tuple[int, ...], threshold: float = 0.8, bit_size: int = 8) -> np.ndarray:
     ret = np.zeros(img.shape[:2])
-    
+
     for color in colors:
         match_img = color_key(
             img,
@@ -107,6 +101,7 @@ def constant_color_key(img: np.ndarray, *colors: Tuple[int, ...], threshold: flo
         ret = np.array(np.maximum(ret, match_img))
 
     return ret
+
 
 def sharpen(img: np.ndarray, size: float = 1, *, bit_size: int = 8) -> np.ndarray:
     return cv2.filter2D(

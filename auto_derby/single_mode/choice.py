@@ -13,12 +13,12 @@ from PIL.Image import Image
 
 LOGGER = logging.getLogger(__name__)
 
-EVENT_IMAGE_PATH = os.getenv(
-    "AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH") or "single_mode_event_images.local"
+EVENT_IMAGE_PATH = os.getenv("AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH", "")
 
 DATA_PATH = os.getenv(
-    "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH"
-) or "single_mode_choices.json"
+    "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH",
+    "single_mode_choices.json"
+)
 
 
 def _load() -> Dict[Text, int]:

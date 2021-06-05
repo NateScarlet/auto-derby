@@ -18,8 +18,8 @@ import logging
 LOGGER = logging.getLogger(__name__)
 
 
-DATA_PATH = os.getenv("AUTO_DERBY_OCR_LABELS_PATH", "ocr_labels.json")
-IMAGE_PATH = os.getenv("AUTO_DERBY_OCR_IMAGES_PATH", "ocr_images.local")
+DATA_PATH = os.getenv("AUTO_DERBY_OCR_LABEL_PATH", "ocr_labels.json")
+IMAGE_PATH = os.getenv("AUTO_DERBY_OCR_IMAGE_PATH", "")
 
 
 def _load() -> Dict[Text, Text]:
