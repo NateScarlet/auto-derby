@@ -38,6 +38,11 @@ namespace NateScarlet.AutoDerby {
           Label = "Legend race",
           Value = "legend_race",
         });
+        Add(new JobOption()
+        {
+          Label = "Roulette derby",
+          Value = "roulette_derby",
+        });
       }
   }
 

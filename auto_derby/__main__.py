@@ -28,6 +28,7 @@ def main():
         "nurturing": jobs.nurturing,
         "daily_race_money": lambda: jobs.daily_race(templates.MOONLIGHT_PRIZE),
         "daily_race_sp": lambda: jobs.daily_race(templates.JUPITER_CUP),
+        "roulette_derby": jobs.roulette_derby,
     }
     parser = argparse.ArgumentParser()
     parser.add_argument("job")
