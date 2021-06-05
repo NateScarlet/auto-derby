@@ -237,6 +237,13 @@ def _handle_option():
     action.click_image(ALL_OPTIONS[ans-1])
 
 
+def _update_context_by_class_menu(ctx: Context):
+    action.wait_click_image(templates.NURTURING_CHARACTER_CLASS_MENU_BUTTON)
+    action.wait_image(templates.NURTURING_CHARACTER_CLASS_MENU_TITLE)
+    ctx.update_by_character_class_menu(template.screenshot())
+    action.wait_click_image(templates.CLOSE_BUTTON)
+
+
 def nurturing():
     ctx = Context()
     while True:
@@ -272,6 +279,9 @@ def nurturing():
             _handle_race(ctx)
         elif name == templates.NURTURING_COMMAND_TRAINING:
             time.sleep(0.2)  # wait animation
+            if not ctx.fan_count:
+                _update_context_by_class_menu(ctx)
+
             ctx.update_by_command_scene(template.screenshot(max_age=0))
             ctx.next_turn()
             LOGGER.info("update context: %s", ctx)

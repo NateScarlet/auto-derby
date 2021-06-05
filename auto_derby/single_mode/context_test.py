@@ -148,4 +148,12 @@ def test_update_by_race_result_scene_3():
         _TEST_DATA_PATH / "race_result_scene_3.png").convert("RGB")
     ctx = Context()
     ctx.update_by_race_result_scene(img)
-    assert ctx.fan_count == 134344
+    assert ctx.fan_count == 134344, ctx.fan_count
+
+
+def test_update_by_character_class_menu():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "character_class_menu.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_character_class_menu(img)
+    assert ctx.fan_count == 1, ctx.fan_count

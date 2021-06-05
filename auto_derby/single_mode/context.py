@@ -98,7 +98,7 @@ def _recognize_fan_count(img: Image) -> int:
         np.full_like(cv_img, (29, 69, 125))
     )
     text = ocr.text(image_from_array(mask_img))
-    return int(text.replace(",", ""))
+    return int(text.rstrip("人").replace(",", ""))
 
 
 class Context:
@@ -160,6 +160,10 @@ class Context:
 
     def update_by_race_result_scene(self, screenshot: Image) -> None:
         fan_count_bbox = (128, 698, 330, 716)
+        self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
+
+    def update_by_character_class_menu(self, screenshot: Image) -> None:
+        fan_count_bbox = (220, 523, 420, 540)
         self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
 
     def __str__(self):
