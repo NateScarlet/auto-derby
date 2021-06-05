@@ -120,7 +120,7 @@ def _bbox_contains(a: Tuple[int, int, int, int], b: Tuple[int, int, int, int]) -
 _LINE_HEIGHT = 32
 
 
-def text(img: Image, *, threshold: float=0.8) -> Text:
+def text(img: Image, *, threshold: float = 0.8) -> Text:
     """Regcognize text line, background color should be black.
 
     Args:
@@ -164,6 +164,7 @@ def text(img: Image, *, threshold: float=0.8) -> Text:
     char_img_list: List[Tuple[Tuple[int, int, int, int], np.ndarray]] = []
     char_parts: List[np.ndarray] = []
     char_parts_bbox = contours_with_bbox[0][1]
+    char_has_top_part = False
 
     def _push_char():
         if not char_parts:
@@ -190,7 +191,13 @@ def text(img: Image, *, threshold: float=0.8) -> Text:
         is_new_char = (
             char_parts and
             l > char_parts_bbox[2] and
-            l > char_parts_bbox[0] + max_char_width * 0.5 and
+            (
+                l > char_parts_bbox[0] + max_char_width * 0.6 or
+                (
+                    not char_has_top_part and
+                    l > char_parts_bbox[0] + max_char_width * 0.3
+                )
+            ) and
             not _bbox_contains(_pad_bbox(char_parts_bbox, 2), bbox)
         )
         if is_new_char:
@@ -209,6 +216,8 @@ def text(img: Image, *, threshold: float=0.8) -> Text:
                 r,
                 int(char_parts_bbox[1] + max_char_height),
             )
+            char_has_top_part = False
+        char_has_top_part = char_has_top_part or t < char_parts_bbox[1] + max_char_height * 0.5
         char_parts.append(i)
         char_parts_bbox = _union_bbox(char_parts_bbox, bbox)
     _push_char()

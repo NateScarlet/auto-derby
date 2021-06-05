@@ -13,7 +13,7 @@ import sqlite3
 import argparse
 import os
 import contextlib
-from auto_derby.single_mode import Race
+from auto_derby.single_mode.race import Race, DATA_PATH
 import json
 import pathlib
 
@@ -37,6 +37,7 @@ def _read_master_mdb(path: Text) -> Iterator[Race]:
     cur = db.execute("""
 SELECT
   t4.text,
+  t7.text AS stadium,
   t1.month,
   t1.half,
   t3.grade,
@@ -56,6 +57,7 @@ SELECT
   LEFT JOIN text_data AS t4 ON t4.category = 32 AND t3.id = t4."index"
   LEFT JOIN race_course_set AS t5 ON t5.id = t3.course_set
   LEFT JOIN race_course_set_status AS t6 ON t6.course_set_status_id = t5.course_set_status_id
+  LEFT JOIN text_data AS t7 ON t7.category = 35 AND t7."index" = t5.race_track_id
   WHERE t1.base_program_id = 0
   ORDER BY t1.race_permission, t1.month, t1.half, t3.grade DESC
 ;
@@ -63,10 +65,11 @@ SELECT
 
     with contextlib.closing(cur):
         for i in cur:
-            assert len(i) == 14, i
+            assert len(i) == 15, i
             v = Race()
             (
                 v.name,
+                v.stadium,
                 v.month,
                 v.half,
                 v.grade,
@@ -98,7 +101,7 @@ def main():
     data = [
         i.to_dict() for i in _read_master_mdb(path)
     ]
-    with pathlib.Path("single_mode_races.json").open("w", encoding="utf-8") as f:
+    with pathlib.Path(DATA_PATH).open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 

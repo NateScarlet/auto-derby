@@ -211,6 +211,9 @@ def _handle_race_result():
 
 
 def _handle_race(ctx: Context):
+    # TODO: change running style
+    action.wait_click_image(templates.NURTURING_RACE_DETAIL_BUTTON)
+    exit(1)
     action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
     action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
     _handle_race_result()

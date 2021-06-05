@@ -1,9 +1,22 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 """.  """
+from __future__ import annotations
+import cv2
+import cast_unknown as cast
 
+from .context import Context
+from .. import imagetools, ocr
+from typing import Dict, Iterator, Text, Tuple, Any
+import PIL.Image
+import PIL.ImageOps
+import os
+import json
 
-from typing import Dict, Text, Tuple, Any
+DATA_PATH = os.getenv(
+    "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH",
+    "single_mode_races.json",
+)
 
 
 class Race:
@@ -11,9 +24,9 @@ class Race:
     GROUND_GRASS = 1
     GROUND_DART = 2
 
-    TRACK_IN = 1
-    TRACK_MIDDLE = 2
-    TRACK_OUT = 3
+    TRACK_OUT = 1
+    TRACK_IN = 2
+    TRACK_MIDDLE = 3
 
     TARGET_STATUS_SPEED = 1
     TARGET_STATUS_STAMINA = 2
@@ -35,12 +48,13 @@ class Race:
     GRADE_G2 = 200
     GRADE_G1 = 100
 
-    TURN_LEFT = 1
-    TURN_RIGHT = 2
+    TURN_RIGHT = 1
+    TURN_LEFT = 2
     TURN_NONE = 4
 
     def __init__(self):
         self.name: Text = ''
+        self.stadium: Text = ''
         self.permission: int = 0
         self.month: int = 0
         self.half: int = 0
@@ -58,6 +72,7 @@ class Race:
     def to_dict(self) -> Dict[Text, Any]:
         return {
             "name": self.name,
+            "stadium": self.stadium,
             "permission": self.permission,
             "month": self.month,
             "half": self.half,
@@ -71,3 +86,146 @@ class Race:
             "minFanCount": self.min_fan_count,
             "fanCounts": self.fan_counts
         }
+
+    @classmethod
+    def from_dict(cls, data: Dict[Text, Any]) -> Race:
+        self = cls()
+        self.name = data["name"]
+        self.stadium = data["stadium"]
+        self.permission = data["permission"]
+        self.month = data["month"]
+        self.half = data["half"]
+        self.grade = data["grade"]
+        self.entry_count = data["entryCount"]
+        self.distance = data["distance"]
+        self.ground = data["ground"]
+        self.track = data["track"]
+        self.turn = data["turn"]
+        self.target_statuses = tuple(data["targetStatuses"])
+        self.min_fan_count = data["minFanCount"]
+        self.fan_counts = tuple(data["fanCounts"])
+        return self
+
+    @property
+    def years(self) -> Tuple[int, ...]:
+        if self.permission == self.PERMISSION_JUNIOR:
+            return (1,)
+        if self.permission == self.PERMISSION_CLASSIC:
+            return (2,)
+        if self.permission == self.PERMISSION_JUNIOR_OR_CLASSIC:
+            return (1, 2)
+        if self.permission == self.PERMISSION_SENIOR:
+            return (3,)
+        if self.permission == self.PERMISSION_URA:
+            return (4,)
+        raise ValueError("Race.year: unknown permission: %s" % self.permission)
+
+    def __str__(self):
+        return f"Race<{self.stadium} {self.name}>"
+
+
+def _load() -> Tuple[Race, ...]:
+    with open(DATA_PATH, "r", encoding="utf-8") as f:
+        return tuple(Race.from_dict(i) for i in json.load(f))
+
+
+RACES = _load()
+
+
+def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
+    year, month, half = date
+    for i in RACES:
+        if year not in i.years:
+            continue
+        if (month, half) != (i.month, half):
+            continue
+        yield i
+
+
+def _recognize_fan_count(img: PIL.Image.Image) -> int:
+    text = ocr.text(PIL.ImageOps.invert(img))
+    return int(text.rstrip("人").replace(",", ""))
+
+
+def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
+    cv_img = imagetools.cv_image(img.convert("L"))
+    _, binary_img = cv2.threshold(
+        255 - cv_img,
+        150,
+        255,
+        cv2.THRESH_BINARY,
+    )
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+    text = ocr.text(imagetools.pil_image(binary_img))
+    stadium, text = text[:2], text[2:]
+    if text[0] == "芝":
+        text = text[1:]
+        ground = Race.GROUND_GRASS
+    elif text[0] == "ダ":
+        text = text[3:]
+        ground = Race.GROUND_DART
+    else:
+        raise ValueError("_recognize_spec: invalid spec: %s", text)
+
+    distance, text = int(text[:4]), text[10:]
+
+    turn, track = {
+        '左·内': (Race.TURN_LEFT, Race.TRACK_IN),
+        '右·内': (Race.TURN_RIGHT, Race.TRACK_IN),
+        '左': (Race.TURN_LEFT, Race.TRACK_MIDDLE),
+        '右': (Race.TURN_RIGHT, Race.TRACK_MIDDLE),
+        '左·外': (Race.TURN_LEFT, Race.TRACK_OUT),
+        '右·外': (Race.TURN_RIGHT, Race.TRACK_OUT),
+    }[text]
+
+    return stadium, ground, distance, turn, track
+
+
+def _recognize_grade(rgb_color: Tuple[int, ...]) -> int:
+    if imagetools.compare_color((244, 85, 129),  rgb_color) > 0.9:
+        return Race.GRADE_G2
+    raise ValueError(
+        "_recognize_grade: unknown grade color: %s" % (rgb_color,))
+
+
+def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race:
+    grade_color_pos = (10, 75)
+    spec_bbox = (27, 260, 302, 279)
+    no1_fan_count_bbox = (150, 407, 400, 425)
+
+    grade = _recognize_grade(
+        tuple(cast.list_(screenshot.getpixel(grade_color_pos), int)))
+    stadium, ground, distance, turn, track = _recognize_spec(
+        screenshot.crop(spec_bbox)
+    )
+    no1_fan_count = _recognize_fan_count(screenshot.crop(no1_fan_count_bbox))
+
+    full_spec = (
+        grade,
+        stadium,
+        ground,
+        distance,
+        turn,
+        track,
+        no1_fan_count,
+    )
+    for i in find_by_date(ctx.date):
+        if full_spec == (
+            i.grade,
+            i.stadium,
+            i.ground,
+            i.distance,
+            i.turn,
+            i.track,
+            i.fan_counts[0],
+        ):
+            return i
+
+    raise ValueError(
+        "find_by_race_details_image: can race match spec: %s",
+        full_spec,
+    )

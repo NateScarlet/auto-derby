@@ -1,6 +1,7 @@
 [
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 6,
     "half": 1,
@@ -38,6 +39,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "中山",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -72,6 +74,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "中山",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -106,6 +109,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "中山",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -142,6 +146,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "東京",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -178,6 +183,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "東京",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -215,6 +221,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "東京",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -249,6 +256,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "新潟",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -286,6 +294,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "中京",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -320,6 +329,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "京都",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -356,6 +366,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "京都",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -392,6 +403,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "札幌",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -428,6 +440,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "阪神",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -464,6 +477,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "阪神",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -500,6 +514,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "中京",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -536,6 +551,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "阪神",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -570,6 +586,7 @@
   },
   {
     "name": "ジュニア級新馬",
+    "stadium": "函館",
     "permission": 1,
     "month": 6,
     "half": 2,
@@ -606,6 +623,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "福島",
     "permission": 1,
     "month": 7,
     "half": 1,
@@ -640,6 +658,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "福島",
     "permission": 1,
     "month": 7,
     "half": 1,
@@ -674,6 +693,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "福島",
     "permission": 1,
     "month": 7,
     "half": 1,
@@ -710,6 +730,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "福島",
     "permission": 1,
     "month": 7,
     "half": 2,
@@ -746,6 +767,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "福島",
     "permission": 1,
     "month": 7,
     "half": 2,
@@ -780,6 +802,7 @@
   },
   {
     "name": "中京ジュニアステークス",
+    "stadium": "中京",
     "permission": 1,
     "month": 7,
     "half": 2,
@@ -816,6 +839,7 @@
   },
   {
     "name": "函館ジュニアステークス",
+    "stadium": "函館",
     "permission": 1,
     "month": 7,
     "half": 2,
@@ -850,6 +874,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 1,
@@ -886,6 +911,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 1,
@@ -920,6 +946,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 1,
@@ -954,6 +981,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 1,
@@ -990,6 +1018,7 @@
   },
   {
     "name": "ダリア賞",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 1,
@@ -1024,6 +1053,7 @@
   },
   {
     "name": "フェニックス賞",
+    "stadium": "小倉",
     "permission": 1,
     "month": 8,
     "half": 1,
@@ -1060,6 +1090,7 @@
   },
   {
     "name": "コスモス賞",
+    "stadium": "札幌",
     "permission": 1,
     "month": 8,
     "half": 1,
@@ -1094,6 +1125,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 2,
@@ -1130,6 +1162,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 2,
@@ -1166,6 +1199,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 2,
@@ -1200,6 +1234,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 2,
@@ -1234,6 +1269,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 2,
@@ -1268,6 +1304,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 2,
@@ -1304,6 +1341,7 @@
   },
   {
     "name": "クローバー賞",
+    "stadium": "札幌",
     "permission": 1,
     "month": 8,
     "half": 2,
@@ -1338,6 +1376,7 @@
   },
   {
     "name": "新潟ジュニアステークス",
+    "stadium": "新潟",
     "permission": 1,
     "month": 8,
     "half": 2,
@@ -1372,6 +1411,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1408,6 +1448,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1442,6 +1483,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1478,6 +1520,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1514,6 +1557,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1550,6 +1594,7 @@
   },
   {
     "name": "アスター賞",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1586,6 +1631,7 @@
   },
   {
     "name": "すずらん賞",
+    "stadium": "札幌",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1620,6 +1666,7 @@
   },
   {
     "name": "野路菊ステークス",
+    "stadium": "阪神",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1656,6 +1703,7 @@
   },
   {
     "name": "札幌ジュニアステークス",
+    "stadium": "札幌",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1690,6 +1738,7 @@
   },
   {
     "name": "小倉ジュニアステークス",
+    "stadium": "小倉",
     "permission": 1,
     "month": 9,
     "half": 1,
@@ -1726,6 +1775,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -1762,6 +1812,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -1798,6 +1849,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -1834,6 +1886,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -1870,6 +1923,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -1904,6 +1958,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -1938,6 +1993,7 @@
   },
   {
     "name": "サフラン賞",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -1974,6 +2030,7 @@
   },
   {
     "name": "ききょうステークス",
+    "stadium": "阪神",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -2008,6 +2065,7 @@
   },
   {
     "name": "芙蓉ステークス",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -2044,6 +2102,7 @@
   },
   {
     "name": "カンナステークス",
+    "stadium": "中山",
     "permission": 1,
     "month": 9,
     "half": 2,
@@ -2078,6 +2137,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2114,6 +2174,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2151,6 +2212,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2187,6 +2249,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2224,6 +2287,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2261,6 +2325,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2297,6 +2362,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2331,6 +2397,7 @@
   },
   {
     "name": "りんどう賞",
+    "stadium": "京都",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2365,6 +2432,7 @@
   },
   {
     "name": "紫菊賞",
+    "stadium": "京都",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2401,6 +2469,7 @@
   },
   {
     "name": "プラタナス賞",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2438,6 +2507,7 @@
   },
   {
     "name": "もみじステークス",
+    "stadium": "京都",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2472,6 +2542,7 @@
   },
   {
     "name": "サウジアラビアロイヤルカップ",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 1,
@@ -2509,6 +2580,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2545,6 +2617,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2582,6 +2655,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2619,6 +2693,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2653,6 +2728,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2689,6 +2765,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2726,6 +2803,7 @@
   },
   {
     "name": "なでしこ賞",
+    "stadium": "京都",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2760,6 +2838,7 @@
   },
   {
     "name": "アイビーステークス",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2796,6 +2875,7 @@
   },
   {
     "name": "萩ステークス",
+    "stadium": "京都",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2830,6 +2910,7 @@
   },
   {
     "name": "アルテミスステークス",
+    "stadium": "東京",
     "permission": 1,
     "month": 10,
     "half": 2,
@@ -2867,6 +2948,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -2903,6 +2985,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -2940,6 +3023,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -2976,6 +3060,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3013,6 +3098,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3050,6 +3136,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3086,6 +3173,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3120,6 +3208,7 @@
   },
   {
     "name": "百日草特別",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3154,6 +3243,7 @@
   },
   {
     "name": "きんもくせい特別",
+    "stadium": "福島",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3190,6 +3280,7 @@
   },
   {
     "name": "オキザリス賞",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3226,6 +3317,7 @@
   },
   {
     "name": "黄菊賞",
+    "stadium": "京都",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3262,6 +3354,7 @@
   },
   {
     "name": "福島ジュニアステークス",
+    "stadium": "福島",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3296,6 +3389,7 @@
   },
   {
     "name": "ファンタジーステークス",
+    "stadium": "京都",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3330,6 +3424,7 @@
   },
   {
     "name": "京王杯ジュニアステークス",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3367,6 +3462,7 @@
   },
   {
     "name": "デイリー杯ジュニアステークス",
+    "stadium": "京都",
     "permission": 1,
     "month": 11,
     "half": 1,
@@ -3403,6 +3499,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3439,6 +3536,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3475,6 +3573,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3512,6 +3611,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3549,6 +3649,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3585,6 +3686,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3622,6 +3724,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3656,6 +3759,7 @@
   },
   {
     "name": "もちの木賞",
+    "stadium": "京都",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3690,6 +3794,7 @@
   },
   {
     "name": "赤松賞",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3727,6 +3832,7 @@
   },
   {
     "name": "秋明菊賞",
+    "stadium": "京都",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3761,6 +3867,7 @@
   },
   {
     "name": "カトレア賞",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3798,6 +3905,7 @@
   },
   {
     "name": "ベゴニア賞",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3835,6 +3943,7 @@
   },
   {
     "name": "白菊賞",
+    "stadium": "京都",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3871,6 +3980,7 @@
   },
   {
     "name": "葉牡丹賞",
+    "stadium": "中山",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3907,6 +4017,7 @@
   },
   {
     "name": "こうやまき賞",
+    "stadium": "中京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3943,6 +4054,7 @@
   },
   {
     "name": "東京スポーツ杯ジュニアステークス",
+    "stadium": "東京",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -3979,6 +4091,7 @@
   },
   {
     "name": "京都ジュニアステークス",
+    "stadium": "京都",
     "permission": 1,
     "month": 11,
     "half": 2,
@@ -4015,6 +4128,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4051,6 +4165,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4087,6 +4202,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4121,6 +4237,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4157,6 +4274,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4191,6 +4309,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4227,6 +4346,7 @@
   },
   {
     "name": "万両賞",
+    "stadium": "阪神",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4261,6 +4381,7 @@
   },
   {
     "name": "黒松賞",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4295,6 +4416,7 @@
   },
   {
     "name": "エリカ賞",
+    "stadium": "阪神",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4331,6 +4453,7 @@
   },
   {
     "name": "つわぶき賞",
+    "stadium": "中京",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4365,6 +4488,7 @@
   },
   {
     "name": "ひいらぎ賞",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4401,6 +4525,7 @@
   },
   {
     "name": "さざんか賞",
+    "stadium": "阪神",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4435,6 +4560,7 @@
   },
   {
     "name": "寒椿賞",
+    "stadium": "中京",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4469,6 +4595,7 @@
   },
   {
     "name": "阪神ジュベナイルフィリーズ",
+    "stadium": "阪神",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4505,6 +4632,7 @@
   },
   {
     "name": "朝日杯フューチュリティステークス",
+    "stadium": "阪神",
     "permission": 1,
     "month": 12,
     "half": 1,
@@ -4541,6 +4669,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 2,
@@ -4577,6 +4706,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 2,
@@ -4611,6 +4741,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 2,
@@ -4647,6 +4778,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 2,
@@ -4683,6 +4815,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 2,
@@ -4719,6 +4852,7 @@
   },
   {
     "name": "ジュニア級未勝利",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 2,
@@ -4753,6 +4887,7 @@
   },
   {
     "name": "千両賞",
+    "stadium": "阪神",
     "permission": 1,
     "month": 12,
     "half": 2,
@@ -4789,6 +4924,7 @@
   },
   {
     "name": "クリスマスローズステークス",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 2,
@@ -4823,6 +4959,7 @@
   },
   {
     "name": "ホープフルステークス",
+    "stadium": "中山",
     "permission": 1,
     "month": 12,
     "half": 2,
@@ -4859,6 +4996,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -4895,6 +5033,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -4931,6 +5070,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -4967,6 +5107,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -5003,6 +5144,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -5040,6 +5182,7 @@
   },
   {
     "name": "ジュニアカップ",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -5076,6 +5219,7 @@
   },
   {
     "name": "紅梅ステークス",
+    "stadium": "京都",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -5110,6 +5254,7 @@
   },
   {
     "name": "シンザン記念",
+    "stadium": "京都",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -5146,6 +5291,7 @@
   },
   {
     "name": "フェアリーステークス",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -5182,6 +5328,7 @@
   },
   {
     "name": "京成杯",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 1,
@@ -5218,6 +5365,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 2,
@@ -5254,6 +5402,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 2,
@@ -5288,6 +5437,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 2,
@@ -5324,6 +5474,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 1,
     "half": 2,
@@ -5360,6 +5511,7 @@
   },
   {
     "name": "若駒ステークス",
+    "stadium": "京都",
     "permission": 2,
     "month": 1,
     "half": 2,
@@ -5396,6 +5548,7 @@
   },
   {
     "name": "クロッカスステークス",
+    "stadium": "東京",
     "permission": 2,
     "month": 1,
     "half": 2,
@@ -5433,6 +5586,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5469,6 +5623,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5506,6 +5661,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5542,6 +5698,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5579,6 +5736,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5616,6 +5774,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5652,6 +5811,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5686,6 +5846,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5720,6 +5881,7 @@
   },
   {
     "name": "エルフィンステークス",
+    "stadium": "京都",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5756,6 +5918,7 @@
   },
   {
     "name": "きさらぎ賞",
+    "stadium": "京都",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5790,6 +5953,7 @@
   },
   {
     "name": "クイーンカップ",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5827,6 +5991,7 @@
   },
   {
     "name": "共同通信杯",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 1,
@@ -5863,6 +6028,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 2,
@@ -5899,6 +6065,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 2,
@@ -5935,6 +6102,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 2,
@@ -5972,6 +6140,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 2,
@@ -6008,6 +6177,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 2,
@@ -6042,6 +6212,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 2,
@@ -6079,6 +6250,7 @@
   },
   {
     "name": "ヒヤシンスステークス",
+    "stadium": "東京",
     "permission": 2,
     "month": 2,
     "half": 2,
@@ -6116,6 +6288,7 @@
   },
   {
     "name": "すみれステークス",
+    "stadium": "阪神",
     "permission": 2,
     "month": 2,
     "half": 2,
@@ -6152,6 +6325,7 @@
   },
   {
     "name": "マーガレットステークス",
+    "stadium": "阪神",
     "permission": 2,
     "month": 2,
     "half": 2,
@@ -6186,6 +6360,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6222,6 +6397,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6258,6 +6434,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6292,6 +6469,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6328,6 +6506,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6365,6 +6544,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6401,6 +6581,7 @@
   },
   {
     "name": "アネモネステークス",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6437,6 +6618,7 @@
   },
   {
     "name": "昇竜ステークス",
+    "stadium": "中京",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6471,6 +6653,7 @@
   },
   {
     "name": "弥生賞",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6507,6 +6690,7 @@
   },
   {
     "name": "フィリーズレビュー",
+    "stadium": "阪神",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6541,6 +6725,7 @@
   },
   {
     "name": "チューリップ賞",
+    "stadium": "阪神",
     "permission": 2,
     "month": 3,
     "half": 1,
@@ -6577,6 +6762,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6613,6 +6799,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6649,6 +6836,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6685,6 +6873,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6721,6 +6910,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6755,6 +6945,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6792,6 +6983,7 @@
   },
   {
     "name": "若葉ステークス",
+    "stadium": "阪神",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6828,6 +7020,7 @@
   },
   {
     "name": "ファルコンステークス",
+    "stadium": "中京",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6862,6 +7055,7 @@
   },
   {
     "name": "フラワーカップ",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6896,6 +7090,7 @@
   },
   {
     "name": "毎日杯",
+    "stadium": "阪神",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6932,6 +7127,7 @@
   },
   {
     "name": "スプリングステークス",
+    "stadium": "中山",
     "permission": 2,
     "month": 3,
     "half": 2,
@@ -6966,6 +7162,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7002,6 +7199,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7038,6 +7236,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7074,6 +7273,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7110,6 +7310,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "中山",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7147,6 +7348,7 @@
   },
   {
     "name": "伏竜ステークス",
+    "stadium": "中山",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7183,6 +7385,7 @@
   },
   {
     "name": "忘れな草賞",
+    "stadium": "阪神",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7219,6 +7422,7 @@
   },
   {
     "name": "アーリントンカップ",
+    "stadium": "阪神",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7255,6 +7459,7 @@
   },
   {
     "name": "ニュージーランドトロフィー",
+    "stadium": "中山",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7291,6 +7496,7 @@
   },
   {
     "name": "桜花賞",
+    "stadium": "阪神",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7327,6 +7533,7 @@
   },
   {
     "name": "皐月賞",
+    "stadium": "中山",
     "permission": 2,
     "month": 4,
     "half": 1,
@@ -7363,6 +7570,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7397,6 +7605,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7433,6 +7642,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7470,6 +7680,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7506,6 +7717,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7543,6 +7755,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7580,6 +7793,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7616,6 +7830,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7650,6 +7865,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7684,6 +7900,7 @@
   },
   {
     "name": "橘ステークス",
+    "stadium": "京都",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7718,6 +7935,7 @@
   },
   {
     "name": "端午ステークス",
+    "stadium": "京都",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7752,6 +7970,7 @@
   },
   {
     "name": "スイートピーステークス",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7788,6 +8007,7 @@
   },
   {
     "name": "フローラステークス",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7822,6 +8042,7 @@
   },
   {
     "name": "青葉賞",
+    "stadium": "東京",
     "permission": 2,
     "month": 4,
     "half": 2,
@@ -7856,6 +8077,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -7892,6 +8114,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -7928,6 +8151,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -7965,6 +8189,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -8002,6 +8227,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -8038,6 +8264,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -8072,6 +8299,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -8106,6 +8334,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -8142,6 +8371,7 @@
   },
   {
     "name": "プリンシパルステークス",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -8176,6 +8406,7 @@
   },
   {
     "name": "青竜ステークス",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -8213,6 +8444,7 @@
   },
   {
     "name": "京都新聞杯",
+    "stadium": "京都",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -8249,6 +8481,7 @@
   },
   {
     "name": "NHKマイルカップ",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 1,
@@ -8286,6 +8519,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8323,6 +8557,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8359,6 +8594,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8395,6 +8631,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8432,6 +8669,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8468,6 +8706,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8502,6 +8741,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8536,6 +8776,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8573,6 +8814,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8607,6 +8849,7 @@
   },
   {
     "name": "鳳雛ステークス",
+    "stadium": "京都",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8641,6 +8884,7 @@
   },
   {
     "name": "白百合ステークス",
+    "stadium": "京都",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8675,6 +8919,7 @@
   },
   {
     "name": "葵ステークス",
+    "stadium": "京都",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8709,6 +8954,7 @@
   },
   {
     "name": "オークス",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8743,6 +8989,7 @@
   },
   {
     "name": "東京優駿（日本ダービー）",
+    "stadium": "東京",
     "permission": 2,
     "month": 5,
     "half": 2,
@@ -8777,6 +9024,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 1,
@@ -8813,6 +9061,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 1,
@@ -8850,6 +9099,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 1,
@@ -8886,6 +9136,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 1,
@@ -8923,6 +9174,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 1,
@@ -8960,6 +9212,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 1,
@@ -8994,6 +9247,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 1,
@@ -9028,6 +9282,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 1,
@@ -9062,6 +9317,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 2,
@@ -9098,6 +9354,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 2,
@@ -9132,6 +9389,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 2,
@@ -9169,6 +9427,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 2,
@@ -9206,6 +9465,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 2,
@@ -9242,6 +9502,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 2,
@@ -9279,6 +9540,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 2,
@@ -9313,6 +9575,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 2,
@@ -9349,6 +9612,7 @@
   },
   {
     "name": "ユニコーンステークス",
+    "stadium": "東京",
     "permission": 2,
     "month": 6,
     "half": 2,
@@ -9386,6 +9650,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 1,
@@ -9422,6 +9687,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 1,
@@ -9456,6 +9722,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 1,
@@ -9490,6 +9757,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 1,
@@ -9526,6 +9794,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 1,
@@ -9562,6 +9831,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 1,
@@ -9596,6 +9866,7 @@
   },
   {
     "name": "ラジオNIKKEI賞",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 1,
@@ -9632,6 +9903,7 @@
   },
   {
     "name": "ジャパンダートダービー",
+    "stadium": "大井",
     "permission": 2,
     "month": 7,
     "half": 1,
@@ -9666,6 +9938,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 2,
@@ -9702,6 +9975,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 2,
@@ -9736,6 +10010,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 2,
@@ -9772,6 +10047,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 2,
@@ -9806,6 +10082,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "福島",
     "permission": 2,
     "month": 7,
     "half": 2,
@@ -9842,6 +10119,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 1,
@@ -9878,6 +10156,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 1,
@@ -9912,6 +10191,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 1,
@@ -9946,6 +10226,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 1,
@@ -9982,6 +10263,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 1,
@@ -10018,6 +10300,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 1,
@@ -10055,6 +10338,7 @@
   },
   {
     "name": "レパードステークス",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 1,
@@ -10091,6 +10375,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 2,
@@ -10127,6 +10412,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 2,
@@ -10161,6 +10447,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 2,
@@ -10197,6 +10484,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 2,
@@ -10234,6 +10522,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 2,
@@ -10268,6 +10557,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 2,
@@ -10304,6 +10594,7 @@
   },
   {
     "name": "クラシック級未勝利",
+    "stadium": "新潟",
     "permission": 2,
     "month": 8,
     "half": 2,
@@ -10338,6 +10629,7 @@
   },
   {
     "name": "紫苑ステークス",
+    "stadium": "中山",
     "permission": 2,
     "month": 9,
     "half": 1,
@@ -10374,6 +10666,7 @@
   },
   {
     "name": "ローズステークス",
+    "stadium": "阪神",
     "permission": 2,
     "month": 9,
     "half": 1,
@@ -10410,6 +10703,7 @@
   },
   {
     "name": "神戸新聞杯",
+    "stadium": "阪神",
     "permission": 2,
     "month": 9,
     "half": 2,
@@ -10446,6 +10740,7 @@
   },
   {
     "name": "セントライト記念",
+    "stadium": "中山",
     "permission": 2,
     "month": 9,
     "half": 2,
@@ -10483,6 +10778,7 @@
   },
   {
     "name": "秋華賞",
+    "stadium": "京都",
     "permission": 2,
     "month": 10,
     "half": 2,
@@ -10519,6 +10815,7 @@
   },
   {
     "name": "菊花賞",
+    "stadium": "京都",
     "permission": 2,
     "month": 10,
     "half": 2,
@@ -10556,6 +10853,7 @@
   },
   {
     "name": "天保山ステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 6,
     "half": 1,
@@ -10590,6 +10888,7 @@
   },
   {
     "name": "スレイプニルステークス",
+    "stadium": "東京",
     "permission": 3,
     "month": 6,
     "half": 1,
@@ -10624,6 +10923,7 @@
   },
   {
     "name": "鳴尾記念",
+    "stadium": "阪神",
     "permission": 3,
     "month": 6,
     "half": 1,
@@ -10660,6 +10960,7 @@
   },
   {
     "name": "マーメイドステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 6,
     "half": 1,
@@ -10696,6 +10997,7 @@
   },
   {
     "name": "エプソムカップ",
+    "stadium": "東京",
     "permission": 3,
     "month": 6,
     "half": 1,
@@ -10732,6 +11034,7 @@
   },
   {
     "name": "安田記念",
+    "stadium": "東京",
     "permission": 3,
     "month": 6,
     "half": 1,
@@ -10769,6 +11072,7 @@
   },
   {
     "name": "アハルテケステークス",
+    "stadium": "東京",
     "permission": 3,
     "month": 6,
     "half": 2,
@@ -10806,6 +11110,7 @@
   },
   {
     "name": "米子ステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 6,
     "half": 2,
@@ -10842,6 +11147,7 @@
   },
   {
     "name": "大沼ステークス",
+    "stadium": "函館",
     "permission": 3,
     "month": 6,
     "half": 2,
@@ -10876,6 +11182,7 @@
   },
   {
     "name": "パラダイスステークス",
+    "stadium": "東京",
     "permission": 3,
     "month": 6,
     "half": 2,
@@ -10913,6 +11220,7 @@
   },
   {
     "name": "三宮ステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 6,
     "half": 2,
@@ -10947,6 +11255,7 @@
   },
   {
     "name": "函館スプリントステークス",
+    "stadium": "函館",
     "permission": 3,
     "month": 6,
     "half": 2,
@@ -10981,6 +11290,7 @@
   },
   {
     "name": "宝塚記念",
+    "stadium": "阪神",
     "permission": 3,
     "month": 6,
     "half": 2,
@@ -11017,6 +11327,7 @@
   },
   {
     "name": "巴賞",
+    "stadium": "函館",
     "permission": 3,
     "month": 7,
     "half": 1,
@@ -11053,6 +11364,7 @@
   },
   {
     "name": "マリーンステークス",
+    "stadium": "函館",
     "permission": 3,
     "month": 7,
     "half": 1,
@@ -11087,6 +11399,7 @@
   },
   {
     "name": "名鉄杯",
+    "stadium": "中京",
     "permission": 3,
     "month": 7,
     "half": 1,
@@ -11123,6 +11436,7 @@
   },
   {
     "name": "CBC賞",
+    "stadium": "中京",
     "permission": 3,
     "month": 7,
     "half": 1,
@@ -11157,6 +11471,7 @@
   },
   {
     "name": "プロキオンステークス",
+    "stadium": "中京",
     "permission": 3,
     "month": 7,
     "half": 1,
@@ -11191,6 +11506,7 @@
   },
   {
     "name": "七夕賞",
+    "stadium": "福島",
     "permission": 3,
     "month": 7,
     "half": 1,
@@ -11227,6 +11543,7 @@
   },
   {
     "name": "函館記念",
+    "stadium": "函館",
     "permission": 3,
     "month": 7,
     "half": 1,
@@ -11263,6 +11580,7 @@
   },
   {
     "name": "福島テレビオープン",
+    "stadium": "福島",
     "permission": 3,
     "month": 7,
     "half": 2,
@@ -11297,6 +11615,7 @@
   },
   {
     "name": "中京記念",
+    "stadium": "中京",
     "permission": 3,
     "month": 7,
     "half": 2,
@@ -11333,6 +11652,7 @@
   },
   {
     "name": "アイビスサマーダッシュ",
+    "stadium": "新潟",
     "permission": 3,
     "month": 7,
     "half": 2,
@@ -11369,6 +11689,7 @@
   },
   {
     "name": "クイーンステークス",
+    "stadium": "札幌",
     "permission": 3,
     "month": 7,
     "half": 2,
@@ -11403,6 +11724,7 @@
   },
   {
     "name": "札幌日経オープン",
+    "stadium": "札幌",
     "permission": 3,
     "month": 8,
     "half": 1,
@@ -11439,6 +11761,7 @@
   },
   {
     "name": "UHB賞",
+    "stadium": "札幌",
     "permission": 3,
     "month": 8,
     "half": 1,
@@ -11473,6 +11796,7 @@
   },
   {
     "name": "阿蘇ステークス",
+    "stadium": "小倉",
     "permission": 3,
     "month": 8,
     "half": 1,
@@ -11507,6 +11831,7 @@
   },
   {
     "name": "関越ステークス",
+    "stadium": "新潟",
     "permission": 3,
     "month": 8,
     "half": 1,
@@ -11543,6 +11868,7 @@
   },
   {
     "name": "小倉記念",
+    "stadium": "小倉",
     "permission": 3,
     "month": 8,
     "half": 1,
@@ -11579,6 +11905,7 @@
   },
   {
     "name": "関屋記念",
+    "stadium": "新潟",
     "permission": 3,
     "month": 8,
     "half": 1,
@@ -11613,6 +11940,7 @@
   },
   {
     "name": "エルムステークス",
+    "stadium": "札幌",
     "permission": 3,
     "month": 8,
     "half": 1,
@@ -11649,6 +11977,7 @@
   },
   {
     "name": "NST賞",
+    "stadium": "新潟",
     "permission": 3,
     "month": 8,
     "half": 2,
@@ -11683,6 +12012,7 @@
   },
   {
     "name": "BSN賞",
+    "stadium": "新潟",
     "permission": 3,
     "month": 8,
     "half": 2,
@@ -11719,6 +12049,7 @@
   },
   {
     "name": "小倉日経オープン",
+    "stadium": "小倉",
     "permission": 3,
     "month": 8,
     "half": 2,
@@ -11753,6 +12084,7 @@
   },
   {
     "name": "朱鷺ステークス",
+    "stadium": "新潟",
     "permission": 3,
     "month": 8,
     "half": 2,
@@ -11787,6 +12119,7 @@
   },
   {
     "name": "北九州記念",
+    "stadium": "小倉",
     "permission": 3,
     "month": 8,
     "half": 2,
@@ -11823,6 +12156,7 @@
   },
   {
     "name": "キーンランドカップ",
+    "stadium": "札幌",
     "permission": 3,
     "month": 8,
     "half": 2,
@@ -11857,6 +12191,7 @@
   },
   {
     "name": "札幌記念",
+    "stadium": "札幌",
     "permission": 3,
     "month": 8,
     "half": 2,
@@ -11893,6 +12228,7 @@
   },
   {
     "name": "丹頂ステークス",
+    "stadium": "札幌",
     "permission": 3,
     "month": 9,
     "half": 1,
@@ -11929,6 +12265,7 @@
   },
   {
     "name": "エニフステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 9,
     "half": 1,
@@ -11963,6 +12300,7 @@
   },
   {
     "name": "ラジオ日本賞",
+    "stadium": "中山",
     "permission": 3,
     "month": 9,
     "half": 1,
@@ -11999,6 +12337,7 @@
   },
   {
     "name": "新潟記念",
+    "stadium": "新潟",
     "permission": 3,
     "month": 9,
     "half": 1,
@@ -12036,6 +12375,7 @@
   },
   {
     "name": "京成杯オータムハンデキャップ",
+    "stadium": "中山",
     "permission": 3,
     "month": 9,
     "half": 1,
@@ -12072,6 +12412,7 @@
   },
   {
     "name": "セントウルステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 9,
     "half": 1,
@@ -12106,6 +12447,7 @@
   },
   {
     "name": "ポートアイランドステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 9,
     "half": 2,
@@ -12142,6 +12484,7 @@
   },
   {
     "name": "ながつきステークス",
+    "stadium": "中山",
     "permission": 3,
     "month": 9,
     "half": 2,
@@ -12178,6 +12521,7 @@
   },
   {
     "name": "シリウスステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 9,
     "half": 2,
@@ -12215,6 +12559,7 @@
   },
   {
     "name": "オールカマー",
+    "stadium": "中山",
     "permission": 3,
     "month": 9,
     "half": 2,
@@ -12252,6 +12597,7 @@
   },
   {
     "name": "スプリンターズステークス",
+    "stadium": "中山",
     "permission": 3,
     "month": 9,
     "half": 2,
@@ -12286,6 +12632,7 @@
   },
   {
     "name": "オパールステークス",
+    "stadium": "京都",
     "permission": 3,
     "month": 10,
     "half": 1,
@@ -12320,6 +12667,7 @@
   },
   {
     "name": "グリーンチャンネルカップ",
+    "stadium": "東京",
     "permission": 3,
     "month": 10,
     "half": 1,
@@ -12356,6 +12704,7 @@
   },
   {
     "name": "オクトーバーステークス",
+    "stadium": "東京",
     "permission": 3,
     "month": 10,
     "half": 1,
@@ -12390,6 +12739,7 @@
   },
   {
     "name": "信越ステークス",
+    "stadium": "新潟",
     "permission": 3,
     "month": 10,
     "half": 1,
@@ -12424,6 +12774,7 @@
   },
   {
     "name": "太秦ステークス",
+    "stadium": "京都",
     "permission": 3,
     "month": 10,
     "half": 1,
@@ -12458,6 +12809,7 @@
   },
   {
     "name": "毎日王冠",
+    "stadium": "東京",
     "permission": 3,
     "month": 10,
     "half": 1,
@@ -12494,6 +12846,7 @@
   },
   {
     "name": "京都大賞典",
+    "stadium": "京都",
     "permission": 3,
     "month": 10,
     "half": 1,
@@ -12530,6 +12883,7 @@
   },
   {
     "name": "府中ウマ娘ステークス",
+    "stadium": "東京",
     "permission": 3,
     "month": 10,
     "half": 1,
@@ -12566,6 +12920,7 @@
   },
   {
     "name": "室町ステークス",
+    "stadium": "京都",
     "permission": 3,
     "month": 10,
     "half": 2,
@@ -12600,6 +12955,7 @@
   },
   {
     "name": "ブラジルカップ",
+    "stadium": "東京",
     "permission": 3,
     "month": 10,
     "half": 2,
@@ -12634,6 +12990,7 @@
   },
   {
     "name": "カシオペアステークス",
+    "stadium": "京都",
     "permission": 3,
     "month": 10,
     "half": 2,
@@ -12668,6 +13025,7 @@
   },
   {
     "name": "ルミエールオータムダッシュ",
+    "stadium": "新潟",
     "permission": 3,
     "month": 10,
     "half": 2,
@@ -12704,6 +13062,7 @@
   },
   {
     "name": "スワンステークス",
+    "stadium": "京都",
     "permission": 3,
     "month": 10,
     "half": 2,
@@ -12738,6 +13097,7 @@
   },
   {
     "name": "富士ステークス",
+    "stadium": "東京",
     "permission": 3,
     "month": 10,
     "half": 2,
@@ -12775,6 +13135,7 @@
   },
   {
     "name": "天皇賞（秋）",
+    "stadium": "東京",
     "permission": 3,
     "month": 10,
     "half": 2,
@@ -12809,6 +13170,7 @@
   },
   {
     "name": "オーロカップ",
+    "stadium": "東京",
     "permission": 3,
     "month": 11,
     "half": 1,
@@ -12846,6 +13208,7 @@
   },
   {
     "name": "みやこステークス",
+    "stadium": "京都",
     "permission": 3,
     "month": 11,
     "half": 1,
@@ -12880,6 +13243,7 @@
   },
   {
     "name": "武蔵野ステークス",
+    "stadium": "東京",
     "permission": 3,
     "month": 11,
     "half": 1,
@@ -12917,6 +13281,7 @@
   },
   {
     "name": "福島記念",
+    "stadium": "福島",
     "permission": 3,
     "month": 11,
     "half": 1,
@@ -12953,6 +13318,7 @@
   },
   {
     "name": "アルゼンチン共和国杯",
+    "stadium": "東京",
     "permission": 3,
     "month": 11,
     "half": 1,
@@ -12989,6 +13355,7 @@
   },
   {
     "name": "エリザベス女王杯",
+    "stadium": "京都",
     "permission": 3,
     "month": 11,
     "half": 1,
@@ -13025,6 +13392,7 @@
   },
   {
     "name": "JBCレディスクラシック",
+    "stadium": "大井",
     "permission": 3,
     "month": 11,
     "half": 1,
@@ -13059,6 +13427,7 @@
   },
   {
     "name": "JBCスプリント",
+    "stadium": "大井",
     "permission": 3,
     "month": 11,
     "half": 1,
@@ -13093,6 +13462,7 @@
   },
   {
     "name": "JBCクラシック",
+    "stadium": "大井",
     "permission": 3,
     "month": 11,
     "half": 1,
@@ -13127,6 +13497,7 @@
   },
   {
     "name": "アンドロメダステークス",
+    "stadium": "京都",
     "permission": 3,
     "month": 11,
     "half": 2,
@@ -13163,6 +13534,7 @@
   },
   {
     "name": "霜月ステークス",
+    "stadium": "東京",
     "permission": 3,
     "month": 11,
     "half": 2,
@@ -13199,6 +13571,7 @@
   },
   {
     "name": "福島民友カップ",
+    "stadium": "福島",
     "permission": 3,
     "month": 11,
     "half": 2,
@@ -13235,6 +13608,7 @@
   },
   {
     "name": "キャピタルステークス",
+    "stadium": "東京",
     "permission": 3,
     "month": 11,
     "half": 2,
@@ -13272,6 +13646,7 @@
   },
   {
     "name": "オータムリーフステークス",
+    "stadium": "京都",
     "permission": 3,
     "month": 11,
     "half": 2,
@@ -13306,6 +13681,7 @@
   },
   {
     "name": "京阪杯",
+    "stadium": "京都",
     "permission": 3,
     "month": 11,
     "half": 2,
@@ -13340,6 +13716,7 @@
   },
   {
     "name": "マイルチャンピオンシップ",
+    "stadium": "京都",
     "permission": 3,
     "month": 11,
     "half": 2,
@@ -13376,6 +13753,7 @@
   },
   {
     "name": "ジャパンカップ",
+    "stadium": "東京",
     "permission": 3,
     "month": 11,
     "half": 2,
@@ -13410,6 +13788,7 @@
   },
   {
     "name": "ラピスラズリステークス",
+    "stadium": "中山",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13444,6 +13823,7 @@
   },
   {
     "name": "師走ステークス",
+    "stadium": "中山",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13480,6 +13860,7 @@
   },
   {
     "name": "リゲルステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13516,6 +13897,7 @@
   },
   {
     "name": "タンザナイトステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13550,6 +13932,7 @@
   },
   {
     "name": "ディセンバーステークス",
+    "stadium": "中山",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13584,6 +13967,7 @@
   },
   {
     "name": "チャレンジカップ",
+    "stadium": "阪神",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13620,6 +14004,7 @@
   },
   {
     "name": "中日新聞杯",
+    "stadium": "中京",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13654,6 +14039,7 @@
   },
   {
     "name": "カペラステークス",
+    "stadium": "中山",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13690,6 +14076,7 @@
   },
   {
     "name": "ターコイズステークス",
+    "stadium": "中山",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13726,6 +14113,7 @@
   },
   {
     "name": "ステイヤーズステークス",
+    "stadium": "中山",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13762,6 +14150,7 @@
   },
   {
     "name": "チャンピオンズカップ",
+    "stadium": "中京",
     "permission": 3,
     "month": 12,
     "half": 1,
@@ -13798,6 +14187,7 @@
   },
   {
     "name": "ギャラクシーステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 12,
     "half": 2,
@@ -13832,6 +14222,7 @@
   },
   {
     "name": "ベテルギウスステークス",
+    "stadium": "阪神",
     "permission": 3,
     "month": 12,
     "half": 2,
@@ -13866,6 +14257,7 @@
   },
   {
     "name": "阪神カップ",
+    "stadium": "阪神",
     "permission": 3,
     "month": 12,
     "half": 2,
@@ -13900,6 +14292,7 @@
   },
   {
     "name": "有馬記念",
+    "stadium": "中山",
     "permission": 3,
     "month": 12,
     "half": 2,
@@ -13937,6 +14330,7 @@
   },
   {
     "name": "東京大賞典",
+    "stadium": "大井",
     "permission": 3,
     "month": 12,
     "half": 2,
@@ -13971,6 +14365,7 @@
   },
   {
     "name": "万葉ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14008,6 +14403,7 @@
   },
   {
     "name": "淀短距離ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14042,6 +14438,7 @@
   },
   {
     "name": "ポルックスステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14078,6 +14475,7 @@
   },
   {
     "name": "ジャニュアリーステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14114,6 +14512,7 @@
   },
   {
     "name": "ニューイヤーステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14150,6 +14549,7 @@
   },
   {
     "name": "カーバンクルステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14184,6 +14584,7 @@
   },
   {
     "name": "京都金杯",
+    "stadium": "京都",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14220,6 +14621,7 @@
   },
   {
     "name": "中山金杯",
+    "stadium": "中山",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14256,6 +14658,7 @@
   },
   {
     "name": "愛知杯",
+    "stadium": "中京",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14290,6 +14693,7 @@
   },
   {
     "name": "日経新春杯",
+    "stadium": "京都",
     "permission": 4,
     "month": 1,
     "half": 1,
@@ -14326,6 +14730,7 @@
   },
   {
     "name": "すばるステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 1,
     "half": 2,
@@ -14360,6 +14765,7 @@
   },
   {
     "name": "白富士ステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 1,
     "half": 2,
@@ -14394,6 +14800,7 @@
   },
   {
     "name": "シルクロードステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 1,
     "half": 2,
@@ -14428,6 +14835,7 @@
   },
   {
     "name": "根岸ステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 1,
     "half": 2,
@@ -14464,6 +14872,7 @@
   },
   {
     "name": "東海ステークス",
+    "stadium": "中京",
     "permission": 4,
     "month": 1,
     "half": 2,
@@ -14500,6 +14909,7 @@
   },
   {
     "name": "アメリカJCC",
+    "stadium": "中山",
     "permission": 4,
     "month": 1,
     "half": 2,
@@ -14537,6 +14947,7 @@
   },
   {
     "name": "大和ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 2,
     "half": 1,
@@ -14571,6 +14982,7 @@
   },
   {
     "name": "洛陽ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 2,
     "half": 1,
@@ -14607,6 +15019,7 @@
   },
   {
     "name": "アルデバランステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 2,
     "half": 1,
@@ -14641,6 +15054,7 @@
   },
   {
     "name": "バレンタインステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 2,
     "half": 1,
@@ -14677,6 +15091,7 @@
   },
   {
     "name": "東京新聞杯",
+    "stadium": "東京",
     "permission": 4,
     "month": 2,
     "half": 1,
@@ -14714,6 +15129,7 @@
   },
   {
     "name": "京都記念",
+    "stadium": "京都",
     "permission": 4,
     "month": 2,
     "half": 1,
@@ -14750,6 +15166,7 @@
   },
   {
     "name": "総武ステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 2,
     "half": 2,
@@ -14786,6 +15203,7 @@
   },
   {
     "name": "北九州短距離ステークス",
+    "stadium": "小倉",
     "permission": 4,
     "month": 2,
     "half": 2,
@@ -14822,6 +15240,7 @@
   },
   {
     "name": "京都ウマ娘ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 2,
     "half": 2,
@@ -14856,6 +15275,7 @@
   },
   {
     "name": "ダイヤモンドステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 2,
     "half": 2,
@@ -14890,6 +15310,7 @@
   },
   {
     "name": "小倉大賞典",
+    "stadium": "小倉",
     "permission": 4,
     "month": 2,
     "half": 2,
@@ -14924,6 +15345,7 @@
   },
   {
     "name": "阪急杯",
+    "stadium": "阪神",
     "permission": 4,
     "month": 2,
     "half": 2,
@@ -14958,6 +15380,7 @@
   },
   {
     "name": "中山記念",
+    "stadium": "中山",
     "permission": 4,
     "month": 2,
     "half": 2,
@@ -14992,6 +15415,7 @@
   },
   {
     "name": "フェブラリーステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 2,
     "half": 2,
@@ -15029,6 +15453,7 @@
   },
   {
     "name": "大阪城ステークス",
+    "stadium": "阪神",
     "permission": 4,
     "month": 3,
     "half": 1,
@@ -15065,6 +15490,7 @@
   },
   {
     "name": "ポラリスステークス",
+    "stadium": "阪神",
     "permission": 4,
     "month": 3,
     "half": 1,
@@ -15099,6 +15525,7 @@
   },
   {
     "name": "仁川ステークス",
+    "stadium": "阪神",
     "permission": 4,
     "month": 3,
     "half": 1,
@@ -15136,6 +15563,7 @@
   },
   {
     "name": "東風ステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 3,
     "half": 1,
@@ -15172,6 +15600,7 @@
   },
   {
     "name": "オーシャンステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 3,
     "half": 1,
@@ -15206,6 +15635,7 @@
   },
   {
     "name": "中山ウマ娘ステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 3,
     "half": 1,
@@ -15240,6 +15670,7 @@
   },
   {
     "name": "金鯱賞",
+    "stadium": "中京",
     "permission": 4,
     "month": 3,
     "half": 1,
@@ -15274,6 +15705,7 @@
   },
   {
     "name": "千葉ステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 3,
     "half": 2,
@@ -15310,6 +15742,7 @@
   },
   {
     "name": "六甲ステークス",
+    "stadium": "阪神",
     "permission": 4,
     "month": 3,
     "half": 2,
@@ -15346,6 +15779,7 @@
   },
   {
     "name": "マーチステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 3,
     "half": 2,
@@ -15382,6 +15816,7 @@
   },
   {
     "name": "阪神大賞典",
+    "stadium": "阪神",
     "permission": 4,
     "month": 3,
     "half": 2,
@@ -15418,6 +15853,7 @@
   },
   {
     "name": "日経賞",
+    "stadium": "中山",
     "permission": 4,
     "month": 3,
     "half": 2,
@@ -15455,6 +15891,7 @@
   },
   {
     "name": "高松宮記念",
+    "stadium": "中京",
     "permission": 4,
     "month": 3,
     "half": 2,
@@ -15489,6 +15926,7 @@
   },
   {
     "name": "大阪杯",
+    "stadium": "阪神",
     "permission": 4,
     "month": 3,
     "half": 2,
@@ -15525,6 +15963,7 @@
   },
   {
     "name": "コーラルステークス",
+    "stadium": "阪神",
     "permission": 4,
     "month": 4,
     "half": 1,
@@ -15559,6 +15998,7 @@
   },
   {
     "name": "京葉ステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 4,
     "half": 1,
@@ -15595,6 +16035,7 @@
   },
   {
     "name": "春雷ステークス",
+    "stadium": "中山",
     "permission": 4,
     "month": 4,
     "half": 1,
@@ -15629,6 +16070,7 @@
   },
   {
     "name": "福島民報杯",
+    "stadium": "福島",
     "permission": 4,
     "month": 4,
     "half": 1,
@@ -15665,6 +16107,7 @@
   },
   {
     "name": "吾妻小富士ステークス",
+    "stadium": "福島",
     "permission": 4,
     "month": 4,
     "half": 1,
@@ -15701,6 +16144,7 @@
   },
   {
     "name": "ダービー卿チャレンジトロフィー",
+    "stadium": "中山",
     "permission": 4,
     "month": 4,
     "half": 1,
@@ -15737,6 +16181,7 @@
   },
   {
     "name": "アンタレスステークス",
+    "stadium": "阪神",
     "permission": 4,
     "month": 4,
     "half": 1,
@@ -15771,6 +16216,7 @@
   },
   {
     "name": "阪神ウマ娘ステークス",
+    "stadium": "阪神",
     "permission": 4,
     "month": 4,
     "half": 1,
@@ -15807,6 +16253,7 @@
   },
   {
     "name": "オアシスステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 4,
     "half": 2,
@@ -15844,6 +16291,7 @@
   },
   {
     "name": "天王山ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 4,
     "half": 2,
@@ -15878,6 +16326,7 @@
   },
   {
     "name": "福島ウマ娘ステークス",
+    "stadium": "福島",
     "permission": 4,
     "month": 4,
     "half": 2,
@@ -15914,6 +16363,7 @@
   },
   {
     "name": "マイラーズカップ",
+    "stadium": "京都",
     "permission": 4,
     "month": 4,
     "half": 2,
@@ -15950,6 +16400,7 @@
   },
   {
     "name": "天皇賞（春）",
+    "stadium": "京都",
     "permission": 4,
     "month": 4,
     "half": 2,
@@ -15984,6 +16435,7 @@
   },
   {
     "name": "谷川岳ステークス",
+    "stadium": "新潟",
     "permission": 4,
     "month": 5,
     "half": 1,
@@ -16018,6 +16470,7 @@
   },
   {
     "name": "メトロポリタンステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 5,
     "half": 1,
@@ -16052,6 +16505,7 @@
   },
   {
     "name": "鞍馬ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 5,
     "half": 1,
@@ -16086,6 +16540,7 @@
   },
   {
     "name": "ブリリアントステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 5,
     "half": 1,
@@ -16120,6 +16575,7 @@
   },
   {
     "name": "都大路ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 5,
     "half": 1,
@@ -16154,6 +16610,7 @@
   },
   {
     "name": "栗東ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 5,
     "half": 1,
@@ -16188,6 +16645,7 @@
   },
   {
     "name": "新潟大賞典",
+    "stadium": "新潟",
     "permission": 4,
     "month": 5,
     "half": 1,
@@ -16225,6 +16683,7 @@
   },
   {
     "name": "京王杯スプリングカップ",
+    "stadium": "東京",
     "permission": 4,
     "month": 5,
     "half": 1,
@@ -16262,6 +16721,7 @@
   },
   {
     "name": "ヴィクトリアマイル",
+    "stadium": "東京",
     "permission": 4,
     "month": 5,
     "half": 1,
@@ -16299,6 +16759,7 @@
   },
   {
     "name": "メイステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 5,
     "half": 2,
@@ -16335,6 +16796,7 @@
   },
   {
     "name": "韋駄天ステークス",
+    "stadium": "新潟",
     "permission": 4,
     "month": 5,
     "half": 2,
@@ -16371,6 +16833,7 @@
   },
   {
     "name": "欅ステークス",
+    "stadium": "東京",
     "permission": 4,
     "month": 5,
     "half": 2,
@@ -16407,6 +16870,7 @@
   },
   {
     "name": "安土城ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 5,
     "half": 2,
@@ -16441,6 +16905,7 @@
   },
   {
     "name": "平安ステークス",
+    "stadium": "京都",
     "permission": 4,
     "month": 5,
     "half": 2,
@@ -16475,6 +16940,7 @@
   },
   {
     "name": "目黒記念",
+    "stadium": "東京",
     "permission": 4,
     "month": 5,
     "half": 2,
@@ -16511,6 +16977,7 @@
   },
   {
     "name": "帝王賞",
+    "stadium": "大井",
     "permission": 4,
     "month": 6,
     "half": 2,
@@ -16545,6 +17012,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16579,6 +17047,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16613,6 +17082,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16647,6 +17117,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16681,6 +17152,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16715,6 +17187,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16749,6 +17222,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16786,6 +17260,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16822,6 +17297,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16858,6 +17334,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16895,6 +17372,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16931,6 +17409,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -16965,6 +17444,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17001,6 +17481,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17035,6 +17516,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17071,6 +17553,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17107,6 +17590,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17143,6 +17627,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17179,6 +17664,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17216,6 +17702,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17250,6 +17737,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17284,6 +17772,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17320,6 +17809,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17356,6 +17846,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17392,6 +17883,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17426,6 +17918,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17460,6 +17953,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17497,6 +17991,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17534,6 +18029,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17570,6 +18066,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17606,6 +18103,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17640,6 +18138,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17676,6 +18175,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17712,6 +18212,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17746,6 +18247,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17780,6 +18282,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17814,6 +18317,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17851,6 +18355,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17887,6 +18392,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17921,6 +18427,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17955,6 +18462,7 @@
   },
   {
     "name": "URAファイナルズ 予選",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -17989,6 +18497,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18023,6 +18532,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18057,6 +18567,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18091,6 +18602,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18125,6 +18637,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18159,6 +18672,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18193,6 +18707,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18230,6 +18745,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18266,6 +18782,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18302,6 +18819,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18339,6 +18857,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18375,6 +18894,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18409,6 +18929,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18445,6 +18966,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18479,6 +19001,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18515,6 +19038,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18551,6 +19075,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18587,6 +19112,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18623,6 +19149,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18660,6 +19187,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18694,6 +19222,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18728,6 +19257,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18764,6 +19294,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18800,6 +19331,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18836,6 +19368,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18870,6 +19403,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18904,6 +19438,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18941,6 +19476,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -18978,6 +19514,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19014,6 +19551,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19050,6 +19588,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19084,6 +19623,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19120,6 +19660,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19156,6 +19697,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19190,6 +19732,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19224,6 +19767,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19258,6 +19802,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19295,6 +19840,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19331,6 +19877,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19365,6 +19912,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19399,6 +19947,7 @@
   },
   {
     "name": "URAファイナルズ 準決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19433,6 +19982,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19467,6 +20017,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19501,6 +20052,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19535,6 +20087,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19569,6 +20122,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19603,6 +20157,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19637,6 +20192,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19674,6 +20230,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19710,6 +20267,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19746,6 +20304,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19783,6 +20342,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19819,6 +20379,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19853,6 +20414,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19889,6 +20451,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19923,6 +20486,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19959,6 +20523,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -19995,6 +20560,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20031,6 +20597,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20067,6 +20634,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20104,6 +20672,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20138,6 +20707,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20172,6 +20742,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20208,6 +20779,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20244,6 +20816,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20280,6 +20853,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20314,6 +20888,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20348,6 +20923,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20385,6 +20961,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20422,6 +20999,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中山",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20458,6 +21036,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20494,6 +21073,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20528,6 +21108,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "阪神",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20564,6 +21145,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20600,6 +21182,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20634,6 +21217,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20668,6 +21252,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20702,6 +21287,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20739,6 +21325,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "中京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20775,6 +21362,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20809,6 +21397,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "東京",
     "permission": 5,
     "month": 1,
     "half": 2,
@@ -20843,6 +21432,7 @@
   },
   {
     "name": "URAファイナルズ 決勝",
+    "stadium": "京都",
     "permission": 5,
     "month": 1,
     "half": 2,
