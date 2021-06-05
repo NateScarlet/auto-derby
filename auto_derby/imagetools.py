@@ -12,6 +12,7 @@ import cv2
 import cv2.img_hash
 import numpy as np
 from PIL.Image import Image, fromarray
+import PIL.Image
 
 
 def md5(b_img: np.ndarray, *, save_path: Optional[Text] = None) -> Text:
@@ -56,6 +57,20 @@ def _cast_float(v: Any) -> float:
     return float(v)
 
 
+def cv_image(img: Image) -> np.ndarray:
+    if img.mode == "RGB":
+        return cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
+    if img.mode == "L":
+        return np.array(img)
+    raise ValueError("cv_image: unsupported mode: %s" % img.mode)
+
+
+def pil_image(img: np.ndarray) -> Image:
+    if img.shape[2:] == (3,):
+        return fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    return fromarray(img)
+
+
 def compare_color(a: Union[Tuple[int, ...], int], b: Union[Tuple[int, ...], int], *, bit_size: int = 8) -> float:
     max_value = (1 << bit_size) - 1
     t_a = tuple(cast.list_(a, (int,)))
@@ -66,9 +81,18 @@ def compare_color(a: Union[Tuple[int, ...], int], b: Union[Tuple[int, ...], int]
     return max(1 - _cast_float(np.sqrt(_cast_float(np.sum((np.array(t_a)-np.array(t_b)) ** 2, axis=0)))) / max_value, 0)
 
 
+def level(img: np.ndarray, black: np.ndarray, white: np.ndarray, *, bit_size: int = 8) -> np.ndarray:
+    max_value = (1 << bit_size) - 1
+    return np.clip((img - black) / (white - black) * max_value, 0, max_value).astype(img.dtype)
+
+
 def color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_size: int = 8) -> np.ndarray:
     max_value = (1 << bit_size) - 1
     assert img.shape == color.shape, (img.shape, color.shape)
+
+    if len(img.shape) == 2:
+        img = img[..., np.newaxis]
+        color = color[..., np.newaxis]
 
     # do this is somehow faster than
     # `numpy.linalg.norm(img.astype(int) - color.astype(int), axis=2,).clip(0, 255).astype(np.uint8)`
@@ -77,14 +101,14 @@ def color_key(img: np.ndarray, color: np.ndarray, threshold: float = 0.8, bit_si
             (img.astype(int) - color.astype(int)) ** 2,
             axis=2,
         )),
-    )).clip(0, 255).astype(np.uint8)
+    )).clip(0, 255).astype(img.dtype)
 
     ret = max_value - diff_img
     if threshold > 0:
-        mask_img = (ret > (max_value * threshold)).astype(np.uint8)
+        mask_img = (ret > (max_value * threshold)).astype(img.dtype)
         ret *= mask_img
     ret = ret.clip(0, 255)
-    ret = ret.astype(np.uint8)
+    ret = ret.astype(img.dtype)
     return ret
 
 

@@ -157,3 +157,56 @@ def test_update_by_character_class_menu():
     ctx = Context()
     ctx.update_by_character_class_menu(img)
     assert ctx.fan_count == 1, ctx.fan_count
+
+def test_update_by_character_class_menu_2():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "character_class_menu_2.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_character_class_menu(img)
+    assert ctx.fan_count == 1225, ctx.fan_count
+
+def test_update_by_character_class_menu_3():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "character_class_menu_3.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_character_class_menu(img)
+    assert ctx.fan_count == 11950, ctx.fan_count
+
+
+def test_update_by_character_status_menu():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "character_status_menu.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_character_status_menu(img)
+
+    assert ctx.grass == ctx.STATUS_A, ctx.grass
+    assert ctx.dart == ctx.STATUS_G, ctx.dart
+
+    assert ctx.sprint == ctx.STATUS_C, ctx.sprint
+    assert ctx.mile == ctx.STATUS_B, ctx.mile
+    assert ctx.intermediate == ctx.STATUS_A, ctx.intermediate
+    assert ctx.long == ctx.STATUS_C, ctx.long
+
+    assert ctx.lead == ctx.STATUS_D, ctx.lead
+    assert ctx.head == ctx.STATUS_A, ctx.head
+    assert ctx.middle == ctx.STATUS_A, ctx.middle
+    assert ctx.last == ctx.STATUS_G, ctx.last
+
+def test_update_by_character_status_menu_2():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "character_status_menu_2.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_character_status_menu(img)
+
+    assert ctx.grass == ctx.STATUS_A, ctx.grass
+    assert ctx.dart == ctx.STATUS_E, ctx.dart
+
+    assert ctx.sprint == ctx.STATUS_D, ctx.sprint
+    assert ctx.mile == ctx.STATUS_D, ctx.mile
+    assert ctx.intermediate == ctx.STATUS_A, ctx.intermediate
+    assert ctx.long == ctx.STATUS_A, ctx.long
+
+    assert ctx.lead == ctx.STATUS_A, ctx.lead
+    assert ctx.head == ctx.STATUS_A, ctx.head
+    assert ctx.middle == ctx.STATUS_B, ctx.middle
+    assert ctx.last == ctx.STATUS_B, ctx.last

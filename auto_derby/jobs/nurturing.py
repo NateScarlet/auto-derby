@@ -244,6 +244,13 @@ def _update_context_by_class_menu(ctx: Context):
     action.wait_click_image(templates.CLOSE_BUTTON)
 
 
+def _update_context_by_status_menu(ctx: Context):
+    action.wait_click_image(templates.NURTURING_CHARACTER_STATUS_MENU_BUTTON)
+    action.wait_image(templates.NURTURING_CHARACTER_STATUS_MENU_TITLE)
+    ctx.update_by_character_status_menu(template.screenshot())
+    action.wait_click_image(templates.CLOSE_BUTTON)
+
+
 def nurturing():
     ctx = Context()
     while True:
@@ -279,10 +286,12 @@ def nurturing():
             _handle_race(ctx)
         elif name == templates.NURTURING_COMMAND_TRAINING:
             time.sleep(0.2)  # wait animation
+            ctx.update_by_command_scene(template.screenshot(max_age=0))
             if not ctx.fan_count:
                 _update_context_by_class_menu(ctx)
+            if ctx.grass == ctx.STATUS_NONE or ctx.date[1:] == (4, 1):
+                _update_context_by_status_menu(ctx)
 
-            ctx.update_by_command_scene(template.screenshot(max_age=0))
             ctx.next_turn()
             LOGGER.info("update context: %s", ctx)
             if action.click_image(templates.NURTURING_SCHEDULED_RACE_OPENING_BANNER):

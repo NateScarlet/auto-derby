@@ -53,13 +53,13 @@ def _query(h: Text) -> Tuple[Text, Text, float]:
     return sorted(((k, v, imagetools.compare_hash(h, k)) for k, v in _LABELS.items()), key=lambda x: x[2],  reverse=True)[0]
 
 
-def _text_from_image(img: np.ndarray) -> Text:
+def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     hash_img = cv2.GaussianBlur(img, (7, 7), 1, borderType=cv2.BORDER_CONSTANT)
     h = imagetools.image_hash(fromarray(hash_img), save_path=IMAGE_PATH)
     match, value, similarity = _query(h)
     LOGGER.debug("match label: value=%s, current=%s, match=%s, similarity=%0.3f",
                  value, h, match, similarity)
-    if similarity > 0.8:
+    if similarity > threshold:
         return value
     ans = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
@@ -120,7 +120,7 @@ def _bbox_contains(a: Tuple[int, int, int, int], b: Tuple[int, int, int, int]) -
 _LINE_HEIGHT = 32
 
 
-def text(img: Image) -> Text:
+def text(img: Image, *, threshold: float=0.8) -> Text:
     """Regcognize text line, background color should be black.
 
     Args:
@@ -232,7 +232,7 @@ def text(img: Image) -> Text:
         cv2.destroyAllWindows()
 
     for _, i in char_img_list:
-        ret += _text_from_image(i)
+        ret += _text_from_image(i, threshold)
 
     LOGGER.debug("ocr result: %s", ret)
 

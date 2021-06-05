@@ -4,7 +4,7 @@ from __future__ import annotations
 import cv2
 import numpy as np
 
-from typing import Tuple
+from typing import Text, Tuple
 
 from PIL.Image import Image
 import PIL.ImageOps
@@ -92,7 +92,7 @@ def _recognize_mood(rgb_color: Tuple[int, int, int]) -> float:
 
 
 def _recognize_fan_count(img: Image) -> int:
-    cv_img = cv2.cvtColor(np.asarray(img.convert("RGB")), cv2.COLOR_RGB2BGR)
+    cv_img = imagetools.cv_image(img)
     mask_img = imagetools.color_key(
         cv_img,
         np.full_like(cv_img, (29, 69, 125))
@@ -101,12 +101,116 @@ def _recognize_fan_count(img: Image) -> int:
     return int(text.rstrip("人").replace(",", ""))
 
 
+def _recognize_status(img: Image) -> Tuple[int, Text]:
+    cv_img = imagetools.cv_image(
+        imagetools.resize_by_heihgt(img.convert("L"), 32))
+
+    cv_img = cv2.copyMakeBorder(
+        cv_img,
+        4,
+        4,
+        4,
+        4,
+        cv2.BORDER_CONSTANT,
+        value=(255,)
+    )
+    blurred_img = cv2.blur(
+        cv_img,
+        (3, 3),
+    )
+
+    binary_img = cv2.adaptiveThreshold(
+        blurred_img,
+        255,
+        cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+        cv2.THRESH_BINARY,
+        5,
+        -1,
+    )
+
+    contours, hierarchy = cv2.findContours(
+        binary_img,
+        cv2.RETR_TREE,
+        cv2.CHAIN_APPROX_NONE,
+    )
+    if not contours:
+        raise ValueError("_recognize_status: image is empty")
+
+    text_img = np.zeros_like(binary_img)
+
+    def _contour_level(h: np.ndarray) -> int:
+        _, _, _, parent = h
+        if parent < 0:
+            return 0
+        return _contour_level(hierarchy[0][parent]) + 1
+
+    for index, h in enumerate(hierarchy[0]):
+        level = _contour_level(h)
+        if level < 2:
+            continue
+        is_white = level % 2 == 0
+        if is_white and cv2.contourArea(contours[index]) < 40:
+            continue
+        color = (255,) if is_white else (0,)
+        cv2.drawContours(
+            text_img,
+            contours,
+            index,
+            thickness=cv2.FILLED,
+            color=color,
+        )
+        if color == (0,):
+            # use white border
+            cv2.drawContours(
+                text_img,
+                contours,
+                index,
+                thickness=1,
+                color=(255,),
+            )
+
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.imshow("text_img", text_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+
+    text = ocr.text(imagetools.pil_image(text_img))
+    for i in Context.ALL_STATUSES:
+        if i[1] == text:
+            return i
+
+    raise ValueError("_recognize_status: unknown status: %s" % text)
+
+
 class Context:
     MOOD_VERY_BAD: float = 0.8
     MOOD_BAD: float = 0.9
     MOOD_NORMAL: float = 1.0
     MOOD_GOOD: float = 1.1
     MOOD_VERY_GOOD: float = 1.2
+
+    STATUS_S = (8, 'S')
+    STATUS_A = (7, 'A')
+    STATUS_B = (6, 'B')
+    STATUS_C = (5, 'C')
+    STATUS_D = (4, 'D')
+    STATUS_E = (3, 'E')
+    STATUS_F = (2, 'F')
+    STATUS_G = (1, 'G')
+    STATUS_NONE: Tuple[int, Text] = (0, '')
+
+    ALL_STATUSES = (
+        STATUS_S,
+        STATUS_A,
+        STATUS_B,
+        STATUS_C,
+        STATUS_D,
+        STATUS_E,
+        STATUS_F,
+        STATUS_G,
+    )
 
     def __init__(self) -> None:
         self.speed = 0
@@ -121,6 +225,32 @@ class Context:
         self.fan_count = 0
 
         self._extra_turn_count = 0
+
+        self.grass = Context.STATUS_NONE
+        self.dart = Context.STATUS_NONE
+
+        # Distance statuses
+        # https://umamusume.cygames.jp/#/help?p=3
+        # 短距離：1400m以下
+        self.sprint = Context.STATUS_NONE
+        # マイル：1401m～1800m
+        self.mile = Context.STATUS_NONE
+        # 中距離：1801m～2400m
+        self.intermediate = Context.STATUS_NONE
+        # 長距離：2401m以上
+        self.long = Context.STATUS_NONE
+
+        # Runing style status
+        # https://umamusume.cygames.jp/#/help?p=3
+        # 作戦には以下の4つがあります。
+        # ・逃げ：スタート直後から先頭に立ち、そのまま最後まで逃げ切る作戦。
+        self.lead = Context.STATUS_NONE
+        # ・先行：なるべく前に付けて、先頭を狙っていく作戦。
+        self.head = Context.STATUS_NONE
+        # ・差し：後方につけ、レース後半に加速して先頭に立つ作戦。
+        self.middle = Context.STATUS_NONE
+        # ・追込：最後方に控え、最後に勝負をかける作戦。
+        self.last = Context.STATUS_NONE
 
     def next_turn(self) -> None:
         if self.date in ((1, 0, 0), (4, 0, 0)):
@@ -166,6 +296,35 @@ class Context:
         fan_count_bbox = (220, 523, 420, 540)
         self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
 
+    def update_by_character_status_menu(self, screenshot: Image) -> None:
+        grass_bbox = (158, 263, 173, 280)
+        dart_bbox = (244, 263, 258, 280)
+
+        sprint_bbox = (158, 289, 173, 305)
+        mile_bbox = (244, 289, 258, 305)
+        intermediate_bbox = (329, 289, 344, 305)
+        long_bbox = (414, 289, 430, 305)
+
+        lead_bbox = (158, 316, 173, 332)
+        head_bbox = (244, 316, 258, 332)
+        middle_bbox = (329, 316, 344, 332)
+        last_bbox = (414, 316, 430, 332)
+
+        self.grass = _recognize_status(screenshot.crop(grass_bbox))
+        self.dart = _recognize_status(screenshot.crop(dart_bbox))
+
+        self.sprint = _recognize_status(screenshot.crop(sprint_bbox))
+        self.mile = _recognize_status(screenshot.crop(mile_bbox))
+        self.intermediate = _recognize_status(
+            screenshot.crop(intermediate_bbox),
+        )
+        self.long = _recognize_status(screenshot.crop(long_bbox))
+
+        self.lead = _recognize_status(screenshot.crop(lead_bbox))
+        self.head = _recognize_status(screenshot.crop(head_bbox))
+        self.middle = _recognize_status(screenshot.crop(middle_bbox))
+        self.last = _recognize_status(screenshot.crop(last_bbox))
+
     def __str__(self):
         return (
             "Context<"
@@ -177,7 +336,10 @@ class Context:
             f"pow={self.power},"
             f"per={self.perservance},"
             f"int={self.intelligence},"
-            f"fan={self.fan_count}"
+            f"fan={self.fan_count},"
+            f"ground={''.join(i[1] for i in (self.grass, self.dart))},"
+            f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"
+            f"runing_style={''.join(i[1] for i in (self.lead, self.head, self.middle, self.last))}"
             ">"
         )
 

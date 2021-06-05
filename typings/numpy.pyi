@@ -31962,7 +31962,7 @@ def squeeze(a, axis=None):
     ...
 
 
-def stack(arrays, axis=0, out=None):
+def stack(arrays: ArrayLike, axis: int=0, out: Optional[ndarray]=None) -> ndarray:
     """
     Join a sequence of arrays along a new axis.
 

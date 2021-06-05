@@ -27503,29 +27503,6 @@ def blendLinear(src1, src2, weights1, weights2[, dst]) -> dst:
     ...
 
 
-def blur(src, ksize[, dst[, anchor[, borderType]]]) -> dst:
-    """
-    .   @brief Blurs an image using the normalized box filter.
-    .
-    .   The function smooths an image using the kernel:
-    .
-    .   \f[\texttt{K} =  \frac{1}{\texttt{ksize.width*ksize.height}} \begin{bmatrix} 1 & 1 & 1 &  \cdots & 1 & 1  \\ 1 & 1 & 1 &  \cdots & 1 & 1  \\ \hdotsfor{6} \\ 1 & 1 & 1 &  \cdots & 1 & 1  \\ \end{bmatrix}\f]
-    .
-    .   The call `blur(src, dst, ksize, anchor, borderType)` is equivalent to `boxFilter(src, dst, src.type(), ksize,
-    .   anchor, true, borderType)`.
-    .
-    .   @param src input image; it can have any number of channels, which are processed independently, but
-    .   the depth should be CV_8U, CV_16U, CV_16S, CV_32F or CV_64F.
-    .   @param dst output image of the same size and type as src.
-    .   @param ksize blurring kernel size.
-    .   @param anchor anchor point; default value Point(-1,-1) means that the anchor is at the kernel
-    .   center.
-    .   @param borderType border mode used to extrapolate pixels outside of the image, see #BorderTypes. #BORDER_WRAP is not supported.
-    .   @sa  boxFilter, bilateralFilter, GaussianBlur, medianBlur
-    """
-    ...
-
-
 def borderInterpolate(p, len, borderType) -> retval:
     """
     .   @brief Computes the source location of an extrapolated pixel.

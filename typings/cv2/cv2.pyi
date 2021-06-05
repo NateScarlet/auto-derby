@@ -14624,7 +14624,7 @@ def blendLinear(src1, src2, weights1, weights2[, dst]) -> dst:
     ...
 
 
-def blur(src, ksize[, dst[, anchor[, borderType]]]) -> dst:
+def blur(src: ndarray, ksize: Tuple[int, int], dst: ndarray = ..., anchor: Tuple[int, int] = ..., borderType: int =...) -> ndarray:
     """
     .   @brief Blurs an image using the normalized box filter.
     .
