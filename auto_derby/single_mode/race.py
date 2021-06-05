@@ -53,6 +53,7 @@ class Race:
         self.track: int = 0
         self.turn: int = 0
         self.target_statuses: Tuple[int, ...] = ()
+        self.fan_counts: Tuple[int, ...] = ()
 
     def to_dict(self) -> Dict[Text, Any]:
         return {
@@ -67,5 +68,6 @@ class Race:
             "track": self.track,
             "turn": self.turn,
             "targetStatuses": self.target_statuses,
-            "minFanCount": self.min_fan_count
+            "minFanCount": self.min_fan_count,
+            "fan_counts": self.fan_counts
         }

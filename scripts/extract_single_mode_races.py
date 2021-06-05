@@ -8,7 +8,7 @@ if True:
     import os
     sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from typing import Iterator, Text
+from typing import Iterator, Text, Tuple
 import sqlite3
 import argparse
 import os
@@ -16,6 +16,19 @@ import contextlib
 from auto_derby.single_mode import Race
 import json
 import pathlib
+
+
+def _get_fan_set(db: sqlite3.Connection, fan_set_id: int) -> Tuple[int, ...]:
+
+    with contextlib.closing(
+        db.execute("""
+SELECT fan_count
+FROM single_mode_fan_count
+WHERE fan_set_id = ?
+;
+""", (fan_set_id, ))
+    ) as cur:
+        return tuple(i[0] for i in cur.fetchall())
 
 
 def _read_master_mdb(path: Text) -> Iterator[Race]:
@@ -29,6 +42,7 @@ SELECT
   t3.grade,
   t1.race_permission,
   t1.need_fan_count,
+  t1.fan_set_id,
   t3.entry_num,
   t5.distance,
   t5.ground,
@@ -49,7 +63,7 @@ SELECT
 
     with contextlib.closing(cur):
         for i in cur:
-            assert len(i) == 13, i
+            assert len(i) == 14, i
             v = Race()
             (
                 v.name,
@@ -58,6 +72,7 @@ SELECT
                 v.grade,
                 v.permission,
                 v.min_fan_count,
+                fan_set_id,
                 v.entry_count,
                 v.distance,
                 v.ground,
@@ -65,6 +80,7 @@ SELECT
                 v.turn,
             ) = i[:-2]
             v.target_statuses = tuple(j for j in i[-2:] if j)
+            v.fan_counts = _get_fan_set(db, fan_set_id)
             yield v
 
 
