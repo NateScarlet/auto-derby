@@ -23,8 +23,9 @@ def _get_fan_set(db: sqlite3.Connection, fan_set_id: int) -> Tuple[int, ...]:
     with contextlib.closing(
         db.execute("""
 SELECT fan_count
-FROM single_mode_fan_count
-WHERE fan_set_id = ?
+  FROM single_mode_fan_count
+  WHERE fan_set_id = ?
+  ORDER BY "order"
 ;
 """, (fan_set_id, ))
     ) as cur:
