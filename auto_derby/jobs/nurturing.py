@@ -144,7 +144,7 @@ def _handle_training(ctx: Context):
     expected_score = 15 + ctx.turn_count() * 10 / 24
     if ctx.vitality > 0.5:
         expected_score *= 0.5
-    if ctx.turn_count() == 75:
+    if ctx.turn_count() >= ctx.total_turn_count() - 2:
         expected_score *= 0.1
     if ctx.date[1:] in (
         (6, 1),
@@ -261,11 +261,13 @@ def nurturing():
             action.click((x, y))
             _handle_race()
         elif name == templates.NURTURING_URA_FINALS:
+            ctx.next_turn()
             action.click(pos)
             _handle_race()
         elif name == templates.NURTURING_COMMAND_TRAINING:
-            time.sleep(0.2) # wait animation
+            time.sleep(0.2)  # wait animation
             ctx.update_by_command_scene(template.screenshot(max_age=0))
+            ctx.next_turn()
             LOGGER.info("update context: %s", ctx)
             if action.click_image(templates.NURTURING_SCHEDULED_RACE_OPENING_BANNER):
                 action.wait_click_image(
@@ -273,7 +275,7 @@ def nurturing():
                 _handle_race()
                 continue
 
-            if ctx.turn_count() == 75:
+            if ctx.turn_count() >= ctx.total_turn_count() - 2:
                 if ctx.vitality < 0.4:
                     action.click_image(templates.NURTURING_COMMAND_GO_OUT)
                 else:

@@ -17,7 +17,8 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     img = imagetools.resize_by_heihgt(img, 32)
     cv_img = np.asarray(img.convert("L"))
     sharpened_img = imagetools.sharpen(cv_img)
-    _, outline_img = cv2.threshold(imagetools.sharpen(cv_img, 1.2), 200, 255, cv2.THRESH_BINARY)
+    _, outline_img = cv2.threshold(imagetools.sharpen(
+        cv_img, 1.2), 200, 255, cv2.THRESH_BINARY)
     bg_mask_img = imagetools.bg_mask_by_outline(
         outline_img,
     )
@@ -106,8 +107,13 @@ class Context:
 
         self._extra_turn_count = 0
 
-    def update_by_command_scene(self, screenshot: Image) -> None:
+    def next_turn(self) -> None:
+        if self.date in ((1, 0, 0), (4, 0, 0)):
+            self._extra_turn_count += 1
+        else:
+            self._extra_turn_count = 0
 
+    def update_by_command_scene(self, screenshot: Image) -> None:
         vitality_bbox = (148, 106, 327, 108)
         speed_bbox = (45, 553, 90, 572)
         stamina_bbox = (125, 553, 162, 572)
@@ -117,10 +123,6 @@ class Context:
         date_bbox = (10, 27, 140, 43)
 
         self.date = _ocr_date(screenshot.crop(date_bbox))
-        if self.date in ((1, 0, 0), (4, 0, 0)):
-            self._extra_turn_count += 1
-        else:
-            self._extra_turn_count = 0
 
         self.vitality = _recognize_vitality(screenshot.crop(vitality_bbox))
 
@@ -163,4 +165,4 @@ class Context:
         return (self.date[0] - 1) * 24 + (self.date[1] - 1) * 2 + (self.date[2] - 1)
 
     def total_turn_count(self) -> int:
-        return 24 * 3 + 3
+        return 24 * 3 + 6
