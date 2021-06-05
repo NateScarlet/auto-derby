@@ -69,5 +69,5 @@ class Race:
             "turn": self.turn,
             "targetStatuses": self.target_statuses,
             "minFanCount": self.min_fan_count,
-            "fan_counts": self.fan_counts
+            "fanCounts": self.fan_counts
         }
