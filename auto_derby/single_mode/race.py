@@ -21,7 +21,7 @@ DATA_PATH = os.getenv(
 
 class Race:
 
-    GROUND_GRASS = 1
+    GROUND_TURF = 1
     GROUND_DART = 2
 
     TRACK_OUT = 1
@@ -164,7 +164,7 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
     stadium, text = text[:2], text[2:]
     if text[0] == "芝":
         text = text[1:]
-        ground = Race.GROUND_GRASS
+        ground = Race.GROUND_TURF
     elif text[0] == "ダ":
         text = text[3:]
         ground = Race.GROUND_DART
