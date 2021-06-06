@@ -339,7 +339,7 @@ class Context:
             f"fan={self.fan_count},"
             f"ground={''.join(i[1] for i in (self.turf, self.dart))},"
             f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"
-            f"running_style={''.join(i[1] for i in (self.lead, self.head, self.middle, self.last))}"
+            f"style={''.join(i[1] for i in (self.last, self.middle, self.head, self.lead))}"
             ">"
         )
 
