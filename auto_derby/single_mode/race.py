@@ -13,7 +13,7 @@ import cv2
 import PIL.Image
 import PIL.ImageOps
 
-from .. import imagetools, ocr
+from .. import imagetools, ocr, templates, template
 from .context import Context
 
 LOGGER = logging.getLogger(__name__)
@@ -158,7 +158,7 @@ def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
     for i in RACES:
         if year not in i.years:
             continue
-        if (month, half) != (i.month, half):
+        if year not in (1, 4) and (month, half) != (i.month, half):
             continue
         yield i
 
@@ -215,6 +215,9 @@ def _recognize_grade(rgb_color: Tuple[int, ...]) -> int:
         return Race.GRADE_G3
     if imagetools.compare_color((252, 169, 5),  rgb_color) > 0.9:
         return Race.GRADE_OP
+    if imagetools.compare_color((247, 209, 41),  rgb_color) > 0.9:
+        # EX(URA)
+        return Race.GRADE_G1
     raise ValueError(
         "_recognize_grade: unknown grade color: %s" % (rgb_color,))
 
@@ -222,7 +225,14 @@ def _recognize_grade(rgb_color: Tuple[int, ...]) -> int:
 def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race:
     grade_color_pos = (10, 75)
     spec_bbox = (27, 260, 302, 279)
-    no1_fan_count_bbox = (150, 407, 400, 425)
+    _, no1_fan_count_pos = next(template.match(
+        screenshot, templates.NURTURING_RACE_DETAIL_NO1_FAN_COUNT))
+    no1_fan_count_bbox = (
+        150,
+        no1_fan_count_pos[1] + 1,
+        400,
+        no1_fan_count_pos[1] + 1 + 18,
+    )
 
     grade = _recognize_grade(
         tuple(cast.list_(screenshot.getpixel(grade_color_pos), int)))
@@ -241,6 +251,16 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
         no1_fan_count,
     )
     for i in find_by_date(ctx.date):
+        if i.distance == 2200 and i.name == "URAファイナルズ 準決勝" and i.stadium == "阪神":
+            print(
+                i.grade,
+                i.stadium,
+                i.ground,
+                i.distance,
+                i.turn,
+                i.track,
+                i.fan_counts[0],
+            )
         if full_spec == (
             i.grade,
             i.stadium,
