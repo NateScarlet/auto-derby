@@ -310,7 +310,7 @@ def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float,
     )
 
     if (
-        ctx.speed > ctx.turn_count() * 300 / 24 and
+        ctx.speed > ctx.turn_count() * 400 / 24 and
         (race1.grade >= race1.GRADE_G2 or race1.distance <= 1800)
     ):
         lead += 40
