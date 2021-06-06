@@ -263,7 +263,7 @@ class Context:
         vitality_bbox = (148, 106, 327, 108)
 
         _, detail_button_pos = next(template.match(
-            screenshot, templates.NURTURING_CHARACTER_STATUS_MENU_BUTTON),
+            screenshot, templates.SINGLE_MODE_CHARACTER_STATUS_MENU_BUTTON),
         )
         base_y = detail_button_pos[1] + 71
         speed_bbox = (45, base_y, 90, base_y + 19)

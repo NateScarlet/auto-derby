@@ -124,7 +124,7 @@ class Training:
     def from_training_scene(cls, img: Image) -> Training:
         self = cls()
         self.confirm_position = next(template.match(img, template.Specification(
-            templates.NURTURING_TRAINING_CONFIRM,
+            templates.SINGLE_MODE_TRAINING_CONFIRM,
             threshold=0.8
         )))[1]
 

@@ -234,7 +234,7 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
     grade_color_pos = (10, 75)
     spec_bbox = (27, 260, 302, 279)
     _, no1_fan_count_pos = next(template.match(
-        screenshot, templates.NURTURING_RACE_DETAIL_NO1_FAN_COUNT))
+        screenshot, templates.SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT))
     no1_fan_count_bbox = (
         150,
         no1_fan_count_pos[1] + 1,

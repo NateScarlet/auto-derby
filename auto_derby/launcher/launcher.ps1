@@ -63,7 +63,7 @@ $mainWindow.Content.FindName('startButton').add_Click(
 $mainWindow.Content.FindName('chooseSingleModeChoicesDataPathButton').add_Click( 
     {
         $dialog = New-Object Microsoft.Win32.SaveFileDialog -Property @{
-            Title            = "Choose nurturing choices"
+            Title            = "Choose single mode choices"
             AddExtension     = $true
             DefaultExt       = ".json"
             Filter           = "JSON data Files|*.json"

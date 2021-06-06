@@ -120,7 +120,7 @@ def _training_score(ctx: Context, training: Training) -> float:
 
 
 _TRAINING_CONFIRM = template.Specification(
-    templates.NURTURING_TRAINING_CONFIRM,
+    templates.SINGLE_MODE_TRAINING_CONFIRM,
     threshold=0.8
 )
 
@@ -175,11 +175,11 @@ def _handle_training(ctx: Context):
         # not worth, go rest
         action.click_image(templates.RETURN_BUTTON)
         _, pos = action.wait_image(
-            templates.NURTURING_REST,  # TODO: rename this template
-            templates.NURTURING_COMMAND_SUMMER_REST,
+            templates.SINGLE_MODE_REST,  # TODO: rename this template
+            templates.SINGLE_MODE_COMMAND_SUMMER_REST,
         ) if ctx.vitality < 0.8 else action.wait_image(
-            templates.NURTURING_COMMAND_GO_OUT,
-            templates.NURTURING_COMMAND_SUMMER_REST,
+            templates.SINGLE_MODE_COMMAND_GO_OUT,
+            templates.SINGLE_MODE_COMMAND_SUMMER_REST,
         )
         action.click(pos)
     x, y = training.confirm_position
@@ -204,14 +204,14 @@ def _handle_race_result():
         time.sleep(1)
         if action.click_image(templates.GREEN_NEXT_BUTTON):
             break
-        if action.click_image(templates.NURTURING_CONTINUE):
+        if action.click_image(templates.SINGLE_MODE_CONTINUE):
             _handle_race_result()
             return
         action.click(pos)
 
 
 _RACE_DETAIL_BUTTON = template.Specification(
-    templates.NURTURING_RACE_DETAIL_BUTTON,
+    templates.SINGLE_MODE_RACE_DETAIL_BUTTON,
     threshold=0.8
 )
 
@@ -341,8 +341,8 @@ def _choose_running_style(ctx: Context, race1: race.Race) -> None:
 
 
 def _handle_race(ctx: Context):
-    action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
-    action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
+    action.wait_click_image(templates.SINGLE_MODE_RACE_START_BUTTON)
+    action.wait_click_image(templates.SINGLE_MODE_RACE_START_BUTTON)
     action.wait_image(templates.RACE_RESULT_BUTTON)
 
     action.wait_click_image(_RACE_DETAIL_BUTTON)
@@ -352,7 +352,7 @@ def _handle_race(ctx: Context):
     _choose_running_style(ctx, race1)
 
     _handle_race_result()
-    _, pos = action.wait_image(templates.NURTURING_RACE_NEXT_BUTTON)
+    _, pos = action.wait_image(templates.SINGLE_MODE_RACE_NEXT_BUTTON)
 
     with action.recover_cursor():
         action.move((pos[0], pos[1]-100))
@@ -362,11 +362,11 @@ def _handle_race(ctx: Context):
 
 
 ALL_OPTIONS = [
-    templates.NURTURING_OPTION1,
-    templates.NURTURING_OPTION2,
-    templates.NURTURING_OPTION3,
-    templates.NURTURING_OPTION4,
-    templates.NURTURING_OPTION5,
+    templates.SINGLE_MODE_OPTION1,
+    templates.SINGLE_MODE_OPTION2,
+    templates.SINGLE_MODE_OPTION3,
+    templates.SINGLE_MODE_OPTION4,
+    templates.SINGLE_MODE_OPTION5,
 ]
 
 
@@ -376,15 +376,15 @@ def _handle_option():
 
 
 def _update_context_by_class_menu(ctx: Context):
-    action.wait_click_image(templates.NURTURING_CHARACTER_CLASS_MENU_BUTTON)
-    action.wait_image(templates.NURTURING_CHARACTER_CLASS_MENU_TITLE)
+    action.wait_click_image(templates.SINGLE_MODE_CHARACTER_CLASS_MENU_BUTTON)
+    action.wait_image(templates.SINGLE_MODE_CHARACTER_CLASS_MENU_TITLE)
     ctx.update_by_character_class_menu(template.screenshot())
     action.wait_click_image(templates.CLOSE_BUTTON)
 
 
 def _update_context_by_status_menu(ctx: Context):
-    action.wait_click_image(templates.NURTURING_CHARACTER_STATUS_MENU_BUTTON)
-    action.wait_image(templates.NURTURING_CHARACTER_STATUS_MENU_TITLE)
+    action.wait_click_image(templates.SINGLE_MODE_CHARACTER_STATUS_MENU_BUTTON)
+    action.wait_image(templates.SINGLE_MODE_CHARACTER_STATUS_MENU_TITLE)
     ctx.update_by_character_status_menu(template.screenshot())
     action.wait_click_image(templates.CLOSE_BUTTON)
 
@@ -404,75 +404,75 @@ def nurturing():
         tmpl, pos = action.wait_image(
             templates.CONNECTING,
             templates.RETRY_BUTTON,
-            templates.NURTURING_COMMAND_TRAINING,
-            templates.NURTURING_FANS_NOT_ENOUGH,
-            templates.NURTURING_FINISH_BUTTON,
-            templates.NURTURING_FORMAL_RACE_BANNER,
-            templates.NURTURING_RACE_NEXT_BUTTON,
-            templates.NURTURING_OPTION1,
+            templates.SINGLE_MODE_COMMAND_TRAINING,
+            templates.SINGLE_MODE_FANS_NOT_ENOUGH,
+            templates.SINGLE_MODE_FINISH_BUTTON,
+            templates.SINGLE_MODE_FORMAL_RACE_BANNER,
+            templates.SINGLE_MODE_RACE_NEXT_BUTTON,
+            templates.SINGLE_MODE_OPTION1,
             templates.GREEN_NEXT_BUTTON,
-            templates.NURTURING_URA_FINALS,
-            templates.NURTURING_GENE_INHERIT,
+            templates.SINGLE_MODE_URA_FINALS,
+            templates.SINGLE_MODE_GENE_INHERIT,
         )
         name = tmpl.name
         if name == templates.CONNECTING:
             pass
-        elif name == templates.NURTURING_FANS_NOT_ENOUGH:
+        elif name == templates.SINGLE_MODE_FANS_NOT_ENOUGH:
             # TODO: handle this
             exit(1)
-        elif name == templates.NURTURING_FINISH_BUTTON:
+        elif name == templates.SINGLE_MODE_FINISH_BUTTON:
             break
-        elif name == templates.NURTURING_FORMAL_RACE_BANNER:
+        elif name == templates.SINGLE_MODE_FORMAL_RACE_BANNER:
             _update_context_by_command_scene(ctx)
             ctx.next_turn()
             x, y = pos
             y += 60
             action.click((x, y))
             _handle_race(ctx)
-        elif name == templates.NURTURING_URA_FINALS:
+        elif name == templates.SINGLE_MODE_URA_FINALS:
             ctx.next_turn()
             action.click(pos)
             _handle_race(ctx)
-        elif name == templates.NURTURING_COMMAND_TRAINING:
+        elif name == templates.SINGLE_MODE_COMMAND_TRAINING:
             time.sleep(0.2)  # wait animation
             _update_context_by_command_scene(ctx)
             ctx.next_turn()
             LOGGER.info("update context: %s", ctx)
-            if action.click_image(templates.NURTURING_SCHEDULED_RACE_OPENING_BANNER):
+            if action.click_image(templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER):
                 action.wait_click_image(
-                    templates.NURTURING_GO_TO_SCHEDULED_RACE_BUTTON)
+                    templates.SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON)
                 _handle_race(ctx)
                 continue
 
             if ctx.turn_count() >= ctx.total_turn_count() - 2:
                 if ctx.vitality < 0.4:
-                    action.click_image(templates.NURTURING_COMMAND_GO_OUT)
+                    action.click_image(templates.SINGLE_MODE_COMMAND_GO_OUT)
                 else:
                     action.click(pos)
                     _handle_training(ctx)
             elif ctx.vitality <= 0.5:
-                if action.click_image(templates.NURTURING_COMMAND_HEALTH_CARE):
+                if action.click_image(templates.SINGLE_MODE_COMMAND_HEALTH_CARE):
                     time.sleep(2)
-                    if action.count_image(templates.NURTURING_HEALTH_CARE_CONFIRM):
+                    if action.count_image(templates.SINGLE_MODE_HEALTH_CARE_CONFIRM):
                         action.click_image(templates.GREEN_OK_BUTTON)
                     continue
 
                 if ctx.mood < ctx.MOOD_GOOD:
                     _, pos = action.wait_image(
-                        templates.NURTURING_COMMAND_GO_OUT,
-                        templates.NURTURING_COMMAND_SUMMER_REST,
+                        templates.SINGLE_MODE_COMMAND_GO_OUT,
+                        templates.SINGLE_MODE_COMMAND_SUMMER_REST,
                     )
                     action.click(pos)
                 else:
                     _, pos = action.wait_image(
-                        templates.NURTURING_REST,
-                        templates.NURTURING_COMMAND_SUMMER_REST,
+                        templates.SINGLE_MODE_REST,
+                        templates.SINGLE_MODE_COMMAND_SUMMER_REST,
                     )
                     action.click(pos)
             else:
                 action.click(pos)
                 _handle_training(ctx)
-        elif name == templates.NURTURING_OPTION1:
+        elif name == templates.SINGLE_MODE_OPTION1:
             _handle_option()
         else:
             action.click(pos)
