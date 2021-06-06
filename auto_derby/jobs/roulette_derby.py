@@ -3,6 +3,7 @@
 
 
 from .. import action, templates
+import time
 
 
 def roulette_derby():
@@ -17,5 +18,9 @@ def roulette_derby():
             templates.ROULETTE_DERBY_TAP_BUTTON_DISABLED,
         )
         if tmpl.name == templates.ROULETTE_DERBY_TAP_BUTTON_DISABLED:
+            # wait animation
+            time.sleep(1)
+            if not action.count_image(templates.ROULETTE_DERBY_TAP_BUTTON_DISABLED):
+                continue
             return
         action.click(pos)
