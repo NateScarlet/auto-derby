@@ -220,9 +220,9 @@ def _running_style_single_score(
     ctx: Context,
     race1: race.Race,
     status: Tuple[int, Text],
-    factors: Tuple[float, float, float, float, float]
+    factors: Tuple[int, int, int, int, int]
 ) -> float:
-    assert sum(factors) == 1, factors
+    assert sum(factors) == 10000, factors
     spd = ctx.speed
     sta = ctx.stamina
     pow = ctx.power
@@ -292,22 +292,22 @@ def _running_style_single_score(
             race1.TARGET_STATUS_GUTS: gut,
             race1.TARGET_STATUS_WISDOM: wis,
         }[i] / 300)
-    return (spd * factors[0] + sta * factors[1] + pow * factors[2] + gut * factors[3] + wis * factors[4]) * total_factor
+    return (spd * factors[0] + sta * factors[1] + pow * factors[2] + gut * factors[3] + wis * factors[4]) * total_factor / 10000
 
 
 def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float, float, float]:
 
     lead = _running_style_single_score(
-        ctx, race1, ctx.lead, (0.5, 0.3, 0.05, 0.05, 0.1),
+        ctx, race1, ctx.lead, (5000, 3000, 500, 500, 1000),
     )
     head = _running_style_single_score(
-        ctx, race1, ctx.head, (0.45, 0.2, 0.15, 0.05, 0.15)
+        ctx, race1, ctx.head, (4500, 2000, 1500, 500, 1500)
     )
     middle = _running_style_single_score(
-        ctx, race1, ctx.middle, (0.4, 0.2, 0.2, 0.02, 0.18)
+        ctx, race1, ctx.middle, (4000, 2000, 2000, 200, 1800)
     )
     last = _running_style_single_score(
-        ctx, race1, ctx.last, (0.4, 0.15, 0.25, 0.02, 0.18)
+        ctx, race1, ctx.last, (4000, 1500, 2500, 200, 1800)
     )
 
     if (
