@@ -293,6 +293,8 @@ def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float,
 
     if race1.grade <= race1.GRADE_G2 or race1.distance <= 1800:
         lead *= 1.2
+    if race1.distance >= 2400:
+        lead *= 0.9
 
     return last, middle, head, lead
 
