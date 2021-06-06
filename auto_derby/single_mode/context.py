@@ -217,7 +217,7 @@ class Context:
         self.stamina = 0
         self.power = 0
         self.guts = 0
-        self.intelligence = 0
+        self.wisdom = 0
         # (year, month, half-month), 1-base
         self.date = (0, 0, 0)
         self.vitality = 0.0
@@ -264,7 +264,7 @@ class Context:
         stamina_bbox = (125, 553, 162, 572)
         power_bbox = (192, 553, 234, 572)
         guts_bbox = (264, 553, 308, 572)
-        intelligence_bbox = (337, 553, 381, 572)
+        wisdom_bbox = (337, 553, 381, 572)
         date_bbox = (10, 27, 140, 43)
 
         self.date = _ocr_date(screenshot.crop(date_bbox))
@@ -285,8 +285,8 @@ class Context:
             ocr.text(PIL.ImageOps.invert(screenshot.crop(power_bbox))))
         self.guts = int(
             ocr.text(PIL.ImageOps.invert(screenshot.crop(guts_bbox))))
-        self.intelligence = int(
-            ocr.text(PIL.ImageOps.invert(screenshot.crop(intelligence_bbox))))
+        self.wisdom = int(
+            ocr.text(PIL.ImageOps.invert(screenshot.crop(wisdom_bbox))))
 
     def update_by_race_result_scene(self, screenshot: Image) -> None:
         fan_count_bbox = (128, 698, 330, 716)
@@ -335,7 +335,7 @@ class Context:
             f"sta={self.stamina},"
             f"pow={self.power},"
             f"gut={self.guts},"
-            f"int={self.intelligence},"
+            f"wis={self.wisdom},"
             f"fan={self.fan_count},"
             f"ground={''.join(i[1] for i in (self.grass, self.dart))},"
             f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"

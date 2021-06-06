@@ -15,7 +15,7 @@ def test_update_by_training_scene():
     assert training.stamina == 0
     assert training.power == 14
     assert training.guts == 0
-    assert training.intelligence == 0
+    assert training.wisdom == 0
     assert training.skill == 3
 
 
@@ -27,7 +27,7 @@ def test_update_by_training_scene_2():
     assert training.stamina == 0
     assert training.power == 0
     assert training.guts == 0
-    assert training.intelligence == 24
+    assert training.wisdom == 24
     assert training.skill == 8
 
 
@@ -39,5 +39,5 @@ def test_update_by_training_scene_issue9():
     assert training.stamina == 0
     assert training.power == 7
     assert training.guts == 0
-    assert training.intelligence == 0
+    assert training.wisdom == 0
     assert training.skill == 2

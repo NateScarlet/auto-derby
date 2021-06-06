@@ -94,8 +94,8 @@ def _training_score(ctx: Context, training: Training) -> float:
         )
     )
     int_ = _training_single_score(
-        ctx.intelligence,
-        training.intelligence,
+        ctx.wisdom,
+        training.wisdom,
         (
             (0, 3.0),
             (300, 1.0),

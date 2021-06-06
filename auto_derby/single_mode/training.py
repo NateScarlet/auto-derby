@@ -102,7 +102,7 @@ class Training:
         self.stamina: int = 0
         self.power: int = 0
         self.guts: int = 0
-        self.intelligence: int = 0
+        self.wisdom: int = 0
         self.skill: int = 0
         # self.friendship: int = 0
         # self.failure_rate: float = 0.0
@@ -121,7 +121,7 @@ class Training:
         self.stamina = _ocr_training_effect(img.crop((91, t, 163, b)))
         self.power = _ocr_training_effect(img.crop((163, t, 237, b)))
         self.guts = _ocr_training_effect(img.crop((237, t, 309, b)))
-        self.intelligence = _ocr_training_effect(img.crop((309, t, 382, b)))
+        self.wisdom = _ocr_training_effect(img.crop((309, t, 382, b)))
         self.skill = _ocr_training_effect(img.crop((387, t, 450, b)))
         return self
 
@@ -131,8 +131,8 @@ class Training:
             ("spd", self.speed,),
             ("sta", self.stamina,),
             ("pow", self.power,),
-            ("per", self.guts,),
-            ("int", self.intelligence,),
+            ("gut", self.guts,),
+            ("wis", self.wisdom,),
             ("ski", self.skill,)
         )
         return (
