@@ -70,7 +70,8 @@ if __name__ == '__main__':
     )
     LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", 'auto_derby.log')
     if LOG_PATH and LOG_PATH != "-":
-        handler = logging.handlers.RotatingFileHandler(LOG_PATH, backupCount=3)
+        handler = logging.handlers.RotatingFileHandler(
+            LOG_PATH, backupCount=3, encoding="utf-8")
         handler.doRollover()
         formatter = logging.Formatter(
             "%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
@@ -89,4 +90,8 @@ if __name__ == '__main__':
             "admin permission is required, otherwise mouse event will be ignored by the game.",
         )
         exit(1)
-    main()
+    try:
+        main()
+    except:
+        LOGGER.exception("unexpected exception")
+        exit(1)

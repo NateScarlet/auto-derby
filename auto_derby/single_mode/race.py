@@ -2,16 +2,21 @@
 # pyright: strict
 """.  """
 from __future__ import annotations
-import cv2
-import cast_unknown as cast
 
-from .context import Context
-from .. import imagetools, ocr
-from typing import Dict, Iterator, Text, Tuple, Any
+import json
+import logging
+import os
+from typing import Any, Dict, Iterator, Text, Tuple
+
+import cast_unknown as cast
+import cv2
 import PIL.Image
 import PIL.ImageOps
-import os
-import json
+
+from .. import imagetools, ocr
+from .context import Context
+
+LOGGER = logging.getLogger(__name__)
 
 DATA_PATH = os.getenv(
     "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH",
@@ -24,15 +29,15 @@ class Race:
     GROUND_TURF = 1
     GROUND_DART = 2
 
-    TRACK_OUT = 1
+    TRACK_MIDDLE = 1
     TRACK_IN = 2
-    TRACK_MIDDLE = 3
+    TRACK_OUT = 3
 
     TARGET_STATUS_SPEED = 1
     TARGET_STATUS_STAMINA = 2
     TARGET_STATUS_POWER = 3
-    TARGET_STATUS_PERSERVANCE = 4
-    TARGET_STATUS_INTELLIGENCE = 5
+    TARGET_STATUS_GUTS = 4
+    TARGET_STATUS_WISDOM = 5
 
     PERMISSION_JUNIOR = 1
     PERMISSION_CLASSIC = 2
@@ -123,6 +128,22 @@ class Race:
     def __str__(self):
         return f"Race<{self.stadium} {self.name}>"
 
+    def distance_status(self, ctx: Context) -> Tuple[int, Text]:
+        if self.distance <= 1400:
+            return ctx.sprint
+        elif self.distance <= 1800:
+            return ctx.mile
+        elif self.distance <= 2400:
+            return ctx.intermediate
+        else:
+            return ctx.long
+
+    def ground_status(self, ctx: Context) -> Tuple[int, Text]:
+        if self.ground == self.GROUND_TURF:
+            return ctx.turf
+        else:
+            return ctx.dart
+
 
 def _load() -> Tuple[Race, ...]:
     with open(DATA_PATH, "r", encoding="utf-8") as f:
@@ -186,8 +207,14 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
 
 
 def _recognize_grade(rgb_color: Tuple[int, ...]) -> int:
+    if imagetools.compare_color((54, 133, 228),  rgb_color) > 0.9:
+        return Race.GRADE_G1
     if imagetools.compare_color((244, 85, 129),  rgb_color) > 0.9:
         return Race.GRADE_G2
+    if imagetools.compare_color((57, 187, 85),  rgb_color) > 0.9:
+        return Race.GRADE_G3
+    if imagetools.compare_color((252, 169, 5),  rgb_color) > 0.9:
+        return Race.GRADE_OP
     raise ValueError(
         "_recognize_grade: unknown grade color: %s" % (rgb_color,))
 
@@ -223,6 +250,7 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
             i.track,
             i.fan_counts[0],
         ):
+            LOGGER.info("image match: %s", i)
             return i
 
     raise ValueError(

@@ -226,7 +226,7 @@ class Context:
 
         self._extra_turn_count = 0
 
-        self.grass = Context.STATUS_NONE
+        self.turf = Context.STATUS_NONE
         self.dart = Context.STATUS_NONE
 
         # Distance statuses
@@ -310,7 +310,7 @@ class Context:
         middle_bbox = (329, 316, 344, 332)
         last_bbox = (414, 316, 430, 332)
 
-        self.grass = _recognize_status(screenshot.crop(grass_bbox))
+        self.turf = _recognize_status(screenshot.crop(grass_bbox))
         self.dart = _recognize_status(screenshot.crop(dart_bbox))
 
         self.sprint = _recognize_status(screenshot.crop(sprint_bbox))
@@ -337,7 +337,7 @@ class Context:
             f"gut={self.guts},"
             f"wis={self.wisdom},"
             f"fan={self.fan_count},"
-            f"ground={''.join(i[1] for i in (self.grass, self.dart))},"
+            f"ground={''.join(i[1] for i in (self.turf, self.dart))},"
             f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"
             f"running_style={''.join(i[1] for i in (self.lead, self.head, self.middle, self.last))}"
             ">"

@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import logging
 import time
-from typing import List, Tuple
+from typing import List, Text, Tuple
 
 from .. import action, template, templates
-from ..single_mode import Context, Training, choice
+from ..single_mode import Context, Training, choice, race
 
 LOGGER = logging.getLogger(__name__)
 
@@ -210,12 +210,121 @@ def _handle_race_result():
         action.click(pos)
 
 
+_RACE_DETAIL_BUTTON = template.Specification(
+    templates.NURTURING_RACE_DETAIL_BUTTON,
+    threshold=0.8
+)
+
+
+def _running_style_single_score(
+    ctx: Context,
+    race1: race.Race,
+    status: Tuple[int, Text],
+    factors: Tuple[float, float, float, float, float]
+) -> float:
+    assert sum(factors) == 1, factors
+    spd = ctx.speed
+    sta = ctx.stamina
+    pow = ctx.power
+    gut = ctx.guts
+    wis = ctx.wisdom
+
+    # proper ground
+    # from master.mdb `race_proper_ground_rate` table
+    ground = race1.ground_status(ctx)
+    ground_rate = {
+        "S": 1.05,
+        "A": 1.0,
+        "B": 0.9,
+        "C": 0.8,
+        "D": 0.7,
+        "E": 0.5,
+        "F": 0.3,
+        "G": 0.1,
+    }[ground[1]]
+
+    # proper distance
+    # from master.mdb `race_proper_distance_rate` table
+    distance = race1.distance_status(ctx)
+    d_spd_rate, d_pow_rate = {
+        "S": (1.05, 1.0),
+        "A": (1.0, 1.0),
+        "B": (0.9, 1.0),
+        "C": (0.8, 1.0),
+        "D": (0.6, 1.0),
+        "E": (0.4, 0.6),
+        "F": (0.2, 0.5),
+        "G": (0.1, 0.4),
+    }[distance[1]]
+
+    # proper running style
+    # from master.mdb `race_proper_runningstyle_rate` table
+    style_rate = {
+        "S": 1.1,
+        "A": 1.0,
+        "B": 0.85,
+        "C": 0.75,
+        "D": 0.6,
+        "E": 0.4,
+        "F": 0.2,
+        "G": 0.1,
+    }[status[1]]
+
+    spd *= d_spd_rate
+    pow *= d_pow_rate
+
+    return (spd * factors[0] + sta * factors[1] + pow * factors[2] + gut * factors[3] + wis * factors[4]) * ground_rate * style_rate
+
+
+def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float, float, float]:
+
+    lead = _running_style_single_score(
+        ctx, race1, ctx.lead, (0.5, 0.35, 0.05, 0.05, 0.05),
+    )
+    head = _running_style_single_score(
+        ctx, race1, ctx.head, (0.45, 0.2, 0.15, 0.05, 0.15)
+    )
+    middle = _running_style_single_score(
+        ctx, race1, ctx.middle, (0.4, 0.2, 0.2, 0.02, 0.18)
+    )
+    last = _running_style_single_score(
+        ctx, race1, ctx.last, (0.4, 0.15, 0.25, 0.02, 0.18)
+    )
+
+    if race1.grade <= race1.GRADE_G2 or race1.distance <= 1800:
+        lead *= 1.2
+
+    return last, middle, head, lead
+
+
+def _choose_running_style(ctx: Context, race1: race.Race) -> None:
+    action.wait_click_image(templates.RACE_RUNNING_STYLE_CHANGE_BUTTON)
+
+    names = ("lead", "head", "middle", "last")
+    scores = _running_style_scores(ctx, race1)
+    button_pos = ((60, 500), (160, 500), (260, 500), (360, 500))
+
+    race_with_scores = zip(names, scores, button_pos)
+    race_with_scores = sorted(
+        race_with_scores, key=lambda x: x[1], reverse=True)
+
+    for name, score, _ in race_with_scores:
+        LOGGER.info("running style score:\t%.2f:\t%s", score, name)
+
+    action.click(race_with_scores[0][2])
+    action.wait_click_image(templates.RACE_CONFIRM_BUTTON)
+
+
 def _handle_race(ctx: Context):
-    # TODO: change running style
-    action.wait_click_image(templates.NURTURING_RACE_DETAIL_BUTTON)
-    exit(1)
     action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
     action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
+
+    action.wait_click_image(_RACE_DETAIL_BUTTON)
+    race1 = race.find_by_race_detail_image(ctx, template.screenshot())
+    action.wait_click_image(templates.CLOSE_BUTTON)
+
+    _choose_running_style(ctx, race1)
+
     _handle_race_result()
     _, pos = action.wait_image(templates.NURTURING_RACE_NEXT_BUTTON)
 
@@ -256,6 +365,7 @@ def _update_context_by_status_menu(ctx: Context):
 
 def nurturing():
     ctx = Context()
+
     while True:
         tmpl, pos = action.wait_image(
             templates.CONNECTING,
@@ -292,7 +402,7 @@ def nurturing():
             ctx.update_by_command_scene(template.screenshot(max_age=0))
             if not ctx.fan_count:
                 _update_context_by_class_menu(ctx)
-            if ctx.grass == ctx.STATUS_NONE or ctx.date[1:] == (4, 1):
+            if ctx.turf == ctx.STATUS_NONE or ctx.date[1:] == (4, 1):
                 _update_context_by_status_menu(ctx)
 
             ctx.next_turn()

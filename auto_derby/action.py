@@ -84,7 +84,7 @@ def click_image(name: Union[Text, template.Specification], *, x: int = 0, y: int
         return False
 
 
-def wait_click_image(name: Text, *, x: int = 0, y: int = 0) -> None:
+def wait_click_image(name: Union[Text, template.Specification], *, x: int = 0, y: int = 0) -> None:
     _, pos = wait_image(name)
     click((pos[0]+x, pos[1]+y))
 
