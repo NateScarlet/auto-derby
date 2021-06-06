@@ -127,7 +127,7 @@ def constant_color_key(img: np.ndarray, *colors: Tuple[int, ...], threshold: flo
     return ret
 
 
-def sharpen(img: np.ndarray, size: float = 1, *, bit_size: int = 8) -> np.ndarray:
+def sharpen(img: np.ndarray, size: int = 1, *, bit_size: int = 8) -> np.ndarray:
     return cv2.filter2D(
         img,
         bit_size,

@@ -35,17 +35,18 @@ def _gradient(colors: Tuple[
 
 
 def _ocr_training_effect(img: Image) -> int:
-    cv_img = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
-
+    cv_img = cv2.cvtColor(
+        np.asarray(imagetools.resize_by_heihgt(img, 32)),
+        cv2.COLOR_RGB2BGR,
+    )
     sharpened_img = imagetools.sharpen(cv_img)
 
     outline_img = imagetools.color_key(
         sharpened_img,
         np.full_like(
-            sharpened_img,
+            cv_img,
             (255, 255, 255),
-        ),
-        0.95,
+        )
     ).clip(0, 255)
 
     bg_mask_img = imagetools.bg_mask_by_outline(outline_img)
@@ -58,9 +59,13 @@ def _ocr_training_effect(img: Image) -> int:
         ((95, 179, 255), round(img.height * 0.63)),
         ((74, 157, 255), round(img.height * 0.70)),
         ((74, 117, 255), round(img.height * 0.83)),
-        ((74, 117, 255), img.height),
+        ((74, 117, 255), cv_img.shape[0]),
     )).astype(np.uint8)
-    fill_img = np.repeat(np.expand_dims(fill_gradient, 1), img.width, axis=1)
+    fill_img = np.repeat(
+        np.expand_dims(fill_gradient, 1),
+        cv_img.shape[1],
+        axis=1,
+    )
     assert fill_img.shape == cv_img.shape
 
     fg_mask_img = 255 - bg_mask_img
