@@ -198,11 +198,11 @@ def test_update_by_class_detail_4():
     assert ctx.fan_count == 148805, ctx.fan_count
 
 
-def test_update_by_character_status_menu():
+def test_update_by_character_detail():
     img = PIL.Image.open(
-        _TEST_DATA_PATH / "character_status_menu.png").convert("RGB")
+        _TEST_DATA_PATH / "character_detail.png").convert("RGB")
     ctx = Context()
-    ctx.update_by_character_status_menu(img)
+    ctx.update_by_character_detail(img)
 
     assert ctx.turf == ctx.STATUS_A, ctx.turf
     assert ctx.dart == ctx.STATUS_G, ctx.dart
@@ -218,11 +218,11 @@ def test_update_by_character_status_menu():
     assert ctx.last == ctx.STATUS_G, ctx.last
 
 
-def test_update_by_character_status_menu_2():
+def test_update_by_character_detail_2():
     img = PIL.Image.open(
-        _TEST_DATA_PATH / "character_status_menu_2.png").convert("RGB")
+        _TEST_DATA_PATH / "character_detail_2.png").convert("RGB")
     ctx = Context()
-    ctx.update_by_character_status_menu(img)
+    ctx.update_by_character_detail(img)
 
     assert ctx.turf == ctx.STATUS_A, ctx.turf
     assert ctx.dart == ctx.STATUS_E, ctx.dart

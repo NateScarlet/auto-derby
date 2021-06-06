@@ -263,7 +263,7 @@ class Context:
         vitality_bbox = (148, 106, 327, 108)
 
         _, detail_button_pos = next(template.match(
-            screenshot, templates.SINGLE_MODE_CHARACTER_STATUS_MENU_BUTTON),
+            screenshot, templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON),
         )
         base_y = detail_button_pos[1] + 71
         speed_bbox = (45, base_y, 90, base_y + 19)
@@ -301,7 +301,7 @@ class Context:
         fan_count_bbox = (220, 523, 420, 540)
         self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
 
-    def update_by_character_status_menu(self, screenshot: Image) -> None:
+    def update_by_character_detail(self, screenshot: Image) -> None:
         grass_bbox = (158, 263, 173, 280)
         dart_bbox = (244, 263, 258, 280)
 
