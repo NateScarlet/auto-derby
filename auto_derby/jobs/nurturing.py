@@ -318,6 +318,7 @@ def _choose_running_style(ctx: Context, race1: race.Race) -> None:
 def _handle_race(ctx: Context):
     action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
     action.wait_click_image(templates.NURTURING_RACE_START_BUTTON)
+    action.wait_image(templates.RACE_RESULT_BUTTON)
 
     action.wait_click_image(_RACE_DETAIL_BUTTON)
     race1 = race.find_by_race_detail_image(ctx, template.screenshot())
