@@ -324,19 +324,21 @@ def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float,
 def _choose_running_style(ctx: Context, race1: race.Race) -> None:
     action.wait_click_image(templates.RACE_RUNNING_STYLE_CHANGE_BUTTON)
 
-    names = ("last", "middle", "lead", "head")
+    names = ("last", "middle", "head", "lead")
     scores = _running_style_scores(ctx, race1)
     button_pos = ((60, 500), (160, 500), (260, 500), (360, 500))
 
-    race_with_scores = zip(names, scores, button_pos)
-    race_with_scores = sorted(
-        race_with_scores, key=lambda x: x[1], reverse=True)
+    style_scores = sorted(
+        zip(names, scores, button_pos),
+        key=lambda x: x[1],
+        reverse=True,
+    )
 
-    for name, score, _ in race_with_scores:
+    for name, score, _ in style_scores:
         LOGGER.info("running style score:\t%.2f:\t%s", score, name)
 
     _, pos = action.wait_image(templates.RACE_CONFIRM_BUTTON)
-    action.click(race_with_scores[0][2])
+    action.click(style_scores[0][2])
     action.click(pos)
 
 
