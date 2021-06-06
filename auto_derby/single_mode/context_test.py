@@ -158,6 +158,7 @@ def test_update_by_character_class_menu():
     ctx.update_by_character_class_menu(img)
     assert ctx.fan_count == 1, ctx.fan_count
 
+
 def test_update_by_character_class_menu_2():
     img = PIL.Image.open(
         _TEST_DATA_PATH / "character_class_menu_2.png").convert("RGB")
@@ -165,12 +166,21 @@ def test_update_by_character_class_menu_2():
     ctx.update_by_character_class_menu(img)
     assert ctx.fan_count == 1225, ctx.fan_count
 
+
 def test_update_by_character_class_menu_3():
     img = PIL.Image.open(
         _TEST_DATA_PATH / "character_class_menu_3.png").convert("RGB")
     ctx = Context()
     ctx.update_by_character_class_menu(img)
     assert ctx.fan_count == 11950, ctx.fan_count
+
+
+def test_update_by_character_class_menu_4():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "character_class_menu_4.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_character_class_menu(img)
+    assert ctx.fan_count == 148805, ctx.fan_count
 
 
 def test_update_by_character_status_menu():
@@ -191,6 +201,7 @@ def test_update_by_character_status_menu():
     assert ctx.head == ctx.STATUS_A, ctx.head
     assert ctx.middle == ctx.STATUS_A, ctx.middle
     assert ctx.last == ctx.STATUS_G, ctx.last
+
 
 def test_update_by_character_status_menu_2():
     img = PIL.Image.open(
