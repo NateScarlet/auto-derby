@@ -10,7 +10,7 @@ from PIL.Image import Image
 import PIL.ImageOps
 from PIL.Image import fromarray as image_from_array
 
-from .. import ocr, imagetools
+from .. import ocr, imagetools, templates, template
 
 import os
 
@@ -259,13 +259,18 @@ class Context:
             self._extra_turn_count = 0
 
     def update_by_command_scene(self, screenshot: Image) -> None:
-        vitality_bbox = (148, 106, 327, 108)
-        speed_bbox = (45, 553, 90, 572)
-        stamina_bbox = (125, 553, 162, 572)
-        power_bbox = (192, 553, 234, 572)
-        guts_bbox = (264, 553, 308, 572)
-        wisdom_bbox = (337, 553, 381, 572)
         date_bbox = (10, 27, 140, 43)
+        vitality_bbox = (148, 106, 327, 108)
+
+        _, detail_button_pos = next(template.match(
+            screenshot, templates.NURTURING_CHARACTER_STATUS_MENU_BUTTON),
+        )
+        base_y = detail_button_pos[1] + 71
+        speed_bbox = (45, base_y, 90, base_y + 19)
+        stamina_bbox = (125, base_y, 162, base_y + 19)
+        power_bbox = (192, base_y, 234, base_y + 19)
+        guts_bbox = (264, base_y, 308, base_y + 19)
+        wisdom_bbox = (337, base_y, 381, base_y + 19)
 
         self.date = _ocr_date(screenshot.crop(date_bbox))
 

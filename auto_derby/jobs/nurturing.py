@@ -367,6 +367,14 @@ def _update_context_by_status_menu(ctx: Context):
     action.wait_click_image(templates.CLOSE_BUTTON)
 
 
+def _update_context_by_command_scene(ctx: Context):
+    ctx.update_by_command_scene(template.screenshot(max_age=0))
+    if not ctx.fan_count:
+        _update_context_by_class_menu(ctx)
+    if ctx.turf == ctx.STATUS_NONE or ctx.date[1:] == (4, 1):
+        _update_context_by_status_menu(ctx)
+
+
 def nurturing():
     ctx = Context()
 
@@ -393,6 +401,8 @@ def nurturing():
         elif name == templates.NURTURING_FINISH_BUTTON:
             break
         elif name == templates.NURTURING_FORMAL_RACE_BANNER:
+            _update_context_by_command_scene(ctx)
+            ctx.next_turn()
             x, y = pos
             y += 60
             action.click((x, y))
@@ -403,12 +413,7 @@ def nurturing():
             _handle_race(ctx)
         elif name == templates.NURTURING_COMMAND_TRAINING:
             time.sleep(0.2)  # wait animation
-            ctx.update_by_command_scene(template.screenshot(max_age=0))
-            if not ctx.fan_count:
-                _update_context_by_class_menu(ctx)
-            if ctx.turf == ctx.STATUS_NONE or ctx.date[1:] == (4, 1):
-                _update_context_by_status_menu(ctx)
-
+            _update_context_by_command_scene(ctx)
             ctx.next_turn()
             LOGGER.info("update context: %s", ctx)
             if action.click_image(templates.NURTURING_SCHEDULED_RACE_OPENING_BANNER):
