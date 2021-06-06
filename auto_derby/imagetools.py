@@ -12,7 +12,6 @@ import cv2
 import cv2.img_hash
 import numpy as np
 from PIL.Image import Image, fromarray
-import PIL.Image
 
 
 def md5(b_img: np.ndarray, *, save_path: Optional[Text] = None) -> Text:

@@ -352,13 +352,8 @@ def _handle_race(ctx: Context):
     _choose_running_style(ctx, race1)
 
     _handle_race_result()
-    _, pos = action.wait_image(templates.SINGLE_MODE_RACE_NEXT_BUTTON)
-
-    with action.recover_cursor():
-        action.move((pos[0], pos[1]-100))
-        action.wheel(10)
-        ctx.update_by_race_result_scene(template.screenshot())
-        action.click(pos)
+    ctx.fan_count = 0  # request update in next turn
+    action.wait_click_image(templates.SINGLE_MODE_RACE_NEXT_BUTTON)
 
 
 ALL_OPTIONS = [

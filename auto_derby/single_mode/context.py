@@ -303,10 +303,6 @@ class Context:
         self.wisdom = int(
             ocr.text(PIL.ImageOps.invert(screenshot.crop(wisdom_bbox))))
 
-    def update_by_race_result_scene(self, screenshot: Image) -> None:
-        fan_count_bbox = (128, 698, 330, 716)
-        self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
-
     def update_by_class_detail(self, screenshot: Image) -> None:
         fan_count_bbox = (220, 523, 420, 540)
         self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))

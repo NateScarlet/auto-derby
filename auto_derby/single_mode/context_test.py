@@ -141,31 +141,6 @@ def test_update_by_command_scene_issue17_2():
     assert ctx.wisdom == 233, ctx.wisdom
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
-
-def test_update_by_race_result_scene():
-    img = PIL.Image.open(
-        _TEST_DATA_PATH / "race_result_scene.png").convert("RGB")
-    ctx = Context()
-    ctx.update_by_race_result_scene(img)
-    assert ctx.fan_count == 1179
-
-
-def test_update_by_race_result_scene_2():
-    img = PIL.Image.open(
-        _TEST_DATA_PATH / "race_result_scene_2.png").convert("RGB")
-    ctx = Context()
-    ctx.update_by_race_result_scene(img)
-    assert ctx.fan_count == 4073
-
-
-def test_update_by_race_result_scene_3():
-    img = PIL.Image.open(
-        _TEST_DATA_PATH / "race_result_scene_3.png").convert("RGB")
-    ctx = Context()
-    ctx.update_by_race_result_scene(img)
-    assert ctx.fan_count == 134344, ctx.fan_count
-
-
 def test_update_by_class_detail():
     img = PIL.Image.open(
         _TEST_DATA_PATH / "class_detail.png").convert("RGB")
