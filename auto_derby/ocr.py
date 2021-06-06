@@ -192,10 +192,15 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
             char_parts and
             l > char_bbox[2] and
             (
-                l > char_bbox[0] + max_char_width * 0.6 or
+                l > char_non_zero_bbox[0] + max_char_width * 0.6 or
+                (
+                    # previous is punctuation
+                    r - char_non_zero_bbox[0] > max_char_width
+                ) or
                 (
                     # punctuation
                     char_non_zero_bbox[3] - char_non_zero_bbox[1] < max_char_height * 0.5 and
+                    l > char_bbox[2] + 4 and
                     l > char_bbox[0] + max_char_width * 0.3
                 )
             ) and

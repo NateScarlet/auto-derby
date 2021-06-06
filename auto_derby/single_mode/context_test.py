@@ -179,7 +179,7 @@ def test_update_by_character_status_menu():
     ctx = Context()
     ctx.update_by_character_status_menu(img)
 
-    assert ctx.grass == ctx.STATUS_A, ctx.grass
+    assert ctx.turf == ctx.STATUS_A, ctx.turf
     assert ctx.dart == ctx.STATUS_G, ctx.dart
 
     assert ctx.sprint == ctx.STATUS_C, ctx.sprint
@@ -198,7 +198,7 @@ def test_update_by_character_status_menu_2():
     ctx = Context()
     ctx.update_by_character_status_menu(img)
 
-    assert ctx.grass == ctx.STATUS_A, ctx.grass
+    assert ctx.turf == ctx.STATUS_A, ctx.turf
     assert ctx.dart == ctx.STATUS_E, ctx.dart
 
     assert ctx.sprint == ctx.STATUS_D, ctx.sprint
