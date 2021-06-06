@@ -376,9 +376,9 @@ def _handle_option():
 
 
 def _update_context_by_class_menu(ctx: Context):
-    action.wait_click_image(templates.SINGLE_MODE_CHARACTER_CLASS_MENU_BUTTON)
-    action.wait_image(templates.SINGLE_MODE_CHARACTER_CLASS_MENU_TITLE)
-    ctx.update_by_character_class_menu(template.screenshot())
+    action.wait_click_image(templates.SINGLE_MODE_CLASS_DETAIL_BUTTON)
+    action.wait_image(templates.SINGLE_MODE_CLASS_DETAIL_TITLE)
+    ctx.update_by_class_detail(template.screenshot())
     action.wait_click_image(templates.CLOSE_BUTTON)
 
 

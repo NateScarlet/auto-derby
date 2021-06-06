@@ -166,35 +166,35 @@ def test_update_by_race_result_scene_3():
     assert ctx.fan_count == 134344, ctx.fan_count
 
 
-def test_update_by_character_class_menu():
+def test_update_by_class_detail():
     img = PIL.Image.open(
-        _TEST_DATA_PATH / "character_class_menu.png").convert("RGB")
+        _TEST_DATA_PATH / "class_detail.png").convert("RGB")
     ctx = Context()
-    ctx.update_by_character_class_menu(img)
+    ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1, ctx.fan_count
 
 
-def test_update_by_character_class_menu_2():
+def test_update_by_class_detail_2():
     img = PIL.Image.open(
-        _TEST_DATA_PATH / "character_class_menu_2.png").convert("RGB")
+        _TEST_DATA_PATH / "class_detail_2.png").convert("RGB")
     ctx = Context()
-    ctx.update_by_character_class_menu(img)
+    ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1225, ctx.fan_count
 
 
-def test_update_by_character_class_menu_3():
+def test_update_by_class_detail_3():
     img = PIL.Image.open(
-        _TEST_DATA_PATH / "character_class_menu_3.png").convert("RGB")
+        _TEST_DATA_PATH / "class_detail_3.png").convert("RGB")
     ctx = Context()
-    ctx.update_by_character_class_menu(img)
+    ctx.update_by_class_detail(img)
     assert ctx.fan_count == 11950, ctx.fan_count
 
 
-def test_update_by_character_class_menu_4():
+def test_update_by_class_detail_4():
     img = PIL.Image.open(
-        _TEST_DATA_PATH / "character_class_menu_4.png").convert("RGB")
+        _TEST_DATA_PATH / "class_detail_4.png").convert("RGB")
     ctx = Context()
-    ctx.update_by_character_class_menu(img)
+    ctx.update_by_class_detail(img)
     assert ctx.fan_count == 148805, ctx.fan_count
 
 

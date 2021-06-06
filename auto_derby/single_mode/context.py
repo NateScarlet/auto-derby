@@ -297,7 +297,7 @@ class Context:
         fan_count_bbox = (128, 698, 330, 716)
         self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
 
-    def update_by_character_class_menu(self, screenshot: Image) -> None:
+    def update_by_class_detail(self, screenshot: Image) -> None:
         fan_count_bbox = (220, 523, 420, 540)
         self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
 
