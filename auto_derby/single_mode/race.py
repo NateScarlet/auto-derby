@@ -1,5 +1,5 @@
-# -*- coding=UTF-8 -*-
 # pyright: strict
+# -*- coding=UTF-8 -*-
 """.  """
 from __future__ import annotations
 
@@ -208,20 +208,20 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
     return stadium, ground, distance, turn, track
 
 
-def _recognize_grade(rgb_color: Tuple[int, ...]) -> int:
+def _recognize_grade(rgb_color: Tuple[int, ...]) -> Tuple[int, ...]:
     if imagetools.compare_color((54, 133, 228),  rgb_color) > 0.9:
-        return Race.GRADE_G1
+        return Race.GRADE_G1,
     if imagetools.compare_color((244, 85, 129),  rgb_color) > 0.9:
-        return Race.GRADE_G2
+        return Race.GRADE_G2,
     if imagetools.compare_color((57, 187, 85),  rgb_color) > 0.9:
-        return Race.GRADE_G3
+        return Race.GRADE_G3,
     if imagetools.compare_color((252, 169, 5),  rgb_color) > 0.9:
-        return Race.GRADE_OP
+        return Race.GRADE_OP, Race.GRADE_PRE_OP
     if imagetools.compare_color((148, 203, 8),  rgb_color) > 0.9:
-        return Race.GRADE_DEBUT
+        return Race.GRADE_DEBUT, Race.GRADE_NOT_WINNING
     if imagetools.compare_color((247, 209, 41),  rgb_color) > 0.9:
         # EX(URA)
-        return Race.GRADE_G1
+        return Race.GRADE_G1,
     raise ValueError(
         "_recognize_grade: unknown grade color: %s" % (rgb_color,))
 
@@ -238,7 +238,7 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
         no1_fan_count_pos[1] + 1 + 18,
     )
 
-    grade = _recognize_grade(
+    grades = _recognize_grade(
         tuple(cast.list_(screenshot.getpixel(grade_color_pos), int)))
     stadium, ground, distance, turn, track = _recognize_spec(
         screenshot.crop(spec_bbox)
@@ -246,7 +246,6 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
     no1_fan_count = _recognize_fan_count(screenshot.crop(no1_fan_count_bbox))
 
     full_spec = (
-        grade,
         stadium,
         ground,
         distance,
@@ -255,8 +254,9 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
         no1_fan_count,
     )
     for i in find_by_date(ctx.date):
+        if i.grade not in grades:
+            continue
         if full_spec == (
-            i.grade,
             i.stadium,
             i.ground,
             i.distance,
