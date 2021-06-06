@@ -296,18 +296,17 @@ def _running_style_single_score(
 
 
 def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float, float, float]:
-
     lead = _running_style_single_score(
         ctx, race1, ctx.lead, (5000, 3000, 500, 500, 1000),
     )
     head = _running_style_single_score(
-        ctx, race1, ctx.head, (4500, 2000, 1500, 500, 1500)
+        ctx, race1, ctx.head, (4800, 2000, 1400, 500, 1300)
     )
     middle = _running_style_single_score(
-        ctx, race1, ctx.middle, (4000, 2000, 2000, 200, 1800)
+        ctx, race1, ctx.middle, (4500, 1800, 2000, 200, 1500)
     )
     last = _running_style_single_score(
-        ctx, race1, ctx.last, (4000, 1500, 2500, 200, 1800)
+        ctx, race1, ctx.last, (4300, 1500, 2300, 200, 1700)
     )
 
     if (
