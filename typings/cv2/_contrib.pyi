@@ -31679,23 +31679,6 @@ def getRotationMatrix2D(center, angle, scale) -> retval:
     ...
 
 
-def getStructuringElement(shape, ksize[, anchor]) -> retval:
-    """
-    .   @brief Returns a structuring element of the specified size and shape for morphological operations.
-    .
-    .   The function constructs and returns the structuring element that can be further passed to #erode,
-    .   #dilate or #morphologyEx. But you can also construct an arbitrary binary mask yourself and use it as
-    .   the structuring element.
-    .
-    .   @param shape Element shape that could be one of #MorphShapes
-    .   @param ksize Size of the structuring element.
-    .   @param anchor Anchor position within the element. The default value \f$(-1, -1)\f$ means that the
-    .   anchor is at the center. Note that only the shape of a cross-shaped element depends on the anchor
-    .   position. In other cases the anchor just regulates how much the result of the morphological
-    .   operation is shifted.
-    """
-    ...
-
 
 def getTextSize(text, fontFace, fontScale, thickness) -> retval, baseLine:
     """

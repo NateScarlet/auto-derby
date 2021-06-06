@@ -104,7 +104,11 @@ def _recognize_fan_count(img: Image) -> int:
 def _recognize_status(img: Image) -> Tuple[int, Text]:
     cv_img = imagetools.cv_image(
         imagetools.resize_by_heihgt(img.convert("L"), 32))
-
+    cv_img = imagetools.level(
+        cv_img,
+        np.percentile(cv_img, 5),
+        np.percentile(cv_img, 95),
+    )
     cv_img = cv2.copyMakeBorder(
         cv_img,
         4,
@@ -114,9 +118,14 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
         cv2.BORDER_CONSTANT,
         value=(255,)
     )
-    blurred_img = cv2.blur(
+
+    blurred_img = imagetools.mix(
+        cv2.blur(
+            cv_img,
+            (5, 5),
+        ),
         cv_img,
-        (3, 3),
+        0.8
     )
 
     binary_img = cv2.adaptiveThreshold(
@@ -171,6 +180,7 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
+        cv2.imshow("blurred_img", blurred_img)
         cv2.imshow("binary_img", binary_img)
         cv2.imshow("text_img", text_img)
         cv2.waitKey()

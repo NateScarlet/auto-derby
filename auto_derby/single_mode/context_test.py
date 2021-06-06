@@ -236,3 +236,24 @@ def test_update_by_character_detail_2():
     assert ctx.head == ctx.STATUS_A, ctx.head
     assert ctx.middle == ctx.STATUS_B, ctx.middle
     assert ctx.last == ctx.STATUS_B, ctx.last
+
+
+def test_update_by_character_detail_3():
+    img = PIL.Image.open(
+        _TEST_DATA_PATH / "character_detail_3.png",
+    ).convert("RGB")
+    ctx = Context()
+    ctx.update_by_character_detail(img)
+
+    assert ctx.turf == ctx.STATUS_S, ctx.turf
+    assert ctx.dart == ctx.STATUS_G, ctx.dart
+
+    assert ctx.sprint == ctx.STATUS_C, ctx.sprint
+    assert ctx.mile == ctx.STATUS_B, ctx.mile
+    assert ctx.intermediate == ctx.STATUS_A, ctx.intermediate
+    assert ctx.long == ctx.STATUS_C, ctx.long
+
+    assert ctx.lead == ctx.STATUS_D, ctx.lead
+    assert ctx.head == ctx.STATUS_A, ctx.head
+    assert ctx.middle == ctx.STATUS_A, ctx.middle
+    assert ctx.last == ctx.STATUS_G, ctx.last

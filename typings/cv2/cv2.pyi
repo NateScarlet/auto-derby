@@ -17325,7 +17325,7 @@ def equalizeHist(src[, dst]) -> dst:
     ...
 
 
-def erode(src: ndarray, kernel: Tuple[int, int], dst: ndarray =..., anchor: Tuple[int, int] = ..., iterations: int = ..., borderType: int =..., borderValue: Any = ...) -> ndarray:
+def erode(src: ndarray, kernel: ndarray, dst: ndarray =..., anchor: Tuple[int, int] = ..., iterations: int = ..., borderType: int =..., borderValue: Any = ...) -> ndarray:
     """
     .   @brief Erodes an image by using a specific structuring element.
     .
@@ -19073,7 +19073,7 @@ def getRotationMatrix2D(center, angle, scale) -> retval:
     ...
 
 
-def getStructuringElement(shape, ksize[, anchor]) -> retval:
+def getStructuringElement(shape: int, ksize: Tuple[int, int], anchor: Tuple[int, int] = ...) -> ndarray:
     """
     .   @brief Returns a structuring element of the specified size and shape for morphological operations.
     .

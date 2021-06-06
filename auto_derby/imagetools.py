@@ -141,6 +141,13 @@ def sharpen(img: np.ndarray, size: int = 1, *, bit_size: int = 8) -> np.ndarray:
     )
 
 
+def mix(a: np.ndarray, b: np.ndarray, a_mix: float) -> np.ndarray:
+    total_ratio = 10000
+    a_ratio = int(a_mix * 10000)
+    b_ratio = total_ratio - a_ratio
+    return ((a.astype(int) * a_ratio + b.astype(int) * b_ratio) / total_ratio).astype(a.dtype)
+
+
 def bg_mask_by_outline(outline_img: np.ndarray) -> np.ndarray:
     h, w = outline_img.shape[:2]
 
