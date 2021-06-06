@@ -17,7 +17,7 @@ def test_update_by_command_scene():
     assert ctx.speed == 281, ctx.speed
     assert ctx.stamina == 217, ctx.stamina
     assert ctx.power == 210, ctx.power
-    assert ctx.perservance == 187, ctx.perservance
+    assert ctx.guts == 187, ctx.guts
     assert ctx.intelligence == 266, ctx.intelligence
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
@@ -32,7 +32,7 @@ def test_update_by_command_scene_2():
     assert ctx.speed == 281, ctx.speed
     assert ctx.stamina == 217, ctx.stamina
     assert ctx.power == 210, ctx.power
-    assert ctx.perservance == 198, ctx.perservance
+    assert ctx.guts == 198, ctx.guts
     assert ctx.intelligence == 266, ctx.intelligence
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
@@ -47,7 +47,7 @@ def test_update_by_command_scene_3():
     assert ctx.speed == 589, ctx.speed
     assert ctx.stamina == 375, ctx.stamina
     assert ctx.power == 461, ctx.power
-    assert ctx.perservance == 263, ctx.perservance
+    assert ctx.guts == 263, ctx.guts
     assert ctx.intelligence == 386, ctx.intelligence
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
@@ -62,7 +62,7 @@ def test_update_by_command_scene_issue7():
     assert ctx.speed == 158
     assert ctx.stamina == 190
     assert ctx.power == 67
-    assert ctx.perservance == 95
+    assert ctx.guts == 95
     assert ctx.intelligence == 90
     assert ctx.mood == ctx.MOOD_NORMAL
 
@@ -77,7 +77,7 @@ def test_update_by_command_scene_issue12():
     assert ctx.speed == 266, ctx.speed
     assert ctx.stamina == 228, ctx.stamina
     assert ctx.power == 196, ctx.power
-    assert ctx.perservance == 200, ctx.perservance
+    assert ctx.guts == 200, ctx.guts
     assert ctx.intelligence == 176, ctx.intelligence
     assert ctx.mood == ctx.MOOD_BAD, ctx.mood
 
@@ -92,7 +92,7 @@ def test_update_by_command_scene_issue12_2():
     assert ctx.speed == 241, ctx.speed
     assert ctx.stamina == 237, ctx.stamina
     assert ctx.power == 144, ctx.power
-    assert ctx.perservance == 187, ctx.perservance
+    assert ctx.guts == 187, ctx.guts
     assert ctx.intelligence == 184, ctx.intelligence
     assert ctx.mood == ctx.MOOD_GOOD, ctx.mood
 
@@ -107,7 +107,7 @@ def test_update_by_command_scene_issue17():
     assert ctx.speed == 195, ctx.speed
     assert ctx.stamina == 150, ctx.stamina
     assert ctx.power == 119, ctx.power
-    assert ctx.perservance == 115, ctx.perservance
+    assert ctx.guts == 115, ctx.guts
     assert ctx.intelligence == 91, ctx.intelligence
     assert ctx.mood == ctx.MOOD_GOOD, ctx.mood
 
@@ -122,7 +122,7 @@ def test_update_by_command_scene_issue17_2():
     assert ctx.speed == 262, ctx.speed
     assert ctx.stamina == 266, ctx.stamina
     assert ctx.power == 142, ctx.power
-    assert ctx.perservance == 156, ctx.perservance
+    assert ctx.guts == 156, ctx.guts
     assert ctx.intelligence == 233, ctx.intelligence
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 

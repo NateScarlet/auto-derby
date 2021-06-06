@@ -80,8 +80,8 @@ def _training_score(ctx: Context, training: Training) -> float:
         )
     )
     per = _training_single_score(
-        ctx.perservance,
-        training.perservance,
+        ctx.guts,
+        training.guts,
         (
             (0, 2.0),
             (300, 1.0),

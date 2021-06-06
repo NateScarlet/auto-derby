@@ -216,7 +216,7 @@ class Context:
         self.speed = 0
         self.stamina = 0
         self.power = 0
-        self.perservance = 0
+        self.guts = 0
         self.intelligence = 0
         # (year, month, half-month), 1-base
         self.date = (0, 0, 0)
@@ -263,7 +263,7 @@ class Context:
         speed_bbox = (45, 553, 90, 572)
         stamina_bbox = (125, 553, 162, 572)
         power_bbox = (192, 553, 234, 572)
-        perservance_bbox = (264, 553, 308, 572)
+        guts_bbox = (264, 553, 308, 572)
         intelligence_bbox = (337, 553, 381, 572)
         date_bbox = (10, 27, 140, 43)
 
@@ -283,8 +283,8 @@ class Context:
             ocr.text(PIL.ImageOps.invert(screenshot.crop(stamina_bbox))))
         self.power = int(
             ocr.text(PIL.ImageOps.invert(screenshot.crop(power_bbox))))
-        self.perservance = int(
-            ocr.text(PIL.ImageOps.invert(screenshot.crop(perservance_bbox))))
+        self.guts = int(
+            ocr.text(PIL.ImageOps.invert(screenshot.crop(guts_bbox))))
         self.intelligence = int(
             ocr.text(PIL.ImageOps.invert(screenshot.crop(intelligence_bbox))))
 
@@ -334,12 +334,12 @@ class Context:
             f"spd={self.speed},"
             f"sta={self.stamina},"
             f"pow={self.power},"
-            f"per={self.perservance},"
+            f"gut={self.guts},"
             f"int={self.intelligence},"
             f"fan={self.fan_count},"
             f"ground={''.join(i[1] for i in (self.grass, self.dart))},"
             f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"
-            f"runing_style={''.join(i[1] for i in (self.lead, self.head, self.middle, self.last))}"
+            f"running_style={''.join(i[1] for i in (self.lead, self.head, self.middle, self.last))}"
             ">"
         )
 
