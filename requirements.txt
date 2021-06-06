@@ -1,7 +1,7 @@
 pywin32==300
 opencv-python==4.5.2.52
 opencv-contrib-python==4.5.2.52
-cast-unknown==0.1.4
+cast-unknown==0.1.6
 numpy==1.20.3
 pillow==8.2.0
 mouse==0.7.1
