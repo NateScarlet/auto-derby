@@ -13,6 +13,7 @@ def buy_everything():
     ):
         action.click(pos)
         action.wait_click_image(templates.EXCHANGE_CONFIRM_BUTTON)
+        action.wait_image(templates.CLOSE_BUTTON)
         for _, pos in action.match_image_until_disappear(templates.CLOSE_BUTTON):
             action.click(pos)
         action.wait_image(templates.CLOSE_NOW_BUTTON)
