@@ -283,13 +283,22 @@ def _running_style_single_score(
     # バ場適性が合わないバ場を走ると力強さに欠けうまく走れないことが多い。
     pow *= ground_rate
 
-    return (spd * factors[0] + sta * factors[1] + pow * factors[2] + gut * factors[3] + wis * factors[4])
+    total_factor = 1
+    for i in race1.target_statuses:
+        total_factor *= 1 + 0.1 * int({
+            race1.TARGET_STATUS_SPEED: spd,
+            race1.TARGET_STATUS_POWER: pow,
+            race1.TARGET_STATUS_STAMINA: sta,
+            race1.TARGET_STATUS_GUTS: gut,
+            race1.TARGET_STATUS_WISDOM: wis,
+        }[i] / 300)
+    return (spd * factors[0] + sta * factors[1] + pow * factors[2] + gut * factors[3] + wis * factors[4]) * total_factor
 
 
 def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float, float, float]:
 
     lead = _running_style_single_score(
-        ctx, race1, ctx.lead, (0.5, 0.35, 0.05, 0.05, 0.05),
+        ctx, race1, ctx.lead, (0.5, 0.3, 0.05, 0.05, 0.1),
     )
     head = _running_style_single_score(
         ctx, race1, ctx.head, (0.45, 0.2, 0.15, 0.05, 0.15)
@@ -302,7 +311,7 @@ def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float,
     )
 
     if (
-        race1.TARGET_STATUS_WISDOM not in race1.target_statuses and
+        ctx.speed > ctx.turn_count() * 300 / 24 and
         (race1.grade >= race1.GRADE_G2 or race1.distance <= 1800)
     ):
         lead += 40
