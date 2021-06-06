@@ -158,7 +158,9 @@ def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
     for i in RACES:
         if year not in i.years:
             continue
-        if year not in (1, 4) and (month, half) != (i.month, half):
+        if date == (1, 0, 0) and i.grade != Race.GRADE_DEBUT:
+            continue
+        if (month, half) not in ((i.month, half), (0, 0)):
             continue
         yield i
 
@@ -215,6 +217,8 @@ def _recognize_grade(rgb_color: Tuple[int, ...]) -> int:
         return Race.GRADE_G3
     if imagetools.compare_color((252, 169, 5),  rgb_color) > 0.9:
         return Race.GRADE_OP
+    if imagetools.compare_color((148, 203, 8),  rgb_color) > 0.9:
+        return Race.GRADE_DEBUT
     if imagetools.compare_color((247, 209, 41),  rgb_color) > 0.9:
         # EX(URA)
         return Race.GRADE_G1
@@ -251,16 +255,6 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
         no1_fan_count,
     )
     for i in find_by_date(ctx.date):
-        if i.distance == 2200 and i.name == "URAファイナルズ 準決勝" and i.stadium == "阪神":
-            print(
-                i.grade,
-                i.stadium,
-                i.ground,
-                i.distance,
-                i.turn,
-                i.track,
-                i.fan_counts[0],
-            )
         if full_spec == (
             i.grade,
             i.stadium,

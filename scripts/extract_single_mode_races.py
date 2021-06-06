@@ -55,7 +55,7 @@ SELECT
   FROM single_mode_program AS t1
   LEFT JOIN race_instance AS t2 ON t1.race_instance_id = t2.id
   LEFT JOIN race AS t3 ON t2.race_id = t3.id
-  LEFT JOIN text_data AS t4 ON t4.category = 32 AND t3.id = t4."index"
+  LEFT JOIN text_data AS t4 ON t4.category = 28 AND t2.id = t4."index"
   LEFT JOIN race_course_set AS t5 ON t5.id = t3.course_set
   LEFT JOIN race_course_set_status AS t6 ON t6.course_set_status_id = t5.course_set_status_id
   LEFT JOIN text_data AS t7 ON t7.category = 35 AND t7."index" = t5.race_track_id
