@@ -40,6 +40,7 @@ def _ocr_training_effect(img: Image) -> int:
         cv2.COLOR_RGB2BGR,
     )
     sharpened_img = imagetools.sharpen(cv_img)
+    sharpened_img = ((sharpened_img / 2.0 + cv_img / 2.0)).astype(np.uint8)
 
     outline_img = imagetools.color_key(
         sharpened_img,
@@ -75,9 +76,7 @@ def _ocr_training_effect(img: Image) -> int:
         masked_img,
         fill_img,
     )
-    # ignore small white background
-    if np.average(text_img) == 0:
-        return 0
+
     text_img_extra = imagetools.constant_color_key(
         masked_img,
         (175, 214, 255),
@@ -89,6 +88,11 @@ def _ocr_training_effect(img: Image) -> int:
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("sharpened_img", sharpened_img)
+        # cv2.imshow("fill_diff_img", imagetools.color_key(
+        #     masked_img,
+        #     fill_img,
+        #     threshold=0,
+        # ))
         cv2.imshow("outline_img", outline_img)
         cv2.imshow("bg_mask_img", bg_mask_img)
         cv2.imshow("fg_mask_img", fg_mask_img)
