@@ -41,7 +41,7 @@ class Race:
 
     PERMISSION_JUNIOR = 1
     PERMISSION_CLASSIC = 2
-    PERMISSION_JUNIOR_OR_CLASSIC = 3
+    PERMISSION_SENIOR_OR_CLASSIC = 3
     PERMISSION_SENIOR = 4
     PERMISSION_URA = 5
 
@@ -117,8 +117,8 @@ class Race:
             return (1,)
         if self.permission == self.PERMISSION_CLASSIC:
             return (2,)
-        if self.permission == self.PERMISSION_JUNIOR_OR_CLASSIC:
-            return (1, 2)
+        if self.permission == self.PERMISSION_SENIOR_OR_CLASSIC:
+            return (2, 3)
         if self.permission == self.PERMISSION_SENIOR:
             return (3,)
         if self.permission == self.PERMISSION_URA:
