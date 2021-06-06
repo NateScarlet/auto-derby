@@ -42,10 +42,11 @@ def main():
 
     h_wnd = window.get_game()
     if not h_wnd:
-        if win32gui.MessageBox(0, "Launch DMM umamusume?", "Can not found window", win32con.MB_YESNO):
+        if win32gui.MessageBox(0, "Launch DMM umamusume?", "Can not found window", win32con.MB_YESNO) == 6:
             webbrowser.open('dmmgameplayer://umamusume/cl/general/umamusume')
             while not h_wnd:
                 time.sleep(1)
+                LOGGER.info("waiting game launch")
                 h_wnd = window.get_game()
         else:
             exit(1)
