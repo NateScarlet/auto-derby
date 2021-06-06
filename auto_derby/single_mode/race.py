@@ -126,7 +126,11 @@ class Race:
         raise ValueError("Race.year: unknown permission: %s" % self.permission)
 
     def __str__(self):
-        return f"Race<{self.stadium} {self.name}>"
+        ground_text = {
+            Race.GROUND_DART: 'dart',
+            Race.GROUND_TURF: 'turf',
+        }.get(self.ground, self.ground)
+        return f"Race<{self.stadium} {ground_text} {self.distance}m {self.name}>"
 
     def distance_status(self, ctx: Context) -> Tuple[int, Text]:
         if self.distance <= 1400:
