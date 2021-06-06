@@ -163,8 +163,8 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
 
     char_img_list: List[Tuple[Tuple[int, int, int, int], np.ndarray]] = []
     char_parts: List[np.ndarray] = []
-    char_parts_bbox = contours_with_bbox[0][1]
-    char_has_top_part = False
+    char_bbox = contours_with_bbox[0][1]
+    char_non_zero_bbox = contours_with_bbox[0][1]
 
     def _push_char():
         if not char_parts:
@@ -178,48 +178,49 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
             thickness=cv2.FILLED,
         )
         char_img = cv2.copyTo(binary_img, mask)
-        assert char_parts_bbox is not None
-        l, t, r, b = char_parts_bbox
+        assert char_bbox is not None
+        l, t, r, b = char_bbox
         char_img = char_img[
             t:b,
             l:r,
         ]
-        char_img_list.append((char_parts_bbox, char_img))
+        char_img_list.append((char_bbox, char_img))
 
     for i, bbox in contours_with_bbox:
         l, t, r, b = bbox
         is_new_char = (
             char_parts and
-            l > char_parts_bbox[2] and
+            l > char_bbox[2] and
             (
-                l > char_parts_bbox[0] + max_char_width * 0.6 or
+                l > char_bbox[0] + max_char_width * 0.6 or
                 (
-                    not char_has_top_part and
-                    l > char_parts_bbox[0] + max_char_width * 0.3
+                    # punctuation
+                    char_non_zero_bbox[3] - char_non_zero_bbox[1] < max_char_height * 0.5 and
+                    l > char_bbox[0] + max_char_width * 0.3
                 )
             ) and
-            not _bbox_contains(_pad_bbox(char_parts_bbox, 2), bbox)
+            not _bbox_contains(_pad_bbox(char_bbox, 2), bbox)
         )
         if is_new_char:
-            space_w = l - char_parts_bbox[2]
+            space_w = l - char_bbox[2]
             divide_x = int(l-space_w * 0.5 - 1)
-            last_r = min(divide_x, char_parts_bbox[0] + max_char_width)
-            char_parts_bbox = _union_bbox(
-                char_parts_bbox,
-                (last_r, t, last_r, t),
+            last_r = min(divide_x, char_bbox[0] + max_char_width)
+            char_bbox = _union_bbox(
+                char_bbox,
+                (last_r, t, last_r, b),
             )
             _push_char()
             char_parts = []
-            char_parts_bbox = (
-                max(divide_x + 1, r-max_char_width),
-                char_parts_bbox[1],
+            char_bbox = (
+                max(last_r + 1, r-max_char_width),
+                char_bbox[1],
                 r,
-                int(char_parts_bbox[1] + max_char_height),
+                int(char_bbox[1] + max_char_height),
             )
-            char_has_top_part = False
-        char_has_top_part = char_has_top_part or t < char_parts_bbox[1] + max_char_height * 0.5
+            char_non_zero_bbox = bbox
         char_parts.append(i)
-        char_parts_bbox = _union_bbox(char_parts_bbox, bbox)
+        char_non_zero_bbox = _union_bbox(char_non_zero_bbox, bbox)
+        char_bbox = _union_bbox(char_bbox, bbox)
     _push_char()
 
     if os.getenv("DEBUG") == __name__:

@@ -41,3 +41,13 @@ def test_find_by_race_detail_image_4():
     race1 = race.find_by_race_detail_image(ctx, img)
 
     assert race1.name == "ダイヤモンドステークス", race1.name
+
+
+def test_find_by_race_detail_image_5():
+
+    img = PIL.Image.open(_test.DATA_PATH / "race_detail_5.png").convert("RGB")
+    ctx = Context()
+    ctx.date = (2, 10, 2)
+    race1 = race.find_by_race_detail_image(ctx, img)
+
+    assert race1.name == "菊花賞", race1.name
