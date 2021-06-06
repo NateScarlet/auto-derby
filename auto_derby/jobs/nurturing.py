@@ -301,8 +301,11 @@ def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float,
         ctx, race1, ctx.last, (0.4, 0.15, 0.25, 0.02, 0.18)
     )
 
-    if race1.grade <= race1.GRADE_G2 or race1.distance <= 1800:
-        lead *= 1.2
+    if (
+        race1.TARGET_STATUS_WISDOM not in race1.target_statuses and
+        (race1.grade >= race1.GRADE_G2 or race1.distance <= 1800)
+    ):
+        lead += 40
     if race1.distance >= 2400:
         lead *= 0.9
 
