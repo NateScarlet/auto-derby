@@ -259,6 +259,7 @@ def _running_style_single_score(
 
     # proper running style
     # from master.mdb `race_proper_runningstyle_rate` table
+
     style_rate = {
         "S": 1.1,
         "A": 1.0,
@@ -270,10 +271,19 @@ def _running_style_single_score(
         "G": 0.1,
     }[status[1]]
 
+    # https://umamusume.cygames.jp/#/help?p=3
+
+    # 距離適性が低い距離のコースを走るとうまくスピードに乗れず、上位争いをすることが難しいことが多い。
     spd *= d_spd_rate
     pow *= d_pow_rate
 
-    return (spd * factors[0] + sta * factors[1] + pow * factors[2] + gut * factors[3] + wis * factors[4]) * ground_rate * style_rate
+    # 適性が低い作戦で走ろうとすると冷静に走れないことが多い。
+    wis *= style_rate
+
+    # バ場適性が合わないバ場を走ると力強さに欠けうまく走れないことが多い。
+    pow *= ground_rate
+
+    return (spd * factors[0] + sta * factors[1] + pow * factors[2] + gut * factors[3] + wis * factors[4])
 
 
 def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float, float, float]:
@@ -302,7 +312,7 @@ def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float,
 def _choose_running_style(ctx: Context, race1: race.Race) -> None:
     action.wait_click_image(templates.RACE_RUNNING_STYLE_CHANGE_BUTTON)
 
-    names = ("lead", "head", "middle", "last")
+    names = ("last", "middle", "lead", "head")
     scores = _running_style_scores(ctx, race1)
     button_pos = ((60, 500), (160, 500), (260, 500), (360, 500))
 
