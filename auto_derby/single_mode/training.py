@@ -75,6 +75,9 @@ def _ocr_training_effect(img: Image) -> int:
         masked_img,
         fill_img,
     )
+    # ignore small white background
+    if np.average(text_img) == 0:
+        return 0
     text_img_extra = imagetools.constant_color_key(
         masked_img,
         (175, 214, 255),
