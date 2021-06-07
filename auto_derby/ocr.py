@@ -179,7 +179,7 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
         )
         char_img = cv2.copyTo(binary_img, mask)
         l, t, r, b = char_non_zero_bbox
-        if r - l < max_char_width * 0.6 or b - t < max_char_height * 0.8:
+        if r - l < max_char_width * 0.5 or b - t < max_char_height * 0.8:
             l, t, r, b = char_bbox
         char_img = char_img[
             t:b,
@@ -191,18 +191,21 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
         l, t, r, b = bbox
         is_new_char = (
             char_parts and
-            l > char_bbox[2] and
+            l > char_non_zero_bbox[2] and
             (
-                l > char_non_zero_bbox[0] + max_char_width * 0.6 or
+                l - char_non_zero_bbox[0] > max_char_width * 0.6 or
+                l - char_non_zero_bbox[2] > max_char_width * 0.2 or
+                r - char_non_zero_bbox[0] > max_char_width or
                 (
                     # previous is punctuation
-                    r - char_non_zero_bbox[0] > max_char_width
+                    char_non_zero_bbox[3] - char_non_zero_bbox[1] < max_char_height * 0.6 and
+                    r - l > max_char_width * 0.6
                 ) or
                 (
-                    # punctuation
-                    char_non_zero_bbox[3] - char_non_zero_bbox[1] < max_char_height * 0.5 and
-                    l > char_bbox[2] + 2 and
-                    l > char_bbox[0] + max_char_width * 0.3
+                    # current is punctuation
+                    b - t < max_char_height * 0.4 and
+                    l > char_non_zero_bbox[2] + 1 and
+                    l > char_non_zero_bbox[0] + max_char_width * 0.3
                 )
             ) and
             not _bbox_contains(_pad_bbox(char_bbox, 2), bbox)

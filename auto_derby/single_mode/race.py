@@ -170,7 +170,13 @@ def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
 
 
 def _recognize_fan_count(img: PIL.Image.Image) -> int:
-    text = ocr.text(PIL.ImageOps.invert(img))
+    cv_img = imagetools.cv_image(img.convert("L"))
+    cv_img = imagetools.mix(
+        cv_img,
+        imagetools.sharpen(cv_img),
+        0.5,
+    )
+    text = ocr.text(imagetools.pil_image(255 - cv_img))
     return int(text.rstrip("人").replace(",", ""))
 
 

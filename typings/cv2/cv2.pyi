@@ -16840,7 +16840,7 @@ def dft(src[, dst[, flags[, nonzeroRows]]]) -> dst:
     ...
 
 
-def dilate(src: ndarray, kernel: Tuple[int, int], dst: ndarray =..., anchor: Tuple[int, int] = ..., iterations: int = ..., borderType: int =..., borderValue: Any = ...) -> ndarray:
+def dilate(src: ndarray, kernel: ndarray, dst: ndarray =..., anchor: Tuple[int, int] = ..., iterations: int = ..., borderType: int =..., borderValue: Any = ...) -> ndarray:
     """
     .   @brief Dilates an image by using a specific structuring element.
     .
