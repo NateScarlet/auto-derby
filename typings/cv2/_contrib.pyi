@@ -23507,7 +23507,6 @@ def CamShift(probImage, window, criteria) -> Tuple[retval, window]:
     """
     ...
 
-
 def CascadeClassifier_convert(oldcascade, newcascade) -> retval:
     """
     .

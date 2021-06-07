@@ -18996,7 +18996,7 @@ def meanStdDev(src, mean=..., stddev=..., mask=...) -> Tuple[mean, stddev]:
     """
     ...
 
-def medianBlur(src: ndarray, ksize: int, dst: Optional[ndarray]=...) -> ndarray:
+def medianBlur(src: ndarray, ksize: int, dst: Optional[ndarray] = ...) -> ndarray:
     """
     .   @brief Blurs an image using the median filter.
     .
