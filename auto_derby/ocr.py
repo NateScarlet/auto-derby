@@ -178,8 +178,9 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
             thickness=cv2.FILLED,
         )
         char_img = cv2.copyTo(binary_img, mask)
-        assert char_bbox is not None
-        l, t, r, b = char_bbox
+        l, t, r, b = char_non_zero_bbox
+        if r - l < max_char_width * 0.6 or b - t < max_char_height * 0.8:
+            l, t, r, b = char_bbox
         char_img = char_img[
             t:b,
             l:r,
