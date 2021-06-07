@@ -15,6 +15,7 @@ from . import window, action
 import json
 
 import logging
+
 LOGGER = logging.getLogger(__name__)
 
 
@@ -50,21 +51,29 @@ def _query(h: Text) -> Tuple[Text, Text, float]:
     # TODO: use a more efficient data structure, maybe vp-tree
     if not _LABELS:
         return "", "", 0
-    return sorted(((k, v, imagetools.compare_hash(h, k)) for k, v in _LABELS.items()), key=lambda x: x[2],  reverse=True)[0]
+    return sorted(
+        ((k, v, imagetools.compare_hash(h, k)) for k, v in _LABELS.items()),
+        key=lambda x: x[2],
+        reverse=True,
+    )[0]
 
 
 def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     hash_img = cv2.GaussianBlur(img, (7, 7), 1, borderType=cv2.BORDER_CONSTANT)
     h = imagetools.image_hash(fromarray(hash_img), save_path=IMAGE_PATH)
     match, value, similarity = _query(h)
-    LOGGER.debug("match label: value=%s, current=%s, match=%s, similarity=%0.3f",
-                 value, h, match, similarity)
+    LOGGER.debug(
+        "match label: value=%s, current=%s, match=%s, similarity=%0.3f",
+        value,
+        h,
+        match,
+        similarity,
+    )
     if similarity > threshold:
         return value
     ans = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
-    close_msg = window.info(
-        "New text encountered\nplease do annotation in terminal")
+    close_msg = window.info("New text encountered\nplease do annotation in terminal")
     try:
         with action.recover_cursor(), window.recover_foreground():  # may during a drag
             while len(ans) != 1:
@@ -80,22 +89,24 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     return ret
 
 
-def _union_bbox(*bbox: Optional[Tuple[int, int, int, int]]) -> Tuple[int, int, int, int]:
+def _union_bbox(
+    *bbox: Optional[Tuple[int, int, int, int]]
+) -> Tuple[int, int, int, int]:
     b = [i for i in bbox if i]
     ret = b[0]
     for i in b[1:]:
         ret = (
-            min(ret[0],  i[0]),
-            min(ret[1],  i[1]),
-            max(ret[2],  i[2]),
-            max(ret[3],  i[3]),
+            min(ret[0], i[0]),
+            min(ret[1], i[1]),
+            max(ret[2], i[2]),
+            max(ret[3], i[3]),
         )
     return ret
 
 
 def _rect2bbox(rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
     x, y, w, h = rect
-    l, t, r, b = x, y, x+w, y+h
+    l, t, r, b = x, y, x + w, y + h
     return l, t, r, b
 
 
@@ -109,12 +120,7 @@ def _pad_bbox(v: Tuple[int, int, int, int], padding: int) -> Tuple[int, int, int
 
 
 def _bbox_contains(a: Tuple[int, int, int, int], b: Tuple[int, int, int, int]) -> bool:
-    return (
-        a[0] <= b[0] and
-        a[1] <= b[1] and
-        a[2] >= b[2] and
-        a[3] >= b[3]
-    )
+    return a[0] <= b[0] and a[1] <= b[1] and a[2] >= b[2] and a[3] >= b[3]
 
 
 _LINE_HEIGHT = 32
@@ -138,25 +144,17 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
         h = _LINE_HEIGHT
         img = img.resize((w, h))
     cv_img = np.asarray(img.convert("L"))
-    _, binary_img = cv2.threshold(
-        cv_img,
-        0,
-        255,
-        cv2.THRESH_OTSU,
-    )
+    _, binary_img = cv2.threshold(cv_img, 0, 255, cv2.THRESH_OTSU)
 
-    contours, _ = cv2.findContours(
-        binary_img,
-        cv2.RETR_EXTERNAL,
-        cv2.CHAIN_APPROX_NONE,
-    )
+    contours, _ = cv2.findContours(binary_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
     if len(contours) == 0:
         LOGGER.debug("ocr result is empty")
-        return ''
+        return ""
 
-    contours_with_bbox = sorted(((i, _rect2bbox(cv2.boundingRect(i)))
-                                 for i in contours), key=lambda x: x[1][0])
+    contours_with_bbox = sorted(
+        ((i, _rect2bbox(cv2.boundingRect(i))) for i in contours), key=lambda x: x[1][0]
+    )
 
     max_char_width = max(bbox[2] - bbox[0] for _, bbox in contours_with_bbox)
     max_char_height = max(bbox[3] - bbox[1] for _, bbox in contours_with_bbox)
@@ -170,58 +168,47 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
         if not char_parts:
             return
         mask = np.zeros_like(binary_img)
-        cv2.drawContours(
-            mask,
-            char_parts,
-            -1,
-            (255,),
-            thickness=cv2.FILLED,
-        )
+        cv2.drawContours(mask, char_parts, -1, (255,), thickness=cv2.FILLED)
         char_img = cv2.copyTo(binary_img, mask)
         l, t, r, b = char_non_zero_bbox
         if r - l < max_char_width * 0.5 or b - t < max_char_height * 0.8:
             l, t, r, b = char_bbox
-        char_img = char_img[
-            t:b,
-            l:r,
-        ]
+        char_img = char_img[t:b, l:r]
         char_img_list.append((char_bbox, char_img))
 
     for i, bbox in contours_with_bbox:
         l, t, r, b = bbox
         is_new_char = (
-            char_parts and
-            l > char_non_zero_bbox[2] and
-            (
-                l - char_non_zero_bbox[0] > max_char_width * 0.6 or
-                l - char_non_zero_bbox[2] > max_char_width * 0.2 or
-                r - char_non_zero_bbox[0] > max_char_width or
-                (
+            char_parts
+            and l > char_non_zero_bbox[2]
+            and (
+                l - char_non_zero_bbox[0] > max_char_width * 0.6
+                or l - char_non_zero_bbox[2] > max_char_width * 0.2
+                or r - char_non_zero_bbox[0] > max_char_width
+                or (
                     # previous is punctuation
-                    char_non_zero_bbox[3] - char_non_zero_bbox[1] < max_char_height * 0.6 and
-                    r - l > max_char_width * 0.6
-                ) or
-                (
-                    # current is punctuation
-                    b - t < max_char_height * 0.4 and
-                    l > char_non_zero_bbox[2] + 1 and
-                    l > char_non_zero_bbox[0] + max_char_width * 0.3
+                    char_non_zero_bbox[3] - char_non_zero_bbox[1]
+                    < max_char_height * 0.6
+                    and r - l > max_char_width * 0.6
                 )
-            ) and
-            not _bbox_contains(_pad_bbox(char_bbox, 2), bbox)
+                or (
+                    # current is punctuation
+                    b - t < max_char_height * 0.4
+                    and l > char_non_zero_bbox[2] + 1
+                    and l > char_non_zero_bbox[0] + max_char_width * 0.3
+                )
+            )
+            and not _bbox_contains(_pad_bbox(char_bbox, 2), bbox)
         )
         if is_new_char:
             space_w = l - char_bbox[2]
-            divide_x = int(l-space_w * 0.5 - 1)
+            divide_x = int(l - space_w * 0.5 - 1)
             last_r = min(divide_x, char_bbox[0] + max_char_width)
-            char_bbox = _union_bbox(
-                char_bbox,
-                (last_r, t, last_r, b),
-            )
+            char_bbox = _union_bbox(char_bbox, (last_r, t, last_r, b))
             _push_char()
             char_parts = []
             char_bbox = (
-                max(last_r + 1, r-max_char_width),
+                max(last_r + 1, r - max_char_width),
                 char_bbox[1],
                 r,
                 int(char_bbox[1] + max_char_height),
@@ -236,13 +223,13 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
         segmentation_img = cv2.cvtColor(binary_img, cv2.COLOR_GRAY2BGR)
         for i in contours:
             x, y, w, h = cv2.boundingRect(i)
-            cv2.rectangle(segmentation_img, (x, y), (x+w, y+h),
-                          (0, 0, 255), thickness=1)
+            cv2.rectangle(
+                segmentation_img, (x, y), (x + w, y + h), (0, 0, 255), thickness=1
+            )
         chars_img = cv2.cvtColor(binary_img, cv2.COLOR_GRAY2BGR)
         for bbox, _ in char_img_list:
             l, t, r, b = bbox
-            cv2.rectangle(chars_img, (l, t), (r, b),
-                          (0, 0, 255), thickness=1)
+            cv2.rectangle(chars_img, (l, t), (r, b), (0, 0, 255), thickness=1)
         cv2.imshow("ocr input", cv_img)
         cv2.imshow("ocr binary", binary_img)
         cv2.imshow("ocr segmentation", segmentation_img)

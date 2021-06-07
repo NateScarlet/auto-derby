@@ -29,13 +29,13 @@ def screenshot_window(h_wnd: int) -> Image:
         # not use GetWindowRect to exclude border
         _, _, w, h = win32gui.GetClientRect(h_wnd)
         x, y = win32gui.ClientToScreen(h_wnd, (0, 0))
-        left, top, right, bottom = x, y, x+w, y+h
+        left, top, right, bottom = x, y, x + w, y + h
         bbox = (left, top, right, bottom)
         return ImageGrab.grab(bbox, True, True)
 
 
 _CACHED_SCREENSHOT: Dict[Literal["value"], Tuple[dt.datetime, Image]] = {
-    "value": (dt.datetime.fromtimestamp(0), Image()),
+    "value": (dt.datetime.fromtimestamp(0), Image())
 }
 
 
@@ -43,9 +43,7 @@ def invalidate_screeshot():
     _CACHED_SCREENSHOT["value"] = (dt.datetime.fromtimestamp(0), Image())
 
 
-_LAST_SCREENSHOT_SAVE_PATH = os.getenv(
-    "AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH",
-)
+_LAST_SCREENSHOT_SAVE_PATH = os.getenv("AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH")
 
 
 def screenshot(*, max_age: float = 1) -> Image:
@@ -70,7 +68,8 @@ def load(name: Text) -> Image:
     if name not in _LOADED_TEMPLATES:
         LOGGER.debug("load: %s", name)
         _LOADED_TEMPLATES[name] = open_image(
-            pathlib.Path(__file__).parent / "templates" / name)
+            pathlib.Path(__file__).parent / "templates" / name
+        )
     return _LOADED_TEMPLATES[name]
 
 
@@ -94,8 +93,15 @@ def add_middle_ext(name: Text, value: Text) -> Text:
     return ".".join(parts)
 
 
-class Specification():
-    def __init__(self, name: Text, pos: Optional[Text] = None, *, threshold: float = 0.9, lightness_sensitive: bool = True):
+class Specification:
+    def __init__(
+        self,
+        name: Text,
+        pos: Optional[Text] = None,
+        *,
+        threshold: float = 0.9,
+        lightness_sensitive: bool = True,
+    ):
         self.name = name
         self.pos = pos
         self.threshold = threshold
@@ -108,7 +114,7 @@ class Specification():
         x, y = pos
         if self.lightness_sensitive:
             tmpl_img = load(self.name)
-            match_img = img.crop((x, y, x + tmpl_img.width, y+tmpl_img.height))
+            match_img = img.crop((x, y, x + tmpl_img.width, y + tmpl_img.height))
 
             cv_tmpl_img = np.asarray(tmpl_img.convert("L"))
             cv_match_img = np.asarray(match_img.convert("L"))
@@ -122,8 +128,9 @@ class Specification():
                 min_diff *= -1
 
             lightness_similarity = 1 - (abs(max_diff + min_diff) / 2)
-            LOGGER.debug("lightness match: tmpl=%s, similarity=%s",
-                         self, lightness_similarity)
+            LOGGER.debug(
+                "lightness match: tmpl=%s, similarity=%s", self, lightness_similarity
+            )
             if lightness_similarity < self.threshold:
                 return False
         return True
@@ -138,7 +145,9 @@ class Specification():
 _DEBUG_TMPL = os.getenv("DEBUG_TMPL") or "debug.png"
 
 
-def _match_one(img: Image, tmpl: Union[Text, Specification]) -> Iterator[Tuple[Specification, Tuple[int, int]]]:
+def _match_one(
+    img: Image, tmpl: Union[Text, Specification]
+) -> Iterator[Tuple[Specification, Tuple[int, int]]]:
     cv_img = _cv_image(img)
     if not isinstance(tmpl, Specification):
         tmpl = Specification(tmpl)
@@ -149,42 +158,31 @@ def _match_one(img: Image, tmpl: Union[Text, Specification]) -> Iterator[Tuple[S
     if pos:
         cv_pos = np.array(pos.convert("L"))
     else:
-        cv_pos = np.full(
-            cv_img.shape[:2],
-            255.0,
-            dtype=np.uint8,
-        )
+        cv_pos = np.full(cv_img.shape[:2], 255.0, dtype=np.uint8)
     res = cv2.matchTemplate(cv_img, cv_tmpl, cv2.TM_CCOEFF_NORMED)
     if tmpl.name == _DEBUG_TMPL:
         cv2.imshow("match", res)
         cv2.waitKey()
         cv2.destroyWindow("match")
     while True:
-        mask = cv_pos[
-            0:res.shape[0],
-            0:res.shape[1],
-        ]
-        _, max_val, _, max_loc = cv2.minMaxLoc(
-            res,
-            mask=mask,
-        )
+        mask = cv_pos[0 : res.shape[0], 0 : res.shape[1]]
+        _, max_val, _, max_loc = cv2.minMaxLoc(res, mask=mask)
         x, y = max_loc
         if max_val < tmpl.threshold or not tmpl.match(img, (x, y)):
             LOGGER.debug(
-                "not match: tmpl=%s, pos=%s, similarity=%.3f", tmpl, max_loc, max_val)
+                "not match: tmpl=%s, pos=%s, similarity=%.3f", tmpl, max_loc, max_val
+            )
             break
-        LOGGER.info(
-            "match: tmpl=%s, pos=%s, similarity=%.2f", tmpl, max_loc, max_val)
+        LOGGER.info("match: tmpl=%s, pos=%s, similarity=%.2f", tmpl, max_loc, max_val)
         yield (tmpl, (x, y))
 
         # mark position unavailable to avoid overlap
-        cv_pos[
-            max(0, y-tmpl_h): y+tmpl_h,
-            max(0, x-tmpl_w): x+tmpl_w,
-        ] = 0
+        cv_pos[max(0, y - tmpl_h) : y + tmpl_h, max(0, x - tmpl_w) : x + tmpl_w] = 0
 
 
-def match(img: Image, *tmpl: Union[Text, Specification]) -> Iterator[Tuple[Specification, Tuple[int, int]]]:
+def match(
+    img: Image, *tmpl: Union[Text, Specification]
+) -> Iterator[Tuple[Specification, Tuple[int, int]]]:
     match_count = 0
     for i in tmpl:
         for j in _match_one(img, i):

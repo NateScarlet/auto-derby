@@ -15,10 +15,7 @@ LOGGER = logging.getLogger(__name__)
 
 EVENT_IMAGE_PATH = os.getenv("AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH", "")
 
-DATA_PATH = os.getenv(
-    "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH",
-    "single_mode_choices.json"
-)
+DATA_PATH = os.getenv("AUTO_DERBY_SINGLE_MODE_CHOICE_PATH", "single_mode_choices.json")
 
 
 def _load() -> Dict[Text, int]:
@@ -41,49 +38,31 @@ def get(event_screen: Image) -> int:
     b_img = np.zeros((event_screen.height, event_screen.width))
     event_name_bbox = (75, 155, 305, 180)
     options_bbox = (50, 200, 400, 570)
-    cv_event_name_img = np.asarray(
-        event_screen.crop(event_name_bbox).convert("L"))
-    _, cv_event_name_img = cv2.threshold(
-        cv_event_name_img, 220, 255, cv2.THRESH_TOZERO)
+    cv_event_name_img = np.asarray(event_screen.crop(event_name_bbox).convert("L"))
+    _, cv_event_name_img = cv2.threshold(cv_event_name_img, 220, 255, cv2.THRESH_TOZERO)
 
     l, t, r, b = event_name_bbox
-    b_img[
-        t: b,
-        l: r,
-    ] = cv_event_name_img
+    b_img[t:b, l:r] = cv_event_name_img
 
     cv_options_img = np.asarray(event_screen.crop(options_bbox).convert("L"))
 
-    option_rows = (
-        cv2.reduce(cv_options_img, 1, cv2.REDUCE_MAX) == 255
-    ).astype(np.uint8)
-
-    option_mask = np.repeat(
-        option_rows,
-        cv_options_img.shape[1],
-        axis=1,
+    option_rows = (cv2.reduce(cv_options_img, 1, cv2.REDUCE_MAX) == 255).astype(
+        np.uint8
     )
 
-    cv_options_img = 255-cv_options_img
+    option_mask = np.repeat(option_rows, cv_options_img.shape[1], axis=1)
+
+    cv_options_img = 255 - cv_options_img
     cv_options_img *= option_mask
 
-    _, cv_options_img = cv2.threshold(
-        cv_options_img,
-        128,
-        255,
-        cv2.THRESH_BINARY,
-    )
+    _, cv_options_img = cv2.threshold(cv_options_img, 128, 255, cv2.THRESH_BINARY)
 
     l, t, r, b = options_bbox
-    b_img[
-        t: b,
-        l: r,
-    ] = cv_options_img
+    b_img[t:b, l:r] = cv_options_img
 
     event_id = imagetools.md5(b_img, save_path=EVENT_IMAGE_PATH)
     if event_id not in _CHOICES:
-        close = window.info(
-            "New event encountered\nplease choose option in terminal")
+        close = window.info("New event encountered\nplease choose option in terminal")
         while True:
             ans = input("Choose event option(1/2/3/4/5):")
             if ans in ["1", "2", "3", "4", "5"]:

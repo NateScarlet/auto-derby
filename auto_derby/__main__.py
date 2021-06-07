@@ -36,14 +36,22 @@ def main():
     job = avaliable_jobs.get(args.job)
 
     if not job:
-        LOGGER.error("unknown job: %s\navaliable jobs:\n  %s",
-                     args.job, "\n  ".join(avaliable_jobs.keys()))
+        LOGGER.error(
+            "unknown job: %s\navaliable jobs:\n  %s",
+            args.job,
+            "\n  ".join(avaliable_jobs.keys()),
+        )
         exit(1)
 
     h_wnd = window.get_game()
     if not h_wnd:
-        if win32gui.MessageBox(0, "Launch DMM umamusume?", "Can not found window", win32con.MB_YESNO) == 6:
-            webbrowser.open('dmmgameplayer://umamusume/cl/general/umamusume')
+        if (
+            win32gui.MessageBox(
+                0, "Launch DMM umamusume?", "Can not found window", win32con.MB_YESNO
+            )
+            == 6
+        ):
+            webbrowser.open("dmmgameplayer://umamusume/cl/general/umamusume")
             while not h_wnd:
                 time.sleep(1)
                 LOGGER.info("waiting game launch")
@@ -63,20 +71,21 @@ def is_admin():
         return False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(
         format="%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
         level=logging.INFO,
         datefmt="%H:%M:%S",
     )
-    LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", 'auto_derby.log')
+    LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", "auto_derby.log")
     if LOG_PATH and LOG_PATH != "-":
         handler = logging.handlers.RotatingFileHandler(
-            LOG_PATH, backupCount=3, encoding="utf-8")
+            LOG_PATH, backupCount=3, encoding="utf-8"
+        )
         handler.doRollover()
         formatter = logging.Formatter(
             "%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
-            '%Y-%m-%d %H:%M:%S',
+            "%Y-%m-%d %H:%M:%S",
         )
         handler.setFormatter(formatter)
         logging.root.addHandler(handler)
@@ -88,7 +97,7 @@ if __name__ == '__main__':
 
     if not is_admin():
         LOGGER.error(
-            "admin permission is required, otherwise mouse event will be ignored by the game.",
+            "admin permission is required, otherwise mouse event will be ignored by the game."
         )
         exit(1)
     try:

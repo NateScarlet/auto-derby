@@ -8,7 +8,6 @@ from typing import *
 
 from numpy import ArrayLike, Scalar, ndarray
 
-
 class AKAZE(Feature2D):
     @staticmethod
     def __new__(*args, **kwargs):
@@ -16,9 +15,16 @@ class AKAZE(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, descriptor_type[, descriptor_size[, descriptor_channels[, threshold[, nOctaves[, nOctaveLayers[, diffusivity]]]]]]]) -> retval:
+    def create(
+        descriptor_type=...,
+        descriptor_size=...,
+        descriptor_channels=...,
+        threshold=...,
+        nOctaves=...,
+        nOctaveLayers=...,
+        diffusivity=...,
+    ) -> retval:
         """
         .   @brief The AKAZE constructor
         .
@@ -33,105 +39,87 @@ class AKAZE(Feature2D):
         .       DIFF_CHARBONNIER
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def getDescriptorChannels(self) -> retval:
         """
         .
         """
         ...
-
     def getDescriptorSize(self) -> retval:
         """
         .
         """
         ...
-
     def getDescriptorType(self) -> retval:
         """
         .
         """
         ...
-
     def getDiffusivity(self) -> retval:
         """
         .
         """
         ...
-
     def getNOctaveLayers(self) -> retval:
         """
         .
         """
         ...
-
     def getNOctaves(self) -> retval:
         """
         .
         """
         ...
-
     def getThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def setDescriptorChannels(self, dch) -> None:
         """
         .
         """
         ...
-
     def setDescriptorSize(self, dsize) -> None:
         """
         .
         """
         ...
-
     def setDescriptorType(self, dtype) -> None:
         """
         .
         """
         ...
-
     def setDiffusivity(self, diff) -> None:
         """
         .
         """
         ...
-
     def setNOctaveLayers(self, octaveLayers) -> None:
         """
         .
         """
         ...
-
     def setNOctaves(self, octaves) -> None:
         """
         .
         """
         ...
-
     def setThreshold(self, threshold) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class AffineFeature(Feature2D):
     @staticmethod
@@ -140,9 +128,10 @@ class AffineFeature(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create(backend[, maxTilt[, minTilt[, tiltStep[, rotateStepBase]]]]) -> retval:
+    def create(
+        backend, maxTilt=..., minTilt=..., tiltStep=..., rotateStepBase=...
+    ) -> retval:
         """
         .   @param backend The detector/extractor you want to use as backend.
         .       @param maxTilt The highest power index of tilt factor. 5 is used in the paper as tilt sampling range n.
@@ -151,33 +140,27 @@ class AffineFeature(Feature2D):
         .       @param rotateStepBase Rotation sampling step factor b in Algorithm 1 in the paper.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def getViewParams(self, tilts, rolls) -> None:
         """
         .
         """
         ...
-
     def setViewParams(self, tilts, rolls) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class AgastFeatureDetector(Feature2D):
     @staticmethod
@@ -186,64 +169,53 @@ class AgastFeatureDetector(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, threshold[, nonmaxSuppression[, type]]]) -> retval:
+    def create(threshold=..., nonmaxSuppression=..., type=...) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def getNonmaxSuppression(self) -> retval:
         """
         .
         """
         ...
-
     def getThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def getType(self) -> retval:
         """
         .
         """
         ...
-
     def setNonmaxSuppression(self, f) -> None:
         """
         .
         """
         ...
-
     def setThreshold(self, threshold) -> None:
         """
         .
         """
         ...
-
     def setType(self, type) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class Algorithm(builtins.object):
     @staticmethod
@@ -252,54 +224,45 @@ class Algorithm(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def clear(self) -> None:
         """
         .   @brief Clears the algorithm state
         """
         ...
-
     def empty(self) -> retval:
         """
         .   @brief Returns true if the Algorithm is empty (e.g. in the very beginning or after unsuccessful read
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .   Returns the algorithm string identifier.
         .   This string is used as top level xml/yml node tag when the object is saved to a file or string.
         """
         ...
-
     def read(self, fn) -> None:
         """
         .   @brief Reads algorithm parameters from a file storage
         """
         ...
-
     def save(self, filename) -> None:
         """
         .   Saves the algorithm to a file.
         .   In order to make this method work, the derived class must implement Algorithm::write(FileStorage& fs).
         """
         ...
-
-    def write(self, fs[, name]) -> None:
+    def write(self, fs, name=...) -> None:
         """
         .   @brief simplified API for language bindings
         .       * @overload
         """
         ...
-
     ...
-
 
 class AlignExposures(Algorithm):
     @staticmethod
@@ -308,13 +271,11 @@ class AlignExposures(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def process(self, src, dst, times, response) -> None:
         """
         .   @brief Aligns images
@@ -326,9 +287,7 @@ class AlignExposures(Algorithm):
         .       have the same number of channels as images.
         """
         ...
-
     ...
-
 
 class AlignMTB(AlignExposures):
     @staticmethod
@@ -337,13 +296,11 @@ class AlignMTB(AlignExposures):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def calculateShift(self, img0, img1) -> retval:
         """
         .   @brief Calculates shift between two images, i. e. how to shift the second image to correspond it with the
@@ -353,8 +310,7 @@ class AlignMTB(AlignExposures):
         .       @param img1 second image
         """
         ...
-
-    def computeBitmaps(self, img[, tb[, eb]]) -> tb, eb:
+    def computeBitmaps(self, img, tb=..., eb=...) -> Tuple[tb, eb]:
         """
         .   @brief Computes median threshold and exclude bitmaps of given image.
         .
@@ -363,25 +319,21 @@ class AlignMTB(AlignExposures):
         .       @param eb exclude bitmap
         """
         ...
-
     def getCut(self) -> retval:
         """
         .
         """
         ...
-
     def getExcludeRange(self) -> retval:
         """
         .
         """
         ...
-
     def getMaxBits(self) -> retval:
         """
         .
         """
         ...
-
     def process(self, src, dst, times, response) -> None:
         """
         .
@@ -395,26 +347,22 @@ class AlignMTB(AlignExposures):
         .       @param dst vector of aligned images
         """
         ...
-
     def setCut(self, value) -> None:
         """
         .
         """
         ...
-
     def setExcludeRange(self, exclude_range) -> None:
         """
         .
         """
         ...
-
     def setMaxBits(self, max_bits) -> None:
         """
         .
         """
         ...
-
-    def shiftMat(self, src, shift[, dst]) -> dst:
+    def shiftMat(self, src, shift, dst=...) -> dst:
         """
         .   @brief Helper function, that shift Mat filling new regions with zeros.
         .
@@ -423,9 +371,7 @@ class AlignMTB(AlignExposures):
         .       @param shift shift value
         """
         ...
-
     ...
-
 
 class AsyncArray(builtins.object):
     @staticmethod
@@ -434,20 +380,17 @@ class AsyncArray(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def get(self, [, dst]) -> dst:
+    def get(self, dst=...) -> dst:
         """
         .   Fetch the result.
         .       @param[out] dst destination array
@@ -461,7 +404,7 @@ class AsyncArray(builtins.object):
 
 
 
-        get(timeoutNs[, dst]) -> retval, dst
+        get(timeoutNs, dst=...) -> retval, dst
         .   Retrieving the result with timeout
         .       @param[out] dst destination array
         .       @param[in] timeoutNs timeout in nanoseconds, -1 for infinite wait
@@ -471,27 +414,22 @@ class AsyncArray(builtins.object):
         .       @note Result or stored exception can be fetched only once.
         """
         ...
-
     def release(self) -> None:
         """
         .
         """
         ...
-
     def valid(self) -> retval:
         """
         .
         """
         ...
-
     def wait_for(self, timeoutNs) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class BFMatcher(DescriptorMatcher):
     @staticmethod
@@ -500,9 +438,8 @@ class BFMatcher(DescriptorMatcher):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, normType[, crossCheck]]) -> retval:
+    def create(normType=..., crossCheck=...) -> retval:
         """
         .   @brief Brute-force matcher create method.
         .       @param normType One of NORM_L1, NORM_L2, NORM_HAMMING, NORM_HAMMING2. L1 and L2 norms are
@@ -517,21 +454,17 @@ class BFMatcher(DescriptorMatcher):
         .       enough matches. This is alternative to the ratio test, used by D. Lowe in SIFT paper.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class BOWImgDescriptorExtractor(builtins.object):
     @staticmethod
@@ -540,20 +473,17 @@ class BOWImgDescriptorExtractor(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def compute(self, image, keypoints[, imgDescriptor]) -> imgDescriptor:
+    def compute(self, image, keypoints, imgDescriptor=...) -> imgDescriptor:
         """
         .   @overload
         .       @param keypointDescriptors Computed descriptors to match with vocabulary.
@@ -563,25 +493,21 @@ class BOWImgDescriptorExtractor(builtins.object):
         .       returned if it is non-zero.
         """
         ...
-
     def descriptorSize(self) -> retval:
         """
         .   @brief Returns an image descriptor size if the vocabulary is set. Otherwise, it returns 0.
         """
         ...
-
     def descriptorType(self) -> retval:
         """
         .   @brief Returns an image descriptor type.
         """
         ...
-
     def getVocabulary(self) -> retval:
         """
         .   @brief Returns the set vocabulary.
         """
         ...
-
     def setVocabulary(self, vocabulary) -> None:
         """
         .   @brief Sets a visual vocabulary.
@@ -590,9 +516,7 @@ class BOWImgDescriptorExtractor(builtins.object):
         .       vocabulary is a visual word (cluster center).
         """
         ...
-
     ...
-
 
 class BOWKMeansTrainer(BOWTrainer):
     @staticmethod
@@ -601,19 +525,16 @@ class BOWKMeansTrainer(BOWTrainer):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def cluster(self) -> retval:
         """
         .
@@ -624,9 +545,7 @@ class BOWKMeansTrainer(BOWTrainer):
         .
         """
         ...
-
     ...
-
 
 class BOWTrainer(builtins.object):
     @staticmethod
@@ -635,13 +554,11 @@ class BOWTrainer(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def add(self, descriptors) -> None:
         """
         .   @brief Adds descriptors to a training set.
@@ -652,13 +569,11 @@ class BOWTrainer(builtins.object):
         .       The training set is clustered using clustermethod to construct the vocabulary.
         """
         ...
-
     def clear(self) -> None:
         """
         .
         """
         ...
-
     def cluster(self) -> retval:
         """
         .   @overload
@@ -676,21 +591,17 @@ class BOWTrainer(builtins.object):
         .       input descriptors are clustered.
         """
         ...
-
     def descriptorsCount(self) -> retval:
         """
         .   @brief Returns the count of all descriptors stored in the training set.
         """
         ...
-
     def getDescriptors(self) -> retval:
         """
         .   @brief Returns a training set of descriptors.
         """
         ...
-
     ...
-
 
 class BRISK(Feature2D):
     @staticmethod
@@ -699,9 +610,8 @@ class BRISK(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, thresh[, octaves[, patternScale]]]) -> retval:
+    def create(thresh=..., octaves=..., patternScale=...) -> retval:
         """
         .   @brief The BRISK constructor
         .
@@ -712,7 +622,7 @@ class BRISK(Feature2D):
 
 
 
-        create(radiusList, numberList[, dMax[, dMin[, indexChange]]]) -> retval
+        create(radiusList, numberList, dMax=..., dMin=..., indexChange=...) -> retval
         .   @brief The BRISK constructor for a custom pattern
         .
         .       @param radiusList defines the radii (in pixels) where the samples around a keypoint are taken (for
@@ -727,7 +637,7 @@ class BRISK(Feature2D):
 
 
 
-        create(thresh, octaves, radiusList, numberList[, dMax[, dMin[, indexChange]]]) -> retval
+        create(thresh, octaves, radiusList, numberList, dMax=..., dMin=..., indexChange=...) -> retval
         .   @brief The BRISK constructor for a custom pattern, detection threshold and octaves
         .
         .       @param thresh AGAST detection threshold score.
@@ -743,47 +653,39 @@ class BRISK(Feature2D):
         .   @param indexChange index remapping of the bits.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def getOctaves(self) -> retval:
         """
         .
         """
         ...
-
     def getThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def setOctaves(self, octaves) -> None:
         """
         .   @brief Set detection octaves.
         .       @param octaves detection octaves. Use 0 to do single scale.
         """
         ...
-
     def setThreshold(self, threshold) -> None:
         """
         .   @brief Set detection threshold.
         .       @param threshold AGAST detection threshold score.
         """
         ...
-
     ...
-
 
 class BackgroundSubtractor(Algorithm):
     @staticmethod
@@ -792,14 +694,12 @@ class BackgroundSubtractor(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def apply(self, image[, fgmask[, learningRate]]) -> fgmask:
+    def apply(self, image, fgmask=..., learningRate=...) -> fgmask:
         """
         .   @brief Computes a foreground mask.
         .
@@ -811,8 +711,7 @@ class BackgroundSubtractor(Algorithm):
         .       is completely reinitialized from the last frame.
         """
         ...
-
-    def getBackgroundImage(self, [, backgroundImage]) -> backgroundImage:
+    def getBackgroundImage(self, backgroundImage=...) -> backgroundImage:
         """
         .   @brief Computes a background image.
         .
@@ -822,9 +721,7 @@ class BackgroundSubtractor(Algorithm):
         .       statistics.
         """
         ...
-
     ...
-
 
 class BackgroundSubtractorKNN(BackgroundSubtractor):
     @staticmethod
@@ -833,13 +730,11 @@ class BackgroundSubtractorKNN(BackgroundSubtractor):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDetectShadows(self) -> retval:
         """
         .   @brief Returns the shadow detection flag
@@ -848,7 +743,6 @@ class BackgroundSubtractorKNN(BackgroundSubtractor):
         .       details.
         """
         ...
-
     def getDist2Threshold(self) -> retval:
         """
         .   @brief Returns the threshold on the squared distance between the pixel and the sample
@@ -857,19 +751,16 @@ class BackgroundSubtractorKNN(BackgroundSubtractor):
         .       close to a data sample.
         """
         ...
-
     def getHistory(self) -> retval:
         """
         .   @brief Returns the number of last frames that affect the background model
         """
         ...
-
     def getNSamples(self) -> retval:
         """
         .   @brief Returns the number of data samples in the background model
         """
         ...
-
     def getShadowThreshold(self) -> retval:
         """
         .   @brief Returns the shadow threshold
@@ -880,7 +771,6 @@ class BackgroundSubtractorKNN(BackgroundSubtractor):
         .       *Detecting Moving Shadows...*, IEEE PAMI,2003.
         """
         ...
-
     def getShadowValue(self) -> retval:
         """
         .   @brief Returns the shadow value
@@ -889,7 +779,6 @@ class BackgroundSubtractorKNN(BackgroundSubtractor):
         .       in the mask always means background, 255 means foreground.
         """
         ...
-
     def getkNNSamples(self) -> retval:
         """
         .   @brief Returns the number of neighbours, the k in the kNN.
@@ -898,25 +787,21 @@ class BackgroundSubtractorKNN(BackgroundSubtractor):
         .       pixel is matching the kNN background model.
         """
         ...
-
     def setDetectShadows(self, detectShadows) -> None:
         """
         .   @brief Enables or disables shadow detection
         """
         ...
-
     def setDist2Threshold(self, _dist2Threshold) -> None:
         """
         .   @brief Sets the threshold on the squared distance
         """
         ...
-
     def setHistory(self, history) -> None:
         """
         .   @brief Sets the number of last frames that affect the background model
         """
         ...
-
     def setNSamples(self, _nN) -> None:
         """
         .   @brief Sets the number of data samples in the background model.
@@ -924,27 +809,22 @@ class BackgroundSubtractorKNN(BackgroundSubtractor):
         .       The model needs to be reinitalized to reserve memory.
         """
         ...
-
     def setShadowThreshold(self, threshold) -> None:
         """
         .   @brief Sets the shadow threshold
         """
         ...
-
     def setShadowValue(self, value) -> None:
         """
         .   @brief Sets the shadow value
         """
         ...
-
     def setkNNSamples(self, _nkNN) -> None:
         """
         .   @brief Sets the k in the kNN. How many nearest neighbours need to match.
         """
         ...
-
     ...
-
 
 class BackgroundSubtractorMOG2(BackgroundSubtractor):
     @staticmethod
@@ -953,14 +833,12 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def apply(self, image[, fgmask[, learningRate]]) -> fgmask:
+    def apply(self, image, fgmask=..., learningRate=...) -> fgmask:
         """
         .   @brief Computes a foreground mask.
         .
@@ -972,7 +850,6 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         .       is completely reinitialized from the last frame.
         """
         ...
-
     def getBackgroundRatio(self) -> retval:
         """
         .   @brief Returns the "background ratio" parameter of the algorithm
@@ -982,7 +859,6 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         .       parameter in the paper.
         """
         ...
-
     def getComplexityReductionThreshold(self) -> retval:
         """
         .   @brief Returns the complexity reduction threshold
@@ -992,7 +868,6 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         .       standard Stauffer&Grimson algorithm.
         """
         ...
-
     def getDetectShadows(self) -> retval:
         """
         .   @brief Returns the shadow detection flag
@@ -1001,19 +876,16 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         .       details.
         """
         ...
-
     def getHistory(self) -> retval:
         """
         .   @brief Returns the number of last frames that affect the background model
         """
         ...
-
     def getNMixtures(self) -> retval:
         """
         .   @brief Returns the number of gaussian components in the background model
         """
         ...
-
     def getShadowThreshold(self) -> retval:
         """
         .   @brief Returns the shadow threshold
@@ -1024,7 +896,6 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         .       *Detecting Moving Shadows...*, IEEE PAMI,2003.
         """
         ...
-
     def getShadowValue(self) -> retval:
         """
         .   @brief Returns the shadow value
@@ -1033,25 +904,21 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         .       in the mask always means background, 255 means foreground.
         """
         ...
-
     def getVarInit(self) -> retval:
         """
         .   @brief Returns the initial variance of each gaussian component
         """
         ...
-
     def getVarMax(self) -> retval:
         """
         .
         """
         ...
-
     def getVarMin(self) -> retval:
         """
         .
         """
         ...
-
     def getVarThreshold(self) -> retval:
         """
         .   @brief Returns the variance threshold for the pixel-model match
@@ -1060,7 +927,6 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         .       the background model or not. Related to Cthr from the paper.
         """
         ...
-
     def getVarThresholdGen(self) -> retval:
         """
         .   @brief Returns the variance threshold for the pixel-model match used for new mixture component generation
@@ -1072,31 +938,26 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         .       they can grow too large.
         """
         ...
-
     def setBackgroundRatio(self, ratio) -> None:
         """
         .   @brief Sets the "background ratio" parameter of the algorithm
         """
         ...
-
     def setComplexityReductionThreshold(self, ct) -> None:
         """
         .   @brief Sets the complexity reduction threshold
         """
         ...
-
     def setDetectShadows(self, detectShadows) -> None:
         """
         .   @brief Enables or disables shadow detection
         """
         ...
-
     def setHistory(self, history) -> None:
         """
         .   @brief Sets the number of last frames that affect the background model
         """
         ...
-
     def setNMixtures(self, nmixtures) -> None:
         """
         .   @brief Sets the number of gaussian components in the background model.
@@ -1104,51 +965,42 @@ class BackgroundSubtractorMOG2(BackgroundSubtractor):
         .       The model needs to be reinitalized to reserve memory.
         """
         ...
-
     def setShadowThreshold(self, threshold) -> None:
         """
         .   @brief Sets the shadow threshold
         """
         ...
-
     def setShadowValue(self, value) -> None:
         """
         .   @brief Sets the shadow value
         """
         ...
-
     def setVarInit(self, varInit) -> None:
         """
         .   @brief Sets the initial variance of each gaussian component
         """
         ...
-
     def setVarMax(self, varMax) -> None:
         """
         .
         """
         ...
-
     def setVarMin(self, varMin) -> None:
         """
         .
         """
         ...
-
     def setVarThreshold(self, varThreshold) -> None:
         """
         .   @brief Sets the variance threshold for the pixel-model match
         """
         ...
-
     def setVarThresholdGen(self, varThresholdGen) -> None:
         """
         .   @brief Sets the variance threshold for the pixel-model match used for new mixture component generation
         """
         ...
-
     ...
-
 
 class BaseCascadeClassifier(Algorithm):
     @staticmethod
@@ -1157,15 +1009,12 @@ class BaseCascadeClassifier(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class CLAHE(Algorithm):
     @staticmethod
@@ -1174,14 +1023,12 @@ class CLAHE(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def apply(self, src[, dst]) -> dst:
+    def apply(self, src, dst=...) -> dst:
         """
         .   @brief Equalizes the histogram of a grayscale image using Contrast Limited Adaptive Histogram Equalization.
         .
@@ -1189,25 +1036,21 @@ class CLAHE(Algorithm):
         .       @param dst Destination image.
         """
         ...
-
     def collectGarbage(self) -> None:
         """
         .
         """
         ...
-
     def getClipLimit(self) -> retval:
         """
         .
         """
         ...
-
     def getTilesGridSize(self) -> retval:
         """
         .
         """
         ...
-
     def setClipLimit(self, clipLimit) -> None:
         """
         .   @brief Sets threshold for contrast limiting.
@@ -1215,7 +1058,6 @@ class CLAHE(Algorithm):
         .       @param clipLimit threshold value.
         """
         ...
-
     def setTilesGridSize(self, tileGridSize) -> None:
         """
         .   @brief Sets size of grid for histogram equalization. Input image will be divided into
@@ -1224,9 +1066,7 @@ class CLAHE(Algorithm):
         .       @param tileGridSize defines the number of tiles in row and column.
         """
         ...
-
     ...
-
 
 class CalibrateCRF(Algorithm):
     @staticmethod
@@ -1235,14 +1075,12 @@ class CalibrateCRF(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def process(self, src, times[, dst]) -> dst:
+    def process(self, src, times, dst=...) -> dst:
         """
         .   @brief Recovers inverse camera response.
         .
@@ -1251,9 +1089,7 @@ class CalibrateCRF(Algorithm):
         .       @param times vector of exposure time values for each image
         """
         ...
-
     ...
-
 
 class CalibrateDebevec(CalibrateCRF):
     @staticmethod
@@ -1262,51 +1098,42 @@ class CalibrateDebevec(CalibrateCRF):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getLambda(self) -> retval:
         """
         .
         """
         ...
-
     def getRandom(self) -> retval:
         """
         .
         """
         ...
-
     def getSamples(self) -> retval:
         """
         .
         """
         ...
-
-    def setLambda(self, lambda) -> None:
+    def setLambda(self, lambda_) -> None:
         """
         .
         """
         ...
-
     def setRandom(self, random) -> None:
         """
         .
         """
         ...
-
     def setSamples(self, samples) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class CalibrateRobertson(CalibrateCRF):
     @staticmethod
@@ -1315,45 +1142,37 @@ class CalibrateRobertson(CalibrateCRF):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getMaxIter(self) -> retval:
         """
         .
         """
         ...
-
     def getRadiance(self) -> retval:
         """
         .
         """
         ...
-
     def getThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def setMaxIter(self, max_iter) -> None:
         """
         .
         """
         ...
-
     def setThreshold(self, threshold) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class CascadeClassifier(builtins.object):
     @staticmethod
@@ -1362,27 +1181,31 @@ class CascadeClassifier(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def convert(oldcascade, newcascade) -> retval:
         """
         .
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def detectMultiScale(self, image[, scaleFactor[, minNeighbors[, flags[, minSize[, maxSize]]]]]) -> objects:
+    def detectMultiScale(
+        self,
+        image,
+        scaleFactor=...,
+        minNeighbors=...,
+        flags=...,
+        minSize=...,
+        maxSize=...,
+    ) -> objects:
         """
         .   @brief Detects objects of different sizes in the input image. The detected objects are returned as a list
         .       of rectangles.
@@ -1405,8 +1228,15 @@ class CascadeClassifier(builtins.object):
         .               opencv_source_code/samples/python/facedetect.py
         """
         ...
-
-    def detectMultiScale2(self, image[, scaleFactor[, minNeighbors[, flags[, minSize[, maxSize]]]]]) -> objects, numDetections:
+    def detectMultiScale2(
+        self,
+        image,
+        scaleFactor=...,
+        minNeighbors=...,
+        flags=...,
+        minSize=...,
+        maxSize=...,
+    ) -> Tuple[objects, numDetections]:
         """
         .   @overload
         .       @param image Matrix of the type CV_8U containing an image where objects are detected.
@@ -1424,8 +1254,16 @@ class CascadeClassifier(builtins.object):
         .       @param maxSize Maximum possible object size. Objects larger than that are ignored. If `maxSize == minSize` model is evaluated on single scale.
         """
         ...
-
-    def detectMultiScale3(self, image[, scaleFactor[, minNeighbors[, flags[, minSize[, maxSize[, outputRejectLevels]]]]]]) -> objects, rejectLevels, levelWeights:
+    def detectMultiScale3(
+        self,
+        image,
+        scaleFactor=...,
+        minNeighbors=...,
+        flags=...,
+        minSize=...,
+        maxSize=...,
+        outputRejectLevels=...,
+    ) -> Tuple[objects, rejectLevels, levelWeights]:
         """
         .   @overload
         .       This function allows you to retrieve the final stage decision certainty of classification.
@@ -1445,31 +1283,26 @@ class CascadeClassifier(builtins.object):
         .       @endcode
         """
         ...
-
     def empty(self) -> retval:
         """
         .   @brief Checks whether the classifier has been loaded.
         """
         ...
-
     def getFeatureType(self) -> retval:
         """
         .
         """
         ...
-
     def getOriginalWindowSize(self) -> retval:
         """
         .
         """
         ...
-
     def isOldFormatCascade(self) -> retval:
         """
         .
         """
         ...
-
     def load(self, filename) -> retval:
         """
         .   @brief Loads a classifier from a file.
@@ -1479,7 +1312,6 @@ class CascadeClassifier(builtins.object):
         .       traincascade application.
         """
         ...
-
     def read(self, node) -> retval:
         """
         .   @brief Reads a classifier from a FileStorage node.
@@ -1487,9 +1319,7 @@ class CascadeClassifier(builtins.object):
         .       @note The file may contain a new cascade classifier (trained traincascade application) only.
         """
         ...
-
     ...
-
 
 class CirclesGridFinderParameters(builtins.object):
     convexHullFactor: ...
@@ -1566,28 +1396,23 @@ class CirclesGridFinderParameters(builtins.object):
     """
     vertexPenalty
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class DISOpticalFlow(DenseOpticalFlow):
     @staticmethod
@@ -1596,22 +1421,19 @@ class DISOpticalFlow(DenseOpticalFlow):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, preset]) -> retval:
+    def create(preset=...) -> retval:
         """
         .   @brief Creates an instance of DISOpticalFlow
         .
         .       @param preset one of PRESET_ULTRAFAST, PRESET_FAST and PRESET_MEDIUM
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getFinestScale(self) -> retval:
         """
         .   @brief Finest level of the Gaussian pyramid on which the flow is computed (zero level
@@ -1619,7 +1441,6 @@ class DISOpticalFlow(DenseOpticalFlow):
         .   @see setFinestScale
         """
         ...
-
     def getGradientDescentIterations(self) -> retval:
         """
         .   @brief Maximum number of gradient descent iterations in the patch inverse search stage. Higher values
@@ -1627,7 +1448,6 @@ class DISOpticalFlow(DenseOpticalFlow):
         .   @see setGradientDescentIterations
         """
         ...
-
     def getPatchSize(self) -> retval:
         """
         .   @brief Size of an image patch for matching (in pixels). Normally, default 8x8 patches work well
@@ -1635,7 +1455,6 @@ class DISOpticalFlow(DenseOpticalFlow):
         .   @see setPatchSize
         """
         ...
-
     def getPatchStride(self) -> retval:
         """
         .   @brief Stride between neighbor patches. Must be less than patch size. Lower values correspond
@@ -1643,7 +1462,6 @@ class DISOpticalFlow(DenseOpticalFlow):
         .   @see setPatchStride
         """
         ...
-
     def getUseMeanNormalization(self) -> retval:
         """
         .   @brief Whether to use mean-normalization of patches when computing patch distance. It is turned on
@@ -1653,7 +1471,6 @@ class DISOpticalFlow(DenseOpticalFlow):
         .   @see setUseMeanNormalization
         """
         ...
-
     def getUseSpatialPropagation(self) -> retval:
         """
         .   @brief Whether to use spatial propagation of good optical flow vectors. This option is turned on by
@@ -1663,28 +1480,24 @@ class DISOpticalFlow(DenseOpticalFlow):
         .   @see setUseSpatialPropagation
         """
         ...
-
     def getVariationalRefinementAlpha(self) -> retval:
         """
         .   @brief Weight of the smoothness term
         .   @see setVariationalRefinementAlpha
         """
         ...
-
     def getVariationalRefinementDelta(self) -> retval:
         """
         .   @brief Weight of the color constancy term
         .   @see setVariationalRefinementDelta
         """
         ...
-
     def getVariationalRefinementGamma(self) -> retval:
         """
         .   @brief Weight of the gradient constancy term
         .   @see setVariationalRefinementGamma
         """
         ...
-
     def getVariationalRefinementIterations(self) -> retval:
         """
         .   @brief Number of fixed point iterations of variational refinement per scale. Set to zero to
@@ -1693,69 +1506,57 @@ class DISOpticalFlow(DenseOpticalFlow):
         .   @see setGradientDescentIterations
         """
         ...
-
     def setFinestScale(self, val) -> None:
         """
         .   @copybrief getFinestScale @see getFinestScale
         """
         ...
-
     def setGradientDescentIterations(self, val) -> None:
         """
         .   @copybrief getGradientDescentIterations @see getGradientDescentIterations
         """
         ...
-
     def setPatchSize(self, val) -> None:
         """
         .   @copybrief getPatchSize @see getPatchSize
         """
         ...
-
     def setPatchStride(self, val) -> None:
         """
         .   @copybrief getPatchStride @see getPatchStride
         """
         ...
-
     def setUseMeanNormalization(self, val) -> None:
         """
         .   @copybrief getUseMeanNormalization @see getUseMeanNormalization
         """
         ...
-
     def setUseSpatialPropagation(self, val) -> None:
         """
         .   @copybrief getUseSpatialPropagation @see getUseSpatialPropagation
         """
         ...
-
     def setVariationalRefinementAlpha(self, val) -> None:
         """
         .   @copybrief getVariationalRefinementAlpha @see getVariationalRefinementAlpha
         """
         ...
-
     def setVariationalRefinementDelta(self, val) -> None:
         """
         .   @copybrief getVariationalRefinementDelta @see getVariationalRefinementDelta
         """
         ...
-
     def setVariationalRefinementGamma(self, val) -> None:
         """
         .   @copybrief getVariationalRefinementGamma @see getVariationalRefinementGamma
         """
         ...
-
     def setVariationalRefinementIterations(self, val) -> None:
         """
         .   @copybrief getGradientDescentIterations @see getGradientDescentIterations
         """
         ...
-
     ...
-
 
 class DMatch(builtins.object):
     distance: ...
@@ -1777,28 +1578,23 @@ class DMatch(builtins.object):
     """
     trainIdx
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class DenseOpticalFlow(Algorithm):
     @staticmethod
@@ -1807,13 +1603,11 @@ class DenseOpticalFlow(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def calc(self, I0, I1, flow) -> flow:
         """
         .   @brief Calculates an optical flow.
@@ -1823,15 +1617,12 @@ class DenseOpticalFlow(Algorithm):
         .       @param flow computed flow image that has the same size as prev and type CV_32FC2.
         """
         ...
-
     def collectGarbage(self) -> None:
         """
         .   @brief Releases all inner buffers.
         """
         ...
-
     ...
-
 
 class DescriptorMatcher(Algorithm):
     @staticmethod
@@ -1840,7 +1631,6 @@ class DescriptorMatcher(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create(descriptorMatcherType) -> retval:
         """
@@ -1861,13 +1651,11 @@ class DescriptorMatcher(Algorithm):
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def add(self, descriptors) -> None:
         """
         .   @brief Adds descriptors to train a CPU(trainDescCollectionis) or GPU(utrainDescCollectionis) descriptor
@@ -1879,14 +1667,12 @@ class DescriptorMatcher(Algorithm):
         .       train image.
         """
         ...
-
     def clear(self) -> None:
         """
         .   @brief Clears the train descriptor collections.
         """
         ...
-
-    def clone(self, [, emptyTrainData]) -> retval:
+    def clone(self, emptyTrainData=...) -> retval:
         """
         .   @brief Clones the matcher.
         .
@@ -1895,26 +1681,24 @@ class DescriptorMatcher(Algorithm):
         .       object copy with the current parameters but with empty train data.
         """
         ...
-
     def empty(self) -> retval:
         """
         .   @brief Returns true if there are no train descriptors in the both collections.
         """
         ...
-
     def getTrainDescriptors(self) -> retval:
         """
         .   @brief Returns a constant link to the train descriptor collection trainDescCollection .
         """
         ...
-
     def isMaskSupported(self) -> retval:
         """
         .   @brief Returns true if the descriptor matcher supports masking permissible matches.
         """
         ...
-
-    def knnMatch(self, queryDescriptors, trainDescriptors, k[, mask[, compactResult]]) -> matches:
+    def knnMatch(
+        self, queryDescriptors, trainDescriptors, k, mask=..., compactResult=...
+    ) -> matches:
         """
         .   @brief Finds the k best matches for each descriptor from a query set.
         .
@@ -1936,7 +1720,7 @@ class DescriptorMatcher(Algorithm):
 
 
 
-        knnMatch(queryDescriptors, k[, masks[, compactResult]]) -> matches
+        knnMatch(queryDescriptors, k, masks=..., compactResult=...) -> matches
         .   @overload
         .       @param queryDescriptors Query set of descriptors.
         .       @param matches Matches. Each matches[i] is k or less matches for the same query descriptor.
@@ -1949,8 +1733,12 @@ class DescriptorMatcher(Algorithm):
         .       the matches vector does not contain matches for fully masked-out query descriptors.
         """
         ...
-
-    def match(self, queryDescriptors: Any, trainDescriptors: Any, mask: Optional[ndarray] = ...) -> List[Any]:
+    def match(
+        self,
+        queryDescriptors: Any,
+        trainDescriptors: Any,
+        mask: Optional[ndarray] = ...,
+    ) -> List[Any]:
         """
         .   @brief Finds the best match for each descriptor from a query set.
         .
@@ -1970,7 +1758,7 @@ class DescriptorMatcher(Algorithm):
 
 
 
-        match(queryDescriptors[, masks]) -> matches
+        match(queryDescriptors, masks=...) -> matches
         .   @overload
         .       @param queryDescriptors Query set of descriptors.
         .       @param matches Matches. If a query descriptor is masked out in mask , no match is added for this
@@ -1979,8 +1767,14 @@ class DescriptorMatcher(Algorithm):
         .       descriptors and stored train descriptors from the i-th image trainDescCollection[i].
         """
         ...
-
-    def radiusMatch(self, queryDescriptors, trainDescriptors, maxDistance[, mask[, compactResult]]) -> matches:
+    def radiusMatch(
+        self,
+        queryDescriptors,
+        trainDescriptors,
+        maxDistance,
+        mask=...,
+        compactResult=...,
+    ) -> matches:
         """
         .   @brief For each query descriptor, finds the training descriptors not farther than the specified distance.
         .
@@ -2003,7 +1797,7 @@ class DescriptorMatcher(Algorithm):
 
 
 
-        radiusMatch(queryDescriptors, maxDistance[, masks[, compactResult]]) -> matches
+        radiusMatch(queryDescriptors, maxDistance, masks=..., compactResult=...) -> matches
         .   @overload
         .       @param queryDescriptors Query set of descriptors.
         .       @param matches Found matches.
@@ -2017,7 +1811,6 @@ class DescriptorMatcher(Algorithm):
         .       the matches vector does not contain matches for fully masked-out query descriptors.
         """
         ...
-
     def read(self, fileName) -> None:
         """
         .
@@ -2028,7 +1821,6 @@ class DescriptorMatcher(Algorithm):
         .
         """
         ...
-
     def train(self) -> None:
         """
         .   @brief Trains a descriptor matcher
@@ -2039,20 +1831,17 @@ class DescriptorMatcher(Algorithm):
         .       example, FlannBasedMatcher trains flann::Index ).
         """
         ...
-
     def write(self, fileName) -> None:
         """
         .
 
 
 
-        write(fs[, name]) -> None
+        write(fs, name=...) -> None
         .
         """
         ...
-
     ...
-
 
 class FarnebackOpticalFlow(DenseOpticalFlow):
     @staticmethod
@@ -2061,118 +1850,107 @@ class FarnebackOpticalFlow(DenseOpticalFlow):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, numLevels[, pyrScale[, fastPyramids[, winSize[, numIters[, polyN[, polySigma[, flags]]]]]]]]) -> retval:
+    def create(
+        numLevels=...,
+        pyrScale=...,
+        fastPyramids=...,
+        winSize=...,
+        numIters=...,
+        polyN=...,
+        polySigma=...,
+        flags=...,
+    ) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getFastPyramids(self) -> retval:
         """
         .
         """
         ...
-
     def getFlags(self) -> retval:
         """
         .
         """
         ...
-
     def getNumIters(self) -> retval:
         """
         .
         """
         ...
-
     def getNumLevels(self) -> retval:
         """
         .
         """
         ...
-
     def getPolyN(self) -> retval:
         """
         .
         """
         ...
-
     def getPolySigma(self) -> retval:
         """
         .
         """
         ...
-
     def getPyrScale(self) -> retval:
         """
         .
         """
         ...
-
     def getWinSize(self) -> retval:
         """
         .
         """
         ...
-
     def setFastPyramids(self, fastPyramids) -> None:
         """
         .
         """
         ...
-
     def setFlags(self, flags) -> None:
         """
         .
         """
         ...
-
     def setNumIters(self, numIters) -> None:
         """
         .
         """
         ...
-
     def setNumLevels(self, numLevels) -> None:
         """
         .
         """
         ...
-
     def setPolyN(self, polyN) -> None:
         """
         .
         """
         ...
-
     def setPolySigma(self, polySigma) -> None:
         """
         .
         """
         ...
-
     def setPyrScale(self, pyrScale) -> None:
         """
         .
         """
         ...
-
     def setWinSize(self, winSize) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class FastFeatureDetector(Feature2D):
     @staticmethod
@@ -2181,64 +1959,53 @@ class FastFeatureDetector(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, threshold[, nonmaxSuppression[, type]]]) -> retval:
+    def create(threshold=..., nonmaxSuppression=..., type=...) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def getNonmaxSuppression(self) -> retval:
         """
         .
         """
         ...
-
     def getThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def getType(self) -> retval:
         """
         .
         """
         ...
-
     def setNonmaxSuppression(self, f) -> None:
         """
         .
         """
         ...
-
     def setThreshold(self, threshold) -> None:
         """
         .
         """
         ...
-
     def setType(self, type) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class Feature2D(builtins.object):
     @staticmethod
@@ -2247,14 +2014,14 @@ class Feature2D(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def compute(self, image, keypoints[, descriptors]) -> keypoints, descriptors:
+    def compute(
+        self, image, keypoints, descriptors=...
+    ) -> Tuple[keypoints, descriptors]:
         """
         .   @brief Computes the descriptors for a set of keypoints detected in an image (first variant) or image set
         .       (second variant).
@@ -2269,7 +2036,7 @@ class Feature2D(builtins.object):
 
 
 
-        compute(images, keypoints[, descriptors]) -> keypoints, descriptors
+        compute(images, keypoints, descriptors=...) -> keypoints, descriptors
         .   @overload
         .
         .       @param images Image set.
@@ -2281,26 +2048,22 @@ class Feature2D(builtins.object):
         .       descriptor for keypoint j-th keypoint.
         """
         ...
-
     def defaultNorm(self) -> retval:
         """
         .
         """
         ...
-
     def descriptorSize(self) -> retval:
         """
         .
         """
         ...
-
     def descriptorType(self) -> retval:
         """
         .
         """
         ...
-
-    def detect(self, image[, mask]) -> keypoints:
+    def detect(self, image, mask=...) -> keypoints:
         """
         .   @brief Detects keypoints in an image (first variant) or image set (second variant).
         .
@@ -2312,7 +2075,7 @@ class Feature2D(builtins.object):
 
 
 
-        detect(images[, masks]) -> keypoints
+        detect(images, masks=...) -> keypoints
         .   @overload
         .       @param images Image set.
         .       @param keypoints The detected keypoints. In the second variant of the method keypoints[i] is a set
@@ -2321,25 +2084,27 @@ class Feature2D(builtins.object):
         .       masks[i] is a mask for images[i].
         """
         ...
-
-    def detectAndCompute(self, image: ndarray, mask: Optional[ndarray], descriptors: Any = ..., useProvidedKeypoints: Any = ...) -> Tuple[ndarray, Any]:
+    def detectAndCompute(
+        self,
+        image: ndarray,
+        mask: Optional[ndarray],
+        descriptors: Any = ...,
+        useProvidedKeypoints: Any = ...,
+    ) -> Tuple[ndarray, Any]:
         """
         .   Detects keypoints and computes the descriptors
         """
         ...
-
     def empty(self) -> retval:
         """
         .
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def read(self, fileName) -> None:
         """
         .
@@ -2350,20 +2115,17 @@ class Feature2D(builtins.object):
         .
         """
         ...
-
     def write(self, fileName) -> None:
         """
         .
 
 
 
-        write(fs[, name]) -> None
+        write(fs, name=...) -> None
         .
         """
         ...
-
     ...
-
 
 class FileNode(builtins.object):
     @staticmethod
@@ -2372,134 +2134,112 @@ class FileNode(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def at(self, i) -> retval:
         """
         .   @overload
         .        @param i Index of an element in the sequence node.
         """
         ...
-
     def empty(self) -> retval:
         """
         .
         """
         ...
-
     def getNode(self, nodename) -> retval:
         """
         .   @overload
         .        @param nodename Name of an element in the mapping node.
         """
         ...
-
     def isInt(self) -> retval:
         """
         .
         """
         ...
-
     def isMap(self) -> retval:
         """
         .
         """
         ...
-
     def isNamed(self) -> retval:
         """
         .
         """
         ...
-
     def isNone(self) -> retval:
         """
         .
         """
         ...
-
     def isReal(self) -> retval:
         """
         .
         """
         ...
-
     def isSeq(self) -> retval:
         """
         .
         """
         ...
-
     def isString(self) -> retval:
         """
         .
         """
         ...
-
     def keys(self) -> retval:
         """
         .   @brief Returns keys of a mapping node.
         .        @returns Keys of a mapping node.
         """
         ...
-
     def mat(self) -> retval:
         """
         .
         """
         ...
-
     def name(self) -> retval:
         """
         .
         """
         ...
-
     def rawSize(self) -> retval:
         """
         .
         """
         ...
-
     def real(self) -> retval:
         """
         .   Internal method used when reading FileStorage.
         .        Sets the type (int, real or string) and value of the previously created node.
         """
         ...
-
     def size(self) -> retval:
         """
         .
         """
         ...
-
     def string(self) -> retval:
         """
         .
         """
         ...
-
     def type(self) -> retval:
         """
         .   @brief Returns type of the node.
         .        @returns Type of the node. See FileNode::Type
         """
         ...
-
     ...
-
 
 class FileStorage(builtins.object):
     @staticmethod
@@ -2508,45 +2248,38 @@ class FileStorage(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def endWriteStruct(self) -> None:
         """
         .   @brief Finishes writing nested structure (should pair startWriteStruct())
         """
         ...
-
     def getFirstTopLevelNode(self) -> retval:
         """
         .   @brief Returns the first element of the top-level mapping.
         .        @returns The first element of the top-level mapping.
         """
         ...
-
     def getFormat(self) -> retval:
         """
         .   @brief Returns the current format.
         .        * @returns The current format, see FileStorage::Mode
         """
         ...
-
     def getNode(self, nodename) -> retval:
         """
         .   @overload
         """
         ...
-
     def isOpened(self) -> retval:
         """
         .   @brief Checks whether the file is opened.
@@ -2555,8 +2288,7 @@ class FileStorage(builtins.object):
         .        good practice to call this method after you tried to open a file.
         """
         ...
-
-    def open(self, filename, flags[, encoding]) -> retval:
+    def open(self, filename, flags, encoding=...) -> retval:
         """
         .   @brief Opens a file.
         .
@@ -2574,7 +2306,6 @@ class FileStorage(builtins.object):
         .        you should use 8-bit encoding instead of it.
         """
         ...
-
     def release(self) -> None:
         """
         .   @brief Closes the file and releases all the memory buffers.
@@ -2582,7 +2313,6 @@ class FileStorage(builtins.object):
         .        Call this method after all I/O operations with the storage are finished.
         """
         ...
-
     def releaseAndGetString(self) -> retval:
         """
         .   @brief Closes the file and releases all the memory buffers.
@@ -2591,8 +2321,7 @@ class FileStorage(builtins.object):
         .        opened for writing data and FileStorage::WRITE was specified
         """
         ...
-
-    def root(self, [, streamidx]) -> retval:
+    def root(self, streamidx=...) -> retval:
         """
         .   @brief Returns the top-level mapping
         .        @param streamidx Zero-based index of the stream. In most cases there is only one stream in the file.
@@ -2600,8 +2329,7 @@ class FileStorage(builtins.object):
         .        @returns The top-level mapping.
         """
         ...
-
-    def startWriteStruct(self, name, flags[, typeName]) -> None:
+    def startWriteStruct(self, name, flags, typeName=...) -> None:
         """
         .   @brief Starts to write a nested structure (sequence or a mapping).
         .       @param name name of the structure. When writing to sequences (a.k.a. "arrays"), pass an empty string.
@@ -2610,7 +2338,6 @@ class FileStorage(builtins.object):
         .       I.e. if the format has a specification for storing type information, this parameter is used.
         """
         ...
-
     def write(self, name, val) -> None:
         """
         .   * @brief Simplified writing API to use with bindings.
@@ -2618,8 +2345,7 @@ class FileStorage(builtins.object):
         .        * @param val Value of the written object.
         """
         ...
-
-    def writeComment(self, comment[, append]) -> None:
+    def writeComment(self, comment, append=...) -> None:
         """
         .   @brief Writes a comment.
         .
@@ -2630,9 +2356,7 @@ class FileStorage(builtins.object):
         .        line, the comment starts a new line.
         """
         ...
-
     ...
-
 
 class FlannBasedMatcher(DescriptorMatcher):
     @staticmethod
@@ -2641,28 +2365,23 @@ class FlannBasedMatcher(DescriptorMatcher):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
         .
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GArrayDesc(builtins.object):
     @staticmethod
@@ -2671,15 +2390,12 @@ class GArrayDesc(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GArrayT(builtins.object):
     @staticmethod
@@ -2688,27 +2404,22 @@ class GArrayT(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def type(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class GCompileArg(builtins.object):
     @staticmethod
@@ -2717,15 +2428,12 @@ class GCompileArg(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GComputation(builtins.object):
     @staticmethod
@@ -2734,20 +2442,17 @@ class GComputation(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def apply(self, callback[, args]) -> retval:
+    def apply(self, callback, args=...) -> retval:
         """
         .   * @brief Compile graph on-the-fly and immediately execute it on
         .        * the inputs data vectors.
@@ -2784,8 +2489,7 @@ class GComputation(builtins.object):
         .        * @sa @ref gapi_data_objects, @ref gapi_compile_args
         """
         ...
-
-    def compileStreaming(self, callback[, args]) -> retval:
+    def compileStreaming(self, callback, args=...) -> retval:
         """
         .   * @brief Compile the computation for streaming mode.
         .        *
@@ -2812,7 +2516,7 @@ class GComputation(builtins.object):
 
 
 
-        compileStreaming([, args]) -> retval
+        compileStreaming(args=...) -> retval
         .   * @brief Compile the computation for streaming mode.
         .        *
         .        * This method triggers compilation process and produces a new
@@ -2832,9 +2536,7 @@ class GComputation(builtins.object):
         .        * @sa @ref gapi_compile_args
         """
         ...
-
     ...
-
 
 class GFTTDetector(Feature2D):
     @staticmethod
@@ -2843,105 +2545,95 @@ class GFTTDetector(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, maxCorners[, qualityLevel[, minDistance[, blockSize[, useHarrisDetector[, k]]]]]]) -> retval:
+    def create(
+        maxCorners=...,
+        qualityLevel=...,
+        minDistance=...,
+        blockSize=...,
+        useHarrisDetector=...,
+        k=...,
+    ) -> retval:
         """
         .
 
 
 
-        create(maxCorners, qualityLevel, minDistance, blockSize, gradiantSize[, useHarrisDetector[, k]]) -> retval
+        create(maxCorners, qualityLevel, minDistance, blockSize, gradiantSize, useHarrisDetector=..., k=...) -> retval
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getBlockSize(self) -> retval:
         """
         .
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def getHarrisDetector(self) -> retval:
         """
         .
         """
         ...
-
     def getK(self) -> retval:
         """
         .
         """
         ...
-
     def getMaxFeatures(self) -> retval:
         """
         .
         """
         ...
-
     def getMinDistance(self) -> retval:
         """
         .
         """
         ...
-
     def getQualityLevel(self) -> retval:
         """
         .
         """
         ...
-
     def setBlockSize(self, blockSize) -> None:
         """
         .
         """
         ...
-
     def setHarrisDetector(self, val) -> None:
         """
         .
         """
         ...
-
     def setK(self, k) -> None:
         """
         .
         """
         ...
-
     def setMaxFeatures(self, maxFeatures) -> None:
         """
         .
         """
         ...
-
     def setMinDistance(self, minDistance) -> None:
         """
         .
         """
         ...
-
     def setQualityLevel(self, qlevel) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class GFrame(builtins.object):
     @staticmethod
@@ -2950,21 +2642,17 @@ class GFrame(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GInferInputs(builtins.object):
     @staticmethod
@@ -2973,27 +2661,22 @@ class GInferInputs(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def setInput(self, name, value) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class GInferListInputs(builtins.object):
     @staticmethod
@@ -3002,27 +2685,22 @@ class GInferListInputs(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def setInput(self, name, value) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class GInferListOutputs(builtins.object):
     @staticmethod
@@ -3031,27 +2709,22 @@ class GInferListOutputs(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def at(self, name) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class GInferOutputs(builtins.object):
     @staticmethod
@@ -3060,27 +2733,22 @@ class GInferOutputs(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def at(self, name) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class GMat(builtins.object):
     @staticmethod
@@ -3089,21 +2757,17 @@ class GMat(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GMatDesc(builtins.object):
     chan: ...
@@ -3130,34 +2794,28 @@ class GMatDesc(builtins.object):
     """
     size
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def withType(self, ddepth, dchan) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class GMetaArg(builtins.object):
     @staticmethod
@@ -3166,15 +2824,12 @@ class GMetaArg(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GOpaqueDesc(builtins.object):
     @staticmethod
@@ -3183,15 +2838,12 @@ class GOpaqueDesc(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GOpaqueT(builtins.object):
     @staticmethod
@@ -3200,27 +2852,22 @@ class GOpaqueT(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def type(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class GProtoArg(builtins.object):
     @staticmethod
@@ -3229,15 +2876,12 @@ class GProtoArg(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GProtoInputArgs(builtins.object):
     @staticmethod
@@ -3246,15 +2890,12 @@ class GProtoInputArgs(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GProtoOutputArgs(builtins.object):
     @staticmethod
@@ -3263,15 +2904,12 @@ class GProtoOutputArgs(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GRunArg(builtins.object):
     @staticmethod
@@ -3280,15 +2918,12 @@ class GRunArg(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GScalar(builtins.object):
     @staticmethod
@@ -3297,21 +2932,17 @@ class GScalar(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GScalarDesc(builtins.object):
     @staticmethod
@@ -3320,15 +2951,12 @@ class GScalarDesc(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class GStreamingCompiled(builtins.object):
     @staticmethod
@@ -3337,19 +2965,16 @@ class GStreamingCompiled(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def pull(self) -> retval:
         """
         .   * @brief Get the next processed frame from the pipeline.
@@ -3372,7 +2997,6 @@ class GStreamingCompiled(builtins.object):
         .        *    false marks end of the stream.
         """
         ...
-
     def running(self) -> retval:
         """
         .   * @brief Test if the pipeline is running.
@@ -3385,7 +3009,6 @@ class GStreamingCompiled(builtins.object):
         .        * @return true if the current stream is not over yet.
         """
         ...
-
     def setSource(self, callback) -> None:
         """
         .   * @brief Specify the input data to GStreamingCompiled for
@@ -3441,7 +3064,6 @@ class GStreamingCompiled(builtins.object):
         .        * input video stream.
         """
         ...
-
     def start(self) -> None:
         """
         .   * @brief Start the pipeline execution.
@@ -3459,7 +3081,6 @@ class GStreamingCompiled(builtins.object):
         .        * multiple threads in your application.
         """
         ...
-
     def stop(self) -> None:
         """
         .   * @brief Stop (abort) processing the pipeline.
@@ -3470,9 +3091,7 @@ class GStreamingCompiled(builtins.object):
         .        * Throws if the pipeline is not running.
         """
         ...
-
     ...
-
 
 class GeneralizedHough(Algorithm):
     @staticmethod
@@ -3481,97 +3100,82 @@ class GeneralizedHough(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def detect(self, image[, positions[, votes]]) -> positions, votes:
+    def detect(self, image, positions=..., votes=...) -> Tuple[positions, votes]:
         """
         .
 
 
 
-        detect(edges, dx, dy[, positions[, votes]]) -> positions, votes
+        detect(edges, dx, dy, positions=..., votes=...) -> positions, votes
         .
         """
         ...
-
     def getCannyHighThresh(self) -> retval:
         """
         .
         """
         ...
-
     def getCannyLowThresh(self) -> retval:
         """
         .
         """
         ...
-
     def getDp(self) -> retval:
         """
         .
         """
         ...
-
     def getMaxBufferSize(self) -> retval:
         """
         .
         """
         ...
-
     def getMinDist(self) -> retval:
         """
         .
         """
         ...
-
     def setCannyHighThresh(self, cannyHighThresh) -> None:
         """
         .
         """
         ...
-
     def setCannyLowThresh(self, cannyLowThresh) -> None:
         """
         .
         """
         ...
-
     def setDp(self, dp) -> None:
         """
         .
         """
         ...
-
     def setMaxBufferSize(self, maxBufferSize) -> None:
         """
         .
         """
         ...
-
     def setMinDist(self, minDist) -> None:
         """
         .
         """
         ...
-
-    def setTemplate(self, templ[, templCenter]) -> None:
+    def setTemplate(self, templ, templCenter=...) -> None:
         """
         .
 
 
 
-        setTemplate(edges, dx, dy[, templCenter]) -> None
+        setTemplate(edges, dx, dy, templCenter=...) -> None
         .
         """
         ...
-
     ...
-
 
 class GeneralizedHoughBallard(GeneralizedHough):
     @staticmethod
@@ -3580,39 +3184,32 @@ class GeneralizedHoughBallard(GeneralizedHough):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getLevels(self) -> retval:
         """
         .
         """
         ...
-
     def getVotesThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def setLevels(self, levels) -> None:
         """
         .
         """
         ...
-
     def setVotesThreshold(self, votesThreshold) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class GeneralizedHoughGuil(GeneralizedHough):
     @staticmethod
@@ -3621,159 +3218,132 @@ class GeneralizedHoughGuil(GeneralizedHough):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getAngleEpsilon(self) -> retval:
         """
         .
         """
         ...
-
     def getAngleStep(self) -> retval:
         """
         .
         """
         ...
-
     def getAngleThresh(self) -> retval:
         """
         .
         """
         ...
-
     def getLevels(self) -> retval:
         """
         .
         """
         ...
-
     def getMaxAngle(self) -> retval:
         """
         .
         """
         ...
-
     def getMaxScale(self) -> retval:
         """
         .
         """
         ...
-
     def getMinAngle(self) -> retval:
         """
         .
         """
         ...
-
     def getMinScale(self) -> retval:
         """
         .
         """
         ...
-
     def getPosThresh(self) -> retval:
         """
         .
         """
         ...
-
     def getScaleStep(self) -> retval:
         """
         .
         """
         ...
-
     def getScaleThresh(self) -> retval:
         """
         .
         """
         ...
-
     def getXi(self) -> retval:
         """
         .
         """
         ...
-
     def setAngleEpsilon(self, angleEpsilon) -> None:
         """
         .
         """
         ...
-
     def setAngleStep(self, angleStep) -> None:
         """
         .
         """
         ...
-
     def setAngleThresh(self, angleThresh) -> None:
         """
         .
         """
         ...
-
     def setLevels(self, levels) -> None:
         """
         .
         """
         ...
-
     def setMaxAngle(self, maxAngle) -> None:
         """
         .
         """
         ...
-
     def setMaxScale(self, maxScale) -> None:
         """
         .
         """
         ...
-
     def setMinAngle(self, minAngle) -> None:
         """
         .
         """
         ...
-
     def setMinScale(self, minScale) -> None:
         """
         .
         """
         ...
-
     def setPosThresh(self, posThresh) -> None:
         """
         .
         """
         ...
-
     def setScaleStep(self, scaleStep) -> None:
         """
         .
         """
         ...
-
     def setScaleThresh(self, scaleThresh) -> None:
         """
         .
         """
         ...
-
     def setXi(self, xi) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class HOGDescriptor(builtins.object):
     L2HysThreshold: ...
@@ -3840,47 +3410,40 @@ class HOGDescriptor(builtins.object):
     """
     winSize
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def getDaimlerPeopleDetector() -> retval:
         """
         .   @brief Returns coefficients of the classifier trained for people detection (for 48x96 windows).
         """
         ...
-
     @staticmethod
     def getDefaultPeopleDetector() -> retval:
         """
         .   @brief Returns coefficients of the classifier trained for people detection (for 64x128 windows).
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def checkDetectorSize(self) -> retval:
         """
         .   @brief Checks if detector size equal to descriptor size.
         """
         ...
-
-    def compute(self, img[, winStride[, padding[, locations]]]) -> descriptors:
+    def compute(self, img, winStride=..., padding=..., locations=...) -> descriptors:
         """
         .   @brief Computes HOG descriptors of given image.
         .       @param img Matrix of the type CV_8U containing an image where HOG features will be calculated.
@@ -3890,8 +3453,9 @@ class HOGDescriptor(builtins.object):
         .       @param locations Vector of Point
         """
         ...
-
-    def computeGradient(self, img, grad, angleOfs[, paddingTL[, paddingBR]]) -> grad, angleOfs:
+    def computeGradient(
+        self, img, grad, angleOfs, paddingTL=..., paddingBR=...
+    ) -> Tuple[grad, angleOfs]:
         """
         .   @brief  Computes gradients and quantized gradient orientations.
         .       @param img Matrix contains the image to be computed
@@ -3901,8 +3465,9 @@ class HOGDescriptor(builtins.object):
         .       @param paddingBR Padding from bottom-right
         """
         ...
-
-    def detect(self, img[, hitThreshold[, winStride[, padding[, searchLocations]]]]) -> foundLocations, weights:
+    def detect(
+        self, img, hitThreshold=..., winStride=..., padding=..., searchLocations=...
+    ) -> Tuple[foundLocations, weights]:
         """
         .   @brief Performs object detection without a multi-scale window.
         .       @param img Matrix of the type CV_8U or CV_8UC3 containing an image where objects are detected.
@@ -3916,8 +3481,16 @@ class HOGDescriptor(builtins.object):
         .       @param searchLocations Vector of Point includes set of requested locations to be evaluated.
         """
         ...
-
-    def detectMultiScale(self, img[, hitThreshold[, winStride[, padding[, scale[, finalThreshold[, useMeanshiftGrouping]]]]]]) -> foundLocations, foundWeights:
+    def detectMultiScale(
+        self,
+        img,
+        hitThreshold=...,
+        winStride=...,
+        padding=...,
+        scale=...,
+        finalThreshold=...,
+        useMeanshiftGrouping=...,
+    ) -> Tuple[foundLocations, foundWeights]:
         """
         .   @brief Detects objects of different sizes in the input image. The detected objects are returned as a list
         .       of rectangles.
@@ -3934,44 +3507,37 @@ class HOGDescriptor(builtins.object):
         .       @param useMeanshiftGrouping indicates grouping algorithm
         """
         ...
-
     def getDescriptorSize(self) -> retval:
         """
         .   @brief Returns the number of coefficients required for the classification.
         """
         ...
-
     def getWinSigma(self) -> retval:
         """
         .   @brief Returns winSigma value
         """
         ...
-
-    def load(self, filename[, objname]) -> retval:
+    def load(self, filename, objname=...) -> retval:
         """
         .   @brief loads HOGDescriptor parameters and coefficients for the linear SVM classifier from a file.
         .       @param filename Path of the file to read.
         .       @param objname The optional name of the node to read (if empty, the first top-level node will be used).
         """
         ...
-
-    def save(self, filename[, objname]) -> None:
+    def save(self, filename, objname=...) -> None:
         """
         .   @brief saves HOGDescriptor parameters and coefficients for the linear SVM classifier to a file
         .       @param filename File name
         .       @param objname Object name
         """
         ...
-
     def setSVMDetector(self, svmdetector) -> None:
         """
         .   @brief Sets coefficients for the linear SVM classifier.
         .       @param svmdetector coefficients for the linear SVM classifier.
         """
         ...
-
     ...
-
 
 class KAZE(Feature2D):
     @staticmethod
@@ -3980,9 +3546,15 @@ class KAZE(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, extended[, upright[, threshold[, nOctaves[, nOctaveLayers[, diffusivity]]]]]]) -> retval:
+    def create(
+        extended=...,
+        upright=...,
+        threshold=...,
+        nOctaves=...,
+        nOctaveLayers=...,
+        diffusivity=...,
+    ) -> retval:
         """
         .   @brief The KAZE constructor
         .
@@ -3995,93 +3567,77 @@ class KAZE(Feature2D):
         .       DIFF_CHARBONNIER
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def getDiffusivity(self) -> retval:
         """
         .
         """
         ...
-
     def getExtended(self) -> retval:
         """
         .
         """
         ...
-
     def getNOctaveLayers(self) -> retval:
         """
         .
         """
         ...
-
     def getNOctaves(self) -> retval:
         """
         .
         """
         ...
-
     def getThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def getUpright(self) -> retval:
         """
         .
         """
         ...
-
     def setDiffusivity(self, diff) -> None:
         """
         .
         """
         ...
-
     def setExtended(self, extended) -> None:
         """
         .
         """
         ...
-
     def setNOctaveLayers(self, octaveLayers) -> None:
         """
         .
         """
         ...
-
     def setNOctaves(self, octaves) -> None:
         """
         .
         """
         ...
-
     def setThreshold(self, threshold) -> None:
         """
         .
         """
         ...
-
     def setUpright(self, upright) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class KalmanFilter(builtins.object):
     controlMatrix: ...
@@ -4133,26 +3689,22 @@ class KalmanFilter(builtins.object):
     """
     transitionMatrix
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def correct(self, measurement) -> retval:
         """
         .   @brief Updates the predicted state from the measurement.
@@ -4160,17 +3712,14 @@ class KalmanFilter(builtins.object):
         .       @param measurement The measured system parameters
         """
         ...
-
-    def predict(self, [, control]) -> retval:
+    def predict(self, control=...) -> retval:
         """
         .   @brief Computes a predicted state.
         .
         .       @param control The optional input control
         """
         ...
-
     ...
-
 
 class KeyPoint(builtins.object):
     angle: ...
@@ -4202,16 +3751,14 @@ class KeyPoint(builtins.object):
     """
     size
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def convert(keypoints[, keypointIndexes]) -> points2f:
+    def convert(keypoints, keypointIndexes=...) -> points2f:
         """
         .   This method converts vector of keypoints to vector of points or the reverse, where each keypoint is
         .       assigned the same size and the same orientation.
@@ -4223,7 +3770,7 @@ class KeyPoint(builtins.object):
 
 
 
-        convert(points2f[, size[, response[, octave[, class_id]]]]) -> keypoints
+        convert(points2f, size=..., response=..., octave=..., class_id=...) -> keypoints
         .   @overload
         .       @param points2f Array of (x,y) coordinates of each keypoint
         .       @param keypoints Keypoints obtained from any feature detection algorithm like SIFT/SURF/ORB
@@ -4233,7 +3780,6 @@ class KeyPoint(builtins.object):
         .       @param class_id object id
         """
         ...
-
     @staticmethod
     def overlap(kp1, kp2) -> retval:
         """
@@ -4244,21 +3790,17 @@ class KeyPoint(builtins.object):
         .       @param kp2 Second keypoint
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class LineSegmentDetector(Algorithm):
     @staticmethod
@@ -4267,14 +3809,14 @@ class LineSegmentDetector(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def compareSegments(self, size, lines1, lines2[, _image]) -> retval, _image:
+    def compareSegments(
+        self, size, lines1, lines2, _image=...
+    ) -> Tuple[retval, _image]:
         """
         .   @brief Draws two groups of lines in blue and red, counting the non overlapping (mismatching) pixels.
         .
@@ -4285,8 +3827,9 @@ class LineSegmentDetector(Algorithm):
         .       in order for lines1 and lines2 to be drawn in the above mentioned colors.
         """
         ...
-
-    def detect(self, _image[, _lines[, width[, prec[, nfa]]]]) -> _lines, width, prec, nfa:
+    def detect(
+        self, _image, _lines=..., width=..., prec=..., nfa=...
+    ) -> Tuple[prec, nfa]:
         """
         .   @brief Finds lines in the input image.
         .
@@ -4309,7 +3852,6 @@ class LineSegmentDetector(Algorithm):
         .       This vector will be calculated only when the objects type is #LSD_REFINE_ADV.
         """
         ...
-
     def drawSegments(self, _image, lines) -> _image:
         """
         .   @brief Draws the line segments on a given image.
@@ -4318,9 +3860,7 @@ class LineSegmentDetector(Algorithm):
         .       @param lines A vector of the lines that needed to be drawn.
         """
         ...
-
     ...
-
 
 class MSER(Feature2D):
     @staticmethod
@@ -4329,9 +3869,18 @@ class MSER(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, _delta[, _min_area[, _max_area[, _max_variation[, _min_diversity[, _max_evolution[, _area_threshold[, _min_margin[, _edge_blur_size]]]]]]]]]) -> retval:
+    def create(
+        _delta=...,
+        _min_area=...,
+        _max_area=...,
+        _max_variation=...,
+        _min_diversity=...,
+        _max_evolution=...,
+        _area_threshold=...,
+        _min_margin=...,
+        _edge_blur_size=...,
+    ) -> retval:
         """
         .   @brief Full constructor for %MSER detector
         .
@@ -4346,14 +3895,12 @@ class MSER(Feature2D):
         .       @param _edge_blur_size for color image, the aperture size for edge blur
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def detectRegions(self, image) -> msers, bboxes:
+    def detectRegions(self, image) -> Tuple[msers, bboxes]:
         """
         .   @brief Detect %MSER regions
         .
@@ -4362,63 +3909,52 @@ class MSER(Feature2D):
         .       @param bboxes resulting bounding boxes
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def getDelta(self) -> retval:
         """
         .
         """
         ...
-
     def getMaxArea(self) -> retval:
         """
         .
         """
         ...
-
     def getMinArea(self) -> retval:
         """
         .
         """
         ...
-
     def getPass2Only(self) -> retval:
         """
         .
         """
         ...
-
     def setDelta(self, delta) -> None:
         """
         .
         """
         ...
-
     def setMaxArea(self, maxArea) -> None:
         """
         .
         """
         ...
-
     def setMinArea(self, minArea) -> None:
         """
         .
         """
         ...
-
     def setPass2Only(self, f) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class MergeDebevec(MergeExposures):
     @staticmethod
@@ -4427,26 +3963,22 @@ class MergeDebevec(MergeExposures):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def process(self, src, times, response[, dst]) -> dst:
+    def process(self, src, times, response, dst=...) -> dst:
         """
         .
 
 
 
-        process(src, times[, dst]) -> dst
+        process(src, times, dst=...) -> dst
         .
         """
         ...
-
     ...
-
 
 class MergeExposures(Algorithm):
     @staticmethod
@@ -4455,14 +3987,12 @@ class MergeExposures(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def process(self, src, times, response[, dst]) -> dst:
+    def process(self, src, times, response, dst=...) -> dst:
         """
         .   @brief Merges images.
         .
@@ -4473,9 +4003,7 @@ class MergeExposures(Algorithm):
         .       have the same number of channels as images.
         """
         ...
-
     ...
-
 
 class MergeMertens(MergeExposures):
     @staticmethod
@@ -4484,65 +4012,55 @@ class MergeMertens(MergeExposures):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getContrastWeight(self) -> retval:
         """
         .
         """
         ...
-
     def getExposureWeight(self) -> retval:
         """
         .
         """
         ...
-
     def getSaturationWeight(self) -> retval:
         """
         .
         """
         ...
-
-    def process(self, src, times, response[, dst]) -> dst:
+    def process(self, src, times, response, dst=...) -> dst:
         """
         .
 
 
 
-        process(src[, dst]) -> dst
+        process(src, dst=...) -> dst
         .   @brief Short version of process, that doesn't take extra arguments.
         .
         .       @param src vector of input images
         .       @param dst result image
         """
         ...
-
     def setContrastWeight(self, contrast_weiht) -> None:
         """
         .
         """
         ...
-
     def setExposureWeight(self, exposure_weight) -> None:
         """
         .
         """
         ...
-
     def setSaturationWeight(self, saturation_weight) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class MergeRobertson(MergeExposures):
     @staticmethod
@@ -4551,26 +4069,22 @@ class MergeRobertson(MergeExposures):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def process(self, src, times, response[, dst]) -> dst:
+    def process(self, src, times, response, dst=...) -> dst:
         """
         .
 
 
 
-        process(src, times[, dst]) -> dst
+        process(src, times, dst=...) -> dst
         .
         """
         ...
-
     ...
-
 
 class ORB(Feature2D):
     @staticmethod
@@ -4579,9 +4093,18 @@ class ORB(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, nfeatures[, scaleFactor[, nlevels[, edgeThreshold[, firstLevel[, WTA_K[, scoreType[, patchSize[, fastThreshold]]]]]]]]]) -> retval:
+    def create(
+        nfeatures=...,
+        scaleFactor=...,
+        nlevels=...,
+        edgeThreshold=...,
+        firstLevel=...,
+        WTA_K=...,
+        scoreType=...,
+        patchSize=...,
+        fastThreshold=...,
+    ) -> retval:
         """
         .   @brief The ORB constructor
         .
@@ -4615,129 +4138,107 @@ class ORB(Feature2D):
         .       @param fastThreshold the fast threshold
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     def getEdgeThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def getFastThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def getFirstLevel(self) -> retval:
         """
         .
         """
         ...
-
     def getMaxFeatures(self) -> retval:
         """
         .
         """
         ...
-
     def getNLevels(self) -> retval:
         """
         .
         """
         ...
-
     def getPatchSize(self) -> retval:
         """
         .
         """
         ...
-
     def getScaleFactor(self) -> retval:
         """
         .
         """
         ...
-
     def getScoreType(self) -> retval:
         """
         .
         """
         ...
-
     def getWTA_K(self) -> retval:
         """
         .
         """
         ...
-
     def setEdgeThreshold(self, edgeThreshold) -> None:
         """
         .
         """
         ...
-
     def setFastThreshold(self, fastThreshold) -> None:
         """
         .
         """
         ...
-
     def setFirstLevel(self, firstLevel) -> None:
         """
         .
         """
         ...
-
     def setMaxFeatures(self, maxFeatures) -> None:
         """
         .
         """
         ...
-
     def setNLevels(self, nlevels) -> None:
         """
         .
         """
         ...
-
     def setPatchSize(self, patchSize) -> None:
         """
         .
         """
         ...
-
     def setScaleFactor(self, scaleFactor) -> None:
         """
         .
         """
         ...
-
     def setScoreType(self, scoreType) -> None:
         """
         .
         """
         ...
-
     def setWTA_K(self, wta_k) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class PyRotationWarper(builtins.object):
     @staticmethod
@@ -4746,20 +4247,17 @@ class PyRotationWarper(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def buildMaps(self, src_size, K, R[, xmap[, ymap]]) -> retval, xmap, ymap:
+    def buildMaps(self, src_size, K, R, xmap=..., ymap=...) -> Tuple[p, ymap]:
         """
         .   @brief Builds the projection maps according to the given camera data.
         .
@@ -4771,20 +4269,17 @@ class PyRotationWarper(builtins.object):
         .           @return Projected image minimum bounding box
         """
         ...
-
     def getScale(self) -> retval:
         """
         .
         """
         ...
-
     def setScale(self, arg1) -> None:
         """
         .
         """
         ...
-
-    def warp(self, src, K, R, interp_mode, border_mode[, dst]) -> retval, dst:
+    def warp(self, src, K, R, interp_mode, border_mode, dst=...) -> Tuple[retval, dst]:
         """
         .   @brief Projects the image.
         .
@@ -4797,8 +4292,9 @@ class PyRotationWarper(builtins.object):
         .           @return Project image top-left corner
         """
         ...
-
-    def warpBackward(self, src, K, R, interp_mode, border_mode, dst_size[, dst]) -> dst:
+    def warpBackward(
+        self, src, K, R, interp_mode, border_mode, dst_size, dst=...
+    ) -> dst:
         """
         .   @brief Projects the image backward.
         .
@@ -4811,7 +4307,6 @@ class PyRotationWarper(builtins.object):
         .           @param dst Backward-projected image
         """
         ...
-
     def warpPoint(self, pt, K, R) -> retval:
         """
         .   @brief Projects the image point.
@@ -4822,7 +4317,6 @@ class PyRotationWarper(builtins.object):
         .           @return Projected point
         """
         ...
-
     def warpPointBackward(self, pt, K, R) -> retval:
         """
         .   @brief Projects the image point backward.
@@ -4833,7 +4327,6 @@ class PyRotationWarper(builtins.object):
         .           @return Backward-projected point
         """
         ...
-
     def warpRoi(self, src_size, K, R) -> retval:
         """
         .   @param src_size Source image bounding box
@@ -4842,9 +4335,7 @@ class PyRotationWarper(builtins.object):
         .           @return Projected image minimum bounding box
         """
         ...
-
     ...
-
 
 class QRCodeDetector(builtins.object):
     @staticmethod
@@ -4853,20 +4344,19 @@ class QRCodeDetector(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def decode(self, img, points[, straight_qrcode]) -> retval, straight_qrcode:
+    def decode(
+        self, img, points, straight_qrcode=...
+    ) -> Tuple[retval, straight_qrcode]:
         """
         .   @brief Decodes QR code in image once it's found by the detect() method.
         .
@@ -4876,8 +4366,9 @@ class QRCodeDetector(builtins.object):
         .        @param straight_qrcode The optional output image containing rectified and binarized QR code
         """
         ...
-
-    def decodeCurved(self, img, points[, straight_qrcode]) -> retval, straight_qrcode:
+    def decodeCurved(
+        self, img, points, straight_qrcode=...
+    ) -> Tuple[retval, straight_qrcode]:
         """
         .   @brief Decodes QR code on a curved surface in image once it's found by the detect() method.
         .
@@ -4887,8 +4378,9 @@ class QRCodeDetector(builtins.object):
         .        @param straight_qrcode The optional output image containing rectified and binarized QR code
         """
         ...
-
-    def decodeMulti(self, img, points[, straight_qrcode]) -> retval, decoded_info, straight_qrcode:
+    def decodeMulti(
+        self, img, points, straight_qrcode=...
+    ) -> Tuple[o, straight_qrcode]:
         """
         .   @brief Decodes QR codes in image once it's found by the detect() method.
         .        @param img grayscale or color (BGR) image containing QR codes.
@@ -4897,16 +4389,16 @@ class QRCodeDetector(builtins.object):
         .        @param straight_qrcode The optional output vector of images containing rectified and binarized QR codes
         """
         ...
-
-    def detect(self, img[, points]) -> retval, points:
+    def detect(self, img, points=...) -> Tuple[retval, points]:
         """
         .   @brief Detects QR code in image and returns the quadrangle containing the code.
         .        @param img grayscale or color (BGR) image containing (or not) QR code.
         .        @param points Output vector of vertices of the minimum-area quadrangle containing the code.
         """
         ...
-
-    def detectAndDecode(self, img[, points[, straight_qrcode]]) -> retval, points, straight_qrcode:
+    def detectAndDecode(
+        self, img, points=..., straight_qrcode=...
+    ) -> Tuple[s, straight_qrcode]:
         """
         .   @brief Both detects and decodes QR code
         .
@@ -4915,8 +4407,9 @@ class QRCodeDetector(builtins.object):
         .        @param straight_qrcode The optional output image containing rectified and binarized QR code
         """
         ...
-
-    def detectAndDecodeCurved(self, img[, points[, straight_qrcode]]) -> retval, points, straight_qrcode:
+    def detectAndDecodeCurved(
+        self, img, points=..., straight_qrcode=...
+    ) -> Tuple[s, straight_qrcode]:
         """
         .   @brief Both detects and decodes QR code on a curved surface
         .
@@ -4925,8 +4418,9 @@ class QRCodeDetector(builtins.object):
         .        @param straight_qrcode The optional output image containing rectified and binarized QR code
         """
         ...
-
-    def detectAndDecodeMulti(self, img[, points[, straight_qrcode]]) -> retval, decoded_info, points, straight_qrcode:
+    def detectAndDecodeMulti(
+        self, img, points=..., straight_qrcode=...
+    ) -> Tuple[points, straight_qrcode]:
         """
         .   @brief Both detects and decodes QR codes
         .       @param img grayscale or color (BGR) image containing QR codes.
@@ -4935,15 +4429,13 @@ class QRCodeDetector(builtins.object):
         .       @param straight_qrcode The optional output vector of images containing rectified and binarized QR codes
         """
         ...
-
-    def detectMulti(self, img[, points]) -> retval, points:
+    def detectMulti(self, img, points=...) -> Tuple[retval, points]:
         """
         .   @brief Detects QR codes in image and returns the vector of the quadrangles containing the codes.
         .        @param img grayscale or color (BGR) image containing (or not) QR codes.
         .        @param points Output vector of vector of vertices of the minimum-area quadrangle containing the codes.
         """
         ...
-
     def setEpsX(self, epsX) -> None:
         """
         .   @brief sets the epsilon used during the horizontal scan of QR code stop marker detection.
@@ -4951,7 +4443,6 @@ class QRCodeDetector(builtins.object):
         .        of the scheme 1:1:3:1:1 according to QR code standard.
         """
         ...
-
     def setEpsY(self, epsY) -> None:
         """
         .   @brief sets the epsilon used during the vertical scan of QR code stop marker detection.
@@ -4959,9 +4450,7 @@ class QRCodeDetector(builtins.object):
         .        of the scheme 1:1:3:1:1 according to QR code standard.
         """
         ...
-
     ...
-
 
 class SIFT(Feature2D):
     @staticmethod
@@ -4970,9 +4459,14 @@ class SIFT(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, nfeatures[, nOctaveLayers[, contrastThreshold[, edgeThreshold[, sigma]]]]]) -> retval:
+    def create(
+        nfeatures=...,
+        nOctaveLayers=...,
+        contrastThreshold=...,
+        edgeThreshold=...,
+        sigma=...,
+    ) -> retval:
         """
         .   @param nfeatures The number of best features to retain. The features are ranked by their scores
         .       (measured in SIFT algorithm as the local contrast)
@@ -5021,21 +4515,17 @@ class SIFT(Feature2D):
         .       @param descriptorType The type of descriptors. Only CV_32F and CV_8U are supported.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class SimpleBlobDetector(Feature2D):
     @staticmethod
@@ -5044,28 +4534,23 @@ class SimpleBlobDetector(Feature2D):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, parameters]) -> retval:
+    def create(parameters=...) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDefaultName(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class SimpleBlobDetector_Params(builtins.object):
     blobColor: ...
@@ -5162,28 +4647,23 @@ class SimpleBlobDetector_Params(builtins.object):
     """
     thresholdStep
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class SparseOpticalFlow(Algorithm):
     @staticmethod
@@ -5192,14 +4672,14 @@ class SparseOpticalFlow(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def calc(self, prevImg, nextImg, prevPts, nextPts[, status[, err]]) -> nextPts, status, err:
+    def calc(
+        self, prevImg, nextImg, prevPts, nextPts, status=..., err=...
+    ) -> Tuple[s, err]:
         """
         .   @brief Calculates a sparse optical flow.
         .
@@ -5212,9 +4692,7 @@ class SparseOpticalFlow(Algorithm):
         .       @param err Optional output vector that contains error response for each point (inverse confidence).
         """
         ...
-
     ...
-
 
 class SparsePyrLKOpticalFlow(SparseOpticalFlow):
     @staticmethod
@@ -5223,82 +4701,70 @@ class SparsePyrLKOpticalFlow(SparseOpticalFlow):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, winSize[, maxLevel[, crit[, flags[, minEigThreshold]]]]]) -> retval:
+    def create(
+        winSize=..., maxLevel=..., crit=..., flags=..., minEigThreshold=...
+    ) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getFlags(self) -> retval:
         """
         .
         """
         ...
-
     def getMaxLevel(self) -> retval:
         """
         .
         """
         ...
-
     def getMinEigThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def getTermCriteria(self) -> retval:
         """
         .
         """
         ...
-
     def getWinSize(self) -> retval:
         """
         .
         """
         ...
-
     def setFlags(self, flags) -> None:
         """
         .
         """
         ...
-
     def setMaxLevel(self, maxLevel) -> None:
         """
         .
         """
         ...
-
     def setMinEigThreshold(self, minEigThreshold) -> None:
         """
         .
         """
         ...
-
     def setTermCriteria(self, crit) -> None:
         """
         .
         """
         ...
-
     def setWinSize(self, winSize) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class StereoBM(StereoMatcher):
     @staticmethod
@@ -5307,9 +4773,8 @@ class StereoBM(StereoMatcher):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, numDisparities[, blockSize]]) -> retval:
+    def create(numDisparities=..., blockSize=...) -> retval:
         """
         .   @brief Creates StereoBM object
         .
@@ -5325,111 +4790,92 @@ class StereoBM(StereoMatcher):
         .       a specific stereo pair.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getPreFilterCap(self) -> retval:
         """
         .
         """
         ...
-
     def getPreFilterSize(self) -> retval:
         """
         .
         """
         ...
-
     def getPreFilterType(self) -> retval:
         """
         .
         """
         ...
-
     def getROI1(self) -> retval:
         """
         .
         """
         ...
-
     def getROI2(self) -> retval:
         """
         .
         """
         ...
-
     def getSmallerBlockSize(self) -> retval:
         """
         .
         """
         ...
-
     def getTextureThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def getUniquenessRatio(self) -> retval:
         """
         .
         """
         ...
-
     def setPreFilterCap(self, preFilterCap) -> None:
         """
         .
         """
         ...
-
     def setPreFilterSize(self, preFilterSize) -> None:
         """
         .
         """
         ...
-
     def setPreFilterType(self, preFilterType) -> None:
         """
         .
         """
         ...
-
     def setROI1(self, roi1) -> None:
         """
         .
         """
         ...
-
     def setROI2(self, roi2) -> None:
         """
         .
         """
         ...
-
     def setSmallerBlockSize(self, blockSize) -> None:
         """
         .
         """
         ...
-
     def setTextureThreshold(self, textureThreshold) -> None:
         """
         .
         """
         ...
-
     def setUniquenessRatio(self, uniquenessRatio) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class StereoMatcher(Algorithm):
     @staticmethod
@@ -5438,14 +4884,12 @@ class StereoMatcher(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def compute(self, left, right[, disparity]) -> disparity:
+    def compute(self, left, right, disparity=...) -> disparity:
         """
         .   @brief Computes disparity map for the specified stereo pair
         .
@@ -5456,81 +4900,67 @@ class StereoMatcher(Algorithm):
         .       has 4 fractional bits), whereas other algorithms output 32-bit floating-point disparity map.
         """
         ...
-
     def getBlockSize(self) -> retval:
         """
         .
         """
         ...
-
     def getDisp12MaxDiff(self) -> retval:
         """
         .
         """
         ...
-
     def getMinDisparity(self) -> retval:
         """
         .
         """
         ...
-
     def getNumDisparities(self) -> retval:
         """
         .
         """
         ...
-
     def getSpeckleRange(self) -> retval:
         """
         .
         """
         ...
-
     def getSpeckleWindowSize(self) -> retval:
         """
         .
         """
         ...
-
     def setBlockSize(self, blockSize) -> None:
         """
         .
         """
         ...
-
     def setDisp12MaxDiff(self, disp12MaxDiff) -> None:
         """
         .
         """
         ...
-
     def setMinDisparity(self, minDisparity) -> None:
         """
         .
         """
         ...
-
     def setNumDisparities(self, numDisparities) -> None:
         """
         .
         """
         ...
-
     def setSpeckleRange(self, speckleRange) -> None:
         """
         .
         """
         ...
-
     def setSpeckleWindowSize(self, speckleWindowSize) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class StereoSGBM(StereoMatcher):
     @staticmethod
@@ -5539,9 +4969,20 @@ class StereoSGBM(StereoMatcher):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, minDisparity[, numDisparities[, blockSize[, P1[, P2[, disp12MaxDiff[, preFilterCap[, uniquenessRatio[, speckleWindowSize[, speckleRange[, mode]]]]]]]]]]]) -> retval:
+    def create(
+        minDisparity=...,
+        numDisparities=...,
+        blockSize=...,
+        P1=...,
+        P2=...,
+        disp12MaxDiff=...,
+        preFilterCap=...,
+        uniquenessRatio=...,
+        speckleWindowSize=...,
+        speckleRange=...,
+        mode=...,
+    ) -> retval:
         """
         .   @brief Creates StereoSGBM object
         .
@@ -5581,75 +5022,62 @@ class StereoSGBM(StereoMatcher):
         .       to a custom value.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getMode(self) -> retval:
         """
         .
         """
         ...
-
     def getP1(self) -> retval:
         """
         .
         """
         ...
-
     def getP2(self) -> retval:
         """
         .
         """
         ...
-
     def getPreFilterCap(self) -> retval:
         """
         .
         """
         ...
-
     def getUniquenessRatio(self) -> retval:
         """
         .
         """
         ...
-
     def setMode(self, mode) -> None:
         """
         .
         """
         ...
-
     def setP1(self, P1) -> None:
         """
         .
         """
         ...
-
     def setP2(self, P2) -> None:
         """
         .
         """
         ...
-
     def setPreFilterCap(self, preFilterCap) -> None:
         """
         .
         """
         ...
-
     def setUniquenessRatio(self, uniquenessRatio) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class Stitcher(builtins.object):
     @staticmethod
@@ -5658,9 +5086,8 @@ class Stitcher(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, mode]) -> retval:
+    def create(mode=...) -> retval:
         """
         .   @brief Creates a Stitcher configured in one of the stitching modes.
         .
@@ -5670,20 +5097,18 @@ class Stitcher(builtins.object):
         .       @return Stitcher class instance.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def composePanorama(self, [, pano]) -> retval, pano:
+    def composePanorama(self, pano=...) -> Tuple[retval, pano]:
         """
         .   @overload
 
 
 
-        composePanorama(images[, pano]) -> retval, pano
+        composePanorama(images, pano=...) -> retval, pano
         .   @brief These functions try to compose the given images (or images stored internally from the other function
         .       calls) into the final pano under the assumption that the image transformations were estimated
         .       before.
@@ -5696,14 +5121,12 @@ class Stitcher(builtins.object):
         .       @return Status code.
         """
         ...
-
     def compositingResol(self) -> retval:
         """
         .
         """
         ...
-
-    def estimateTransform(self, images[, masks]) -> retval:
+    def estimateTransform(self, images, masks=...) -> retval:
         """
         .   @brief These functions try to match the given images and to estimate rotations of each camera.
         .
@@ -5715,74 +5138,63 @@ class Stitcher(builtins.object):
         .       @return Status code.
         """
         ...
-
     def interpolationFlags(self) -> retval:
         """
         .
         """
         ...
-
     def panoConfidenceThresh(self) -> retval:
         """
         .
         """
         ...
-
     def registrationResol(self) -> retval:
         """
         .
         """
         ...
-
     def seamEstimationResol(self) -> retval:
         """
         .
         """
         ...
-
     def setCompositingResol(self, resol_mpx) -> None:
         """
         .
         """
         ...
-
     def setInterpolationFlags(self, interp_flags) -> None:
         """
         .
         """
         ...
-
     def setPanoConfidenceThresh(self, conf_thresh) -> None:
         """
         .
         """
         ...
-
     def setRegistrationResol(self, resol_mpx) -> None:
         """
         .
         """
         ...
-
     def setSeamEstimationResol(self, resol_mpx) -> None:
         """
         .
         """
         ...
-
     def setWaveCorrection(self, flag) -> None:
         """
         .
         """
         ...
-
-    def stitch(self, images[, pano]) -> retval, pano:
+    def stitch(self, images, pano=...) -> Tuple[retval, pano]:
         """
         .   @overload
 
 
 
-        stitch(images, masks[, pano]) -> retval, pano
+        stitch(images, masks, pano=...) -> retval, pano
         .   @brief These functions try to stitch the given images.
         .
         .       @param images Input images.
@@ -5791,21 +5203,17 @@ class Stitcher(builtins.object):
         .       @return Status code.
         """
         ...
-
     def waveCorrection(self) -> retval:
         """
         .
         """
         ...
-
     def workScale(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class Subdiv2D(builtins.object):
     @staticmethod
@@ -5814,20 +5222,17 @@ class Subdiv2D(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def edgeDst(self, edge) -> retval, dstpt:
+    def edgeDst(self, edge) -> Tuple[retval, dstpt]:
         """
         .   @brief Returns the edge destination.
         .
@@ -5837,8 +5242,7 @@ class Subdiv2D(builtins.object):
         .       @returns vertex ID.
         """
         ...
-
-    def edgeOrg(self, edge) -> retval, orgpt:
+    def edgeOrg(self, edge) -> Tuple[retval, orgpt]:
         """
         .   @brief Returns the edge origin.
         .
@@ -5848,8 +5252,7 @@ class Subdiv2D(builtins.object):
         .       @returns vertex ID.
         """
         ...
-
-    def findNearest(self, pt) -> retval, nearestPt:
+    def findNearest(self, pt) -> Tuple[retval, nearestPt]:
         """
         .   @brief Finds the subdivision vertex closest to the given point.
         .
@@ -5864,7 +5267,6 @@ class Subdiv2D(builtins.object):
         .       @returns vertex ID.
         """
         ...
-
     def getEdge(self, edge, nextEdgeType) -> retval:
         """
         .   @brief Returns one of the edges related to the given edge.
@@ -5886,7 +5288,6 @@ class Subdiv2D(builtins.object):
         .       @returns edge ID related to the input edge.
         """
         ...
-
     def getEdgeList(self) -> edgeList:
         """
         .   @brief Returns a list of all edges.
@@ -5897,7 +5298,6 @@ class Subdiv2D(builtins.object):
         .       vertices. i.e. org_x = v[0], org_y = v[1], dst_x = v[2], dst_y = v[3].
         """
         ...
-
     def getLeadingEdgeList(self) -> leadingEdgeList:
         """
         .   @brief Returns a list of the leading edge ID connected to each triangle.
@@ -5907,7 +5307,6 @@ class Subdiv2D(builtins.object):
         .       The function gives one edge ID for each triangle.
         """
         ...
-
     def getTriangleList(self) -> triangleList:
         """
         .   @brief Returns a list of all triangles.
@@ -5918,8 +5317,7 @@ class Subdiv2D(builtins.object):
         .       vertices. i.e. p1_x = v[0], p1_y = v[1], p2_x = v[2], p2_y = v[3], p3_x = v[4], p3_y = v[5].
         """
         ...
-
-    def getVertex(self, vertex) -> retval, firstEdge:
+    def getVertex(self, vertex) -> Tuple[retval, firstEdge]:
         """
         .   @brief Returns vertex location from vertex ID.
         .
@@ -5928,8 +5326,7 @@ class Subdiv2D(builtins.object):
         .       @returns vertex (x,y)
         """
         ...
-
-    def getVoronoiFacetList(self, idx) -> facetList, facetCenters:
+    def getVoronoiFacetList(self, idx) -> Tuple[facetList, facetCenters]:
         """
         .   @brief Returns a list of all Voronoi facets.
         .
@@ -5938,7 +5335,6 @@ class Subdiv2D(builtins.object):
         .       @param facetCenters Output vector of the Voronoi facets center points.
         """
         ...
-
     def initDelaunay(self, rect) -> None:
         """
         .   @brief Creates a new empty Delaunay subdivision
@@ -5946,7 +5342,6 @@ class Subdiv2D(builtins.object):
         .       @param rect Rectangle that includes all of the 2D points that are to be added to the subdivision.
         """
         ...
-
     def insert(self, pt) -> retval:
         """
         .   @brief Insert a single point into a Delaunay triangulation.
@@ -5970,8 +5365,7 @@ class Subdiv2D(builtins.object):
         .       appropriately.
         """
         ...
-
-    def locate(self, pt) -> retval, edge, vertex:
+    def locate(self, pt) -> Tuple[e, vertex]:
         """
         .   @brief Returns the location of a point within a Delaunay triangulation.
         .
@@ -5994,7 +5388,6 @@ class Subdiv2D(builtins.object):
         .          processing mode is selected, #PTLOC_ERROR is returned.
         """
         ...
-
     def nextEdge(self, edge) -> retval:
         """
         .   @brief Returns next edge around the edge origin.
@@ -6005,7 +5398,6 @@ class Subdiv2D(builtins.object):
         .       picture above if e is the input edge).
         """
         ...
-
     def rotateEdge(self, edge, rotate) -> retval:
         """
         .   @brief Returns another edge of the same quad-edge.
@@ -6021,15 +5413,12 @@ class Subdiv2D(builtins.object):
         .       @returns one of the edges ID of the same quad-edge as the input edge.
         """
         ...
-
     def symEdge(self, edge) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class TickMeter(builtins.object):
     @staticmethod
@@ -6038,87 +5427,72 @@ class TickMeter(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getAvgTimeMilli(self) -> retval:
         """
         .
         """
         ...
-
     def getAvgTimeSec(self) -> retval:
         """
         .
         """
         ...
-
     def getCounter(self) -> retval:
         """
         .
         """
         ...
-
     def getFPS(self) -> retval:
         """
         .
         """
         ...
-
     def getTimeMicro(self) -> retval:
         """
         .
         """
         ...
-
     def getTimeMilli(self) -> retval:
         """
         .
         """
         ...
-
     def getTimeSec(self) -> retval:
         """
         .
         """
         ...
-
     def getTimeTicks(self) -> retval:
         """
         .
         """
         ...
-
     def reset(self) -> None:
         """
         .
         """
         ...
-
     def start(self) -> None:
         """
         .
         """
         ...
-
     def stop(self) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class Tonemap(Algorithm):
     @staticmethod
@@ -6127,20 +5501,17 @@ class Tonemap(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getGamma(self) -> retval:
         """
         .
         """
         ...
-
-    def process(self, src[, dst]) -> dst:
+    def process(self, src, dst=...) -> dst:
         """
         .   @brief Tonemaps image
         .
@@ -6148,15 +5519,12 @@ class Tonemap(Algorithm):
         .       @param dst destination image - CV_32FC3 Mat with values in [0, 1] range
         """
         ...
-
     def setGamma(self, gamma) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class TonemapDrago(Tonemap):
     @staticmethod
@@ -6165,39 +5533,32 @@ class TonemapDrago(Tonemap):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getBias(self) -> retval:
         """
         .
         """
         ...
-
     def getSaturation(self) -> retval:
         """
         .
         """
         ...
-
     def setBias(self, bias) -> None:
         """
         .
         """
         ...
-
     def setSaturation(self, saturation) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class TonemapMantiuk(Tonemap):
     @staticmethod
@@ -6206,39 +5567,32 @@ class TonemapMantiuk(Tonemap):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getSaturation(self) -> retval:
         """
         .
         """
         ...
-
     def getScale(self) -> retval:
         """
         .
         """
         ...
-
     def setSaturation(self, saturation) -> None:
         """
         .
         """
         ...
-
     def setScale(self, scale) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class TonemapReinhard(Tonemap):
     @staticmethod
@@ -6247,51 +5601,42 @@ class TonemapReinhard(Tonemap):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getColorAdaptation(self) -> retval:
         """
         .
         """
         ...
-
     def getIntensity(self) -> retval:
         """
         .
         """
         ...
-
     def getLightAdaptation(self) -> retval:
         """
         .
         """
         ...
-
     def setColorAdaptation(self, color_adapt) -> None:
         """
         .
         """
         ...
-
     def setIntensity(self, intensity) -> None:
         """
         .
         """
         ...
-
     def setLightAdaptation(self, light_adapt) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class Tracker(builtins.object):
     @staticmethod
@@ -6300,13 +5645,11 @@ class Tracker(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def init(self, image, boundingBox) -> None:
         """
         .   @brief Initialize the tracker with a known bounding box that surrounded the target
@@ -6314,8 +5657,7 @@ class Tracker(builtins.object):
         .       @param boundingBox The initial bounding box
         """
         ...
-
-    def update(self, image) -> retval, boundingBox:
+    def update(self, image) -> Tuple[retval, boundingBox]:
         """
         .   @brief Update the tracker, find the new most likely bounding box for the target
         .       @param image The current frame
@@ -6327,9 +5669,7 @@ class Tracker(builtins.object):
         .       missing from the frame (say, out of sight)
         """
         ...
-
     ...
-
 
 class TrackerGOTURN(Tracker):
     @staticmethod
@@ -6338,23 +5678,19 @@ class TrackerGOTURN(Tracker):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, parameters]) -> retval:
+    def create(parameters=...) -> retval:
         """
         .   @brief Constructor
         .       @param parameters GOTURN parameters TrackerGOTURN::Params
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class TrackerGOTURN_Params(builtins.object):
     modelBin: ...
@@ -6366,28 +5702,23 @@ class TrackerGOTURN_Params(builtins.object):
     """
     modelTxt
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class TrackerMIL(Tracker):
     @staticmethod
@@ -6396,23 +5727,19 @@ class TrackerMIL(Tracker):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, parameters]) -> retval:
+    def create(parameters=...) -> retval:
         """
         .   @brief Create MIL tracker instance
         .        *  @param parameters MIL parameters TrackerMIL::Params
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class TrackerMIL_Params(builtins.object):
     featureSetNumFeatures: ...
@@ -6449,94 +5776,78 @@ class TrackerMIL_Params(builtins.object):
     """
     samplerTrackMaxPosNum
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class UMat(builtins.object):
     offset: ...
     """
     offset
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def context() -> retval:
         """
         .
         """
         ...
-
     @staticmethod
     def queue() -> retval:
         """
         .
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def get(self) -> retval:
         """
         .
         """
         ...
-
     def handle(self, accessFlags) -> retval:
         """
         .
         """
         ...
-
     def isContinuous(self) -> retval:
         """
         .
         """
         ...
-
     def isSubmatrix(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class UsacParams(builtins.object):
     confidence: ...
@@ -6593,28 +5904,23 @@ class UsacParams(builtins.object):
     """
     threshold
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class VariationalRefinement(DenseOpticalFlow):
     @staticmethod
@@ -6623,62 +5929,53 @@ class VariationalRefinement(DenseOpticalFlow):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
         .   @brief Creates an instance of VariationalRefinement
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def calcUV(self, I0, I1, flow_u, flow_v) -> flow_u, flow_v:
+    def calcUV(self, I0, I1, flow_u, flow_v) -> Tuple[flow_u, flow_v]:
         """
         .   @brief @ref calc function overload to handle separate horizontal (u) and vertical (v) flow components
         .   (to avoid extra splits/merges)
         """
         ...
-
     def getAlpha(self) -> retval:
         """
         .   @brief Weight of the smoothness term
         .   @see setAlpha
         """
         ...
-
     def getDelta(self) -> retval:
         """
         .   @brief Weight of the color constancy term
         .   @see setDelta
         """
         ...
-
     def getFixedPointIterations(self) -> retval:
         """
         .   @brief Number of outer (fixed-point) iterations in the minimization procedure.
         .   @see setFixedPointIterations
         """
         ...
-
     def getGamma(self) -> retval:
         """
         .   @brief Weight of the gradient constancy term
         .   @see setGamma
         """
         ...
-
     def getOmega(self) -> retval:
         """
         .   @brief Relaxation factor in SOR
         .   @see setOmega
         """
         ...
-
     def getSorIterations(self) -> retval:
         """
         .   @brief Number of inner successive over-relaxation (SOR) iterations
@@ -6686,45 +5983,37 @@ class VariationalRefinement(DenseOpticalFlow):
         .   @see setSorIterations
         """
         ...
-
     def setAlpha(self, val) -> None:
         """
         .   @copybrief getAlpha @see getAlpha
         """
         ...
-
     def setDelta(self, val) -> None:
         """
         .   @copybrief getDelta @see getDelta
         """
         ...
-
     def setFixedPointIterations(self, val) -> None:
         """
         .   @copybrief getFixedPointIterations @see getFixedPointIterations
         """
         ...
-
     def setGamma(self, val) -> None:
         """
         .   @copybrief getGamma @see getGamma
         """
         ...
-
     def setOmega(self, val) -> None:
         """
         .   @copybrief getOmega @see getOmega
         """
         ...
-
     def setSorIterations(self, val) -> None:
         """
         .   @copybrief getSorIterations @see getSorIterations
         """
         ...
-
     ...
-
 
 class VideoCapture(builtins.object):
     @staticmethod
@@ -6733,19 +6022,16 @@ class VideoCapture(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def get(self, propId) -> retval:
         """
         .   @brief Returns the specified VideoCapture property
@@ -6765,7 +6051,6 @@ class VideoCapture(builtins.object):
         .       driver and API Backend
         """
         ...
-
     def getBackendName(self) -> retval:
         """
         .   @brief Returns used backend API name
@@ -6773,13 +6058,11 @@ class VideoCapture(builtins.object):
         .        @note Stream should be opened.
         """
         ...
-
     def getExceptionMode(self) -> retval:
         """
         .
         """
         ...
-
     def grab(self) -> retval:
         """
         .   @brief Grabs the next frame from video file or capturing device.
@@ -6802,7 +6085,6 @@ class VideoCapture(builtins.object):
         .       @ref tutorial_kinect_openni
         """
         ...
-
     def isOpened(self) -> retval:
         """
         .   @brief Returns true if video capturing has been initialized already.
@@ -6811,8 +6093,7 @@ class VideoCapture(builtins.object):
         .       true.
         """
         ...
-
-    def open(self, filename[, apiPreference]) -> retval:
+    def open(self, filename, apiPreference=...) -> retval:
         """
         .   @brief  Opens a video file or a capturing device or an IP video stream for video capturing.
         .
@@ -6839,7 +6120,7 @@ class VideoCapture(builtins.object):
 
 
 
-        open(index[, apiPreference]) -> retval
+        open(index, apiPreference=...) -> retval
         .   @brief  Opens a camera for video capturing
         .
         .       @overload
@@ -6864,8 +6145,7 @@ class VideoCapture(builtins.object):
         .       The method first calls VideoCapture::release to close the already opened file or camera.
         """
         ...
-
-    def read(self, [, image]) -> retval, image:
+    def read(self, image=...) -> Tuple[retval, image]:
         """
         .   @brief Grabs, decodes and returns the next video frame.
         .
@@ -6882,7 +6162,6 @@ class VideoCapture(builtins.object):
         .       cvCloneImage and then do whatever you want with the copy.
         """
         ...
-
     def release(self) -> None:
         """
         .   @brief Closes video file or capturing device.
@@ -6893,8 +6172,7 @@ class VideoCapture(builtins.object):
         .       The C function also deallocates memory and clears \*capture pointer.
         """
         ...
-
-    def retrieve(self, [, image[, flag]]) -> retval, image:
+    def retrieve(self, image=..., flag=...) -> Tuple[retval, image]:
         """
         .   @brief Decodes and returns the grabbed video frame.
         .
@@ -6913,7 +6191,6 @@ class VideoCapture(builtins.object):
         .       cvCloneImage and then do whatever you want with the copy.
         """
         ...
-
     def set(self, propId, value) -> retval:
         """
         .   @brief Sets a property in the VideoCapture.
@@ -6926,7 +6203,6 @@ class VideoCapture(builtins.object):
         .       value has been accepted by the capture device. See note in VideoCapture::get()
         """
         ...
-
     def setExceptionMode(self, enable) -> None:
         """
         .   Switches exceptions mode
@@ -6934,9 +6210,7 @@ class VideoCapture(builtins.object):
         .        * methods raise exceptions if not successful instead of returning an error code
         """
         ...
-
     ...
-
 
 class VideoWriter(builtins.object):
     @staticmethod
@@ -6945,7 +6219,6 @@ class VideoWriter(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def fourcc(c1, c2, c3, c4) -> retval:
         """
@@ -6957,19 +6230,16 @@ class VideoWriter(builtins.object):
         .       VideoWriter::VideoWriter or VideoWriter::open.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def get(self, propId) -> retval:
         """
         .   @brief Returns the specified VideoWriter property
@@ -6981,7 +6251,6 @@ class VideoWriter(builtins.object):
         .        not supported by the backend used by the VideoWriter instance.
         """
         ...
-
     def getBackendName(self) -> retval:
         """
         .   @brief Returns used backend API name
@@ -6989,14 +6258,12 @@ class VideoWriter(builtins.object):
         .        @note Stream should be opened.
         """
         ...
-
     def isOpened(self) -> retval:
         """
         .   @brief Returns true if video writer has been successfully initialized.
         """
         ...
-
-    def open(self, filename, fourcc, fps, frameSize[, isColor]) -> retval:
+    def open(self, filename, fourcc, fps, frameSize, isColor=...) -> retval:
         """
         .   @brief Initializes or reinitializes video writer.
         .
@@ -7008,7 +6275,7 @@ class VideoWriter(builtins.object):
 
 
 
-        open(filename, apiPreference, fourcc, fps, frameSize[, isColor]) -> retval
+        open(filename, apiPreference, fourcc, fps, frameSize, isColor=...) -> retval
         .   @overload
 
 
@@ -7022,7 +6289,6 @@ class VideoWriter(builtins.object):
         .   @overload
         """
         ...
-
     def release(self) -> None:
         """
         .   @brief Closes the video writer.
@@ -7031,7 +6297,6 @@ class VideoWriter(builtins.object):
         .       destructor.
         """
         ...
-
     def set(self, propId, value) -> retval:
         """
         .   @brief Sets a property in the VideoWriter.
@@ -7043,7 +6308,6 @@ class VideoWriter(builtins.object):
         .        @return  `true` if the property is supported by the backend used by the VideoWriter instance.
         """
         ...
-
     def write(self, image) -> None:
         """
         .   @brief Writes the next video frame
@@ -7054,9 +6318,7 @@ class VideoWriter(builtins.object):
         .       been specified when opening the video writer.
         """
         ...
-
     ...
-
 
 class WarperCreator(builtins.object):
     @staticmethod
@@ -7065,15 +6327,12 @@ class WarperCreator(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class cuda_BufferPool(builtins.object):
     @staticmethod
@@ -7082,19 +6341,16 @@ class cuda_BufferPool(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getAllocator(self) -> retval:
         """
         .
         """
         ...
-
     def getBuffer(self, rows, cols, type) -> retval:
         """
         .
@@ -7105,9 +6361,7 @@ class cuda_BufferPool(builtins.object):
         .
         """
         ...
-
     ...
-
 
 class cuda_DeviceInfo(builtins.object):
     @staticmethod
@@ -7116,73 +6370,61 @@ class cuda_DeviceInfo(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     def ECCEnabled(self) -> retval:
         """
         .
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def asyncEngineCount(self) -> retval:
         """
         .
         """
         ...
-
     def canMapHostMemory(self) -> retval:
         """
         .
         """
         ...
-
     def clockRate(self) -> retval:
         """
         .
         """
         ...
-
     def computeMode(self) -> retval:
         """
         .
         """
         ...
-
     def concurrentKernels(self) -> retval:
         """
         .
         """
         ...
-
     def deviceID(self) -> retval:
         """
         .   @brief Returns system index of the CUDA device starting with 0.
         """
         ...
-
     def freeMemory(self) -> retval:
         """
         .
         """
         ...
-
     def integrated(self) -> retval:
         """
         .
         """
         ...
-
     def isCompatible(self) -> retval:
         """
         .   @brief Checks the CUDA module and device compatibility.
@@ -7191,285 +6433,237 @@ class cuda_DeviceInfo(builtins.object):
         .       returns false .
         """
         ...
-
     def kernelExecTimeoutEnabled(self) -> retval:
         """
         .
         """
         ...
-
     def l2CacheSize(self) -> retval:
         """
         .
         """
         ...
-
     def majorVersion(self) -> retval:
         """
         .
         """
         ...
-
     def maxGridSize(self) -> retval:
         """
         .
         """
         ...
-
     def maxSurface1D(self) -> retval:
         """
         .
         """
         ...
-
     def maxSurface1DLayered(self) -> retval:
         """
         .
         """
         ...
-
     def maxSurface2D(self) -> retval:
         """
         .
         """
         ...
-
     def maxSurface2DLayered(self) -> retval:
         """
         .
         """
         ...
-
     def maxSurface3D(self) -> retval:
         """
         .
         """
         ...
-
     def maxSurfaceCubemap(self) -> retval:
         """
         .
         """
         ...
-
     def maxSurfaceCubemapLayered(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture1D(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture1DLayered(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture1DLinear(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture1DMipmap(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture2D(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture2DGather(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture2DLayered(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture2DLinear(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture2DMipmap(self) -> retval:
         """
         .
         """
         ...
-
     def maxTexture3D(self) -> retval:
         """
         .
         """
         ...
-
     def maxTextureCubemap(self) -> retval:
         """
         .
         """
         ...
-
     def maxTextureCubemapLayered(self) -> retval:
         """
         .
         """
         ...
-
     def maxThreadsDim(self) -> retval:
         """
         .
         """
         ...
-
     def maxThreadsPerBlock(self) -> retval:
         """
         .
         """
         ...
-
     def maxThreadsPerMultiProcessor(self) -> retval:
         """
         .
         """
         ...
-
     def memPitch(self) -> retval:
         """
         .
         """
         ...
-
     def memoryBusWidth(self) -> retval:
         """
         .
         """
         ...
-
     def memoryClockRate(self) -> retval:
         """
         .
         """
         ...
-
     def minorVersion(self) -> retval:
         """
         .
         """
         ...
-
     def multiProcessorCount(self) -> retval:
         """
         .
         """
         ...
-
     def pciBusID(self) -> retval:
         """
         .
         """
         ...
-
     def pciDeviceID(self) -> retval:
         """
         .
         """
         ...
-
     def pciDomainID(self) -> retval:
         """
         .
         """
         ...
-
     def queryMemory(self, totalMemory, freeMemory) -> None:
         """
         .
         """
         ...
-
     def regsPerBlock(self) -> retval:
         """
         .
         """
         ...
-
     def sharedMemPerBlock(self) -> retval:
         """
         .
         """
         ...
-
     def surfaceAlignment(self) -> retval:
         """
         .
         """
         ...
-
     def tccDriver(self) -> retval:
         """
         .
         """
         ...
-
     def textureAlignment(self) -> retval:
         """
         .
         """
         ...
-
     def texturePitchAlignment(self) -> retval:
         """
         .
         """
         ...
-
     def totalConstMem(self) -> retval:
         """
         .
         """
         ...
-
     def totalGlobalMem(self) -> retval:
         """
         .
         """
         ...
-
     def totalMemory(self) -> retval:
         """
         .
         """
         ...
-
     def unifiedAddressing(self) -> retval:
         """
         .
         """
         ...
-
     def warpSize(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class cuda_Event(builtins.object):
     @staticmethod
@@ -7478,46 +6672,38 @@ class cuda_Event(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def elapsedTime(start, end) -> retval:
         """
         .
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def queryIfComplete(self) -> retval:
         """
         .
         """
         ...
-
-    def record(self, [, stream]) -> None:
+    def record(self, stream=...) -> None:
         """
         .
         """
         ...
-
     def waitForCompletion(self) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class cuda_GpuData(builtins.object):
     @staticmethod
@@ -7526,85 +6712,71 @@ class cuda_GpuData(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class cuda_GpuMat(builtins.object):
     step: ...
     """
     step
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def defaultAllocator() -> retval:
         """
         .
         """
         ...
-
     @staticmethod
     def setDefaultAllocator(allocator) -> None:
         """
         .
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def adjustROI(self, dtop, dbottom, dleft, dright) -> retval:
         """
         .
         """
         ...
-
-    def assignTo(self, m[, type]) -> None:
+    def assignTo(self, m, type=...) -> None:
         """
         .
         """
         ...
-
     def channels(self) -> retval:
         """
         .
         """
         ...
-
     def clone(self) -> retval:
         """
         .
         """
         ...
-
     def col(self, x) -> retval:
         """
         .
         """
         ...
-
     def colRange(self, startcol, endcol) -> retval:
         """
         .
@@ -7615,54 +6787,51 @@ class cuda_GpuMat(builtins.object):
         .
         """
         ...
-
-    def convertTo(self, rtype[, dst]) -> dst:
+    def convertTo(self, rtype, dst=...) -> dst:
         """
         .
 
 
 
-        convertTo(rtype, stream[, dst]) -> dst
+        convertTo(rtype, stream, dst=...) -> dst
         .
 
 
 
-        convertTo(rtype, alpha[, dst[, beta]]) -> dst
+        convertTo(rtype, alpha, dst=..., beta=...) -> dst
         .
 
 
 
-        convertTo(rtype, alpha, stream[, dst]) -> dst
+        convertTo(rtype, alpha, stream, dst=...) -> dst
         .
 
 
 
-        convertTo(rtype, alpha, beta, stream[, dst]) -> dst
-        .
-        """
-        ...
-
-    def copyTo(self, [, dst]) -> dst:
-        """
-        .
-
-
-
-        copyTo(stream[, dst]) -> dst
-        .
-
-
-
-        copyTo(mask[, dst]) -> dst
-        .
-
-
-
-        copyTo(mask, stream[, dst]) -> dst
+        convertTo(rtype, alpha, beta, stream, dst=...) -> dst
         .
         """
         ...
+    def copyTo(self, dst=...) -> dst:
+        """
+        .
 
+
+
+        copyTo(stream, dst=...) -> dst
+        .
+
+
+
+        copyTo(mask, dst=...) -> dst
+        .
+
+
+
+        copyTo(mask, stream, dst=...) -> dst
+        .
+        """
+        ...
     def create(self, rows, cols, type) -> None:
         """
         .
@@ -7673,20 +6842,17 @@ class cuda_GpuMat(builtins.object):
         .
         """
         ...
-
     def cudaPtr(self) -> retval:
         """
         .
         """
         ...
-
     def depth(self) -> retval:
         """
         .
         """
         ...
-
-    def download(self, [, dst]) -> dst:
+    def download(self, dst=...) -> dst:
         """
         .   @brief Performs data download from GpuMat (Blocking call)
         .
@@ -7695,7 +6861,7 @@ class cuda_GpuMat(builtins.object):
 
 
 
-        download(stream[, dst]) -> dst
+        download(stream, dst=...) -> dst
         .   @brief Performs data download from GpuMat (Non-Blocking call)
         .
         .       This function copies data from device memory to host memory. As being a non-blocking call, this
@@ -7705,49 +6871,41 @@ class cuda_GpuMat(builtins.object):
         .       not the default stream and \p dst is HostMem allocated with HostMem::PAGE_LOCKED option.
         """
         ...
-
     def elemSize(self) -> retval:
         """
         .
         """
         ...
-
     def elemSize1(self) -> retval:
         """
         .
         """
         ...
-
     def empty(self) -> retval:
         """
         .
         """
         ...
-
     def isContinuous(self) -> retval:
         """
         .
         """
         ...
-
     def locateROI(self, wholeSize, ofs) -> None:
         """
         .
         """
         ...
-
-    def reshape(self, cn[, rows]) -> retval:
+    def reshape(self, cn, rows=...) -> retval:
         """
         .
         """
         ...
-
     def row(self, y) -> retval:
         """
         .
         """
         ...
-
     def rowRange(self, startrow, endrow) -> retval:
         """
         .
@@ -7758,7 +6916,6 @@ class cuda_GpuMat(builtins.object):
         .
         """
         ...
-
     def setTo(self, s) -> retval:
         """
         .
@@ -7779,37 +6936,31 @@ class cuda_GpuMat(builtins.object):
         .
         """
         ...
-
     def size(self) -> retval:
         """
         .
         """
         ...
-
     def step1(self) -> retval:
         """
         .
         """
         ...
-
     def swap(self, mat) -> None:
         """
         .
         """
         ...
-
     def type(self) -> retval:
         """
         .
         """
         ...
-
     def updateContinuityFlag(self) -> None:
         """
         .
         """
         ...
-
     def upload(self, arr) -> None:
         """
         .   @brief Performs data upload to GpuMat (Blocking call)
@@ -7829,9 +6980,7 @@ class cuda_GpuMat(builtins.object):
         .       not the default stream and \p dst is HostMem allocated with HostMem::PAGE_LOCKED option.
         """
         ...
-
     ...
-
 
 class cuda_GpuMatND(builtins.object):
     @staticmethod
@@ -7840,15 +6989,12 @@ class cuda_GpuMatND(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class cuda_GpuMat_Allocator(builtins.object):
     @staticmethod
@@ -7857,89 +7003,74 @@ class cuda_GpuMat_Allocator(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class cuda_HostMem(builtins.object):
     step: ...
     """
     step
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def channels(self) -> retval:
         """
         .
         """
         ...
-
     def clone(self) -> retval:
         """
         .
         """
         ...
-
     def create(self, rows, cols, type) -> None:
         """
         .
         """
         ...
-
     def createMatHeader(self) -> retval:
         """
         .
         """
         ...
-
     def depth(self) -> retval:
         """
         .
         """
         ...
-
     def elemSize(self) -> retval:
         """
         .
         """
         ...
-
     def elemSize1(self) -> retval:
         """
         .
         """
         ...
-
     def empty(self) -> retval:
         """
         .
         """
         ...
-
     def isContinuous(self) -> retval:
         """
         .   @brief Maps CPU memory to GPU address space and creates the cuda::GpuMat header without reference counting
@@ -7950,39 +7081,32 @@ class cuda_HostMem(builtins.object):
         .       eliminates an extra copy.
         """
         ...
-
-    def reshape(self, cn[, rows]) -> retval:
+    def reshape(self, cn, rows=...) -> retval:
         """
         .
         """
         ...
-
     def size(self) -> retval:
         """
         .
         """
         ...
-
     def step1(self) -> retval:
         """
         .
         """
         ...
-
     def swap(self, b) -> None:
         """
         .
         """
         ...
-
     def type(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class cuda_Stream(builtins.object):
     @staticmethod
@@ -7997,52 +7121,43 @@ class cuda_Stream(builtins.object):
         .       serialized.
         """
         ...
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def cudaPtr(self) -> retval:
         """
         .
         """
         ...
-
     def queryIfComplete(self) -> retval:
         """
         .   @brief Returns true if the current stream queue is finished. Otherwise, it returns false.
         """
         ...
-
     def waitEvent(self, event) -> None:
         """
         .   @brief Makes a compute stream wait on an event.
         """
         ...
-
     def waitForCompletion(self) -> None:
         """
         .   @brief Blocks the current CPU thread until all operations in the stream are complete.
         """
         ...
-
     ...
-
 
 class cuda_TargetArchs(builtins.object):
     @staticmethod
@@ -8051,7 +7166,6 @@ class cuda_TargetArchs(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def has(major, minor) -> retval:
         """
@@ -8062,57 +7176,48 @@ class cuda_TargetArchs(builtins.object):
         .       @param minor Minor compute capability version.
         """
         ...
-
     @staticmethod
     def hasBin(major, minor) -> retval:
         """
         .
         """
         ...
-
     @staticmethod
     def hasEqualOrGreater(major, minor) -> retval:
         """
         .
         """
         ...
-
     @staticmethod
     def hasEqualOrGreaterBin(major, minor) -> retval:
         """
         .
         """
         ...
-
     @staticmethod
     def hasEqualOrGreaterPtx(major, minor) -> retval:
         """
         .
         """
         ...
-
     @staticmethod
     def hasEqualOrLessPtx(major, minor) -> retval:
         """
         .
         """
         ...
-
     @staticmethod
     def hasPtx(major, minor) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_AffineBasedEstimator(detail_Estimator):
     @staticmethod
@@ -8121,21 +7226,17 @@ class detail_AffineBasedEstimator(detail_Estimator):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_AffineBestOf2NearestMatcher(detail_BestOf2NearestMatcher):
     @staticmethod
@@ -8144,21 +7245,17 @@ class detail_AffineBestOf2NearestMatcher(detail_BestOf2NearestMatcher):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_BestOf2NearestMatcher(detail_FeaturesMatcher):
     @staticmethod
@@ -8167,34 +7264,33 @@ class detail_BestOf2NearestMatcher(detail_FeaturesMatcher):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, try_use_gpu[, match_conf[, num_matches_thresh1[, num_matches_thresh2]]]]) -> retval:
+    def create(
+        try_use_gpu=...,
+        match_conf=...,
+        num_matches_thresh1=...,
+        num_matches_thresh2=...,
+    ) -> retval:
         """
         .
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def collectGarbage(self) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_BestOf2NearestRangeMatcher(detail_BestOf2NearestMatcher):
     @staticmethod
@@ -8203,21 +7299,17 @@ class detail_BestOf2NearestRangeMatcher(detail_BestOf2NearestMatcher):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_Blender(builtins.object):
     @staticmethod
@@ -8226,21 +7318,18 @@ class detail_Blender(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def createDefault(type[, try_gpu]) -> retval:
+    def createDefault(type, try_gpu=...) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def blend(self, dst, dst_mask) -> dst, dst_mask:
+    def blend(self, dst, dst_mask) -> Tuple[dst, dst_mask]:
         """
         .   @brief Blends and returns the final pano.
         .
@@ -8248,7 +7337,6 @@ class detail_Blender(builtins.object):
         .       @param dst_mask Final pano mask
         """
         ...
-
     def feed(self, img, mask, tl) -> None:
         """
         .   @brief Processes the image.
@@ -8258,7 +7346,6 @@ class detail_Blender(builtins.object):
         .       @param tl Source image top-left corners
         """
         ...
-
     def prepare(self, corners, sizes) -> None:
         """
         .   @brief Prepares the blender for blending.
@@ -8272,9 +7359,7 @@ class detail_Blender(builtins.object):
         .   @overload
         """
         ...
-
     ...
-
 
 class detail_BlocksChannelsCompensator(detail_BlocksCompensator):
     @staticmethod
@@ -8283,21 +7368,17 @@ class detail_BlocksChannelsCompensator(detail_BlocksCompensator):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_BlocksCompensator(detail_ExposureCompensator):
     @staticmethod
@@ -8306,49 +7387,41 @@ class detail_BlocksCompensator(detail_ExposureCompensator):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def apply(self, index, corner, image, mask) -> image:
         """
         .
         """
         ...
-
     def getBlockSize(self) -> retval:
         """
         .
         """
         ...
-
-    def getMatGains(self, [, umv]) -> umv:
+    def getMatGains(self, umv=...) -> umv:
         """
         .
         """
         ...
-
     def getNrFeeds(self) -> retval:
         """
         .
         """
         ...
-
     def getNrGainsFilteringIterations(self) -> retval:
         """
         .
         """
         ...
-
     def getSimilarityThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def setBlockSize(self, width, height) -> None:
         """
         .
@@ -8359,33 +7432,27 @@ class detail_BlocksCompensator(detail_ExposureCompensator):
         .
         """
         ...
-
     def setMatGains(self, umv) -> None:
         """
         .
         """
         ...
-
     def setNrFeeds(self, nr_feeds) -> None:
         """
         .
         """
         ...
-
     def setNrGainsFilteringIterations(self, nr_iterations) -> None:
         """
         .
         """
         ...
-
     def setSimilarityThreshold(self, similarity_threshold) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_BlocksGainCompensator(detail_BlocksCompensator):
     @staticmethod
@@ -8394,39 +7461,32 @@ class detail_BlocksGainCompensator(detail_BlocksCompensator):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def apply(self, index, corner, image, mask) -> image:
         """
         .
         """
         ...
-
-    def getMatGains(self, [, umv]) -> umv:
+    def getMatGains(self, umv=...) -> umv:
         """
         .
         """
         ...
-
     def setMatGains(self, umv) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_BundleAdjusterAffine(detail_BundleAdjusterBase):
     @staticmethod
@@ -8435,21 +7495,17 @@ class detail_BundleAdjusterAffine(detail_BundleAdjusterBase):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_BundleAdjusterAffinePartial(detail_BundleAdjusterBase):
     @staticmethod
@@ -8458,21 +7514,17 @@ class detail_BundleAdjusterAffinePartial(detail_BundleAdjusterBase):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_BundleAdjusterBase(detail_Estimator):
     @staticmethod
@@ -8481,51 +7533,42 @@ class detail_BundleAdjusterBase(detail_Estimator):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def confThresh(self) -> retval:
         """
         .
         """
         ...
-
     def refinementMask(self) -> retval:
         """
         .
         """
         ...
-
     def setConfThresh(self, conf_thresh) -> None:
         """
         .
         """
         ...
-
     def setRefinementMask(self, mask) -> None:
         """
         .
         """
         ...
-
     def setTermCriteria(self, term_criteria) -> None:
         """
         .
         """
         ...
-
     def termCriteria(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_BundleAdjusterRay(detail_BundleAdjusterBase):
     @staticmethod
@@ -8534,21 +7577,17 @@ class detail_BundleAdjusterRay(detail_BundleAdjusterBase):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_BundleAdjusterReproj(detail_BundleAdjusterBase):
     @staticmethod
@@ -8557,21 +7596,17 @@ class detail_BundleAdjusterReproj(detail_BundleAdjusterBase):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_CameraParams(builtins.object):
     R: ...
@@ -8603,28 +7638,23 @@ class detail_CameraParams(builtins.object):
     """
     t
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     def K(self) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_ChannelsCompensator(detail_ExposureCompensator):
     @staticmethod
@@ -8633,63 +7663,52 @@ class detail_ChannelsCompensator(detail_ExposureCompensator):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def apply(self, index, corner, image, mask) -> image:
         """
         .
         """
         ...
-
-    def getMatGains(self, [, umv]) -> umv:
+    def getMatGains(self, umv=...) -> umv:
         """
         .
         """
         ...
-
     def getNrFeeds(self) -> retval:
         """
         .
         """
         ...
-
     def getSimilarityThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def setMatGains(self, umv) -> None:
         """
         .
         """
         ...
-
     def setNrFeeds(self, nr_feeds) -> None:
         """
         .
         """
         ...
-
     def setSimilarityThreshold(self, similarity_threshold) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_DpSeamFinder(detail_SeamFinder):
     @staticmethod
@@ -8698,27 +7717,22 @@ class detail_DpSeamFinder(detail_SeamFinder):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def setCostFunction(self, val) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_Estimator(builtins.object):
     @staticmethod
@@ -8727,14 +7741,12 @@ class detail_Estimator(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def apply(self, features, pairwise_matches, cameras) -> retval, cameras:
+    def apply(self, features, pairwise_matches, cameras) -> Tuple[retval, cameras]:
         """
         .   @brief Estimates camera parameters.
         .
@@ -8744,9 +7756,7 @@ class detail_Estimator(builtins.object):
         .       @return True in case of success, false otherwise
         """
         ...
-
     ...
-
 
 class detail_ExposureCompensator(builtins.object):
     @staticmethod
@@ -8755,20 +7765,17 @@ class detail_ExposureCompensator(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def createDefault(type) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def apply(self, index, corner, image, mask) -> image:
         """
         .   @brief Compensate exposure in the specified image.
@@ -8779,7 +7786,6 @@ class detail_ExposureCompensator(builtins.object):
         .       @param mask Image mask
         """
         ...
-
     def feed(self, corners, images, masks) -> None:
         """
         .   @param corners Source image top-left corners
@@ -8788,33 +7794,27 @@ class detail_ExposureCompensator(builtins.object):
         .       to detect where image is)
         """
         ...
-
-    def getMatGains(self, [, arg1]) -> arg1:
+    def getMatGains(self, arg1=...) -> arg1:
         """
         .
         """
         ...
-
     def getUpdateGain(self) -> retval:
         """
         .
         """
         ...
-
     def setMatGains(self, arg1) -> None:
         """
         .
         """
         ...
-
     def setUpdateGain(self, b) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_ExtractArgsCallback(builtins.object):
     @staticmethod
@@ -8823,15 +7823,12 @@ class detail_ExtractArgsCallback(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_ExtractMetaCallback(builtins.object):
     @staticmethod
@@ -8840,15 +7837,12 @@ class detail_ExtractMetaCallback(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_FeatherBlender(detail_Blender):
     @staticmethod
@@ -8857,57 +7851,49 @@ class detail_FeatherBlender(detail_Blender):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def blend(self, dst, dst_mask) -> dst, dst_mask:
+    def blend(self, dst, dst_mask) -> Tuple[dst, dst_mask]:
         """
         .
         """
         ...
-
-    def createWeightMaps(self, masks, corners, weight_maps) -> retval, weight_maps:
+    def createWeightMaps(
+        self, masks, corners, weight_maps
+    ) -> Tuple[retval, weight_maps]:
         """
         .
         """
         ...
-
     def feed(self, img, mask, tl) -> None:
         """
         .
         """
         ...
-
     def prepare(self, dst_roi) -> None:
         """
         .
         """
         ...
-
     def setSharpness(self, val) -> None:
         """
         .
         """
         ...
-
     def sharpness(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_FeaturesMatcher(builtins.object):
     @staticmethod
@@ -8916,13 +7902,11 @@ class detail_FeaturesMatcher(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def apply(self, features1, features2) -> matches_info:
         """
         .   @overload
@@ -8931,8 +7915,7 @@ class detail_FeaturesMatcher(builtins.object):
         .       @param matches_info Found matches
         """
         ...
-
-    def apply2(self, features[, mask]) -> pairwise_matches:
+    def apply2(self, features, mask=...) -> pairwise_matches:
         """
         .   @brief Performs images matching.
         .
@@ -8945,21 +7928,17 @@ class detail_FeaturesMatcher(builtins.object):
         .       @sa detail::MatchesInfo
         """
         ...
-
     def collectGarbage(self) -> None:
         """
         .   @brief Frees unused memory allocated before if there is any.
         """
         ...
-
     def isThreadSafe(self) -> retval:
         """
         .   @return True, if it's possible to use the same matcher instance in parallel, false otherwise
         """
         ...
-
     ...
-
 
 class detail_GainCompensator(detail_ExposureCompensator):
     @staticmethod
@@ -8968,63 +7947,52 @@ class detail_GainCompensator(detail_ExposureCompensator):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def apply(self, index, corner, image, mask) -> image:
         """
         .
         """
         ...
-
-    def getMatGains(self, [, umv]) -> umv:
+    def getMatGains(self, umv=...) -> umv:
         """
         .
         """
         ...
-
     def getNrFeeds(self) -> retval:
         """
         .
         """
         ...
-
     def getSimilarityThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def setMatGains(self, umv) -> None:
         """
         .
         """
         ...
-
     def setNrFeeds(self, nr_feeds) -> None:
         """
         .
         """
         ...
-
     def setSimilarityThreshold(self, similarity_threshold) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_GraphCutSeamFinder(builtins.object):
     @staticmethod
@@ -9033,27 +8001,22 @@ class detail_GraphCutSeamFinder(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def find(self, src, corners, masks) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_HomographyBasedEstimator(detail_Estimator):
     @staticmethod
@@ -9062,21 +8025,17 @@ class detail_HomographyBasedEstimator(detail_Estimator):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_ImageFeatures(builtins.object):
     descriptors: ...
@@ -9093,28 +8052,23 @@ class detail_ImageFeatures(builtins.object):
     """
     img_size
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getKeypoints(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_MatchesInfo(builtins.object):
     H: ...
@@ -9141,34 +8095,28 @@ class detail_MatchesInfo(builtins.object):
     """
     src_img_idx
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getInliers(self) -> retval:
         """
         .
         """
         ...
-
     def getMatches(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_MultiBandBlender(detail_Blender):
     @staticmethod
@@ -9177,51 +8125,42 @@ class detail_MultiBandBlender(detail_Blender):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def blend(self, dst, dst_mask) -> dst, dst_mask:
+    def blend(self, dst, dst_mask) -> Tuple[dst, dst_mask]:
         """
         .
         """
         ...
-
     def feed(self, img, mask, tl) -> None:
         """
         .
         """
         ...
-
     def numBands(self) -> retval:
         """
         .
         """
         ...
-
     def prepare(self, dst_roi) -> None:
         """
         .
         """
         ...
-
     def setNumBands(self, val) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_NoBundleAdjuster(detail_BundleAdjusterBase):
     @staticmethod
@@ -9230,21 +8169,17 @@ class detail_NoBundleAdjuster(detail_BundleAdjusterBase):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_NoExposureCompensator(detail_ExposureCompensator):
     @staticmethod
@@ -9253,33 +8188,27 @@ class detail_NoExposureCompensator(detail_ExposureCompensator):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def apply(self, arg1, arg2, arg3, arg4) -> arg3:
         """
         .
         """
         ...
-
-    def getMatGains(self, [, umv]) -> umv:
+    def getMatGains(self, umv=...) -> umv:
         """
         .
         """
         ...
-
     def setMatGains(self, umv) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_NoSeamFinder(detail_SeamFinder):
     @staticmethod
@@ -9288,21 +8217,17 @@ class detail_NoSeamFinder(detail_SeamFinder):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def find(self, arg1, arg2, arg3) -> arg3:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_PairwiseSeamFinder(detail_SeamFinder):
     @staticmethod
@@ -9311,21 +8236,17 @@ class detail_PairwiseSeamFinder(detail_SeamFinder):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def find(self, src, corners, masks) -> masks:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_ProjectorBase(builtins.object):
     @staticmethod
@@ -9334,15 +8255,12 @@ class detail_ProjectorBase(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_SeamFinder(builtins.object):
     @staticmethod
@@ -9351,20 +8269,17 @@ class detail_SeamFinder(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def createDefault(type) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def find(self, src, corners, masks) -> masks:
         """
         .   @brief Estimates seams.
@@ -9374,9 +8289,7 @@ class detail_SeamFinder(builtins.object):
         .       @param masks Source image masks to update
         """
         ...
-
     ...
-
 
 class detail_SphericalProjector(detail_ProjectorBase):
     @staticmethod
@@ -9385,27 +8298,22 @@ class detail_SphericalProjector(detail_ProjectorBase):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def mapBackward(self, u, v, x, y) -> None:
         """
         .
         """
         ...
-
     def mapForward(self, x, y, u, v) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_Timelapser(builtins.object):
     @staticmethod
@@ -9414,40 +8322,33 @@ class detail_Timelapser(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def createDefault(type) -> retval:
         """
         .
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDst(self) -> retval:
         """
         .
         """
         ...
-
     def initialize(self, corners, sizes) -> None:
         """
         .
         """
         ...
-
     def process(self, img, mask, tl) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class detail_TimelapserCrop(detail_Timelapser):
     @staticmethod
@@ -9456,15 +8357,12 @@ class detail_TimelapserCrop(detail_Timelapser):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class detail_VoronoiSeamFinder(detail_PairwiseSeamFinder):
     @staticmethod
@@ -9473,21 +8371,17 @@ class detail_VoronoiSeamFinder(detail_PairwiseSeamFinder):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def find(self, src, corners, masks) -> masks:
         """
         .
         """
         ...
-
     ...
-
 
 class dnn_ClassificationModel(dnn_Model):
     @staticmethod
@@ -9496,27 +8390,22 @@ class dnn_ClassificationModel(dnn_Model):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def classify(self, frame) -> classId, conf:
+    def classify(self, frame) -> Tuple[classId, conf]:
         """
         .   @overload
         """
         ...
-
     ...
-
 
 class dnn_DetectionModel(dnn_Model):
     @staticmethod
@@ -9525,20 +8414,17 @@ class dnn_DetectionModel(dnn_Model):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def detect(self, frame[, confThreshold[, nmsThreshold]]) -> classIds, confidences, boxes:
+    def detect(self, frame, confThreshold=..., nmsThreshold=...) -> Tuple[s, boxes]:
         """
         .   @brief Given the @p input frame, create input blob, run net and return result detections.
         .             *  @param[in]  frame  The input image.
@@ -9549,14 +8435,12 @@ class dnn_DetectionModel(dnn_Model):
         .             *  @param[in] nmsThreshold A threshold used in non maximum suppression.
         """
         ...
-
     def getNmsAcrossClasses(self) -> retval:
         """
         .   * @brief Getter for nmsAcrossClasses. This variable defaults to false,
         .             * such that when non max suppression is used during the detect() function, it will do so only per-class
         """
         ...
-
     def setNmsAcrossClasses(self, value) -> retval:
         """
         .   * @brief nmsAcrossClasses defaults to false,
@@ -9565,9 +8449,7 @@ class dnn_DetectionModel(dnn_Model):
         .             * @param[in] value The new value for nmsAcrossClasses
         """
         ...
-
     ...
-
 
 class dnn_DictValue(builtins.object):
     @staticmethod
@@ -9576,57 +8458,47 @@ class dnn_DictValue(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def getIntValue(self, [, idx]) -> retval:
+    def getIntValue(self, idx=...) -> retval:
         """
         .
         """
         ...
-
-    def getRealValue(self, [, idx]) -> retval:
+    def getRealValue(self, idx=...) -> retval:
         """
         .
         """
         ...
-
-    def getStringValue(self, [, idx]) -> retval:
+    def getStringValue(self, idx=...) -> retval:
         """
         .
         """
         ...
-
     def isInt(self) -> retval:
         """
         .
         """
         ...
-
     def isReal(self) -> retval:
         """
         .
         """
         ...
-
     def isString(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class dnn_KeypointsModel(dnn_Model):
     @staticmethod
@@ -9635,20 +8507,17 @@ class dnn_KeypointsModel(dnn_Model):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def estimate(self, frame[, thresh]) -> retval:
+    def estimate(self, frame, thresh=...) -> retval:
         """
         .   @brief Given the @p input frame, create input blob, run net
         .             *  @param[in]  frame  The input image.
@@ -9657,9 +8526,7 @@ class dnn_KeypointsModel(dnn_Model):
         .             *
         """
         ...
-
     ...
-
 
 class dnn_Layer(Algorithm):
     blobs: ...
@@ -9681,21 +8548,18 @@ class dnn_Layer(Algorithm):
     """
     type
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def finalize(self, inputs[, outputs]) -> outputs:
+    def finalize(self, inputs, outputs=...) -> outputs:
         """
         .   @brief Computes and sets internal parameters according to inputs, outputs and blobs.
         .            *  @param[in]  inputs  vector of already allocated input blobs
@@ -9705,23 +8569,19 @@ class dnn_Layer(Algorithm):
         .            * and before inferencing.
         """
         ...
-
     def outputNameToIndex(self, outputName) -> retval:
         """
         .   @brief Returns index of output blob in output array.
         .            *  @see inputNameToIndex()
         """
         ...
-
-    def run(self, inputs, internals[, outputs]) -> outputs, internals:
+    def run(self, inputs, internals, outputs=...) -> Tuple[outputs, internals]:
         """
         .   @brief Allocates layer and computes output.
         .            *  @deprecated This method will be removed in the future release.
         """
         ...
-
     ...
-
 
 class dnn_Model(builtins.object):
     @staticmethod
@@ -9730,42 +8590,38 @@ class dnn_Model(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def predict(self, frame[, outs]) -> outs:
+    def predict(self, frame, outs=...) -> outs:
         """
         .   @brief Given the @p input frame, create input blob, run net and return the output @p blobs.
         .             *  @param[in]  frame  The input image.
         .             *  @param[out] outs Allocated output blobs, which will store results of the computation.
         """
         ...
-
     def setInputCrop(self, crop) -> retval:
         """
         .   @brief Set flag crop for frame.
         .             *  @param[in] crop Flag which indicates whether image will be cropped after resize or not.
         """
         ...
-
     def setInputMean(self, mean) -> retval:
         """
         .   @brief Set mean value for frame.
         .             *  @param[in] mean Scalar with mean values which are subtracted from channels.
         """
         ...
-
-    def setInputParams(self, [, scale[, size[, mean[, swapRB[, crop]]]]]) -> None:
+    def setInputParams(
+        self, scale=..., size=..., mean=..., swapRB=..., crop=...
+    ) -> None:
         """
         .   @brief Set preprocessing parameters for frame.
         .            *  @param[in] size New input size.
@@ -9776,14 +8632,12 @@ class dnn_Model(builtins.object):
         .            *  blob(n, c, y, x) = scale * resize( frame(y, x, c) ) - mean(c) )
         """
         ...
-
     def setInputScale(self, scale) -> retval:
         """
         .   @brief Set scalefactor value for frame.
         .             *  @param[in] scale Multiplier for frame values.
         """
         ...
-
     def setInputSize(self, size) -> retval:
         """
         .   @brief Set input size for frame.
@@ -9798,28 +8652,23 @@ class dnn_Model(builtins.object):
         .            *  @param[in] height New input height.
         """
         ...
-
     def setInputSwapRB(self, swapRB) -> retval:
         """
         .   @brief Set flag swapRB for frame.
         .             *  @param[in] swapRB Flag which indicates that swap first and last channels.
         """
         ...
-
     def setPreferableBackend(self, backendId) -> retval:
         """
         .
         """
         ...
-
     def setPreferableTarget(self, targetId) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class dnn_Net(builtins.object):
     @staticmethod
@@ -9828,7 +8677,6 @@ class dnn_Net(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def readFromModelOptimizer(xml, bin) -> retval:
         """
@@ -9847,19 +8695,16 @@ class dnn_Net(builtins.object):
         .            *  @returns Net object.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def connect(self, outPin, inpPin) -> None:
         """
         .   @brief Connects output of the first layer to input of the second layer.
@@ -9876,7 +8721,6 @@ class dnn_Net(builtins.object):
         .            *  @see setNetInputs(), Layer::inputNameToIndex(), Layer::outputNameToIndex()
         """
         ...
-
     def dump(self) -> retval:
         """
         .   @brief Dump net to String
@@ -9884,7 +8728,6 @@ class dnn_Net(builtins.object):
         .            *  Call method after setInput(). To see correct backend, target and fusion run after forward().
         """
         ...
-
     def dumpToFile(self, path) -> None:
         """
         .   @brief Dump net structure, hyperparameters, backend, target and fusion to dot file
@@ -9892,21 +8735,18 @@ class dnn_Net(builtins.object):
         .            *  @see dump()
         """
         ...
-
     def empty(self) -> retval:
         """
         .   Returns true if there are no layers in the network.
         """
         ...
-
     def enableFusion(self, fusion) -> None:
         """
         .   @brief Enables or disables layer fusion in the network.
         .            * @param fusion true to enable the fusion, false to disable. The fusion is enabled by default.
         """
         ...
-
-    def forward(self, [, outputName]) -> retval:
+    def forward(self, outputName=...) -> retval:
         """
         .   @brief Runs forward pass to compute output of layer with name @p outputName.
         .            *  @param outputName name for layer which output is needed to get
@@ -9915,7 +8755,7 @@ class dnn_Net(builtins.object):
 
 
 
-        forward([, outputBlobs[, outputName]]) -> outputBlobs
+        forward(outputBlobs=..., outputName=...) -> outputBlobs
         .   @brief Runs forward pass to compute output of layer with name @p outputName.
         .            *  @param outputBlobs contains all output blobs for specified layer.
         .            *  @param outputName name for layer which output is needed to get
@@ -9923,13 +8763,12 @@ class dnn_Net(builtins.object):
 
 
 
-        forward(outBlobNames[, outputBlobs]) -> outputBlobs
+        forward(outBlobNames, outputBlobs=...) -> outputBlobs
         .   @brief Runs forward pass to compute outputs of layers listed in @p outBlobNames.
         .            *  @param outputBlobs contains blobs for first outputs of specified layers.
         .            *  @param outBlobNames names for layers which outputs are needed to get
         """
         ...
-
     def forwardAndRetrieve(self, outBlobNames) -> outputBlobs:
         """
         .   @brief Runs forward pass to compute outputs of layers listed in @p outBlobNames.
@@ -9937,8 +8776,7 @@ class dnn_Net(builtins.object):
         .            *  @param outBlobNames names for layers which outputs are needed to get
         """
         ...
-
-    def forwardAsync(self, [, outputName]) -> retval:
+    def forwardAsync(self, outputName=...) -> retval:
         """
         .   @brief Runs forward pass to compute output of layer with name @p outputName.
         .            *  @param outputName name for layer which output is needed to get
@@ -9948,7 +8786,6 @@ class dnn_Net(builtins.object):
         .            *  dnn::DNN_BACKEND_INFERENCE_ENGINE backend is required.
         """
         ...
-
     def getFLOPS(self, netInputShapes) -> retval:
         """
         .   @brief Computes FLOP for whole loaded model with specified input shapes.
@@ -9971,33 +8808,28 @@ class dnn_Net(builtins.object):
         .   @overload
         """
         ...
-
     def getLayer(self, layerId) -> retval:
         """
         .   @brief Returns pointer to layer with specified id or name which the network use.
         """
         ...
-
     def getLayerId(self, layer) -> retval:
         """
         .   @brief Converts string name of the layer to the integer identifier.
         .            *  @returns id of the layer, or -1 if the layer wasn't found.
         """
         ...
-
     def getLayerNames(self) -> retval:
         """
         .
         """
         ...
-
     def getLayerTypes(self) -> layersTypes:
         """
         .   @brief Returns list of types for layer used in model.
         .            * @param layersTypes output parameter for returning types.
         """
         ...
-
     def getLayersCount(self, layerType) -> retval:
         """
         .   @brief Returns count of layers of specified type.
@@ -10005,8 +8837,7 @@ class dnn_Net(builtins.object):
         .            * @returns count of layers
         """
         ...
-
-    def getLayersShapes(self, netInputShapes) -> layersIds, inLayersShapes, outLayersShapes:
+    def getLayersShapes(self, netInputShapes) -> Tuple[s, outLayersShapes]:
         """
         .   @brief Returns input and output shapes for all layers in loaded model;
         .            *  preliminary inferencing isn't necessary.
@@ -10023,8 +8854,7 @@ class dnn_Net(builtins.object):
         .   @overload
         """
         ...
-
-    def getMemoryConsumption(self, netInputShape) -> weights, blobs:
+    def getMemoryConsumption(self, netInputShape) -> Tuple[weights, blobs]:
         """
         .   @overload
 
@@ -10039,8 +8869,7 @@ class dnn_Net(builtins.object):
         .   @overload
         """
         ...
-
-    def getParam(self, layer[, numParam]) -> retval:
+    def getParam(self, layer, numParam=...) -> retval:
         """
         .   @brief Returns parameter blob of the layer.
         .            *  @param layer name or id of the layer.
@@ -10048,8 +8877,7 @@ class dnn_Net(builtins.object):
         .            *  @see Layer::blobs
         """
         ...
-
-    def getPerfProfile(self) -> retval, timings:
+    def getPerfProfile(self) -> Tuple[retval, timings]:
         """
         .   @brief Returns overall time for inference and timings (in ticks) for layers.
         .            * Indexes in returned vector correspond to layers ids. Some layers can be fused with others,
@@ -10058,19 +8886,16 @@ class dnn_Net(builtins.object):
         .            * @return overall ticks for model inference.
         """
         ...
-
     def getUnconnectedOutLayers(self) -> retval:
         """
         .   @brief Returns indexes of layers with unconnected outputs.
         """
         ...
-
     def getUnconnectedOutLayersNames(self) -> retval:
         """
         .   @brief Returns names of layers with unconnected outputs.
         """
         ...
-
     def setHalideScheduler(self, scheduler) -> None:
         """
         .   * @brief Compile Halide layers.
@@ -10082,8 +8907,7 @@ class dnn_Net(builtins.object):
         .            * or if no manual scheduling used at all, automatic scheduling will be applied.
         """
         ...
-
-    def setInput(self, blob[, name[, scalefactor[, mean]]]) -> None:
+    def setInput(self, blob, name=..., scalefactor=..., mean=...) -> None:
         """
         .   @brief Sets the new input value for the network
         .            *  @param blob        A new blob. Should have CV_32F or CV_8U depth.
@@ -10097,13 +8921,11 @@ class dnn_Net(builtins.object):
         .            * \f[input(n,c,h,w) = scalefactor \times (blob(n,c,h,w) - mean_c)\f]
         """
         ...
-
     def setInputShape(self, inputName, shape) -> None:
         """
         .   @brief Specify shape of network input.
         """
         ...
-
     def setInputsNames(self, inputBlobNames) -> None:
         """
         .   @brief Sets outputs names of the network input pseudo layer.
@@ -10114,7 +8936,6 @@ class dnn_Net(builtins.object):
         .            * As any other layer, this layer can label its outputs and this function provides an easy way to do this.
         """
         ...
-
     def setParam(self, layer, numParam, blob) -> None:
         """
         .   @brief Sets the new value for the learned param of the layer.
@@ -10126,7 +8947,6 @@ class dnn_Net(builtins.object):
         .            *  then the following forward pass may fail.
         """
         ...
-
     def setPreferableBackend(self, backendId) -> None:
         """
         .   * @brief Ask network to use specific computation backend where it supported.
@@ -10137,7 +8957,6 @@ class dnn_Net(builtins.object):
         .            * means DNN_BACKEND_INFERENCE_ENGINE. Otherwise it equals to DNN_BACKEND_OPENCV.
         """
         ...
-
     def setPreferableTarget(self, targetId) -> None:
         """
         .   * @brief Ask network to make computations on specific target device.
@@ -10157,9 +8976,7 @@ class dnn_Net(builtins.object):
         .            * | DNN_TARGET_HDDL        |                    |                            + |                    |                   |
         """
         ...
-
     ...
-
 
 class dnn_SegmentationModel(dnn_Model):
     @staticmethod
@@ -10168,29 +8985,24 @@ class dnn_SegmentationModel(dnn_Model):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def segment(self, frame[, mask]) -> mask:
+    def segment(self, frame, mask=...) -> mask:
         """
         .   @brief Given the @p input frame, create input blob, run net
         .             *  @param[in]  frame  The input image.
         .             *  @param[out] mask Allocated class prediction for each pixel
         """
         ...
-
     ...
-
 
 class dnn_TextDetectionModel(dnn_Model):
     @staticmethod
@@ -10199,14 +9011,12 @@ class dnn_TextDetectionModel(dnn_Model):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def detect(self, frame) -> detections, confidences:
+    def detect(self, frame) -> Tuple[detections, confidences]:
         """
         .   @brief Performs detection
         .        *
@@ -10232,8 +9042,7 @@ class dnn_TextDetectionModel(dnn_Model):
         .   @overload
         """
         ...
-
-    def detectTextRectangles(self, frame) -> detections, confidences:
+    def detectTextRectangles(self, frame) -> Tuple[detections, confidences]:
         """
         .   @brief Performs detection
         .        *
@@ -10253,9 +9062,7 @@ class dnn_TextDetectionModel(dnn_Model):
         .   @overload
         """
         ...
-
     ...
-
 
 class dnn_TextDetectionModel_DB(dnn_TextDetectionModel):
     @staticmethod
@@ -10264,69 +9071,57 @@ class dnn_TextDetectionModel_DB(dnn_TextDetectionModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getBinaryThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def getMaxCandidates(self) -> retval:
         """
         .
         """
         ...
-
     def getPolygonThreshold(self) -> retval:
         """
         .
         """
         ...
-
     def getUnclipRatio(self) -> retval:
         """
         .
         """
         ...
-
     def setBinaryThreshold(self, binaryThreshold) -> retval:
         """
         .
         """
         ...
-
     def setMaxCandidates(self, maxCandidates) -> retval:
         """
         .
         """
         ...
-
     def setPolygonThreshold(self, polygonThreshold) -> retval:
         """
         .
         """
         ...
-
     def setUnclipRatio(self, unclipRatio) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class dnn_TextDetectionModel_EAST(dnn_TextDetectionModel):
     @staticmethod
@@ -10335,47 +9130,39 @@ class dnn_TextDetectionModel_EAST(dnn_TextDetectionModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getConfidenceThreshold(self) -> retval:
         """
         .   * @brief Get the detection confidence threshold
         """
         ...
-
     def getNMSThreshold(self) -> retval:
         """
         .   * @brief Get the detection confidence threshold
         """
         ...
-
     def setConfidenceThreshold(self, confThreshold) -> retval:
         """
         .   * @brief Set the detection confidence threshold
         .        * @param[in] confThreshold A threshold used to filter boxes by confidences
         """
         ...
-
     def setNMSThreshold(self, nmsThreshold) -> retval:
         """
         .   * @brief Set the detection NMS filter threshold
         .        * @param[in] nmsThreshold A threshold used in non maximum suppression
         """
         ...
-
     ...
-
 
 class dnn_TextRecognitionModel(dnn_Model):
     @staticmethod
@@ -10384,33 +9171,28 @@ class dnn_TextRecognitionModel(dnn_Model):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getDecodeType(self) -> retval:
         """
         .   * @brief Get the decoding method
         .        * @return the decoding method
         """
         ...
-
     def getVocabulary(self) -> retval:
         """
         .   * @brief Get the vocabulary for recognition.
         .        * @return vocabulary the associated vocabulary
         """
         ...
-
     def recognize(self, frame) -> retval:
         """
         .   * @brief Given the @p input frame, create input blob, run net and return recognition result
@@ -10426,23 +9208,19 @@ class dnn_TextRecognitionModel(dnn_Model):
         .        * @param[out] results A set of text recognition results.
         """
         ...
-
     def setDecodeType(self, decodeType) -> retval:
         """
         .   * @brief Set the decoding method of translating the network output into string
         .        * @param[in] decodeType The decoding method of translating the network output into string: {'CTC-greedy': greedy decoding for the output of CTC-based methods}
         """
         ...
-
     def setVocabulary(self, vocabulary) -> retval:
         """
         .   * @brief Set the vocabulary for recognition.
         .        * @param[in] vocabulary the associated vocabulary of the network.
         """
         ...
-
     ...
-
 
 class error(builtins.Exception):
     """
@@ -10475,7 +9253,6 @@ class error(builtins.Exception):
 
     ...
 
-
 class flann_Index(builtins.object):
     @staticmethod
     def __new__(*args, **kwargs):
@@ -10483,69 +9260,61 @@ class flann_Index(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def build(self, features, params[, distType]) -> None:
+    def build(self, features, params, distType=...) -> None:
         """
         .
         """
         ...
-
     def getAlgorithm(self) -> retval:
         """
         .
         """
         ...
-
     def getDistance(self) -> retval:
         """
         .
         """
         ...
-
-    def knnSearch(self, query, knn[, indices[, dists[, params]]]) -> indices, dists:
+    def knnSearch(
+        self, query, knn, indices=..., dists=..., params=...
+    ) -> Tuple[indices, dists]:
         """
         .
         """
         ...
-
     def load(self, features, filename) -> retval:
         """
         .
         """
         ...
-
-    def radiusSearch(self, query, radius, maxResults[, indices[, dists[, params]]]) -> retval, indices, dists:
+    def radiusSearch(
+        self, query, radius, maxResults, indices=..., dists=..., params=...
+    ) -> Tuple[s, dists]:
         """
         .
         """
         ...
-
     def release(self) -> None:
         """
         .
         """
         ...
-
     def save(self, filename) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class gapi_GKernelPackage(builtins.object):
     @staticmethod
@@ -10554,15 +9323,12 @@ class gapi_GKernelPackage(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class gapi_GNetPackage(builtins.object):
     @staticmethod
@@ -10571,21 +9337,17 @@ class gapi_GNetPackage(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class gapi_ie_PyParams(builtins.object):
     @staticmethod
@@ -10594,15 +9356,12 @@ class gapi_ie_PyParams(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class gapi_wip_GOutputs(builtins.object):
     @staticmethod
@@ -10611,39 +9370,32 @@ class gapi_wip_GOutputs(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getGArray(self, type) -> retval:
         """
         .
         """
         ...
-
     def getGMat(self) -> retval:
         """
         .
         """
         ...
-
     def getGOpaque(self, type) -> retval:
         """
         .
         """
         ...
-
     def getGScalar(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class gapi_wip_IStreamSource(builtins.object):
     @staticmethod
@@ -10652,15 +9404,12 @@ class gapi_wip_IStreamSource(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class ml_ANN_MLP(ml_StatModel):
     @staticmethod
@@ -10669,7 +9418,6 @@ class ml_ANN_MLP(ml_StatModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -10679,7 +9427,6 @@ class ml_ANN_MLP(ml_StatModel):
         .       Note that the train method has optional flags: ANN_MLP::TrainFlags.
         """
         ...
-
     @staticmethod
     def load(filepath) -> retval:
         """
@@ -10691,49 +9438,41 @@ class ml_ANN_MLP(ml_StatModel):
         .        * @param filepath path to serialized ANN
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getAnnealCoolingRatio(self) -> retval:
         """
         .   @see setAnnealCoolingRatio
         """
         ...
-
     def getAnnealFinalT(self) -> retval:
         """
         .   @see setAnnealFinalT
         """
         ...
-
     def getAnnealInitialT(self) -> retval:
         """
         .   @see setAnnealInitialT
         """
         ...
-
     def getAnnealItePerStep(self) -> retval:
         """
         .   @see setAnnealItePerStep
         """
         ...
-
     def getBackpropMomentumScale(self) -> retval:
         """
         .   @see setBackpropMomentumScale
         """
         ...
-
     def getBackpropWeightScale(self) -> retval:
         """
         .   @see setBackpropWeightScale
         """
         ...
-
     def getLayerSizes(self) -> retval:
         """
         .   Integer vector specifying the number of neurons in each layer including the input and output layers.
@@ -10742,56 +9481,47 @@ class ml_ANN_MLP(ml_StatModel):
         .   @sa setLayerSizes
         """
         ...
-
     def getRpropDW0(self) -> retval:
         """
         .   @see setRpropDW0
         """
         ...
-
     def getRpropDWMax(self) -> retval:
         """
         .   @see setRpropDWMax
         """
         ...
-
     def getRpropDWMin(self) -> retval:
         """
         .   @see setRpropDWMin
         """
         ...
-
     def getRpropDWMinus(self) -> retval:
         """
         .   @see setRpropDWMinus
         """
         ...
-
     def getRpropDWPlus(self) -> retval:
         """
         .   @see setRpropDWPlus
         """
         ...
-
     def getTermCriteria(self) -> retval:
         """
         .   @see setTermCriteria
         """
         ...
-
     def getTrainMethod(self) -> retval:
         """
         .   Returns current training method
         """
         ...
-
     def getWeights(self, layerIdx) -> retval:
         """
         .
         """
         ...
-
-    def setActivationFunction(self, type[, param1[, param2]]) -> None:
+    def setActivationFunction(self, type, param1=..., param2=...) -> None:
         """
         .   Initialize the activation function for each neuron.
         .       Currently the default and the only fully supported activation function is ANN_MLP::SIGMOID_SYM.
@@ -10800,43 +9530,36 @@ class ml_ANN_MLP(ml_StatModel):
         .       @param param2 The second parameter of the activation function, \f$\beta\f$. Default value is 0.
         """
         ...
-
     def setAnnealCoolingRatio(self, val) -> None:
         """
         .   @copybrief getAnnealCoolingRatio @see getAnnealCoolingRatio
         """
         ...
-
     def setAnnealFinalT(self, val) -> None:
         """
         .   @copybrief getAnnealFinalT @see getAnnealFinalT
         """
         ...
-
     def setAnnealInitialT(self, val) -> None:
         """
         .   @copybrief getAnnealInitialT @see getAnnealInitialT
         """
         ...
-
     def setAnnealItePerStep(self, val) -> None:
         """
         .   @copybrief getAnnealItePerStep @see getAnnealItePerStep
         """
         ...
-
     def setBackpropMomentumScale(self, val) -> None:
         """
         .   @copybrief getBackpropMomentumScale @see getBackpropMomentumScale
         """
         ...
-
     def setBackpropWeightScale(self, val) -> None:
         """
         .   @copybrief getBackpropWeightScale @see getBackpropWeightScale
         """
         ...
-
     def setLayerSizes(self, _layer_sizes) -> None:
         """
         .   Integer vector specifying the number of neurons in each layer including the input and output layers.
@@ -10845,44 +9568,37 @@ class ml_ANN_MLP(ml_StatModel):
         .   @sa getLayerSizes
         """
         ...
-
     def setRpropDW0(self, val) -> None:
         """
         .   @copybrief getRpropDW0 @see getRpropDW0
         """
         ...
-
     def setRpropDWMax(self, val) -> None:
         """
         .   @copybrief getRpropDWMax @see getRpropDWMax
         """
         ...
-
     def setRpropDWMin(self, val) -> None:
         """
         .   @copybrief getRpropDWMin @see getRpropDWMin
         """
         ...
-
     def setRpropDWMinus(self, val) -> None:
         """
         .   @copybrief getRpropDWMinus @see getRpropDWMinus
         """
         ...
-
     def setRpropDWPlus(self, val) -> None:
         """
         .   @copybrief getRpropDWPlus @see getRpropDWPlus
         """
         ...
-
     def setTermCriteria(self, val) -> None:
         """
         .   @copybrief getTermCriteria @see getTermCriteria
         """
         ...
-
-    def setTrainMethod(self, method[, param1[, param2]]) -> None:
+    def setTrainMethod(self, method, param1=..., param2=...) -> None:
         """
         .   Sets training method and common parameters.
         .       @param method Default value is ANN_MLP::RPROP. See ANN_MLP::TrainingMethods.
@@ -10890,9 +9606,7 @@ class ml_ANN_MLP(ml_StatModel):
         .       @param param2 passed to setRpropDWMin for ANN_MLP::RPROP and to setBackpropMomentumScale for ANN_MLP::BACKPROP and to finalT for ANN_MLP::ANNEAL.
         """
         ...
-
     ...
-
 
 class ml_Boost(ml_DTrees):
     @staticmethod
@@ -10901,7 +9615,6 @@ class ml_Boost(ml_DTrees):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -10909,9 +9622,8 @@ class ml_Boost(ml_DTrees):
         .   Use StatModel::train to train the model, Algorithm::load\<Boost\>(filename) to load the pre-trained model.
         """
         ...
-
     @staticmethod
-    def load(filepath[, nodeName]) -> retval:
+    def load(filepath, nodeName=...) -> retval:
         """
         .   @brief Loads and creates a serialized Boost from a file
         .        *
@@ -10923,51 +9635,42 @@ class ml_Boost(ml_DTrees):
         .        * @param nodeName name of node containing the classifier
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getBoostType(self) -> retval:
         """
         .   @see setBoostType
         """
         ...
-
     def getWeakCount(self) -> retval:
         """
         .   @see setWeakCount
         """
         ...
-
     def getWeightTrimRate(self) -> retval:
         """
         .   @see setWeightTrimRate
         """
         ...
-
     def setBoostType(self, val) -> None:
         """
         .   @copybrief getBoostType @see getBoostType
         """
         ...
-
     def setWeakCount(self, val) -> None:
         """
         .   @copybrief getWeakCount @see getWeakCount
         """
         ...
-
     def setWeightTrimRate(self, val) -> None:
         """
         .   @copybrief getWeightTrimRate @see getWeightTrimRate
         """
         ...
-
     ...
-
 
 class ml_DTrees(ml_StatModel):
     @staticmethod
@@ -10976,7 +9679,6 @@ class ml_DTrees(ml_StatModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -10987,9 +9689,8 @@ class ml_DTrees(ml_StatModel):
         .       file using Algorithm::load\<DTrees\>(filename).
         """
         ...
-
     @staticmethod
-    def load(filepath[, nodeName]) -> retval:
+    def load(filepath, nodeName=...) -> retval:
         """
         .   @brief Loads and creates a serialized DTrees from a file
         .        *
@@ -11001,123 +9702,102 @@ class ml_DTrees(ml_StatModel):
         .        * @param nodeName name of node containing the classifier
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getCVFolds(self) -> retval:
         """
         .   @see setCVFolds
         """
         ...
-
     def getMaxCategories(self) -> retval:
         """
         .   @see setMaxCategories
         """
         ...
-
     def getMaxDepth(self) -> retval:
         """
         .   @see setMaxDepth
         """
         ...
-
     def getMinSampleCount(self) -> retval:
         """
         .   @see setMinSampleCount
         """
         ...
-
     def getPriors(self) -> retval:
         """
         .   @see setPriors
         """
         ...
-
     def getRegressionAccuracy(self) -> retval:
         """
         .   @see setRegressionAccuracy
         """
         ...
-
     def getTruncatePrunedTree(self) -> retval:
         """
         .   @see setTruncatePrunedTree
         """
         ...
-
     def getUse1SERule(self) -> retval:
         """
         .   @see setUse1SERule
         """
         ...
-
     def getUseSurrogates(self) -> retval:
         """
         .   @see setUseSurrogates
         """
         ...
-
     def setCVFolds(self, val) -> None:
         """
         .   @copybrief getCVFolds @see getCVFolds
         """
         ...
-
     def setMaxCategories(self, val) -> None:
         """
         .   @copybrief getMaxCategories @see getMaxCategories
         """
         ...
-
     def setMaxDepth(self, val) -> None:
         """
         .   @copybrief getMaxDepth @see getMaxDepth
         """
         ...
-
     def setMinSampleCount(self, val) -> None:
         """
         .   @copybrief getMinSampleCount @see getMinSampleCount
         """
         ...
-
     def setPriors(self, val) -> None:
         """
         .   @copybrief getPriors @see getPriors
         """
         ...
-
     def setRegressionAccuracy(self, val) -> None:
         """
         .   @copybrief getRegressionAccuracy @see getRegressionAccuracy
         """
         ...
-
     def setTruncatePrunedTree(self, val) -> None:
         """
         .   @copybrief getTruncatePrunedTree @see getTruncatePrunedTree
         """
         ...
-
     def setUse1SERule(self, val) -> None:
         """
         .   @copybrief getUse1SERule @see getUse1SERule
         """
         ...
-
     def setUseSurrogates(self, val) -> None:
         """
         .   @copybrief getUseSurrogates @see getUseSurrogates
         """
         ...
-
     ...
-
 
 class ml_EM(ml_StatModel):
     @staticmethod
@@ -11126,7 +9806,6 @@ class ml_EM(ml_StatModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -11135,9 +9814,8 @@ class ml_EM(ml_StatModel):
         .       can use one of the EM::train\* methods or load it from file using Algorithm::load\<EM\>(filename).
         """
         ...
-
     @staticmethod
-    def load(filepath[, nodeName]) -> retval:
+    def load(filepath, nodeName=...) -> retval:
         """
         .   @brief Loads and creates a serialized EM from a file
         .        *
@@ -11149,26 +9827,22 @@ class ml_EM(ml_StatModel):
         .        * @param nodeName name of node containing the classifier
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getClustersNumber(self) -> retval:
         """
         .   @see setClustersNumber
         """
         ...
-
     def getCovarianceMatrixType(self) -> retval:
         """
         .   @see setCovarianceMatrixType
         """
         ...
-
-    def getCovs(self, [, covs]) -> covs:
+    def getCovs(self, covs=...) -> covs:
         """
         .   @brief Returns covariation matrices
         .
@@ -11176,7 +9850,6 @@ class ml_EM(ml_StatModel):
         .       each matrix is a square floating-point matrix NxN, where N is the space dimensionality.
         """
         ...
-
     def getMeans(self) -> retval:
         """
         .   @brief Returns the cluster centers (means of the Gaussian mixture)
@@ -11185,13 +9858,11 @@ class ml_EM(ml_StatModel):
         .       equal to the space dimensionality.
         """
         ...
-
     def getTermCriteria(self) -> retval:
         """
         .   @see setTermCriteria
         """
         ...
-
     def getWeights(self) -> retval:
         """
         .   @brief Returns weights of the mixtures
@@ -11199,8 +9870,7 @@ class ml_EM(ml_StatModel):
         .       Returns vector with the number of elements equal to the number of mixtures.
         """
         ...
-
-    def predict(self, samples[, results[, flags]]) -> retval, results:
+    def predict(self, samples, results=..., flags=...) -> Tuple[retval, results]:
         """
         .   @brief Returns posterior probabilities for the provided samples
         .
@@ -11210,8 +9880,7 @@ class ml_EM(ml_StatModel):
         .       @param flags This parameter will be ignored
         """
         ...
-
-    def predict2(self, sample[, probs]) -> retval, probs:
+    def predict2(self, sample, probs=...) -> Tuple[retval, probs]:
         """
         .   @brief Returns a likelihood logarithm value and an index of the most probable mixture component
         .       for the given sample.
@@ -11226,26 +9895,31 @@ class ml_EM(ml_StatModel):
         .       sample.
         """
         ...
-
     def setClustersNumber(self, val) -> None:
         """
         .   @copybrief getClustersNumber @see getClustersNumber
         """
         ...
-
     def setCovarianceMatrixType(self, val) -> None:
         """
         .   @copybrief getCovarianceMatrixType @see getCovarianceMatrixType
         """
         ...
-
     def setTermCriteria(self, val) -> None:
         """
         .   @copybrief getTermCriteria @see getTermCriteria
         """
         ...
-
-    def trainE(self, samples, means0[, covs0[, weights0[, logLikelihoods[, labels[, probs]]]]]) -> retval, logLikelihoods, labels, probs:
+    def trainE(
+        self,
+        samples,
+        means0,
+        covs0=...,
+        weights0=...,
+        logLikelihoods=...,
+        labels=...,
+        probs=...,
+    ) -> Tuple[labels, probs]:
         """
         .   @brief Estimate the Gaussian mixture parameters from a samples set.
         .
@@ -11275,8 +9949,9 @@ class ml_EM(ml_StatModel):
         .           CV_64FC1 type.
         """
         ...
-
-    def trainEM(self, samples[, logLikelihoods[, labels[, probs]]]) -> retval, logLikelihoods, labels, probs:
+    def trainEM(
+        self, samples, logLikelihoods=..., labels=..., probs=...
+    ) -> Tuple[labels, probs]:
         """
         .   @brief Estimate the Gaussian mixture parameters from a samples set.
         .
@@ -11307,8 +9982,9 @@ class ml_EM(ml_StatModel):
         .           CV_64FC1 type.
         """
         ...
-
-    def trainM(self, samples, probs0[, logLikelihoods[, labels[, probs]]]) -> retval, logLikelihoods, labels, probs:
+    def trainM(
+        self, samples, probs0, logLikelihoods=..., labels=..., probs=...
+    ) -> Tuple[labels, probs]:
         """
         .   @brief Estimate the Gaussian mixture parameters from a samples set.
         .
@@ -11329,9 +10005,7 @@ class ml_EM(ml_StatModel):
         .           CV_64FC1 type.
         """
         ...
-
     ...
-
 
 class ml_KNearest(ml_StatModel):
     @staticmethod
@@ -11340,7 +10014,6 @@ class ml_KNearest(ml_StatModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -11349,7 +10022,6 @@ class ml_KNearest(ml_StatModel):
         .       The static method creates empty %KNearest classifier. It should be then trained using StatModel::train method.
         """
         ...
-
     @staticmethod
     def load(filepath) -> retval:
         """
@@ -11361,14 +10033,14 @@ class ml_KNearest(ml_StatModel):
         .        * @param filepath path to serialized KNearest
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def findNearest(self, samples, k[, results[, neighborResponses[, dist]]]) -> retval, results, neighborResponses, dist:
+    def findNearest(
+        self, samples, k, results=..., neighborResponses=..., dist=...
+    ) -> Tuple[neighborResponses, dist]:
         """
         .   @brief Finds the neighbors and predicts responses for input vectors.
         .
@@ -11397,57 +10069,47 @@ class ml_KNearest(ml_StatModel):
         .       The function is parallelized with the TBB library.
         """
         ...
-
     def getAlgorithmType(self) -> retval:
         """
         .   @see setAlgorithmType
         """
         ...
-
     def getDefaultK(self) -> retval:
         """
         .   @see setDefaultK
         """
         ...
-
     def getEmax(self) -> retval:
         """
         .   @see setEmax
         """
         ...
-
     def getIsClassifier(self) -> retval:
         """
         .   @see setIsClassifier
         """
         ...
-
     def setAlgorithmType(self, val) -> None:
         """
         .   @copybrief getAlgorithmType @see getAlgorithmType
         """
         ...
-
     def setDefaultK(self, val) -> None:
         """
         .   @copybrief getDefaultK @see getDefaultK
         """
         ...
-
     def setEmax(self, val) -> None:
         """
         .   @copybrief getEmax @see getEmax
         """
         ...
-
     def setIsClassifier(self, val) -> None:
         """
         .   @copybrief getIsClassifier @see getIsClassifier
         """
         ...
-
     ...
-
 
 class ml_LogisticRegression(ml_StatModel):
     @staticmethod
@@ -11456,7 +10118,6 @@ class ml_LogisticRegression(ml_StatModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -11465,9 +10126,8 @@ class ml_LogisticRegression(ml_StatModel):
         .       Creates Logistic Regression model with parameters given.
         """
         ...
-
     @staticmethod
-    def load(filepath[, nodeName]) -> retval:
+    def load(filepath, nodeName=...) -> retval:
         """
         .   @brief Loads and creates a serialized LogisticRegression from a file
         .        *
@@ -11479,49 +10139,41 @@ class ml_LogisticRegression(ml_StatModel):
         .        * @param nodeName name of node containing the classifier
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getIterations(self) -> retval:
         """
         .   @see setIterations
         """
         ...
-
     def getLearningRate(self) -> retval:
         """
         .   @see setLearningRate
         """
         ...
-
     def getMiniBatchSize(self) -> retval:
         """
         .   @see setMiniBatchSize
         """
         ...
-
     def getRegularization(self) -> retval:
         """
         .   @see setRegularization
         """
         ...
-
     def getTermCriteria(self) -> retval:
         """
         .   @see setTermCriteria
         """
         ...
-
     def getTrainMethod(self) -> retval:
         """
         .   @see setTrainMethod
         """
         ...
-
     def get_learnt_thetas(self) -> retval:
         """
         .   @brief This function returns the trained parameters arranged across rows.
@@ -11530,8 +10182,7 @@ class ml_LogisticRegression(ml_StatModel):
         .       the Logistic Regression as a matrix of type CV_32F.
         """
         ...
-
-    def predict(self, samples[, results[, flags]]) -> retval, results:
+    def predict(self, samples, results=..., flags=...) -> Tuple[retval, results]:
         """
         .   @brief Predicts responses for input samples and returns a float type.
         .
@@ -11541,45 +10192,37 @@ class ml_LogisticRegression(ml_StatModel):
         .       @param flags Not used.
         """
         ...
-
     def setIterations(self, val) -> None:
         """
         .   @copybrief getIterations @see getIterations
         """
         ...
-
     def setLearningRate(self, val) -> None:
         """
         .   @copybrief getLearningRate @see getLearningRate
         """
         ...
-
     def setMiniBatchSize(self, val) -> None:
         """
         .   @copybrief getMiniBatchSize @see getMiniBatchSize
         """
         ...
-
     def setRegularization(self, val) -> None:
         """
         .   @copybrief getRegularization @see getRegularization
         """
         ...
-
     def setTermCriteria(self, val) -> None:
         """
         .   @copybrief getTermCriteria @see getTermCriteria
         """
         ...
-
     def setTrainMethod(self, val) -> None:
         """
         .   @copybrief getTrainMethod @see getTrainMethod
         """
         ...
-
     ...
-
 
 class ml_NormalBayesClassifier(ml_StatModel):
     @staticmethod
@@ -11588,7 +10231,6 @@ class ml_NormalBayesClassifier(ml_StatModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -11596,9 +10238,8 @@ class ml_NormalBayesClassifier(ml_StatModel):
         .   Use StatModel::train to train the model after creation.
         """
         ...
-
     @staticmethod
-    def load(filepath[, nodeName]) -> retval:
+    def load(filepath, nodeName=...) -> retval:
         """
         .   @brief Loads and creates a serialized NormalBayesClassifier from a file
         .        *
@@ -11610,14 +10251,14 @@ class ml_NormalBayesClassifier(ml_StatModel):
         .        * @param nodeName name of node containing the classifier
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def predictProb(self, inputs[, outputs[, outputProbs[, flags]]]) -> retval, outputs, outputProbs:
+    def predictProb(
+        self, inputs, outputs=..., outputProbs=..., flags=...
+    ) -> Tuple[s, outputProbs]:
         """
         .   @brief Predicts the response for sample(s).
         .
@@ -11628,9 +10269,7 @@ class ml_NormalBayesClassifier(ml_StatModel):
         .       result.
         """
         ...
-
     ...
-
 
 class ml_ParamGrid(builtins.object):
     logStep: ...
@@ -11647,16 +10286,14 @@ class ml_ParamGrid(builtins.object):
     """
     minVal
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create([, minVal[, maxVal[, logstep]]]) -> retval:
+    def create(minVal=..., maxVal=..., logstep=...) -> retval:
         """
         .   @brief Creates a ParamGrid Ptr that can be given to the %SVM::trainAuto method
         .
@@ -11665,15 +10302,12 @@ class ml_ParamGrid(builtins.object):
         .       @param logstep Logarithmic step for iterating the statmodel parameter
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class ml_RTrees(ml_DTrees):
     @staticmethod
@@ -11682,7 +10316,6 @@ class ml_RTrees(ml_DTrees):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -11691,9 +10324,8 @@ class ml_RTrees(ml_DTrees):
         .       Algorithm::load to load the pre-trained model.
         """
         ...
-
     @staticmethod
-    def load(filepath[, nodeName]) -> retval:
+    def load(filepath, nodeName=...) -> retval:
         """
         .   @brief Loads and creates a serialized RTree from a file
         .        *
@@ -11705,38 +10337,32 @@ class ml_RTrees(ml_DTrees):
         .        * @param nodeName name of node containing the classifier
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getActiveVarCount(self) -> retval:
         """
         .   @see setActiveVarCount
         """
         ...
-
     def getCalculateVarImportance(self) -> retval:
         """
         .   @see setCalculateVarImportance
         """
         ...
-
     def getOOBError(self) -> retval:
         """
         .   Returns the OOB error value, computed at the training stage when calcOOBError is set to true.
         .        * If this flag was set to false, 0 is returned. The OOB error is also scaled by sample weighting.
         """
         ...
-
     def getTermCriteria(self) -> retval:
         """
         .   @see setTermCriteria
         """
         ...
-
     def getVarImportance(self) -> retval:
         """
         .   Returns the variable importance array.
@@ -11745,8 +10371,7 @@ class ml_RTrees(ml_DTrees):
         .       returned.
         """
         ...
-
-    def getVotes(self, samples, flags[, results]) -> results:
+    def getVotes(self, samples, flags, results=...) -> results:
         """
         .   Returns the result of each individual tree in the forest.
         .       In case the model is a regression problem, the method will return each of the trees'
@@ -11758,27 +10383,22 @@ class ml_RTrees(ml_DTrees):
         .           @param flags Flags for defining the type of RTrees.
         """
         ...
-
     def setActiveVarCount(self, val) -> None:
         """
         .   @copybrief getActiveVarCount @see getActiveVarCount
         """
         ...
-
     def setCalculateVarImportance(self, val) -> None:
         """
         .   @copybrief getCalculateVarImportance @see getCalculateVarImportance
         """
         ...
-
     def setTermCriteria(self, val) -> None:
         """
         .   @copybrief getTermCriteria @see getTermCriteria
         """
         ...
-
     ...
-
 
 class ml_SVM(ml_StatModel):
     @staticmethod
@@ -11787,7 +10407,6 @@ class ml_SVM(ml_StatModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -11796,7 +10415,6 @@ class ml_SVM(ml_StatModel):
         .   find the best parameters for your problem, it can be done with SVM::trainAuto.
         """
         ...
-
     @staticmethod
     def getDefaultGridPtr(param_id) -> retval:
         """
@@ -11809,7 +10427,6 @@ class ml_SVM(ml_StatModel):
         .       The grid may be passed to the function SVM::trainAuto.
         """
         ...
-
     @staticmethod
     def load(filepath) -> retval:
         """
@@ -11821,32 +10438,27 @@ class ml_SVM(ml_StatModel):
         .        * @param filepath path to serialized svm
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getC(self) -> retval:
         """
         .   @see setC
         """
         ...
-
     def getClassWeights(self) -> retval:
         """
         .   @see setClassWeights
         """
         ...
-
     def getCoef0(self) -> retval:
         """
         .   @see setCoef0
         """
         ...
-
-    def getDecisionFunction(self, i[, alpha[, svidx]]) -> retval, alpha, svidx:
+    def getDecisionFunction(self, i, alpha=..., svidx=...) -> Tuple[a, svidx]:
         """
         .   @brief Retrieves the decision function
         .
@@ -11864,38 +10476,32 @@ class ml_SVM(ml_StatModel):
         .       sum of kernel responses.
         """
         ...
-
     def getDegree(self) -> retval:
         """
         .   @see setDegree
         """
         ...
-
     def getGamma(self) -> retval:
         """
         .   @see setGamma
         """
         ...
-
     def getKernelType(self) -> retval:
         """
         .   Type of a %SVM kernel.
         .   See SVM::KernelTypes. Default value is SVM::RBF.
         """
         ...
-
     def getNu(self) -> retval:
         """
         .   @see setNu
         """
         ...
-
     def getP(self) -> retval:
         """
         .   @see setP
         """
         ...
-
     def getSupportVectors(self) -> retval:
         """
         .   @brief Retrieves all the support vectors
@@ -11904,19 +10510,16 @@ class ml_SVM(ml_StatModel):
         .       stored as matrix rows.
         """
         ...
-
     def getTermCriteria(self) -> retval:
         """
         .   @see setTermCriteria
         """
         ...
-
     def getType(self) -> retval:
         """
         .   @see setType
         """
         ...
-
     def getUncompressedSupportVectors(self) -> retval:
         """
         .   @brief Retrieves all the uncompressed support vectors of a linear %SVM
@@ -11926,69 +10529,71 @@ class ml_SVM(ml_StatModel):
         .       matrix, where the support vectors are stored as matrix rows.
         """
         ...
-
     def setC(self, val) -> None:
         """
         .   @copybrief getC @see getC
         """
         ...
-
     def setClassWeights(self, val) -> None:
         """
         .   @copybrief getClassWeights @see getClassWeights
         """
         ...
-
     def setCoef0(self, val) -> None:
         """
         .   @copybrief getCoef0 @see getCoef0
         """
         ...
-
     def setDegree(self, val) -> None:
         """
         .   @copybrief getDegree @see getDegree
         """
         ...
-
     def setGamma(self, val) -> None:
         """
         .   @copybrief getGamma @see getGamma
         """
         ...
-
     def setKernel(self, kernelType) -> None:
         """
         .   Initialize with one of predefined kernels.
         .   See SVM::KernelTypes.
         """
         ...
-
     def setNu(self, val) -> None:
         """
         .   @copybrief getNu @see getNu
         """
         ...
-
     def setP(self, val) -> None:
         """
         .   @copybrief getP @see getP
         """
         ...
-
     def setTermCriteria(self, val) -> None:
         """
         .   @copybrief getTermCriteria @see getTermCriteria
         """
         ...
-
     def setType(self, val) -> None:
         """
         .   @copybrief getType @see getType
         """
         ...
-
-    def trainAuto(self, samples, layout, responses[, kFold[, Cgrid[, gammaGrid[, pGrid[, nuGrid[, coeffGrid[, degreeGrid[, balanced]]]]]]]]) -> retval:
+    def trainAuto(
+        self,
+        samples,
+        layout,
+        responses,
+        kFold=...,
+        Cgrid=...,
+        gammaGrid=...,
+        pGrid=...,
+        nuGrid=...,
+        coeffGrid=...,
+        degreeGrid=...,
+        balanced=...,
+    ) -> retval:
         """
         .   @brief Trains an %SVM with optimal parameters
         .
@@ -12019,9 +10624,7 @@ class ml_SVM(ml_StatModel):
         .       the usual %SVM with parameters specified in params is executed.
         """
         ...
-
     ...
-
 
 class ml_SVMSGD(ml_StatModel):
     @staticmethod
@@ -12030,7 +10633,6 @@ class ml_SVMSGD(ml_StatModel):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def create() -> retval:
         """
@@ -12039,9 +10641,8 @@ class ml_SVMSGD(ml_StatModel):
         .        * find the best parameters for your problem or use setOptimalParameters() to set some default parameters.
         """
         ...
-
     @staticmethod
-    def load(filepath[, nodeName]) -> retval:
+    def load(filepath, nodeName=...) -> retval:
         """
         .   @brief Loads and creates a serialized SVMSGD from a file
         .        *
@@ -12053,107 +10654,89 @@ class ml_SVMSGD(ml_StatModel):
         .        * @param nodeName name of node containing the classifier
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getInitialStepSize(self) -> retval:
         """
         .   @see setInitialStepSize
         """
         ...
-
     def getMarginRegularization(self) -> retval:
         """
         .   @see setMarginRegularization
         """
         ...
-
     def getMarginType(self) -> retval:
         """
         .   @see setMarginType
         """
         ...
-
     def getShift(self) -> retval:
         """
         .   * @return the shift of the trained model (decision function f(x) = weights * x + shift).
         """
         ...
-
     def getStepDecreasingPower(self) -> retval:
         """
         .   @see setStepDecreasingPower
         """
         ...
-
     def getSvmsgdType(self) -> retval:
         """
         .   @see setSvmsgdType
         """
         ...
-
     def getTermCriteria(self) -> retval:
         """
         .   @see setTermCriteria
         """
         ...
-
     def getWeights(self) -> retval:
         """
         .   * @return the weights of the trained model (decision function f(x) = weights * x + shift).
         """
         ...
-
     def setInitialStepSize(self, InitialStepSize) -> None:
         """
         .   @copybrief getInitialStepSize @see getInitialStepSize
         """
         ...
-
     def setMarginRegularization(self, marginRegularization) -> None:
         """
         .   @copybrief getMarginRegularization @see getMarginRegularization
         """
         ...
-
     def setMarginType(self, marginType) -> None:
         """
         .   @copybrief getMarginType @see getMarginType
         """
         ...
-
-    def setOptimalParameters(self, [, svmsgdType[, marginType]]) -> None:
+    def setOptimalParameters(self, svmsgdType=..., marginType=...) -> None:
         """
         .   @brief Function sets optimal parameters values for chosen SVM SGD model.
         .        * @param svmsgdType is the type of SVMSGD classifier.
         .        * @param marginType is the type of margin constraint.
         """
         ...
-
     def setStepDecreasingPower(self, stepDecreasingPower) -> None:
         """
         .   @copybrief getStepDecreasingPower @see getStepDecreasingPower
         """
         ...
-
     def setSvmsgdType(self, svmsgdType) -> None:
         """
         .   @copybrief getSvmsgdType @see getSvmsgdType
         """
         ...
-
     def setTermCriteria(self, val) -> None:
         """
         .   @copybrief getTermCriteria @see getTermCriteria
         """
         ...
-
     ...
-
 
 class ml_StatModel(Algorithm):
     @staticmethod
@@ -12162,14 +10745,12 @@ class ml_StatModel(Algorithm):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def calcError(self, data, test[, resp]) -> retval, resp:
+    def calcError(self, data, test, resp=...) -> Tuple[retval, resp]:
         """
         .   @brief Computes error on the training or test dataset
         .
@@ -12185,32 +10766,27 @@ class ml_StatModel(Algorithm):
         .       computed as RMS, for classifiers - as a percent of missclassified samples (0%-100%).
         """
         ...
-
     def empty(self) -> retval:
         """
         .
         """
         ...
-
     def getVarCount(self) -> retval:
         """
         .   @brief Returns the number of variables in training samples
         """
         ...
-
     def isClassifier(self) -> retval:
         """
         .   @brief Returns true if the model is classifier
         """
         ...
-
     def isTrained(self) -> retval:
         """
         .   @brief Returns true if the model is trained
         """
         ...
-
-    def predict(self, samples[, results[, flags]]) -> retval, results:
+    def predict(self, samples, results=..., flags=...) -> Tuple[retval, results]:
         """
         .   @brief Predicts response(s) for the provided sample(s)
         .
@@ -12219,8 +10795,7 @@ class ml_StatModel(Algorithm):
         .       @param flags The optional flags, model-dependent. See cv::ml::StatModel::Flags.
         """
         ...
-
-    def train(self, trainData[, flags]) -> retval:
+    def train(self, trainData, flags=...) -> retval:
         """
         .   @brief Trains the statistical model
         .
@@ -12239,9 +10814,7 @@ class ml_StatModel(Algorithm):
         .       @param responses vector of responses associated with the training samples.
         """
         ...
-
     ...
-
 
 class ml_TrainData(builtins.object):
     @staticmethod
@@ -12250,9 +10823,16 @@ class ml_TrainData(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
-    def create(samples, layout, responses[, varIdx[, sampleIdx[, sampleWeights[, varType]]]]) -> retval:
+    def create(
+        samples,
+        layout,
+        responses,
+        varIdx=...,
+        sampleIdx=...,
+        sampleWeights=...,
+        varType=...,
+    ) -> retval:
         """
         .   @brief Creates training data from in-memory arrays.
         .
@@ -12274,7 +10854,6 @@ class ml_TrainData(builtins.object):
         .           ml::VariableTypes.
         """
         ...
-
     @staticmethod
     def getSubMatrix(matrix, idx, layout) -> retval:
         """
@@ -12284,7 +10863,6 @@ class ml_TrainData(builtins.object):
         .       @param layout specifies to extract rows (cv::ml::ROW_SAMPLES) or to extract columns (cv::ml::COL_SAMPLES)
         """
         ...
-
     @staticmethod
     def getSubVector(vec, idx) -> retval:
         """
@@ -12293,31 +10871,26 @@ class ml_TrainData(builtins.object):
         .       @param idx 1D index vector
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def getCatCount(self, vi) -> retval:
         """
         .
         """
         ...
-
     def getCatMap(self) -> retval:
         """
         .
         """
         ...
-
     def getCatOfs(self) -> retval:
         """
         .
         """
         ...
-
     def getClassLabels(self) -> retval:
         """
         .   @brief Returns the vector of class labels
@@ -12325,127 +10898,106 @@ class ml_TrainData(builtins.object):
         .       The function returns vector of unique labels occurred in the responses.
         """
         ...
-
     def getDefaultSubstValues(self) -> retval:
         """
         .
         """
         ...
-
     def getLayout(self) -> retval:
         """
         .
         """
         ...
-
     def getMissing(self) -> retval:
         """
         .
         """
         ...
-
     def getNAllVars(self) -> retval:
         """
         .
         """
         ...
-
     def getNSamples(self) -> retval:
         """
         .
         """
         ...
-
     def getNTestSamples(self) -> retval:
         """
         .
         """
         ...
-
     def getNTrainSamples(self) -> retval:
         """
         .
         """
         ...
-
     def getNVars(self) -> retval:
         """
         .
         """
         ...
-
     def getNames(self, names) -> None:
         """
         .   @brief Returns vector of symbolic names captured in loadFromCSV()
         """
         ...
-
     def getNormCatResponses(self) -> retval:
         """
         .
         """
         ...
-
     def getResponseType(self) -> retval:
         """
         .
         """
         ...
-
     def getResponses(self) -> retval:
         """
         .
         """
         ...
-
     def getSample(self, varIdx, sidx, buf) -> None:
         """
         .
         """
         ...
-
     def getSampleWeights(self) -> retval:
         """
         .
         """
         ...
-
     def getSamples(self) -> retval:
         """
         .
         """
         ...
-
     def getTestNormCatResponses(self) -> retval:
         """
         .
         """
         ...
-
     def getTestResponses(self) -> retval:
         """
         .
         """
         ...
-
     def getTestSampleIdx(self) -> retval:
         """
         .
         """
         ...
-
     def getTestSampleWeights(self) -> retval:
         """
         .
         """
         ...
-
     def getTestSamples(self) -> retval:
         """
         .   @brief Returns matrix of test samples
         """
         ...
-
     def getTrainNormCatResponses(self) -> retval:
         """
         .   @brief Returns the vector of normalized categorical responses
@@ -12455,7 +11007,6 @@ class ml_TrainData(builtins.object):
         .       TrainData::getClassLabels.
         """
         ...
-
     def getTrainResponses(self) -> retval:
         """
         .   @brief Returns the vector of responses
@@ -12464,20 +11015,19 @@ class ml_TrainData(builtins.object):
         .       regression algorithms.
         """
         ...
-
     def getTrainSampleIdx(self) -> retval:
         """
         .
         """
         ...
-
     def getTrainSampleWeights(self) -> retval:
         """
         .
         """
         ...
-
-    def getTrainSamples(self, [, layout[, compressSamples[, compressVars]]]) -> retval:
+    def getTrainSamples(
+        self, layout=..., compressSamples=..., compressVars=...
+    ) -> retval:
         """
         .   @brief Returns matrix of train samples
         .
@@ -12492,39 +11042,33 @@ class ml_TrainData(builtins.object):
         .       matrix stored inside TrainData (unless the transposition or compression is needed).
         """
         ...
-
     def getValues(self, vi, sidx, values) -> None:
         """
         .
         """
         ...
-
     def getVarIdx(self) -> retval:
         """
         .
         """
         ...
-
     def getVarSymbolFlags(self) -> retval:
         """
         .
         """
         ...
-
     def getVarType(self) -> retval:
         """
         .
         """
         ...
-
-    def setTrainTestSplit(self, count[, shuffle]) -> None:
+    def setTrainTestSplit(self, count, shuffle=...) -> None:
         """
         .   @brief Splits the training data into the training and test parts
         .       @sa TrainData::setTrainTestSplitRatio
         """
         ...
-
-    def setTrainTestSplitRatio(self, ratio[, shuffle]) -> None:
+    def setTrainTestSplitRatio(self, ratio, shuffle=...) -> None:
         """
         .   @brief Splits the training data into the training and test parts
         .
@@ -12535,15 +11079,12 @@ class ml_TrainData(builtins.object):
         .       @sa TrainData::setTrainTestSplit
         """
         ...
-
     def shuffleTrainTest(self) -> None:
         """
         .
         """
         ...
-
     ...
-
 
 class ocl_Device(builtins.object):
     @staticmethod
@@ -12552,448 +11093,373 @@ class ocl_Device(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     @staticmethod
     def getDefault() -> retval:
         """
         .
         """
         ...
-
     def OpenCLVersion(self) -> retval:
         """
         .
         """
         ...
-
     def OpenCL_C_Version(self) -> retval:
         """
         .
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def addressBits(self) -> retval:
         """
         .
         """
         ...
-
     def available(self) -> retval:
         """
         .
         """
         ...
-
     def compilerAvailable(self) -> retval:
         """
         .
         """
         ...
-
     def deviceVersionMajor(self) -> retval:
         """
         .
         """
         ...
-
     def deviceVersionMinor(self) -> retval:
         """
         .
         """
         ...
-
     def doubleFPConfig(self) -> retval:
         """
         .
         """
         ...
-
     def driverVersion(self) -> retval:
         """
         .
         """
         ...
-
     def endianLittle(self) -> retval:
         """
         .
         """
         ...
-
     def errorCorrectionSupport(self) -> retval:
         """
         .
         """
         ...
-
     def executionCapabilities(self) -> retval:
         """
         .
         """
         ...
-
     def extensions(self) -> retval:
         """
         .
         """
         ...
-
     def globalMemCacheLineSize(self) -> retval:
         """
         .
         """
         ...
-
     def globalMemCacheSize(self) -> retval:
         """
         .
         """
         ...
-
     def globalMemCacheType(self) -> retval:
         """
         .
         """
         ...
-
     def globalMemSize(self) -> retval:
         """
         .
         """
         ...
-
     def halfFPConfig(self) -> retval:
         """
         .
         """
         ...
-
     def hostUnifiedMemory(self) -> retval:
         """
         .
         """
         ...
-
     def image2DMaxHeight(self) -> retval:
         """
         .
         """
         ...
-
     def image2DMaxWidth(self) -> retval:
         """
         .
         """
         ...
-
     def image3DMaxDepth(self) -> retval:
         """
         .
         """
         ...
-
     def image3DMaxHeight(self) -> retval:
         """
         .
         """
         ...
-
     def image3DMaxWidth(self) -> retval:
         """
         .
         """
         ...
-
     def imageFromBufferSupport(self) -> retval:
         """
         .
         """
         ...
-
     def imageMaxArraySize(self) -> retval:
         """
         .
         """
         ...
-
     def imageMaxBufferSize(self) -> retval:
         """
         .
         """
         ...
-
     def imageSupport(self) -> retval:
         """
         .
         """
         ...
-
     def intelSubgroupsSupport(self) -> retval:
         """
         .
         """
         ...
-
     def isAMD(self) -> retval:
         """
         .
         """
         ...
-
     def isExtensionSupported(self, extensionName) -> retval:
         """
         .
         """
         ...
-
     def isIntel(self) -> retval:
         """
         .
         """
         ...
-
     def isNVidia(self) -> retval:
         """
         .
         """
         ...
-
     def linkerAvailable(self) -> retval:
         """
         .
         """
         ...
-
     def localMemSize(self) -> retval:
         """
         .
         """
         ...
-
     def localMemType(self) -> retval:
         """
         .
         """
         ...
-
     def maxClockFrequency(self) -> retval:
         """
         .
         """
         ...
-
     def maxComputeUnits(self) -> retval:
         """
         .
         """
         ...
-
     def maxConstantArgs(self) -> retval:
         """
         .
         """
         ...
-
     def maxConstantBufferSize(self) -> retval:
         """
         .
         """
         ...
-
     def maxMemAllocSize(self) -> retval:
         """
         .
         """
         ...
-
     def maxParameterSize(self) -> retval:
         """
         .
         """
         ...
-
     def maxReadImageArgs(self) -> retval:
         """
         .
         """
         ...
-
     def maxSamplers(self) -> retval:
         """
         .
         """
         ...
-
     def maxWorkGroupSize(self) -> retval:
         """
         .
         """
         ...
-
     def maxWorkItemDims(self) -> retval:
         """
         .
         """
         ...
-
     def maxWriteImageArgs(self) -> retval:
         """
         .
         """
         ...
-
     def memBaseAddrAlign(self) -> retval:
         """
         .
         """
         ...
-
     def name(self) -> retval:
         """
         .
         """
         ...
-
     def nativeVectorWidthChar(self) -> retval:
         """
         .
         """
         ...
-
     def nativeVectorWidthDouble(self) -> retval:
         """
         .
         """
         ...
-
     def nativeVectorWidthFloat(self) -> retval:
         """
         .
         """
         ...
-
     def nativeVectorWidthHalf(self) -> retval:
         """
         .
         """
         ...
-
     def nativeVectorWidthInt(self) -> retval:
         """
         .
         """
         ...
-
     def nativeVectorWidthLong(self) -> retval:
         """
         .
         """
         ...
-
     def nativeVectorWidthShort(self) -> retval:
         """
         .
         """
         ...
-
     def preferredVectorWidthChar(self) -> retval:
         """
         .
         """
         ...
-
     def preferredVectorWidthDouble(self) -> retval:
         """
         .
         """
         ...
-
     def preferredVectorWidthFloat(self) -> retval:
         """
         .
         """
         ...
-
     def preferredVectorWidthHalf(self) -> retval:
         """
         .
         """
         ...
-
     def preferredVectorWidthInt(self) -> retval:
         """
         .
         """
         ...
-
     def preferredVectorWidthLong(self) -> retval:
         """
         .
         """
         ...
-
     def preferredVectorWidthShort(self) -> retval:
         """
         .
         """
         ...
-
     def printfBufferSize(self) -> retval:
         """
         .
         """
         ...
-
     def profilingTimerResolution(self) -> retval:
         """
         .
         """
         ...
-
     def singleFPConfig(self) -> retval:
         """
         .
         """
         ...
-
     def type(self) -> retval:
         """
         .
         """
         ...
-
     def vendorID(self) -> retval:
         """
         .
         """
         ...
-
     def vendorName(self) -> retval:
         """
         .
         """
         ...
-
     def version(self) -> retval:
         """
         .
         """
         ...
-
     ...
-
 
 class ocl_OpenCLExecutionContext(builtins.object):
     @staticmethod
@@ -13002,15 +11468,12 @@ class ocl_OpenCLExecutionContext(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     ...
-
 
 class segmentation_IntelligentScissorsMB(builtins.object):
     @staticmethod
@@ -13019,19 +11482,16 @@ class segmentation_IntelligentScissorsMB(builtins.object):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def applyImage(self, image) -> retval:
         """
         .   @brief Specify input image and extract image features
@@ -13039,8 +11499,9 @@ class segmentation_IntelligentScissorsMB(builtins.object):
         .        * @param image input image. Type is #CV_8UC1 / #CV_8UC3
         """
         ...
-
-    def applyImageFeatures(self, non_edge, gradient_direction, gradient_magnitude[, image]) -> retval:
+    def applyImageFeatures(
+        self, non_edge, gradient_direction, gradient_magnitude, image=...
+    ) -> retval:
         """
         .   @brief Specify custom features of imput image
         .        *
@@ -13052,7 +11513,6 @@ class segmentation_IntelligentScissorsMB(builtins.object):
         .        * @param image **Optional parameter**. Must be specified if subset of features is specified (non-specified features are calculated internally)
         """
         ...
-
     def buildMap(self, sourcePt) -> None:
         """
         .   @brief Prepares a map of optimal paths for the given source point on the image
@@ -13062,8 +11522,7 @@ class segmentation_IntelligentScissorsMB(builtins.object):
         .        * @param sourcePt The source point used to find the paths
         """
         ...
-
-    def getContour(self, targetPt[, contour[, backward]]) -> contour:
+    def getContour(self, targetPt, contour=..., backward=...) -> contour:
         """
         .   @brief Extracts optimal contour for the given target point on the image
         .        *
@@ -13074,8 +11533,9 @@ class segmentation_IntelligentScissorsMB(builtins.object):
         .        * @param backward Flag to indicate reverse order of retrived pixels (use "true" value to fetch points from the target to the source point)
         """
         ...
-
-    def setEdgeFeatureCannyParameters(self, threshold1, threshold2[, apertureSize[, L2gradient]]) -> retval:
+    def setEdgeFeatureCannyParameters(
+        self, threshold1, threshold2, apertureSize=..., L2gradient=...
+    ) -> retval:
         """
         .   @brief Switch edge feature extractor to use Canny edge detector
         .        *
@@ -13084,8 +11544,9 @@ class segmentation_IntelligentScissorsMB(builtins.object):
         .        * @sa Canny
         """
         ...
-
-    def setEdgeFeatureZeroCrossingParameters(self, [, gradient_magnitude_min_value]) -> retval:
+    def setEdgeFeatureZeroCrossingParameters(
+        self, gradient_magnitude_min_value=...
+    ) -> retval:
         """
         .   @brief Switch to "Laplacian Zero-Crossing" edge feature extractor and specify its parameters
         .        *
@@ -13101,8 +11562,9 @@ class segmentation_IntelligentScissorsMB(builtins.object):
         .        * @param gradient_magnitude_min_value Minimal gradient magnitude value for edge pixels (default: 0, check is disabled)
         """
         ...
-
-    def setGradientMagnitudeMaxLimit(self, [, gradient_magnitude_threshold_max]) -> retval:
+    def setGradientMagnitudeMaxLimit(
+        self, gradient_magnitude_threshold_max=...
+    ) -> retval:
         """
         .   @brief Specify gradient magnitude max value threshold
         .        *
@@ -13114,8 +11576,9 @@ class segmentation_IntelligentScissorsMB(builtins.object):
         .        * @param gradient_magnitude_threshold_max Specify gradient magnitude max value threshold (default: 0, disabled)
         """
         ...
-
-    def setWeights(self, weight_non_edge, weight_gradient_direction, weight_gradient_magnitude) -> retval:
+    def setWeights(
+        self, weight_non_edge, weight_gradient_direction, weight_gradient_magnitude
+    ) -> retval:
         """
         .   @brief Specify weights of feature functions
         .        *
@@ -13127,11 +11590,17 @@ class segmentation_IntelligentScissorsMB(builtins.object):
         .        * @param weight_gradient_magnitude Specify cost of gradient magnitude function (default: 0.14f)
         """
         ...
-
     ...
 
-
-def AKAZE_create([, descriptor_type[, descriptor_size[, descriptor_channels[, threshold[, nOctaves[, nOctaveLayers[, diffusivity]]]]]]]) -> retval:
+def AKAZE_create(
+    descriptor_type=...,
+    descriptor_size=...,
+    descriptor_channels=...,
+    threshold=...,
+    nOctaves=...,
+    nOctaveLayers=...,
+    diffusivity=...,
+) -> retval:
     """
     .   @brief The AKAZE constructor
     .
@@ -13147,8 +11616,9 @@ def AKAZE_create([, descriptor_type[, descriptor_size[, descriptor_channels[, th
     """
     ...
 
-
-def AffineFeature_create(backend[, maxTilt[, minTilt[, tiltStep[, rotateStepBase]]]]) -> retval:
+def AffineFeature_create(
+    backend, maxTilt=..., minTilt=..., tiltStep=..., rotateStepBase=...
+) -> retval:
     """
     .   @param backend The detector/extractor you want to use as backend.
     .       @param maxTilt The highest power index of tilt factor. 5 is used in the paper as tilt sampling range n.
@@ -13158,15 +11628,15 @@ def AffineFeature_create(backend[, maxTilt[, minTilt[, tiltStep[, rotateStepBase
     """
     ...
 
-
-def AgastFeatureDetector_create([, threshold[, nonmaxSuppression[, type]]]) -> retval:
+def AgastFeatureDetector_create(
+    threshold=..., nonmaxSuppression=..., type=...
+) -> retval:
     """
     .
     """
     ...
 
-
-def BFMatcher_create([, normType[, crossCheck]]) -> retval:
+def BFMatcher_create(normType=..., crossCheck=...) -> retval:
     """
     .   @brief Brute-force matcher create method.
     .       @param normType One of NORM_L1, NORM_L2, NORM_HAMMING, NORM_HAMMING2. L1 and L2 norms are
@@ -13182,8 +11652,7 @@ def BFMatcher_create([, normType[, crossCheck]]) -> retval:
     """
     ...
 
-
-def BRISK_create([, thresh[, octaves[, patternScale]]]) -> retval:
+def BRISK_create(thresh=..., octaves=..., patternScale=...) -> retval:
     """
     .   @brief The BRISK constructor
     .
@@ -13194,7 +11663,7 @@ def BRISK_create([, thresh[, octaves[, patternScale]]]) -> retval:
 
 
 
-    BRISK_create(radiusList, numberList[, dMax[, dMin[, indexChange]]]) -> retval
+    BRISK_create(radiusList, numberList, dMax=..., dMin=..., indexChange=...) -> retval
     .   @brief The BRISK constructor for a custom pattern
     .
     .       @param radiusList defines the radii (in pixels) where the samples around a keypoint are taken (for
@@ -13209,7 +11678,7 @@ def BRISK_create([, thresh[, octaves[, patternScale]]]) -> retval:
 
 
 
-    BRISK_create(thresh, octaves, radiusList, numberList[, dMax[, dMin[, indexChange]]]) -> retval
+    BRISK_create(thresh, octaves, radiusList, numberList, dMax=..., dMin=..., indexChange=...) -> retval
     .   @brief The BRISK constructor for a custom pattern, detection threshold and octaves
     .
     .       @param thresh AGAST detection threshold score.
@@ -13226,8 +11695,7 @@ def BRISK_create([, thresh[, octaves[, patternScale]]]) -> retval:
     """
     ...
 
-
-def CamShift(probImage, window, criteria) -> retval, window:
+def CamShift(probImage, window, criteria) -> Tuple[retval, window]:
     """
     .   @brief Finds an object center, size, and orientation.
     .
@@ -13249,8 +11717,9 @@ def CamShift(probImage, window, criteria) -> retval, window:
     """
     ...
 
-
-def Canny(image, threshold1, threshold2[, edges[, apertureSize[, L2gradient]]]) -> edges:
+def Canny(
+    image, threshold1, threshold2, edges=..., apertureSize=..., L2gradient=...
+) -> edges:
     """
     .   @brief Finds edges in an image using the Canny algorithm @cite Canny86 .
     .
@@ -13271,7 +11740,7 @@ def Canny(image, threshold1, threshold2[, edges[, apertureSize[, L2gradient]]]) 
 
 
 
-    Canny(dx, dy, threshold1, threshold2[, edges[, L2gradient]]) -> edges
+    Canny(dx, dy, threshold1, threshold2, edges=..., L2gradient=...) -> edges
     .   \overload
     .
     .   Finds edges in an image using the Canny algorithm with custom image gradient.
@@ -13288,22 +11757,19 @@ def Canny(image, threshold1, threshold2[, edges[, apertureSize[, L2gradient]]]) 
     """
     ...
 
-
 def CascadeClassifier_convert(oldcascade, newcascade) -> retval:
     """
     .
     """
     ...
 
-
-def DISOpticalFlow_create([, preset]) -> retval:
+def DISOpticalFlow_create(preset=...) -> retval:
     """
     .   @brief Creates an instance of DISOpticalFlow
     .
     .       @param preset one of PRESET_ULTRAFAST, PRESET_FAST and PRESET_MEDIUM
     """
     ...
-
 
 def DescriptorMatcher_create(descriptorMatcherType) -> retval:
     """
@@ -13325,8 +11791,9 @@ def DescriptorMatcher_create(descriptorMatcherType) -> retval:
     """
     ...
 
-
-def EMD(signature1, signature2, distType[, cost[, lowerBound[, flow]]]) -> retval, lowerBound, flow:
+def EMD(
+    signature1, signature2, distType, cost=..., lowerBound=..., flow=...
+) -> Tuple[d, flow]:
     """
     .   @brief Computes the "minimal work" distance between two weighted point configurations.
     .
@@ -13364,20 +11831,28 @@ def EMD(signature1, signature2, distType[, cost[, lowerBound[, flow]]]) -> retva
     """
     ...
 
-
-def FarnebackOpticalFlow_create([, numLevels[, pyrScale[, fastPyramids[, winSize[, numIters[, polyN[, polySigma[, flags]]]]]]]]) -> retval:
+def FarnebackOpticalFlow_create(
+    numLevels=...,
+    pyrScale=...,
+    fastPyramids=...,
+    winSize=...,
+    numIters=...,
+    polyN=...,
+    polySigma=...,
+    flags=...,
+) -> retval:
     """
     .
     """
     ...
 
-
-def FastFeatureDetector_create([, threshold[, nonmaxSuppression[, type]]]) -> retval:
+def FastFeatureDetector_create(
+    threshold=..., nonmaxSuppression=..., type=...
+) -> retval:
     """
     .
     """
     ...
-
 
 def FlannBasedMatcher_create() -> retval:
     """
@@ -13385,32 +11860,40 @@ def FlannBasedMatcher_create() -> retval:
     """
     ...
 
-
-def GFTTDetector_create([, maxCorners[, qualityLevel[, minDistance[, blockSize[, useHarrisDetector[, k]]]]]]) -> retval:
+def GFTTDetector_create(
+    maxCorners=...,
+    qualityLevel=...,
+    minDistance=...,
+    blockSize=...,
+    useHarrisDetector=...,
+    k=...,
+) -> retval:
     """
     .
 
 
 
-    GFTTDetector_create(maxCorners, qualityLevel, minDistance, blockSize, gradiantSize[, useHarrisDetector[, k]]) -> retval
+    GFTTDetector_create(maxCorners, qualityLevel, minDistance, blockSize, gradiantSize, useHarrisDetector=..., k=...) -> retval
     .
     """
     ...
-
 
 def GIn(*args, **kwargs) -> GInputProtoArgs:
-    """
-    """
+    """ """
     ...
-
 
 def GOut(*args, **kwargs) -> GOutputProtoArgs:
-    """
-    """
+    """ """
     ...
 
-
-def GaussianBlur(src: ndarray, ksize: Tuple[int, int], sigmaX: int, dst: ndarray = ..., sigmaY: int = ..., borderType: int =...) -> ndarray:
+def GaussianBlur(
+    src: ndarray,
+    ksize: Tuple[int, int],
+    sigmaX: int,
+    dst: ndarray = ...,
+    sigmaY: int = ...,
+    borderType: int = ...,
+) -> ndarray:
     """
     .   @brief Blurs an image using a Gaussian filter.
     .
@@ -13434,13 +11917,11 @@ def GaussianBlur(src: ndarray, ksize: Tuple[int, int], sigmaX: int, dst: ndarray
     """
     ...
 
-
 def HOGDescriptor_getDaimlerPeopleDetector() -> retval:
     """
     .   @brief Returns coefficients of the classifier trained for people detection (for 48x96 windows).
     """
     ...
-
 
 def HOGDescriptor_getDefaultPeopleDetector() -> retval:
     """
@@ -13448,8 +11929,17 @@ def HOGDescriptor_getDefaultPeopleDetector() -> retval:
     """
     ...
 
-
-def HoughCircles(image, method, dp, minDist[, circles[, param1[, param2[, minRadius[, maxRadius]]]]]) -> circles:
+def HoughCircles(
+    image,
+    method,
+    dp,
+    minDist,
+    circles=...,
+    param1=...,
+    param2=...,
+    minRadius=...,
+    maxRadius=...,
+) -> circles:
     """
     .   @brief Finds circles in a grayscale image using the Hough transform.
     .
@@ -13496,8 +11986,17 @@ def HoughCircles(image, method, dp, minDist[, circles[, param1[, param2[, minRad
     """
     ...
 
-
-def HoughLines(image, rho, theta, threshold[, lines[, srn[, stn[, min_theta[, max_theta]]]]]) -> lines:
+def HoughLines(
+    image,
+    rho,
+    theta,
+    threshold,
+    lines=...,
+    srn=...,
+    stn=...,
+    min_theta=...,
+    max_theta=...,
+) -> lines:
     """
     .   @brief Finds lines in a binary image using the standard Hough transform.
     .
@@ -13527,8 +12026,9 @@ def HoughLines(image, rho, theta, threshold[, lines[, srn[, stn[, min_theta[, ma
     """
     ...
 
-
-def HoughLinesP(image, rho, theta, threshold[, lines[, minLineLength[, maxLineGap]]]) -> lines:
+def HoughLinesP(
+    image, rho, theta, threshold, lines=..., minLineLength=..., maxLineGap=...
+) -> lines:
     """
     .   @brief Finds line segments in a binary image using the probabilistic Hough transform.
     .
@@ -13560,8 +12060,18 @@ def HoughLinesP(image, rho, theta, threshold[, lines[, minLineLength[, maxLineGa
     """
     ...
 
-
-def HoughLinesPointSet(_point, lines_max, threshold, min_rho, max_rho, rho_step, min_theta, max_theta, theta_step[, _lines]) -> _lines:
+def HoughLinesPointSet(
+    _point,
+    lines_max,
+    threshold,
+    min_rho,
+    max_rho,
+    rho_step,
+    min_theta,
+    max_theta,
+    theta_step,
+    _lines=...,
+) -> _lines:
     """
     .   @brief Finds lines in a set of points using the standard Hough transform.
     .
@@ -13582,8 +12092,17 @@ def HoughLinesPointSet(_point, lines_max, threshold, min_rho, max_rho, rho_step,
     """
     ...
 
-
-def HoughLinesWithAccumulator(image, rho, theta, threshold[, lines[, srn[, stn[, min_theta[, max_theta]]]]]) -> lines:
+def HoughLinesWithAccumulator(
+    image,
+    rho,
+    theta,
+    threshold,
+    lines=...,
+    srn=...,
+    stn=...,
+    min_theta=...,
+    max_theta=...,
+) -> lines:
     """
     .   @brief Finds lines in a binary image using the standard Hough transform and get accumulator.
     .    *
@@ -13593,15 +12112,20 @@ def HoughLinesWithAccumulator(image, rho, theta, threshold[, lines[, srn[, stn[,
     """
     ...
 
-
-def HuMoments(m[, hu]) -> hu:
+def HuMoments(m, hu=...) -> hu:
     """
     .   @overload
     """
     ...
 
-
-def KAZE_create([, extended[, upright[, threshold[, nOctaves[, nOctaveLayers[, diffusivity]]]]]]) -> retval:
+def KAZE_create(
+    extended=...,
+    upright=...,
+    threshold=...,
+    nOctaves=...,
+    nOctaveLayers=...,
+    diffusivity=...,
+) -> retval:
     """
     .   @brief The KAZE constructor
     .
@@ -13615,8 +12139,7 @@ def KAZE_create([, extended[, upright[, threshold[, nOctaves[, nOctaveLayers[, d
     """
     ...
 
-
-def KeyPoint_convert(keypoints[, keypointIndexes]) -> points2f:
+def KeyPoint_convert(keypoints, keypointIndexes=...) -> points2f:
     """
     .   This method converts vector of keypoints to vector of points or the reverse, where each keypoint is
     .       assigned the same size and the same orientation.
@@ -13628,7 +12151,7 @@ def KeyPoint_convert(keypoints[, keypointIndexes]) -> points2f:
 
 
 
-    KeyPoint_convert(points2f[, size[, response[, octave[, class_id]]]]) -> keypoints
+    KeyPoint_convert(points2f, size=..., response=..., octave=..., class_id=...) -> keypoints
     .   @overload
     .       @param points2f Array of (x,y) coordinates of each keypoint
     .       @param keypoints Keypoints obtained from any feature detection algorithm like SIFT/SURF/ORB
@@ -13638,7 +12161,6 @@ def KeyPoint_convert(keypoints[, keypointIndexes]) -> points2f:
     .       @param class_id object id
     """
     ...
-
 
 def KeyPoint_overlap(kp1, kp2) -> retval:
     """
@@ -13650,8 +12172,7 @@ def KeyPoint_overlap(kp1, kp2) -> retval:
     """
     ...
 
-
-def LUT(src, lut[, dst]) -> dst:
+def LUT(src, lut, dst=...) -> dst:
     """
     .   @brief Performs a look-up table transform of an array.
     .
@@ -13669,8 +12190,9 @@ def LUT(src, lut[, dst]) -> dst:
     """
     ...
 
-
-def Laplacian(src, ddepth[, dst[, ksize[, scale[, delta[, borderType]]]]]) -> dst:
+def Laplacian(
+    src, ddepth, dst=..., ksize=..., scale=..., delta=..., borderType=...
+) -> dst:
     """
     .   @brief Calculates the Laplacian of an image.
     .
@@ -13697,8 +12219,17 @@ def Laplacian(src, ddepth[, dst[, ksize[, scale[, delta[, borderType]]]]]) -> ds
     """
     ...
 
-
-def MSER_create([, _delta[, _min_area[, _max_area[, _max_variation[, _min_diversity[, _max_evolution[, _area_threshold[, _min_margin[, _edge_blur_size]]]]]]]]]) -> retval:
+def MSER_create(
+    _delta=...,
+    _min_area=...,
+    _max_area=...,
+    _max_variation=...,
+    _min_diversity=...,
+    _max_evolution=...,
+    _area_threshold=...,
+    _min_margin=...,
+    _edge_blur_size=...,
+) -> retval:
     """
     .   @brief Full constructor for %MSER detector
     .
@@ -13714,7 +12245,6 @@ def MSER_create([, _delta[, _min_area[, _max_area[, _max_variation[, _min_divers
     """
     ...
 
-
 def Mahalanobis(v1, v2, icovar) -> retval:
     """
     .   @brief Calculates the Mahalanobis distance between two vectors.
@@ -13729,15 +12259,14 @@ def Mahalanobis(v1, v2, icovar) -> retval:
     """
     ...
 
-
 def ORB_create(
-    features: int = ..., 
+    features: int = ...,
     scaleFactor: float = ...,
-    nlevels: int = ..., 
+    nlevels: int = ...,
     edgeThreshold: int = ...,
     firstLevel: int = ...,
     WTA_K: int = ...,
-    scoreType: int = ..., 
+    scoreType: int = ...,
     patchSize: int = ...,
     fastThreshold: int = ...,
 ) -> ORB:
@@ -13775,46 +12304,45 @@ def ORB_create(
     """
     ...
 
-
-def PCABackProject(data, mean, eigenvectors[, result]) -> result:
+def PCABackProject(data, mean, eigenvectors, result=...) -> result:
     """
     .   wrap PCA::backProject
     """
     ...
 
-
-def PCACompute(data, mean[, eigenvectors[, maxComponents]]) -> mean, eigenvectors:
+def PCACompute(
+    data, mean, eigenvectors=..., maxComponents=...
+) -> Tuple[mean, eigenvectors]:
     """
     .   wrap PCA::operator()
 
 
 
-    PCACompute(data, mean, retainedVariance[, eigenvectors]) -> mean, eigenvectors
+    PCACompute(data, mean, retainedVariance, eigenvectors=...) -> mean, eigenvectors
     .   wrap PCA::operator()
     """
     ...
 
-
-def PCACompute2(data, mean[, eigenvectors[, eigenvalues[, maxComponents]]]) -> mean, eigenvectors, eigenvalues:
+def PCACompute2(
+    data, mean, eigenvectors=..., eigenvalues=..., maxComponents=...
+) -> Tuple[s, eigenvalues]:
     """
     .   wrap PCA::operator() and add eigenvalues output parameter
 
 
 
-    PCACompute2(data, mean, retainedVariance[, eigenvectors[, eigenvalues]]) -> mean, eigenvectors, eigenvalues
+    PCACompute2(data, mean, retainedVariance, eigenvectors=..., eigenvalues=...) -> mean, eigenvectors, eigenvalues
     .   wrap PCA::operator() and add eigenvalues output parameter
     """
     ...
 
-
-def PCAProject(data, mean, eigenvectors[, result]) -> result:
+def PCAProject(data, mean, eigenvectors, result=...) -> result:
     """
     .   wrap PCA::project
     """
     ...
 
-
-def PSNR(src1, src2[, R]) -> retval:
+def PSNR(src1, src2, R=...) -> retval:
     """
     .   @brief Computes the Peak Signal-to-Noise Ratio (PSNR) image quality metric.
     .
@@ -13836,8 +12364,7 @@ def PSNR(src1, src2[, R]) -> retval:
     """
     ...
 
-
-def RQDecomp3x3(src[, mtxR[, mtxQ[, Qx[, Qy[, Qz]]]]]) -> retval, mtxR, mtxQ, Qx, Qy, Qz:
+def RQDecomp3x3(src, mtxR=..., mtxQ=..., Qx=..., Qy=..., Qz=...) -> Tuple[Qy, Qz]:
     """
     .   @brief Computes an RQ decomposition of 3x3 matrices.
     .
@@ -13860,8 +12387,7 @@ def RQDecomp3x3(src[, mtxR[, mtxQ[, Qx[, Qy[, Qz]]]]]) -> retval, mtxR, mtxQ, Qx
     """
     ...
 
-
-def Rodrigues(src[, dst[, jacobian]]) -> dst, jacobian:
+def Rodrigues(src, dst=..., jacobian=...) -> Tuple[dst, jacobian]:
     """
     .   @brief Converts a rotation matrix to a rotation vector or vice versa.
     .
@@ -13891,8 +12417,13 @@ def Rodrigues(src[, dst[, jacobian]]) -> dst, jacobian:
     """
     ...
 
-
-def SIFT_create([, nfeatures[, nOctaveLayers[, contrastThreshold[, edgeThreshold[, sigma]]]]]) -> retval:
+def SIFT_create(
+    nfeatures=...,
+    nOctaveLayers=...,
+    contrastThreshold=...,
+    edgeThreshold=...,
+    sigma=...,
+) -> retval:
     """
     .   @param nfeatures The number of best features to retain. The features are ranked by their scores
     .       (measured in SIFT algorithm as the local contrast)
@@ -13942,22 +12473,19 @@ def SIFT_create([, nfeatures[, nOctaveLayers[, contrastThreshold[, edgeThreshold
     """
     ...
 
-
-def SVBackSubst(w, u, vt, rhs[, dst]) -> dst:
+def SVBackSubst(w, u, vt, rhs, dst=...) -> dst:
     """
     .   wrap SVD::backSubst
     """
     ...
 
-
-def SVDecomp(src[, w[, u[, vt[, flags]]]]) -> w, u, vt:
+def SVDecomp(src, w=..., u=..., vt=..., flags=...) -> Tuple[w, u, vt]:
     """
     .   wrap SVD::compute
     """
     ...
 
-
-def Scharr(src, ddepth, dx, dy[, dst[, scale[, delta[, borderType]]]]) -> dst:
+def Scharr(src, ddepth, dx, dy, dst=..., scale=..., delta=..., borderType=...) -> dst:
     """
     .   @brief Calculates the first x- or y- image derivative using Scharr operator.
     .
@@ -13983,15 +12511,15 @@ def Scharr(src, ddepth, dx, dy[, dst[, scale[, delta[, borderType]]]]) -> dst:
     """
     ...
 
-
-def SimpleBlobDetector_create([, parameters]) -> retval:
+def SimpleBlobDetector_create(parameters=...) -> retval:
     """
     .
     """
     ...
 
-
-def Sobel(src, ddepth, dx, dy[, dst[, ksize[, scale[, delta[, borderType]]]]]) -> dst:
+def Sobel(
+    src, ddepth, dx, dy, dst=..., ksize=..., scale=..., delta=..., borderType=...
+) -> dst:
     """
     .   @brief Calculates the first, second, third, or mixed image derivatives using an extended Sobel operator.
     .
@@ -14037,15 +12565,15 @@ def Sobel(src, ddepth, dx, dy[, dst[, ksize[, scale[, delta[, borderType]]]]]) -
     """
     ...
 
-
-def SparsePyrLKOpticalFlow_create([, winSize[, maxLevel[, crit[, flags[, minEigThreshold]]]]]) -> retval:
+def SparsePyrLKOpticalFlow_create(
+    winSize=..., maxLevel=..., crit=..., flags=..., minEigThreshold=...
+) -> retval:
     """
     .
     """
     ...
 
-
-def StereoBM_create([, numDisparities[, blockSize]]) -> retval:
+def StereoBM_create(numDisparities=..., blockSize=...) -> retval:
     """
     .   @brief Creates StereoBM object
     .
@@ -14062,8 +12590,19 @@ def StereoBM_create([, numDisparities[, blockSize]]) -> retval:
     """
     ...
 
-
-def StereoSGBM_create([, minDisparity[, numDisparities[, blockSize[, P1[, P2[, disp12MaxDiff[, preFilterCap[, uniquenessRatio[, speckleWindowSize[, speckleRange[, mode]]]]]]]]]]]) -> retval:
+def StereoSGBM_create(
+    minDisparity=...,
+    numDisparities=...,
+    blockSize=...,
+    P1=...,
+    P2=...,
+    disp12MaxDiff=...,
+    preFilterCap=...,
+    uniquenessRatio=...,
+    speckleWindowSize=...,
+    speckleRange=...,
+    mode=...,
+) -> retval:
     """
     .   @brief Creates StereoSGBM object
     .
@@ -14104,8 +12643,7 @@ def StereoSGBM_create([, minDisparity[, numDisparities[, blockSize[, P1[, P2[, d
     """
     ...
 
-
-def Stitcher_create([, mode]) -> retval:
+def Stitcher_create(mode=...) -> retval:
     """
     .   @brief Creates a Stitcher configured in one of the stitching modes.
     .
@@ -14116,22 +12654,19 @@ def Stitcher_create([, mode]) -> retval:
     """
     ...
 
-
-def TrackerGOTURN_create([, parameters]) -> retval:
+def TrackerGOTURN_create(parameters=...) -> retval:
     """
     .   @brief Constructor
     .       @param parameters GOTURN parameters TrackerGOTURN::Params
     """
     ...
 
-
-def TrackerMIL_create([, parameters]) -> retval:
+def TrackerMIL_create(parameters=...) -> retval:
     """
     .   @brief Create MIL tracker instance
     .        *  @param parameters MIL parameters TrackerMIL::Params
     """
     ...
-
 
 def UMat_context() -> retval:
     """
@@ -14139,20 +12674,17 @@ def UMat_context() -> retval:
     """
     ...
 
-
 def UMat_queue() -> retval:
     """
     .
     """
     ...
 
-
 def VariationalRefinement_create() -> retval:
     """
     .   @brief Creates an instance of VariationalRefinement
     """
     ...
-
 
 def VideoWriter_fourcc(c1, c2, c3, c4) -> retval:
     """
@@ -14165,8 +12697,7 @@ def VideoWriter_fourcc(c1, c2, c3, c4) -> retval:
     """
     ...
 
-
-def absdiff(src1: ndarray, src2: ndarray, dst: ndarray =...) -> ndarray:
+def absdiff(src1: ndarray, src2: ndarray, dst: ndarray = ...) -> ndarray:
     """
     .   @brief Calculates the per-element absolute difference between two arrays or between an array and a scalar.
     .
@@ -14193,8 +12724,7 @@ def absdiff(src1: ndarray, src2: ndarray, dst: ndarray =...) -> ndarray:
     """
     ...
 
-
-def accumulate(src, dst[, mask]) -> dst:
+def accumulate(src, dst, mask=...) -> dst:
     """
     .   @brief Adds an image to the accumulator image.
     .
@@ -14215,8 +12745,7 @@ def accumulate(src, dst[, mask]) -> dst:
     """
     ...
 
-
-def accumulateProduct(src1, src2, dst[, mask]) -> dst:
+def accumulateProduct(src1, src2, dst, mask=...) -> dst:
     """
     .   @brief Adds the per-element product of two input images to the accumulator image.
     .
@@ -14236,8 +12765,7 @@ def accumulateProduct(src1, src2, dst[, mask]) -> dst:
     """
     ...
 
-
-def accumulateSquare(src, dst[, mask]) -> dst:
+def accumulateSquare(src, dst, mask=...) -> dst:
     """
     .   @brief Adds the square of a source image to the accumulator image.
     .
@@ -14257,8 +12785,7 @@ def accumulateSquare(src, dst[, mask]) -> dst:
     """
     ...
 
-
-def accumulateWeighted(src, dst, alpha[, mask]) -> dst:
+def accumulateWeighted(src, dst, alpha, mask=...) -> dst:
     """
     .   @brief Updates a running average.
     .
@@ -14280,8 +12807,15 @@ def accumulateWeighted(src, dst, alpha[, mask]) -> dst:
     """
     ...
 
-
-def adaptiveThreshold(src: ndarray, maxValue: float, adaptiveMethod: int, thresholdType: int, blockSize: int, C: float, dst: ndarray = ...) -> ndarray:
+def adaptiveThreshold(
+    src: ndarray,
+    maxValue: float,
+    adaptiveMethod: int,
+    thresholdType: int,
+    blockSize: int,
+    C: float,
+    dst: ndarray = ...,
+) -> ndarray:
     """
     .   @brief Applies an adaptive threshold to an array.
     .
@@ -14310,8 +12844,7 @@ def adaptiveThreshold(src: ndarray, maxValue: float, adaptiveMethod: int, thresh
     """
     ...
 
-
-def add(src1, src2[, dst[, mask[, dtype]]]) -> dst:
+def add(src1, src2, dst=..., mask=..., dtype=...) -> dst:
     """
     .   @brief Calculates the per-element sum of two arrays or an array and a scalar.
     .
@@ -14351,8 +12884,17 @@ def add(src1, src2[, dst[, mask[, dtype]]]) -> dst:
     """
     ...
 
-
-def addText(img, text, org, nameFont[, pointSize[, color[, weight[, style[, spacing]]]]]) -> None:
+def addText(
+    img,
+    text,
+    org,
+    nameFont,
+    pointSize=...,
+    color=...,
+    weight=...,
+    style=...,
+    spacing=...,
+) -> None:
     """
     .   @brief Draws a text on the image.
     .
@@ -14370,8 +12912,7 @@ def addText(img, text, org, nameFont[, pointSize[, color[, weight[, style[, spac
     """
     ...
 
-
-def addWeighted(src1, alpha, src2, beta, gamma[, dst[, dtype]]) -> dst:
+def addWeighted(src1, alpha, src2, beta, gamma, dst=..., dtype=...) -> dst:
     """
     .   @brief Calculates the weighted sum of two arrays.
     .
@@ -14397,8 +12938,7 @@ def addWeighted(src1, alpha, src2, beta, gamma[, dst[, dtype]]) -> dst:
     """
     ...
 
-
-def applyColorMap(src, colormap[, dst]) -> dst:
+def applyColorMap(src, colormap, dst=...) -> dst:
     """
     .   @brief Applies a GNU Octave/MATLAB equivalent colormap on a given image.
     .
@@ -14408,7 +12948,7 @@ def applyColorMap(src, colormap[, dst]) -> dst:
 
 
 
-    applyColorMap(src, userColor[, dst]) -> dst
+    applyColorMap(src, userColor, dst=...) -> dst
     .   @brief Applies a user colormap on a given image.
     .
     .   @param src The source image, grayscale or colored of type CV_8UC1 or CV_8UC3.
@@ -14417,8 +12957,7 @@ def applyColorMap(src, colormap[, dst]) -> dst:
     """
     ...
 
-
-def approxPolyDP(curve, epsilon, closed[, approxCurve]) -> approxCurve:
+def approxPolyDP(curve, epsilon, closed, approxCurve=...) -> approxCurve:
     """
     .   @brief Approximates a polygonal curve(s) with the specified precision.
     .
@@ -14435,7 +12974,6 @@ def approxPolyDP(curve, epsilon, closed[, approxCurve]) -> approxCurve:
     """
     ...
 
-
 def arcLength(curve, closed) -> retval:
     """
     .   @brief Calculates a contour perimeter or a curve length.
@@ -14447,8 +12985,9 @@ def arcLength(curve, closed) -> retval:
     """
     ...
 
-
-def arrowedLine(img, pt1, pt2, color[, thickness[, line_type[, shift[, tipLength]]]]) -> img:
+def arrowedLine(
+    img, pt1, pt2, color, thickness=..., line_type=..., shift=..., tipLength=...
+) -> img:
     """
     .   @brief Draws a arrow segment pointing from the first point to the second one.
     .
@@ -14465,8 +13004,18 @@ def arrowedLine(img, pt1, pt2, color[, thickness[, line_type[, shift[, tipLength
     """
     ...
 
-
-def batchDistance(src1, src2, dtype[, dist[, nidx[, normType[, K[, mask[, update[, crosscheck]]]]]]]) -> dist, nidx:
+def batchDistance(
+    src1,
+    src2,
+    dtype,
+    dist=...,
+    nidx=...,
+    normType=...,
+    K=...,
+    mask=...,
+    update=...,
+    crosscheck=...,
+) -> Tuple[dist, nidx]:
     """
     .   @brief naive nearest neighbor finder
     .
@@ -14475,8 +13024,7 @@ def batchDistance(src1, src2, dtype[, dist[, nidx[, normType[, K[, mask[, update
     """
     ...
 
-
-def bilateralFilter(src, d, sigmaColor, sigmaSpace[, dst[, borderType]]) -> dst:
+def bilateralFilter(src, d, sigmaColor, sigmaSpace, dst=..., borderType=...) -> dst:
     """
     .   @brief Applies the bilateral filter to an image.
     .
@@ -14508,8 +13056,9 @@ def bilateralFilter(src, d, sigmaColor, sigmaSpace[, dst[, borderType]]) -> dst:
     """
     ...
 
-
-def bitwise_and(src1: ndarray, src2: ndarray, dst: ndarray =..., mask: ndarray=...) -> ndarray:
+def bitwise_and(
+    src1: ndarray, src2: ndarray, dst: ndarray = ..., mask: ndarray = ...
+) -> ndarray:
     """
     .   @brief computes bitwise conjunction of the two arrays (dst = src1 & src2)
     .   Calculates the per-element bit-wise conjunction of two arrays or an
@@ -14538,8 +13087,7 @@ def bitwise_and(src1: ndarray, src2: ndarray, dst: ndarray =..., mask: ndarray=.
     """
     ...
 
-
-def bitwise_not(src[, dst[, mask]]) -> dst:
+def bitwise_not(src, dst=..., mask=...) -> dst:
     """
     .   @brief  Inverts every bit of an array.
     .
@@ -14557,8 +13105,7 @@ def bitwise_not(src[, dst[, mask]]) -> dst:
     """
     ...
 
-
-def bitwise_or(src1, src2[, dst[, mask]]) -> dst:
+def bitwise_or(src1, src2, dst=..., mask=...) -> dst:
     """
     .   @brief Calculates the per-element bit-wise disjunction of two arrays or an
     .   array and a scalar.
@@ -14586,8 +13133,7 @@ def bitwise_or(src1, src2[, dst[, mask]]) -> dst:
     """
     ...
 
-
-def bitwise_xor(src1, src2[, dst[, mask]]) -> dst:
+def bitwise_xor(src1, src2, dst=..., mask=...) -> dst:
     """
     .   @brief Calculates the per-element bit-wise "exclusive or" operation on two
     .   arrays or an array and a scalar.
@@ -14616,15 +13162,19 @@ def bitwise_xor(src1, src2[, dst[, mask]]) -> dst:
     """
     ...
 
-
-def blendLinear(src1, src2, weights1, weights2[, dst]) -> dst:
+def blendLinear(src1, src2, weights1, weights2, dst=...) -> dst:
     """
     .
     """
     ...
 
-
-def blur(src: ndarray, ksize: Tuple[int, int], dst: ndarray = ..., anchor: Tuple[int, int] = ..., borderType: int =...) -> ndarray:
+def blur(
+    src: ndarray,
+    ksize: Tuple[int, int],
+    dst: ndarray = ...,
+    anchor: Tuple[int, int] = ...,
+    borderType: int = ...,
+) -> ndarray:
     """
     .   @brief Blurs an image using the normalized box filter.
     .
@@ -14645,7 +13195,6 @@ def blur(src: ndarray, ksize: Tuple[int, int], dst: ndarray = ..., anchor: Tuple
     .   @sa  boxFilter, bilateralFilter, GaussianBlur, medianBlur
     """
     ...
-
 
 def borderInterpolate(p, len, borderType) -> retval:
     """
@@ -14672,7 +13221,6 @@ def borderInterpolate(p, len, borderType) -> retval:
     """
     ...
 
-
 def boundingRect(array: ndarray) -> Tuple[int, int, int, int]:
     """
     .   @brief Calculates the up-right bounding rectangle of a point set or non-zero pixels of gray-scale image.
@@ -14684,8 +13232,9 @@ def boundingRect(array: ndarray) -> Tuple[int, int, int, int]:
     """
     ...
 
-
-def boxFilter(src, ddepth, ksize[, dst[, anchor[, normalize[, borderType]]]]) -> dst:
+def boxFilter(
+    src, ddepth, ksize, dst=..., anchor=..., normalize=..., borderType=...
+) -> dst:
     """
     .   @brief Blurs an image using the box filter.
     .
@@ -14713,8 +13262,7 @@ def boxFilter(src, ddepth, ksize[, dst[, anchor[, normalize[, borderType]]]]) ->
     """
     ...
 
-
-def boxPoints(box[, points]) -> points:
+def boxPoints(box, points=...) -> points:
     """
     .   @brief Finds the four vertices of a rotated rect. Useful to draw the rotated rectangle.
     .
@@ -14727,8 +13275,16 @@ def boxPoints(box[, points]) -> points:
     """
     ...
 
-
-def buildOpticalFlowPyramid(img, winSize, maxLevel[, pyramid[, withDerivatives[, pyrBorder[, derivBorder[, tryReuseInputImage]]]]]) -> retval, pyramid:
+def buildOpticalFlowPyramid(
+    img,
+    winSize,
+    maxLevel,
+    pyramid=...,
+    withDerivatives=...,
+    pyrBorder=...,
+    derivBorder=...,
+    tryReuseInputImage=...,
+) -> Tuple[retval, pyramid]:
     """
     .   @brief Constructs the image pyramid which can be passed to calcOpticalFlowPyrLK.
     .
@@ -14747,15 +13303,13 @@ def buildOpticalFlowPyramid(img, winSize, maxLevel[, pyramid[, withDerivatives[,
     """
     ...
 
-
-def calcBackProject(images, channels, hist, ranges, scale[, dst]) -> dst:
+def calcBackProject(images, channels, hist, ranges, scale, dst=...) -> dst:
     """
     .   @overload
     """
     ...
 
-
-def calcCovarMatrix(samples, mean, flags[, covar[, ctype]]) -> covar, mean:
+def calcCovarMatrix(samples, mean, flags, covar=..., ctype=...) -> Tuple[covar, mean]:
     """
     .   @overload
     .   @note use #COVAR_ROWS or #COVAR_COLS flag
@@ -14767,15 +13321,23 @@ def calcCovarMatrix(samples, mean, flags[, covar[, ctype]]) -> covar, mean:
     """
     ...
 
-
-def calcHist(images: ndarray, channels: Tuple[int, ...], mask: Optional[ndarray], histSize:  Tuple[int] , ranges: Tuple[int, int], hist: ndarray = ..., accumulate: bool = ...) -> ndarray:
+def calcHist(
+    images: ndarray,
+    channels: Tuple[int, ...],
+    mask: Optional[ndarray],
+    histSize: Tuple[int],
+    ranges: Tuple[int, int],
+    hist: ndarray = ...,
+    accumulate: bool = ...,
+) -> ndarray:
     """
     .   @overload
     """
     ...
 
-
-def calcOpticalFlowFarneback(prev, next, flow, pyr_scale, levels, winsize, iterations, poly_n, poly_sigma, flags) -> flow:
+def calcOpticalFlowFarneback(
+    prev, next, flow, pyr_scale, levels, winsize, iterations, poly_n, poly_sigma, flags
+) -> flow:
     """
     .   @brief Computes a dense optical flow using the Gunnar Farneback's algorithm.
     .
@@ -14817,8 +13379,19 @@ def calcOpticalFlowFarneback(prev, next, flow, pyr_scale, levels, winsize, itera
     """
     ...
 
-
-def calcOpticalFlowPyrLK(prevImg, nextImg, prevPts, nextPts[, status[, err[, winSize[, maxLevel[, criteria[, flags[, minEigThreshold]]]]]]]) -> nextPts, status, err:
+def calcOpticalFlowPyrLK(
+    prevImg,
+    nextImg,
+    prevPts,
+    nextPts,
+    status=...,
+    err=...,
+    winSize=...,
+    maxLevel=...,
+    criteria=...,
+    flags=...,
+    minEigThreshold=...,
+) -> Tuple[s, err]:
     """
     .   @brief Calculates an optical flow for a sparse feature set using the iterative Lucas-Kanade method with
     .   pyramids.
@@ -14869,15 +13442,36 @@ def calcOpticalFlowPyrLK(prevImg, nextImg, prevPts, nextPts[, status[, err[, win
     """
     ...
 
-
-def calibrateCamera(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs[, rvecs[, tvecs[, flags[, criteria]]]]) -> retval, cameraMatrix, distCoeffs, rvecs, tvecs:
+def calibrateCamera(
+    objectPoints,
+    imagePoints,
+    imageSize,
+    cameraMatrix,
+    distCoeffs,
+    rvecs=...,
+    tvecs=...,
+    flags=...,
+    criteria=...,
+) -> Tuple[s, tvecs]:
     """
     .   @overload
     """
     ...
 
-
-def calibrateCameraExtended(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs[, rvecs[, tvecs[, stdDeviationsIntrinsics[, stdDeviationsExtrinsics[, perViewErrors[, flags[, criteria]]]]]]]) -> retval, cameraMatrix, distCoeffs, rvecs, tvecs, stdDeviationsIntrinsics, stdDeviationsExtrinsics, perViewErrors:
+def calibrateCameraExtended(
+    objectPoints,
+    imagePoints,
+    imageSize,
+    cameraMatrix,
+    distCoeffs,
+    rvecs=...,
+    tvecs=...,
+    stdDeviationsIntrinsics=...,
+    stdDeviationsExtrinsics=...,
+    perViewErrors=...,
+    flags=...,
+    criteria=...,
+) -> Tuple[stdDeviationsExtrinsics, perViewErrors]:
     """
     .   @brief Finds the camera intrinsic and extrinsic parameters from several views of a calibration
     .   pattern.
@@ -14998,15 +13592,41 @@ def calibrateCameraExtended(objectPoints, imagePoints, imageSize, cameraMatrix, 
     """
     ...
 
-
-def calibrateCameraRO(objectPoints, imagePoints, imageSize, iFixedPoint, cameraMatrix, distCoeffs[, rvecs[, tvecs[, newObjPoints[, flags[, criteria]]]]]) -> retval, cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints:
+def calibrateCameraRO(
+    objectPoints,
+    imagePoints,
+    imageSize,
+    iFixedPoint,
+    cameraMatrix,
+    distCoeffs,
+    rvecs=...,
+    tvecs=...,
+    newObjPoints=...,
+    flags=...,
+    criteria=...,
+) -> Tuple[tvecs, newObjPoints]:
     """
     .   @overload
     """
     ...
 
-
-def calibrateCameraROExtended(objectPoints, imagePoints, imageSize, iFixedPoint, cameraMatrix, distCoeffs[, rvecs[, tvecs[, newObjPoints[, stdDeviationsIntrinsics[, stdDeviationsExtrinsics[, stdDeviationsObjPoints[, perViewErrors[, flags[, criteria]]]]]]]]]) -> retval, cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints, stdDeviationsIntrinsics, stdDeviationsExtrinsics, stdDeviationsObjPoints, perViewErrors:
+def calibrateCameraROExtended(
+    objectPoints,
+    imagePoints,
+    imageSize,
+    iFixedPoint,
+    cameraMatrix,
+    distCoeffs,
+    rvecs=...,
+    tvecs=...,
+    newObjPoints=...,
+    stdDeviationsIntrinsics=...,
+    stdDeviationsExtrinsics=...,
+    stdDeviationsObjPoints=...,
+    perViewErrors=...,
+    flags=...,
+    criteria=...,
+) -> Tuple[stdDeviationsObjPoints, perViewErrors]:
     """
     .   @brief Finds the camera intrinsic and extrinsic parameters from several views of a calibration pattern.
     .
@@ -15067,8 +13687,15 @@ def calibrateCameraROExtended(objectPoints, imagePoints, imageSize, iFixedPoint,
     """
     ...
 
-
-def calibrateHandEye(R_gripper2base, t_gripper2base, R_target2cam, t_target2cam[, R_cam2gripper[, t_cam2gripper[, method]]]) -> R_cam2gripper, t_cam2gripper:
+def calibrateHandEye(
+    R_gripper2base,
+    t_gripper2base,
+    R_target2cam,
+    t_target2cam,
+    R_cam2gripper=...,
+    t_cam2gripper=...,
+    method=...,
+) -> Tuple[R_cam2gripper, t_cam2gripper]:
     """
     .   @brief Computes Hand-Eye calibration: \f$_{}^{g}\textrm{T}_c\f$
     .
@@ -15217,8 +13844,17 @@ def calibrateHandEye(R_gripper2base, t_gripper2base, R_target2cam, t_target2cam[
     """
     ...
 
-
-def calibrateRobotWorldHandEye(R_world2cam, t_world2cam, R_base2gripper, t_base2gripper[, R_base2world[, t_base2world[, R_gripper2cam[, t_gripper2cam[, method]]]]]) -> R_base2world, t_base2world, R_gripper2cam, t_gripper2cam:
+def calibrateRobotWorldHandEye(
+    R_world2cam,
+    t_world2cam,
+    R_base2gripper,
+    t_base2gripper,
+    R_base2world=...,
+    t_base2world=...,
+    R_gripper2cam=...,
+    t_gripper2cam=...,
+    method=...,
+) -> Tuple[R_gripper2cam, t_gripper2cam]:
     """
     .   @brief Computes Robot-World/Hand-Eye calibration: \f$_{}^{w}\textrm{T}_b\f$ and \f$_{}^{c}\textrm{T}_g\f$
     .
@@ -15359,8 +13995,9 @@ def calibrateRobotWorldHandEye(R_world2cam, t_world2cam, R_base2gripper, t_base2
     """
     ...
 
-
-def calibrationMatrixValues(cameraMatrix, imageSize, apertureWidth, apertureHeight) -> fovx, fovy, focalLength, principalPoint, aspectRatio:
+def calibrationMatrixValues(
+    cameraMatrix, imageSize, apertureWidth, apertureHeight
+) -> Tuple[t, aspectRatio]:
     """
     .   @brief Computes useful camera characteristics from the camera intrinsic matrix.
     .
@@ -15384,8 +14021,9 @@ def calibrationMatrixValues(cameraMatrix, imageSize, apertureWidth, apertureHeig
     """
     ...
 
-
-def cartToPolar(x, y[, magnitude[, angle[, angleInDegrees]]]) -> magnitude, angle:
+def cartToPolar(
+    x, y, magnitude=..., angle=..., angleInDegrees=...
+) -> Tuple[magnitude, angle]:
     """
     .   @brief Calculates the magnitude and angle of 2D vectors.
     .
@@ -15407,13 +14045,11 @@ def cartToPolar(x, y[, magnitude[, angle[, angleInDegrees]]]) -> magnitude, angl
     """
     ...
 
-
 def checkChessboard(img, size) -> retval:
     """
     .
     """
     ...
-
 
 def checkHardwareSupport(feature) -> retval:
     """
@@ -15427,8 +14063,7 @@ def checkHardwareSupport(feature) -> retval:
     """
     ...
 
-
-def checkRange(a[, quiet[, minVal[, maxVal]]]) -> retval, pos:
+def checkRange(a, quiet=..., minVal=..., maxVal=...) -> Tuple[retval, pos]:
     """
     .   @brief Checks every element of an input array for invalid values.
     .
@@ -15447,8 +14082,15 @@ def checkRange(a[, quiet[, minVal[, maxVal]]]) -> retval, pos:
     """
     ...
 
-
-def circle(img: ndarray, center: Tuple[int, int], radius: int, color: Tuple[int, ...], thickness: int =..., lineType: int =..., shift: int = ...) -> ndarray:
+def circle(
+    img: ndarray,
+    center: Tuple[int, int],
+    radius: int,
+    color: Tuple[int, ...],
+    thickness: int = ...,
+    lineType: int = ...,
+    shift: int = ...,
+) -> ndarray:
     """
     .   @brief Draws a circle.
     .
@@ -15464,8 +14106,7 @@ def circle(img: ndarray, center: Tuple[int, int], radius: int, color: Tuple[int,
     """
     ...
 
-
-def clipLine(imgRect, pt1, pt2) -> retval, pt1, pt2:
+def clipLine(imgRect, pt1, pt2) -> Tuple[1, pt2]:
     """
     .   @overload
     .   @param imgRect Image rectangle.
@@ -15474,8 +14115,7 @@ def clipLine(imgRect, pt1, pt2) -> retval, pt1, pt2:
     """
     ...
 
-
-def colorChange(src, mask[, dst[, red_mul[, green_mul[, blue_mul]]]]) -> dst:
+def colorChange(src, mask, dst=..., red_mul=..., green_mul=..., blue_mul=...) -> dst:
     """
     .   @brief Given an original color image, two differently colored versions of this image can be mixed
     .   seamlessly.
@@ -15491,8 +14131,7 @@ def colorChange(src, mask[, dst[, red_mul[, green_mul[, blue_mul]]]]) -> dst:
     """
     ...
 
-
-def compare(src1, src2, cmpop[, dst]) -> dst:
+def compare(src1, src2, cmpop, dst=...) -> dst:
     """
     .   @brief Performs the per-element comparison of two arrays or an array and scalar value.
     .
@@ -15522,8 +14161,7 @@ def compare(src1, src2, cmpop[, dst]) -> dst:
     """
     ...
 
-
-def compareHist(H1:ndarray, H2: ndarray, method: int) -> float:
+def compareHist(H1: ndarray, H2: ndarray, method: int) -> float:
     """
     .   @brief Compares two histograms.
     .
@@ -15542,7 +14180,6 @@ def compareHist(H1:ndarray, H2: ndarray, method: int) -> float:
     """
     ...
 
-
 def compile_args(pkg) -> retval:
     """
     .
@@ -15554,8 +14191,7 @@ def compile_args(pkg) -> retval:
     """
     ...
 
-
-def completeSymm(m[, lowerToUpper]) -> m:
+def completeSymm(m, lowerToUpper=...) -> m:
     """
     .   @brief Copies the lower or the upper half of a square matrix to its another half.
     .
@@ -15573,8 +14209,22 @@ def completeSymm(m[, lowerToUpper]) -> m:
     """
     ...
 
-
-def composeRT(rvec1, tvec1, rvec2, tvec2[, rvec3[, tvec3[, dr3dr1[, dr3dt1[, dr3dr2[, dr3dt2[, dt3dr1[, dt3dt1[, dt3dr2[, dt3dt2]]]]]]]]]]) -> rvec3, tvec3, dr3dr1, dr3dt1, dr3dr2, dr3dt2, dt3dr1, dt3dt1, dt3dr2, dt3dt2:
+def composeRT(
+    rvec1,
+    tvec1,
+    rvec2,
+    tvec2,
+    rvec3=...,
+    tvec3=...,
+    dr3dr1=...,
+    dr3dt1=...,
+    dr3dr2=...,
+    dr3dt2=...,
+    dt3dr1=...,
+    dt3dt1=...,
+    dt3dr2=...,
+    dt3dt2=...,
+) -> Tuple[dt3dr2, dt3dt2]:
     """
     .   @brief Combines two rotation-and-shift transformations.
     .
@@ -15607,8 +14257,7 @@ def composeRT(rvec1, tvec1, rvec2, tvec2[, rvec3[, tvec3[, dr3dr1[, dr3dt1[, dr3
     """
     ...
 
-
-def computeCorrespondEpilines(points, whichImage, F[, lines]) -> lines:
+def computeCorrespondEpilines(points, whichImage, F, lines=...) -> lines:
     """
     .   @brief For points in an image of a stereo pair, computes the corresponding epilines in the other image.
     .
@@ -15635,8 +14284,7 @@ def computeCorrespondEpilines(points, whichImage, F[, lines]) -> lines:
     """
     ...
 
-
-def computeECC(templateImage, inputImage[, inputMask]) -> retval:
+def computeECC(templateImage, inputImage, inputMask=...) -> retval:
     """
     .   @brief Computes the Enhanced Correlation Coefficient value between two images @cite EP08 .
     .
@@ -15650,8 +14298,9 @@ def computeECC(templateImage, inputImage[, inputMask]) -> retval:
     """
     ...
 
-
-def connectedComponents(image[, labels[, connectivity[, ltype]]]) -> retval, labels:
+def connectedComponents(
+    image, labels=..., connectivity=..., ltype=...
+) -> Tuple[retval, labels]:
     """
     .   @overload
     .
@@ -15662,8 +14311,9 @@ def connectedComponents(image[, labels[, connectivity[, ltype]]]) -> retval, lab
     """
     ...
 
-
-def connectedComponentsWithAlgorithm(image, connectivity, ltype, ccltype[, labels]) -> retval, labels:
+def connectedComponentsWithAlgorithm(
+    image, connectivity, ltype, ccltype, labels=...
+) -> Tuple[retval, labels]:
     """
     .   @brief computes the connected components labeled image of boolean image
     .
@@ -15684,8 +14334,9 @@ def connectedComponentsWithAlgorithm(image, connectivity, ltype, ccltype[, label
     """
     ...
 
-
-def connectedComponentsWithStats(image[, labels[, stats[, centroids[, connectivity[, ltype]]]]]) -> retval, labels, stats, centroids:
+def connectedComponentsWithStats(
+    image, labels=..., stats=..., centroids=..., connectivity=..., ltype=...
+) -> Tuple[stats, centroids]:
     """
     .   @overload
     .   @param image the 8-bit single-channel image to be labeled
@@ -15700,8 +14351,9 @@ def connectedComponentsWithStats(image[, labels[, stats[, centroids[, connectivi
     """
     ...
 
-
-def connectedComponentsWithStatsWithAlgorithm(image, connectivity, ltype, ccltype[, labels[, stats[, centroids]]]) -> retval, labels, stats, centroids:
+def connectedComponentsWithStatsWithAlgorithm(
+    image, connectivity, ltype, ccltype, labels=..., stats=..., centroids=...
+) -> Tuple[stats, centroids]:
     """
     .   @brief computes the connected components labeled image of boolean image and also produces a statistics output for each label
     .
@@ -15726,7 +14378,6 @@ def connectedComponentsWithStatsWithAlgorithm(image, connectivity, ltype, ccltyp
     .   @param ccltype connected components algorithm type (see #ConnectedComponentsAlgorithmsTypes).
     """
     ...
-
 
 def contourArea(contour: ndarray, oriented: bool = ...) -> int:
     """
@@ -15762,8 +14413,7 @@ def contourArea(contour: ndarray, oriented: bool = ...) -> int:
     """
     ...
 
-
-def convertFp16(src[, dst]) -> dst:
+def convertFp16(src, dst=...) -> dst:
     """
     .   @brief Converts an array to half precision floating number.
     .
@@ -15777,8 +14427,9 @@ def convertFp16(src[, dst]) -> dst:
     """
     ...
 
-
-def convertMaps(map1, map2, dstmap1type[, dstmap1[, dstmap2[, nninterpolation]]]) -> dstmap1, dstmap2:
+def convertMaps(
+    map1, map2, dstmap1type, dstmap1=..., dstmap2=..., nninterpolation=...
+) -> Tuple[dstmap1, dstmap2]:
     """
     .   @brief Converts image transformation maps from one representation to another.
     .
@@ -15812,8 +14463,7 @@ def convertMaps(map1, map2, dstmap1type[, dstmap1[, dstmap2[, nninterpolation]]]
     """
     ...
 
-
-def convertPointsFromHomogeneous(src[, dst]) -> dst:
+def convertPointsFromHomogeneous(src, dst=...) -> dst:
     """
     .   @brief Converts points from homogeneous to Euclidean space.
     .
@@ -15826,8 +14476,7 @@ def convertPointsFromHomogeneous(src[, dst]) -> dst:
     """
     ...
 
-
-def convertPointsToHomogeneous(src[, dst]) -> dst:
+def convertPointsToHomogeneous(src, dst=...) -> dst:
     """
     .   @brief Converts points from Euclidean to homogeneous space.
     .
@@ -15839,8 +14488,7 @@ def convertPointsToHomogeneous(src[, dst]) -> dst:
     """
     ...
 
-
-def convertScaleAbs(src[, dst[, alpha[, beta]]]) -> dst:
+def convertScaleAbs(src, dst=..., alpha=..., beta=...) -> dst:
     """
     .   @brief Scales, calculates absolute values, and converts the result to 8-bit.
     .
@@ -15869,8 +14517,7 @@ def convertScaleAbs(src[, dst[, alpha[, beta]]]) -> dst:
     """
     ...
 
-
-def convexHull(points[, hull[, clockwise[, returnPoints]]]) -> hull:
+def convexHull(points, hull=..., clockwise=..., returnPoints=...) -> hull:
     """
     .   @brief Finds the convex hull of a point set.
     .
@@ -15901,8 +14548,7 @@ def convexHull(points[, hull[, clockwise[, returnPoints]]]) -> hull:
     """
     ...
 
-
-def convexityDefects(contour, convexhull[, convexityDefects]) -> convexityDefects:
+def convexityDefects(contour, convexhull, convexityDefects=...) -> convexityDefects:
     """
     .   @brief Finds the convexity defects of a contour.
     .
@@ -15923,8 +14569,16 @@ def convexityDefects(contour, convexhull[, convexityDefects]) -> convexityDefect
     """
     ...
 
-
-def copyMakeBorder(src: ndarray, top: int, bottom: int, left: int, right: int, borderType: int , dst: ndarray =..., value: Any =...) -> ndarray:
+def copyMakeBorder(
+    src: ndarray,
+    top: int,
+    bottom: int,
+    left: int,
+    right: int,
+    borderType: int,
+    dst: ndarray = ...,
+    value: Any = ...,
+) -> ndarray:
     """
     .   @brief Forms a border around an image.
     .
@@ -15971,7 +14625,6 @@ def copyMakeBorder(src: ndarray, top: int, bottom: int, left: int, right: int, b
     """
     ...
 
-
 def copyTo(src: ndarray, mask: ndarray = ..., dst: ndarray = ...) -> ndarray:
     """
     .   @brief  This is an overloaded member function, provided for convenience (python)
@@ -15985,8 +14638,7 @@ def copyTo(src: ndarray, mask: ndarray = ..., dst: ndarray = ...) -> ndarray:
     """
     ...
 
-
-def cornerEigenValsAndVecs(src, blockSize, ksize[, dst[, borderType]]) -> dst:
+def cornerEigenValsAndVecs(src, blockSize, ksize, dst=..., borderType=...) -> dst:
     """
     .   @brief Calculates eigenvalues and eigenvectors of image blocks for corner detection.
     .
@@ -16016,8 +14668,7 @@ def cornerEigenValsAndVecs(src, blockSize, ksize[, dst[, borderType]]) -> dst:
     """
     ...
 
-
-def cornerHarris(src, blockSize, ksize, k[, dst[, borderType]]) -> dst:
+def cornerHarris(src, blockSize, ksize, k, dst=..., borderType=...) -> dst:
     """
     .   @brief Harris corner detector.
     .
@@ -16040,8 +14691,7 @@ def cornerHarris(src, blockSize, ksize, k[, dst[, borderType]]) -> dst:
     """
     ...
 
-
-def cornerMinEigenVal(src, blockSize[, dst[, ksize[, borderType]]]) -> dst:
+def cornerMinEigenVal(src, blockSize, dst=..., ksize=..., borderType=...) -> dst:
     """
     .   @brief Calculates the minimal eigenvalue of gradient matrices for corner detection.
     .
@@ -16057,7 +14707,6 @@ def cornerMinEigenVal(src, blockSize[, dst[, ksize[, borderType]]]) -> dst:
     .   @param borderType Pixel extrapolation method. See #BorderTypes. #BORDER_WRAP is not supported.
     """
     ...
-
 
 def cornerSubPix(image, corners, winSize, zeroZone, criteria) -> corners:
     """
@@ -16103,8 +14752,9 @@ def cornerSubPix(image, corners, winSize, zeroZone, criteria) -> corners:
     """
     ...
 
-
-def correctMatches(F, points1, points2[, newPoints1[, newPoints2]]) -> newPoints1, newPoints2:
+def correctMatches(
+    F, points1, points2, newPoints1=..., newPoints2=...
+) -> Tuple[newPoints1, newPoints2]:
     """
     .   @brief Refines coordinates of corresponding points.
     .
@@ -16123,7 +14773,6 @@ def correctMatches(F, points1, points2[, newPoints1[, newPoints2]]) -> newPoints
     """
     ...
 
-
 def countNonZero(src) -> retval:
     """
     .   @brief Counts non-zero array elements.
@@ -16135,8 +14784,7 @@ def countNonZero(src) -> retval:
     """
     ...
 
-
-def createAlignMTB([, max_bits[, exclude_range[, cut]]]) -> retval:
+def createAlignMTB(max_bits=..., exclude_range=..., cut=...) -> retval:
     """
     .   @brief Creates AlignMTB object
     .
@@ -16148,8 +14796,9 @@ def createAlignMTB([, max_bits[, exclude_range[, cut]]]) -> retval:
     """
     ...
 
-
-def createBackgroundSubtractorKNN([, history[, dist2Threshold[, detectShadows]]]) -> retval:
+def createBackgroundSubtractorKNN(
+    history=..., dist2Threshold=..., detectShadows=...
+) -> retval:
     """
     .   @brief Creates KNN Background Subtractor
     .
@@ -16161,8 +14810,9 @@ def createBackgroundSubtractorKNN([, history[, dist2Threshold[, detectShadows]]]
     """
     ...
 
-
-def createBackgroundSubtractorMOG2([, history[, varThreshold[, detectShadows]]]) -> retval:
+def createBackgroundSubtractorMOG2(
+    history=..., varThreshold=..., detectShadows=...
+) -> retval:
     """
     .   @brief Creates MOG2 Background Subtractor
     .
@@ -16175,14 +14825,13 @@ def createBackgroundSubtractorMOG2([, history[, varThreshold[, detectShadows]]])
     """
     ...
 
-
-def createButton(buttonName, onChange[, userData, buttonType, initialButtonState]) -> None:
-    """
-    """
+def createButton(
+    buttonName, onChange, userData=..., buttonType=..., initialButtonState=...
+) -> None:
+    """ """
     ...
 
-
-def createCLAHE([, clipLimit[, tileGridSize]]) -> retval:
+def createCLAHE(clipLimit=..., tileGridSize=...) -> retval:
     """
     .   @brief Creates a smart pointer to a cv::CLAHE class and initializes it.
     .
@@ -16192,8 +14841,7 @@ def createCLAHE([, clipLimit[, tileGridSize]]) -> retval:
     """
     ...
 
-
-def createCalibrateDebevec([, samples[, lambda[, random]]]) -> retval:
+def createCalibrateDebevec(samples=..., lambda_=..., random=...) -> retval:
     """
     .   @brief Creates CalibrateDebevec object
     .
@@ -16205,8 +14853,7 @@ def createCalibrateDebevec([, samples[, lambda[, random]]]) -> retval:
     """
     ...
 
-
-def createCalibrateRobertson([, max_iter[, threshold]]) -> retval:
+def createCalibrateRobertson(max_iter=..., threshold=...) -> retval:
     """
     .   @brief Creates CalibrateRobertson object
     .
@@ -16215,13 +14862,11 @@ def createCalibrateRobertson([, max_iter[, threshold]]) -> retval:
     """
     ...
 
-
 def createGeneralizedHoughBallard() -> retval:
     """
     .   @brief Creates a smart pointer to a cv::GeneralizedHoughBallard class and initializes it.
     """
     ...
-
 
 def createGeneralizedHoughGuil() -> retval:
     """
@@ -16229,8 +14874,7 @@ def createGeneralizedHoughGuil() -> retval:
     """
     ...
 
-
-def createHanningWindow(winSize, type[, dst]) -> dst:
+def createHanningWindow(winSize, type, dst=...) -> dst:
     """
     .   @brief This function computes a Hanning window coefficients in two dimensions.
     .
@@ -16249,8 +14893,16 @@ def createHanningWindow(winSize, type[, dst]) -> dst:
     """
     ...
 
-
-def createLineSegmentDetector([, _refine[, _scale[, _sigma_scale[, _quant[, _ang_th[, _log_eps[, _density_th[, _n_bins]]]]]]]]) -> retval:
+def createLineSegmentDetector(
+    _refine=...,
+    _scale=...,
+    _sigma_scale=...,
+    _quant=...,
+    _ang_th=...,
+    _log_eps=...,
+    _density_th=...,
+    _n_bins=...,
+) -> retval:
     """
     .   @brief Creates a smart pointer to a LineSegmentDetector object and initializes it.
     .
@@ -16271,15 +14923,15 @@ def createLineSegmentDetector([, _refine[, _scale[, _sigma_scale[, _quant[, _ang
     """
     ...
 
-
 def createMergeDebevec() -> retval:
     """
     .   @brief Creates MergeDebevec object
     """
     ...
 
-
-def createMergeMertens([, contrast_weight[, saturation_weight[, exposure_weight]]]) -> retval:
+def createMergeMertens(
+    contrast_weight=..., saturation_weight=..., exposure_weight=...
+) -> retval:
     """
     .   @brief Creates MergeMertens object
     .
@@ -16289,15 +14941,13 @@ def createMergeMertens([, contrast_weight[, saturation_weight[, exposure_weight]
     """
     ...
 
-
 def createMergeRobertson() -> retval:
     """
     .   @brief Creates MergeRobertson object
     """
     ...
 
-
-def createTonemap([, gamma]) -> retval:
+def createTonemap(gamma=...) -> retval:
     """
     .   @brief Creates simple linear mapper with gamma correction
     .
@@ -16307,8 +14957,7 @@ def createTonemap([, gamma]) -> retval:
     """
     ...
 
-
-def createTonemapDrago([, gamma[, saturation[, bias]]]) -> retval:
+def createTonemapDrago(gamma=..., saturation=..., bias=...) -> retval:
     """
     .   @brief Creates TonemapDrago object
     .
@@ -16320,8 +14969,7 @@ def createTonemapDrago([, gamma[, saturation[, bias]]]) -> retval:
     """
     ...
 
-
-def createTonemapMantiuk([, gamma[, scale[, saturation]]]) -> retval:
+def createTonemapMantiuk(gamma=..., scale=..., saturation=...) -> retval:
     """
     .   @brief Creates TonemapMantiuk object
     .
@@ -16332,8 +14980,9 @@ def createTonemapMantiuk([, gamma[, scale[, saturation]]]) -> retval:
     """
     ...
 
-
-def createTonemapReinhard([, gamma[, intensity[, light_adapt[, color_adapt]]]]) -> retval:
+def createTonemapReinhard(
+    gamma=..., intensity=..., light_adapt=..., color_adapt=...
+) -> retval:
     """
     .   @brief Creates TonemapReinhard object
     .
@@ -16346,12 +14995,9 @@ def createTonemapReinhard([, gamma[, intensity[, light_adapt[, color_adapt]]]]) 
     """
     ...
 
-
 def createTrackbar(trackbarName, windowName, value, count, onChange) -> None:
-    """
-    """
+    """ """
     ...
-
 
 def cubeRoot(val) -> retval:
     """
@@ -16364,8 +15010,9 @@ def cubeRoot(val) -> retval:
     """
     ...
 
-
-def cvtColor(src: ndarray, code: int = ..., dst: ndarray = ..., dstCn: int = ...) -> ndarray:
+def cvtColor(
+    src: ndarray, code: int = ..., dst: ndarray = ..., dstCn: int = ...
+) -> ndarray:
     """
     .   @brief Converts an image from one color space to another.
     .
@@ -16410,8 +15057,7 @@ def cvtColor(src: ndarray, code: int = ..., dst: ndarray = ..., dstCn: int = ...
     """
     ...
 
-
-def cvtColorTwoPlane(src1, src2, code[, dst]) -> dst:
+def cvtColorTwoPlane(src1, src2, code, dst=...) -> dst:
     """
     .   @brief Converts an image from one color space to another where the source image is
     .   stored in two planes.
@@ -16433,8 +15079,7 @@ def cvtColorTwoPlane(src1, src2, code[, dst]) -> dst:
     """
     ...
 
-
-def dct(src[, dst[, flags]]) -> dst:
+def dct(src, dst=..., flags=...) -> dst:
     """
     .   @brief Performs a forward or inverse discrete Cosine transform of 1D or 2D array.
     .
@@ -16477,8 +15122,7 @@ def dct(src[, dst[, flags]]) -> dst:
     """
     ...
 
-
-def decolor(src[, grayscale[, color_boost]]) -> grayscale, color_boost:
+def decolor(src, grayscale=..., color_boost=...) -> Tuple[grayscale, color_boost]:
     """
     .   @brief Transforms a color image to a grayscale image. It is a basic tool in digital printing, stylized
     .   black-and-white photograph rendering, and in many single channel image processing applications
@@ -16492,8 +15136,7 @@ def decolor(src[, grayscale[, color_boost]]) -> grayscale, color_boost:
     """
     ...
 
-
-def decomposeEssentialMat(E[, R1[, R2[, t]]]) -> R1, R2, t:
+def decomposeEssentialMat(E, R1=..., R2=..., t=...) -> Tuple[2, t]:
     """
     .   @brief Decompose an essential matrix to possible rotations and translation.
     .
@@ -16515,8 +15158,9 @@ def decomposeEssentialMat(E[, R1[, R2[, t]]]) -> R1, R2, t:
     """
     ...
 
-
-def decomposeHomographyMat(H, K[, rotations[, translations[, normals]]]) -> retval, rotations, translations, normals:
+def decomposeHomographyMat(
+    H, K, rotations=..., translations=..., normals=...
+) -> Tuple[translations, normals]:
     """
     .   @brief Decompose a homography matrix to rotation(s), translation(s) and plane normal(s).
     .
@@ -16542,8 +15186,16 @@ def decomposeHomographyMat(H, K[, rotations[, translations[, normals]]]) -> retv
     """
     ...
 
-
-def decomposeProjectionMatrix(projMatrix[, cameraMatrix[, rotMatrix[, transVect[, rotMatrixX[, rotMatrixY[, rotMatrixZ[, eulerAngles]]]]]]]) -> cameraMatrix, rotMatrix, transVect, rotMatrixX, rotMatrixY, rotMatrixZ, eulerAngles:
+def decomposeProjectionMatrix(
+    projMatrix,
+    cameraMatrix=...,
+    rotMatrix=...,
+    transVect=...,
+    rotMatrixX=...,
+    rotMatrixY=...,
+    rotMatrixZ=...,
+    eulerAngles=...,
+) -> Tuple[Z, eulerAngles]:
     """
     .   @brief Decomposes a projection matrix into a rotation matrix and a camera intrinsic matrix.
     .
@@ -16569,8 +15221,7 @@ def decomposeProjectionMatrix(projMatrix[, cameraMatrix[, rotMatrix[, transVect[
     """
     ...
 
-
-def demosaicing(src, code[, dst[, dstCn]]) -> dst:
+def demosaicing(src, code, dst=..., dstCn=...) -> dst:
     """
     .   @brief main function for all demosaicing processes
     .
@@ -16604,8 +15255,7 @@ def demosaicing(src, code[, dst[, dstCn]]) -> dst:
     """
     ...
 
-
-def denoise_TVL1(observations, result[, lambda[, niters]]) -> None:
+def denoise_TVL1(observations, result, lambda_=..., niters=...) -> None:
     """
     .   @brief Primal-dual algorithm is an algorithm for solving special types of variational problems (that is,
     .   finding a function to minimize some functional). As the image denoising, in particular, may be seen
@@ -16646,12 +15296,9 @@ def denoise_TVL1(observations, result[, lambda[, niters]]) -> None:
     """
     ...
 
-
 def descr_of(*args, **kwargs) -> ExtractMetaCallback:
-    """
-    """
+    """ """
     ...
-
 
 def destroyAllWindows() -> None:
     """
@@ -16660,7 +15307,6 @@ def destroyAllWindows() -> None:
     .   The function destroyAllWindows destroys all of the opened HighGUI windows.
     """
     ...
-
 
 def destroyWindow(winname: Text) -> None:
     """
@@ -16672,8 +15318,7 @@ def destroyWindow(winname: Text) -> None:
     """
     ...
 
-
-def detailEnhance(src[, dst[, sigma_s[, sigma_r]]]) -> dst:
+def detailEnhance(src, dst=..., sigma_s=..., sigma_r=...) -> dst:
     """
     .   @brief This filter enhances the details of a particular image.
     .
@@ -16683,7 +15328,6 @@ def detailEnhance(src[, dst[, sigma_s[, sigma_r]]]) -> dst:
     .   @param sigma_r %Range between 0 to 1.
     """
     ...
-
 
 def determinant(mtx) -> retval:
     """
@@ -16702,8 +15346,7 @@ def determinant(mtx) -> retval:
     """
     ...
 
-
-def dft(src[, dst[, flags[, nonzeroRows]]]) -> dst:
+def dft(src, dst=..., flags=..., nonzeroRows=...) -> dst:
     """
     .   @brief Performs a forward or inverse Discrete Fourier transform of a 1D or 2D floating-point array.
     .
@@ -16839,8 +15482,15 @@ def dft(src[, dst[, flags[, nonzeroRows]]]) -> dst:
     """
     ...
 
-
-def dilate(src: ndarray, kernel: ndarray, dst: ndarray =..., anchor: Tuple[int, int] = ..., iterations: int = ..., borderType: int =..., borderValue: Any = ...) -> ndarray:
+def dilate(
+    src: ndarray,
+    kernel: ndarray,
+    dst: ndarray = ...,
+    anchor: Tuple[int, int] = ...,
+    iterations: int = ...,
+    borderType: int = ...,
+    borderValue: Any = ...,
+) -> ndarray:
     """
     .   @brief Dilates an image by using a specific structuring element.
     .
@@ -16865,8 +15515,7 @@ def dilate(src: ndarray, kernel: ndarray, dst: ndarray =..., anchor: Tuple[int, 
     """
     ...
 
-
-def displayOverlay(winname, text[, delayms]) -> None:
+def displayOverlay(winname, text, delayms=...) -> None:
     """
     .   @brief Displays a text on a window image as an overlay for a specified duration.
     .
@@ -16882,8 +15531,7 @@ def displayOverlay(winname, text[, delayms]) -> None:
     """
     ...
 
-
-def displayStatusBar(winname, text[, delayms]) -> None:
+def displayStatusBar(winname, text, delayms=...) -> None:
     """
     .   @brief Displays a text on the window statusbar during the specified period of time.
     .
@@ -16899,8 +15547,13 @@ def displayStatusBar(winname, text[, delayms]) -> None:
     """
     ...
 
-
-def distanceTransform(src: ndarray, distanceType: int, maskSize: int, dst: ndarray = ..., dstType: int = ...) -> ndarray:
+def distanceTransform(
+    src: ndarray,
+    distanceType: int,
+    maskSize: int,
+    dst: ndarray = ...,
+    dstType: int = ...,
+) -> ndarray:
     """
     .   @overload
     .   @param src 8-bit, single-channel (binary) source image.
@@ -16915,8 +15568,9 @@ def distanceTransform(src: ndarray, distanceType: int, maskSize: int, dst: ndarr
     """
     ...
 
-
-def distanceTransformWithLabels(src, distanceType, maskSize[, dst[, labels[, labelType]]]) -> dst, labels:
+def distanceTransformWithLabels(
+    src, distanceType, maskSize, dst=..., labels=..., labelType=...
+) -> Tuple[dst, labels]:
     """
     .   @brief Calculates the distance to the closest zero pixel for each pixel of the source image.
     .
@@ -16973,8 +15627,7 @@ def distanceTransformWithLabels(src, distanceType, maskSize[, dst[, labels[, lab
     """
     ...
 
-
-def divide(src1, src2[, dst[, scale[, dtype]]]) -> dst:
+def divide(src1, src2, dst=..., scale=..., dtype=...) -> dst:
     """
     .   @brief Performs per-element division of two arrays or a scalar by an array.
     .
@@ -17003,11 +15656,10 @@ def divide(src1, src2[, dst[, scale[, dtype]]]) -> dst:
 
 
 
-    divide(scale, src2[, dst[, dtype]]) -> dst
+    divide(scale, src2, dst=..., dtype=...) -> dst
     .   @overload
     """
     ...
-
 
 def dnn_registerLayer(*args, **kwargs):
     """
@@ -17015,13 +15667,11 @@ def dnn_registerLayer(*args, **kwargs):
     """
     ...
 
-
 def dnn_unregisterLayer(*args, **kwargs):
     """
     unregisterLayer(type) -> None
     """
     ...
-
 
 def drawChessboardCorners(image, patternSize, corners, patternWasFound) -> image:
     """
@@ -17039,8 +15689,17 @@ def drawChessboardCorners(image, patternSize, corners, patternWasFound) -> image
     """
     ...
 
-
-def drawContours(image: ndarray, contours: ArrayLike, contourIdx: int, color: Tuple[int,...] = ..., thickness: int= ..., lineType: int =..., hierarchy: Optional[ndarray] = ..., maxLevel: int = ..., offset: int = ...) -> ndarray:
+def drawContours(
+    image: ndarray,
+    contours: ArrayLike,
+    contourIdx: int,
+    color: Tuple[int, ...] = ...,
+    thickness: int = ...,
+    lineType: int = ...,
+    hierarchy: Optional[ndarray] = ...,
+    maxLevel: int = ...,
+    offset: int = ...,
+) -> ndarray:
     """
     .   @brief Draws contours outlines or filled contours.
     .
@@ -17072,8 +15731,9 @@ def drawContours(image: ndarray, contours: ArrayLike, contourIdx: int, color: Tu
     """
     ...
 
-
-def drawFrameAxes(image, cameraMatrix, distCoeffs, rvec, tvec, length[, thickness]) -> image:
+def drawFrameAxes(
+    image, cameraMatrix, distCoeffs, rvec, tvec, length, thickness=...
+) -> image:
     """
     .   @brief Draw axes of the world/object coordinate system from pose estimation. @sa solvePnP
     .
@@ -17093,8 +15753,7 @@ def drawFrameAxes(image, cameraMatrix, distCoeffs, rvec, tvec, length[, thicknes
     """
     ...
 
-
-def drawKeypoints(image, keypoints, outImage[, color[, flags]]) -> outImage:
+def drawKeypoints(image, keypoints, outImage, color=..., flags=...) -> outImage:
     """
     .   @brief Draws keypoints.
     .
@@ -17113,8 +15772,9 @@ def drawKeypoints(image, keypoints, outImage[, color[, flags]]) -> outImage:
     """
     ...
 
-
-def drawMarker(img, position, color[, markerType[, markerSize[, thickness[, line_type]]]]) -> img:
+def drawMarker(
+    img, position, color, markerType=..., markerSize=..., thickness=..., line_type=...
+) -> img:
     """
     .   @brief Draws a marker on a predefined position in an image.
     .
@@ -17131,8 +15791,18 @@ def drawMarker(img, position, color[, markerType[, markerSize[, thickness[, line
     """
     ...
 
-
-def drawMatches(img1, keypoints1, img2, keypoints2, matches1to2, outImg[, matchColor[, singlePointColor[, matchesMask[, flags]]]]) -> outImg:
+def drawMatches(
+    img1,
+    keypoints1,
+    img2,
+    keypoints2,
+    matches1to2,
+    outImg,
+    matchColor=...,
+    singlePointColor=...,
+    matchesMask=...,
+    flags=...,
+) -> outImg:
     """
     .   @brief Draws the found matches of keypoints from two images.
     .
@@ -17158,15 +15828,24 @@ def drawMatches(img1, keypoints1, img2, keypoints2, matches1to2, outImg[, matchC
     """
     ...
 
-
-def drawMatchesKnn(img1, keypoints1, img2, keypoints2, matches1to2, outImg[, matchColor[, singlePointColor[, matchesMask[, flags]]]]) -> outImg:
+def drawMatchesKnn(
+    img1,
+    keypoints1,
+    img2,
+    keypoints2,
+    matches1to2,
+    outImg,
+    matchColor=...,
+    singlePointColor=...,
+    matchesMask=...,
+    flags=...,
+) -> outImg:
     """
     .   @overload
     """
     ...
 
-
-def edgePreservingFilter(src[, dst[, flags[, sigma_s[, sigma_r]]]]) -> dst:
+def edgePreservingFilter(src, dst=..., flags=..., sigma_s=..., sigma_r=...) -> dst:
     """
     .   @brief Filtering is the fundamental operation in image and video processing. Edge-preserving smoothing
     .   filters are used in many different applications @cite EM11 .
@@ -17179,8 +15858,7 @@ def edgePreservingFilter(src[, dst[, flags[, sigma_s[, sigma_r]]]]) -> dst:
     """
     ...
 
-
-def eigen(src[, eigenvalues[, eigenvectors]]) -> retval, eigenvalues, eigenvectors:
+def eigen(src, eigenvalues=..., eigenvectors=...) -> Tuple[s, eigenvectors]:
     """
     .   @brief Calculates eigenvalues and eigenvectors of a symmetric matrix.
     .
@@ -17203,8 +15881,9 @@ def eigen(src[, eigenvalues[, eigenvectors]]) -> retval, eigenvalues, eigenvecto
     """
     ...
 
-
-def eigenNonSymmetric(src[, eigenvalues[, eigenvectors]]) -> eigenvalues, eigenvectors:
+def eigenNonSymmetric(
+    src, eigenvalues=..., eigenvectors=...
+) -> Tuple[eigenvalues, eigenvectors]:
     """
     .   @brief Calculates eigenvalues and eigenvectors of a non-symmetric matrix (real eigenvalues only).
     .
@@ -17222,8 +15901,18 @@ def eigenNonSymmetric(src[, eigenvalues[, eigenvectors]]) -> eigenvalues, eigenv
     """
     ...
 
-
-def ellipse(img, center, axes, angle, startAngle, endAngle, color[, thickness[, lineType[, shift]]]) -> img:
+def ellipse(
+    img,
+    center,
+    axes,
+    angle,
+    startAngle,
+    endAngle,
+    color,
+    thickness=...,
+    lineType=...,
+    shift=...,
+) -> img:
     """
     .   @brief Draws a simple or thick elliptic arc or fills an ellipse sector.
     .
@@ -17252,7 +15941,7 @@ def ellipse(img, center, axes, angle, startAngle, endAngle, color[, thickness[, 
 
 
 
-    ellipse(img, box, color[, thickness[, lineType]]) -> img
+    ellipse(img, box, color, thickness=..., lineType=...) -> img
     .   @overload
     .   @param img Image.
     .   @param box Alternative ellipse representation via RotatedRect. This means that the function draws
@@ -17263,7 +15952,6 @@ def ellipse(img, center, axes, angle, startAngle, endAngle, color[, thickness[, 
     .   @param lineType Type of the ellipse boundary. See #LineTypes
     """
     ...
-
 
 def ellipse2Poly(center, axes, angle, arcStart, arcEnd, delta) -> pts:
     """
@@ -17283,13 +15971,11 @@ def ellipse2Poly(center, axes, angle, arcStart, arcEnd, delta) -> pts:
     """
     ...
 
-
 def empty_array_desc() -> retval:
     """
     .
     """
     ...
-
 
 def empty_gopaque_desc() -> retval:
     """
@@ -17297,15 +15983,13 @@ def empty_gopaque_desc() -> retval:
     """
     ...
 
-
 def empty_scalar_desc() -> retval:
     """
     .
     """
     ...
 
-
-def equalizeHist(src[, dst]) -> dst:
+def equalizeHist(src, dst=...) -> dst:
     """
     .   @brief Equalizes the histogram of a grayscale image.
     .
@@ -17324,8 +16008,15 @@ def equalizeHist(src[, dst]) -> dst:
     """
     ...
 
-
-def erode(src: ndarray, kernel: ndarray, dst: ndarray =..., anchor: Tuple[int, int] = ..., iterations: int = ..., borderType: int =..., borderValue: Any = ...) -> ndarray:
+def erode(
+    src: ndarray,
+    kernel: ndarray,
+    dst: ndarray = ...,
+    anchor: Tuple[int, int] = ...,
+    iterations: int = ...,
+    borderType: int = ...,
+    borderValue: Any = ...,
+) -> ndarray:
     """
     .   @brief Erodes an image by using a specific structuring element.
     .
@@ -17351,8 +16042,16 @@ def erode(src: ndarray, kernel: ndarray, dst: ndarray =..., anchor: Tuple[int, i
     """
     ...
 
-
-def estimateAffine2D(from, to[, inliers[, method[, ransacReprojThreshold[, maxIters[, confidence[, refineIters]]]]]]) -> retval, inliers:
+def estimateAffine2D(
+    from_,
+    to,
+    inliers=...,
+    method=...,
+    ransacReprojThreshold=...,
+    maxIters=...,
+    confidence=...,
+    refineIters=...,
+) -> Tuple[retval, inliers]:
     """
     .   @brief Computes an optimal affine transformation between two 2D point sets.
     .
@@ -17418,13 +16117,14 @@ def estimateAffine2D(from, to[, inliers[, method[, ransacReprojThreshold[, maxIt
 
 
 
-    estimateAffine2D(pts1, pts2, params[, inliers]) -> retval, inliers
+    estimateAffine2D(pts1, pts2, params, inliers=...) -> retval, inliers
     .
     """
     ...
 
-
-def estimateAffine3D(src, dst[, out[, inliers[, ransacThreshold[, confidence]]]]) -> retval, out, inliers:
+def estimateAffine3D(
+    src, dst, out=..., inliers=..., ransacThreshold=..., confidence=...
+) -> Tuple[t, inliers]:
     """
     .   @brief Computes an optimal affine transformation between two 3D point sets.
     .
@@ -17476,8 +16176,16 @@ def estimateAffine3D(src, dst[, out[, inliers[, ransacThreshold[, confidence]]]]
     """
     ...
 
-
-def estimateAffinePartial2D(from, to[, inliers[, method[, ransacReprojThreshold[, maxIters[, confidence[, refineIters]]]]]]) -> retval, inliers:
+def estimateAffinePartial2D(
+    from_,
+    to,
+    inliers=...,
+    method=...,
+    ransacReprojThreshold=...,
+    maxIters=...,
+    confidence=...,
+    refineIters=...,
+) -> Tuple[retval, inliers]:
     """
     .   @brief Computes an optimal limited affine transformation with 4 degrees of freedom between
     .   two 2D point sets.
@@ -17524,8 +16232,9 @@ def estimateAffinePartial2D(from, to[, inliers[, method[, ransacReprojThreshold[
     """
     ...
 
-
-def estimateChessboardSharpness(image, patternSize, corners[, rise_distance[, vertical[, sharpness]]]) -> retval, sharpness:
+def estimateChessboardSharpness(
+    image, patternSize, corners, rise_distance=..., vertical=..., sharpness=...
+) -> Tuple[retval, sharpness]:
     """
     .   @brief Estimates the sharpness of a detected chessboard.
     .
@@ -17556,8 +16265,9 @@ def estimateChessboardSharpness(image, patternSize, corners[, rise_distance[, ve
     """
     ...
 
-
-def estimateTranslation3D(src, dst[, out[, inliers[, ransacThreshold[, confidence]]]]) -> retval, out, inliers:
+def estimateTranslation3D(
+    src, dst, out=..., inliers=..., ransacThreshold=..., confidence=...
+) -> Tuple[t, inliers]:
     """
     .   @brief Computes an optimal translation between two 3D point sets.
     .    *
@@ -17605,8 +16315,7 @@ def estimateTranslation3D(src, dst[, out[, inliers[, ransacThreshold[, confidenc
     """
     ...
 
-
-def exp(src[, dst]) -> dst:
+def exp(src, dst=...) -> dst:
     """
     .   @brief Calculates the exponent of every array element.
     .
@@ -17624,8 +16333,7 @@ def exp(src[, dst]) -> dst:
     """
     ...
 
-
-def extractChannel(src, coi[, dst]) -> dst:
+def extractChannel(src, coi, dst=...) -> dst:
     """
     .   @brief Extracts a single channel from src (coi is 0-based index)
     .   @param src input array
@@ -17634,7 +16342,6 @@ def extractChannel(src, coi[, dst]) -> dst:
     .   @sa mixChannels, split
     """
     ...
-
 
 def fastAtan2(y, x) -> retval:
     """
@@ -17647,8 +16354,9 @@ def fastAtan2(y, x) -> retval:
     """
     ...
 
-
-def fastNlMeansDenoising(src[, dst[, h[, templateWindowSize[, searchWindowSize]]]]) -> dst:
+def fastNlMeansDenoising(
+    src, dst=..., h=..., templateWindowSize=..., searchWindowSize=...
+) -> dst:
     """
     .   @brief Perform image denoising using Non-local Means Denoising algorithm
     .   <http://www.ipol.im/pub/algo/bcm_non_local_means_denoising/> with several computational
@@ -17672,7 +16380,7 @@ def fastNlMeansDenoising(src[, dst[, h[, templateWindowSize[, searchWindowSize]]
 
 
 
-    fastNlMeansDenoising(src, h[, dst[, templateWindowSize[, searchWindowSize[, normType]]]]) -> dst
+    fastNlMeansDenoising(src, h, dst=..., templateWindowSize=..., searchWindowSize=..., normType=...) -> dst
     .   @brief Perform image denoising using Non-local Means Denoising algorithm
     .   <http://www.ipol.im/pub/algo/bcm_non_local_means_denoising/> with several computational
     .   optimizations. Noise expected to be a gaussian white noise
@@ -17699,8 +16407,9 @@ def fastNlMeansDenoising(src[, dst[, h[, templateWindowSize[, searchWindowSize]]
     """
     ...
 
-
-def fastNlMeansDenoisingColored(src[, dst[, h[, hColor[, templateWindowSize[, searchWindowSize]]]]]) -> dst:
+def fastNlMeansDenoisingColored(
+    src, dst=..., h=..., hColor=..., templateWindowSize=..., searchWindowSize=...
+) -> dst:
     """
     .   @brief Modification of fastNlMeansDenoising function for colored images
     .
@@ -17722,8 +16431,16 @@ def fastNlMeansDenoisingColored(src[, dst[, h[, hColor[, templateWindowSize[, se
     """
     ...
 
-
-def fastNlMeansDenoisingColoredMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize[, dst[, h[, hColor[, templateWindowSize[, searchWindowSize]]]]]) -> dst:
+def fastNlMeansDenoisingColoredMulti(
+    srcImgs,
+    imgToDenoiseIndex,
+    temporalWindowSize,
+    dst=...,
+    h=...,
+    hColor=...,
+    templateWindowSize=...,
+    searchWindowSize=...,
+) -> dst:
     """
     .   @brief Modification of fastNlMeansDenoisingMulti function for colored images sequences
     .
@@ -17750,8 +16467,15 @@ def fastNlMeansDenoisingColoredMulti(srcImgs, imgToDenoiseIndex, temporalWindowS
     """
     ...
 
-
-def fastNlMeansDenoisingMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize[, dst[, h[, templateWindowSize[, searchWindowSize]]]]) -> dst:
+def fastNlMeansDenoisingMulti(
+    srcImgs,
+    imgToDenoiseIndex,
+    temporalWindowSize,
+    dst=...,
+    h=...,
+    templateWindowSize=...,
+    searchWindowSize=...,
+) -> dst:
     """
     .   @brief Modification of fastNlMeansDenoising function for images sequence where consecutive images have been
     .   captured in small period of time. For example video. This version of the function is for grayscale
@@ -17778,7 +16502,7 @@ def fastNlMeansDenoisingMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize[, d
 
 
 
-    fastNlMeansDenoisingMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize, h[, dst[, templateWindowSize[, searchWindowSize[, normType]]]]) -> dst
+    fastNlMeansDenoisingMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize, h, dst=..., templateWindowSize=..., searchWindowSize=..., normType=...) -> dst
     .   @brief Modification of fastNlMeansDenoising function for images sequence where consecutive images have been
     .   captured in small period of time. For example video. This version of the function is for grayscale
     .   images or for manual manipulation with colorspaces. For more details see
@@ -17806,8 +16530,7 @@ def fastNlMeansDenoisingMulti(srcImgs, imgToDenoiseIndex, temporalWindowSize[, d
     """
     ...
 
-
-def fillConvexPoly(img, points, color[, lineType[, shift]]) -> img:
+def fillConvexPoly(img, points, color, lineType=..., shift=...) -> img:
     """
     .   @brief Fills a convex polygon.
     .
@@ -17824,8 +16547,7 @@ def fillConvexPoly(img, points, color[, lineType[, shift]]) -> img:
     """
     ...
 
-
-def fillPoly(img, pts, color[, lineType[, shift[, offset]]]) -> img:
+def fillPoly(img, pts, color, lineType=..., shift=..., offset=...) -> img:
     """
     .   @brief Fills the area bounded by one or more polygons.
     .
@@ -17842,8 +16564,15 @@ def fillPoly(img, pts, color[, lineType[, shift[, offset]]]) -> img:
     """
     ...
 
-
-def filter2D(src: ndarray, ddepth: int, kernel: ndarray, dst: ndarray =..., anchor: Tuple[int, int] = ..., delta: Any =..., borderType: int = ...) -> ndarray:
+def filter2D(
+    src: ndarray,
+    ddepth: int,
+    kernel: ndarray,
+    dst: ndarray = ...,
+    anchor: Tuple[int, int] = ...,
+    delta: Any = ...,
+    borderType: int = ...,
+) -> ndarray:
     """
     .   @brief Convolves an image with the kernel.
     .
@@ -17877,8 +16606,9 @@ def filter2D(src: ndarray, ddepth: int, kernel: ndarray, dst: ndarray =..., anch
     """
     ...
 
-
-def filterHomographyDecompByVisibleRefpoints(rotations, normals, beforePoints, afterPoints[, possibleSolutions[, pointsMask]]) -> possibleSolutions:
+def filterHomographyDecompByVisibleRefpoints(
+    rotations, normals, beforePoints, afterPoints, possibleSolutions=..., pointsMask=...
+) -> possibleSolutions:
     """
     .   @brief Filters homography decompositions based on additional information.
     .
@@ -17899,8 +16629,7 @@ def filterHomographyDecompByVisibleRefpoints(rotations, normals, beforePoints, a
     """
     ...
 
-
-def filterSpeckles(img, newVal, maxSpeckleSize, maxDiff[, buf]) -> img, buf:
+def filterSpeckles(img, newVal, maxSpeckleSize, maxDiff, buf=...) -> Tuple[img, buf]:
     """
     .   @brief Filters off small noise blobs (speckles) in the disparity map
     .
@@ -17916,15 +16645,15 @@ def filterSpeckles(img, newVal, maxSpeckleSize, maxDiff[, buf]) -> img, buf:
     """
     ...
 
-
-def find4QuadCornerSubpix(img, corners, region_size) -> retval, corners:
+def find4QuadCornerSubpix(img, corners, region_size) -> Tuple[retval, corners]:
     """
     .
     """
     ...
 
-
-def findChessboardCorners(image, patternSize[, corners[, flags]]) -> retval, corners:
+def findChessboardCorners(
+    image, patternSize, corners=..., flags=...
+) -> Tuple[retval, corners]:
     """
     .   @brief Finds the positions of internal corners of the chessboard.
     .
@@ -17977,15 +16706,17 @@ def findChessboardCorners(image, patternSize[, corners[, flags]]) -> retval, cor
     """
     ...
 
-
-def findChessboardCornersSB(image, patternSize[, corners[, flags]]) -> retval, corners:
+def findChessboardCornersSB(
+    image, patternSize, corners=..., flags=...
+) -> Tuple[retval, corners]:
     """
     .   @overload
     """
     ...
 
-
-def findChessboardCornersSBWithMeta(image, patternSize, flags[, corners[, meta]]) -> retval, corners, meta:
+def findChessboardCornersSBWithMeta(
+    image, patternSize, flags, corners=..., meta=...
+) -> Tuple[s, meta]:
     """
     .   @brief Finds the positions of internal corners of the chessboard using a sector based approach.
     .
@@ -18037,8 +16768,9 @@ def findChessboardCornersSBWithMeta(image, patternSize, flags[, corners[, meta]]
     """
     ...
 
-
-def findCirclesGrid(image, patternSize, flags, blobDetector, parameters[, centers]) -> retval, centers:
+def findCirclesGrid(
+    image, patternSize, flags, blobDetector, parameters, centers=...
+) -> Tuple[retval, centers]:
     """
     .   @brief Finds centers in the grid of circles.
     .
@@ -18075,13 +16807,19 @@ def findCirclesGrid(image, patternSize, flags, blobDetector, parameters[, center
 
 
 
-    findCirclesGrid(image, patternSize[, centers[, flags[, blobDetector]]]) -> retval, centers
+    findCirclesGrid(image, patternSize, centers=..., flags=..., blobDetector=...) -> retval, centers
     .   @overload
     """
     ...
 
-
-def findContours(image: ndarray, mode: int, method: int, contours: ndarray =..., hierarchy: ndarray = ..., offset: int = ...) -> Tuple[ndarray, List[ndarray]]:
+def findContours(
+    image: ndarray,
+    mode: int,
+    method: int,
+    contours: ndarray = ...,
+    hierarchy: ndarray = ...,
+    offset: int = ...,
+) -> Tuple[ndarray, List[ndarray]]:
     """
     .   @brief Finds contours in a binary image.
     .
@@ -18110,8 +16848,9 @@ def findContours(image: ndarray, mode: int, method: int, contours: ndarray =...,
     """
     ...
 
-
-def findEssentialMat(points1, points2, cameraMatrix[, method[, prob[, threshold[, mask]]]]) -> retval, mask:
+def findEssentialMat(
+    points1, points2, cameraMatrix, method=..., prob=..., threshold=..., mask=...
+) -> Tuple[retval, mask]:
     """
     .   @brief Calculates an essential matrix from the corresponding points in two images.
     .
@@ -18147,7 +16886,7 @@ def findEssentialMat(points1, points2, cameraMatrix[, method[, prob[, threshold[
 
 
 
-    findEssentialMat(points1, points2[, focal[, pp[, method[, prob[, threshold[, mask]]]]]]) -> retval, mask
+    findEssentialMat(points1, points2, focal=..., pp=..., method=..., prob=..., threshold=..., mask=...) -> retval, mask
     .   @overload
     .   @param points1 Array of N (N \>= 5) 2D points from the first image. The point coordinates should
     .   be floating-point (single or double precision).
@@ -18179,7 +16918,7 @@ def findEssentialMat(points1, points2, cameraMatrix[, method[, prob[, threshold[
 
 
 
-    findEssentialMat(points1, points2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2[, method[, prob[, threshold[, mask]]]]) -> retval, mask
+    findEssentialMat(points1, points2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, method=..., prob=..., threshold=..., mask=...) -> retval, mask
     .   @brief Calculates an essential matrix from the corresponding points in two images from potentially two different cameras.
     .
     .   @param points1 Array of N (N \>= 5) 2D points from the first image. The point coordinates should
@@ -18198,10 +16937,10 @@ def findEssentialMat(points1, points2, cameraMatrix[, method[, prob[, threshold[
     .   to normalized image coordinates, which are valid for the identity camera matrix. When
     .   passing these coordinates, pass the identity matrix for this parameter.
     .   @param distCoeffs1 Input vector of distortion coefficients
-    .   \f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \tau_x, \tau_y]]]])\f$
+    .   \f$(k_1, k_2, p_1, p_2, k_3=..., k_4=..., k_5, k_6, s_1=..., s_2, s_3, s_4, \tau_x=..., \tau_y)\f$
     .   of 4, 5, 8, 12 or 14 elements. If the vector is NULL/empty, the zero distortion coefficients are assumed.
     .   @param distCoeffs2 Input vector of distortion coefficients
-    .   \f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \tau_x, \tau_y]]]])\f$
+    .   \f$(k_1, k_2, p_1, p_2, k_3=..., k_4=..., k_5, k_6, s_1=..., s_2, s_3, s_4, \tau_x=..., \tau_y)\f$
     .   of 4, 5, 8, 12 or 14 elements. If the vector is NULL/empty, the zero distortion coefficients are assumed.
     .   @param method Method for computing an essential matrix.
     .   -   @ref RANSAC for the RANSAC algorithm.
@@ -18226,13 +16965,14 @@ def findEssentialMat(points1, points2, cameraMatrix[, method[, prob[, threshold[
 
 
 
-    findEssentialMat(points1, points2, cameraMatrix1, cameraMatrix2, dist_coeff1, dist_coeff2, params[, mask]) -> retval, mask
+    findEssentialMat(points1, points2, cameraMatrix1, cameraMatrix2, dist_coeff1, dist_coeff2, params, mask=...) -> retval, mask
     .
     """
     ...
 
-
-def findFundamentalMat(points1, points2, method, ransacReprojThreshold, confidence, maxIters[, mask]) -> retval, mask:
+def findFundamentalMat(
+    points1, points2, method, ransacReprojThreshold, confidence, maxIters, mask=...
+) -> Tuple[retval, mask]:
     """
     .   @brief Calculates a fundamental matrix from the corresponding points in two images.
     .
@@ -18287,18 +17027,25 @@ def findFundamentalMat(points1, points2, method, ransacReprojThreshold, confiden
 
 
 
-    findFundamentalMat(points1, points2[, method[, ransacReprojThreshold[, confidence[, mask]]]]) -> retval, mask
+    findFundamentalMat(points1, points2, method=..., ransacReprojThreshold=..., confidence=..., mask=...) -> retval, mask
     .   @overload
 
 
 
-    findFundamentalMat(points1, points2, params[, mask]) -> retval, mask
+    findFundamentalMat(points1, points2, params, mask=...) -> retval, mask
     .   @overload
     """
     ...
 
-
-def findHomography(srcPoints, dstPoints[, method[, ransacReprojThreshold[, mask[, maxIters[, confidence]]]]]) -> retval, mask:
+def findHomography(
+    srcPoints,
+    dstPoints,
+    method=...,
+    ransacReprojThreshold=...,
+    mask=...,
+    maxIters=...,
+    confidence=...,
+) -> Tuple[retval, mask]:
     """
     .   @brief Finds a perspective transformation between two planes.
     .
@@ -18361,11 +17108,10 @@ def findHomography(srcPoints, dstPoints[, method[, ransacReprojThreshold[, mask[
 
 
 
-    findHomography(srcPoints, dstPoints, params[, mask]) -> retval, mask
+    findHomography(srcPoints, dstPoints, params, mask=...) -> retval, mask
     .   @overload
     """
     ...
-
 
 def findNonZero(src: ndarray, idx: ndarray = ...) -> ndarray:
     """
@@ -18397,8 +17143,15 @@ def findNonZero(src: ndarray, idx: ndarray = ...) -> ndarray:
     """
     ...
 
-
-def findTransformECC(templateImage, inputImage, warpMatrix, motionType, criteria, inputMask, gaussFiltSize) -> retval, warpMatrix:
+def findTransformECC(
+    templateImage,
+    inputImage,
+    warpMatrix,
+    motionType,
+    criteria,
+    inputMask,
+    gaussFiltSize,
+) -> Tuple[retval, warpMatrix]:
     """
     .   @brief Finds the geometric transform (warp) between two images in terms of the ECC criterion @cite EP08 .
     .
@@ -18453,11 +17206,10 @@ def findTransformECC(templateImage, inputImage, warpMatrix, motionType, criteria
 
 
 
-    findTransformECC(templateImage, inputImage, warpMatrix[, motionType[, criteria[, inputMask]]]) -> retval, warpMatrix
+    findTransformECC(templateImage, inputImage, warpMatrix, motionType=..., criteria=..., inputMask=...) -> retval, warpMatrix
     .   @overload
     """
     ...
-
 
 def fitEllipse(points) -> retval:
     """
@@ -18472,7 +17224,6 @@ def fitEllipse(points) -> retval:
     .   @param points Input 2D point set, stored in std::vector\<\> or Mat
     """
     ...
-
 
 def fitEllipseAMS(points) -> retval:
     """
@@ -18512,7 +17263,6 @@ def fitEllipseAMS(points) -> retval:
     .    @param points Input 2D point set, stored in std::vector\<\> or Mat
     """
     ...
-
 
 def fitEllipseDirect(points) -> retval:
     """
@@ -18560,8 +17310,7 @@ def fitEllipseDirect(points) -> retval:
     """
     ...
 
-
-def fitLine(points, distType, param, reps, aeps[, line]) -> line:
+def fitLine(points, distType, param, reps, aeps, line=...) -> line:
     """
     .   @brief Fits a line to a 2D or 3D point set.
     .
@@ -18599,8 +17348,7 @@ def fitLine(points, distType, param, reps, aeps[, line]) -> line:
     """
     ...
 
-
-def flip(src, flipCode[, dst]) -> dst:
+def flip(src, flipCode, dst=...) -> dst:
     """
     .   @brief Flips a 2D array around vertical, horizontal, or both axes.
     .
@@ -18636,9 +17384,15 @@ def flip(src, flipCode[, dst]) -> dst:
     """
     ...
 
-
-def floodFill(image: ndarray, mask: ndarray, seedPoint: Tuple[int, int], newVal: Any, loDiff: float =..., upDiff: float =..., flags: int = ...
-) -> Tuple[ndarray, ndarray, ndarray,Tuple[int, int, int,int]]:
+def floodFill(
+    image: ndarray,
+    mask: ndarray,
+    seedPoint: Tuple[int, int],
+    newVal: Any,
+    loDiff: float = ...,
+    upDiff: float = ...,
+    flags: int = ...,
+) -> Tuple[ndarray, ndarray, ndarray, Tuple[int, int, int, int]]:
     """
     .   @brief Fills a connected component with the given color.
     .
@@ -18713,8 +17467,7 @@ def floodFill(image: ndarray, mask: ndarray, seedPoint: Tuple[int, int], newVal:
     """
     ...
 
-
-def gemm(src1, src2, alpha, src3, beta[, dst[, flags]]) -> dst:
+def gemm(src1, src2, alpha, src3, beta, dst=..., flags=...) -> dst:
     """
     .   @brief Performs generalized matrix multiplication.
     .
@@ -18746,13 +17499,11 @@ def gemm(src1, src2, alpha, src3, beta[, dst[, flags]]) -> dst:
     """
     ...
 
-
 def getAffineTransform(src, dst) -> retval:
     """
     .   @overload
     """
     ...
-
 
 def getBuildInformation() -> retval:
     """
@@ -18763,7 +17514,6 @@ def getBuildInformation() -> retval:
     .   architecture.
     """
     ...
-
 
 def getCPUFeaturesLine() -> retval:
     """
@@ -18778,7 +17528,6 @@ def getCPUFeaturesLine() -> retval:
     .   Example: `SSE SSE2 SSE3 *SSE4.1 *SSE4.2 *FP16 *AVX *AVX2 *AVX512-SKX?`
     """
     ...
-
 
 def getCPUTickCount() -> retval:
     """
@@ -18796,8 +17545,9 @@ def getCPUTickCount() -> retval:
     """
     ...
 
-
-def getDefaultNewCameraMatrix(cameraMatrix[, imgsize[, centerPrincipalPoint]]) -> retval:
+def getDefaultNewCameraMatrix(
+    cameraMatrix, imgsize=..., centerPrincipalPoint=...
+) -> retval:
     """
     .   @brief Returns the default new camera matrix.
     .
@@ -18823,8 +17573,9 @@ def getDefaultNewCameraMatrix(cameraMatrix[, imgsize[, centerPrincipalPoint]]) -
     """
     ...
 
-
-def getDerivKernels(dx, dy, ksize[, kx[, ky[, normalize[, ktype]]]]) -> kx, ky:
+def getDerivKernels(
+    dx, dy, ksize, kx=..., ky=..., normalize=..., ktype=...
+) -> Tuple[kx, ky]:
     """
     .   @brief Returns filter coefficients for computing spatial image derivatives.
     .
@@ -18846,8 +17597,7 @@ def getDerivKernels(dx, dy, ksize[, kx[, ky[, normalize[, ktype]]]]) -> kx, ky:
     """
     ...
 
-
-def getFontScaleFromHeight(fontFace, pixelHeight[, thickness]) -> retval:
+def getFontScaleFromHeight(fontFace, pixelHeight, thickness=...) -> retval:
     """
     .   @brief Calculates the font-specific size to use to achieve a given height in pixels.
     .
@@ -18860,8 +17610,7 @@ def getFontScaleFromHeight(fontFace, pixelHeight[, thickness]) -> retval:
     """
     ...
 
-
-def getGaborKernel(ksize, sigma, theta, lambd, gamma[, psi[, ktype]]) -> retval:
+def getGaborKernel(ksize, sigma, theta, lambd, gamma, psi=..., ktype=...) -> retval:
     """
     .   @brief Returns Gabor filter coefficients.
     .
@@ -18878,8 +17627,7 @@ def getGaborKernel(ksize, sigma, theta, lambd, gamma[, psi[, ktype]]) -> retval:
     """
     ...
 
-
-def getGaussianKernel(ksize, sigma[, ktype]) -> retval:
+def getGaussianKernel(ksize, sigma, ktype=...) -> retval:
     """
     .   @brief Returns Gaussian filter coefficients.
     .
@@ -18901,7 +17649,6 @@ def getGaussianKernel(ksize, sigma[, ktype]) -> retval:
     """
     ...
 
-
 def getHardwareFeatureName(feature) -> retval:
     """
     .   @brief Returns feature name by ID
@@ -18910,13 +17657,11 @@ def getHardwareFeatureName(feature) -> retval:
     """
     ...
 
-
 def getLogLevel() -> retval:
     """
     .
     """
     ...
-
 
 def getNumThreads() -> retval:
     """
@@ -18938,13 +17683,11 @@ def getNumThreads() -> retval:
     """
     ...
 
-
 def getNumberOfCPUs() -> retval:
     """
     .   @brief Returns the number of logical CPUs available for the process.
     """
     ...
-
 
 def getOptimalDFTSize(vecsize) -> retval:
     """
@@ -18971,8 +17714,9 @@ def getOptimalDFTSize(vecsize) -> retval:
     """
     ...
 
-
-def getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, alpha[, newImgSize[, centerPrincipalPoint]]) -> retval, validPixROI:
+def getOptimalNewCameraMatrix(
+    cameraMatrix, distCoeffs, imageSize, alpha, newImgSize=..., centerPrincipalPoint=...
+) -> Tuple[retval, validPixROI]:
     """
     .   @brief Returns the new camera intrinsic matrix based on the free scaling parameter.
     .
@@ -19002,8 +17746,7 @@ def getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, alpha[, newIm
     """
     ...
 
-
-def getPerspectiveTransform(src, dst[, solveMethod]) -> retval:
+def getPerspectiveTransform(src, dst, solveMethod=...) -> retval:
     """
     .   @brief Calculates a perspective transform from four pairs of the corresponding points.
     .
@@ -19023,8 +17766,7 @@ def getPerspectiveTransform(src, dst[, solveMethod]) -> retval:
     """
     ...
 
-
-def getRectSubPix(image, patchSize, center[, patch[, patchType]]) -> patch:
+def getRectSubPix(image, patchSize, center, patch=..., patchType=...) -> patch:
     """
     .   @brief Retrieves a pixel rectangle from an image with sub-pixel accuracy.
     .
@@ -19047,7 +17789,6 @@ def getRectSubPix(image, patchSize, center[, patch[, patchType]]) -> patch:
     .   @sa  warpAffine, warpPerspective
     """
     ...
-
 
 def getRotationMatrix2D(center, angle, scale) -> retval:
     """
@@ -19072,8 +17813,9 @@ def getRotationMatrix2D(center, angle, scale) -> retval:
     """
     ...
 
-
-def getStructuringElement(shape: int, ksize: Tuple[int, int], anchor: Tuple[int, int] = ...) -> ndarray:
+def getStructuringElement(
+    shape: int, ksize: Tuple[int, int], anchor: Tuple[int, int] = ...
+) -> ndarray:
     """
     .   @brief Returns a structuring element of the specified size and shape for morphological operations.
     .
@@ -19090,8 +17832,7 @@ def getStructuringElement(shape: int, ksize: Tuple[int, int], anchor: Tuple[int,
     """
     ...
 
-
-def getTextSize(text, fontFace, fontScale, thickness) -> retval, baseLine:
+def getTextSize(text, fontFace, fontScale, thickness) -> Tuple[retval, baseLine]:
     """
     .   @brief Calculates the width and height of a text string.
     .
@@ -19140,7 +17881,6 @@ def getTextSize(text, fontFace, fontScale, thickness) -> retval, baseLine:
     """
     ...
 
-
 def getThreadNum() -> retval:
     """
     .   @brief Returns the index of the currently executed thread within the current parallel region. Always
@@ -19159,7 +17899,6 @@ def getThreadNum() -> retval:
     """
     ...
 
-
 def getTickCount() -> retval:
     """
     .   @brief Returns the number of ticks.
@@ -19170,7 +17909,6 @@ def getTickCount() -> retval:
     .   @sa getTickFrequency, TickMeter
     """
     ...
-
 
 def getTickFrequency() -> retval:
     """
@@ -19186,7 +17924,6 @@ def getTickFrequency() -> retval:
     .   @sa getTickCount, TickMeter
     """
     ...
-
 
 def getTrackbarPos(trackbarname, winname) -> retval:
     """
@@ -19204,13 +17941,13 @@ def getTrackbarPos(trackbarname, winname) -> retval:
     """
     ...
 
-
-def getValidDisparityROI(roi1, roi2, minDisparity, numberOfDisparities, blockSize) -> retval:
+def getValidDisparityROI(
+    roi1, roi2, minDisparity, numberOfDisparities, blockSize
+) -> retval:
     """
     .
     """
     ...
-
 
 def getVersionMajor() -> retval:
     """
@@ -19218,20 +17955,17 @@ def getVersionMajor() -> retval:
     """
     ...
 
-
 def getVersionMinor() -> retval:
     """
     .   @brief Returns minor library version
     """
     ...
 
-
 def getVersionRevision() -> retval:
     """
     .   @brief Returns revision field of the library version
     """
     ...
-
 
 def getVersionString() -> retval:
     """
@@ -19242,7 +17976,6 @@ def getVersionString() -> retval:
     .   @sa getMajorVersion, getMinorVersion, getRevisionVersion
     """
     ...
-
 
 def getWindowImageRect(winname) -> retval:
     """
@@ -19255,7 +17988,6 @@ def getWindowImageRect(winname) -> retval:
     .   @sa resizeWindow moveWindow
     """
     ...
-
 
 def getWindowProperty(winname: Text, prop_id: int) -> int:
     """
@@ -19270,14 +18002,21 @@ def getWindowProperty(winname: Text, prop_id: int) -> int:
     """
     ...
 
-
 def gin(*args, **kwargs) -> ExtractArgsCallback:
-    """
-    """
+    """ """
     ...
 
-
-def goodFeaturesToTrack(image, maxCorners, qualityLevel, minDistance[, corners[, mask[, blockSize[, useHarrisDetector[, k]]]]]) -> corners:
+def goodFeaturesToTrack(
+    image,
+    maxCorners,
+    qualityLevel,
+    minDistance,
+    corners=...,
+    mask=...,
+    blockSize=...,
+    useHarrisDetector=...,
+    k=...,
+) -> corners:
     """
     .   @brief Determines strong corners on an image.
     .
@@ -19324,13 +18063,24 @@ def goodFeaturesToTrack(image, maxCorners, qualityLevel, minDistance[, corners[,
 
 
 
-    goodFeaturesToTrack(image, maxCorners, qualityLevel, minDistance, mask, blockSize, gradientSize[, corners[, useHarrisDetector[, k]]]) -> corners
+    goodFeaturesToTrack(image, maxCorners, qualityLevel, minDistance, mask, blockSize, gradientSize, corners=..., useHarrisDetector=..., k=...) -> corners
     .
     """
     ...
 
-
-def goodFeaturesToTrackWithQuality(image, maxCorners, qualityLevel, minDistance, mask[, corners[, cornersQuality[, blockSize[, gradientSize[, useHarrisDetector[, k]]]]]]) -> corners, cornersQuality:
+def goodFeaturesToTrackWithQuality(
+    image,
+    maxCorners,
+    qualityLevel,
+    minDistance,
+    mask,
+    corners=...,
+    cornersQuality=...,
+    blockSize=...,
+    gradientSize=...,
+    useHarrisDetector=...,
+    k=...,
+) -> Tuple[corners, cornersQuality]:
     """
     .   @brief Same as above, but returns also quality measure of the detected corners.
     .
@@ -19359,8 +18109,9 @@ def goodFeaturesToTrackWithQuality(image, maxCorners, qualityLevel, minDistance,
     """
     ...
 
-
-def grabCut(img, mask, rect, bgdModel, fgdModel, iterCount[, mode]) -> mask, bgdModel, fgdModel:
+def grabCut(
+    img, mask, rect, bgdModel, fgdModel, iterCount, mode=...
+) -> Tuple[l, fgdModel]:
     """
     .   @brief Runs the GrabCut algorithm.
     .
@@ -19382,13 +18133,11 @@ def grabCut(img, mask, rect, bgdModel, fgdModel, iterCount[, mode]) -> mask, bgd
     """
     ...
 
-
-def groupRectangles(rectList, groupThreshold[, eps]) -> rectList, weights:
+def groupRectangles(rectList, groupThreshold, eps=...) -> Tuple[rectList, weights]:
     """
     .   @overload
     """
     ...
-
 
 def haveImageReader(filename) -> retval:
     """
@@ -19398,7 +18147,6 @@ def haveImageReader(filename) -> retval:
     """
     ...
 
-
 def haveImageWriter(filename) -> retval:
     """
     .   @brief Returns true if an image with the specified filename can be encoded by OpenCV
@@ -19407,15 +18155,13 @@ def haveImageWriter(filename) -> retval:
     """
     ...
 
-
 def haveOpenVX() -> retval:
     """
     .
     """
     ...
 
-
-def hconcat(src[, dst]) -> dst:
+def hconcat(src, dst=...) -> dst:
     """
     .   @overload
     .    @code{.cpp}
@@ -19437,8 +18183,7 @@ def hconcat(src[, dst]) -> dst:
     """
     ...
 
-
-def idct(src[, dst[, flags]]) -> dst:
+def idct(src, dst=..., flags=...) -> dst:
     """
     .   @brief Calculates the inverse Discrete Cosine Transform of a 1D or 2D array.
     .
@@ -19450,8 +18195,7 @@ def idct(src[, dst[, flags]]) -> dst:
     """
     ...
 
-
-def idft(src[, dst[, flags[, nonzeroRows]]]) -> dst:
+def idft(src, dst=..., flags=..., nonzeroRows=...) -> dst:
     """
     .   @brief Calculates the inverse Discrete Fourier Transform of a 1D or 2D array.
     .
@@ -19467,8 +18211,7 @@ def idft(src[, dst[, flags[, nonzeroRows]]]) -> dst:
     """
     ...
 
-
-def illuminationChange(src, mask[, dst[, alpha[, beta]]]) -> dst:
+def illuminationChange(src, mask, dst=..., alpha=..., beta=...) -> dst:
     """
     .   @brief Applying an appropriate non-linear transformation to the gradient field inside the selection and
     .   then integrating back with a Poisson solver, modifies locally the apparent illumination of an image.
@@ -19482,7 +18225,6 @@ def illuminationChange(src, mask[, dst[, alpha[, beta]]]) -> dst:
     .   This is useful to highlight under-exposed foreground objects or to reduce specular reflections.
     """
     ...
-
 
 def imdecode(buf, flags) -> retval:
     """
@@ -19499,8 +18241,7 @@ def imdecode(buf, flags) -> retval:
     """
     ...
 
-
-def imencode(ext, img[, params]) -> retval, buf:
+def imencode(ext, img, params=...) -> Tuple[retval, buf]:
     """
     .   @brief Encodes an image into a memory buffer.
     .
@@ -19514,8 +18255,7 @@ def imencode(ext, img[, params]) -> retval, buf:
     """
     ...
 
-
-def imread(filename[, flags]) -> retval:
+def imread(filename, flags=...) -> retval:
     """
     .   @brief Loads an image from a file.
     .
@@ -19570,8 +18310,7 @@ def imread(filename[, flags]) -> retval:
     """
     ...
 
-
-def imreadmulti(filename[, mats[, flags]]) -> retval, mats:
+def imreadmulti(filename, mats=..., flags=...) -> Tuple[retval, mats]:
     """
     .   @brief Loads a multi-page image from a file.
     .
@@ -19582,7 +18321,6 @@ def imreadmulti(filename[, mats[, flags]]) -> retval, mats:
     .   @sa cv::imread
     """
     ...
-
 
 def imshow(winname: Text, mat: ndarray) -> None:
     """
@@ -19623,8 +18361,7 @@ def imshow(winname: Text, mat: ndarray) -> None:
     """
     ...
 
-
-def imwrite(filename, img[, params]) -> retval:
+def imwrite(filename, img, params=...) -> retval:
     """
     .   @brief Saves an image to a specified file.
     .
@@ -19655,15 +18392,13 @@ def imwrite(filename, img[, params]) -> retval:
     """
     ...
 
-
-def imwritemulti(filename, img[, params]) -> retval:
+def imwritemulti(filename, img, params=...) -> retval:
     """
     .
     """
     ...
 
-
-def inRange(src, lowerb, upperb[, dst]) -> dst:
+def inRange(src, lowerb, upperb, dst=...) -> dst:
     """
     .   @brief  Checks if array elements lie between the elements of two other arrays.
     .
@@ -19686,8 +18421,7 @@ def inRange(src, lowerb, upperb[, dst]) -> dst:
     """
     ...
 
-
-def initCameraMatrix2D(objectPoints, imagePoints, imageSize[, aspectRatio]) -> retval:
+def initCameraMatrix2D(objectPoints, imagePoints, imageSize, aspectRatio=...) -> retval:
     """
     .   @brief Finds an initial camera intrinsic matrix from 3D-2D point correspondences.
     .
@@ -19706,8 +18440,9 @@ def initCameraMatrix2D(objectPoints, imagePoints, imageSize[, aspectRatio]) -> r
     """
     ...
 
-
-def initUndistortRectifyMap(cameraMatrix, distCoeffs, R, newCameraMatrix, size, m1type[, map1[, map2]]) -> map1, map2:
+def initUndistortRectifyMap(
+    cameraMatrix, distCoeffs, R, newCameraMatrix, size, m1type, map1=..., map2=...
+) -> Tuple[map1, map2]:
     """
     .   @brief Computes the undistortion and rectification transformation map.
     .
@@ -19746,7 +18481,7 @@ def initUndistortRectifyMap(cameraMatrix, distCoeffs, R, newCameraMatrix, size, 
     .   map_y(u,v)  \leftarrow y''' f_y + c_y
     .   \end{array}
     .   \f]
-    .   where \f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \tau_x, \tau_y]]]])\f$
+    .   where \f$(k_1, k_2, p_1, p_2, k_3=..., k_4=..., k_5, k_6, s_1=..., s_2, s_3, s_4, \tau_x=..., \tau_y)\f$
     .   are the distortion coefficients.
     .
     .   In case of a stereo camera, this function is called twice: once for each camera head, after
@@ -19760,7 +18495,7 @@ def initUndistortRectifyMap(cameraMatrix, distCoeffs, R, newCameraMatrix, size, 
     .
     .   @param cameraMatrix Input camera matrix \f$A=\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$ .
     .   @param distCoeffs Input vector of distortion coefficients
-    .   \f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \tau_x, \tau_y]]]])\f$
+    .   \f$(k_1, k_2, p_1, p_2, k_3=..., k_4=..., k_5, k_6, s_1=..., s_2, s_3, s_4, \tau_x=..., \tau_y)\f$
     .   of 4, 5, 8, 12 or 14 elements. If the vector is NULL/empty, the zero distortion coefficients are assumed.
     .   @param R Optional rectification transformation in the object space (3x3 matrix). R1 or R2 ,
     .   computed by #stereoRectify can be passed here. If the matrix is empty, the identity transformation
@@ -19773,8 +18508,7 @@ def initUndistortRectifyMap(cameraMatrix, distCoeffs, R, newCameraMatrix, size, 
     """
     ...
 
-
-def inpaint(src, inpaintMask, inpaintRadius, flags[, dst]) -> dst:
+def inpaint(src, inpaintMask, inpaintRadius, flags, dst=...) -> dst:
     """
     .   @brief Restores the selected region in an image using the region neighborhood.
     .
@@ -19798,7 +18532,6 @@ def inpaint(src, inpaintMask, inpaintRadius, flags[, dst]) -> dst:
     """
     ...
 
-
 def insertChannel(src, dst, coi) -> dst:
     """
     .   @brief Inserts a single channel to dst (coi is 0-based index)
@@ -19809,22 +18542,21 @@ def insertChannel(src, dst, coi) -> dst:
     """
     ...
 
-
-def integral(src[, sum[, sdepth]]) -> sum:
+def integral(src, sum=..., sdepth=...) -> sum:
     """
     .   @overload
     """
     ...
 
-
-def integral2(src[, sum[, sqsum[, sdepth[, sqdepth]]]]) -> sum, sqsum:
+def integral2(src, sum=..., sqsum=..., sdepth=..., sqdepth=...) -> Tuple[sum, sqsum]:
     """
     .   @overload
     """
     ...
 
-
-def integral3(src[, sum[, sqsum[, tilted[, sdepth[, sqdepth]]]]]) -> sum, sqsum, tilted:
+def integral3(
+    src, sum=..., sqsum=..., tilted=..., sdepth=..., sqdepth=...
+) -> Tuple[m, tilted]:
     """
     .   @brief Calculates the integral of an image.
     .
@@ -19862,8 +18594,7 @@ def integral3(src[, sum[, sqsum[, tilted[, sdepth[, sqdepth]]]]]) -> sum, sqsum,
     """
     ...
 
-
-def intersectConvexConvex(_p1, _p2[, _p12[, handleNested]]) -> retval, _p12:
+def intersectConvexConvex(_p1, _p2, _p12=..., handleNested=...) -> Tuple[retval, _p12]:
     """
     .   @brief Finds intersection of two convex polygons
     .
@@ -19880,8 +18611,7 @@ def intersectConvexConvex(_p1, _p2[, _p12[, handleNested]]) -> retval, _p12:
     """
     ...
 
-
-def invert(src[, dst[, flags]]) -> retval, dst:
+def invert(src, dst=..., flags=...) -> Tuple[retval, dst]:
     """
     .   @brief Finds the inverse or pseudo-inverse of a matrix.
     .
@@ -19910,8 +18640,7 @@ def invert(src[, dst[, flags]]) -> retval, dst:
     """
     ...
 
-
-def invertAffineTransform(M[, iM]) -> iM:
+def invertAffineTransform(M, iM=...) -> iM:
     """
     .   @brief Inverts an affine transformation.
     .
@@ -19926,7 +18655,6 @@ def invertAffineTransform(M[, iM]) -> iM:
     """
     ...
 
-
 def isContourConvex(contour) -> retval:
     """
     .   @brief Tests a contour convexity.
@@ -19938,8 +18666,9 @@ def isContourConvex(contour) -> retval:
     """
     ...
 
-
-def kmeans(data, K, bestLabels, criteria, attempts, flags[, centers]) -> retval, bestLabels, centers:
+def kmeans(
+    data, K, bestLabels, criteria, attempts, flags, centers=...
+) -> Tuple[s, centers]:
     """
     .   @brief Finds centers of clusters and groups input samples around the clusters.
     .
@@ -19976,8 +18705,15 @@ def kmeans(data, K, bestLabels, criteria, attempts, flags[, centers]) -> retval,
     """
     ...
 
-
-def line(img: ndarray, pt1: Tuple[int, int], pt2: Tuple[int, int], color: Any, thickness: int = ..., lineType: int =..., shift: int =...) -> ndarray:
+def line(
+    img: ndarray,
+    pt1: Tuple[int, int],
+    pt2: Tuple[int, int],
+    color: Any,
+    thickness: int = ...,
+    lineType: int = ...,
+    shift: int = ...,
+) -> ndarray:
     """
     .   @brief Draws a line segment connecting two points.
     .
@@ -19996,8 +18732,7 @@ def line(img: ndarray, pt1: Tuple[int, int], pt2: Tuple[int, int], color: Any, t
     """
     ...
 
-
-def linearPolar(src, center, maxRadius, flags[, dst]) -> dst:
+def linearPolar(src, center, maxRadius, flags, dst=...) -> dst:
     """
     .   @brief Remaps an image to polar coordinates space.
     .
@@ -20039,8 +18774,7 @@ def linearPolar(src, center, maxRadius, flags[, dst]) -> dst:
     """
     ...
 
-
-def log(src[, dst]) -> dst:
+def log(src, dst=...) -> dst:
     """
     .   @brief Calculates the natural logarithm of every array element.
     .
@@ -20055,8 +18789,7 @@ def log(src[, dst]) -> dst:
     """
     ...
 
-
-def logPolar(src, center, M, flags[, dst]) -> dst:
+def logPolar(src, center, M, flags, dst=...) -> dst:
     """
     .   @brief Remaps an image to semilog-polar coordinates space.
     .
@@ -20099,8 +18832,7 @@ def logPolar(src, center, M, flags[, dst]) -> dst:
     """
     ...
 
-
-def magnitude(x, y[, magnitude]) -> magnitude:
+def magnitude(x, y, magnitude=...) -> magnitude:
     """
     .   @brief Calculates the magnitude of 2D vectors.
     .
@@ -20115,8 +18847,7 @@ def magnitude(x, y[, magnitude]) -> magnitude:
     """
     ...
 
-
-def matMulDeriv(A, B[, dABdA[, dABdB]]) -> dABdA, dABdB:
+def matMulDeriv(A, B, dABdA=..., dABdB=...) -> Tuple[dABdA, dABdB]:
     """
     .   @brief Computes partial derivatives of the matrix product for each multiplied matrix.
     .
@@ -20133,7 +18864,6 @@ def matMulDeriv(A, B[, dABdA[, dABdB]]) -> dABdA, dABdB:
     """
     ...
 
-
 def matchShapes(contour1, contour2, method, parameter) -> retval:
     """
     .   @brief Compares two shapes.
@@ -20147,8 +18877,13 @@ def matchShapes(contour1, contour2, method, parameter) -> retval:
     """
     ...
 
-
-def matchTemplate(image: ndarray, templ: ndarray, method: int, result: ndarray = ..., mask: ndarray = ...) -> ndarray:
+def matchTemplate(
+    image: ndarray,
+    templ: ndarray,
+    method: int,
+    result: ndarray = ...,
+    mask: ndarray = ...,
+) -> ndarray:
     """
     .   @brief Compares a template against overlapped image regions.
     .
@@ -20180,8 +18915,7 @@ def matchTemplate(image: ndarray, templ: ndarray, method: int, result: ndarray =
     """
     ...
 
-
-def max(src1, src2[, dst]) -> dst:
+def max(src1, src2, dst=...) -> dst:
     """
     .   @brief Calculates per-element maximum of two arrays or an array and a scalar.
     .
@@ -20196,8 +18930,7 @@ def max(src1, src2[, dst]) -> dst:
     """
     ...
 
-
-def mean(src[, mask]) -> retval:
+def mean(src, mask=...) -> retval:
     """
     .   @brief Calculates an average (mean) of array elements.
     .
@@ -20212,8 +18945,7 @@ def mean(src[, mask]) -> retval:
     """
     ...
 
-
-def meanShift(probImage, window, criteria) -> retval, window:
+def meanShift(probImage, window, criteria) -> Tuple[retval, window]:
     """
     .   @brief Finds an object on a back projection image.
     .
@@ -20235,8 +18967,7 @@ def meanShift(probImage, window, criteria) -> retval, window:
     """
     ...
 
-
-def meanStdDev(src[, mean[, stddev[, mask]]]) -> mean, stddev:
+def meanStdDev(src, mean=..., stddev=..., mask=...) -> Tuple[mean, stddev]:
     """
     .   Calculates a mean and standard deviation of array elements.
     .
@@ -20260,8 +18991,7 @@ def meanStdDev(src[, mean[, stddev[, mask]]]) -> mean, stddev:
     """
     ...
 
-
-def medianBlur(src, ksize[, dst]) -> dst:
+def medianBlur(src, ksize, dst=...) -> dst:
     """
     .   @brief Blurs an image using the median filter.
     .
@@ -20279,8 +19009,7 @@ def medianBlur(src, ksize[, dst]) -> dst:
     """
     ...
 
-
-def merge(mv[, dst]) -> dst:
+def merge(mv, dst=...) -> dst:
     """
     .   @overload
     .   @param mv input vector of matrices to be merged; all the matrices in mv must have the same
@@ -20290,8 +19019,7 @@ def merge(mv[, dst]) -> dst:
     """
     ...
 
-
-def min(src1, src2[, dst]) -> dst:
+def min(src1, src2, dst=...) -> dst:
     """
     .   @brief Calculates per-element minimum of two arrays or an array and a scalar.
     .
@@ -20306,7 +19034,6 @@ def min(src1, src2[, dst]) -> dst:
     """
     ...
 
-
 def minAreaRect(points) -> retval:
     """
     .   @brief Finds a rotated rectangle of the minimum area enclosing the input 2D point set.
@@ -20319,8 +19046,7 @@ def minAreaRect(points) -> retval:
     """
     ...
 
-
-def minEnclosingCircle(points) -> center, radius:
+def minEnclosingCircle(points) -> Tuple[center, radius]:
     """
     .   @brief Finds a circle of the minimum area enclosing a 2D point set.
     .
@@ -20332,8 +19058,7 @@ def minEnclosingCircle(points) -> center, radius:
     """
     ...
 
-
-def minEnclosingTriangle(points[, triangle]) -> retval, triangle:
+def minEnclosingTriangle(points, triangle=...) -> Tuple[retval, triangle]:
     """
     .   @brief Finds a triangle of minimum area enclosing a 2D point set and returns its area.
     .
@@ -20356,8 +19081,9 @@ def minEnclosingTriangle(points[, triangle]) -> retval, triangle:
     """
     ...
 
-
-def minMaxLoc(src: ndarray, mask: Optional[ndarray] = ...) -> Tuple[float, float, Tuple[int, ...], Tuple[int, ...]]:
+def minMaxLoc(
+    src: ndarray, mask: Optional[ndarray] = ...
+) -> Tuple[float, float, Tuple[int, ...], Tuple[int, ...]]:
     """
     .   @brief Finds the global minimum and maximum in an array.
     .
@@ -20379,7 +19105,6 @@ def minMaxLoc(src: ndarray, mask: Optional[ndarray] = ...) -> Tuple[float, float
     """
     ...
 
-
 def mixChannels(src, dst, fromTo) -> dst:
     """
     .   @overload
@@ -20397,8 +19122,7 @@ def mixChannels(src, dst, fromTo) -> dst:
     """
     ...
 
-
-def moments(array[, binaryImage]) -> retval:
+def moments(array, binaryImage=...) -> retval:
     """
     .   @brief Calculates all of the moments up to the third order of a polygon or rasterized shape.
     .
@@ -20418,8 +19142,16 @@ def moments(array[, binaryImage]) -> retval:
     """
     ...
 
-
-def morphologyEx(src, op, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) -> dst:
+def morphologyEx(
+    src,
+    op,
+    kernel,
+    dst=...,
+    anchor=...,
+    iterations=...,
+    borderType=...,
+    borderValue=...,
+) -> dst:
     """
     .   @brief Performs advanced morphological transformations.
     .
@@ -20447,7 +19179,6 @@ def morphologyEx(src, op, kernel[, dst[, anchor[, iterations[, borderType[, bord
     """
     ...
 
-
 def moveWindow(winname, x, y) -> None:
     """
     .   @brief Moves the window to the specified position
@@ -20458,8 +19189,7 @@ def moveWindow(winname, x, y) -> None:
     """
     ...
 
-
-def mulSpectrums(a, b, flags[, c[, conjB]]) -> c:
+def mulSpectrums(a, b, flags, c=..., conjB=...) -> c:
     """
     .   @brief Performs the per-element multiplication of two Fourier spectrums.
     .
@@ -20480,8 +19210,7 @@ def mulSpectrums(a, b, flags[, c[, conjB]]) -> c:
     """
     ...
 
-
-def mulTransposed(src, aTa[, dst[, delta[, scale[, dtype]]]]) -> dst:
+def mulTransposed(src, aTa, dst=..., delta=..., scale=..., dtype=...) -> dst:
     """
     .   @brief Calculates the product of a matrix and its transposition.
     .
@@ -20513,8 +19242,7 @@ def mulTransposed(src, aTa[, dst[, delta[, scale[, dtype]]]]) -> dst:
     """
     ...
 
-
-def multiply(src1, src2[, dst[, scale[, dtype]]]) -> dst:
+def multiply(src1, src2, dst=..., scale=..., dtype=...) -> dst:
     """
     .   @brief Calculates the per-element scaled product of two arrays.
     .
@@ -20539,8 +19267,7 @@ def multiply(src1, src2[, dst[, scale[, dtype]]]) -> dst:
     """
     ...
 
-
-def namedWindow(winname: Text, flags: int= ...) -> None:
+def namedWindow(winname: Text, flags: int = ...) -> None:
     """
     .   @brief Creates a window.
     .
@@ -20570,8 +19297,7 @@ def namedWindow(winname: Text, flags: int= ...) -> None:
     """
     ...
 
-
-def norm(src1[, normType[, mask]]) -> retval:
+def norm(src1, normType=..., mask=...) -> retval:
     """
     .   @brief Calculates the  absolute norm of an array.
     .
@@ -20611,7 +19337,7 @@ def norm(src1[, normType[, mask]]) -> retval:
 
 
 
-    norm(src1, src2[, normType[, mask]]) -> retval
+    norm(src1, src2, normType=..., mask=...) -> retval
     .   @brief Calculates an absolute difference norm or a relative difference norm.
     .
     .   This version of cv::norm calculates the absolute difference norm
@@ -20625,8 +19351,15 @@ def norm(src1[, normType[, mask]]) -> retval:
     """
     ...
 
-
-def normalize(src: ndarray, dst: Optional[ndarray], alpha: float =..., beta:float =..., norm_type: int =..., dtype: bool=..., mask: ndarray =...) -> ndarray:
+def normalize(
+    src: ndarray,
+    dst: Optional[ndarray],
+    alpha: float = ...,
+    beta: float = ...,
+    norm_type: int = ...,
+    dtype: bool = ...,
+    mask: ndarray = ...,
+) -> ndarray:
     """
     .   @brief Normalizes the norm or value range of an array.
     .
@@ -20688,8 +19421,7 @@ def normalize(src: ndarray, dst: Optional[ndarray], alpha: float =..., beta:floa
     """
     ...
 
-
-def patchNaNs(a[, val]) -> a:
+def patchNaNs(a, val=...) -> a:
     """
     .   @brief converts NaNs to the given number
     .   @param a input/output matrix (CV_32F type).
@@ -20697,8 +19429,9 @@ def patchNaNs(a[, val]) -> a:
     """
     ...
 
-
-def pencilSketch(src[, dst1[, dst2[, sigma_s[, sigma_r[, shade_factor]]]]]) -> dst1, dst2:
+def pencilSketch(
+    src, dst1=..., dst2=..., sigma_s=..., sigma_r=..., shade_factor=...
+) -> Tuple[dst1, dst2]:
     """
     .   @brief Pencil-like non-photorealistic line drawing
     .
@@ -20711,8 +19444,7 @@ def pencilSketch(src[, dst1[, dst2[, sigma_s[, sigma_r[, shade_factor]]]]]) -> d
     """
     ...
 
-
-def perspectiveTransform(src, m[, dst]) -> dst:
+def perspectiveTransform(src, m, dst=...) -> dst:
     """
     .   @brief Performs the perspective matrix transformation of vectors.
     .
@@ -20741,8 +19473,7 @@ def perspectiveTransform(src, m[, dst]) -> dst:
     """
     ...
 
-
-def phase(x, y[, angle[, angleInDegrees]]) -> angle:
+def phase(x, y, angle=..., angleInDegrees=...) -> angle:
     """
     .   @brief Calculates the rotation angle of 2D vectors.
     .
@@ -20762,8 +19493,7 @@ def phase(x, y[, angle[, angleInDegrees]]) -> angle:
     """
     ...
 
-
-def phaseCorrelate(src1, src2[, window]) -> retval, response:
+def phaseCorrelate(src1, src2, window=...) -> Tuple[retval, response]:
     """
     .   @brief The function is used to detect translational shifts that occur between two images.
     .
@@ -20802,7 +19532,6 @@ def phaseCorrelate(src1, src2[, window]) -> retval, response:
     """
     ...
 
-
 def pointPolygonTest(contour, pt, measureDist) -> retval:
     """
     .   @brief Performs a point-in-contour test.
@@ -20823,8 +19552,7 @@ def pointPolygonTest(contour, pt, measureDist) -> retval:
     """
     ...
 
-
-def polarToCart(magnitude, angle[, x[, y[, angleInDegrees]]]) -> x, y:
+def polarToCart(magnitude, angle, x=..., y=..., angleInDegrees=...) -> Tuple[x, y]:
     """
     .   @brief Calculates x and y coordinates of 2D vectors from their magnitude and angle.
     .
@@ -20848,7 +19576,6 @@ def polarToCart(magnitude, angle[, x[, y[, angleInDegrees]]]) -> x, y:
     """
     ...
 
-
 def pollKey() -> Union[Text, Literal[-1]]:
     """
     .   @brief Polls for a pressed key.
@@ -20865,8 +19592,7 @@ def pollKey() -> Union[Text, Literal[-1]]:
     """
     ...
 
-
-def polylines(img, pts, isClosed, color[, thickness[, lineType[, shift]]]) -> img:
+def polylines(img, pts, isClosed, color, thickness=..., lineType=..., shift=...) -> img:
     """
     .   @brief Draws several polygonal curves.
     .
@@ -20883,8 +19609,7 @@ def polylines(img, pts, isClosed, color[, thickness[, lineType[, shift]]]) -> im
     """
     ...
 
-
-def pow(src, power[, dst]) -> dst:
+def pow(src, power, dst=...) -> dst:
     """
     .   @brief Raises every array element to a power.
     .
@@ -20911,8 +19636,7 @@ def pow(src, power[, dst]) -> dst:
     """
     ...
 
-
-def preCornerDetect(src, ksize[, dst[, borderType]]) -> dst:
+def preCornerDetect(src, ksize, dst=..., borderType=...) -> dst:
     """
     .   @brief Calculates a feature map for corner detection.
     .
@@ -20939,8 +19663,16 @@ def preCornerDetect(src, ksize[, dst[, borderType]]) -> dst:
     """
     ...
 
-
-def projectPoints(objectPoints, rvec, tvec, cameraMatrix, distCoeffs[, imagePoints[, jacobian[, aspectRatio]]]) -> imagePoints, jacobian:
+def projectPoints(
+    objectPoints,
+    rvec,
+    tvec,
+    cameraMatrix,
+    distCoeffs,
+    imagePoints=...,
+    jacobian=...,
+    aspectRatio=...,
+) -> Tuple[imagePoints, jacobian]:
     """
     .   @brief Projects 3D points to an image plane.
     .
@@ -20977,8 +19709,17 @@ def projectPoints(objectPoints, rvec, tvec, cameraMatrix, distCoeffs[, imagePoin
     """
     ...
 
-
-def putText(img, text, org, fontFace, fontScale, color[, thickness[, lineType[, bottomLeftOrigin]]]) -> img:
+def putText(
+    img,
+    text,
+    org,
+    fontFace,
+    fontScale,
+    color,
+    thickness=...,
+    lineType=...,
+    bottomLeftOrigin=...,
+) -> img:
     """
     .   @brief Draws a text string.
     .
@@ -20999,8 +19740,7 @@ def putText(img, text, org, fontFace, fontScale, color[, thickness[, lineType[, 
     """
     ...
 
-
-def pyrDown(src[, dst[, dstsize[, borderType]]]) -> dst:
+def pyrDown(src, dst=..., dstsize=..., borderType=...) -> dst:
     """
     .   @brief Blurs an image and downsamples it.
     .
@@ -21023,8 +19763,7 @@ def pyrDown(src[, dst[, dstsize[, borderType]]]) -> dst:
     """
     ...
 
-
-def pyrMeanShiftFiltering(src, sp, sr[, dst[, maxLevel[, termcrit]]]) -> dst:
+def pyrMeanShiftFiltering(src, sp, sr, dst=..., maxLevel=..., termcrit=...) -> dst:
     """
     .   @brief Performs initial step of meanshift segmentation of an image.
     .
@@ -21064,8 +19803,7 @@ def pyrMeanShiftFiltering(src, sp, sr[, dst[, maxLevel[, termcrit]]]) -> dst:
     """
     ...
 
-
-def pyrUp(src[, dst[, dstsize[, borderType]]]) -> dst:
+def pyrUp(src, dst=..., dstsize=..., borderType=...) -> dst:
     """
     .   @brief Upsamples an image and then blurs it.
     .
@@ -21086,8 +19824,7 @@ def pyrUp(src[, dst[, dstsize[, borderType]]]) -> dst:
     """
     ...
 
-
-def randShuffle(dst[, iterFactor]) -> dst:
+def randShuffle(dst, iterFactor=...) -> dst:
     """
     .   @brief Shuffles the array elements randomly.
     .
@@ -21101,7 +19838,6 @@ def randShuffle(dst[, iterFactor]) -> dst:
     .   @sa RNG, sort
     """
     ...
-
 
 def randn(dst, mean, stddev) -> dst:
     """
@@ -21118,7 +19854,6 @@ def randn(dst, mean, stddev) -> dst:
     """
     ...
 
-
 def randu(dst, low, high) -> dst:
     """
     .   @brief Generates a single uniformly-distributed random number or an array of random numbers.
@@ -21133,7 +19868,6 @@ def randu(dst, low, high) -> dst:
     """
     ...
 
-
 def readOpticalFlow(path) -> retval:
     """
     .   @brief Read a .flo file
@@ -21146,8 +19880,9 @@ def readOpticalFlow(path) -> retval:
     """
     ...
 
-
-def recoverPose(E, points1, points2, cameraMatrix[, R[, t[, mask]]]) -> retval, R, t, mask:
+def recoverPose(
+    E, points1, points2, cameraMatrix, R=..., t=..., mask=...
+) -> Tuple[t, mask]:
     """
     .   @brief Recovers the relative camera rotation and the translation from an estimated essential
     .   matrix and the corresponding points in two images, using cheirality check. Returns the number of
@@ -21201,7 +19936,7 @@ def recoverPose(E, points1, points2, cameraMatrix[, R[, t[, mask]]]) -> retval, 
 
 
 
-    recoverPose(E, points1, points2[, R[, t[, focal[, pp[, mask]]]]]) -> retval, R, t, mask
+    recoverPose(E, points1, points2, R=..., t=..., focal=..., pp=..., mask=...) -> retval, R, t, mask
     .   @overload
     .   @param E The input essential matrix.
     .   @param points1 Array of N 2D points from the first image. The point coordinates should be
@@ -21233,7 +19968,7 @@ def recoverPose(E, points1, points2, cameraMatrix[, R[, t[, mask]]]) -> retval, 
 
 
 
-    recoverPose(E, points1, points2, cameraMatrix, distanceThresh[, R[, t[, mask[, triangulatedPoints]]]]) -> retval, R, t, mask, triangulatedPoints
+    recoverPose(E, points1, points2, cameraMatrix, distanceThresh, R=..., t=..., mask=..., triangulatedPoints=...) -> retval, R, t, mask, triangulatedPoints
     .   @overload
     .   @param E The input essential matrix.
     .   @param points1 Array of N 2D points from the first image. The point coordinates should be
@@ -21261,8 +19996,15 @@ def recoverPose(E, points1, points2, cameraMatrix[, R[, t[, mask]]]) -> retval, 
     """
     ...
 
-
-def rectangle(img: ndarray, pt1: Tuple[int, int], pt2: Tuple[int, int], color: Tuple[int, ...], thickness: int = ..., lineType: int =..., shift: int = ...) -> ndarray:
+def rectangle(
+    img: ndarray,
+    pt1: Tuple[int, int],
+    pt2: Tuple[int, int],
+    color: Tuple[int, ...],
+    thickness: int = ...,
+    lineType: int = ...,
+    shift: int = ...,
+) -> ndarray:
     """
     .   @brief Draws a simple, thick, or filled up-right rectangle.
     .
@@ -21280,7 +20022,7 @@ def rectangle(img: ndarray, pt1: Tuple[int, int], pt2: Tuple[int, int], color: T
 
 
 
-    rectangle(img, rec, color[, thickness[, lineType[, shift]]]) -> img
+    rectangle(img, rec, color, thickness=..., lineType=..., shift=...) -> img
     .   @overload
     .
     .   use `rec` parameter as alternative specification of the drawn rectangle: `r.tl() and
@@ -21288,21 +20030,43 @@ def rectangle(img: ndarray, pt1: Tuple[int, int], pt2: Tuple[int, int], color: T
     """
     ...
 
-
-def rectify3Collinear(cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, cameraMatrix3, distCoeffs3, imgpt1, imgpt3, imageSize, R12, T12, R13, T13, alpha, newImgSize, flags[, R1[, R2[, R3[, P1[, P2[, P3[, Q]]]]]]]) -> retval, R1, R2, R3, P1, P2, P3, Q, roi1, roi2:
+def rectify3Collinear(
+    cameraMatrix1,
+    distCoeffs1,
+    cameraMatrix2,
+    distCoeffs2,
+    cameraMatrix3,
+    distCoeffs3,
+    imgpt1,
+    imgpt3,
+    imageSize,
+    R12,
+    T12,
+    R13,
+    T13,
+    alpha,
+    newImgSize,
+    flags,
+    R1=...,
+    R2=...,
+    R3=...,
+    P1=...,
+    P2=...,
+    P3=...,
+    Q=...,
+) -> Tuple[roi1, roi2]:
     """
     .
     """
     ...
 
-
 def redirectError(onError) -> None:
-    """
-    """
+    """ """
     ...
 
-
-def reduce(src: ndarray, dim: int, rtype: int, dst: ndarray = ..., dtype: int = ...) -> ndarray:
+def reduce(
+    src: ndarray, dim: int, rtype: int, dst: ndarray = ..., dtype: int = ...
+) -> ndarray:
     """
     .   @brief Reduces a matrix to a vector.
     .
@@ -21330,8 +20094,9 @@ def reduce(src: ndarray, dim: int, rtype: int, dst: ndarray = ..., dtype: int = 
     """
     ...
 
-
-def remap(src, map1, map2, interpolation[, dst[, borderMode[, borderValue]]]) -> dst:
+def remap(
+    src, map1, map2, interpolation, dst=..., borderMode=..., borderValue=...
+) -> dst:
     """
     .   @brief Applies a generic geometrical transformation to an image.
     .
@@ -21367,8 +20132,7 @@ def remap(src, map1, map2, interpolation[, dst[, borderMode[, borderValue]]]) ->
     """
     ...
 
-
-def repeat(src, ny, nx[, dst]) -> dst:
+def repeat(src, ny, nx, dst=...) -> dst:
     """
     .   @brief Fills the output array with repeated copies of the input array.
     .
@@ -21385,8 +20149,9 @@ def repeat(src, ny, nx[, dst]) -> dst:
     """
     ...
 
-
-def reprojectImageTo3D(disparity, Q[, _3dImage[, handleMissingValues[, ddepth]]]) -> _3dImage:
+def reprojectImageTo3D(
+    disparity, Q, _3dImage=..., handleMissingValues=..., ddepth=...
+) -> _3dImage:
     """
     .   @brief Reprojects a disparity image to 3D space.
     .
@@ -21429,8 +20194,14 @@ def reprojectImageTo3D(disparity, Q[, _3dImage[, handleMissingValues[, ddepth]]]
     """
     ...
 
-
-def resize(src: ndarray, dsize: Tuple[int, int], dst: ndarray =..., fx: float = ..., fy: float =..., interpolation: int = ...) -> ndarray:
+def resize(
+    src: ndarray,
+    dsize: Tuple[int, int],
+    dst: ndarray = ...,
+    fx: float = ...,
+    fy: float = ...,
+    interpolation: int = ...,
+) -> ndarray:
     """
     .   @brief Resizes an image.
     .
@@ -21468,7 +20239,6 @@ def resize(src: ndarray, dsize: Tuple[int, int], dst: ndarray =..., fx: float = 
     """
     ...
 
-
 def resizeWindow(winname, width, height) -> None:
     """
     .   @brief Resizes the window to the specified size
@@ -21491,8 +20261,7 @@ def resizeWindow(winname, width, height) -> None:
     """
     ...
 
-
-def rotate(src, rotateCode[, dst]) -> dst:
+def rotate(src, rotateCode, dst=...) -> dst:
     """
     .   @brief Rotates a 2D array in multiples of 90 degrees.
     .   The function cv::rotate rotates the array in one of three different ways:
@@ -21507,8 +20276,9 @@ def rotate(src, rotateCode[, dst]) -> dst:
     """
     ...
 
-
-def rotatedRectangleIntersection(rect1, rect2[, intersectingRegion]) -> retval, intersectingRegion:
+def rotatedRectangleIntersection(
+    rect1, rect2, intersectingRegion=...
+) -> Tuple[retval, intersectingRegion]:
     """
     .   @brief Finds out if there is any intersection between two rotated rectangles.
     .
@@ -21526,7 +20296,6 @@ def rotatedRectangleIntersection(rect1, rect2[, intersectingRegion]) -> retval, 
     .   @returns One of #RectanglesIntersectTypes
     """
     ...
-
 
 def sampsonDistance(pt1, pt2, F) -> retval:
     """
@@ -21549,8 +20318,7 @@ def sampsonDistance(pt1, pt2, F) -> retval:
     """
     ...
 
-
-def scaleAdd(src1, alpha, src2[, dst]) -> dst:
+def scaleAdd(src1, alpha, src2, dst=...) -> dst:
     """
     .   @brief Calculates the sum of a scaled array and another array.
     .
@@ -21572,8 +20340,7 @@ def scaleAdd(src1, alpha, src2[, dst]) -> dst:
     """
     ...
 
-
-def seamlessClone(src, dst, mask, p, flags[, blend]) -> blend:
+def seamlessClone(src, dst, mask, p, flags, blend=...) -> blend:
     """
     .   @brief Image editing tasks concern either global changes (color/intensity corrections, filters,
     .   deformations) or local changes concerned to a selection. Here we are interested in achieving local
@@ -21590,8 +20357,7 @@ def seamlessClone(src, dst, mask, p, flags[, blend]) -> blend:
     """
     ...
 
-
-def selectROI(windowName, img[, showCrosshair[, fromCenter]]) -> retval:
+def selectROI(windowName, img, showCrosshair=..., fromCenter=...) -> retval:
     """
     .   @brief Allows users to select a ROI on the given image.
     .
@@ -21610,13 +20376,12 @@ def selectROI(windowName, img[, showCrosshair[, fromCenter]]) -> retval:
 
 
 
-    selectROI(img[, showCrosshair[, fromCenter]]) -> retval
+    selectROI(img, showCrosshair=..., fromCenter=...) -> retval
     .   @overload
     """
     ...
 
-
-def selectROIs(windowName, img[, showCrosshair[, fromCenter]]) -> boundingBoxes:
+def selectROIs(windowName, img, showCrosshair=..., fromCenter=...) -> boundingBoxes:
     """
     .   @brief Allows users to select multiple ROIs on the given image.
     .
@@ -21636,8 +20401,9 @@ def selectROIs(windowName, img[, showCrosshair[, fromCenter]]) -> boundingBoxes:
     """
     ...
 
-
-def sepFilter2D(src, ddepth, kernelX, kernelY[, dst[, anchor[, delta[, borderType]]]]) -> dst:
+def sepFilter2D(
+    src, ddepth, kernelX, kernelY, dst=..., anchor=..., delta=..., borderType=...
+) -> dst:
     """
     .   @brief Applies a separable linear filter to an image.
     .
@@ -21658,8 +20424,7 @@ def sepFilter2D(src, ddepth, kernelX, kernelY[, dst[, anchor[, delta[, borderTyp
     """
     ...
 
-
-def setIdentity(mtx[, s]) -> mtx:
+def setIdentity(mtx, s=...) -> mtx:
     """
     .   @brief Initializes a scaled identity matrix.
     .
@@ -21678,19 +20443,15 @@ def setIdentity(mtx[, s]) -> mtx:
     """
     ...
 
-
 def setLogLevel(level) -> retval:
     """
     .
     """
     ...
 
-
-def setMouseCallback(windowName, onMouse[, param]) -> None:
-    """
-    """
+def setMouseCallback(windowName, onMouse, param=...) -> None:
+    """ """
     ...
-
 
 def setNumThreads(nthreads) -> None:
     """
@@ -21714,7 +20475,6 @@ def setNumThreads(nthreads) -> None:
     """
     ...
 
-
 def setRNGSeed(seed) -> None:
     """
     .   @brief Sets state of default random number generator.
@@ -21724,7 +20484,6 @@ def setRNGSeed(seed) -> None:
     .   @sa RNG, randu, randn
     """
     ...
-
 
 def setTrackbarMax(trackbarname, winname, maxval) -> None:
     """
@@ -21743,7 +20502,6 @@ def setTrackbarMax(trackbarname, winname, maxval) -> None:
     """
     ...
 
-
 def setTrackbarMin(trackbarname, winname, minval) -> None:
     """
     .   @brief Sets the trackbar minimum position.
@@ -21760,7 +20518,6 @@ def setTrackbarMin(trackbarname, winname, minval) -> None:
     .   @param minval New minimum position.
     """
     ...
-
 
 def setTrackbarPos(trackbarname, winname, pos) -> None:
     """
@@ -21779,13 +20536,11 @@ def setTrackbarPos(trackbarname, winname, pos) -> None:
     """
     ...
 
-
 def setUseOpenVX(flag) -> None:
     """
     .
     """
     ...
-
 
 def setUseOptimized(onoff) -> None:
     """
@@ -21804,7 +20559,6 @@ def setUseOptimized(onoff) -> None:
     """
     ...
 
-
 def setWindowProperty(winname, prop_id, prop_value) -> None:
     """
     .   @brief Changes parameters of a window dynamically.
@@ -21817,7 +20571,6 @@ def setWindowProperty(winname, prop_id, prop_value) -> None:
     """
     ...
 
-
 def setWindowTitle(winname, title) -> None:
     """
     .   @brief Updates window title
@@ -21826,8 +20579,7 @@ def setWindowTitle(winname, title) -> None:
     """
     ...
 
-
-def solve(src1, src2[, dst[, flags]]) -> retval, dst:
+def solve(src1, src2, dst=..., flags=...) -> Tuple[retval, dst]:
     """
     .   @brief Solves one or more linear systems or least-squares problems.
     .
@@ -21853,8 +20605,7 @@ def solve(src1, src2[, dst[, flags]]) -> retval, dst:
     """
     ...
 
-
-def solveCubic(coeffs[, roots]) -> retval, roots:
+def solveCubic(coeffs, roots=...) -> Tuple[retval, roots]:
     """
     .   @brief Finds the real roots of a cubic equation.
     .
@@ -21871,8 +20622,7 @@ def solveCubic(coeffs[, roots]) -> retval, roots:
     """
     ...
 
-
-def solveLP(Func, Constr[, z]) -> retval, z:
+def solveLP(Func, Constr, z=...) -> Tuple[retval, z]:
     """
     .   @brief Solve given (non-integer) linear programming problem using the Simplex Algorithm (Simplex Method).
     .
@@ -21907,8 +20657,9 @@ def solveLP(Func, Constr[, z]) -> retval, z:
     """
     ...
 
-
-def solveP3P(objectPoints, imagePoints, cameraMatrix, distCoeffs, flags[, rvecs[, tvecs]]) -> retval, rvecs, tvecs:
+def solveP3P(
+    objectPoints, imagePoints, cameraMatrix, distCoeffs, flags, rvecs=..., tvecs=...
+) -> Tuple[s, tvecs]:
     """
     .   @brief Finds an object pose from 3 3D-2D point correspondences.
     .
@@ -21937,8 +20688,16 @@ def solveP3P(objectPoints, imagePoints, cameraMatrix, distCoeffs, flags[, rvecs[
     """
     ...
 
-
-def solvePnP(objectPoints, imagePoints, cameraMatrix, distCoeffs[, rvec[, tvec[, useExtrinsicGuess[, flags]]]]) -> retval, rvec, tvec:
+def solvePnP(
+    objectPoints,
+    imagePoints,
+    cameraMatrix,
+    distCoeffs,
+    rvec=...,
+    tvec=...,
+    useExtrinsicGuess=...,
+    flags=...,
+) -> Tuple[c, tvec]:
     """
     .   @brief Finds an object pose from 3D-2D point correspondences.
     .   This function returns the rotation and the translation vectors that transform a 3D point expressed in the object
@@ -22128,8 +20887,19 @@ def solvePnP(objectPoints, imagePoints, cameraMatrix, distCoeffs[, rvec[, tvec[,
     """
     ...
 
-
-def solvePnPGeneric(objectPoints, imagePoints, cameraMatrix, distCoeffs[, rvecs[, tvecs[, useExtrinsicGuess[, flags[, rvec[, tvec[, reprojectionError]]]]]]]) -> retval, rvecs, tvecs, reprojectionError:
+def solvePnPGeneric(
+    objectPoints,
+    imagePoints,
+    cameraMatrix,
+    distCoeffs,
+    rvecs=...,
+    tvecs=...,
+    useExtrinsicGuess=...,
+    flags=...,
+    rvec=...,
+    tvec=...,
+    reprojectionError=...,
+) -> Tuple[tvecs, reprojectionError]:
     """
     .   @brief Finds an object pose from 3D-2D point correspondences.
     .   This function returns a list of all the possible solutions (a solution is a <rotation vector, translation vector>
@@ -22323,8 +21093,20 @@ def solvePnPGeneric(objectPoints, imagePoints, cameraMatrix, distCoeffs[, rvecs[
     """
     ...
 
-
-def solvePnPRansac(objectPoints, imagePoints, cameraMatrix, distCoeffs[, rvec[, tvec[, useExtrinsicGuess[, iterationsCount[, reprojectionError[, confidence[, inliers[, flags]]]]]]]]) -> retval, rvec, tvec, inliers:
+def solvePnPRansac(
+    objectPoints,
+    imagePoints,
+    cameraMatrix,
+    distCoeffs,
+    rvec=...,
+    tvec=...,
+    useExtrinsicGuess=...,
+    iterationsCount=...,
+    reprojectionError=...,
+    confidence=...,
+    inliers=...,
+    flags=...,
+) -> Tuple[tvec, inliers]:
     """
     .   @brief Finds an object pose from 3D-2D point correspondences using the RANSAC scheme.
     .
@@ -22369,13 +21151,14 @@ def solvePnPRansac(objectPoints, imagePoints, cameraMatrix, distCoeffs[, rvec[, 
 
 
 
-    solvePnPRansac(objectPoints, imagePoints, cameraMatrix, distCoeffs[, rvec[, tvec[, inliers[, params]]]]) -> retval, cameraMatrix, rvec, tvec, inliers
+    solvePnPRansac(objectPoints, imagePoints, cameraMatrix, distCoeffs, rvec=..., tvec=..., inliers=..., params=...) -> retval, cameraMatrix, rvec, tvec, inliers
     .
     """
     ...
 
-
-def solvePnPRefineLM(objectPoints, imagePoints, cameraMatrix, distCoeffs, rvec, tvec[, criteria]) -> rvec, tvec:
+def solvePnPRefineLM(
+    objectPoints, imagePoints, cameraMatrix, distCoeffs, rvec, tvec, criteria=...
+) -> Tuple[rvec, tvec]:
     """
     .   @brief Refine a pose (the translation and the rotation that transform a 3D point expressed in the object coordinate frame
     .   to the camera coordinate frame) from a 3D-2D point correspondences and starting from an initial solution.
@@ -22401,8 +21184,16 @@ def solvePnPRefineLM(objectPoints, imagePoints, cameraMatrix, distCoeffs, rvec, 
     """
     ...
 
-
-def solvePnPRefineVVS(objectPoints, imagePoints, cameraMatrix, distCoeffs, rvec, tvec[, criteria[, VVSlambda]]) -> rvec, tvec:
+def solvePnPRefineVVS(
+    objectPoints,
+    imagePoints,
+    cameraMatrix,
+    distCoeffs,
+    rvec,
+    tvec,
+    criteria=...,
+    VVSlambda_=...,
+) -> Tuple[rvec, tvec]:
     """
     .   @brief Refine a pose (the translation and the rotation that transform a 3D point expressed in the object coordinate frame
     .   to the camera coordinate frame) from a 3D-2D point correspondences and starting from an initial solution.
@@ -22430,8 +21221,7 @@ def solvePnPRefineVVS(objectPoints, imagePoints, cameraMatrix, distCoeffs, rvec,
     """
     ...
 
-
-def solvePoly(coeffs[, roots[, maxIters]]) -> retval, roots:
+def solvePoly(coeffs, roots=..., maxIters=...) -> Tuple[retval, roots]:
     """
     .   @brief Finds the real or complex roots of a polynomial equation.
     .
@@ -22443,8 +21233,7 @@ def solvePoly(coeffs[, roots[, maxIters]]) -> retval, roots:
     """
     ...
 
-
-def sort(src, flags[, dst]) -> dst:
+def sort(src, flags, dst=...) -> dst:
     """
     .   @brief Sorts each row or each column of a matrix.
     .
@@ -22461,8 +21250,7 @@ def sort(src, flags[, dst]) -> dst:
     """
     ...
 
-
-def sortIdx(src, flags[, dst]) -> dst:
+def sortIdx(src, flags, dst=...) -> dst:
     """
     .   @brief Sorts each row or each column of a matrix.
     .
@@ -22484,8 +21272,7 @@ def sortIdx(src, flags[, dst]) -> dst:
     """
     ...
 
-
-def spatialGradient(src[, dx[, dy[, ksize[, borderType]]]]) -> dx, dy:
+def spatialGradient(src, dx=..., dy=..., ksize=..., borderType=...) -> Tuple[dx, dy]:
     """
     .   @brief Calculates the first order image derivative in both x and y using a Sobel operator
     .
@@ -22507,8 +21294,7 @@ def spatialGradient(src[, dx[, dy[, ksize[, borderType]]]]) -> dx, dy:
     """
     ...
 
-
-def split(m[, mv]) -> mv:
+def split(m, mv=...) -> mv:
     """
     .   @overload
     .   @param m input multi-channel array.
@@ -22516,8 +21302,9 @@ def split(m[, mv]) -> mv:
     """
     ...
 
-
-def sqrBoxFilter(src, ddepth, ksize[, dst[, anchor[, normalize[, borderType]]]]) -> dst:
+def sqrBoxFilter(
+    src, ddepth, ksize, dst=..., anchor=..., normalize=..., borderType=...
+) -> dst:
     """
     .   @brief Calculates the normalized sum of squares of the pixel values overlapping the filter.
     .
@@ -22539,8 +21326,7 @@ def sqrBoxFilter(src, ddepth, ksize[, dst[, anchor[, normalize[, borderType]]]])
     """
     ...
 
-
-def sqrt(src[, dst]) -> dst:
+def sqrt(src, dst=...) -> dst:
     """
     .   @brief Calculates a square root of array elements.
     .
@@ -22553,22 +21339,50 @@ def sqrt(src[, dst]) -> dst:
     """
     ...
 
-
 def startWindowThread() -> retval:
     """
     .
     """
     ...
 
-
-def stereoCalibrate(objectPoints, imagePoints1, imagePoints2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, imageSize[, R[, T[, E[, F[, flags[, criteria]]]]]]) -> retval, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, R, T, E, F:
+def stereoCalibrate(
+    objectPoints,
+    imagePoints1,
+    imagePoints2,
+    cameraMatrix1,
+    distCoeffs1,
+    cameraMatrix2,
+    distCoeffs2,
+    imageSize,
+    R=...,
+    T=...,
+    E=...,
+    F=...,
+    flags=...,
+    criteria=...,
+) -> Tuple[E, F]:
     """
     .
     """
     ...
 
-
-def stereoCalibrateExtended(objectPoints, imagePoints1, imagePoints2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, imageSize, R, T[, E[, F[, perViewErrors[, flags[, criteria]]]]]) -> retval, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, R, T, E, F, perViewErrors:
+def stereoCalibrateExtended(
+    objectPoints,
+    imagePoints1,
+    imagePoints2,
+    cameraMatrix1,
+    distCoeffs1,
+    cameraMatrix2,
+    distCoeffs2,
+    imageSize,
+    R,
+    T,
+    E=...,
+    F=...,
+    perViewErrors=...,
+    flags=...,
+    criteria=...,
+) -> Tuple[F, perViewErrors]:
     """
     .   @brief Calibrates a stereo camera set up. This function finds the intrinsic parameters
     .   for each of the two cameras and the extrinsic parameters between the two cameras.
@@ -22694,8 +21508,23 @@ def stereoCalibrateExtended(objectPoints, imagePoints1, imagePoints2, cameraMatr
     """
     ...
 
-
-def stereoRectify(cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, imageSize, R, T[, R1[, R2[, P1[, P2[, Q[, flags[, alpha[, newImageSize]]]]]]]]) -> R1, R2, P1, P2, Q, validPixROI1, validPixROI2:
+def stereoRectify(
+    cameraMatrix1,
+    distCoeffs1,
+    cameraMatrix2,
+    distCoeffs2,
+    imageSize,
+    R,
+    T,
+    R1=...,
+    R2=...,
+    P1=...,
+    P2=...,
+    Q=...,
+    flags=...,
+    alpha=...,
+    newImageSize=...,
+) -> Tuple[1, validPixROI2]:
     """
     .   @brief Computes rectification transforms for each head of a calibrated stereo camera.
     .
@@ -22804,8 +21633,9 @@ def stereoRectify(cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, imageS
     """
     ...
 
-
-def stereoRectifyUncalibrated(points1, points2, F, imgSize[, H1[, H2[, threshold]]]) -> retval, H1, H2:
+def stereoRectifyUncalibrated(
+    points1, points2, F, imgSize, H1=..., H2=..., threshold=...
+) -> Tuple[1, H2]:
     """
     .   @brief Computes a rectification transform for an uncalibrated stereo camera.
     .
@@ -22838,8 +21668,7 @@ def stereoRectifyUncalibrated(points1, points2, F, imgSize[, H1[, H2[, threshold
     """
     ...
 
-
-def stylization(src[, dst[, sigma_s[, sigma_r]]]) -> dst:
+def stylization(src, dst=..., sigma_s=..., sigma_r=...) -> dst:
     """
     .   @brief Stylization aims to produce digital imagery with a wide variety of effects not focused on
     .   photorealism. Edge-aware filters are ideal for stylization, as they can abstract regions of low
@@ -22852,8 +21681,7 @@ def stylization(src[, dst[, sigma_s[, sigma_r]]]) -> dst:
     """
     ...
 
-
-def subtract(src1, src2[, dst[, mask[, dtype]]]) -> dst:
+def subtract(src1, src2, dst=..., mask=..., dtype=...) -> dst:
     """
     .   @brief Calculates the per-element difference between two arrays or array and a scalar.
     .
@@ -22894,7 +21722,6 @@ def subtract(src1, src2[, dst[, mask[, dtype]]]) -> dst:
     """
     ...
 
-
 def sumElems(src) -> retval:
     """
     .   @brief Calculates the sum of array elements.
@@ -22906,8 +21733,9 @@ def sumElems(src) -> retval:
     """
     ...
 
-
-def textureFlattening(src, mask[, dst[, low_threshold[, high_threshold[, kernel_size]]]]) -> dst:
+def textureFlattening(
+    src, mask, dst=..., low_threshold=..., high_threshold=..., kernel_size=...
+) -> dst:
     """
     .   @brief By retaining only the gradients at edge locations, before integrating with the Poisson solver, one
     .   washes out the texture of the selected region, giving its contents a flat aspect. Here Canny Edge %Detector is used.
@@ -22926,8 +21754,9 @@ def textureFlattening(src, mask[, dst[, low_threshold[, high_threshold[, kernel_
     """
     ...
 
-
-def threshold(src: ndarray, thresh: float, maxval: float, type: int, dst: ndarray =...) -> Tuple[float, ndarray]:
+def threshold(
+    src: ndarray, thresh: float, maxval: float, type: int, dst: ndarray = ...
+) -> Tuple[float, ndarray]:
     """
     .   @brief Applies a fixed-level threshold to each array element.
     .
@@ -22955,7 +21784,6 @@ def threshold(src: ndarray, thresh: float, maxval: float, type: int, dst: ndarra
     """
     ...
 
-
 def trace(mtx) -> retval:
     """
     .   @brief Returns the trace of a matrix.
@@ -22967,8 +21795,7 @@ def trace(mtx) -> retval:
     """
     ...
 
-
-def transform(src, m[, dst]) -> dst:
+def transform(src, m, dst=...) -> dst:
     """
     .   @brief Performs the matrix transformation of every array element.
     .
@@ -22996,8 +21823,7 @@ def transform(src, m[, dst]) -> dst:
     """
     ...
 
-
-def transpose(src[, dst]) -> dst:
+def transpose(src, dst=...) -> dst:
     """
     .   @brief Transposes a matrix.
     .
@@ -23010,8 +21836,9 @@ def transpose(src[, dst]) -> dst:
     """
     ...
 
-
-def triangulatePoints(projMatr1, projMatr2, projPoints1, projPoints2[, points4D]) -> points4D:
+def triangulatePoints(
+    projMatr1, projMatr2, projPoints1, projPoints2, points4D=...
+) -> points4D:
     """
     .   @brief This function reconstructs 3-dimensional points (in homogeneous coordinates) by using
     .   their observations with a stereo camera.
@@ -23039,8 +21866,7 @@ def triangulatePoints(projMatr1, projMatr2, projPoints1, projPoints2[, points4D]
     """
     ...
 
-
-def undistort(src, cameraMatrix, distCoeffs[, dst[, newCameraMatrix]]) -> dst:
+def undistort(src, cameraMatrix, distCoeffs, dst=..., newCameraMatrix=...) -> dst:
     """
     .   @brief Transforms an image to compensate for lens distortion.
     .
@@ -23066,15 +21892,14 @@ def undistort(src, cameraMatrix, distCoeffs[, dst[, newCameraMatrix]]) -> dst:
     .   @param dst Output (corrected) image that has the same size and type as src .
     .   @param cameraMatrix Input camera matrix \f$A = \vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$ .
     .   @param distCoeffs Input vector of distortion coefficients
-    .   \f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \tau_x, \tau_y]]]])\f$
+    .   \f$(k_1, k_2, p_1, p_2, k_3=..., k_4=..., k_5, k_6, s_1=..., s_2, s_3, s_4, \tau_x=..., \tau_y)\f$
     .   of 4, 5, 8, 12 or 14 elements. If the vector is NULL/empty, the zero distortion coefficients are assumed.
     .   @param newCameraMatrix Camera matrix of the distorted image. By default, it is the same as
     .   cameraMatrix but you may additionally scale and shift the result by using a different matrix.
     """
     ...
 
-
-def undistortPoints(src, cameraMatrix, distCoeffs[, dst[, R[, P]]]) -> dst:
+def undistortPoints(src, cameraMatrix, distCoeffs, dst=..., R=..., P=...) -> dst:
     """
     .   @brief Computes the ideal point coordinates from the observed point coordinates.
     .
@@ -23109,7 +21934,7 @@ def undistortPoints(src, cameraMatrix, distCoeffs[, dst[, R[, P]]]) -> dst:
     .   transformation. If matrix P is identity or omitted, dst will contain normalized point coordinates.
     .   @param cameraMatrix Camera matrix \f$\vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{1}\f$ .
     .   @param distCoeffs Input vector of distortion coefficients
-    .   \f$(k_1, k_2, p_1, p_2[, k_3[, k_4, k_5, k_6[, s_1, s_2, s_3, s_4[, \tau_x, \tau_y]]]])\f$
+    .   \f$(k_1, k_2, p_1, p_2, k_3=..., k_4=..., k_5, k_6, s_1=..., s_2, s_3, s_4, \tau_x=..., \tau_y)\f$
     .   of 4, 5, 8, 12 or 14 elements. If the vector is NULL/empty, the zero distortion coefficients are assumed.
     .   @param R Rectification transformation in the object space (3x3 matrix). R1 or R2 computed by
     .   #stereoRectify can be passed here. If the matrix is empty, the identity transformation is used.
@@ -23118,21 +21943,18 @@ def undistortPoints(src, cameraMatrix, distCoeffs[, dst[, R[, P]]]) -> dst:
     """
     ...
 
-
-def undistortPointsIter(src, cameraMatrix, distCoeffs, R, P, criteria[, dst]) -> dst:
+def undistortPointsIter(src, cameraMatrix, distCoeffs, R, P, criteria, dst=...) -> dst:
     """
     .   @overload
     .       @note Default version of #undistortPoints does 5 iterations to compute undistorted points.
     """
     ...
 
-
 def useOpenVX() -> retval:
     """
     .
     """
     ...
-
 
 def useOptimized() -> retval:
     """
@@ -23142,15 +21964,15 @@ def useOptimized() -> retval:
     """
     ...
 
-
-def validateDisparity(disparity, cost, minDisparity, numberOfDisparities[, disp12MaxDisp]) -> disparity:
+def validateDisparity(
+    disparity, cost, minDisparity, numberOfDisparities, disp12MaxDisp=...
+) -> disparity:
     """
     .
     """
     ...
 
-
-def vconcat(src[, dst]) -> dst:
+def vconcat(src, dst=...) -> dst:
     """
     .   @overload
     .    @code{.cpp}
@@ -23171,8 +21993,7 @@ def vconcat(src[, dst]) -> dst:
     """
     ...
 
-
-def waitKey(delay: float=...) -> Union[Text, Literal[-1]]:
+def waitKey(delay: float = ...) -> Union[Text, Literal[-1]]:
     """
     .   @brief Waits for a pressed key.
     .
@@ -23194,8 +22015,7 @@ def waitKey(delay: float=...) -> Union[Text, Literal[-1]]:
     """
     ...
 
-
-def waitKeyEx([, delay]) -> retval:
+def waitKeyEx(delay=...) -> retval:
     """
     .   @brief Similar to #waitKey, but returns full key code.
     .
@@ -23205,8 +22025,9 @@ def waitKeyEx([, delay]) -> retval:
     """
     ...
 
-
-def warpAffine(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]]) -> dst:
+def warpAffine(
+    src, M, dsize, dst=..., flags=..., borderMode=..., borderValue=...
+) -> dst:
     """
     .   @brief Applies an affine transformation to an image.
     .
@@ -23234,8 +22055,9 @@ def warpAffine(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]]) -> ds
     """
     ...
 
-
-def warpPerspective(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]]) -> dst:
+def warpPerspective(
+    src, M, dsize, dst=..., flags=..., borderMode=..., borderValue=...
+) -> dst:
     """
     .   @brief Applies a perspective transformation to an image.
     .
@@ -23261,8 +22083,7 @@ def warpPerspective(src, M, dsize[, dst[, flags[, borderMode[, borderValue]]]]) 
     """
     ...
 
-
-def warpPolar(src, dsize, center, maxRadius, flags[, dst]) -> dst:
+def warpPolar(src, dsize, center, maxRadius, flags, dst=...) -> dst:
     """
     .   \brief Remaps an image to polar or semilog-polar coordinates space
     .
@@ -23353,7 +22174,6 @@ def warpPolar(src, dsize, center, maxRadius, flags[, dst]) -> dst:
     """
     ...
 
-
 def watershed(image, markers) -> markers:
     """
     .   @brief Performs a marker-based image segmentation using the watershed algorithm.
@@ -23382,7 +22202,6 @@ def watershed(image, markers) -> markers:
     """
     ...
 
-
 def writeOpticalFlow(path, flow) -> retval:
     """
     .   @brief Write a .flo to disk
@@ -23395,7 +22214,6 @@ def writeOpticalFlow(path, flow) -> retval:
     .    to the flow in the horizontal direction (u), second - vertical (v).
     """
     ...
-
 
 ACCESS_FAST: int = 67108864
 
@@ -26458,7 +25276,7 @@ True
 
 haarcascades: ...
 """
-r'C:\Users\...\AppData\Local\Programs\Python\Python38...
+r'C:\\Users\\...\\AppData\\Local\\Programs\\Python\\Python38...
 """
 
 headless: bool

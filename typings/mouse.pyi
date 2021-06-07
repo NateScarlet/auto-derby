@@ -5,7 +5,6 @@ mouse
 
 """
 
-from . import
 from . import _os_mouse
 import typing
 
@@ -52,7 +51,6 @@ Then check the [API docs](https://github.com/boppreh/mouse#api) to see what feat
 
 """
 
-
 class ButtonEvent(builtins.tuple):
     """
     ButtonEvent(event_type, button, time)
@@ -64,54 +62,46 @@ class ButtonEvent(builtins.tuple):
     """
     """
 
-    _fields: ... = ('event_type', 'button', 'time')
+    _fields: ... = ("event_type", "button", "time")
     """
     """
 
     _fields_defaults: ...
     """
     """
-
     @staticmethod
     def __new__(_cls, event_type, button, time):
         """
         Create new instance of ButtonEvent(event_type, button, time)
         """
         ...
-
     @classmethod
     def _make(cls, iterable):
         """
         Make a new ButtonEvent object from a sequence or iterable
         """
         ...
-
     def __getnewargs__(self):
         """
         Return self as a plain tuple.  Used by copy and pickle.
         """
         ...
-
     def __repr__(self):
         """
         Return a nicely formatted representation string
         """
         ...
-
     def _asdict(self):
         """
         Return a new dict which maps field names to their values.
         """
         ...
-
-    def _replace(self, /, **kwds):
+    def _replace(self, **kwds):
         """
         Return a new ButtonEvent object replacing specified fields with new values
         """
         ...
-
     ...
-
 
 class MoveEvent(builtins.tuple):
     """
@@ -124,54 +114,46 @@ class MoveEvent(builtins.tuple):
     """
     """
 
-    _fields: ... = ('x', 'y', 'time')
+    _fields: ... = ("x", "y", "time")
     """
     """
 
     _fields_defaults: ...
     """
     """
-
     @staticmethod
     def __new__(_cls, x, y, time):
         """
         Create new instance of MoveEvent(x, y, time)
         """
         ...
-
     @classmethod
     def _make(cls, iterable):
         """
         Make a new MoveEvent object from a sequence or iterable
         """
         ...
-
     def __getnewargs__(self):
         """
         Return self as a plain tuple.  Used by copy and pickle.
         """
         ...
-
     def __repr__(self):
         """
         Return a nicely formatted representation string
         """
         ...
-
     def _asdict(self):
         """
         Return a new dict which maps field names to their values.
         """
         ...
-
-    def _replace(self, /, **kwds):
+    def _replace(self, **kwds):
         """
         Return a new MoveEvent object replacing specified fields with new values
         """
         ...
-
     ...
-
 
 class WheelEvent(builtins.tuple):
     """
@@ -184,92 +166,81 @@ class WheelEvent(builtins.tuple):
     """
     """
 
-    _fields: ... = ('delta', 'time')
+    _fields: ... = ("delta", "time")
     """
     """
 
     _fields_defaults: ...
     """
     """
-
     @staticmethod
     def __new__(_cls, delta, time):
         """
         Create new instance of WheelEvent(delta, time)
         """
         ...
-
     @classmethod
     def _make(cls, iterable):
         """
         Make a new WheelEvent object from a sequence or iterable
         """
         ...
-
     def __getnewargs__(self):
         """
         Return self as a plain tuple.  Used by copy and pickle.
         """
         ...
-
     def __repr__(self):
         """
         Return a nicely formatted representation string
         """
         ...
-
     def _asdict(self):
         """
         Return a new dict which maps field names to their values.
         """
         ...
-
-    def _replace(self, /, **kwds):
+    def _replace(self, **kwds):
         """
         Return a new WheelEvent object replacing specified fields with new values
         """
         ...
-
     ...
-
 
 _GenericListener = GenericListener
 
-
 class _MouseListener(mouse._generic.GenericListener):
     def init(self):
-        """
-        """
+        """ """
         ...
-
     def listen(self):
-        """
-        """
+        """ """
         ...
-
     def pre_process_event(self, event):
-        """
-        """
+        """ """
         ...
-
     ...
 
-
-def click(button: typing.Text = 'left') -> None:
+def click(button: typing.Text = "left") -> None:
     """
     Sends a click with the given button.
     """
     ...
 
-
-def double_click(button: typing.Text = 'left') -> None:
+def double_click(button: typing.Text = "left") -> None:
     """
     Sends a double click with the given button.
     """
     ...
 
-
-def drag(start_x: int, start_y: int, end_x: int, end_y: int, absolute: bool=True, duration: float=0) -> None:
+def drag(
+    start_x: int,
+    start_y: int,
+    end_x: int,
+    end_y: int,
+    absolute: bool = True,
+    duration: float = 0,
+) -> None:
     """
     Holds the left mouse button, moving from start to end position, then
     releases. `absolute` and `duration` are parameters regarding the mouse
@@ -277,16 +248,13 @@ def drag(start_x: int, start_y: int, end_x: int, end_y: int, absolute: bool=True
     """
     ...
 
-
 def get_position():
     """
     Returns the (x, y) mouse position.
     """
     ...
 
-
 hold = press
-
 
 def hook(callback):
     """
@@ -299,13 +267,11 @@ def hook(callback):
     """
     ...
 
-
-def is_pressed(button: typing.Text = 'left') -> bool:
+def is_pressed(button: typing.Text = "left") -> bool:
     """
     Returns True if the given button is currently pressed.
     """
     ...
-
 
 def move(x: int, y: int, absolute: bool = True, duration: float = 0) -> None:
     """
@@ -314,13 +280,16 @@ def move(x: int, y: int, absolute: bool = True, duration: float = 0) -> None:
     """
     ...
 
-
-def on_button(callback, args=(), buttons=('left', 'middle', 'right', 'x', 'x2'), types=('up', 'down', 'double')):
+def on_button(
+    callback,
+    args=(),
+    buttons=("left", "middle", "right", "x", "x2"),
+    types=("up", "down", "double"),
+):
     """
     Invokes `callback` with `args` when the specified event happens.
     """
     ...
-
 
 def on_click(callback, args=()):
     """
@@ -328,13 +297,11 @@ def on_click(callback, args=()):
     """
     ...
 
-
 def on_double_click(callback, args=()):
     """
     Invokes `callback` with `args` when the left button is double clicked.
     """
     ...
-
 
 def on_middle_click(callback, args=()):
     """
@@ -342,15 +309,19 @@ def on_middle_click(callback, args=()):
     """
     ...
 
-
 def on_right_click(callback, args=()):
     """
     Invokes `callback` with `args` when the right button is clicked.
     """
     ...
 
-
-def play(events, speed_factor=1.0, include_clicks=True, include_moves=True, include_wheel=True):
+def play(
+    events,
+    speed_factor=1.0,
+    include_clicks=True,
+    include_moves=True,
+    include_wheel=True,
+):
     """
     Plays a sequence of recorded events, maintaining the relative time
     intervals. If speed_factor is <= 0 then the actions are replayed as fast
@@ -361,15 +332,13 @@ def play(events, speed_factor=1.0, include_clicks=True, include_moves=True, incl
     """
     ...
 
-
-def press(button: typing.Text = 'left') -> None:
+def press(button: typing.Text = "left") -> None:
     """
     Presses the given button (but doesn't release).
     """
     ...
 
-
-def record(button='right', target_types=('down', )):
+def record(button="right", target_types=("down",)):
     """
     Records all mouse events until the user presses the given button.
     Then returns the list of events recorded. Pairs well with `play(events)`.
@@ -379,16 +348,13 @@ def record(button='right', target_types=('down', )):
     """
     ...
 
-
-def release(button: typing.Text = 'left') -> None:
+def release(button: typing.Text = "left") -> None:
     """
     Releases the given button.
     """
     ...
 
-
 replay = play
-
 
 def right_click():
     """
@@ -396,13 +362,11 @@ def right_click():
     """
     ...
 
-
 def unhook(callback):
     """
     Removes a previously installed hook.
     """
     ...
-
 
 def unhook_all():
     """
@@ -411,20 +375,17 @@ def unhook_all():
     """
     ...
 
-
-def wait(button: typing.Text = 'left', target_types=('up', 'down', 'double')):
+def wait(button: typing.Text = "left", target_types=("up", "down", "double")):
     """
     Blocks program execution until the given button performs an event.
     """
     ...
 
-
-def wheel(delta: int =1) -> None:
+def wheel(delta: int = 1) -> None:
     """
     Scrolls the wheel `delta` clicks. Sign indicates direction.
     """
     ...
-
 
 DOUBLE: typing.Text
 """

@@ -11,13 +11,11 @@ from numpy import ndarray
 
 from . import _contrib
 
-
 def AverageHash_create() -> _contrib.img_hash_AverageHash:
     """
     .
     """
     ...
-
 
 def BlockMeanHash_create(mode: int = ...) -> _contrib.img_hash_BlockMeanHash:
     """
@@ -25,13 +23,11 @@ def BlockMeanHash_create(mode: int = ...) -> _contrib.img_hash_BlockMeanHash:
     """
     ...
 
-
 def ColorMomentHash_create() -> _contrib.img_hash_ColorMomentHash:
     """
     .
     """
     ...
-
 
 def MarrHildrethHash_create(alpha=..., scale=...) -> _contrib.img_hash_ColorMomentHash:
     """
@@ -40,20 +36,19 @@ def MarrHildrethHash_create(alpha=..., scale=...) -> _contrib.img_hash_ColorMome
     """
     ...
 
-
 def PHash_create() -> _contrib.img_hash_PHash:
     """
     .
     """
     ...
 
-
-def RadialVarianceHash_create(sigma=..., numOfAngleLine: int = ...) -> _contrib.img_hash_RadialVarianceHash:
+def RadialVarianceHash_create(
+    sigma=..., numOfAngleLine: int = ...
+) -> _contrib.img_hash_RadialVarianceHash:
     """
     .
     """
     ...
-
 
 def averageHash(inputArr: ndarray, outputArr: ndarray = ...) -> ndarray:
     """
@@ -63,8 +58,9 @@ def averageHash(inputArr: ndarray, outputArr: ndarray = ...) -> ndarray:
     """
     ...
 
-
-def blockMeanHash(inputArr: ndarray, outputArr: ndarray = ..., mode: int = ...) -> ndarray:
+def blockMeanHash(
+    inputArr: ndarray, outputArr: ndarray = ..., mode: int = ...
+) -> ndarray:
     """
     .   @brief Computes block mean hash of the input image
     .       @param inputArr input image want to compute hash value, type should be CV_8UC4, CV_8UC3 or CV_8UC1.
@@ -72,7 +68,6 @@ def blockMeanHash(inputArr: ndarray, outputArr: ndarray = ..., mode: int = ...) 
     .       @param mode the mode
     """
     ...
-
 
 def colorMomentHash(inputArr: ndarray, outputArr: ndarray = ...) -> ndarray:
     """
@@ -85,8 +80,9 @@ def colorMomentHash(inputArr: ndarray, outputArr: ndarray = ...) -> ndarray:
     """
     ...
 
-
-def marrHildrethHash(inputArr: ndarray, outputArr: ndarray = ..., alpha: int = ..., scale: int = ...) -> ndarray:
+def marrHildrethHash(
+    inputArr: ndarray, outputArr: ndarray = ..., alpha: int = ..., scale: int = ...
+) -> ndarray:
     """
     .   @brief Computes average hash value of the input image
     .       @param inputArr input image want to compute hash value,
@@ -98,7 +94,6 @@ def marrHildrethHash(inputArr: ndarray, outputArr: ndarray = ..., alpha: int = .
     """
     ...
 
-
 def pHash(inputArr: ndarray, outputArr: ndarray = ...) -> ndarray:
     """
     .   @brief Computes pHash value of the input image
@@ -108,8 +103,12 @@ def pHash(inputArr: ndarray, outputArr: ndarray = ...) -> ndarray:
     """
     ...
 
-
-def radialVarianceHash(inputArr: ndarray, outputArr: ndarray = ..., sigma: int = ..., numOfAngleLine: int = ...) -> ndarray:
+def radialVarianceHash(
+    inputArr: ndarray,
+    outputArr: ndarray = ...,
+    sigma: int = ...,
+    numOfAngleLine: int = ...,
+) -> ndarray:
     """
     .   @brief Computes radial variance hash of the input image
     .       @param inputArr input image want to compute hash value,
@@ -119,7 +118,6 @@ def radialVarianceHash(inputArr: ndarray, outputArr: ndarray = ..., sigma: int =
     .       @param numOfAngleLine The number of angles to consider
     """
     ...
-
 
 BLOCK_MEAN_HASH_MODE_0: int = 0
 

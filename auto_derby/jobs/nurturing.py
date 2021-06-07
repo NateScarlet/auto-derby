@@ -33,14 +33,13 @@ def _interpolate(value: int, value_map: Tuple[Tuple[int, float], ...]) -> float:
     return weight
 
 
-def _training_single_score(current: int, delta: int, value_map: Tuple[Tuple[int, float], ...]) -> float:
+def _training_single_score(
+    current: int, delta: int, value_map: Tuple[Tuple[int, float], ...]
+) -> float:
 
     ret = 0
-    for i in range(current, current+delta):
-        ret += _interpolate(
-            i,
-            value_map
-        )
+    for i in range(current, current + delta):
+        ret += _interpolate(i, value_map)
     return ret
 
 
@@ -48,13 +47,7 @@ def _training_score(ctx: Context, training: Training) -> float:
     spd = _training_single_score(
         ctx.speed,
         training.speed,
-        (
-            (0, 2.0),
-            (300, 1.0),
-            (600, 0.8),
-            (900, 0.7),
-            (1100, 0.5),
-        )
+        ((0, 2.0), (300, 1.0), (600, 0.8), (900, 0.7), (1100, 0.5)),
     )
 
     sta = _training_single_score(
@@ -62,12 +55,13 @@ def _training_score(ctx: Context, training: Training) -> float:
         training.stamina,
         (
             (0, 2.0),
-            (300, ctx.speed / 600 + 0.3 *
-             ctx.date[0] if ctx.speed > 600 else 1.0),
-            (600, ctx.speed / 900 * 0.6 + 0.1 *
-             ctx.date[0] if ctx.speed > 900 else 0.6),
+            (300, ctx.speed / 600 + 0.3 * ctx.date[0] if ctx.speed > 600 else 1.0),
+            (
+                600,
+                ctx.speed / 900 * 0.6 + 0.1 * ctx.date[0] if ctx.speed > 900 else 0.6,
+            ),
             (900, ctx.speed / 900 * 0.3),
-        )
+        ),
     )
     pow = _training_single_score(
         ctx.power,
@@ -77,51 +71,32 @@ def _training_score(ctx: Context, training: Training) -> float:
             (300, 0.2 + ctx.speed / 600),
             (600, 0.1 + ctx.speed / 900),
             (900, ctx.speed / 900 / 3),
-        )
+        ),
     )
     per = _training_single_score(
         ctx.guts,
         training.guts,
-        (
-            (0, 2.0),
-            (300, 1.0),
-            (400, 0.3),
-            (600, 0.1),
-        ) if ctx.speed > 400 / 24 * ctx.turn_count() else (
-            (0, 2.0),
-            (300, 0.5),
-            (400, 0.1),
-        )
+        ((0, 2.0), (300, 1.0), (400, 0.3), (600, 0.1))
+        if ctx.speed > 400 / 24 * ctx.turn_count()
+        else ((0, 2.0), (300, 0.5), (400, 0.1)),
     )
     int_ = _training_single_score(
         ctx.wisdom,
         training.wisdom,
-        (
-            (0, 3.0),
-            (300, 1.0),
-            (400, 0.4),
-            (600, 0.2),
-        ) if ctx.vitality < 0.9 else (
-            (0, 2.0),
-            (300, 0.8),
-            (400, 0.1),
-        )
+        ((0, 3.0), (300, 1.0), (400, 0.4), (600, 0.2))
+        if ctx.vitality < 0.9
+        else ((0, 2.0), (300, 0.8), (400, 0.1)),
     )
 
     if ctx.vitality < 0.9:
-        int_ += 5 if ctx.date[1:] in (
-            (7, 1),
-            (7, 2),
-            (8, 1),
-        ) else 3
+        int_ += 5 if ctx.date[1:] in ((7, 1), (7, 2), (8, 1)) else 3
 
     skill = training.skill * 0.5
     return spd + sta + pow + per + int_ + skill
 
 
 _TRAINING_CONFIRM = template.Specification(
-    templates.SINGLE_MODE_TRAINING_CONFIRM,
-    threshold=0.8
+    templates.SINGLE_MODE_TRAINING_CONFIRM, threshold=0.8
 )
 
 
@@ -129,14 +104,8 @@ def _handle_training(ctx: Context):
     trainings: List[Training] = []
 
     action.wait_image(_TRAINING_CONFIRM)
-    for x, y in (
-        (78, 700),
-        (158, 700),
-        (234, 700),
-        (314, 700),
-        (402, 700),
-    ):
-        action.drag((x, y-100), dy=100)
+    for x, y in ((78, 700), (158, 700), (234, 700), (314, 700), (402, 700)):
+        action.drag((x, y - 100), dy=100)
         action.wait_image(_TRAINING_CONFIRM)
         t = Training.from_training_scene(template.screenshot())
         trainings.append(t)
@@ -146,44 +115,39 @@ def _handle_training(ctx: Context):
         expected_score *= 0.5
     if ctx.turn_count() >= ctx.total_turn_count() - 2:
         expected_score *= 0.1
-    if ctx.date[1:] in (
-        (6, 1),
-    ) and ctx.vitality < 0.8:
+    if ctx.date[1:] in ((6, 1),) and ctx.vitality < 0.8:
         expected_score += 10
-    if ctx.date[1:] in (
-        (6, 2),
-    ) and ctx.vitality < 0.9:
+    if ctx.date[1:] in ((6, 2),) and ctx.vitality < 0.9:
         expected_score += 20
-    if ctx.date[1:] in (
-        (7, 1),
-        (7, 2),
-        (8, 1),
-    ) and ctx.vitality < 0.8:
+    if ctx.date[1:] in ((7, 1), (7, 2), (8, 1)) and ctx.vitality < 0.8:
         expected_score += 10
-    if ctx.date in (
-        (4, 0, 0)
-    ):
+    if ctx.date in ((4, 0, 0)):
         expected_score -= 20
     LOGGER.info("expected score:\t%2.2f", expected_score)
     trainings_with_score = [(i, _training_score(ctx, i)) for i in trainings]
     trainings_with_score = sorted(
-        trainings_with_score, key=lambda x: x[1], reverse=True)
+        trainings_with_score, key=lambda x: x[1], reverse=True
+    )
     for t, s in trainings_with_score:
         LOGGER.info("score:\t%2.2f:\t%s", s, t)
     training, score = trainings_with_score[0]
     if score < expected_score:
         # not worth, go rest
         action.click_image(templates.RETURN_BUTTON)
-        _, pos = action.wait_image(
-            templates.SINGLE_MODE_REST,  # TODO: rename this template
-            templates.SINGLE_MODE_COMMAND_SUMMER_REST,
-        ) if ctx.vitality < 0.8 else action.wait_image(
-            templates.SINGLE_MODE_COMMAND_GO_OUT,
-            templates.SINGLE_MODE_COMMAND_SUMMER_REST,
+        _, pos = (
+            action.wait_image(
+                templates.SINGLE_MODE_REST,  # TODO: rename this template
+                templates.SINGLE_MODE_COMMAND_SUMMER_REST,
+            )
+            if ctx.vitality < 0.8
+            else action.wait_image(
+                templates.SINGLE_MODE_COMMAND_GO_OUT,
+                templates.SINGLE_MODE_COMMAND_SUMMER_REST,
+            )
         )
         action.click(pos)
     x, y = training.confirm_position
-    action.drag((x, y-100), dy=100)
+    action.drag((x, y - 100), dy=100)
     action.click((x, y))
 
 
@@ -211,8 +175,7 @@ def _handle_race_result():
 
 
 _RACE_DETAIL_BUTTON = template.Specification(
-    templates.SINGLE_MODE_RACE_DETAIL_BUTTON,
-    threshold=0.8
+    templates.SINGLE_MODE_RACE_DETAIL_BUTTON, threshold=0.8
 )
 
 
@@ -220,7 +183,7 @@ def _running_style_single_score(
     ctx: Context,
     race1: race.Race,
     status: Tuple[int, Text],
-    factors: Tuple[int, int, int, int, int]
+    factors: Tuple[int, int, int, int, int],
 ) -> float:
     assert sum(factors) == 10000, factors
     spd = ctx.speed
@@ -285,19 +248,34 @@ def _running_style_single_score(
 
     total_factor = 1
     for i in race1.target_statuses:
-        total_factor *= 1 + 0.1 * int({
-            race1.TARGET_STATUS_SPEED: spd,
-            race1.TARGET_STATUS_POWER: pow,
-            race1.TARGET_STATUS_STAMINA: sta,
-            race1.TARGET_STATUS_GUTS: gut,
-            race1.TARGET_STATUS_WISDOM: wis,
-        }[i] / 300)
-    return (spd * factors[0] + sta * factors[1] + pow * factors[2] + gut * factors[3] + wis * factors[4]) * total_factor / 10000
+        total_factor *= 1 + 0.1 * int(
+            {
+                race1.TARGET_STATUS_SPEED: spd,
+                race1.TARGET_STATUS_POWER: pow,
+                race1.TARGET_STATUS_STAMINA: sta,
+                race1.TARGET_STATUS_GUTS: gut,
+                race1.TARGET_STATUS_WISDOM: wis,
+            }[i]
+            / 300
+        )
+    return (
+        (
+            spd * factors[0]
+            + sta * factors[1]
+            + pow * factors[2]
+            + gut * factors[3]
+            + wis * factors[4]
+        )
+        * total_factor
+        / 10000
+    )
 
 
-def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float, float, float]:
+def _running_style_scores(
+    ctx: Context, race1: race.Race
+) -> Tuple[float, float, float, float]:
     lead = _running_style_single_score(
-        ctx, race1, ctx.lead, (5000, 3000, 500, 500, 1000),
+        ctx, race1, ctx.lead, (5000, 3000, 500, 500, 1000)
     )
     head = _running_style_single_score(
         ctx, race1, ctx.head, (4800, 2000, 1400, 500, 1300)
@@ -310,9 +288,9 @@ def _running_style_scores(ctx: Context, race1: race.Race) -> Tuple[float, float,
     )
 
     if (
-        ctx.speed > ctx.turn_count() * 400 / 24 and
-        race1.grade >= race1.GRADE_G2 and
-        race1.distance <= 1800
+        ctx.speed > ctx.turn_count() * 400 / 24
+        and race1.grade >= race1.GRADE_G2
+        and race1.distance <= 1800
     ):
         lead += 40
     if race1.distance >= 2400:
@@ -329,9 +307,7 @@ def _choose_running_style(ctx: Context, race1: race.Race) -> None:
     button_pos = ((60, 500), (160, 500), (260, 500), (360, 500))
 
     style_scores = sorted(
-        zip(names, scores, button_pos),
-        key=lambda x: x[1],
-        reverse=True,
+        zip(names, scores, button_pos), key=lambda x: x[1], reverse=True
     )
 
     for name, score, _ in style_scores:
@@ -369,7 +345,7 @@ ALL_OPTIONS = [
 
 def _handle_option():
     ans = choice.get(template.screenshot())
-    action.click_image(ALL_OPTIONS[ans-1])
+    action.click_image(ALL_OPTIONS[ans - 1])
 
 
 def _update_context_by_class_menu(ctx: Context):
@@ -437,7 +413,8 @@ def nurturing():
             LOGGER.info("update context: %s", ctx)
             if action.click_image(templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER):
                 action.wait_click_image(
-                    templates.SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON)
+                    templates.SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON
+                )
                 _handle_race(ctx)
                 continue
 

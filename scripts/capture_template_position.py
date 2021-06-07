@@ -4,7 +4,8 @@
 if True:
     import sys
     import os
-    sys.path.insert(0, os.path.join(__file__, "../.."), )
+
+    sys.path.insert(0, os.path.join(__file__, "../.."))
 
 
 from typing import Text
@@ -28,7 +29,11 @@ def _all_templates():
 
 
 def _latest_file():
-    return str((sorted(_all_templates(), key=lambda x: x.stat().st_mtime, reverse=True))[0].name)
+    return str(
+        (sorted(_all_templates(), key=lambda x: x.stat().st_mtime, reverse=True))[
+            0
+        ].name
+    )
 
 
 def create_pos_mask(name: Text, game_img: PIL.Image.Image, threshold: float):
@@ -41,13 +46,12 @@ def create_pos_mask(name: Text, game_img: PIL.Image.Image, threshold: float):
         out_img = np.zeros((game_img.height, game_img.width), dtype=np.uint8)
 
     padding = 2
-    for _, pos in template.match(game_img, template.Specification(name, templates.ANY_POS, threshold=threshold)):
+    for _, pos in template.match(
+        game_img, template.Specification(name, templates.ANY_POS, threshold=threshold)
+    ):
         print(pos)
         x, y = pos
-        out_img[
-            y-padding: y+padding,
-            x-padding: x+padding,
-        ] = 255
+        out_img[y - padding : y + padding, x - padding : x + padding] = 255
 
     img = PIL.Image.fromarray(out_img).convert("1")
     dest = str(_TEMPLATES_PATH / template.add_middle_ext(name, "pos"))
@@ -62,8 +66,7 @@ def main():
 
     parser.add_argument("--name", "-n", dest="name")
     parser.add_argument("--game-image", "-g", dest="game_image")
-    parser.add_argument("--threshold", "-t",
-                        dest="threshold", type=float, default=0.9)
+    parser.add_argument("--threshold", "-t", dest="threshold", type=float, default=0.9)
     args = parser.parse_args()
     name = args.name
     threshold = args.threshold
@@ -78,5 +81,5 @@ def main():
     create_pos_mask(name, game_image, threshold)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

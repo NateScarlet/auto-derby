@@ -120,6 +120,7 @@ from . import _mat
 from . import char
 from . import emath
 from . import rec
+
 class AxisError(ValueError, IndexError):
     """
     AxisError(axis, ndim=None, msg_prefix=None)
@@ -131,13 +132,11 @@ class AxisError(ValueError, IndexError):
     """
     list of weak references to the object (if defined)
     """
-
     def __init__(self, axis, ndim=None, msg_prefix=None):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
     ...
 
 Bytes0 = bytes_
@@ -216,18 +215,14 @@ class DataSource(object):
     """
     list of weak references to the object (if defined)
     """
-
     def __del__(self):
-        """
-        """
+        """ """
         ...
-
-    def __init__(self, destpath='.'):
+    def __init__(self, destpath="."):
         """
         Create a DataSource with a local path at destpath.
         """
         ...
-
     def abspath(self, path):
         """
         Return absolute path of file in the DataSource directory.
@@ -251,7 +246,6 @@ class DataSource(object):
         The functionality is based on `os.path.abspath`.
         """
         ...
-
     def exists(self, path):
         """
         Test if path exists.
@@ -282,8 +276,7 @@ class DataSource(object):
         is accessible if it exists in either location.
         """
         ...
-
-    def open(self, path, mode='r', encoding=None, newline=None):
+    def open(self, path, mode="r", encoding=None, newline=None):
         """
         Open and return file-like object.
 
@@ -310,14 +303,13 @@ class DataSource(object):
             File object.
         """
         ...
-
     ...
 
 Datetime64 = datetime64
 
 class MachAr(object):
     """
-    MachAr(float_conv=<class 'float'>, int_conv=<class 'int'>, float_to_float=<class 'float'>, float_to_str=<function MachAr.<lambda> at 0x0000024BB21AADC0>, title='Python floating point number')
+    MachAr(float_conv=float, int_conv=int, float_to_float=float, float_to_str=<function MachAr.<lambda> at 0x0000024BB21AADC0>, title='Python floating point number')
 
     Diagnosing machine parameters.
 
@@ -406,8 +398,14 @@ class MachAr(object):
     """
     list of weak references to the object (if defined)
     """
-
-    def __init__(self, float_conv=<class 'float'>, int_conv=<class 'int'>, float_to_float=<class 'float'>, float_to_str=<function MachAr.<lambda> at 0x0000024BB21AADC0>, title='Python floating point number'):
+    def __init__(
+        self,
+        float_conv=float,
+        int_conv=int,
+        float_to_float=float,
+        float_to_str=...,
+        title="Python floating point number",
+    ):
         """
         float_conv - convert integer to float (array)
         int_conv   - convert float (array) to integer
@@ -416,13 +414,11 @@ class MachAr(object):
         title        - description of used floating point numbers
         """
         ...
-
     def __str__(self):
         """
         Return str(self).
         """
         ...
-
     ...
 
 class ModuleDeprecationWarning(DeprecationWarning):
@@ -514,109 +510,91 @@ class bool_(generic):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 class broadcast(object):
@@ -771,26 +749,22 @@ class broadcast(object):
     >>> b.size
     9
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __iter__(self, /):
+    def __iter__(self):
         """
         Implement iter(self).
         """
         ...
-
-    def __next__(self, /):
+    def __next__(self):
         """
         Implement next(self).
         """
         ...
-
     def reset(self, *args, **kwargs):
         """
         reset()
@@ -821,7 +795,6 @@ class broadcast(object):
         0
         """
         ...
-
     ...
 
 class busdaycalendar(object):
@@ -897,20 +870,17 @@ class busdaycalendar(object):
     """
     A copy of the seven-element boolean mask indicating valid days.
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
     ...
 
 byte = int8
@@ -933,61 +903,51 @@ class bytes_(bytes, character):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
     ...
 
 cdouble = complex128
@@ -1146,14 +1106,21 @@ class chararray(ndarray):
     __hash__: ... = None
     """
     """
-
     @staticmethod
-    def __new__(subtype, shape, itemsize=1, unicode=False, buffer=None, offset=0, strides=None, order='C'):
+    def __new__(
+        subtype,
+        shape,
+        itemsize=1,
+        unicode=False,
+        buffer=None,
+        offset=0,
+        strides=None,
+        order="C",
+    ):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     def __add__(self, other):
         """
         Return (self + other), that is string concatenation,
@@ -1164,13 +1131,11 @@ class chararray(ndarray):
         add
         """
         ...
-
     def __array_finalize__(self, obj):
         """
         None.
         """
         ...
-
     def __eq__(self, other):
         """
         Return (self == other) element-wise.
@@ -1180,7 +1145,6 @@ class chararray(ndarray):
         equal
         """
         ...
-
     def __ge__(self, other):
         """
         Return (self >= other) element-wise.
@@ -1190,13 +1154,11 @@ class chararray(ndarray):
         greater_equal
         """
         ...
-
     def __getitem__(self, obj):
         """
         Return self[key].
         """
         ...
-
     def __gt__(self, other):
         """
         Return (self > other) element-wise.
@@ -1206,7 +1168,6 @@ class chararray(ndarray):
         greater
         """
         ...
-
     def __le__(self, other):
         """
         Return (self <= other) element-wise.
@@ -1216,7 +1177,6 @@ class chararray(ndarray):
         less_equal
         """
         ...
-
     def __lt__(self, other):
         """
         Return (self < other) element-wise.
@@ -1226,7 +1186,6 @@ class chararray(ndarray):
         less
         """
         ...
-
     def __mod__(self, i):
         """
         Return (self % i), that is pre-Python 2.6 string formatting
@@ -1238,7 +1197,6 @@ class chararray(ndarray):
         mod
         """
         ...
-
     def __mul__(self, i):
         """
         Return (self * i), that is string multiple concatenation,
@@ -1249,7 +1207,6 @@ class chararray(ndarray):
         multiply
         """
         ...
-
     def __ne__(self, other):
         """
         Return (self != other) element-wise.
@@ -1259,7 +1216,6 @@ class chararray(ndarray):
         not_equal
         """
         ...
-
     def __radd__(self, other):
         """
         Return (other + self), that is string concatenation,
@@ -1270,13 +1226,11 @@ class chararray(ndarray):
         add
         """
         ...
-
     def __rmod__(self, other):
         """
         Return value%self.
         """
         ...
-
     def __rmul__(self, i):
         """
         Return (self * i), that is string multiple concatenation,
@@ -1287,7 +1241,6 @@ class chararray(ndarray):
         multiply
         """
         ...
-
     def argsort(self, axis=-1, kind=None, order=None):
         """
         a.argsort(axis=-1, kind=None, order=None)
@@ -1301,7 +1254,6 @@ class chararray(ndarray):
         numpy.argsort : equivalent function
         """
         ...
-
     def capitalize(self):
         """
         Return a copy of `self` with only the first character of each element
@@ -1312,8 +1264,7 @@ class chararray(ndarray):
         char.capitalize
         """
         ...
-
-    def center(self, width, fillchar=' '):
+    def center(self, width, fillchar=" "):
         """
         Return a copy of `self` with its elements centered in a
         string of length `width`.
@@ -1323,7 +1274,6 @@ class chararray(ndarray):
         center
         """
         ...
-
     def count(self, sub, start=0, end=None):
         """
         Returns an array with the number of non-overlapping occurrences of
@@ -1334,7 +1284,6 @@ class chararray(ndarray):
         char.count
         """
         ...
-
     def decode(self, encoding=None, errors=None):
         """
         Calls `str.decode` element-wise.
@@ -1344,7 +1293,6 @@ class chararray(ndarray):
         char.decode
         """
         ...
-
     def encode(self, encoding=None, errors=None):
         """
         Calls `str.encode` element-wise.
@@ -1354,7 +1302,6 @@ class chararray(ndarray):
         char.encode
         """
         ...
-
     def endswith(self, suffix, start=0, end=None):
         """
         Returns a boolean array which is `True` where the string element
@@ -1365,7 +1312,6 @@ class chararray(ndarray):
         char.endswith
         """
         ...
-
     def expandtabs(self, tabsize=8):
         """
         Return a copy of each string element where all tab characters are
@@ -1376,7 +1322,6 @@ class chararray(ndarray):
         char.expandtabs
         """
         ...
-
     def find(self, sub, start=0, end=None):
         """
         For each element, return the lowest index in the string where
@@ -1387,7 +1332,6 @@ class chararray(ndarray):
         char.find
         """
         ...
-
     def index(self, sub, start=0, end=None):
         """
         Like `find`, but raises `ValueError` when the substring is not found.
@@ -1397,7 +1341,6 @@ class chararray(ndarray):
         char.index
         """
         ...
-
     def isalnum(self):
         """
         Returns true for each element if all characters in the string
@@ -1409,7 +1352,6 @@ class chararray(ndarray):
         char.isalnum
         """
         ...
-
     def isalpha(self):
         """
         Returns true for each element if all characters in the string
@@ -1421,7 +1363,6 @@ class chararray(ndarray):
         char.isalpha
         """
         ...
-
     def isdecimal(self):
         """
         For each element in `self`, return True if there are only
@@ -1432,7 +1373,6 @@ class chararray(ndarray):
         char.isdecimal
         """
         ...
-
     def isdigit(self):
         """
         Returns true for each element if all characters in the string are
@@ -1443,7 +1383,6 @@ class chararray(ndarray):
         char.isdigit
         """
         ...
-
     def islower(self):
         """
         Returns true for each element if all cased characters in the
@@ -1455,7 +1394,6 @@ class chararray(ndarray):
         char.islower
         """
         ...
-
     def isnumeric(self):
         """
         For each element in `self`, return True if there are only
@@ -1466,7 +1404,6 @@ class chararray(ndarray):
         char.isnumeric
         """
         ...
-
     def isspace(self):
         """
         Returns true for each element if there are only whitespace
@@ -1478,7 +1415,6 @@ class chararray(ndarray):
         char.isspace
         """
         ...
-
     def istitle(self):
         """
         Returns true for each element if the element is a titlecased
@@ -1489,7 +1425,6 @@ class chararray(ndarray):
         char.istitle
         """
         ...
-
     def isupper(self):
         """
         Returns true for each element if all cased characters in the
@@ -1501,7 +1436,6 @@ class chararray(ndarray):
         char.isupper
         """
         ...
-
     def join(self, seq):
         """
         Return a string which is the concatenation of the strings in the
@@ -1512,8 +1446,7 @@ class chararray(ndarray):
         char.join
         """
         ...
-
-    def ljust(self, width, fillchar=' '):
+    def ljust(self, width, fillchar=" "):
         """
         Return an array with the elements of `self` left-justified in a
         string of length `width`.
@@ -1523,7 +1456,6 @@ class chararray(ndarray):
         char.ljust
         """
         ...
-
     def lower(self):
         """
         Return an array with the elements of `self` converted to
@@ -1534,7 +1466,6 @@ class chararray(ndarray):
         char.lower
         """
         ...
-
     def lstrip(self, chars=None):
         """
         For each element in `self`, return a copy with the leading characters
@@ -1545,7 +1476,6 @@ class chararray(ndarray):
         char.lstrip
         """
         ...
-
     def partition(self, sep):
         """
         Partition each element in `self` around `sep`.
@@ -1555,7 +1485,6 @@ class chararray(ndarray):
         partition
         """
         ...
-
     def replace(self, old, new, count=None):
         """
         For each element in `self`, return a copy of the string with all
@@ -1566,7 +1495,6 @@ class chararray(ndarray):
         char.replace
         """
         ...
-
     def rfind(self, sub, start=0, end=None):
         """
         For each element in `self`, return the highest index in the string
@@ -1578,7 +1506,6 @@ class chararray(ndarray):
         char.rfind
         """
         ...
-
     def rindex(self, sub, start=0, end=None):
         """
         Like `rfind`, but raises `ValueError` when the substring `sub` is
@@ -1589,8 +1516,7 @@ class chararray(ndarray):
         char.rindex
         """
         ...
-
-    def rjust(self, width, fillchar=' '):
+    def rjust(self, width, fillchar=" "):
         """
         Return an array with the elements of `self`
         right-justified in a string of length `width`.
@@ -1600,7 +1526,6 @@ class chararray(ndarray):
         char.rjust
         """
         ...
-
     def rpartition(self, sep):
         """
         Partition each element in `self` around `sep`.
@@ -1610,7 +1535,6 @@ class chararray(ndarray):
         rpartition
         """
         ...
-
     def rsplit(self, sep=None, maxsplit=None):
         """
         For each element in `self`, return a list of the words in
@@ -1621,7 +1545,6 @@ class chararray(ndarray):
         char.rsplit
         """
         ...
-
     def rstrip(self, chars=None):
         """
         For each element in `self`, return a copy with the trailing
@@ -1632,7 +1555,6 @@ class chararray(ndarray):
         char.rstrip
         """
         ...
-
     def split(self, sep=None, maxsplit=None):
         """
         For each element in `self`, return a list of the words in the
@@ -1643,7 +1565,6 @@ class chararray(ndarray):
         char.split
         """
         ...
-
     def splitlines(self, keepends=None):
         """
         For each element in `self`, return a list of the lines in the
@@ -1654,7 +1575,6 @@ class chararray(ndarray):
         char.splitlines
         """
         ...
-
     def startswith(self, prefix, start=0, end=None):
         """
         Returns a boolean array which is `True` where the string element
@@ -1665,7 +1585,6 @@ class chararray(ndarray):
         char.startswith
         """
         ...
-
     def strip(self, chars=None):
         """
         For each element in `self`, return a copy with the leading and
@@ -1676,7 +1595,6 @@ class chararray(ndarray):
         char.strip
         """
         ...
-
     def swapcase(self):
         """
         For each element in `self`, return a copy of the string with
@@ -1687,7 +1605,6 @@ class chararray(ndarray):
         char.swapcase
         """
         ...
-
     def title(self):
         """
         For each element in `self`, return a titlecased version of the
@@ -1699,7 +1616,6 @@ class chararray(ndarray):
         char.title
         """
         ...
-
     def translate(self, table, deletechars=None):
         """
         For each element in `self`, return a copy of the string where
@@ -1712,7 +1628,6 @@ class chararray(ndarray):
         char.translate
         """
         ...
-
     def upper(self):
         """
         Return an array with the elements of `self` converted to
@@ -1723,7 +1638,6 @@ class chararray(ndarray):
         char.upper
         """
         ...
-
     def zfill(self, width):
         """
         Return the numeric string left-filled with zeros in a string of
@@ -1734,7 +1648,6 @@ class chararray(ndarray):
         char.zfill
         """
         ...
-
     ...
 
 class clongdouble(complexfloating):
@@ -1753,198 +1666,164 @@ class clongdouble(complexfloating):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
     def __complex__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
     ...
 
 clongfloat = clongdouble
@@ -1969,169 +1848,141 @@ class complex128(complexfloating, complex):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
     ...
 
 class complex64(complexfloating):
@@ -2151,174 +2002,144 @@ class complex64(complexfloating):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
     def __complex__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
     ...
 
 complex_ = complex128
@@ -2330,10 +2151,8 @@ class complexfloating(inexact):
     """
 
     def __round__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     ...
 
 csingle = complex64
@@ -2358,61 +2177,51 @@ class datetime64(generic):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
     ...
 
 double = float64
@@ -2848,109 +2657,90 @@ class dtype(object):
     >>> x.subdtype
     >>>
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __getitem__(self, key, /):
+    def __getitem__(self, key):
         """
         Return self[key].
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __len__(self, /):
+    def __len__(self):
         """
         Return len(self).
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
     def __reduce__(self, *args, **kwargs):
         """
         Helper for pickle.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
     def __setstate__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
     def newbyteorder(self, *args, **kwargs):
         """
         newbyteorder(new_order='S', /)
@@ -3011,7 +2801,6 @@ class dtype(object):
         True
         """
         ...
-
     ...
 
 class errstate(contextlib.ContextDecorator):
@@ -3075,21 +2864,16 @@ class errstate(contextlib.ContextDecorator):
     """
 
     def __enter__(self):
-        """
-        """
+        """ """
         ...
-
     def __exit__(self, *exc_info):
-        """
-        """
+        """ """
         ...
-
-    def __init__(self, *, call=<numpy.core._ufunc_config._unspecified object at 0x0000024BB214DDF0>, **kwargs):
+    def __init__(self, *, call=..., **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
     ...
 
 class finfo(object):
@@ -3187,26 +2971,22 @@ class finfo(object):
     """
     list of weak references to the object (if defined)
     """
-
     @staticmethod
     def __new__(cls, dtype):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def __str__(self):
         """
         Return str(self).
         """
         ...
-
     ...
 
 class flatiter(object):
@@ -3256,79 +3036,66 @@ class flatiter(object):
         __array__(type=None) Get array from iterator
         """
         ...
-
-    def __delitem__(self, key, /):
+    def __delitem__(self, key):
         """
         Delete self[key].
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __getitem__(self, key, /):
+    def __getitem__(self, key):
         """
         Return self[key].
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __iter__(self, /):
+    def __iter__(self):
         """
         Implement iter(self).
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __len__(self, /):
+    def __len__(self):
         """
         Return len(self).
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __next__(self, /):
+    def __next__(self):
         """
         Implement next(self).
         """
         ...
-
-    def __setitem__(self, key, value, /):
+    def __setitem__(self, key, value):
         """
         Set self[key] to value.
         """
         ...
-
     def copy(self, *args, **kwargs):
         """
         copy()
@@ -3346,7 +3113,6 @@ class flatiter(object):
         array([0, 1, 2, 3, 4, 5])
         """
         ...
-
     ...
 
 class flexible(generic):
@@ -3373,193 +3139,161 @@ class float16(floating):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
     def as_integer_ratio(self, *args, **kwargs):
         """
         half.as_integer_ratio() -> (int, int)
@@ -3576,7 +3310,6 @@ class float16(floating):
         (-1, 4)
         """
         ...
-
     ...
 
 class float32(floating):
@@ -3594,193 +3327,161 @@ class float32(floating):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
     def as_integer_ratio(self, *args, **kwargs):
         """
         single.as_integer_ratio() -> (int, int)
@@ -3797,7 +3498,6 @@ class float32(floating):
         (-1, 4)
         """
         ...
-
     ...
 
 class float64(floating, float):
@@ -3819,193 +3519,161 @@ class float64(floating, float):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
     def as_integer_ratio(self, *args, **kwargs):
         """
         double.as_integer_ratio() -> (int, int)
@@ -4022,7 +3690,6 @@ class float64(floating, float):
         (-1, 4)
         """
         ...
-
     ...
 
 float_ = float64
@@ -4033,10 +3700,8 @@ class floating(inexact):
     """
 
     def __round__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     ...
 
 class format_parser(object):
@@ -4108,13 +3773,11 @@ class format_parser(object):
     """
     list of weak references to the object (if defined)
     """
-
     def __init__(self, formats, names, titles, aligned=False, byteorder=None):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
     ...
 
 class generic(object):
@@ -4128,291 +3791,240 @@ class generic(object):
     custom scalar types.
     """
 
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
     def __array__(self, *args, **kwargs):
         """
         sc.__array__(dtype) return 0-dim array from scalar with specified dtype
         """
         ...
-
     def __array_wrap__(self, *args, **kwargs):
         """
         sc.__array_wrap__(obj) return scalar from array
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
     def __copy__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     def __deepcopy__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
     def __format__(self, *args, **kwargs):
         """
         NumPy array scalar formatter
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __getitem__(self, key, /):
+    def __getitem__(self, key):
         """
         Return self[key].
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
     def __reduce__(self, *args, **kwargs):
         """
         Helper for pickle.
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
     def __setstate__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     def __sizeof__(self, *args, **kwargs):
         """
         Size of object in memory, in bytes.
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     def all(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4420,7 +4032,6 @@ class generic(object):
         Please see `ndarray.all`.
         """
         ...
-
     def any(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4428,7 +4039,6 @@ class generic(object):
         Please see `ndarray.any`.
         """
         ...
-
     def argmax(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4436,7 +4046,6 @@ class generic(object):
         Please see `ndarray.argmax`.
         """
         ...
-
     def argmin(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4444,7 +4053,6 @@ class generic(object):
         Please see `ndarray.argmin`.
         """
         ...
-
     def argsort(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4452,7 +4060,6 @@ class generic(object):
         Please see `ndarray.argsort`.
         """
         ...
-
     def astype(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4460,7 +4067,6 @@ class generic(object):
         Please see `ndarray.astype`.
         """
         ...
-
     def byteswap(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4468,7 +4074,6 @@ class generic(object):
         Please see `ndarray.byteswap`.
         """
         ...
-
     def choose(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4476,7 +4081,6 @@ class generic(object):
         Please see `ndarray.choose`.
         """
         ...
-
     def clip(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4484,7 +4088,6 @@ class generic(object):
         Please see `ndarray.clip`.
         """
         ...
-
     def compress(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4492,12 +4095,9 @@ class generic(object):
         Please see `ndarray.compress`.
         """
         ...
-
     def conj(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     def conjugate(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4505,7 +4105,6 @@ class generic(object):
         Please see `ndarray.conjugate`.
         """
         ...
-
     def copy(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4513,7 +4112,6 @@ class generic(object):
         Please see `ndarray.copy`.
         """
         ...
-
     def cumprod(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4521,7 +4119,6 @@ class generic(object):
         Please see `ndarray.cumprod`.
         """
         ...
-
     def cumsum(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4529,7 +4126,6 @@ class generic(object):
         Please see `ndarray.cumsum`.
         """
         ...
-
     def diagonal(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4537,7 +4133,6 @@ class generic(object):
         Please see `ndarray.diagonal`.
         """
         ...
-
     def dump(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4545,7 +4140,6 @@ class generic(object):
         Please see `ndarray.dump`.
         """
         ...
-
     def dumps(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4553,7 +4147,6 @@ class generic(object):
         Please see `ndarray.dumps`.
         """
         ...
-
     def fill(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4561,7 +4154,6 @@ class generic(object):
         Please see `ndarray.fill`.
         """
         ...
-
     def flatten(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4569,7 +4161,6 @@ class generic(object):
         Please see `ndarray.flatten`.
         """
         ...
-
     def getfield(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4577,7 +4168,6 @@ class generic(object):
         Please see `ndarray.getfield`.
         """
         ...
-
     def item(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4585,7 +4175,6 @@ class generic(object):
         Please see `ndarray.item`.
         """
         ...
-
     def itemset(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4593,7 +4182,6 @@ class generic(object):
         Please see `ndarray.itemset`.
         """
         ...
-
     def max(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4601,7 +4189,6 @@ class generic(object):
         Please see `ndarray.max`.
         """
         ...
-
     def mean(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4609,7 +4196,6 @@ class generic(object):
         Please see `ndarray.mean`.
         """
         ...
-
     def min(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4617,7 +4203,6 @@ class generic(object):
         Please see `ndarray.min`.
         """
         ...
-
     def newbyteorder(self, *args, **kwargs):
         """
         newbyteorder(new_order='S', /)
@@ -4648,7 +4233,6 @@ class generic(object):
             New `dtype` object with the given change to the byte order.
         """
         ...
-
     def nonzero(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4656,7 +4240,6 @@ class generic(object):
         Please see `ndarray.nonzero`.
         """
         ...
-
     def prod(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4664,7 +4247,6 @@ class generic(object):
         Please see `ndarray.prod`.
         """
         ...
-
     def ptp(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4672,7 +4254,6 @@ class generic(object):
         Please see `ndarray.ptp`.
         """
         ...
-
     def put(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4680,7 +4261,6 @@ class generic(object):
         Please see `ndarray.put`.
         """
         ...
-
     def ravel(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4688,7 +4268,6 @@ class generic(object):
         Please see `ndarray.ravel`.
         """
         ...
-
     def repeat(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4696,7 +4275,6 @@ class generic(object):
         Please see `ndarray.repeat`.
         """
         ...
-
     def reshape(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4704,7 +4282,6 @@ class generic(object):
         Please see `ndarray.reshape`.
         """
         ...
-
     def resize(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4712,7 +4289,6 @@ class generic(object):
         Please see `ndarray.resize`.
         """
         ...
-
     def round(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4720,7 +4296,6 @@ class generic(object):
         Please see `ndarray.round`.
         """
         ...
-
     def searchsorted(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4728,7 +4303,6 @@ class generic(object):
         Please see `ndarray.searchsorted`.
         """
         ...
-
     def setfield(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4736,7 +4310,6 @@ class generic(object):
         Please see `ndarray.setfield`.
         """
         ...
-
     def setflags(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4744,7 +4317,6 @@ class generic(object):
         Please see `ndarray.setflags`.
         """
         ...
-
     def sort(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4752,7 +4324,6 @@ class generic(object):
         Please see `ndarray.sort`.
         """
         ...
-
     def squeeze(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4760,7 +4331,6 @@ class generic(object):
         Please see `ndarray.squeeze`.
         """
         ...
-
     def std(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4768,7 +4338,6 @@ class generic(object):
         Please see `ndarray.std`.
         """
         ...
-
     def sum(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4776,7 +4345,6 @@ class generic(object):
         Please see `ndarray.sum`.
         """
         ...
-
     def swapaxes(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4784,7 +4352,6 @@ class generic(object):
         Please see `ndarray.swapaxes`.
         """
         ...
-
     def take(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4792,12 +4359,9 @@ class generic(object):
         Please see `ndarray.take`.
         """
         ...
-
     def tobytes(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     def tofile(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4805,7 +4369,6 @@ class generic(object):
         Please see `ndarray.tofile`.
         """
         ...
-
     def tolist(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4813,7 +4376,6 @@ class generic(object):
         Please see `ndarray.tolist`.
         """
         ...
-
     def tostring(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4821,7 +4383,6 @@ class generic(object):
         Please see `ndarray.tostring`.
         """
         ...
-
     def trace(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4829,7 +4390,6 @@ class generic(object):
         Please see `ndarray.trace`.
         """
         ...
-
     def transpose(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4837,7 +4397,6 @@ class generic(object):
         Please see `ndarray.transpose`.
         """
         ...
-
     def var(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4845,7 +4404,6 @@ class generic(object):
         Please see `ndarray.var`.
         """
         ...
-
     def view(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -4853,7 +4411,6 @@ class generic(object):
         Please see `ndarray.view`.
         """
         ...
-
     ...
 
 half = float16
@@ -4917,25 +4474,21 @@ class iinfo(object):
     """
     list of weak references to the object (if defined)
     """
-
     def __init__(self, int_type):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
     def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def __str__(self):
         """
         String representation.
         """
         ...
-
     ...
 
 class inexact(number):
@@ -4964,265 +4517,221 @@ class int16(signedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 class int32(signedinteger):
@@ -5240,265 +4749,221 @@ class int32(signedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 class int64(signedinteger):
@@ -5517,265 +4982,221 @@ class int64(signedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 class int8(signedinteger):
@@ -5793,265 +5214,221 @@ class int8(signedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 int_ = int32
@@ -6069,265 +5446,221 @@ class intc(signedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 class integer(number):
@@ -6344,12 +5677,9 @@ class integer(number):
     """
     numerator of value (the value itself)
     """
-
     def __round__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     ...
 
 intp = int64
@@ -6371,193 +5701,161 @@ class longdouble(floating):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
     def as_integer_ratio(self, *args, **kwargs):
         """
         longdouble.as_integer_ratio() -> (int, int)
@@ -6574,7 +5872,6 @@ class longdouble(floating):
         (-1, 4)
         """
         ...
-
     ...
 
 longfloat = longdouble
@@ -6627,62 +5924,52 @@ class matrix(ndarray):
     __array_priority__: ... = 10.0
     """
     """
-
     @staticmethod
     def __new__(subtype, data, dtype=None, copy=True):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     def __array_finalize__(self, obj):
         """
         None.
         """
         ...
-
     def __getitem__(self, index):
         """
         Return self[key].
         """
         ...
-
     def __imul__(self, other):
         """
         Return self*=value.
         """
         ...
-
     def __ipow__(self, other):
         """
         Return self**=value.
         """
         ...
-
     def __mul__(self, other):
         """
         Return self*value.
         """
         ...
-
     def __pow__(self, other):
         """
         Return pow(self, value, mod).
         """
         ...
-
     def __rmul__(self, other):
         """
         Return value*self.
         """
         ...
-
     def __rpow__(self, other):
         """
         Return pow(value, self, mod).
         """
         ...
-
     def all(self, axis=None, out=None):
         """
         Test whether all matrix elements along a given axis evaluate to True.
@@ -6721,7 +6008,6 @@ class matrix(ndarray):
                 [False]])
         """
         ...
-
     def any(self, axis=None, out=None):
         """
         Test whether any array element along a given axis evaluates to True.
@@ -6743,7 +6029,6 @@ class matrix(ndarray):
                 returns `ndarray`
         """
         ...
-
     def argmax(self, axis=None, out=None):
         """
         Indexes of the maximum values along an axis.
@@ -6781,7 +6066,6 @@ class matrix(ndarray):
                 [3]])
         """
         ...
-
     def argmin(self, axis=None, out=None):
         """
         Indexes of the minimum values along an axis.
@@ -6819,8 +6103,7 @@ class matrix(ndarray):
                 [3]])
         """
         ...
-
-    def flatten(self, order='C'):
+    def flatten(self, order="C"):
         """
         Return a flattened copy of the matrix.
 
@@ -6855,8 +6138,7 @@ class matrix(ndarray):
         matrix([[1, 3, 2, 4]])
         """
         ...
-
-    def getA = A(self):
+    def getA(self):
         """
         Return `self` as an `ndarray` object.
 
@@ -6883,8 +6165,7 @@ class matrix(ndarray):
                [ 8,  9, 10, 11]])
         """
         ...
-
-    def getA1 = A1(self):
+    def getA1(self):
         """
         Return `self` as a flattened `ndarray`.
 
@@ -6909,8 +6190,7 @@ class matrix(ndarray):
         array([ 0,  1,  2, ...,  9, 10, 11])
         """
         ...
-
-    def getH = H(self):
+    def getH(self):
         """
         Returns the (complex) conjugate transpose of `self`.
 
@@ -6939,8 +6219,7 @@ class matrix(ndarray):
                 [ 3. +3.j,  7. +7.j, 11.+11.j]])
         """
         ...
-
-    def getI = I(self):
+    def getI(self):
         """
         Returns the (multiplicative) inverse of invertible `self`.
 
@@ -6977,8 +6256,7 @@ class matrix(ndarray):
                 [ 0.,  1.]])
         """
         ...
-
-    def getT = T(self):
+    def getT(self):
         """
         Returns the transpose of the matrix.
 
@@ -7008,7 +6286,6 @@ class matrix(ndarray):
                 [2, 4]])
         """
         ...
-
     def max(self, axis=None, out=None):
         """
         Return the maximum value along an axis.
@@ -7042,7 +6319,6 @@ class matrix(ndarray):
                 [11]])
         """
         ...
-
     def mean(self, axis=None, dtype=None, out=None):
         """
         Returns the average of the matrix elements along the given axis.
@@ -7075,7 +6351,6 @@ class matrix(ndarray):
                 [ 9.5]])
         """
         ...
-
     def min(self, axis=None, out=None):
         """
         Return the minimum value along an axis.
@@ -7109,7 +6384,6 @@ class matrix(ndarray):
                 [-11]])
         """
         ...
-
     def prod(self, axis=None, dtype=None, out=None):
         """
         Return the product of the array elements over the given axis.
@@ -7141,7 +6415,6 @@ class matrix(ndarray):
                 [7920]])
         """
         ...
-
     def ptp(self, axis=None, out=None):
         """
         Peak-to-peak (maximum - minimum) value along the given axis.
@@ -7173,8 +6446,7 @@ class matrix(ndarray):
                 [3]])
         """
         ...
-
-    def ravel(self, order='C'):
+    def ravel(self, order="C"):
         """
         Return a flattened matrix.
 
@@ -7210,7 +6482,6 @@ class matrix(ndarray):
         numpy.ravel : related function which returns an ndarray
         """
         ...
-
     def squeeze(self, axis=None):
         """
         Return a possibly reshaped matrix.
@@ -7260,7 +6531,6 @@ class matrix(ndarray):
                 [3, 4]])
         """
         ...
-
     def std(self, axis=None, dtype=None, out=None, ddof=0):
         """
         Return the standard deviation of the array elements along the given axis.
@@ -7293,7 +6563,6 @@ class matrix(ndarray):
                 [ 1.11803399]])
         """
         ...
-
     def sum(self, axis=None, dtype=None, out=None):
         """
         Returns the sum of the matrix elements, along the given axis.
@@ -7326,7 +6595,6 @@ class matrix(ndarray):
                 [7.]])
         """
         ...
-
     def tolist(self):
         """
         Return the matrix as a (possibly nested) list.
@@ -7347,7 +6615,6 @@ class matrix(ndarray):
         [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]]
         """
         ...
-
     def var(self, axis=None, dtype=None, out=None, ddof=0):
         """
         Returns the variance of the matrix elements, along the given axis.
@@ -7380,7 +6647,6 @@ class matrix(ndarray):
                 [1.25]])
         """
         ...
-
     ...
 
 class memmap(ndarray):
@@ -7571,32 +6837,29 @@ class memmap(ndarray):
     __array_priority__: ... = -100.0
     """
     """
-
     @staticmethod
-    def __new__(subtype, filename, dtype=<class 'numpy.uint8'>, mode='r+', offset=0, shape=None, order='C'):
+    def __new__(
+        subtype, filename, dtype=uint8, mode="r+", offset=0, shape=None, order="C"
+    ):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     def __array_finalize__(self, obj):
         """
         None.
         """
         ...
-
     def __array_wrap__(self, arr, context=None):
         """
         a.__array_wrap__(obj) -> Object of same type as ndarray object a.
         """
         ...
-
     def __getitem__(self, index):
         """
         Return self[key].
         """
         ...
-
     def flush(self):
         """
         Write any changes in the array to the file on disk.
@@ -7612,7 +6875,6 @@ class memmap(ndarray):
         memmap
         """
         ...
-
     ...
 
 class ndarray(object):
@@ -7735,96 +6997,80 @@ class ndarray(object):
     array([2, 3])
     """
 
-    T : ndarray
-    data : object
-    dtype : Type[Any]
-    flags : dict
-    flat : object
-    imag : ndarray
-    real : ndarray
-    size : int
-    itemsize : int
-    nbytes : int
-    ndim : int
-    shape : Tuple[int,...]
-    strides : Tuple[int,...]
-    ctypes :  object
-    base : ndarray
-
+    T: ndarray
+    data: object
+    dtype: Type[Any]
+    flags: dict
+    flat: object
+    imag: ndarray
+    real: ndarray
+    size: int
+    itemsize: int
+    nbytes: int
+    ndim: int
+    shape: Tuple[int, ...]
+    strides: Tuple[int, ...]
+    ctypes: object
+    base: ndarray
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value: ArrayLike, /) -> ndarray:
+    def __add__(self, value: ArrayLike) -> ndarray:
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
     def __array__(self, *args, **kwargs):
         """
-        a.__array__([dtype], /) -> reference if type unchanged, copy otherwise.
+        a.__array__([dtype]) -> reference if type unchanged, copy otherwise.
 
         Returns either a new reference to self if dtype is not given or a new array
         of provided data type if dtype is different from the current dtype of the
         array.
         """
         ...
-
     def __array_function__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     def __array_prepare__(self, *args, **kwargs):
         """
         a.__array_prepare__(obj) -> Object of same type as ndarray object obj.
         """
         ...
-
     def __array_ufunc__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     def __array_wrap__(self, *args, **kwargs):
         """
         a.__array_wrap__(obj) -> Object of same type as ndarray object a.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
     def __complex__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
-    def __contains__(self, key, /):
+    def __contains__(self, key):
         """
         Return key in self.
         """
         ...
-
     def __copy__(self, *args, **kwargs):
         """
         a.__copy__()
@@ -7834,264 +7080,219 @@ class ndarray(object):
         Equivalent to ``a.copy(order='K')``.
         """
         ...
-
     def __deepcopy__(self, *args, **kwargs):
         """
-        a.__deepcopy__(memo, /) -> Deep copy of array.
+        a.__deepcopy__(memo) -> Deep copy of array.
 
         Used if :func:`copy.deepcopy` is called on an array.
         """
         ...
-
-    def __delitem__(self, key, /):
+    def __delitem__(self, key):
         """
         Delete self[key].
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /) -> ndarray:
+    def __eq__(self, value) -> ndarray:
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
     def __format__(self, *args, **kwargs):
         """
         Default object formatter.
         """
         ...
-
-    def __ge__(self, value, /) -> ndarray:
+    def __ge__(self, value) -> ndarray:
         """
         Return self>=value.
         """
         ...
-
-    def __getitem__(self, key, /) -> ndarray:
+    def __getitem__(self, key) -> ndarray:
         """
         Return self[key].
         """
         ...
-
-    def __gt__(self, value, /) -> ndarray:
+    def __gt__(self, value) -> ndarray:
         """
         Return self>value.
         """
         ...
-
-    def __iadd__(self, value, /) -> ndarray:
+    def __iadd__(self, value) -> ndarray:
         """
         Return self+=value.
         """
         ...
-
-    def __iand__(self, value, /)-> ndarray:
+    def __iand__(self, value) -> ndarray:
         """
         Return self&=value.
         """
         ...
-
-    def __ifloordiv__(self, value, /)-> ndarray:
+    def __ifloordiv__(self, value) -> ndarray:
         """
         Return self//=value.
         """
         ...
-
-    def __ilshift__(self, value, /)-> ndarray:
+    def __ilshift__(self, value) -> ndarray:
         """
         Return self<<=value.
         """
         ...
-
-    def __imatmul__(self, value, /)-> ndarray:
+    def __imatmul__(self, value) -> ndarray:
         """
         Return self@=value.
         """
         ...
-
-    def __imod__(self, value, /)-> ndarray:
+    def __imod__(self, value) -> ndarray:
         """
         Return self%=value.
         """
         ...
-
-    def __imul__(self, value, /) -> ndarray:
+    def __imul__(self, value) -> ndarray:
         """
         Return self*=value.
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /) -> ndarray:
+    def __invert__(self) -> ndarray:
         """
         ~self
         """
         ...
-
-    def __ior__(self, value, /)-> ndarray:
+    def __ior__(self, value) -> ndarray:
         """
         Return self|=value.
         """
         ...
-
-    def __ipow__(self, value, /)-> ndarray:
+    def __ipow__(self, value) -> ndarray:
         """
         Return self**=value.
         """
         ...
-
-    def __irshift__(self, value, /)-> ndarray:
+    def __irshift__(self, value) -> ndarray:
         """
         Return self>>=value.
         """
         ...
-
-    def __isub__(self, value, /)-> ndarray:
+    def __isub__(self, value) -> ndarray:
         """
         Return self-=value.
         """
         ...
-
-    def __iter__(self, /) -> ndarray:
+    def __iter__(self) -> ndarray:
         """
         Implement iter(self).
         """
         ...
-
-    def __itruediv__(self, value, /)-> ndarray:
+    def __itruediv__(self, value) -> ndarray:
         """
         Return self/=value.
         """
         ...
-
-    def __ixor__(self, value, /)-> ndarray:
+    def __ixor__(self, value) -> ndarray:
         """
         Return self^=value.
         """
         ...
-
-    def __le__(self, value, /)-> ndarray:
+    def __le__(self, value) -> ndarray:
         """
         Return self<=value.
         """
         ...
-
-    def __len__(self, /):
+    def __len__(self):
         """
         Return len(self).
         """
         ...
-
-    def __lshift__(self, value, /)-> ndarray:
+    def __lshift__(self, value) -> ndarray:
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /)-> ndarray:
+    def __lt__(self, value) -> ndarray:
         """
         Return self<value.
         """
         ...
-
-    def __matmul__(self, value, /)-> ndarray:
+    def __matmul__(self, value) -> ndarray:
         """
         Return self@value.
         """
         ...
-
-    def __mod__(self, value, /)-> ndarray:
+    def __mod__(self, value) -> ndarray:
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /) -> ndarray:
+    def __mul__(self, value) -> ndarray:
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /) -> ndarray:
+    def __ne__(self, value) -> ndarray:
         """
         Return self!=value.
         """
         ...
-    
-    def __next__(self, /) -> ndarray:
-        ...
-
-    def __neg__(self, /) -> ndarray:
+    def __next__(self) -> ndarray: ...
+    def __neg__(self) -> ndarray:
         """
         -self
         """
         ...
-
-    def __or__(self, value, /)-> ndarray:
+    def __or__(self, value) -> ndarray:
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /) -> ndarray:
+    def __pos__(self) -> ndarray:
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /) -> ndarray:
+    def __pow__(self, value, mod=None) -> ndarray:
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /) -> ndarray:
+    def __radd__(self, value) -> ndarray:
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /) -> ndarray:
+    def __rand__(self, value) -> ndarray:
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /) -> ndarray:
+    def __rdivmod__(self, value) -> ndarray:
         """
         Return divmod(value, self).
         """
         ...
-
     def __reduce__(self, *args, **kwargs) -> ndarray:
         """
         a.__reduce__()
@@ -8099,97 +7300,81 @@ class ndarray(object):
         For pickling.
         """
         ...
-
     def __reduce_ex__(self, *args, **kwargs) -> ndarray:
         """
         Helper for pickle.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /)-> ndarray:
+    def __rfloordiv__(self, value) -> ndarray:
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /)-> ndarray:
+    def __rlshift__(self, value) -> ndarray:
         """
         Return value<<self.
         """
         ...
-
-    def __rmatmul__(self, value, /)-> ndarray:
+    def __rmatmul__(self, value) -> ndarray:
         """
         Return value@self.
         """
         ...
-
-    def __rmod__(self, value, /)-> ndarray:
+    def __rmod__(self, value) -> ndarray:
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /)-> ndarray:
+    def __rmul__(self, value) -> ndarray:
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /)-> ndarray:
+    def __ror__(self, value) -> ndarray:
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /)-> ndarray:
+    def __rpow__(self, value, mod=None) -> ndarray:
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /)-> ndarray:
+    def __rrshift__(self, value) -> ndarray:
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /)-> ndarray:
+    def __rshift__(self, value) -> ndarray:
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /) -> ndarray:
+    def __rsub__(self, value) -> ndarray:
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /)-> ndarray:
+    def __rtruediv__(self, value) -> ndarray:
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /)-> ndarray:
+    def __rxor__(self, value) -> ndarray:
         """
         Return value^self.
         """
         ...
-
-    def __setitem__(self, key, value, /):
+    def __setitem__(self, key, value):
         """
         Set self[key] to value.
         """
         ...
-
     def __setstate__(self, *args, **kwargs):
         """
         a.__setstate__(state, /)
@@ -8210,37 +7395,31 @@ class ndarray(object):
             a binary string with the data (or a list if 'a' is an object array)
         """
         ...
-
     def __sizeof__(self, *args, **kwargs):
         """
         Size of object in memory, in bytes.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /) -> ndarray:
+    def __sub__(self, value) -> ndarray:
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /) -> ndarray:
+    def __truediv__(self, value) -> ndarray:
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     def all(self, *args, **kwargs):
         """
         a.all(axis=None, out=None, keepdims=False, *, where=True)
@@ -8254,7 +7433,6 @@ class ndarray(object):
         numpy.all : equivalent function
         """
         ...
-
     def any(self) -> bool:
         """
         a.any(axis=None, out=None, keepdims=False, *, where=True)
@@ -8268,7 +7446,6 @@ class ndarray(object):
         numpy.any : equivalent function
         """
         ...
-
     def argmax(self, *args, **kwargs):
         """
         a.argmax(axis=None, out=None)
@@ -8282,7 +7459,6 @@ class ndarray(object):
         numpy.argmax : equivalent function
         """
         ...
-
     def argmin(self, *args, **kwargs):
         """
         a.argmin(axis=None, out=None)
@@ -8296,7 +7472,6 @@ class ndarray(object):
         numpy.argmin : equivalent function
         """
         ...
-
     def argpartition(self, *args, **kwargs):
         """
         a.argpartition(kth, axis=-1, kind='introselect', order=None)
@@ -8312,7 +7487,6 @@ class ndarray(object):
         numpy.argpartition : equivalent function
         """
         ...
-
     def argsort(self, *args, **kwargs):
         """
         a.argsort(axis=-1, kind=None, order=None)
@@ -8326,7 +7500,6 @@ class ndarray(object):
         numpy.argsort : equivalent function
         """
         ...
-
     def astype(self, *args: Any, **kwargs: Any) -> ndarray:
         """
         a.astype(dtype, order='K', casting='unsafe', subok=True, copy=True)
@@ -8399,7 +7572,6 @@ class ndarray(object):
         array([1, 2, 2])
         """
         ...
-
     def byteswap(self, *args, **kwargs):
         """
         a.byteswap(inplace=False)
@@ -8452,7 +7624,6 @@ class ndarray(object):
                0, 3], dtype=uint8)
         """
         ...
-
     def choose(self, *args, **kwargs):
         """
         a.choose(choices, out=None, mode='raise')
@@ -8466,8 +7637,13 @@ class ndarray(object):
         numpy.choose : equivalent function
         """
         ...
-
-    def clip(self, min: Optional[Scalar]=None, max: Optional[Scalar]=None, out: Optional[ndarray]=None, **kwargs: Any) -> ndarray:
+    def clip(
+        self,
+        min: Optional[Scalar] = None,
+        max: Optional[Scalar] = None,
+        out: Optional[ndarray] = None,
+        **kwargs: Any,
+    ) -> ndarray:
         """
         a.clip(min=None, max=None, out=None, **kwargs)
 
@@ -8481,7 +7657,6 @@ class ndarray(object):
         numpy.clip : equivalent function
         """
         ...
-
     def compress(self, *args, **kwargs):
         """
         a.compress(condition, axis=None, out=None)
@@ -8495,7 +7670,6 @@ class ndarray(object):
         numpy.compress : equivalent function
         """
         ...
-
     def conj(self, *args, **kwargs):
         """
         a.conj()
@@ -8509,7 +7683,6 @@ class ndarray(object):
         numpy.conjugate : equivalent function
         """
         ...
-
     def conjugate(self, *args, **kwargs):
         """
         a.conjugate()
@@ -8523,7 +7696,6 @@ class ndarray(object):
         numpy.conjugate : equivalent function
         """
         ...
-
     def copy(self, *, order: Text = ...) -> ndarray:
         """
         a.copy(order='C')
@@ -8565,7 +7737,6 @@ class ndarray(object):
         True
         """
         ...
-
     def cumprod(self, *args, **kwargs):
         """
         a.cumprod(axis=None, dtype=None, out=None)
@@ -8579,7 +7750,6 @@ class ndarray(object):
         numpy.cumprod : equivalent function
         """
         ...
-
     def cumsum(self, *args, **kwargs):
         """
         a.cumsum(axis=None, dtype=None, out=None)
@@ -8593,7 +7763,6 @@ class ndarray(object):
         numpy.cumsum : equivalent function
         """
         ...
-
     def diagonal(self, *args, **kwargs):
         """
         a.diagonal(offset=0, axis1=0, axis2=1)
@@ -8609,7 +7778,6 @@ class ndarray(object):
         numpy.diagonal : equivalent function
         """
         ...
-
     def dot(self, *args, **kwargs):
         """
         a.dot(b, out=None)
@@ -8637,7 +7805,6 @@ class ndarray(object):
                [8.,  8.]])
         """
         ...
-
     def dump(self, *args, **kwargs):
         """
         a.dump(file)
@@ -8654,7 +7821,6 @@ class ndarray(object):
                 `pathlib.Path` objects are now accepted.
         """
         ...
-
     def dumps(self, *args, **kwargs):
         """
         a.dumps()
@@ -8667,7 +7833,6 @@ class ndarray(object):
         None
         """
         ...
-
     def fill(self, *args, **kwargs):
         """
         a.fill(value)
@@ -8691,7 +7856,6 @@ class ndarray(object):
         array([1.,  1.])
         """
         ...
-
     def flatten(self, *args, **kwargs):
         """
         a.flatten(order='C')
@@ -8728,7 +7892,6 @@ class ndarray(object):
         array([1, 3, 2, 4])
         """
         ...
-
     def getfield(self, *args, **kwargs):
         """
         a.getfield(dtype, offset=0)
@@ -8769,7 +7932,6 @@ class ndarray(object):
                [0.,  4.]])
         """
         ...
-
     def item(self, *args, **kwargs):
         """
         a.item(*args)
@@ -8827,7 +7989,6 @@ class ndarray(object):
         1
         """
         ...
-
     def itemset(self, *args, **kwargs):
         """
         a.itemset(*args)
@@ -8873,7 +8034,6 @@ class ndarray(object):
                [1, 0, 9]])
         """
         ...
-
     def max(self, *args, **kwargs):
         """
         a.max(axis=None, out=None, keepdims=False, initial=None, where=True)
@@ -8887,8 +8047,7 @@ class ndarray(object):
         numpy.amax : equivalent function
         """
         ...
-
-    def mean(self, *args:Any, **kwargs: Any) -> Any:
+    def mean(self, *args: Any, **kwargs: Any) -> Any:
         """
         a.mean(axis=None, dtype=None, out=None, keepdims=False, *, where=True)
 
@@ -8901,8 +8060,14 @@ class ndarray(object):
         numpy.mean : equivalent function
         """
         ...
-
-    def min(self, axis: Optional[int]=None, out: Optional[Any]=None, keepdims: bool=False, initial: Optional[Any]=..., where: bool=True) -> Any:
+    def min(
+        self,
+        axis: Optional[int] = None,
+        out: Optional[Any] = None,
+        keepdims: bool = False,
+        initial: Optional[Any] = ...,
+        where: bool = True,
+    ) -> Any:
         """
         a.min(axis=None, out=None, keepdims=False, initial=None, where=True)
 
@@ -8915,7 +8080,6 @@ class ndarray(object):
         numpy.amin : equivalent function
         """
         ...
-
     def newbyteorder(self, *args, **kwargs):
         """
         arr.newbyteorder(new_order='S', /)
@@ -8954,7 +8118,6 @@ class ndarray(object):
             byte order.
         """
         ...
-
     def nonzero(self, *args, **kwargs):
         """
         a.nonzero()
@@ -8968,7 +8131,6 @@ class ndarray(object):
         numpy.nonzero : equivalent function
         """
         ...
-
     def partition(self, *args, **kwargs):
         """
         a.partition(kth, axis=-1, kind='introselect', order=None)
@@ -9024,7 +8186,6 @@ class ndarray(object):
         array([1, 2, 3, 4])
         """
         ...
-
     def prod(self, *args, **kwargs):
         """
         a.prod(axis=None, dtype=None, out=None, keepdims=False, initial=1, where=True)
@@ -9038,7 +8199,6 @@ class ndarray(object):
         numpy.prod : equivalent function
         """
         ...
-
     def ptp(self, *args, **kwargs):
         """
         a.ptp(axis=None, out=None, keepdims=False)
@@ -9052,7 +8212,6 @@ class ndarray(object):
         numpy.ptp : equivalent function
         """
         ...
-
     def put(self, *args, **kwargs):
         """
         a.put(indices, values, mode='raise')
@@ -9066,7 +8225,6 @@ class ndarray(object):
         numpy.put : equivalent function
         """
         ...
-
     def ravel(self, *args, **kwargs):
         """
         a.ravel([order])
@@ -9082,7 +8240,6 @@ class ndarray(object):
         ndarray.flat : a flat iterator on the array.
         """
         ...
-
     def repeat(self, *args, **kwargs):
         """
         a.repeat(repeats, axis=None)
@@ -9096,7 +8253,6 @@ class ndarray(object):
         numpy.repeat : equivalent function
         """
         ...
-
     def reshape(self, *args, **kwargs):
         """
         a.reshape(shape, order='C')
@@ -9117,7 +8273,6 @@ class ndarray(object):
         ``a.reshape((10, 11))``.
         """
         ...
-
     def resize(self, *args, **kwargs):
         """
         a.resize(new_shape, refcheck=True)
@@ -9208,7 +8363,6 @@ class ndarray(object):
         array([[0]])
         """
         ...
-
     def round(self, *args, **kwargs):
         """
         a.round(decimals=0, out=None)
@@ -9222,7 +8376,6 @@ class ndarray(object):
         numpy.around : equivalent function
         """
         ...
-
     def searchsorted(self, *args, **kwargs):
         """
         a.searchsorted(v, side='left', sorter=None)
@@ -9236,7 +8389,6 @@ class ndarray(object):
         numpy.searchsorted : equivalent function
         """
         ...
-
     def setfield(self, *args, **kwargs):
         """
         a.setfield(val, dtype, offset=0)
@@ -9286,7 +8438,6 @@ class ndarray(object):
                [0.,  0.,  1.]])
         """
         ...
-
     def setflags(self, *args, **kwargs):
         """
         a.setflags(write=None, align=None, uic=None)
@@ -9365,7 +8516,6 @@ class ndarray(object):
         ValueError: cannot set WRITEBACKIFCOPY flag to True
         """
         ...
-
     def sort(self, *args, **kwargs):
         """
         a.sort(axis=-1, kind=None, order=None)
@@ -9427,7 +8577,6 @@ class ndarray(object):
               dtype=[('x', 'S1'), ('y', '<i8')])
         """
         ...
-
     def squeeze(self, *args, **kwargs):
         """
         a.squeeze(axis=None)
@@ -9441,7 +8590,6 @@ class ndarray(object):
         numpy.squeeze : equivalent function
         """
         ...
-
     def std(self, *args, **kwargs):
         """
         a.std(axis=None, dtype=None, out=None, ddof=0, keepdims=False, *, where=True)
@@ -9455,7 +8603,6 @@ class ndarray(object):
         numpy.std : equivalent function
         """
         ...
-
     def sum(self, *args, **kwargs):
         """
         a.sum(axis=None, dtype=None, out=None, keepdims=False, initial=0, where=True)
@@ -9469,7 +8616,6 @@ class ndarray(object):
         numpy.sum : equivalent function
         """
         ...
-
     def swapaxes(self, *args, **kwargs):
         """
         a.swapaxes(axis1, axis2)
@@ -9483,7 +8629,6 @@ class ndarray(object):
         numpy.swapaxes : equivalent function
         """
         ...
-
     def take(self, *args, **kwargs):
         """
         a.take(indices, axis=None, out=None, mode='raise')
@@ -9497,7 +8642,6 @@ class ndarray(object):
         numpy.take : equivalent function
         """
         ...
-
     def tobytes(self) -> bytes:
         """
         a.tobytes(order='C')
@@ -9533,7 +8677,6 @@ class ndarray(object):
         b'\x00\x00\x02\x00\x01\x00\x03\x00'
         """
         ...
-
     def tofile(self, *args, **kwargs):
         """
         a.tofile(fid, sep="", format="%s")
@@ -9576,7 +8719,6 @@ class ndarray(object):
         or file-like objects that do not support ``fileno()`` (e.g., BytesIO).
         """
         ...
-
     def tolist(self, *args, **kwargs):
         """
         a.tolist()
@@ -9619,7 +8761,7 @@ class ndarray(object):
         >>> a_tolist
         [1, 2]
         >>> type(a_tolist[0])
-        <class 'int'>
+        int
 
         Additionally, for a 2D array, ``tolist`` applies recursively:
 
@@ -9640,7 +8782,6 @@ class ndarray(object):
         1
         """
         ...
-
     def tostring(self, *args, **kwargs):
         """
         a.tostring(order='C')
@@ -9652,7 +8793,6 @@ class ndarray(object):
         .. deprecated:: 1.19.0
         """
         ...
-
     def trace(self, *args, **kwargs):
         """
         a.trace(offset=0, axis1=0, axis2=1, dtype=None, out=None)
@@ -9666,7 +8806,6 @@ class ndarray(object):
         numpy.trace : equivalent function
         """
         ...
-
     def transpose(self, *args, **kwargs):
         """
         a.transpose(*axes)
@@ -9722,7 +8861,6 @@ class ndarray(object):
                [2, 4]])
         """
         ...
-
     def var(self, *args, **kwargs):
         """
         a.var(axis=None, dtype=None, out=None, ddof=0, keepdims=False, *, where=True)
@@ -9736,7 +8874,6 @@ class ndarray(object):
         numpy.var : equivalent function
         """
         ...
-
     def view(self, *args, **kwargs):
         """
         a.view([dtype][, type])
@@ -9841,7 +8978,6 @@ class ndarray(object):
                [(4, 5)]], dtype=[('width', '<i2'), ('length', '<i2')])
         """
         ...
-
     ...
 
 class ndenumerate(object):
@@ -9881,18 +9017,14 @@ class ndenumerate(object):
     """
     list of weak references to the object (if defined)
     """
-
     def __init__(self, arr):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
     def __iter__(self):
-        """
-        """
+        """ """
         ...
-
     def __next__(self):
         """
         Standard iterator method, returns the index tuple and array value.
@@ -9905,7 +9037,6 @@ class ndenumerate(object):
             The array element of the current iteration.
         """
         ...
-
     ...
 
 class ndindex(object):
@@ -9960,18 +9091,14 @@ class ndindex(object):
     """
     list of weak references to the object (if defined)
     """
-
     def __init__(self, *shape):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
     def __iter__(self):
-        """
-        """
+        """ """
         ...
-
     def __next__(self):
         """
         Standard iterator method, updates the index and returns the index
@@ -9984,7 +9111,6 @@ class ndindex(object):
             iteration.
         """
         ...
-
     def ndincr(self):
         """
         Increment the multi-dimensional index by one.
@@ -9996,7 +9122,6 @@ class ndindex(object):
             started emitting DeprecationWarning as of this version.
         """
         ...
-
     ...
 
 class nditer(object):
@@ -10330,71 +9455,56 @@ class nditer(object):
     shape: ...
     """
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     def __copy__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
-    def __delitem__(self, key, /):
+    def __delitem__(self, key):
         """
         Delete self[key].
         """
         ...
-
     def __enter__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
     def __exit__(self, *args, **kwargs):
-        """
-        """
+        """ """
         ...
-
-    def __getitem__(self, key, /):
+    def __getitem__(self, key):
         """
         Return self[key].
         """
         ...
-
-    def __init__(self, /, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
-    def __iter__(self, /):
+    def __iter__(self):
         """
         Implement iter(self).
         """
         ...
-
-    def __len__(self, /):
+    def __len__(self):
         """
         Return len(self).
         """
         ...
-
-    def __next__(self, /):
+    def __next__(self):
         """
         Implement next(self).
         """
         ...
-
-    def __setitem__(self, key, value, /):
+    def __setitem__(self, key, value):
         """
         Set self[key] to value.
         """
         ...
-
     def close(self, *args, **kwargs):
         """
         close()
@@ -10409,7 +9519,6 @@ class nditer(object):
         :ref:`nditer-context-manager`
         """
         ...
-
     def copy(self, *args, **kwargs):
         """
         copy()
@@ -10428,7 +9537,6 @@ class nditer(object):
         (array(1), array(2))
         """
         ...
-
     def debug_print(self, *args, **kwargs):
         """
         debug_print()
@@ -10436,7 +9544,6 @@ class nditer(object):
         Print the current state of the `nditer` instance and debug info to stdout.
         """
         ...
-
     def enable_external_loop(self, *args, **kwargs):
         """
         enable_external_loop()
@@ -10446,7 +9553,6 @@ class nditer(object):
         was specified.
         """
         ...
-
     def iternext(self, *args, **kwargs):
         """
         iternext()
@@ -10461,7 +9567,6 @@ class nditer(object):
             Whether or not there are iterations left.
         """
         ...
-
     def remove_axis(self, *args, **kwargs):
         """
         remove_axis(i)
@@ -10470,7 +9575,6 @@ class nditer(object):
         be enabled.
         """
         ...
-
     def remove_multi_index(self, *args, **kwargs):
         """
         remove_multi_index()
@@ -10479,7 +9583,6 @@ class nditer(object):
         the internal iteration structure to be optimized further.
         """
         ...
-
     def reset(self, *args, **kwargs):
         """
         reset()
@@ -10487,7 +9590,6 @@ class nditer(object):
         Reset the iterator to its initial state.
         """
         ...
-
     ...
 
 class number(generic):
@@ -10512,133 +9614,111 @@ class object_(generic):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __call__(self, /, *args, **kwargs):
+    def __call__(self, *args, **kwargs):
         """
         Call self as a function.
         """
         ...
-
-    def __contains__(self, key, /):
+    def __contains__(self, key):
         """
         Return key in self.
         """
         ...
-
-    def __delattr__(self, name, /):
+    def __delattr__(self, name):
         """
         Implement delattr(self, name).
         """
         ...
-
-    def __delitem__(self, key, /):
+    def __delitem__(self, key):
         """
         Delete self[key].
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __getattribute__(self, name, /):
+    def __getattribute__(self, name):
         """
         Return getattr(self, name).
         """
         ...
-
-    def __getitem__(self, key, /):
+    def __getitem__(self, key):
         """
         Return self[key].
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __iadd__(self, value, /):
+    def __iadd__(self, value):
         """
         Implement self+=value.
         """
         ...
-
-    def __imul__(self, value, /):
+    def __imul__(self, value):
         """
         Implement self*=value.
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __len__(self, /):
+    def __len__(self):
         """
         Return len(self).
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __setattr__(self, name, value, /):
+    def __setattr__(self, name, value):
         """
         Implement setattr(self, name, value).
         """
         ...
-
-    def __setitem__(self, key, value, /):
+    def __setitem__(self, key, value):
         """
         Set self[key] to value.
         """
         ...
-
     ...
 
 class poly1d(object):
@@ -10750,131 +9830,89 @@ class poly1d(object):
     """
 
     def __add__(self, other):
-        """
-        """
+        """ """
         ...
-
     def __array__(self, t=None):
-        """
-        """
+        """ """
         ...
-
     def __call__(self, val):
         """
         Call self as a function.
         """
         ...
-
     def __div__(self, other):
-        """
-        """
+        """ """
         ...
-
     def __eq__(self, other):
         """
         Return self==value.
         """
         ...
-
     def __getitem__(self, val):
-        """
-        """
+        """ """
         ...
-
     def __init__(self, c_or_r, r=False, variable=None):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
     def __iter__(self):
-        """
-        """
+        """ """
         ...
-
     def __len__(self):
-        """
-        """
+        """ """
         ...
-
     def __mul__(self, other):
-        """
-        """
+        """ """
         ...
-
     def __ne__(self, other):
         """
         Return self!=value.
         """
         ...
-
     def __neg__(self):
-        """
-        """
+        """ """
         ...
-
     def __pos__(self):
-        """
-        """
+        """ """
         ...
-
     def __pow__(self, val):
-        """
-        """
+        """ """
         ...
-
     def __radd__(self, other):
-        """
-        """
+        """ """
         ...
-
     def __rdiv__(self, other):
-        """
-        """
+        """ """
         ...
-
     def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def __rmul__(self, other):
-        """
-        """
+        """ """
         ...
-
     def __rsub__(self, other):
-        """
-        """
+        """ """
         ...
-
-    def __rtruediv__ = __rdiv__(self, other):
-        """
-        """
+    def __rtruediv__(self, other):
+        """ """
         ...
-
     def __setitem__(self, key, val):
-        """
-        """
+        """ """
         ...
-
     def __str__(self):
         """
         Return str(self).
         """
         ...
-
     def __sub__(self, other):
-        """
-        """
+        """ """
         ...
-
-    def __truediv__ = __div__(self, other):
-        """
-        """
+    def __truediv__(self, other):
+        """ """
         ...
-
     def deriv(self, m=1):
         """
         Return a derivative of this polynomial.
@@ -10886,7 +9924,6 @@ class poly1d(object):
         polyder : equivalent function
         """
         ...
-
     def integ(self, m=1, k=0):
         """
         Return an antiderivative (indefinite integral) of this polynomial.
@@ -10898,7 +9935,6 @@ class poly1d(object):
         polyint : equivalent function
         """
         ...
-
     ...
 
 class recarray(ndarray):
@@ -11012,49 +10048,53 @@ class recarray(ndarray):
     """
     dictionary for instance variables (if defined)
     """
-
     @staticmethod
-    def __new__(subtype, shape, dtype=None, buf=None, offset=0, strides=None, formats=None, names=None, titles=None, byteorder=None, aligned=False, order='C'):
+    def __new__(
+        subtype,
+        shape,
+        dtype=None,
+        buf=None,
+        offset=0,
+        strides=None,
+        formats=None,
+        names=None,
+        titles=None,
+        byteorder=None,
+        aligned=False,
+        order="C",
+    ):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
     def __array_finalize__(self, obj):
         """
         None.
         """
         ...
-
     def __getattribute__(self, attr):
         """
         Return getattr(self, name).
         """
         ...
-
     def __getitem__(self, indx):
         """
         Return self[key].
         """
         ...
-
     def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def __setattr__(self, attr, val):
         """
         Implement setattr(self, name, value).
         """
         ...
-
     def field(self, attr, val=None):
-        """
-        """
+        """ """
         ...
-
     ...
 
 class record(None):
@@ -11071,43 +10111,36 @@ class record(None):
     """
     list of weak references to the object (if defined)
     """
-
     def __getattribute__(self, attr):
         """
         Return getattr(self, name).
         """
         ...
-
     def __getitem__(self, indx):
         """
         Return self[key].
         """
         ...
-
     def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
     def __setattr__(self, attr, val):
         """
         Implement setattr(self, name, value).
         """
         ...
-
     def __str__(self):
         """
         Return str(self).
         """
         ...
-
     def pprint(self):
         """
         Pretty-print all fields.
         """
         ...
-
     ...
 
 short = int16
@@ -11150,61 +10183,51 @@ class str_(str, character):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
     ...
 
 string_ = bytes_
@@ -11224,61 +10247,51 @@ class timedelta64(signedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
     ...
 
 ubyte = uint8
@@ -11507,25 +10520,21 @@ class ufunc(object):
     ['bb->b', 'BB->B', 'hh->h', 'HH->H', 'ii->i', 'II->I', 'll->l', 'LL->L',
     'qq->q', 'QQ->Q', 'ff->f', 'dd->d', 'gg->g', 'OO->O']
     """
-
-    def __call__(self, /, *args, **kwargs):
+    def __call__(self, *args, **kwargs):
         """
         Call self as a function.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
     def accumulate(self, *args, **kwargs):
         """
         accumulate(array, axis=0, dtype=None, out=None)
@@ -11604,7 +10613,6 @@ class ufunc(object):
                [0.,  1.]])
         """
         ...
-
     def at(self, *args, **kwargs):
         """
         at(a, indices, b=None, /)
@@ -11656,7 +10664,6 @@ class ufunc(object):
         array([2, 4, 3, 4])
         """
         ...
-
     def outer(self, *args, **kwargs):
         """
         outer(A, B, /, **kwargs)
@@ -11726,7 +10733,6 @@ class ufunc(object):
                 [[ 6, 12, 18, 24]]]])
         """
         ...
-
     def reduce(self, *args, **kwargs):
         """
         reduce(array, axis=0, dtype=None, out=None, keepdims=False, initial=None, where=True)
@@ -11857,7 +10863,6 @@ class ufunc(object):
         ValueError: zero-size array to reduction operation minimum which has no identity
         """
         ...
-
     def reduceat(self, *args, **kwargs):
         """
         reduceat(array, indices, axis=0, dtype=None, out=None)
@@ -11965,7 +10970,6 @@ class ufunc(object):
                [2184.,    15.]])
         """
         ...
-
     ...
 
 uint = uint32
@@ -11987,265 +10991,221 @@ class uint16(unsignedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 class uint32(unsignedinteger):
@@ -12263,265 +11223,221 @@ class uint32(unsignedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 class uint64(unsignedinteger):
@@ -12540,265 +11456,221 @@ class uint64(unsignedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 class uint8(unsignedinteger):
@@ -12816,265 +11688,221 @@ class uint8(unsignedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 class uintc(unsignedinteger):
@@ -13090,265 +11918,221 @@ class uintc(unsignedinteger):
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __abs__(self, /):
+    def __abs__(self):
         """
         abs(self)
         """
         ...
-
-    def __add__(self, value, /):
+    def __add__(self, value):
         """
         Return self+value.
         """
         ...
-
-    def __and__(self, value, /):
+    def __and__(self, value):
         """
         Return self&value.
         """
         ...
-
-    def __bool__(self, /):
+    def __bool__(self):
         """
         self != 0
         """
         ...
-
-    def __divmod__(self, value, /):
+    def __divmod__(self, value):
         """
         Return divmod(self, value).
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __float__(self, /):
+    def __float__(self):
         """
         float(self)
         """
         ...
-
-    def __floordiv__(self, value, /):
+    def __floordiv__(self, value):
         """
         Return self//value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __index__(self, /):
+    def __index__(self):
         """
         Return self converted to an integer, if self is suitable for use as an index into a list.
         """
         ...
-
-    def __int__(self, /):
+    def __int__(self):
         """
         int(self)
         """
         ...
-
-    def __invert__(self, /):
+    def __invert__(self):
         """
         ~self
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __lshift__(self, value, /):
+    def __lshift__(self, value):
         """
         Return self<<value.
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __mod__(self, value, /):
+    def __mod__(self, value):
         """
         Return self%value.
         """
         ...
-
-    def __mul__(self, value, /):
+    def __mul__(self, value):
         """
         Return self*value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __neg__(self, /):
+    def __neg__(self):
         """
         -self
         """
         ...
-
-    def __or__(self, value, /):
+    def __or__(self, value):
         """
         Return self|value.
         """
         ...
-
-    def __pos__(self, /):
+    def __pos__(self):
         """
         +self
         """
         ...
-
-    def __pow__(self, value, mod=None, /):
+    def __pow__(self, value, mod=None):
         """
         Return pow(self, value, mod).
         """
         ...
-
-    def __radd__(self, value, /):
+    def __radd__(self, value):
         """
         Return value+self.
         """
         ...
-
-    def __rand__(self, value, /):
+    def __rand__(self, value):
         """
         Return value&self.
         """
         ...
-
-    def __rdivmod__(self, value, /):
+    def __rdivmod__(self, value):
         """
         Return divmod(value, self).
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __rfloordiv__(self, value, /):
+    def __rfloordiv__(self, value):
         """
         Return value//self.
         """
         ...
-
-    def __rlshift__(self, value, /):
+    def __rlshift__(self, value):
         """
         Return value<<self.
         """
         ...
-
-    def __rmod__(self, value, /):
+    def __rmod__(self, value):
         """
         Return value%self.
         """
         ...
-
-    def __rmul__(self, value, /):
+    def __rmul__(self, value):
         """
         Return value*self.
         """
         ...
-
-    def __ror__(self, value, /):
+    def __ror__(self, value):
         """
         Return value|self.
         """
         ...
-
-    def __rpow__(self, value, mod=None, /):
+    def __rpow__(self, value, mod=None):
         """
         Return pow(value, self, mod).
         """
         ...
-
-    def __rrshift__(self, value, /):
+    def __rrshift__(self, value):
         """
         Return value>>self.
         """
         ...
-
-    def __rshift__(self, value, /):
+    def __rshift__(self, value):
         """
         Return self>>value.
         """
         ...
-
-    def __rsub__(self, value, /):
+    def __rsub__(self, value):
         """
         Return value-self.
         """
         ...
-
-    def __rtruediv__(self, value, /):
+    def __rtruediv__(self, value):
         """
         Return value/self.
         """
         ...
-
-    def __rxor__(self, value, /):
+    def __rxor__(self, value):
         """
         Return value^self.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
-    def __sub__(self, value, /):
+    def __sub__(self, value):
         """
         Return self-value.
         """
         ...
-
-    def __truediv__(self, value, /):
+    def __truediv__(self, value):
         """
         Return self/value.
         """
         ...
-
-    def __xor__(self, value, /):
+    def __xor__(self, value):
         """
         Return self^value.
         """
         ...
-
     ...
 
 uintp = uint64
@@ -13528,20 +12312,19 @@ class vectorize(object):
     """
     list of weak references to the object (if defined)
     """
-
     def __call__(self, *args, **kwargs):
         """
         Return arrays with the results of `pyfunc` broadcast (vectorized) over
         `args` and `kwargs` not in `excluded`.
         """
         ...
-
-    def __init__(self, pyfunc, otypes=None, doc=None, excluded=None, cache=False, signature=None):
+    def __init__(
+        self, pyfunc, otypes=None, doc=None, excluded=None, cache=False, signature=None
+    ):
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
-
     ...
 
 class void(flexible):
@@ -13574,92 +12357,77 @@ class void(flexible):
     """
     integer value of flags
     """
-
     @staticmethod
     def __new__(*args, **kwargs):
         """
         Create and return a new object.  See help(type) for accurate signature.
         """
         ...
-
-    def __delitem__(self, key, /):
+    def __delitem__(self, key):
         """
         Delete self[key].
         """
         ...
-
-    def __eq__(self, value, /):
+    def __eq__(self, value):
         """
         Return self==value.
         """
         ...
-
-    def __ge__(self, value, /):
+    def __ge__(self, value):
         """
         Return self>=value.
         """
         ...
-
-    def __getitem__(self, key, /):
+    def __getitem__(self, key):
         """
         Return self[key].
         """
         ...
-
-    def __gt__(self, value, /):
+    def __gt__(self, value):
         """
         Return self>value.
         """
         ...
-
-    def __hash__(self, /):
+    def __hash__(self):
         """
         Return hash(self).
         """
         ...
-
-    def __le__(self, value, /):
+    def __le__(self, value):
         """
         Return self<=value.
         """
         ...
-
-    def __len__(self, /):
+    def __len__(self):
         """
         Return len(self).
         """
         ...
-
-    def __lt__(self, value, /):
+    def __lt__(self, value):
         """
         Return self<value.
         """
         ...
-
-    def __ne__(self, value, /):
+    def __ne__(self, value):
         """
         Return self!=value.
         """
         ...
-
-    def __repr__(self, /):
+    def __repr__(self):
         """
         Return repr(self).
         """
         ...
-
-    def __setitem__(self, key, value, /):
+    def __setitem__(self, key, value):
         """
         Set self[key] to value.
         """
         ...
-
-    def __str__(self, /):
+    def __str__(self):
         """
         Return str(self).
         """
         ...
-
     def getfield(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -13667,7 +12435,6 @@ class void(flexible):
         Please see `ndarray.getfield`.
         """
         ...
-
     def setfield(self, *args, **kwargs):
         """
         Scalar method identical to the corresponding array attribute.
@@ -13675,16 +12442,13 @@ class void(flexible):
         Please see `ndarray.setfield`.
         """
         ...
-
     ...
 
 void0 = void
 
 def __dir__():
-    """
-    """
+    """ """
     ...
-
 
 def __getattr__(attr):
     """
@@ -13692,7 +12456,6 @@ def __getattr__(attr):
     # https://www.python.org/dev/peps/pep-0562/
     """
     ...
-
 
 def _add_newdoc_ufunc(*args, **kwargs):
     """
@@ -13721,7 +12484,6 @@ def _add_newdoc_ufunc(*args, **kwargs):
     """
     ...
 
-
 def add_docstring(*args, **kwargs):
     """
     add_docstring(obj, docstring)
@@ -13732,7 +12494,6 @@ def add_docstring(*args, **kwargs):
     raise a TypeError
     """
     ...
-
 
 def add_newdoc(place, obj, doc, warn_on_python=True):
     """
@@ -13782,7 +12543,6 @@ def add_newdoc(place, obj, doc, warn_on_python=True):
     """
     ...
 
-
 add_newdoc_ufunc = _add_newdoc_ufunc
 
 def alen(a):
@@ -13815,7 +12575,6 @@ def alen(a):
     7
     """
     ...
-
 
 def all(a, axis=None, out=None, keepdims=None, *, where=None):
     """
@@ -13900,7 +12659,6 @@ def all(a, axis=None, out=None, keepdims=None, *, where=None):
     """
     ...
 
-
 def allclose(a, b, rtol=1e-05, atol=1e-08, equal_nan=False):
     """
     Returns True if two arrays are element-wise equal within a tolerance.
@@ -13971,7 +12729,6 @@ def allclose(a, b, rtol=1e-05, atol=1e-08, equal_nan=False):
     """
     ...
 
-
 def alltrue(*args, **kwargs):
     """
     Check if all elements of input array are true.
@@ -13981,7 +12738,6 @@ def alltrue(*args, **kwargs):
     numpy.all : Equivalent function; see for details.
     """
     ...
-
 
 def amax(a, axis=None, out=None, keepdims=None, initial=None, where=None):
     """
@@ -14099,7 +12855,6 @@ def amax(a, axis=None, out=None, keepdims=None, initial=None, where=None):
     """
     ...
 
-
 def amin(a, axis=None, out=None, keepdims=None, initial=None, where=None):
     """
     Return the minimum of an array or minimum along an axis.
@@ -14216,7 +12971,6 @@ def amin(a, axis=None, out=None, keepdims=None, initial=None, where=None):
     """
     ...
 
-
 def angle(z, deg=False):
     """
     Return the angle of the complex argument.
@@ -14255,7 +13009,6 @@ def angle(z, deg=False):
     45.0
     """
     ...
-
 
 def any(a, axis=None, out=None, keepdims=None, *, where=None):
     """
@@ -14347,7 +13100,6 @@ def any(a, axis=None, out=None, keepdims=None, *, where=None):
     """
     ...
 
-
 def append(arr, values, axis=None):
     """
     Append values to the end of an array.
@@ -14397,8 +13149,9 @@ def append(arr, values, axis=None):
     """
     ...
 
-
-def apply_along_axis(func1d: Callable[[ndarray], Any], axis: int, arr: ndarray, *args: Any, **kwargs: Any) -> ndarray:
+def apply_along_axis(
+    func1d: Callable[[ndarray], Any], axis: int, arr: ndarray, *args: Any, **kwargs: Any
+) -> ndarray:
     """
     Apply a function to 1-D slices along the given axis.
 
@@ -14456,7 +13209,7 @@ def apply_along_axis(func1d: Callable[[ndarray], Any], axis: int, arr: ndarray, 
     Examples
     --------
     >>> def my_func(a):
-    ...     """Average first and last element of a 1-D array"""
+    ...     \"\"\"Average first and last element of a 1-D array\"\"\"
     ...     return (a[0] + a[-1]) * 0.5
     >>> b = np.array([[1,2,3], [4,5,6], [7,8,9]])
     >>> np.apply_along_axis(my_func, 0, b)
@@ -14489,7 +13242,6 @@ def apply_along_axis(func1d: Callable[[ndarray], Any], axis: int, arr: ndarray, 
             [0, 0, 9]]])
     """
     ...
-
 
 def apply_over_axes(func, a, axes):
     """
@@ -14556,7 +13308,6 @@ def apply_over_axes(func, a, axes):
             [124]]])
     """
     ...
-
 
 def arange(*args, **kwargs):
     """
@@ -14630,7 +13381,6 @@ def arange(*args, **kwargs):
     array([3, 5])
     """
     ...
-
 
 def argmax(a, axis=None, out=None):
     """
@@ -14706,7 +13456,6 @@ def argmax(a, axis=None, out=None):
     """
     ...
 
-
 def argmin(a, axis=None, out=None):
     """
     Returns the indices of the minimum values along an axis.
@@ -14781,8 +13530,7 @@ def argmin(a, axis=None, out=None):
     """
     ...
 
-
-def argpartition(a, kth, axis=-1, kind='introselect', order=None):
+def argpartition(a, kth, axis=-1, kind="introselect", order=None):
     """
     Perform an indirect partition along the given axis using the
     algorithm specified by the `kind` keyword. It returns an array of
@@ -14858,12 +13606,11 @@ def argpartition(a, kth, axis=-1, kind='introselect', order=None):
     """
     ...
 
-
 def argsort(
     a: ArrayLike,
-    axis: int =-1, 
-    kind: Optional[Text]=None,
-    order: Optional[Union[Text, Tuple[Text]]]=None,
+    axis: int = -1,
+    kind: Optional[Text] = None,
+    order: Optional[Union[Text, Tuple[Text]]] = None,
 ) -> Union[ndarray, int]:
     """
     Returns the indices that would sort an array.
@@ -14972,7 +13719,6 @@ def argsort(
     """
     ...
 
-
 def argwhere(a):
     """
     Find the indices of array elements that are non-zero, grouped by element.
@@ -15014,7 +13760,6 @@ def argwhere(a):
            [1, 2]])
     """
     ...
-
 
 def around(a, decimals=0, out=None):
     """
@@ -15110,9 +13855,16 @@ def around(a, decimals=0, out=None):
     """
     ...
 
-
-def array(obj: object, dtype:Type[Any]=None, *, copy: bool=True, order: Text='K', subok:bool=False, ndmin: int=0,
-          like: object=None) -> ndarray:
+def array(
+    obj: object,
+    dtype: Type[Any] = None,
+    *,
+    copy: bool = True,
+    order: Text = "K",
+    subok: bool = False,
+    ndmin: int = 0,
+    like: object = None,
+) -> ndarray:
     """
     array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0,
           like=None)
@@ -15238,8 +13990,23 @@ def array(obj: object, dtype:Type[Any]=None, *, copy: bool=True, order: Text='K'
     """
     ...
 
-
-def array2string(a, max_line_width=None, precision=None, suppress_small=None, separator=' ', prefix='', style=None, formatter=None, threshold=None, edgeitems=None, sign=None, floatmode=None, suffix='', *, legacy=None):
+def array2string(
+    a,
+    max_line_width=None,
+    precision=None,
+    suppress_small=None,
+    separator=" ",
+    prefix="",
+    style=None,
+    formatter=None,
+    threshold=None,
+    edgeitems=None,
+    sign=None,
+    floatmode=None,
+    suffix="",
+    *,
+    legacy=None,
+):
     """
     Return a string representation of an array.
 
@@ -15385,7 +14152,6 @@ def array2string(a, max_line_width=None, precision=None, suppress_small=None, se
     """
     ...
 
-
 def array_equal(a1, a2, equal_nan=False):
     """
     True if two arrays have the same shape and elements, False otherwise.
@@ -15441,7 +14207,6 @@ def array_equal(a1, a2, equal_nan=False):
     """
     ...
 
-
 def array_equiv(a1, a2):
     """
     Returns True if input arrays are shape consistent and all elements equal.
@@ -15477,7 +14242,6 @@ def array_equiv(a1, a2):
     False
     """
     ...
-
 
 def array_repr(arr, max_line_width=None, precision=None, suppress_small=None):
     """
@@ -15524,7 +14288,6 @@ def array_repr(arr, max_line_width=None, precision=None, suppress_small=None):
     """
     ...
 
-
 def array_split(ary, indices_or_sections, axis=0):
     """
     Split an array into multiple sub-arrays.
@@ -15551,7 +14314,6 @@ def array_split(ary, indices_or_sections, axis=0):
     [array([0, 1, 2]), array([3, 4]), array([5, 6]), array([7, 8])]
     """
     ...
-
 
 def array_str(a, max_line_width=None, precision=None, suppress_small=None):
     """
@@ -15588,7 +14350,6 @@ def array_str(a, max_line_width=None, precision=None, suppress_small=None):
     '[0 1 2]'
     """
     ...
-
 
 def asanyarray(a, dtype=None, order=None, *, like=None):
     """
@@ -15657,8 +14418,9 @@ def asanyarray(a, dtype=None, order=None, *, like=None):
     """
     ...
 
-
-def asarray(a: object, dtype: Type[Any]=None, order: Text=None, *, like: object=None) -> ndarray:
+def asarray(
+    a: object, dtype: Type[Any] = None, order: Text = None, *, like: object = None
+) -> ndarray:
     """
     Convert the input to an array.
 
@@ -15743,7 +14505,6 @@ def asarray(a: object, dtype: Type[Any]=None, order: Text=None, *, like: object=
     """
     ...
 
-
 def asarray_chkfinite(a, dtype=None, order=None):
     """
     Convert the input to an array, checking for NaNs or Infs.
@@ -15809,7 +14570,6 @@ def asarray_chkfinite(a, dtype=None, order=None):
     """
     ...
 
-
 def ascontiguousarray(a, dtype=None, *, like=None):
     """
     Return a contiguous array (ndim >= 1) in memory (C order).
@@ -15860,8 +14620,7 @@ def ascontiguousarray(a, dtype=None, *, like=None):
     """
     ...
 
-
-def asfarray(a, dtype=<class 'numpy.float64'>):
+def asfarray(a, dtype=float64):
     """
     Return an array converted to a float type.
 
@@ -15888,7 +14647,6 @@ def asfarray(a, dtype=<class 'numpy.float64'>):
     array([2.,  3.])
     """
     ...
-
 
 def asfortranarray(a, dtype=None, *, like=None):
     """
@@ -15940,7 +14698,6 @@ def asfortranarray(a, dtype=None, *, like=None):
     """
     ...
 
-
 def asmatrix(data, dtype=None):
     """
     Interpret the input as a matrix.
@@ -15974,7 +14731,6 @@ def asmatrix(data, dtype=None):
     """
     ...
 
-
 def asscalar(a):
     """
     Convert an array of size 1 to its scalar equivalent.
@@ -16000,7 +14756,6 @@ def asscalar(a):
     24
     """
     ...
-
 
 def atleast_1d(*arys):
     """
@@ -16042,7 +14797,6 @@ def atleast_1d(*arys):
     """
     ...
 
-
 def atleast_2d(*arys):
     """
     View inputs as arrays with at least two dimensions.
@@ -16080,7 +14834,6 @@ def atleast_2d(*arys):
     [array([[1]]), array([[1, 2]]), array([[1, 2]])]
     """
     ...
-
 
 def atleast_3d(*arys):
     """
@@ -16132,8 +14885,12 @@ def atleast_3d(*arys):
     """
     ...
 
-
-def average(a: ndarray, axis: Optional[Tuple[int, ...]]=None, weights: Optional[ArrayLike]=None, returned: Optional[bool]=False) -> Any:
+def average(
+    a: ndarray,
+    axis: Optional[Tuple[int, ...]] = None,
+    weights: Optional[ArrayLike] = None,
+    returned: Optional[bool] = False,
+) -> Any:
     """
     Compute the weighted average along the specified axis.
 
@@ -16230,7 +14987,6 @@ def average(a: ndarray, axis: Optional[Tuple[int, ...]]=None, weights: Optional[
     complex256
     """
     ...
-
 
 def bartlett(M):
     """
@@ -16333,7 +15089,6 @@ def bartlett(M):
     """
     ...
 
-
 def base_repr(number, base=2, padding=0):
     """
     Return a string representation of a number in the given base system.
@@ -16372,7 +15127,6 @@ def base_repr(number, base=2, padding=0):
     '20'
     """
     ...
-
 
 def binary_repr(num, width=None):
     """
@@ -16445,7 +15199,6 @@ def binary_repr(num, width=None):
     '11101'
     """
     ...
-
 
 def bincount(*args, **kwargs):
     """
@@ -16520,7 +15273,6 @@ def bincount(*args, **kwargs):
     array([ 0.3,  0.7,  1.1])
     """
     ...
-
 
 def blackman(M):
     """
@@ -16613,7 +15365,6 @@ def blackman(M):
     >>> plt.show()
     """
     ...
-
 
 def block(arrays):
     """
@@ -16764,7 +15515,6 @@ def block(arrays):
     """
     ...
 
-
 def bmat(obj, ldict=None, gdict=None):
     """
     Build a matrix object from a string, nested sequence, or array.
@@ -16819,7 +15569,6 @@ def bmat(obj, ldict=None, gdict=None):
     """
     ...
 
-
 def broadcast_arrays(*args, subok=False):
     """
     Broadcast any number of arrays against each other.
@@ -16873,7 +15622,6 @@ def broadcast_arrays(*args, subok=False):
     """
     ...
 
-
 def broadcast_shapes(*args):
     """
     Broadcast the input shapes into a single shape.
@@ -16913,7 +15661,6 @@ def broadcast_shapes(*args):
     (5, 6, 7)
     """
     ...
-
 
 def broadcast_to(array, shape, subok=False):
     """
@@ -16961,7 +15708,6 @@ def broadcast_to(array, shape, subok=False):
            [1, 2, 3]])
     """
     ...
-
 
 def busday_count(*args, **kwargs):
     """
@@ -17027,7 +15773,6 @@ def busday_count(*args, **kwargs):
     53
     """
     ...
-
 
 def busday_offset(*args, **kwargs):
     """
@@ -17120,7 +15865,6 @@ def busday_offset(*args, **kwargs):
     """
     ...
 
-
 def byte_bounds(a):
     """
     Returns pointers to the end-points of an array.
@@ -17153,7 +15897,6 @@ def byte_bounds(a):
     True
     """
     ...
-
 
 def can_cast(*args, **kwargs):
     """
@@ -17267,8 +16010,7 @@ def can_cast(*args, **kwargs):
     """
     ...
 
-
-def choose(a, choices, out=None, mode='raise'):
+def choose(a, choices, out=None, mode="raise"):
     """
     Construct an array from an index array and a set of arrays to choose from.
 
@@ -17390,8 +16132,13 @@ def choose(a, choices, out=None, mode='raise'):
     """
     ...
 
-
-def clip(a: ArrayLike, a_min: ArrayLike, a_max: ArrayLike, out: ArrayLike=None, **kwargs: Any) -> ndarray:
+def clip(
+    a: ArrayLike,
+    a_min: ArrayLike,
+    a_max: ArrayLike,
+    out: ArrayLike = None,
+    **kwargs: Any,
+) -> ndarray:
     """
     Clip (limit) the values in an array.
 
@@ -17450,7 +16197,6 @@ def clip(a: ArrayLike, a_min: ArrayLike, a_max: ArrayLike, out: ArrayLike=None, 
     """
     ...
 
-
 def column_stack(tup):
     """
     Stack 1-D arrays as columns into a 2-D array.
@@ -17484,7 +16230,6 @@ def column_stack(tup):
            [3, 4]])
     """
     ...
-
 
 def common_type(*arrays):
     """
@@ -17523,7 +16268,6 @@ def common_type(*arrays):
     """
     ...
 
-
 def compare_chararrays(*args, **kwargs):
     """
     compare_chararrays(a, b, cmp_op, rstrip)
@@ -17560,7 +16304,6 @@ def compare_chararrays(*args, **kwargs):
     array([False,  True, False])
     """
     ...
-
 
 def compress(condition, a, axis=None, out=None):
     """
@@ -17623,12 +16366,11 @@ def compress(condition, a, axis=None, out=None):
     """
     ...
 
-
 def concatenate(
     arrays: ArrayLike,
-    axis: Optional[int] =..., 
-    out: Optional[ndarray] =... ,
-    dtype: Union[Text, Type[Any]]= ...,
+    axis: Optional[int] = ...,
+    out: Optional[ndarray] = ...,
+    dtype: Union[Text, Type[Any]] = ...,
 ) -> ndarray:
     """
     concatenate((a1, a2, ...), axis=0, out=None, dtype=None, casting="same_kind")
@@ -17723,8 +16465,7 @@ def concatenate(
     """
     ...
 
-
-def convolve(a, v, mode='full'):
+def convolve(a, v, mode="full"):
     """
     Returns the discrete, linear convolution of two one-dimensional sequences.
 
@@ -17813,8 +16554,7 @@ def convolve(a, v, mode='full'):
     """
     ...
 
-
-def copy(a, order='K', subok=False):
+def copy(a, order="K", subok=False):
     """
     Return an array copy of the given object.
 
@@ -17892,7 +16632,6 @@ def copy(a, order='K', subok=False):
     """
     ...
 
-
 def copyto(*args, **kwargs):
     """
     copyto(dst, src, casting='same_kind', where=True)
@@ -17925,7 +16664,6 @@ def copyto(*args, **kwargs):
         wherever it contains the value True.
     """
     ...
-
 
 def corrcoef(x, y=None, rowvar=True, bias=None, ddof=None, *, dtype=None):
     """
@@ -18054,8 +16792,7 @@ def corrcoef(x, y=None, rowvar=True, bias=None, ddof=None, *, dtype=None):
     """
     ...
 
-
-def correlate(a, v, mode='valid'):
+def correlate(a, v, mode="valid"):
     """
     Cross-correlation of two 1-dimensional sequences.
 
@@ -18120,7 +16857,6 @@ def correlate(a, v, mode='valid'):
     """
     ...
 
-
 def count_nonzero(a, axis=None, *, keepdims=False):
     """
     Counts the number of non-zero values in the array ``a``.
@@ -18182,8 +16918,17 @@ def count_nonzero(a, axis=None, *, keepdims=False):
     """
     ...
 
-
-def cov(m, y=None, rowvar=True, bias=False, ddof=None, fweights=None, aweights=None, *, dtype=None):
+def cov(
+    m,
+    y=None,
+    rowvar=True,
+    bias=False,
+    ddof=None,
+    fweights=None,
+    aweights=None,
+    *,
+    dtype=None,
+):
     """
     Estimate a covariance matrix, given data and weights.
 
@@ -18305,7 +17050,6 @@ def cov(m, y=None, rowvar=True, bias=False, ddof=None, fweights=None, aweights=N
     """
     ...
 
-
 def cross(a, b, axisa=-1, axisb=-1, axisc=-1, axis=None):
     """
     Return the cross product of two (arrays of) vectors.
@@ -18420,7 +17164,6 @@ def cross(a, b, axisa=-1, axisb=-1, axisc=-1, axis=None):
     """
     ...
 
-
 def cumprod(a, axis=None, dtype=None, out=None):
     """
     Return the cumulative product of elements along a given axis.
@@ -18482,7 +17225,6 @@ def cumprod(a, axis=None, dtype=None, out=None):
     """
     ...
 
-
 def cumproduct(*args, **kwargs):
     """
     Return the cumulative product over the given axis.
@@ -18492,7 +17234,6 @@ def cumproduct(*args, **kwargs):
     cumprod : equivalent function; see for details.
     """
     ...
-
 
 def cumsum(a, axis=None, dtype=None, out=None):
     """
@@ -18559,7 +17300,6 @@ def cumsum(a, axis=None, dtype=None, out=None):
     """
     ...
 
-
 def datetime_as_string(*args, **kwargs):
     """
     datetime_as_string(arr, unit=None, timezone='naive', casting='same_kind')
@@ -18625,7 +17365,6 @@ def datetime_as_string(*args, **kwargs):
     """
     ...
 
-
 def datetime_data(*args, **kwargs):
     """
     datetime_data(dtype, /)
@@ -18663,7 +17402,6 @@ def datetime_data(*args, **kwargs):
     numpy.datetime64('2010-01-01T00:00:00','25s')
     """
     ...
-
 
 def delete(arr, obj, axis=None):
     """
@@ -18730,7 +17468,6 @@ def delete(arr, obj, axis=None):
     """
     ...
 
-
 def deprecate(*args, **kwargs):
     """
     Issues a DeprecationWarning, adds warning to `old_name`'s
@@ -18772,12 +17509,9 @@ def deprecate(*args, **kwargs):
     """
     ...
 
-
 def deprecate_with_doc(msg):
-    """
-    """
+    """ """
     ...
-
 
 def diag(v, k=0):
     """
@@ -18833,7 +17567,6 @@ def diag(v, k=0):
            [0, 0, 8]])
     """
     ...
-
 
 def diag_indices(n, ndim=2):
     """
@@ -18900,7 +17633,6 @@ def diag_indices(n, ndim=2):
     """
     ...
 
-
 def diag_indices_from(arr):
     """
     Return the indices to access the main diagonal of an n-dimensional array.
@@ -18920,7 +17652,6 @@ def diag_indices_from(arr):
     .. versionadded:: 1.4.0
     """
     ...
-
 
 def diagflat(v, k=0):
     """
@@ -18961,7 +17692,6 @@ def diagflat(v, k=0):
            [0, 0, 0]])
     """
     ...
-
 
 def diagonal(a, offset=0, axis1=0, axis2=1):
     """
@@ -19087,7 +17817,6 @@ def diagonal(a, offset=0, axis1=0, axis2=1):
     """
     ...
 
-
 def diff(a, n=1, axis=-1, prepend=None, append=None):
     """
     Calculate the n-th discrete difference along the given axis.
@@ -19172,7 +17901,6 @@ def diff(a, n=1, axis=-1, prepend=None, append=None):
     array([1, 1], dtype='timedelta64[D]')
     """
     ...
-
 
 def digitize(x, bins, right=False):
     """
@@ -19266,7 +17994,6 @@ def digitize(x, bins, right=False):
     """
     ...
 
-
 def disp(mesg, device=None, linefeed=True):
     """
     Display a message on a device.
@@ -19299,7 +18026,6 @@ def disp(mesg, device=None, linefeed=True):
     '"Display" in a file\n'
     """
     ...
-
 
 def dot(*args, **kwargs):
     """
@@ -19387,7 +18113,6 @@ def dot(*args, **kwargs):
     """
     ...
 
-
 def dsplit(ary, indices_or_sections):
     """
     Split array into multiple sub-arrays along the 3rd axis (depth).
@@ -19428,7 +18153,6 @@ def dsplit(ary, indices_or_sections):
     array([], shape=(2, 2, 0), dtype=float64)]
     """
     ...
-
 
 def dstack(tup):
     """
@@ -19483,7 +18207,6 @@ def dstack(tup):
     """
     ...
 
-
 def ediff1d(ary, to_end=None, to_begin=None):
     """
     The differences between consecutive elements of an array.
@@ -19527,7 +18250,6 @@ def ediff1d(ary, to_end=None, to_begin=None):
     array([ 1,  2, -3,  5, 18])
     """
     ...
-
 
 def einsum(*operands, out=None, optimize=False, **kwargs):
     """
@@ -19886,8 +18608,7 @@ def einsum(*operands, out=None, optimize=False, **kwargs):
     """
     ...
 
-
-def einsum_path(*operands, optimize='greedy', einsum_call=False):
+def einsum_path(*operands, optimize="greedy", einsum_call=False):
     """
     einsum_path(subscripts, *operands, optimize='greedy')
 
@@ -19998,7 +18719,6 @@ def einsum_path(*operands, optimize='greedy', einsum_call=False):
     """
     ...
 
-
 def empty(*args, **kwargs):
     """
     empty(shape, dtype=float, order='C', *, like=None)
@@ -20061,7 +18781,6 @@ def empty(*args, **kwargs):
            [  496041986,    19249760]])                     #uninitialized
     """
     ...
-
 
 def empty_like(*args, **kwargs):
     """
@@ -20127,7 +18846,6 @@ def empty_like(*args, **kwargs):
            [  4.38791518e-305,  -2.00000715e+000,   4.17269252e-309]])
     """
     ...
-
 
 def expand_dims(a: ArrayLike, axis: int) -> ndarray:
     """
@@ -20205,7 +18923,6 @@ def expand_dims(a: ArrayLike, axis: int) -> ndarray:
     """
     ...
 
-
 def extract(condition, arr):
     """
     Return the elements of an array that satisfy some condition.
@@ -20255,8 +18972,7 @@ def extract(condition, arr):
     """
     ...
 
-
-def eye(N, M=None, k=0, dtype=<class 'float'>, order='C', *, like=None):
+def eye(N, M=None, k=0, dtype=float, order="C", *, like=None):
     """
     Return a 2-D array with ones on the diagonal and zeros elsewhere.
 
@@ -20312,7 +19028,6 @@ def eye(N, M=None, k=0, dtype=<class 'float'>, order='C', *, like=None):
            [0.,  0.,  0.]])
     """
     ...
-
 
 fastCopyAndTranspose = _fastCopyAndTranspose
 
@@ -20431,7 +19146,6 @@ def fill_diagonal(a, val, wrap=False):
     """
     ...
 
-
 def find_common_type(array_types, scalar_types):
     """
     Determine common type following standard coercion rules.
@@ -20484,7 +19198,6 @@ def find_common_type(array_types, scalar_types):
     """
     ...
 
-
 def fix(x, out=None):
     """
     Round to nearest integer towards zero.
@@ -20527,7 +19240,6 @@ def fix(x, out=None):
     """
     ...
 
-
 def flatnonzero(a):
     """
     Return indices that are non-zero in the flattened version of a.
@@ -20565,7 +19277,6 @@ def flatnonzero(a):
     array([-2, -1,  1,  2])
     """
     ...
-
 
 def flip(m, axis=None):
     """
@@ -20649,7 +19360,6 @@ def flip(m, axis=None):
     """
     ...
 
-
 def fliplr(m):
     """
     Flip array in the left/right direction.
@@ -20694,7 +19404,6 @@ def fliplr(m):
     True
     """
     ...
-
 
 def flipud(m):
     """
@@ -20745,8 +19454,16 @@ def flipud(m):
     """
     ...
 
-
-def format_float_positional(x, precision=None, unique=True, fractional=True, trim='k', sign=False, pad_left=None, pad_right=None):
+def format_float_positional(
+    x,
+    precision=None,
+    unique=True,
+    fractional=True,
+    trim="k",
+    sign=False,
+    pad_left=None,
+    pad_right=None,
+):
     """
     Format a floating-point scalar as a decimal string in positional notation.
 
@@ -20813,8 +19530,9 @@ def format_float_positional(x, precision=None, unique=True, fractional=True, tri
     """
     ...
 
-
-def format_float_scientific(x, precision=None, unique=True, trim='k', sign=False, pad_left=None, exp_digits=None):
+def format_float_scientific(
+    x, precision=None, unique=True, trim="k", sign=False, pad_left=None, exp_digits=None
+):
     """
     Format a floating-point scalar as a decimal string in scientific notation.
 
@@ -20875,7 +19593,6 @@ def format_float_scientific(x, precision=None, unique=True, trim='k', sign=False
     """
     ...
 
-
 def frombuffer(*args, **kwargs):
     """
     frombuffer(buffer, dtype=float, count=-1, offset=0, *, like=None)
@@ -20929,7 +19646,6 @@ def frombuffer(*args, **kwargs):
     array([1, 2, 3], dtype=uint8)
     """
     ...
-
 
 def fromfile(*args, **kwargs):
     """
@@ -21032,7 +19748,6 @@ def fromfile(*args, **kwargs):
     """
     ...
 
-
 def fromfunction(function, shape, *, dtype=float, like=None, **kwargs):
     """
     Construct an array by executing a function over each coordinate.
@@ -21097,8 +19812,13 @@ def fromfunction(function, shape, *, dtype=float, like=None, **kwargs):
     """
     ...
 
-
-def fromiter(iterable: Iterable[Any], dtype: Type[Any], count: int=-1, *, like: ArrayLike=None) -> ndarray:
+def fromiter(
+    iterable: Iterable[Any],
+    dtype: Type[Any],
+    count: int = -1,
+    *,
+    like: ArrayLike = None,
+) -> ndarray:
     """
     fromiter(iterable, dtype, count=-1, *, like=None)
 
@@ -21143,7 +19863,6 @@ def fromiter(iterable: Iterable[Any], dtype: Type[Any], count: int=-1, *, like: 
     array([  0.,   1.,   4.,   9.,  16.])
     """
     ...
-
 
 def frompyfunc(*args, **kwargs):
     """
@@ -21194,7 +19913,6 @@ def frompyfunc(*args, **kwargs):
     array(['0o12', '0o36', '0o144'], dtype='<U5')
     """
     ...
-
 
 def fromregex(file, regexp, dtype, encoding=None):
     """
@@ -21255,7 +19973,6 @@ def fromregex(file, regexp, dtype, encoding=None):
     array([1312, 1534,  444])
     """
     ...
-
 
 def fromstring(*args, **kwargs):
     """
@@ -21329,8 +20046,14 @@ def fromstring(*args, **kwargs):
     """
     ...
 
-
-def full(shape: Tuple[int, ...], fill_value: Scalar, dtype: Type[Any]=None, order: Text='C', *, like: ndarray=None) -> ndarray:
+def full(
+    shape: Tuple[int, ...],
+    fill_value: Scalar,
+    dtype: Type[Any] = None,
+    order: Text = "C",
+    *,
+    like: ndarray = None,
+) -> ndarray:
     """
     Return a new array of given shape and type, filled with `fill_value`.
 
@@ -21386,8 +20109,14 @@ def full(shape: Tuple[int, ...], fill_value: Scalar, dtype: Type[Any]=None, orde
     """
     ...
 
-
-def full_like(a: ndarray, fill_value: ArrayLike, dtype: Type[Any]=None, order: Text='K', subok: bool=True, shape: Tuple[int, ...]=None) -> ndarray:
+def full_like(
+    a: ndarray,
+    fill_value: ArrayLike,
+    dtype: Type[Any] = None,
+    order: Text = "K",
+    subok: bool = True,
+    shape: Tuple[int, ...] = None,
+) -> ndarray:
     """
     Return a full array with the same shape and type as a given array.
 
@@ -21446,8 +20175,33 @@ def full_like(a: ndarray, fill_value: ArrayLike, dtype: Type[Any]=None, order: T
     """
     ...
 
-
-def genfromtxt(fname, dtype=<class 'float'>, comments='#', delimiter=None, skip_header=0, skip_footer=0, converters=None, missing_values=None, filling_values=None, usecols=None, names=None, excludelist=None, deletechars=" !#$%&'()*+, -./:;<=>?@[\\]^{|}~", replace_space='_', autostrip=False, case_sensitive=True, defaultfmt='f%i', unpack=None, usemask=False, loose=True, invalid_raise=True, max_rows=None, encoding='bytes', *, like=None):
+def genfromtxt(
+    fname,
+    dtype=float,
+    comments="#",
+    delimiter=None,
+    skip_header=0,
+    skip_footer=0,
+    converters=None,
+    missing_values=None,
+    filling_values=None,
+    usecols=None,
+    names=None,
+    excludelist=None,
+    deletechars=" !#$%&'()*+, -./:;<=>?@[\\]^{|}~",
+    replace_space="_",
+    autostrip=False,
+    case_sensitive=True,
+    defaultfmt="f%i",
+    unpack=None,
+    usemask=False,
+    loose=True,
+    invalid_raise=True,
+    max_rows=None,
+    encoding="bytes",
+    *,
+    like=None,
+):
     """
     Load data from a text file, with missing values handled as specified.
 
@@ -21637,7 +20391,6 @@ def genfromtxt(fname, dtype=<class 'float'>, comments='#', delimiter=None, skip_
     """
     ...
 
-
 def geomspace(start, stop, num=50, endpoint=True, dtype=None, axis=0):
     """
     Return numbers spaced evenly on a log scale (a geometric progression).
@@ -21741,7 +20494,6 @@ def geomspace(start, stop, num=50, endpoint=True, dtype=None, axis=0):
     """
     ...
 
-
 def get_array_wrap(*args):
     """
     Find the wrapper for the array with the highest priority.
@@ -21749,7 +20501,6 @@ def get_array_wrap(*args):
     In case of ties, leftmost wins. If no wrapper is found, return None
     """
     ...
-
 
 def get_include():
     """
@@ -21770,7 +20521,6 @@ def get_include():
         ...
     """
     ...
-
 
 def get_printoptions():
     """
@@ -21799,7 +20549,6 @@ def get_printoptions():
     """
     ...
 
-
 def getbufsize():
     """
     Return the size of the buffer used in ufuncs.
@@ -21810,7 +20559,6 @@ def getbufsize():
         Size of ufunc buffer in bytes.
     """
     ...
-
 
 def geterr():
     """
@@ -21848,7 +20596,6 @@ def geterr():
     array([nan,  1.,  1.])
     """
     ...
-
 
 def geterrcall():
     """
@@ -21892,7 +20639,6 @@ def geterrcall():
     True
     """
     ...
-
 
 def geterrobj(*args, **kwargs):
     """
@@ -21957,7 +20703,6 @@ def geterrobj(*args, **kwargs):
     '4351'
     """
     ...
-
 
 def gradient(f, *varargs, axis=None, edge_order=1):
     """
@@ -22135,7 +20880,6 @@ def gradient(f, *varargs, axis=None, edge_order=1):
     """
     ...
 
-
 def hamming(M):
     """
     Return the Hamming window.
@@ -22227,7 +20971,6 @@ def hamming(M):
     >>> plt.show()
     """
     ...
-
 
 def hanning(M):
     """
@@ -22324,7 +21067,6 @@ def hanning(M):
     >>> plt.show()
     """
     ...
-
 
 def histogram(a, bins=10, range=None, normed=None, weights=None, density=None):
     """
@@ -22437,7 +21179,6 @@ def histogram(a, bins=10, range=None, normed=None, weights=None, density=None):
     >>> plt.show()
     """
     ...
-
 
 def histogram2d(x, y, bins=10, range=None, normed=None, weights=None, density=None):
     """
@@ -22558,7 +21299,6 @@ def histogram2d(x, y, bins=10, range=None, normed=None, weights=None, density=No
     >>> plt.show()
     """
     ...
-
 
 def histogram_bin_edges(a, bins=10, range=None, weights=None):
     """
@@ -22757,7 +21497,6 @@ def histogram_bin_edges(a, bins=10, range=None, weights=None):
     """
     ...
 
-
 def histogramdd(sample, bins=10, range=None, normed=None, weights=None, density=None):
     """
     Compute the multidimensional histogram of some data.
@@ -22827,7 +21566,6 @@ def histogramdd(sample, bins=10, range=None, normed=None, weights=None, density=
     """
     ...
 
-
 def hsplit(ary, indices_or_sections):
     """
     Split an array into multiple sub-arrays horizontally (column-wise).
@@ -22884,7 +21622,6 @@ def hsplit(ary, indices_or_sections):
     """
     ...
 
-
 def hstack(tup: ndarray) -> ndarray:
     """
     Stack arrays in sequence horizontally (column wise).
@@ -22933,7 +21670,6 @@ def hstack(tup: ndarray) -> ndarray:
            [3, 4]])
     """
     ...
-
 
 def i0(x):
     """
@@ -22986,7 +21722,6 @@ def i0(x):
     """
     ...
 
-
 def identity(n, dtype=None, *, like=None):
     """
     Return the identity array.
@@ -23028,7 +21763,6 @@ def identity(n, dtype=None, *, like=None):
     """
     ...
 
-
 def imag(val):
     """
     Return the imaginary part of the complex argument.
@@ -23061,7 +21795,6 @@ def imag(val):
     1.0
     """
     ...
-
 
 def in1d(ar1, ar2, assume_unique=False, invert=False):
     """
@@ -23130,8 +21863,7 @@ def in1d(ar1, ar2, assume_unique=False, invert=False):
     """
     ...
 
-
-def indices(dimensions, dtype=<class 'int'>, sparse=False):
+def indices(dimensions, dtype=int, sparse=False):
     """
     Return an array representing the indices of a grid.
 
@@ -23216,8 +21948,7 @@ def indices(dimensions, dtype=<class 'int'>, sparse=False):
     """
     ...
 
-
-def info(object=None, maxwidth=76, output=<_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>, toplevel='numpy'):
+def info(object=None, maxwidth=76, output=..., toplevel="numpy"):
     """
     Get help information for a function, class, or module.
 
@@ -23266,7 +21997,6 @@ def info(object=None, maxwidth=76, output=<_io.TextIOWrapper name='<stdout>' mod
          *** Total of 3 references found. ***
     """
     ...
-
 
 def inner(*args, **kwargs):
     """
@@ -23341,7 +22071,6 @@ def inner(*args, **kwargs):
            [0., 7.]])
     """
     ...
-
 
 def insert(arr, obj, values, axis=None):
     """
@@ -23431,7 +22160,6 @@ def insert(arr, obj, values, axis=None):
            [  4, 999,   5,   6, 999,   7]])
     """
     ...
-
 
 def interp(x, xp, fp, left=None, right=None, period=None):
     """
@@ -23537,7 +22265,6 @@ def interp(x, xp, fp, left=None, right=None, period=None):
     """
     ...
 
-
 def intersect1d(ar1, ar2, assume_unique=False, return_indices=False):
     """
     Find the intersection of two arrays.
@@ -23601,7 +22328,6 @@ def intersect1d(ar1, ar2, assume_unique=False, return_indices=False):
     """
     ...
 
-
 def is_busday(*args, **kwargs):
     """
     is_busday(dates, weekmask='1111100', holidays=None, busdaycal=None, out=None)
@@ -23653,7 +22379,6 @@ def is_busday(*args, **kwargs):
     array([False, False,  True])
     """
     ...
-
 
 def isclose(a, b, rtol=1e-05, atol=1e-08, equal_nan=False):
     """
@@ -23736,7 +22461,6 @@ def isclose(a, b, rtol=1e-05, atol=1e-08, equal_nan=False):
     """
     ...
 
-
 def iscomplex(x):
     """
     Returns a bool array, where True if input element is complex.
@@ -23766,7 +22490,6 @@ def iscomplex(x):
     array([ True, False, False, False, False,  True])
     """
     ...
-
 
 def iscomplexobj(x):
     """
@@ -23800,7 +22523,6 @@ def iscomplexobj(x):
     True
     """
     ...
-
 
 def isfortran(a):
     """
@@ -23866,7 +22588,6 @@ def isfortran(a):
     False
     """
     ...
-
 
 def isin(element, test_elements, assume_unique=False, invert=False):
     """
@@ -23963,7 +22684,6 @@ def isin(element, test_elements, assume_unique=False, invert=False):
     """
     ...
 
-
 def isneginf(x, out=None):
     """
     Test element-wise for negative infinity, return result as bool array.
@@ -24023,7 +22743,6 @@ def isneginf(x, out=None):
     array([1, 0, 0])
     """
     ...
-
 
 def isposinf(x, out=None):
     """
@@ -24085,7 +22804,6 @@ def isposinf(x, out=None):
     """
     ...
 
-
 def isreal(x):
     """
     Returns a bool array, where True if input element is real.
@@ -24114,7 +22832,6 @@ def isreal(x):
     array([False,  True,  True,  True,  True, False])
     """
     ...
-
 
 def isrealobj(x):
     """
@@ -24148,7 +22865,6 @@ def isrealobj(x):
     False
     """
     ...
-
 
 def isscalar(element):
     """
@@ -24226,7 +22942,6 @@ def isscalar(element):
     """
     ...
 
-
 def issctype(rep):
     """
     Determines whether the given object represents a scalar data-type.
@@ -24261,7 +22976,6 @@ def issctype(rep):
     True
     """
     ...
-
 
 def issubclass_(arg1, arg2):
     """
@@ -24298,7 +23012,6 @@ def issubclass_(arg1, arg2):
     True
     """
     ...
-
 
 def issubdtype(arg1, arg2):
     """
@@ -24359,7 +23072,6 @@ def issubdtype(arg1, arg2):
     """
     ...
 
-
 def issubsctype(arg1, arg2):
     """
     Determine if the first argument is a subclass of the second argument.
@@ -24389,7 +23101,6 @@ def issubsctype(arg1, arg2):
     """
     ...
 
-
 def iterable(y):
     """
     Check whether or not an object can be iterated over.
@@ -24414,7 +23125,6 @@ def iterable(y):
     False
     """
     ...
-
 
 def ix_(*args):
     """
@@ -24473,7 +23183,6 @@ def ix_(*args):
            [7, 9]])
     """
     ...
-
 
 def kaiser(M, beta):
     """
@@ -24596,7 +23305,6 @@ def kaiser(M, beta):
     """
     ...
 
-
 def kron(a, b):
     """
     Kronecker product of two arrays.
@@ -24665,7 +23373,6 @@ def kron(a, b):
     True
     """
     ...
-
 
 def lexsort(*args, **kwargs):
     """
@@ -24743,15 +23450,14 @@ def lexsort(*args, **kwargs):
     """
     ...
 
-
 def linspace(
     start: ArrayLike,
     stop: ArrayLike,
     num: int = 50,
-    endpoint: bool=True,
-    retstep: bool=False,
-    dtype: Type[Any]=None,
-    axis: int=0,
+    endpoint: bool = True,
+    retstep: bool = False,
+    dtype: Type[Any] = None,
+    axis: int = 0,
 ) -> ndarray:
     """
     Return evenly spaced numbers over a specified interval.
@@ -24848,8 +23554,7 @@ def linspace(
     """
     ...
 
-
-def load(file, mmap_mode=None, allow_pickle=False, fix_imports=True, encoding='ASCII'):
+def load(file, mmap_mode=None, allow_pickle=False, fix_imports=True, encoding="ASCII"):
     """
     Load arrays or pickled objects from ``.npy``, ``.npz`` or pickled files.
 
@@ -24960,14 +23665,25 @@ def load(file, mmap_mode=None, allow_pickle=False, fix_imports=True, encoding='A
     """
     ...
 
-
 def loads(*args, **kwargs):
-    """
-    """
+    """ """
     ...
 
-
-def loadtxt(fname, dtype=<class 'float'>, comments='#', delimiter=None, converters=None, skiprows=0, usecols=None, unpack=False, ndmin=0, encoding='bytes', max_rows=None, *, like=None):
+def loadtxt(
+    fname,
+    dtype=float,
+    comments="#",
+    delimiter=None,
+    converters=None,
+    skiprows=0,
+    usecols=None,
+    unpack=False,
+    ndmin=0,
+    encoding="bytes",
+    max_rows=None,
+    *,
+    like=None,
+):
     """
     Load data from a text file.
 
@@ -25105,7 +23821,6 @@ def loadtxt(fname, dtype=<class 'float'>, comments='#', delimiter=None, converte
     """
     ...
 
-
 def logspace(start, stop, num=50, endpoint=True, base=10.0, dtype=None, axis=0):
     """
     Return numbers spaced evenly on a log scale.
@@ -25197,7 +23912,6 @@ def logspace(start, stop, num=50, endpoint=True, base=10.0, dtype=None, axis=0):
     """
     ...
 
-
 def lookfor(what, module=None, import_modules=True, regenerate=False, output=None):
     """
     Do a keyword search on docstrings.
@@ -25244,7 +23958,6 @@ def lookfor(what, module=None, import_modules=True, regenerate=False, output=Non
     """
     ...
 
-
 def mafromtxt(fname, **kwargs):
     """
     Load ASCII data stored in a text file and return a masked array.
@@ -25264,7 +23977,6 @@ def mafromtxt(fname, **kwargs):
     numpy.genfromtxt : generic function to load ASCII data.
     """
     ...
-
 
 def mask_indices(n, mask_func, k=0):
     """
@@ -25332,7 +24044,6 @@ def mask_indices(n, mask_func, k=0):
     """
     ...
 
-
 mat = asmatrix
 
 max = amax
@@ -25376,7 +24087,6 @@ def maximum_sctype(t):
     """
     ...
 
-
 def may_share_memory(*args, **kwargs):
     """
     may_share_memory(a, b, max_work=None)
@@ -25414,7 +24124,6 @@ def may_share_memory(*args, **kwargs):
     True
     """
     ...
-
 
 def mean(a, axis=None, dtype=None, out=None, keepdims=None, *, where=None):
     """
@@ -25520,7 +24229,6 @@ def mean(a, axis=None, dtype=None, out=None, keepdims=None, *, where=None):
     """
     ...
 
-
 def median(a, axis=None, out=None, overwrite_input=False, keepdims=False):
     """
     Compute the median along the specified axis.
@@ -25603,8 +24311,7 @@ def median(a, axis=None, out=None, overwrite_input=False, keepdims=False):
     """
     ...
 
-
-def meshgrid(*xi, copy=True, sparse=False, indexing='xy'):
+def meshgrid(*xi, copy=True, sparse=False, indexing="xy"):
     """
     Return coordinate matrices from coordinate vectors.
 
@@ -25708,7 +24415,6 @@ def meshgrid(*xi, copy=True, sparse=False, indexing='xy'):
     """
     ...
 
-
 min = amin
 
 def min_scalar_type(*args, **kwargs):
@@ -25759,8 +24465,7 @@ def min_scalar_type(*args, **kwargs):
     """
     ...
 
-
-def mintypecode(typechars, typeset='GDFgdf', default='d'):
+def mintypecode(typechars, typeset="GDFgdf", default="d"):
     """
     Return the character for the minimum-size type to which given types can
     be safely cast.
@@ -25803,7 +24508,6 @@ def mintypecode(typechars, typeset='GDFgdf', default='d'):
     'G'
     """
     ...
-
 
 def moveaxis(a, source, destination):
     """
@@ -25855,7 +24559,6 @@ def moveaxis(a, source, destination):
     """
     ...
 
-
 def msort(a):
     """
     Return a copy of an array sorted along the first axis.
@@ -25879,7 +24582,6 @@ def msort(a):
     ``np.msort(a)`` is equivalent to  ``np.sort(a, axis=0)``.
     """
     ...
-
 
 def nan_to_num(x, copy=True, nan=0.0, posinf=None, neginf=None):
     """
@@ -25976,7 +24678,6 @@ def nan_to_num(x, copy=True, nan=0.0, posinf=None, neginf=None):
     """
     ...
 
-
 def nanargmax(a, axis=None):
     """
     Return the indices of the maximum values in the specified axis ignoring
@@ -26014,7 +24715,6 @@ def nanargmax(a, axis=None):
     """
     ...
 
-
 def nanargmin(a, axis=None):
     """
     Return the indices of the minimum values in the specified axis ignoring
@@ -26050,7 +24750,6 @@ def nanargmin(a, axis=None):
     array([1, 0])
     """
     ...
-
 
 def nancumprod(a, axis=None, dtype=None, out=None):
     """
@@ -26110,7 +24809,6 @@ def nancumprod(a, axis=None, dtype=None, out=None):
            [3.,  3.]])
     """
     ...
-
 
 def nancumsum(a, axis=None, dtype=None, out=None):
     """
@@ -26173,7 +24871,6 @@ def nancumsum(a, axis=None, dtype=None, out=None):
            [3.,  3.]])
     """
     ...
-
 
 def nanmax(a, axis=None, out=None, keepdims=None):
     """
@@ -26260,7 +24957,6 @@ def nanmax(a, axis=None, out=None, keepdims=None):
     """
     ...
 
-
 def nanmean(a, axis=None, dtype=None, out=None, keepdims=None):
     """
     Compute the arithmetic mean along the specified axis, ignoring NaNs.
@@ -26335,7 +25031,6 @@ def nanmean(a, axis=None, dtype=None, out=None, keepdims=None):
     array([1.,  3.5]) # may vary
     """
     ...
-
 
 def nanmedian(a, axis=None, out=None, overwrite_input=False, keepdims=None):
     """
@@ -26422,7 +25117,6 @@ def nanmedian(a, axis=None, out=None, overwrite_input=False, keepdims=None):
     """
     ...
 
-
 def nanmin(a, axis=None, out=None, keepdims=None):
     """
     Return minimum of an array or minimum along an axis, ignoring any NaNs.
@@ -26508,8 +25202,15 @@ def nanmin(a, axis=None, out=None, keepdims=None):
     """
     ...
 
-
-def nanpercentile(a, q, axis=None, out=None, overwrite_input=False, interpolation='linear', keepdims=None):
+def nanpercentile(
+    a,
+    q,
+    axis=None,
+    out=None,
+    overwrite_input=False,
+    interpolation="linear",
+    keepdims=None,
+):
     """
     Compute the qth percentile of the data along the specified axis,
     while ignoring nan values.
@@ -26621,7 +25322,6 @@ def nanpercentile(a, q, axis=None, out=None, overwrite_input=False, interpolatio
     """
     ...
 
-
 def nanprod(a, axis=None, dtype=None, out=None, keepdims=None):
     """
     Return the product of array elements over a given axis treating Not a
@@ -26684,8 +25384,15 @@ def nanprod(a, axis=None, dtype=None, out=None, keepdims=None):
     """
     ...
 
-
-def nanquantile(a, q, axis=None, out=None, overwrite_input=False, interpolation='linear', keepdims=None):
+def nanquantile(
+    a,
+    q,
+    axis=None,
+    out=None,
+    overwrite_input=False,
+    interpolation="linear",
+    keepdims=None,
+):
     """
     Compute the qth quantile of the data along the specified axis,
     while ignoring nan values.
@@ -26785,7 +25492,6 @@ def nanquantile(a, q, axis=None, out=None, overwrite_input=False, interpolation=
     """
     ...
 
-
 def nanstd(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None):
     """
     Compute the standard deviation along the specified axis, while
@@ -26881,7 +25587,6 @@ def nanstd(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None):
     """
     ...
 
-
 def nansum(a, axis=None, dtype=None, out=None, keepdims=None):
     """
     Return the sum of array elements over a given axis treating Not a
@@ -26971,7 +25676,6 @@ def nansum(a, axis=None, dtype=None, out=None, keepdims=None):
     nan
     """
     ...
-
 
 def nanvar(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None):
     """
@@ -27064,7 +25768,6 @@ def nanvar(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None):
     """
     ...
 
-
 def ndfromtxt(fname, **kwargs):
     """
     Load ASCII data stored in a file and return it as a single array.
@@ -27084,7 +25787,6 @@ def ndfromtxt(fname, **kwargs):
     numpy.genfromtxt : generic function.
     """
     ...
-
 
 def ndim(a):
     """
@@ -27117,7 +25819,6 @@ def ndim(a):
     0
     """
     ...
-
 
 def nested_iters(*args, **kwargs):
     """
@@ -27178,7 +25879,6 @@ def nested_iters(*args, **kwargs):
      (1, 1) 11
     """
     ...
-
 
 def nonzero(a):
     """
@@ -27272,7 +25972,6 @@ def nonzero(a):
     """
     ...
 
-
 def obj2sctype(rep, default=None):
     """
     Return the scalar dtype or NumPy equivalent of Python type of an object.
@@ -27312,8 +26011,7 @@ def obj2sctype(rep, default=None):
     """
     ...
 
-
-def ones(shape, dtype=None, order='C', *, like=None):
+def ones(shape, dtype=None, order="C", *, like=None):
     """
     Return a new array of given shape and type, filled with ones.
 
@@ -27373,8 +26071,7 @@ def ones(shape, dtype=None, order='C', *, like=None):
     """
     ...
 
-
-def ones_like(a, dtype=None, order='K', subok=True, shape=None):
+def ones_like(a, dtype=None, order="K", subok=True, shape=None):
     """
     Return an array of ones with the same shape and type as a given array.
 
@@ -27435,7 +26132,6 @@ def ones_like(a, dtype=None, order='K', subok=True, shape=None):
     array([1.,  1.,  1.])
     """
     ...
-
 
 def outer(a, b, out=None):
     """
@@ -27520,7 +26216,6 @@ def outer(a, b, out=None):
     """
     ...
 
-
 def packbits(*args, **kwargs):
     """
     packbits(a, axis=None, bitorder='big')
@@ -27576,8 +26271,7 @@ def packbits(*args, **kwargs):
     """
     ...
 
-
-def pad(array, pad_width, mode='constant', **kwargs):
+def pad(array, pad_width, mode="constant", **kwargs):
     """
     Pad an array.
 
@@ -27785,8 +26479,7 @@ def pad(array, pad_width, mode='constant', **kwargs):
     """
     ...
 
-
-def partition(a, kth, axis=-1, kind='introselect', order=None):
+def partition(a, kth, axis=-1, kind="introselect", order=None):
     """
     Return a partitioned copy of an array.
 
@@ -27868,8 +26561,15 @@ def partition(a, kth, axis=-1, kind='introselect', order=None):
     """
     ...
 
-
-def percentile(a: ndarray, q: int, axis: Union[int, Tuple[int, ...]] =None, out: ndarray=None, overwrite_input: bool=False, interpolation: Text='linear', keepdims:bool=False) -> Union[ndarray, Any]:
+def percentile(
+    a: ndarray,
+    q: int,
+    axis: Union[int, Tuple[int, ...]] = None,
+    out: ndarray = None,
+    overwrite_input: bool = False,
+    interpolation: Text = "linear",
+    keepdims: bool = False,
+) -> Union[ndarray, Any]:
     """
     Compute the q-th percentile of the data along the specified axis.
 
@@ -28007,7 +26707,6 @@ def percentile(a: ndarray, q: int, axis: Union[int, Tuple[int, ...]] =None, out:
     """
     ...
 
-
 def piecewise(x, condlist, funclist, *args, **kw):
     """
     Evaluate a piecewise-defined function.
@@ -28096,7 +26795,6 @@ def piecewise(x, condlist, funclist, *args, **kw):
     """
     ...
 
-
 def place(arr, mask, vals):
     """
     Change elements of an array based on conditional and input values.
@@ -28133,7 +26831,6 @@ def place(arr, mask, vals):
            [44, 55, 44]])
     """
     ...
-
 
 def poly(seq_of_zeros):
     """
@@ -28229,7 +26926,6 @@ def poly(seq_of_zeros):
     """
     ...
 
-
 def polyadd(a1, a2):
     """
     Find the sum of two polynomials.
@@ -28280,7 +26976,6 @@ def polyadd(a1, a2):
     9 x + 6 x + 6
     """
     ...
-
 
 def polyder(p, m=1):
     """
@@ -28341,7 +27036,6 @@ def polyder(p, m=1):
     """
     ...
 
-
 def polydiv(u, v):
     """
     Returns the quotient and remainder of polynomial division.
@@ -28393,7 +27087,6 @@ def polydiv(u, v):
     (array([1.5 , 1.75]), array([0.25]))
     """
     ...
-
 
 def polyfit(x, y, deg, rcond=None, full=False, w=None, cov=False):
     """
@@ -28562,7 +27255,6 @@ def polyfit(x, y, deg, rcond=None, full=False, w=None, cov=False):
     """
     ...
 
-
 def polyint(p, m=1, k=None):
     """
     Return an antiderivative (indefinite integral) of a polynomial.
@@ -28637,7 +27329,6 @@ def polyint(p, m=1, k=None):
     """
     ...
 
-
 def polymul(a1, a2):
     """
     Find the product of two polynomials.
@@ -28693,7 +27384,6 @@ def polymul(a1, a2):
     """
     ...
 
-
 def polysub(a1, a2):
     """
     Difference (subtraction) of two polynomials.
@@ -28730,7 +27420,6 @@ def polysub(a1, a2):
     array([-1,  0,  2])
     """
     ...
-
 
 def polyval(p, x):
     """
@@ -28800,7 +27489,6 @@ def polyval(p, x):
     """
     ...
 
-
 def printoptions(*args, **kwargs):
     """
     Context manager for setting print options.
@@ -28827,7 +27515,6 @@ def printoptions(*args, **kwargs):
     set_printoptions, get_printoptions
     """
     ...
-
 
 def prod(a, axis=None, dtype=None, out=None, keepdims=None, initial=None, where=None):
     """
@@ -28947,7 +27634,6 @@ def prod(a, axis=None, dtype=None, out=None, keepdims=None, initial=None, where=
     """
     ...
 
-
 def product(*args, **kwargs):
     """
     Return the product of array elements over a given axis.
@@ -28957,7 +27643,6 @@ def product(*args, **kwargs):
     prod : equivalent function; see for details.
     """
     ...
-
 
 def promote_types(*args, **kwargs):
     """
@@ -29018,7 +27703,6 @@ def promote_types(*args, **kwargs):
     dtype('S4')
     """
     ...
-
 
 def ptp(a, axis=None, out=None, keepdims=None):
     """
@@ -29101,8 +27785,7 @@ def ptp(a, axis=None, out=None, keepdims=None):
     """
     ...
 
-
-def put(a, ind, v, mode='raise'):
+def put(a, ind, v, mode="raise"):
     """
     Replaces specified elements of an array with given values.
 
@@ -29152,7 +27835,6 @@ def put(a, ind, v, mode='raise'):
     array([ 0,  1,  2,  3, -5])
     """
     ...
-
 
 def put_along_axis(arr, indices, values, axis):
     """
@@ -29227,7 +27909,6 @@ def put_along_axis(arr, indices, values, axis):
     """
     ...
 
-
 def putmask(*args, **kwargs):
     """
     putmask(a, mask, values)
@@ -29270,8 +27951,15 @@ def putmask(*args, **kwargs):
     """
     ...
 
-
-def quantile(a, q, axis=None, out=None, overwrite_input=False, interpolation='linear', keepdims=False):
+def quantile(
+    a,
+    q,
+    axis=None,
+    out=None,
+    overwrite_input=False,
+    interpolation="linear",
+    keepdims=False,
+):
     """
     Compute the q-th quantile of the data along the specified axis.
 
@@ -29371,8 +28059,7 @@ def quantile(a, q, axis=None, out=None, overwrite_input=False, interpolation='li
     """
     ...
 
-
-def ravel(a, order='C'):
+def ravel(a, order="C"):
     """
     Return a contiguous flattened array.
 
@@ -29474,7 +28161,6 @@ def ravel(a, order='C'):
     """
     ...
 
-
 def ravel_multi_index(*args, **kwargs):
     """
     ravel_multi_index(multi_index, dims, mode='raise', order='C')
@@ -29534,7 +28220,6 @@ def ravel_multi_index(*args, **kwargs):
     """
     ...
 
-
 def real(val):
     """
     Return the real part of the complex argument.
@@ -29570,7 +28255,6 @@ def real(val):
     1.0
     """
     ...
-
 
 def real_if_close(a, tol=100):
     """
@@ -29617,7 +28301,6 @@ def real_if_close(a, tol=100):
     """
     ...
 
-
 def recfromcsv(fname, **kwargs):
     """
     Load ASCII data stored in a comma-separated file.
@@ -29641,7 +28324,6 @@ def recfromcsv(fname, **kwargs):
     """
     ...
 
-
 def recfromtxt(fname, **kwargs):
     """
     Load ASCII data from a file and return it in a record array.
@@ -29664,8 +28346,7 @@ def recfromtxt(fname, **kwargs):
     """
     ...
 
-
-def repeat(a: ndarray, repeats: int, axis: int=None) -> ndarray:
+def repeat(a: ndarray, repeats: int, axis: int = None) -> ndarray:
     """
     Repeat elements of an array.
 
@@ -29707,7 +28388,6 @@ def repeat(a: ndarray, repeats: int, axis: int=None) -> ndarray:
            [3, 4]])
     """
     ...
-
 
 def require(a, dtype=None, requirements=None, *, like=None):
     """
@@ -29789,8 +28469,9 @@ def require(a, dtype=None, requirements=None, *, like=None):
     """
     ...
 
-
-def reshape(a: ArrayLike, newshape: Union[int, Tuple[int, ...]], order: Text='C') -> ndarray:
+def reshape(
+    a: ArrayLike, newshape: Union[int, Tuple[int, ...]], order: Text = "C"
+) -> ndarray:
     """
     Gives a new shape to an array without changing its data.
 
@@ -29891,7 +28572,6 @@ def reshape(a: ArrayLike, newshape: Union[int, Tuple[int, ...]], order: Text='C'
     """
     ...
 
-
 def resize(a, new_shape):
     """
     Return a new array with the specified shape.
@@ -29950,7 +28630,6 @@ def resize(a, new_shape):
            [0, 1, 2, 3]])
     """
     ...
-
 
 def result_type(*args, **kwargs):
     """
@@ -30020,7 +28699,6 @@ def result_type(*args, **kwargs):
     dtype('float64')
     """
     ...
-
 
 def roll(a, shift, axis=None):
     """
@@ -30092,7 +28770,6 @@ def roll(a, shift, axis=None):
            [6, 7, 8, 9, 5]])
     """
     ...
-
 
 def rollaxis(a, axis, start=0):
     """
@@ -30166,7 +28843,6 @@ def rollaxis(a, axis, start=0):
     """
     ...
 
-
 def roots(p):
     """
     Return the roots of a polynomial with coefficients given in p.
@@ -30223,7 +28899,6 @@ def roots(p):
     """
     ...
 
-
 def rot90(m, k=1, axes=(0, 1)):
     """
     Rotate an array by 90 degrees in the plane specified by axes.
@@ -30279,7 +28954,6 @@ def rot90(m, k=1, axes=(0, 1)):
     """
     ...
 
-
 round = round_
 
 def round_(a, decimals=0, out=None):
@@ -30291,7 +28965,6 @@ def round_(a, decimals=0, out=None):
     around : equivalent function; see for details.
     """
     ...
-
 
 row_stack = vstack
 
@@ -30338,7 +29011,6 @@ def safe_eval(source):
     ValueError: malformed node or string: <_ast.Call object at 0x...>
     """
     ...
-
 
 def save(file, arr, allow_pickle=True, fix_imports=True):
     """
@@ -30402,8 +29074,17 @@ def save(file, arr, allow_pickle=True, fix_imports=True):
     """
     ...
 
-
-def savetxt(fname, X, fmt='%.18e', delimiter=' ', newline='\n', header='', footer='', comments='# ', encoding=None):
+def savetxt(
+    fname,
+    X,
+    fmt="%.18e",
+    delimiter=" ",
+    newline="\n",
+    header="",
+    footer="",
+    comments="# ",
+    encoding=None,
+):
     """
     Save an array to a text file.
 
@@ -30524,7 +29205,6 @@ def savetxt(fname, X, fmt='%.18e', delimiter=' ', newline='\n', header='', foote
     """
     ...
 
-
 def savez(file, *args, **kwds):
     """
     Save several arrays into a single file in uncompressed ``.npz`` format.
@@ -30606,7 +29286,6 @@ def savez(file, *args, **kwds):
     """
     ...
 
-
 def savez_compressed(file, *args, **kwds):
     """
     Save several arrays into a single file in compressed ``.npz`` format.
@@ -30669,7 +29348,6 @@ def savez_compressed(file, *args, **kwds):
     """
     ...
 
-
 def sctype2char(sctype):
     """
     Return the string representation of a scalar dtype.
@@ -30713,8 +29391,7 @@ def sctype2char(sctype):
     """
     ...
 
-
-def searchsorted(a, v, side='left', sorter=None):
+def searchsorted(a, v, side="left", sorter=None):
     """
     Find indices where elements should be inserted to maintain order.
 
@@ -30781,7 +29458,6 @@ def searchsorted(a, v, side='left', sorter=None):
     """
     ...
 
-
 def select(condlist, choicelist, default=0):
     """
     Return an array drawn from elements in choicelist, depending on conditions.
@@ -30819,7 +29495,6 @@ def select(condlist, choicelist, default=0):
     array([ 0,  1,  2, ..., 49, 64, 81])
     """
     ...
-
 
 def set_numeric_ops(*args, **kwargs):
     """
@@ -30871,8 +29546,20 @@ def set_numeric_ops(*args, **kwargs):
     """
     ...
 
-
-def set_printoptions(precision=None, threshold=None, edgeitems=None, linewidth=None, suppress=None, nanstr=None, infstr=None, formatter=None, sign=None, floatmode=None, *, legacy=None):
+def set_printoptions(
+    precision=None,
+    threshold=None,
+    edgeitems=None,
+    linewidth=None,
+    suppress=None,
+    nanstr=None,
+    infstr=None,
+    formatter=None,
+    sign=None,
+    floatmode=None,
+    *,
+    legacy=None,
+):
     """
     Set printing options.
 
@@ -31022,7 +29709,6 @@ def set_printoptions(precision=None, threshold=None, edgeitems=None, linewidth=N
     """
     ...
 
-
 def set_string_function(f, repr=True):
     """
     Set a Python function to be used when pretty printing arrays.
@@ -31075,7 +29761,6 @@ def set_string_function(f, repr=True):
     """
     ...
 
-
 def setbufsize(size):
     """
     Set the size of the buffer used in ufuncs.
@@ -31086,7 +29771,6 @@ def setbufsize(size):
         Size of buffer.
     """
     ...
-
 
 def setdiff1d(ar1, ar2, assume_unique=False):
     """
@@ -31124,7 +29808,6 @@ def setdiff1d(ar1, ar2, assume_unique=False):
     array([1, 2])
     """
     ...
-
 
 def seterr(all=None, divide=None, over=None, under=None, invalid=None):
     """
@@ -31202,7 +29885,6 @@ def seterr(all=None, divide=None, over=None, under=None, invalid=None):
     30464
     """
     ...
-
 
 def seterrcall(func):
     """
@@ -31287,7 +29969,6 @@ def seterrcall(func):
     """
     ...
 
-
 def seterrobj(*args, **kwargs):
     """
     seterrobj(errobj)
@@ -31347,7 +30028,6 @@ def seterrobj(*args, **kwargs):
     """
     ...
 
-
 def setxor1d(ar1, ar2, assume_unique=False):
     """
     Find the set exclusive-or of two arrays.
@@ -31377,7 +30057,6 @@ def setxor1d(ar1, ar2, assume_unique=False):
     array([1, 4, 5, 7])
     """
     ...
-
 
 def shape(a):
     """
@@ -31417,7 +30096,6 @@ def shape(a):
     (2,)
     """
     ...
-
 
 def shares_memory(*args, **kwargs):
     """
@@ -31490,7 +30168,6 @@ def shares_memory(*args, **kwargs):
     that take still significantly longer.
     """
     ...
-
 
 show_config = show()
 
@@ -31570,7 +30247,6 @@ def sinc(x):
     """
     ...
 
-
 def size(a, axis=None):
     """
     Return the number of elements along a given axis.
@@ -31606,7 +30282,6 @@ def size(a, axis=None):
     """
     ...
 
-
 def sometrue(*args, **kwargs):
     """
     Check whether some values are true.
@@ -31618,7 +30293,6 @@ def sometrue(*args, **kwargs):
     any : equivalent function; see for details.
     """
     ...
-
 
 def sort(a, axis=-1, kind=None, order=None):
     """
@@ -31766,7 +30440,6 @@ def sort(a, axis=-1, kind=None, order=None):
     """
     ...
 
-
 def sort_complex(a):
     """
     Sort a complex array using the real part first, then the imaginary part.
@@ -31791,8 +30464,7 @@ def sort_complex(a):
     """
     ...
 
-
-def source(output=<_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>):
+def source(output=...):
     """
     Print or write to a file the source code for a NumPy object.
 
@@ -31819,7 +30491,7 @@ def source(output=<_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>)
     >>> np.source(np.interp)                        #doctest: +SKIP
     In file: /usr/lib/python2.6/dist-packages/numpy/lib/function_base.py
     def interp(x, xp, fp, left=None, right=None):
-        """.... (full docstring printed)"""
+        \"\"\".... (full docstring printed)\"\"\"
         if isinstance(x, (float, int, number)):
             return compiled_interp([x], xp, fp, left, right).item()
         else:
@@ -31831,7 +30503,6 @@ def source(output=<_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>)
     Not available for this object.
     """
     ...
-
 
 def split(ary, indices_or_sections, axis=0):
     """
@@ -31900,7 +30571,6 @@ def split(ary, indices_or_sections, axis=0):
     """
     ...
 
-
 def squeeze(a, axis=None):
     """
     Remove axes of length one from `a`.
@@ -31961,8 +30631,7 @@ def squeeze(a, axis=None):
     """
     ...
 
-
-def stack(arrays: ArrayLike, axis: int=0, out: Optional[ndarray]=None) -> ndarray:
+def stack(arrays: ArrayLike, axis: int = 0, out: Optional[ndarray] = None) -> ndarray:
     """
     Join a sequence of arrays along a new axis.
 
@@ -32020,7 +30689,6 @@ def stack(arrays: ArrayLike, axis: int=0, out: Optional[ndarray]=None) -> ndarra
            [3, 4]])
     """
     ...
-
 
 def std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None, *, where=None):
     """
@@ -32140,16 +30808,15 @@ def std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None, *, where=None
     """
     ...
 
-
 def sum(
     a: ArrayLike,
-    axis: Optional[Union[int, Tuple[int, ...]]]=None,
-    dtype: Optional[Type[Any]]=None,
-    out: Optional[ndarray]=None, 
-    keepdims: Optional[bool]=...,
-    initial: Optional[Scalar]=...,
-    where: Optional[ArrayLike]=...,
-) -> Union[ndarray, Scalar] :
+    axis: Optional[Union[int, Tuple[int, ...]]] = None,
+    dtype: Optional[Type[Any]] = None,
+    out: Optional[ndarray] = None,
+    keepdims: Optional[bool] = ...,
+    initial: Optional[Scalar] = ...,
+    where: Optional[ArrayLike] = ...,
+) -> Union[ndarray, Scalar]:
     """
     Sum of array elements over a given axis.
 
@@ -32272,7 +30939,6 @@ def sum(
     """
     ...
 
-
 def swapaxes(a, axis1, axis2):
     """
     Interchange two axes of an array.
@@ -32317,8 +30983,7 @@ def swapaxes(a, axis1, axis2):
     """
     ...
 
-
-def take(a, indices, axis=None, out=None, mode='raise'):
+def take(a, indices, axis=None, out=None, mode="raise"):
     """
     Take elements from an array along an axis.
 
@@ -32415,7 +31080,6 @@ def take(a, indices, axis=None, out=None, mode='raise'):
            [5, 7]])
     """
     ...
-
 
 def take_along_axis(arr, indices, axis):
     """
@@ -32521,7 +31185,6 @@ def take_along_axis(arr, indices, axis):
            [40, 60]])
     """
     ...
-
 
 def tensordot(a, b, axes=2):
     """
@@ -32652,7 +31315,6 @@ def tensordot(a, b, axes=2):
     """
     ...
 
-
 def tile(A, reps):
     """
     Construct an array by repeating A the number of times given by reps.
@@ -32721,7 +31383,6 @@ def tile(A, reps):
     """
     ...
 
-
 def trace(a, offset=0, axis1=0, axis2=1, dtype=None, out=None):
     """
     Return the sum along diagonals of the array.
@@ -32779,7 +31440,6 @@ def trace(a, offset=0, axis1=0, axis2=1, dtype=None, out=None):
     """
     ...
 
-
 def transpose(a, axes=None):
     """
     Reverse or permute the axes of an array; returns the modified array.
@@ -32835,7 +31495,6 @@ def transpose(a, axes=None):
     (5, 4, 3, 2)
     """
     ...
-
 
 def trapz(y, x=None, dx=1.0, axis=-1):
     """
@@ -32900,8 +31559,7 @@ def trapz(y, x=None, dx=1.0, axis=-1):
     """
     ...
 
-
-def tri(N, M=None, k=0, dtype=<class 'float'>, *, like=None):
+def tri(N, M=None, k=0, dtype=float, *, like=None):
     """
     An array with ones at and below the given diagonal and zeros elsewhere.
 
@@ -32951,7 +31609,6 @@ def tri(N, M=None, k=0, dtype=<class 'float'>, *, like=None):
     """
     ...
 
-
 def tril(m, k=0):
     """
     Lower triangle of an array.
@@ -32984,7 +31641,6 @@ def tril(m, k=0):
            [10, 11, 12]])
     """
     ...
-
 
 def tril_indices(n, k=0, m=None):
     """
@@ -33064,7 +31720,6 @@ def tril_indices(n, k=0, m=None):
     """
     ...
 
-
 def tril_indices_from(arr, k=0):
     """
     Return the indices for the lower-triangle of arr.
@@ -33089,8 +31744,7 @@ def tril_indices_from(arr, k=0):
     """
     ...
 
-
-def trim_zeros(filt, trim='fb'):
+def trim_zeros(filt, trim="fb"):
     """
     Trim the leading and/or trailing zeros from a 1-D array or sequence.
 
@@ -33124,7 +31778,6 @@ def trim_zeros(filt, trim='fb'):
     """
     ...
 
-
 def triu(m, k=0):
     """
     Upper triangle of an array.
@@ -33147,7 +31800,6 @@ def triu(m, k=0):
            [ 0,  0, 12]])
     """
     ...
-
 
 def triu_indices(n, k=0, m=None):
     """
@@ -33229,7 +31881,6 @@ def triu_indices(n, k=0, m=None):
     """
     ...
 
-
 def triu_indices_from(arr, k=0):
     """
     Return the indices for the upper-triangle of arr.
@@ -33257,7 +31908,6 @@ def triu_indices_from(arr, k=0):
     .. versionadded:: 1.4.0
     """
     ...
-
 
 def typename(char):
     """
@@ -33309,7 +31959,6 @@ def typename(char):
     """
     ...
 
-
 def union1d(ar1, ar2):
     """
     Find the union of two arrays.
@@ -33345,8 +31994,9 @@ def union1d(ar1, ar2):
     """
     ...
 
-
-def unique(ar, return_index=False, return_inverse=False, return_counts=False, axis=None):
+def unique(
+    ar, return_index=False, return_inverse=False, return_counts=False, axis=None
+):
     """
     Find the unique elements of an array.
 
@@ -33467,7 +32117,6 @@ def unique(ar, return_index=False, return_inverse=False, return_counts=False, ax
     """
     ...
 
-
 def unpackbits(*args, **kwargs):
     """
     unpackbits(a, axis=None, count=None, bitorder='big')
@@ -33549,7 +32198,6 @@ def unpackbits(*args, **kwargs):
     """
     ...
 
-
 def unravel_index(*args, **kwargs):
     """
     unravel_index(indices, shape, order='C')
@@ -33597,7 +32245,6 @@ def unravel_index(*args, **kwargs):
     """
     ...
 
-
 def unwrap(p, discont=3.141592653589793, axis=-1):
     """
     Unwrap by changing deltas between values to 2*pi complement.
@@ -33639,7 +32286,6 @@ def unwrap(p, discont=3.141592653589793, axis=-1):
     array([ 0.        ,  0.78539816,  1.57079633, -0.78539816,  0.        ]) # may vary
     """
     ...
-
 
 def vander(x, N=None, increasing=False):
     """
@@ -33713,7 +32359,6 @@ def vander(x, N=None, increasing=False):
     48
     """
     ...
-
 
 def var(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None, *, where=None):
     """
@@ -33832,7 +32477,6 @@ def var(a, axis=None, dtype=None, out=None, ddof=0, keepdims=None, *, where=None
     """
     ...
 
-
 def vdot(*args, **kwargs):
     """
     vdot(a, b)
@@ -33888,7 +32532,6 @@ def vdot(*args, **kwargs):
     """
     ...
 
-
 def vsplit(ary, indices_or_sections):
     """
     Split an array into multiple sub-arrays vertically (row-wise).
@@ -33932,7 +32575,6 @@ def vsplit(ary, indices_or_sections):
             [6., 7.]]])]
     """
     ...
-
 
 def vstack(tup: ndarray) -> ndarray:
     """
@@ -33988,8 +32630,7 @@ def vstack(tup: ndarray) -> ndarray:
     """
     ...
 
-
-def where(condition: ndarray, x: ndarray=..., y: ndarray= ...) -> ndarray:
+def where(condition: ndarray, x: ndarray = ..., y: ndarray = ...) -> ndarray:
     """
     where(condition, [x, y])
 
@@ -34062,7 +32703,6 @@ def where(condition: ndarray, x: ndarray=..., y: ndarray= ...) -> ndarray:
     """
     ...
 
-
 def who(vardict=None):
     """
     Print the NumPy arrays in the given dictionary.
@@ -34108,8 +32748,13 @@ def who(vardict=None):
     """
     ...
 
-
-def zeros(shape: Union[Tuple[int, ...], int], dtype: Type[Any]=float, order: Text='C', *, like: object=None) -> ndarray:
+def zeros(
+    shape: Union[Tuple[int, ...], int],
+    dtype: Type[Any] = float,
+    order: Text = "C",
+    *,
+    like: object = None,
+) -> ndarray:
     """
     zeros(shape, dtype=float, order='C', *, like=None)
 
@@ -34174,8 +32819,13 @@ def zeros(shape: Union[Tuple[int, ...], int], dtype: Type[Any]=float, order: Tex
     """
     ...
 
-
-def zeros_like(a: ndarray, dtype: Type[Any]=None, order: Text='K', subok: bool=True, shape: Union[int, Tuple[int, ...]]=None) -> ndarray:
+def zeros_like(
+    a: ndarray,
+    dtype: Type[Any] = None,
+    order: Text = "K",
+    subok: bool = True,
+    shape: Union[int, Tuple[int, ...]] = None,
+) -> ndarray:
     """
     Return an array of zeros with the same shape and type as a given array.
 
@@ -34236,7 +32886,6 @@ def zeros_like(a: ndarray, dtype: Type[Any]=None, order: Text='K', subok: bool=T
     array([0.,  0.,  0.])
     """
     ...
-
 
 ALLOW_THREADS: int = 1
 
@@ -34307,7 +32956,7 @@ SHIFT_UNDERFLOW: int = 6
 
 ScalarType: ...
 """
-(<class 'int'>, <class 'float'>, <class 'complex'>, <clas...
+(int, float, <class 'complex'>, <clas...
 """
 
 True_: bool
@@ -34771,15 +33420,18 @@ def matmul(*args, **kwargs):
     ...
 
 def maximum(
-    x1: ndarray, x2: ndarray, /, 
-    out: Optional[ndarray]=None, *,
-    where: bool=True, 
-    casting: Text='same_kind', 
-    order:Text='K',
-    dtype: Optional[Type[Any]]=None,
-    subok: bool=True,
+    x1: ndarray,
+    x2: ndarray,
+    /,
+    out: Optional[ndarray] = None,
+    *,
+    where: bool = True,
+    casting: Text = "same_kind",
+    order: Text = "K",
+    dtype: Optional[Type[Any]] = None,
+    subok: bool = True,
     signature: Any = ...,
-    extobj: Any=...,
+    extobj: Any = ...,
 ) -> Union[ndarray, Scalar]:
     """
     Element-wise maximum of array elements.
@@ -34983,15 +33635,15 @@ def spacing(*args, **kwargs):
 def sqrt(
     x: ArrayLike,
     /,
-    out: ndarray=...,
+    out: ndarray = ...,
     *,
-    where: Optional[ArrayLike]=...,
-    casting: Any=..., 
-    order: Text=...,
-    dtype: Text=...,
-    subok: bool=...,
-    signature: Any=...,
-    extobj: Any=...,
+    where: Optional[ArrayLike] = ...,
+    casting: Any = ...,
+    order: Text = ...,
+    dtype: Text = ...,
+    subok: bool = ...,
+    signature: Any = ...,
+    extobj: Any = ...,
 ) -> Union[ndarray, Scalar]:
     """
     sqrt(x, /, out=None, *, where=True, casting=\'same_kind\', order=\'K\', dtype=None, subok=True[, signature, extobj])
@@ -35053,7 +33705,6 @@ def sqrt(
     array([ 2., nan, inf])'
     """
     ...
-
 
 def square(*args, **kwargs):
     """

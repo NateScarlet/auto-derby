@@ -6,6 +6,7 @@
 if True:
     import sys
     import os
+
     sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from typing import Iterator, Text, Tuple
@@ -21,13 +22,16 @@ import pathlib
 def _get_fan_set(db: sqlite3.Connection, fan_set_id: int) -> Tuple[int, ...]:
 
     with contextlib.closing(
-        db.execute("""
+        db.execute(
+            """
 SELECT fan_count
   FROM single_mode_fan_count
   WHERE fan_set_id = ?
   ORDER BY "order"
 ;
-""", (fan_set_id, ))
+""",
+            (fan_set_id,),
+        )
     ) as cur:
         return tuple(i[0] for i in cur.fetchall())
 
@@ -35,7 +39,8 @@ SELECT fan_count
 def _read_master_mdb(path: Text) -> Iterator[Race]:
 
     db = sqlite3.connect(path)
-    cur = db.execute("""
+    cur = db.execute(
+        """
 SELECT
   t4.text,
   t7.text AS stadium,
@@ -62,7 +67,8 @@ SELECT
   WHERE t1.base_program_id = 0
   ORDER BY t1.race_permission, t1.month, t1.half, t3.grade DESC
 ;
-    """)
+    """
+    )
 
     with contextlib.closing(cur):
         for i in cur:
@@ -92,19 +98,18 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "path", nargs="?",
-        default=os.getenv("LocalAppData", "") +
-        "Low/cygames/umamusume/master/master.mdb",
+        "path",
+        nargs="?",
+        default=os.getenv("LocalAppData", "")
+        + "Low/cygames/umamusume/master/master.mdb",
     )
     args = parser.parse_args()
     path: Text = args.path
 
-    data = [
-        i.to_dict() for i in _read_master_mdb(path)
-    ]
+    data = [i.to_dict() for i in _read_master_mdb(path)]
     with pathlib.Path(DATA_PATH).open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

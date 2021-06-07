@@ -1,8 +1,7 @@
 # -*- coding=UTF-8 -*-
 """Show help for everything in a module, not only visible items.  """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import sys
 import pydoc
@@ -10,7 +9,7 @@ import re
 import importlib
 
 
-def indent(lines, prefix='    '):
+def indent(lines, prefix="    "):
     for i in lines:
         yield prefix + i
 
@@ -31,9 +30,10 @@ def full_help(module):
             module.__all__ = orig_all
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import argparse
     import importlib
+
     parser = argparse.ArgumentParser()
     parser.add_argument("import_name", nargs="+")
     args = parser.parse_args()

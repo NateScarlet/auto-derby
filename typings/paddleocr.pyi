@@ -5,7 +5,6 @@ paddleocr
 
 """
 
-from . import
 from . import tools
 import typing
 
@@ -28,7 +27,6 @@ from numpy import ndarray
 
 """
 
-
 class PaddleOCR(tools.infer.predict_system.TextSystem):
     """
     PaddleOCR(**kwargs)
@@ -41,8 +39,13 @@ class PaddleOCR(tools.infer.predict_system.TextSystem):
             **kwargs: other params show in paddleocr --help
         """
         ...
-
-    def ocr(self, img: typing.Union[typing.Text, ndarray], det: bool = True, rec: bool = True, cls: bool = False) -> typing.List[typing.Tuple[typing.Text, float]]:
+    def ocr(
+        self,
+        img: typing.Union[typing.Text, ndarray],
+        det: bool = True,
+        rec: bool = True,
+        cls: bool = False,
+    ) -> typing.List[typing.Tuple[typing.Text, float]]:
         """
         ocr with paddleocr
         args：
@@ -51,11 +54,11 @@ class PaddleOCR(tools.infer.predict_system.TextSystem):
             rec: use text recognition or not, if false, only det will be exec. default is True
         """
         ...
-
     ...
 
-
-def draw_ocr(image, boxes, txts=None, scores=None, drop_score=0.5, font_path='./doc/simfang.ttf'):
+def draw_ocr(
+    image, boxes, txts=None, scores=None, drop_score=0.5, font_path="./doc/simfang.ttf"
+):
     """
     Visualize the results of OCR detection and recognition
     args:
@@ -69,7 +72,6 @@ def draw_ocr(image, boxes, txts=None, scores=None, drop_score=0.5, font_path='./
         the visualized img
     """
     ...
-
 
 __all__: ...
 """

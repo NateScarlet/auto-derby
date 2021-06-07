@@ -58,10 +58,12 @@ def match_image_until_disappear(
             break
 
 
-def wait_image(*tmpl: Union[Text, template.Specification]) -> Tuple[template.Specification, Tuple[int, int]]:
+def wait_image(
+    *tmpl: Union[Text, template.Specification]
+) -> Tuple[template.Specification, Tuple[int, int]]:
     while True:
         try:
-            return next(template.match(template.screenshot(max_age=0), *tmpl,))
+            return next(template.match(template.screenshot(max_age=0), *tmpl))
         except StopIteration:
             time.sleep(0.01)
 
@@ -75,7 +77,9 @@ def wait_image_disappear(*tmpl: Union[Text, template.Specification]) -> None:
             break
 
 
-def click_image(name: Union[Text, template.Specification], *, x: int = 0, y: int = 0) -> bool:
+def click_image(
+    name: Union[Text, template.Specification], *, x: int = 0, y: int = 0
+) -> bool:
     try:
         name, pos = next(template.match(template.screenshot(), name))
         click((pos[0] + x, pos[1] + y))
@@ -84,12 +88,14 @@ def click_image(name: Union[Text, template.Specification], *, x: int = 0, y: int
         return False
 
 
-def wait_click_image(name: Union[Text, template.Specification], *, x: int = 0, y: int = 0) -> None:
+def wait_click_image(
+    name: Union[Text, template.Specification], *, x: int = 0, y: int = 0
+) -> None:
     _, pos = wait_image(name)
-    click((pos[0]+x, pos[1]+y))
+    click((pos[0] + x, pos[1] + y))
 
 
-def move_at_window(h_wnd: int,  point: Tuple[int, int]):
+def move_at_window(h_wnd: int, point: Tuple[int, int]):
     x, y = win32gui.ClientToScreen(h_wnd, point)
     mouse.move(x, y)
 
@@ -112,10 +118,12 @@ def wheel(delta: int) -> None:
     template.invalidate_screeshot()
 
 
-def drag_at_window(h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1):
+def drag_at_window(
+    h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1
+):
     x, y = win32gui.ClientToScreen(h_wnd, point)
     with window.topmost(h_wnd), window.recover_foreground(), recover_cursor():
-        mouse.drag(x, y, x+dx, y+dy, duration=duration)
+        mouse.drag(x, y, x + dx, y + dy, duration=duration)
 
 
 def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.03):
@@ -132,7 +140,9 @@ def pressing_mouse(button: Text = "left"):
     mouse.release(button)
 
 
-def drag_through_at_window(h_wnd: int, *points: Tuple[int, int], duration: float = 0.05) -> Iterator[Tuple[int, int]]:
+def drag_through_at_window(
+    h_wnd: int, *points: Tuple[int, int], duration: float = 0.05
+) -> Iterator[Tuple[int, int]]:
     with recover_cursor(), window.recover_foreground():
         window.set_forground(h_wnd)
         move_at_window(h_wnd, points[0])
@@ -143,7 +153,10 @@ def drag_through_at_window(h_wnd: int, *points: Tuple[int, int], duration: float
                 mouse.move(x, y, duration=duration)
                 yield p
 
-def drag_through(*points: Tuple[int, int], duration: float = 0.02) -> Iterator[Tuple[int, int]]:
+
+def drag_through(
+    *points: Tuple[int, int], duration: float = 0.02
+) -> Iterator[Tuple[int, int]]:
     for i in drag_through_at_window(window.get_game(), *points, duration=duration):
         template.invalidate_screeshot()
         yield i

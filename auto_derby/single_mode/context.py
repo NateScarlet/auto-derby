@@ -20,12 +20,7 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     cv_img = np.asarray(img.convert("L"))
     sharpened_img = imagetools.sharpen(cv_img)
 
-    _, binary_img = cv2.threshold(
-        sharpened_img,
-        100,
-        255,
-        cv2.THRESH_BINARY_INV,
-    )
+    _, binary_img = cv2.threshold(sharpened_img, 100, 255, cv2.THRESH_BINARY_INV)
     imagetools.fill_area(binary_img, (0,), size_lt=3)
 
     if os.getenv("DEBUG") == __name__:
@@ -35,15 +30,11 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
         cv2.waitKey()
         cv2.destroyAllWindows()
 
-    text = ocr.text(
-        image_from_array(
-            binary_img,
-        ),
-    )
+    text = ocr.text(image_from_array(binary_img))
 
-    if text == 'ジュニア級デビュー前':
+    if text == "ジュニア級デビュー前":
         return (1, 0, 0)
-    if text == 'ファイナルズ開催中':
+    if text == "ファイナルズ開催中":
         return (4, 0, 0)
     year_end = text.index("級") + 1
     month_end = year_end + text[year_end:].index("月") + 1
@@ -51,16 +42,9 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     month_text = text[year_end:month_end]
     date_text = text[month_end:]
 
-    year = {
-        'ジュニア級': 1,
-        'クラシック級': 2,
-        'シニア級': 3,
-    }[year_text]
+    year = {"ジュニア級": 1, "クラシック級": 2, "シニア級": 3}[year_text]
     month = int(month_text[:-1])
-    date = {
-        '前半': 1,
-        '後半': 2,
-    }[date_text]
+    date = {"前半": 1, "後半": 2}[date_text]
     return (year, month, date)
 
 
@@ -69,78 +53,50 @@ def _recognize_vitality(img: Image) -> float:
 
     def _is_empty(v: np.ndarray) -> bool:
         assert v.shape == (3,), v.shape
-        return imagetools.compare_color(
-            (118, 117, 118),
-            (int(v[0]), int(v[1]), int(v[2])),
-        ) > 0.99
+        return (
+            imagetools.compare_color((118, 117, 118), (int(v[0]), int(v[1]), int(v[2])))
+            > 0.99
+        )
 
     return 1 - np.average(np.apply_along_axis(_is_empty, 1, cv_img[0, :]))
 
 
 def _recognize_mood(rgb_color: Tuple[int, int, int]) -> float:
-    if imagetools.compare_color((250, 68, 126),  rgb_color) > 0.9:
+    if imagetools.compare_color((250, 68, 126), rgb_color) > 0.9:
         return Context.MOOD_VERY_GOOD
-    if imagetools.compare_color((255, 124, 57),  rgb_color) > 0.9:
+    if imagetools.compare_color((255, 124, 57), rgb_color) > 0.9:
         return Context.MOOD_GOOD
-    if imagetools.compare_color((255, 162, 0),  rgb_color) > 0.9:
+    if imagetools.compare_color((255, 162, 0), rgb_color) > 0.9:
         return Context.MOOD_NORMAL
-    if imagetools.compare_color((16, 136, 247),  rgb_color) > 0.9:
+    if imagetools.compare_color((16, 136, 247), rgb_color) > 0.9:
         return Context.MOOD_BAD
-    if imagetools.compare_color((170, 81, 255),  rgb_color) > 0.9:
+    if imagetools.compare_color((170, 81, 255), rgb_color) > 0.9:
         return Context.MOOD_VERY_BAD
     raise ValueError("_recognize_mood: unknown mood color: %s" % (rgb_color,))
 
 
 def _recognize_fan_count(img: Image) -> int:
     cv_img = imagetools.cv_image(img)
-    mask_img = imagetools.color_key(
-        cv_img,
-        np.full_like(cv_img, (29, 69, 125))
-    )
+    mask_img = imagetools.color_key(cv_img, np.full_like(cv_img, (29, 69, 125)))
     text = ocr.text(image_from_array(mask_img))
     return int(text.rstrip("人").replace(",", ""))
 
 
 def _recognize_status(img: Image) -> Tuple[int, Text]:
-    cv_img = imagetools.cv_image(
-        imagetools.resize_by_heihgt(img.convert("L"), 32))
+    cv_img = imagetools.cv_image(imagetools.resize_by_heihgt(img.convert("L"), 32))
     cv_img = imagetools.level(
-        cv_img,
-        np.percentile(cv_img, 5),
-        np.percentile(cv_img, 95),
+        cv_img, np.percentile(cv_img, 5), np.percentile(cv_img, 95)
     )
-    cv_img = cv2.copyMakeBorder(
-        cv_img,
-        4,
-        4,
-        4,
-        4,
-        cv2.BORDER_CONSTANT,
-        value=(255,)
-    )
+    cv_img = cv2.copyMakeBorder(cv_img, 4, 4, 4, 4, cv2.BORDER_CONSTANT, value=(255,))
 
-    blurred_img = imagetools.mix(
-        cv2.blur(
-            cv_img,
-            (5, 5),
-        ),
-        cv_img,
-        0.8
-    )
+    blurred_img = imagetools.mix(cv2.blur(cv_img, (5, 5)), cv_img, 0.8)
 
     binary_img = cv2.adaptiveThreshold(
-        blurred_img,
-        255,
-        cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-        cv2.THRESH_BINARY,
-        5,
-        -1,
+        blurred_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, -1
     )
 
     contours, hierarchy = cv2.findContours(
-        binary_img,
-        cv2.RETR_TREE,
-        cv2.CHAIN_APPROX_NONE,
+        binary_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE
     )
     if not contours:
         raise ValueError("_recognize_status: image is empty")
@@ -161,22 +117,10 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
         if is_white and cv2.contourArea(contours[index]) < 40:
             continue
         color = (255,) if is_white else (0,)
-        cv2.drawContours(
-            text_img,
-            contours,
-            index,
-            thickness=cv2.FILLED,
-            color=color,
-        )
+        cv2.drawContours(text_img, contours, index, thickness=cv2.FILLED, color=color)
         if color == (0,):
             # use white border
-            cv2.drawContours(
-                text_img,
-                contours,
-                index,
-                thickness=1,
-                color=(255,),
-            )
+            cv2.drawContours(text_img, contours, index, thickness=1, color=(255,))
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
@@ -201,15 +145,15 @@ class Context:
     MOOD_GOOD: float = 1.1
     MOOD_VERY_GOOD: float = 1.2
 
-    STATUS_S = (8, 'S')
-    STATUS_A = (7, 'A')
-    STATUS_B = (6, 'B')
-    STATUS_C = (5, 'C')
-    STATUS_D = (4, 'D')
-    STATUS_E = (3, 'E')
-    STATUS_F = (2, 'F')
-    STATUS_G = (1, 'G')
-    STATUS_NONE: Tuple[int, Text] = (0, '')
+    STATUS_S = (8, "S")
+    STATUS_A = (7, "A")
+    STATUS_B = (6, "B")
+    STATUS_C = (5, "C")
+    STATUS_D = (4, "D")
+    STATUS_E = (3, "E")
+    STATUS_F = (2, "F")
+    STATUS_G = (1, "G")
+    STATUS_NONE: Tuple[int, Text] = (0, "")
 
     ALL_STATUSES = (
         STATUS_S,
@@ -272,8 +216,8 @@ class Context:
         date_bbox = (10, 27, 140, 43)
         vitality_bbox = (148, 106, 327, 108)
 
-        _, detail_button_pos = next(template.match(
-            screenshot, templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON),
+        _, detail_button_pos = next(
+            template.match(screenshot, templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON)
         )
         base_y = detail_button_pos[1] + 71
         speed_bbox = (45, base_y, 90, base_y + 19)
@@ -288,20 +232,13 @@ class Context:
 
         mood_color = screenshot.getpixel((395, 113))
         assert isinstance(mood_color, tuple), mood_color
-        self.mood = _recognize_mood(
-            (mood_color[0], mood_color[1], mood_color[2]),
-        )
+        self.mood = _recognize_mood((mood_color[0], mood_color[1], mood_color[2]))
 
-        self.speed = int(
-            ocr.text(PIL.ImageOps.invert(screenshot.crop(speed_bbox))))
-        self.stamina = int(
-            ocr.text(PIL.ImageOps.invert(screenshot.crop(stamina_bbox))))
-        self.power = int(
-            ocr.text(PIL.ImageOps.invert(screenshot.crop(power_bbox))))
-        self.guts = int(
-            ocr.text(PIL.ImageOps.invert(screenshot.crop(guts_bbox))))
-        self.wisdom = int(
-            ocr.text(PIL.ImageOps.invert(screenshot.crop(wisdom_bbox))))
+        self.speed = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(speed_bbox))))
+        self.stamina = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(stamina_bbox))))
+        self.power = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(power_bbox))))
+        self.guts = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(guts_bbox))))
+        self.wisdom = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(wisdom_bbox))))
 
     def update_by_class_detail(self, screenshot: Image) -> None:
         fan_count_bbox = (220, 523, 420, 540)
@@ -326,9 +263,7 @@ class Context:
 
         self.sprint = _recognize_status(screenshot.crop(sprint_bbox))
         self.mile = _recognize_status(screenshot.crop(mile_bbox))
-        self.intermediate = _recognize_status(
-            screenshot.crop(intermediate_bbox),
-        )
+        self.intermediate = _recognize_status(screenshot.crop(intermediate_bbox))
         self.long = _recognize_status(screenshot.crop(long_bbox))
 
         self.lead = _recognize_status(screenshot.crop(lead_bbox))

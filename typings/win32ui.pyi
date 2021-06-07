@@ -20,693 +20,464 @@ class error(Exception):
     ...
 
 def AddToRecentFileList(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def ComparePath(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateBitmap() -> PyCBitmap:
-    """Creates a bitmap object.  """
+    """Creates a bitmap object."""
     ...
-
 
 def CreateBitmapFromHandle(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateBrush(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateButton(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateColorDialog(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateControl(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateControlBar(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateCtrlView(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateDC(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateDCFromHandle(dc_handle: int) -> PyCDC:
-    """
-    """
+    """ """
     ...
-
 
 def CreateDebuggerThread(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateDialog(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateDialogBar(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateDialogIndirect(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateDocTemplate(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateEdit(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateEditView(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateFileDialog(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateFont(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateFontDialog(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateFormView(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateFrame(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateImageList(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateListCtrl(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateListView(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateMDIChild(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateMDIFrame(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateMenu(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreatePalette(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreatePen(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreatePopupMenu(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreatePrintDialog(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateProgressCtrl(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreatePropertyPage(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreatePropertyPageIndirect(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreatePropertySheet(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateRectRgn(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateRgn(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateRichEditCtrl(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateRichEditDocTemplate(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateRichEditView(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateSliderCtrl(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateSplitter(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateStatusBar(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateStatusBarCtrl(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateThread(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateToolBar(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateToolBarCtrl(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateToolTipCtrl(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateTreeCtrl(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateTreeView(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateView(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateWindowFromHandle(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def CreateWnd(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def DestroyDebuggerThread(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def DisplayTraceback(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def DoWaitCursor(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def Enable3dControls(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def EnableControlContainer(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def FindWindow(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def FindWindowEx(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def FullPath(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetActiveWindow(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetApp(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetAppName(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetAppRegistryKey(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetBytes(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetCommandLine(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetDeviceCaps(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetFileTitle(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetFocus(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetForegroundWindow(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetHalftoneBrush(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetInitialStateRequest(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetMainFrame(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetName(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetProfileFileName(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetProfileVal(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetRecentFileList(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetResource(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetThread(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def GetType(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def InitRichEdit(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def InstallCallbackCaller(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def IsDebug(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def IsObject(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def IsWin32s(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def LoadDialogResource(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def LoadLibrary(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def LoadMenu(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def LoadStdProfileSettings(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def LoadString(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def MessageBox(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def OutputDebug(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def OutputDebugString(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def PrintTraceback(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def PumpWaitingMessages(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def RegisterWndClass(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def RemoveRecentFile(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def SetAppHelpPath(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def SetAppName(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def SetCurrentInstanceHandle(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def SetCurrentResourceHandle(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def SetDialogBkColor(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def SetProfileFileName(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def SetRegistryKey(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def SetResource(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def SetStatusText(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def StartDebuggerPump(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def StopDebuggerPump(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def TranslateMessage(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def TranslateVirtualKey(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 def WinHelp(*args, **kwargs):
-    """
-    """
+    """ """
     ...
-
 
 AFX_IDW_PANE_FIRST: int = 59648
 
@@ -1156,4 +927,3 @@ types: ...
 """
 {'PyCBitmap': <class 'PyCBitmap'>, 'PyCBrush': <class 'PyCBrus...
 """
-

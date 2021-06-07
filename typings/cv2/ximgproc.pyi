@@ -10,15 +10,15 @@ import typing
 from . import segmentation
 from numpy import ndarray
 
-
 def AdaptiveManifoldFilter_create() -> retval:
     """
     .
     """
     ...
 
-
-def FastHoughTransform(src, dstMatDepth[, dst[, angleRange[, op[, makeSkew]]]]) -> dst:
+def FastHoughTransform(
+    src, dstMatDepth, dst=..., angleRange=..., op=..., makeSkew=...
+) -> dst:
     """
     .   * @brief   Calculates 2D Fast Hough transform of an image.
     .   * @param   dst         The destination image, result of transformation.
@@ -33,8 +33,7 @@ def FastHoughTransform(src, dstMatDepth[, dst[, angleRange[, op[, makeSkew]]]]) 
     """
     ...
 
-
-def GradientDericheX(op, alpha, omega[, dst]) -> dst:
+def GradientDericheX(op, alpha, omega, dst=...) -> dst:
     """
     .   * @brief   Applies X Deriche filter to an image.
     .   *
@@ -48,8 +47,7 @@ def GradientDericheX(op, alpha, omega[, dst]) -> dst:
     """
     ...
 
-
-def GradientDericheY(op, alpha, omega[, dst]) -> dst:
+def GradientDericheY(op, alpha, omega, dst=...) -> dst:
     """
     .   * @brief   Applies Y Deriche filter to an image.
     .   *
@@ -63,8 +61,9 @@ def GradientDericheY(op, alpha, omega[, dst]) -> dst:
     """
     ...
 
-
-def HoughPoint2Line(houghPoint, srcImgInfo[, angleRange[, makeSkew[, rules]]]) -> retval:
+def HoughPoint2Line(
+    houghPoint, srcImgInfo, angleRange=..., makeSkew=..., rules=...
+) -> retval:
     """
     .   * @brief   Calculates coordinates of line segment corresponded by point in Hough space.
     .   * @param   houghPoint  Point in Hough space.
@@ -82,15 +81,22 @@ def HoughPoint2Line(houghPoint, srcImgInfo[, angleRange[, makeSkew[, rules]]]) -
     """
     ...
 
-
-def PeiLinNormalization(I[, T]) -> T:
+def PeiLinNormalization(I, T=...) -> T:
     """
     .   @overload
     """
     ...
 
-
-def RidgeDetectionFilter_create([, ddepth[, dx[, dy[, ksize[, out_dtype[, scale[, delta[, borderType]]]]]]]]) -> retval:
+def RidgeDetectionFilter_create(
+    ddepth=...,
+    dx=...,
+    dy=...,
+    ksize=...,
+    out_dtype=...,
+    scale=...,
+    delta=...,
+    borderType=...,
+) -> retval:
     """
     .   @brief Create pointer to the Ridge detection filter.
     .       @param ddepth  Specifies output image depth. Defualt is CV_32FC1
@@ -105,8 +111,7 @@ def RidgeDetectionFilter_create([, ddepth[, dx[, dy[, ksize[, out_dtype[, scale[
     """
     ...
 
-
-def amFilter(joint, src, sigma_s, sigma_r[, dst[, adjust_outliers]]) -> dst:
+def amFilter(joint, src, sigma_s, sigma_r, dst=..., adjust_outliers=...) -> dst:
     """
     .   @brief Simple one-line Adaptive Manifold Filter call.
     .
@@ -130,8 +135,7 @@ def amFilter(joint, src, sigma_s, sigma_r[, dst[, adjust_outliers]]) -> dst:
     """
     ...
 
-
-def anisotropicDiffusion(src, alpha, K, niters[, dst]) -> dst:
+def anisotropicDiffusion(src, alpha, K, niters, dst=...) -> dst:
     """
     .   @brief Performs anisotropic diffusion on an image.
     .
@@ -155,8 +159,9 @@ def anisotropicDiffusion(src, alpha, K, niters[, dst]) -> dst:
     """
     ...
 
-
-def bilateralTextureFilter(src[, dst[, fr[, numIter[, sigmaAlpha[, sigmaAvg]]]]]) -> dst:
+def bilateralTextureFilter(
+    src, dst=..., fr=..., numIter=..., sigmaAlpha=..., sigmaAvg=...
+) -> dst:
     """
     .   @brief Applies the bilateral texture filter to an image. It performs structure-preserving texture filter.
     .   For more details about this filter see @cite Cho2014.
@@ -179,8 +184,7 @@ def bilateralTextureFilter(src[, dst[, fr[, numIter[, sigmaAlpha[, sigmaAvg]]]]]
     """
     ...
 
-
-def colorMatchTemplate(img, templ[, result]) -> result:
+def colorMatchTemplate(img, templ, result=...) -> result:
     """
     .   * @brief    Compares a color template against overlapped color image regions.
     .   *
@@ -190,8 +194,7 @@ def colorMatchTemplate(img, templ[, result]) -> result:
     """
     ...
 
-
-def computeBadPixelPercent(GT, src, ROI[, thresh]) -> retval:
+def computeBadPixelPercent(GT, src, ROI, thresh=...) -> retval:
     """
     .   @brief Function for computing the percent of "bad" pixels in the disparity map
     .   (pixels where error is higher than a specified threshold)
@@ -208,7 +211,6 @@ def computeBadPixelPercent(GT, src, ROI[, thresh]) -> retval:
     """
     ...
 
-
 def computeMSE(GT, src, ROI) -> retval:
     """
     .   @brief Function for computing mean square error for disparity maps
@@ -223,8 +225,7 @@ def computeMSE(GT, src, ROI) -> retval:
     """
     ...
 
-
-def contourSampling(src, nbElt[, out]) -> out:
+def contourSampling(src, nbElt, out=...) -> out:
     """
     .   * @brief   Contour sampling .
     .       *
@@ -235,8 +236,7 @@ def contourSampling(src, nbElt[, out]) -> out:
     """
     ...
 
-
-def covarianceEstimation(src, windowRows, windowCols[, dst]) -> dst:
+def covarianceEstimation(src, windowRows, windowCols, dst=...) -> dst:
     """
     .   @brief Computes the estimated covariance matrix of an image using the sliding
     .   window forumlation.
@@ -254,8 +254,7 @@ def covarianceEstimation(src, windowRows, windowCols[, dst]) -> dst:
     """
     ...
 
-
-def createAMFilter(sigma_s, sigma_r[, adjust_outliers]) -> retval:
+def createAMFilter(sigma_s, sigma_r, adjust_outliers=...) -> retval:
     """
     .   @brief Factory method, create instance of AdaptiveManifoldFilter and produce some initialization routines.
     .
@@ -275,8 +274,7 @@ def createAMFilter(sigma_s, sigma_r[, adjust_outliers]) -> retval:
     """
     ...
 
-
-def createContourFitting([, ctr[, fd]]) -> retval:
+def createContourFitting(ctr=..., fd=...) -> retval:
     """
     .   * @brief create ContourFitting algorithm object
     .       *
@@ -285,8 +283,7 @@ def createContourFitting([, ctr[, fd]]) -> retval:
     """
     ...
 
-
-def createDTFilter(guide, sigmaSpatial, sigmaColor[, mode[, numIters]]) -> retval:
+def createDTFilter(guide, sigmaSpatial, sigmaColor, mode=..., numIters=...) -> retval:
     """
     .   @brief Factory method, create instance of DTFilter and produce initialization routines.
     .
@@ -309,7 +306,6 @@ def createDTFilter(guide, sigmaSpatial, sigmaColor[, mode[, numIters]]) -> retva
     """
     ...
 
-
 def createDisparityWLSFilter(matcher_left) -> retval:
     """
     .   @brief Convenience factory method that creates an instance of DisparityWLSFilter and sets up all the relevant
@@ -318,7 +314,6 @@ def createDisparityWLSFilter(matcher_left) -> retval:
     .   @param matcher_left stereo matcher instance that will be used with the filter
     """
     ...
-
 
 def createDisparityWLSFilterGeneric(use_confidence) -> retval:
     """
@@ -331,7 +326,6 @@ def createDisparityWLSFilterGeneric(use_confidence) -> retval:
     """
     ...
 
-
 def createEdgeAwareInterpolator() -> retval:
     """
     .   @brief Factory method that creates an instance of the
@@ -339,8 +333,20 @@ def createEdgeAwareInterpolator() -> retval:
     """
     ...
 
-
-def createEdgeBoxes([, alpha[, beta[, eta[, minScore[, maxBoxes[, edgeMinMag[, edgeMergeThr[, clusterMinMag[, maxAspectRatio[, minBoxArea[, gamma[, kappa]]]]]]]]]]]]) -> retval:
+def createEdgeBoxes(
+    alpha=...,
+    beta=...,
+    eta=...,
+    minScore=...,
+    maxBoxes=...,
+    edgeMinMag=...,
+    edgeMergeThr=...,
+    clusterMinMag=...,
+    maxAspectRatio=...,
+    minBoxArea=...,
+    gamma=...,
+    kappa=...,
+) -> retval:
     """
     .   @brief Creates a Edgeboxes
     .
@@ -359,15 +365,21 @@ def createEdgeBoxes([, alpha[, beta[, eta[, minScore[, maxBoxes[, edgeMinMag[, e
     """
     ...
 
-
 def createEdgeDrawing() -> retval:
     """
     .   @brief Creates a smart pointer to a EdgeDrawing object and initializes it
     """
     ...
 
-
-def createFastBilateralSolverFilter(guide, sigma_spatial, sigma_luma, sigma_chroma[, lambda[, num_iter[, max_tol]]]) -> retval:
+def createFastBilateralSolverFilter(
+    guide,
+    sigma_spatial,
+    sigma_luma,
+    sigma_chroma,
+    lambda_=...,
+    num_iter=...,
+    max_tol=...,
+) -> retval:
     """
     .   @brief Factory method, create instance of FastBilateralSolverFilter and execute the initialization routines.
     .
@@ -389,8 +401,9 @@ def createFastBilateralSolverFilter(guide, sigma_spatial, sigma_luma, sigma_chro
     """
     ...
 
-
-def createFastGlobalSmootherFilter(guide, lambda, sigma_color[, lambda_attenuation[, num_iter]]) -> retval:
+def createFastGlobalSmootherFilter(
+    guide, lambda_, sigma_color, lambda_attenuation=..., num_iter=...
+) -> retval:
     """
     .   @brief Factory method, create instance of FastGlobalSmootherFilter and execute the initialization routines.
     .
@@ -414,8 +427,14 @@ def createFastGlobalSmootherFilter(guide, lambda, sigma_color[, lambda_attenuati
     """
     ...
 
-
-def createFastLineDetector([, _length_threshold[, _distance_threshold[, _canny_th1[, _canny_th2[, _canny_aperture_size[, _do_merge]]]]]]) -> retval:
+def createFastLineDetector(
+    _length_threshold=...,
+    _distance_threshold=...,
+    _canny_th1=...,
+    _canny_th2=...,
+    _canny_aperture_size=...,
+    _do_merge=...,
+) -> retval:
     """
     .   @brief Creates a smart pointer to a FastLineDetector object and initializes it
     .
@@ -435,7 +454,6 @@ def createFastLineDetector([, _length_threshold[, _distance_threshold[, _canny_t
     """
     ...
 
-
 def createGuidedFilter(guide, radius, eps) -> retval:
     """
     .   @brief Factory method, create instance of GuidedFilter and produce initialization routines.
@@ -452,8 +470,7 @@ def createGuidedFilter(guide, radius, eps) -> retval:
     """
     ...
 
-
-def createQuaternionImage(img[, qimg]) -> qimg:
+def createQuaternionImage(img, qimg=...) -> qimg:
     """
     .   * @brief   creates a quaternion image.
     .   *
@@ -462,13 +479,11 @@ def createQuaternionImage(img[, qimg]) -> qimg:
     """
     ...
 
-
 def createRFFeatureGetter() -> retval:
     """
     .
     """
     ...
-
 
 def createRICInterpolator() -> retval:
     """
@@ -476,7 +491,6 @@ def createRICInterpolator() -> retval:
     .   RICInterpolator.
     """
     ...
-
 
 def createRightMatcher(matcher_left) -> retval:
     """
@@ -487,15 +501,13 @@ def createRightMatcher(matcher_left) -> retval:
     """
     ...
 
-
-def createStructuredEdgeDetection(model[, howToGetFeatures]) -> retval:
+def createStructuredEdgeDetection(model, howToGetFeatures=...) -> retval:
     """
     .
     """
     ...
 
-
-def createSuperpixelLSC(image[, region_size[, ratio]]) -> retval:
+def createSuperpixelLSC(image, region_size=..., ratio=...) -> retval:
     """
     .   @brief Class implementing the LSC (Linear Spectral Clustering) superpixels
     .
@@ -513,8 +525,16 @@ def createSuperpixelLSC(image[, region_size[, ratio]]) -> retval:
     """
     ...
 
-
-def createSuperpixelSEEDS(image_width, image_height, image_channels, num_superpixels, num_levels[, prior[, histogram_bins[, double_step]]]) -> retval:
+def createSuperpixelSEEDS(
+    image_width,
+    image_height,
+    image_channels,
+    num_superpixels,
+    num_levels,
+    prior=...,
+    histogram_bins=...,
+    double_step=...,
+) -> retval:
     """
     .   @brief Initializes a SuperpixelSEEDS object.
     .
@@ -547,8 +567,7 @@ def createSuperpixelSEEDS(image_width, image_height, image_channels, num_superpi
     """
     ...
 
-
-def createSuperpixelSLIC(image[, algorithm[, region_size[, ruler]]]) -> retval:
+def createSuperpixelSLIC(image, algorithm=..., region_size=..., ruler=...) -> retval:
     """
     .   @brief Initialize a SuperpixelSLIC object
     .
@@ -569,8 +588,9 @@ def createSuperpixelSLIC(image[, algorithm[, region_size[, ruler]]]) -> retval:
     """
     ...
 
-
-def dtFilter(guide, src, sigmaSpatial, sigmaColor[, dst[, mode[, numIters]]]) -> dst:
+def dtFilter(
+    guide, src, sigmaSpatial, sigmaColor, dst=..., mode=..., numIters=...
+) -> dst:
     """
     .   @brief Simple one-line Domain Transform filter call. If you have multiple images to filter with the same
     .   guided image then use DTFilter interface to avoid extra computations on initialization stage.
@@ -590,8 +610,7 @@ def dtFilter(guide, src, sigmaSpatial, sigmaColor[, dst[, mode[, numIters]]]) ->
     """
     ...
 
-
-def edgePreservingFilter(src, d, threshold[, dst]) -> dst:
+def edgePreservingFilter(src, d, threshold, dst=...) -> dst:
     """
     .   * @brief Smoothes an image using the Edge-Preserving filter.
     .       *
@@ -606,8 +625,18 @@ def edgePreservingFilter(src, d, threshold[, dst]) -> dst:
     """
     ...
 
-
-def fastBilateralSolverFilter(guide, src, confidence[, dst[, sigma_spatial[, sigma_luma[, sigma_chroma[, lambda[, num_iter[, max_tol]]]]]]]) -> dst:
+def fastBilateralSolverFilter(
+    guide,
+    src,
+    confidence,
+    dst=...,
+    sigma_spatial=...,
+    sigma_luma=...,
+    sigma_chroma=...,
+    lambda_=...,
+    num_iter=...,
+    max_tol=...,
+) -> dst:
     """
     .   @brief Simple one-line Fast Bilateral Solver filter call. If you have multiple images to filter with the same
     .   guide then use FastBilateralSolverFilter interface to avoid extra computations.
@@ -638,8 +667,9 @@ def fastBilateralSolverFilter(guide, src, confidence[, dst[, sigma_spatial[, sig
     """
     ...
 
-
-def fastGlobalSmootherFilter(guide, src, lambda, sigma_color[, dst[, lambda_attenuation[, num_iter]]]) -> dst:
+def fastGlobalSmootherFilter(
+    guide, src, lambda_, sigma_color, dst=..., lambda_attenuation=..., num_iter=...
+) -> dst:
     """
     .   @brief Simple one-line Fast Global Smoother filter call. If you have multiple images to filter with the same
     .   guide then use FastGlobalSmootherFilter interface to avoid extra computations.
@@ -661,8 +691,7 @@ def fastGlobalSmootherFilter(guide, src, lambda, sigma_color[, dst[, lambda_atte
     """
     ...
 
-
-def fourierDescriptor(src[, dst[, nbElt[, nbFD]]]) -> dst:
+def fourierDescriptor(src, dst=..., nbElt=..., nbFD=...) -> dst:
     """
     .   * @brief   Fourier descriptors for planed closed curves
     .       *
@@ -676,8 +705,7 @@ def fourierDescriptor(src[, dst[, nbElt[, nbFD]]]) -> dst:
     """
     ...
 
-
-def getDisparityVis(src[, dst[, scale]]) -> dst:
+def getDisparityVis(src, dst=..., scale=...) -> dst:
     """
     .   @brief Function for creating a disparity map visualization (clamped CV_8U image)
     .
@@ -689,8 +717,7 @@ def getDisparityVis(src[, dst[, scale]]) -> dst:
     """
     ...
 
-
-def guidedFilter(guide, src, radius, eps[, dst[, dDepth]]) -> dst:
+def guidedFilter(guide, src, radius, eps, dst=..., dDepth=...) -> dst:
     """
     .   @brief Simple one-line Guided Filter call.
     .
@@ -715,8 +742,9 @@ def guidedFilter(guide, src, radius, eps[, dst[, dDepth]]) -> dst:
     """
     ...
 
-
-def jointBilateralFilter(joint, src, d, sigmaColor, sigmaSpace[, dst[, borderType]]) -> dst:
+def jointBilateralFilter(
+    joint, src, d, sigmaColor, sigmaSpace, dst=..., borderType=...
+) -> dst:
     """
     .   @brief Applies the joint bilateral filter to an image.
     .
@@ -747,8 +775,7 @@ def jointBilateralFilter(joint, src, d, sigmaColor, sigmaSpace[, dst[, borderTyp
     """
     ...
 
-
-def l0Smooth(src[, dst[, lambda[, kappa]]]) -> dst:
+def l0Smooth(src, dst=..., lambda_=..., kappa=...) -> dst:
     """
     .   @brief Global image smoothing via L0 gradient minimization.
     .
@@ -764,8 +791,9 @@ def l0Smooth(src[, dst[, lambda[, kappa]]]) -> dst:
     """
     ...
 
-
-def niBlackThreshold(_src, maxValue, type, blockSize, k[, _dst[, binarizationMethod[, r]]]) -> _dst:
+def niBlackThreshold(
+    _src, maxValue, type, blockSize, k, _dst=..., binarizationMethod=..., r=...
+) -> _dst:
     """
     .   @brief Performs thresholding on input images using Niblack's technique or some of the
     .   popular variations it inspired.
@@ -801,8 +829,7 @@ def niBlackThreshold(_src, maxValue, type, blockSize, k[, _dst[, binarizationMet
     """
     ...
 
-
-def qconj(qimg[, qcimg]) -> qcimg:
+def qconj(qimg, qcimg=...) -> qcimg:
     """
     .   * @brief   calculates conjugate of a quaternion image.
     .   *
@@ -811,8 +838,7 @@ def qconj(qimg[, qcimg]) -> qcimg:
     """
     ...
 
-
-def qdft(img, flags, sideLeft[, qimg]) -> qimg:
+def qdft(img, flags, sideLeft, qimg=...) -> qimg:
     """
     .   * @brief    Performs a forward or inverse Discrete quaternion Fourier transform of a 2D quaternion array.
     .   *
@@ -823,8 +849,7 @@ def qdft(img, flags, sideLeft[, qimg]) -> qimg:
     """
     ...
 
-
-def qmultiply(src1, src2[, dst]) -> dst:
+def qmultiply(src1, src2, dst=...) -> dst:
     """
     .   * @brief   Calculates the per-element quaternion product of two arrays
     .   *
@@ -834,8 +859,7 @@ def qmultiply(src1, src2[, dst]) -> dst:
     """
     ...
 
-
-def qunitary(qimg[, qnimg]) -> qnimg:
+def qunitary(qimg, qnimg=...) -> qnimg:
     """
     .   * @brief   divides each element by its modulus.
     .   *
@@ -844,8 +868,7 @@ def qunitary(qimg[, qnimg]) -> qnimg:
     """
     ...
 
-
-def readGT(src_path[, dst]) -> retval, dst:
+def readGT(src_path, dst=...) -> Tuple[retval, dst]:
     """
     .   @brief Function for reading ground truth disparity maps. Supports basic Middlebury
     .   and MPI-Sintel formats. Note that the resulting disparity map is scaled by 16.
@@ -858,8 +881,9 @@ def readGT(src_path[, dst]) -> retval, dst:
     """
     ...
 
-
-def rollingGuidanceFilter(src[, dst[, d[, sigmaColor[, sigmaSpace[, numOfIter[, borderType]]]]]]) -> dst:
+def rollingGuidanceFilter(
+    src, dst=..., d=..., sigmaColor=..., sigmaSpace=..., numOfIter=..., borderType=...
+) -> dst:
     """
     .   @brief Applies the rolling guidance filter to an image.
     .
@@ -891,7 +915,6 @@ def rollingGuidanceFilter(src[, dst[, d[, sigmaColor[, sigmaSpace[, numOfIter[, 
     """
     ...
 
-
 def thinning(src: ndarray, dst: ndarray = ..., thinningType: int = ...) -> ndarray:
     """
     .   @brief Applies a binary blob thinning operation, to achieve a skeletization of the input image.
@@ -904,8 +927,7 @@ def thinning(src: ndarray, dst: ndarray = ..., thinningType: int = ...) -> ndarr
     """
     ...
 
-
-def transformFD(src, t[, dst[, fdContour]]) -> dst:
+def transformFD(src, t, dst=..., fdContour=...) -> dst:
     """
     .   * @brief   transform a contour
     .       *
@@ -917,8 +939,9 @@ def transformFD(src, t[, dst[, fdContour]]) -> dst:
     """
     ...
 
-
-def weightedMedianFilter(joint, src, r[, dst[, sigma[, weightType[, mask]]]]) -> dst:
+def weightedMedianFilter(
+    joint, src, r, dst=..., sigma=..., weightType=..., mask=...
+) -> dst:
     """
     .   * @brief   Applies weighted median filter to an image.
     .   *
@@ -936,7 +959,6 @@ def weightedMedianFilter(joint, src, r[, dst[, sigma[, weightType[, mask]]]]) ->
     .   * @sa medianBlur, jointBilateralFilter
     """
     ...
-
 
 AM_FILTER: int = 4
 

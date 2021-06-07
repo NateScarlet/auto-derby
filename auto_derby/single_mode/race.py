@@ -18,10 +18,7 @@ from .context import Context
 
 LOGGER = logging.getLogger(__name__)
 
-DATA_PATH = os.getenv(
-    "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH",
-    "single_mode_races.json",
-)
+DATA_PATH = os.getenv("AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH", "single_mode_races.json")
 
 
 class Race:
@@ -58,8 +55,8 @@ class Race:
     TURN_NONE = 4
 
     def __init__(self):
-        self.name: Text = ''
-        self.stadium: Text = ''
+        self.name: Text = ""
+        self.stadium: Text = ""
         self.permission: int = 0
         self.month: int = 0
         self.half: int = 0
@@ -89,7 +86,7 @@ class Race:
             "turn": self.turn,
             "targetStatuses": self.target_statuses,
             "minFanCount": self.min_fan_count,
-            "fanCounts": self.fan_counts
+            "fanCounts": self.fan_counts,
         }
 
     @classmethod
@@ -126,10 +123,9 @@ class Race:
         raise ValueError("Race.year: unknown permission: %s" % self.permission)
 
     def __str__(self):
-        ground_text = {
-            Race.GROUND_DART: 'dart',
-            Race.GROUND_TURF: 'turf',
-        }.get(self.ground, self.ground)
+        ground_text = {Race.GROUND_DART: "dart", Race.GROUND_TURF: "turf"}.get(
+            self.ground, self.ground
+        )
         return f"Race<{self.stadium} {ground_text} {self.distance}m {self.name}>"
 
     def distance_status(self, ctx: Context) -> Tuple[int, Text]:
@@ -171,23 +167,14 @@ def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
 
 def _recognize_fan_count(img: PIL.Image.Image) -> int:
     cv_img = imagetools.cv_image(img.convert("L"))
-    cv_img = imagetools.mix(
-        cv_img,
-        imagetools.sharpen(cv_img),
-        0.5,
-    )
+    cv_img = imagetools.mix(cv_img, imagetools.sharpen(cv_img), 0.5)
     text = ocr.text(imagetools.pil_image(255 - cv_img))
     return int(text.rstrip("人").replace(",", ""))
 
 
 def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
     cv_img = imagetools.cv_image(img.convert("L"))
-    _, binary_img = cv2.threshold(
-        255 - cv_img,
-        150,
-        255,
-        cv2.THRESH_BINARY,
-    )
+    _, binary_img = cv2.threshold(255 - cv_img, 150, 255, cv2.THRESH_BINARY)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("binary_img", binary_img)
@@ -207,40 +194,40 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
     distance, text = int(text[:4]), text[10:]
 
     turn, track = {
-        '左·内': (Race.TURN_LEFT, Race.TRACK_IN),
-        '右·内': (Race.TURN_RIGHT, Race.TRACK_IN),
-        '左': (Race.TURN_LEFT, Race.TRACK_MIDDLE),
-        '右': (Race.TURN_RIGHT, Race.TRACK_MIDDLE),
-        '左·外': (Race.TURN_LEFT, Race.TRACK_OUT),
-        '右·外': (Race.TURN_RIGHT, Race.TRACK_OUT),
+        "左·内": (Race.TURN_LEFT, Race.TRACK_IN),
+        "右·内": (Race.TURN_RIGHT, Race.TRACK_IN),
+        "左": (Race.TURN_LEFT, Race.TRACK_MIDDLE),
+        "右": (Race.TURN_RIGHT, Race.TRACK_MIDDLE),
+        "左·外": (Race.TURN_LEFT, Race.TRACK_OUT),
+        "右·外": (Race.TURN_RIGHT, Race.TRACK_OUT),
     }[text]
 
     return stadium, ground, distance, turn, track
 
 
 def _recognize_grade(rgb_color: Tuple[int, ...]) -> Tuple[int, ...]:
-    if imagetools.compare_color((54, 133, 228),  rgb_color) > 0.9:
-        return Race.GRADE_G1,
-    if imagetools.compare_color((244, 85, 129),  rgb_color) > 0.9:
-        return Race.GRADE_G2,
-    if imagetools.compare_color((57, 187, 85),  rgb_color) > 0.9:
-        return Race.GRADE_G3,
-    if imagetools.compare_color((252, 169, 5),  rgb_color) > 0.9:
+    if imagetools.compare_color((54, 133, 228), rgb_color) > 0.9:
+        return (Race.GRADE_G1,)
+    if imagetools.compare_color((244, 85, 129), rgb_color) > 0.9:
+        return (Race.GRADE_G2,)
+    if imagetools.compare_color((57, 187, 85), rgb_color) > 0.9:
+        return (Race.GRADE_G3,)
+    if imagetools.compare_color((252, 169, 5), rgb_color) > 0.9:
         return Race.GRADE_OP, Race.GRADE_PRE_OP
-    if imagetools.compare_color((148, 203, 8),  rgb_color) > 0.9:
+    if imagetools.compare_color((148, 203, 8), rgb_color) > 0.9:
         return Race.GRADE_DEBUT, Race.GRADE_NOT_WINNING
-    if imagetools.compare_color((247, 209, 41),  rgb_color) > 0.9:
+    if imagetools.compare_color((247, 209, 41), rgb_color) > 0.9:
         # EX(URA)
-        return Race.GRADE_G1,
-    raise ValueError(
-        "_recognize_grade: unknown grade color: %s" % (rgb_color,))
+        return (Race.GRADE_G1,)
+    raise ValueError("_recognize_grade: unknown grade color: %s" % (rgb_color,))
 
 
 def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race:
     grade_color_pos = (10, 75)
     spec_bbox = (27, 260, 302, 279)
-    _, no1_fan_count_pos = next(template.match(
-        screenshot, templates.SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT))
+    _, no1_fan_count_pos = next(
+        template.match(screenshot, templates.SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT)
+    )
     no1_fan_count_bbox = (
         150,
         no1_fan_count_pos[1] + 1,
@@ -249,20 +236,12 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
     )
 
     grades = _recognize_grade(
-        tuple(cast.list_(screenshot.getpixel(grade_color_pos), int)))
-    stadium, ground, distance, turn, track = _recognize_spec(
-        screenshot.crop(spec_bbox)
+        tuple(cast.list_(screenshot.getpixel(grade_color_pos), int))
     )
+    stadium, ground, distance, turn, track = _recognize_spec(screenshot.crop(spec_bbox))
     no1_fan_count = _recognize_fan_count(screenshot.crop(no1_fan_count_bbox))
 
-    full_spec = (
-        stadium,
-        ground,
-        distance,
-        turn,
-        track,
-        no1_fan_count,
-    )
+    full_spec = (stadium, ground, distance, turn, track, no1_fan_count)
     for i in find_by_date(ctx.date):
         if i.grade not in grades:
             continue
@@ -277,7 +256,4 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
             LOGGER.info("image match: %s", i)
             return i
 
-    raise ValueError(
-        "find_by_race_details_image: can race match spec: %s",
-        full_spec,
-    )
+    raise ValueError("find_by_race_details_image: can race match spec: %s", full_spec)

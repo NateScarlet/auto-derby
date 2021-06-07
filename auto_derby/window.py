@@ -28,6 +28,7 @@ def message_box(
         win32gui.MessageBox(h_wnd, msg, caption, flags)
         if callable(on_close):
             on_close()
+
     t = threading.Thread(target=_run)
     t.start()
     h_wnd_set: Set[int] = set()
@@ -36,6 +37,7 @@ def message_box(
         if win32gui.GetClassName(h_wnd) != "#32770":  # message box
             return
         h_wnd_set.add(h_wnd)
+
     assert t.ident is not None
     while not h_wnd_set:
         time.sleep(0.01)
@@ -47,6 +49,7 @@ def message_box(
             if win32gui.IsWindow(i):
                 win32gui.PostMessage(i, win32con.WM_CLOSE, 0, 0)
         t.join()
+
     return _close
 
 
@@ -59,7 +62,7 @@ def set_game_size() -> None:
     set_client_size(get_game(), 466, 828)
 
 
-_INIT_ONCE: Dict[Literal['value'], bool] = {'value': False}
+_INIT_ONCE: Dict[Literal["value"], bool] = {"value": False}
 
 
 def init():
@@ -83,13 +86,7 @@ def set_client_size(h_wnd: int, width: int, height: int):
     borderWidth = right - left - w
     borderHeight = bottom - top - h
     win32gui.SetWindowPos(
-        h_wnd,
-        0,
-        left,
-        top,
-        width + borderWidth,
-        height + borderHeight,
-        0,
+        h_wnd, 0, left, top, width + borderWidth, height + borderHeight, 0
     )
     set_client_size(h_wnd, width, height)  # repeat until exact match
     return
@@ -99,12 +96,14 @@ def set_client_size(h_wnd: int, width: int, height: int):
 def topmost(h_wnd: int):
     init()
     left, top, right, bottom = win32gui.GetWindowRect(h_wnd)
-    win32gui.SetWindowPos(h_wnd, win32con.HWND_TOPMOST,
-                          left, top, right - left, bottom - top, 0)
+    win32gui.SetWindowPos(
+        h_wnd, win32con.HWND_TOPMOST, left, top, right - left, bottom - top, 0
+    )
     yield
     left, top, right, bottom = win32gui.GetWindowRect(h_wnd)
-    win32gui.SetWindowPos(h_wnd, win32con.HWND_NOTOPMOST,
-                          left, top, right - left, bottom - top, 0)
+    win32gui.SetWindowPos(
+        h_wnd, win32con.HWND_NOTOPMOST, left, top, right - left, bottom - top, 0
+    )
 
 
 def set_forground(h_wnd: int) -> None:
@@ -124,5 +123,6 @@ def recover_foreground():
 
 def info(msg: Text) -> Callable[[], None]:
     return message_box(msg, "auto-derby", h_wnd=get_game() if _IS_ADMIN else 0)
+
 
 # TODO: move client inside visible area
