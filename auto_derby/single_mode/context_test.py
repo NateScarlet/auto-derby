@@ -161,6 +161,13 @@ def test_update_by_class_detail_4():
     assert ctx.fan_count == 148805, ctx.fan_count
 
 
+def test_update_by_class_detail_5():
+    img = PIL.Image.open(_TEST_DATA_PATH / "class_detail_5.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_class_detail(img)
+    assert ctx.fan_count == 127591, ctx.fan_count
+
+
 def test_update_by_character_detail():
     img = PIL.Image.open(_TEST_DATA_PATH / "character_detail.png").convert("RGB")
     ctx = Context()

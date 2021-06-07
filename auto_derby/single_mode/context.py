@@ -76,9 +76,9 @@ def _recognize_mood(rgb_color: Tuple[int, int, int]) -> float:
 
 
 def _recognize_fan_count(img: Image) -> int:
-    cv_img = imagetools.cv_image(img)
-    mask_img = imagetools.color_key(cv_img, np.full_like(cv_img, (29, 69, 125)))
-    text = ocr.text(image_from_array(mask_img))
+    cv_img = imagetools.cv_image(img.convert("L"))
+    cv_img = imagetools.mix(cv_img, imagetools.sharpen(cv_img), 0.5)
+    text = ocr.text(imagetools.pil_image(255 - cv_img))
     return int(text.rstrip("人").replace(",", ""))
 
 
