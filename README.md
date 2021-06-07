@@ -30,6 +30,8 @@
 
 ## 使用方法
 
+[![Python application](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml/badge.svg)](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml)
+
 需求 DMM 版 和 python3.8
 
 安装依赖
