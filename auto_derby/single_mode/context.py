@@ -83,16 +83,15 @@ def _recognize_fan_count(img: Image) -> int:
 
 
 def _recognize_status(img: Image) -> Tuple[int, Text]:
-    cv_img = imagetools.cv_image(imagetools.resize_by_heihgt(img.convert("L"), 32))
+    cv_img = imagetools.cv_image(imagetools.resize_by_heihgt(img.convert("L"), 64))
     cv_img = imagetools.level(
         cv_img, np.percentile(cv_img, 5), np.percentile(cv_img, 95)
     )
     cv_img = cv2.copyMakeBorder(cv_img, 4, 4, 4, 4, cv2.BORDER_CONSTANT, value=(255,))
 
-    blurred_img = imagetools.mix(cv2.blur(cv_img, (5, 5)), cv_img, 0.8)
-
+    blurred_img = cv2.medianBlur(cv_img, 7)
     binary_img = cv2.adaptiveThreshold(
-        blurred_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, -1
+        blurred_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 15, -1
     )
 
     contours, hierarchy = cv2.findContours(
@@ -114,7 +113,7 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
         if level < 2:
             continue
         is_white = level % 2 == 0
-        if is_white and cv2.contourArea(contours[index]) < 40:
+        if is_white and cv2.contourArea(contours[index]) < 160:
             continue
         color = (255,) if is_white else (0,)
         cv2.drawContours(text_img, contours, index, thickness=cv2.FILLED, color=color)

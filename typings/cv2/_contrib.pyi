@@ -23507,45 +23507,6 @@ def CamShift(probImage, window, criteria) -> Tuple[retval, window]:
     """
     ...
 
-def Canny(
-    image, threshold1, threshold2, edges=..., apertureSize=..., L2gradient=...
-) -> edges:
-    """
-    .   @brief Finds edges in an image using the Canny algorithm @cite Canny86 .
-    .
-    .   The function finds edges in the input image and marks them in the output map edges using the
-    .   Canny algorithm. The smallest value between threshold1 and threshold2 is used for edge linking. The
-    .   largest value is used to find initial segments of strong edges. See
-    .   <http://en.wikipedia.org/wiki/Canny_edge_detector>
-    .
-    .   @param image 8-bit input image.
-    .   @param edges output edge map; single channels 8-bit image, which has the same size as image .
-    .   @param threshold1 first threshold for the hysteresis procedure.
-    .   @param threshold2 second threshold for the hysteresis procedure.
-    .   @param apertureSize aperture size for the Sobel operator.
-    .   @param L2gradient a flag, indicating whether a more accurate \f$L_2\f$ norm
-    .   \f$=\sqrt{(dI/dx)^2 + (dI/dy)^2}\f$ should be used to calculate the image gradient magnitude (
-    .   L2gradient=true ), or whether the default \f$L_1\f$ norm \f$=|dI/dx|+|dI/dy|\f$ is enough (
-    .   L2gradient=false ).
-
-
-
-    Canny(dx, dy, threshold1, threshold2, edges=..., L2gradient=...) -> edges
-    .   \overload
-    .
-    .   Finds edges in an image using the Canny algorithm with custom image gradient.
-    .
-    .   @param dx 16-bit x derivative of input image (CV_16SC1 or CV_16SC3).
-    .   @param dy 16-bit y derivative of input image (same type as dx).
-    .   @param edges output edge map; single channels 8-bit image, which has the same size as image .
-    .   @param threshold1 first threshold for the hysteresis procedure.
-    .   @param threshold2 second threshold for the hysteresis procedure.
-    .   @param L2gradient a flag, indicating whether a more accurate \f$L_2\f$ norm
-    .   \f$=\sqrt{(dI/dx)^2 + (dI/dy)^2}\f$ should be used to calculate the image gradient magnitude (
-    .   L2gradient=true ), or whether the default \f$L_1\f$ norm \f$=|dI/dx|+|dI/dy|\f$ is enough (
-    .   L2gradient=false ).
-    """
-    ...
 
 def CascadeClassifier_convert(oldcascade, newcascade) -> retval:
     """
@@ -30342,24 +30303,6 @@ def meanStdDev(src, mean=..., stddev=..., mask=...) -> Tuple[mean, stddev]:
     .   @param stddev output parameter: calculated standard deviation.
     .   @param mask optional operation mask.
     .   @sa  countNonZero, mean, norm, minMaxLoc, calcCovarMatrix
-    """
-    ...
-
-def medianBlur(src, ksize, dst=...) -> dst:
-    """
-    .   @brief Blurs an image using the median filter.
-    .
-    .   The function smoothes an image using the median filter with the \f$\texttt{ksize} \times
-    .   \texttt{ksize}\f$ aperture. Each channel of a multi-channel image is processed independently.
-    .   In-place operation is supported.
-    .
-    .   @note The median filter uses #BORDER_REPLICATE internally to cope with border pixels, see #BorderTypes
-    .
-    .   @param src input 1-, 3-, or 4-channel image; when ksize is 3 or 5, the image depth should be
-    .   CV_8U, CV_16U, or CV_32F, for larger aperture sizes, it can only be CV_8U.
-    .   @param dst destination array of the same size and type as src.
-    .   @param ksize aperture linear size; it must be odd and greater than 1, for example: 3, 5, 7 ...
-    .   @sa  bilateralFilter, blur, boxFilter, GaussianBlur
     """
     ...
 

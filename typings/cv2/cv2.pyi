@@ -11718,8 +11718,13 @@ def CamShift(probImage, window, criteria) -> Tuple[retval, window]:
     ...
 
 def Canny(
-    image, threshold1, threshold2, edges=..., apertureSize=..., L2gradient=...
-) -> edges:
+    image: ndarray,
+    threshold1: int,
+    threshold2: int,
+    edges: ndarray = ...,
+    apertureSize: int = ...,
+    L2gradient: int = ...,
+) -> ndarray:
     """
     .   @brief Finds edges in an image using the Canny algorithm @cite Canny86 .
     .
@@ -18991,7 +18996,7 @@ def meanStdDev(src, mean=..., stddev=..., mask=...) -> Tuple[mean, stddev]:
     """
     ...
 
-def medianBlur(src, ksize, dst=...) -> dst:
+def medianBlur(src: ndarray, ksize: int, dst: Optional[ndarray]=...) -> ndarray:
     """
     .   @brief Blurs an image using the median filter.
     .
