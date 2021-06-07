@@ -129,7 +129,7 @@ class Specification:
 
             lightness_similarity = 1 - (abs(max_diff + min_diff) / 2)
             LOGGER.debug(
-                "lightness match: tmpl=%s, similarity=%s", self, lightness_similarity
+                "lightness match: tmpl=%s, similarity=%.3f", self, lightness_similarity
             )
             if lightness_similarity < self.threshold:
                 return False
