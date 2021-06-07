@@ -1,5 +1,7 @@
 # auto-derby
 
+[![python](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml/badge.svg)](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml)
+
 自动化养马
 
 2021-06-01: 气槽 3 速 2 智 1 体 自动养成结果为 10300 分 URA 冠军，历代评价点第一，无手动干预
@@ -29,8 +31,6 @@
   - [ ] 支持友人卡（在实现前可以带友人卡，就是外出时需要自己手动选）
 
 ## 使用方法
-
-[![Python application](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml/badge.svg)](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml)
 
 需求 DMM 版 和 python3.8
 
