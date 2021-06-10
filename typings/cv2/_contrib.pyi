@@ -29745,29 +29745,6 @@ def imwritemulti(filename, img, params=...) -> retval:
     """
     ...
 
-def inRange(src, lowerb, upperb, dst=...) -> dst:
-    """
-    .   @brief  Checks if array elements lie between the elements of two other arrays.
-    .
-    .   The function checks the range as follows:
-    .   -   For every element of a single-channel input array:
-    .       \f[\texttt{dst} (I)= \texttt{lowerb} (I)_0  \leq \texttt{src} (I)_0 \leq  \texttt{upperb} (I)_0\f]
-    .   -   For two-channel arrays:
-    .       \f[\texttt{dst} (I)= \texttt{lowerb} (I)_0  \leq \texttt{src} (I)_0 \leq  \texttt{upperb} (I)_0  \land \texttt{lowerb} (I)_1  \leq \texttt{src} (I)_1 \leq  \texttt{upperb} (I)_1\f]
-    .   -   and so forth.
-    .
-    .   That is, dst (I) is set to 255 (all 1 -bits) if src (I) is within the
-    .   specified 1D, 2D, 3D, ... box and 0 otherwise.
-    .
-    .   When the lower and/or upper boundary parameters are scalars, the indexes
-    .   (I) at lowerb and upperb in the above formulas should be omitted.
-    .   @param src first input array.
-    .   @param lowerb inclusive lower boundary array or a scalar.
-    .   @param upperb inclusive upper boundary array or a scalar.
-    .   @param dst output array of the same size as src and CV_8U type.
-    """
-    ...
-
 def initCameraMatrix2D(objectPoints, imagePoints, imageSize, aspectRatio=...) -> retval:
     """
     .   @brief Finds an initial camera intrinsic matrix from 3D-2D point correspondences.

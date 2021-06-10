@@ -18403,7 +18403,9 @@ def imwritemulti(filename, img, params=...) -> retval:
     """
     ...
 
-def inRange(src, lowerb, upperb, dst=...) -> dst:
+def inRange(
+    src: ndarray, lowerb: ArrayLike, upperb: ArrayLike, dst: Optional[ndarray] = ...
+) -> ndarray:
     """
     .   @brief  Checks if array elements lie between the elements of two other arrays.
     .

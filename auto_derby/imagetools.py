@@ -11,7 +11,7 @@ import cast_unknown as cast
 import cv2
 import cv2.img_hash
 import numpy as np
-from PIL.Image import Image, fromarray
+from PIL.Image import BICUBIC, BILINEAR, Image, fromarray
 
 
 def md5(b_img: np.ndarray, *, save_path: Optional[Text] = None) -> Text:
@@ -158,8 +158,10 @@ def mix(a: np.ndarray, b: np.ndarray, a_mix: float) -> np.ndarray:
     )
 
 
-def bg_mask_by_outline(outline_img: np.ndarray) -> np.ndarray:
-    h, w = outline_img.shape[:2]
+def border_flood_fill(
+    cv_img: np.ndarray, color: Tuple[int, ...] = (255,)
+) -> np.ndarray:
+    h, w = cv_img.shape[:2]
 
     border_points = (
         *((0, i) for i in range(h)),
@@ -168,27 +170,37 @@ def bg_mask_by_outline(outline_img: np.ndarray) -> np.ndarray:
         *((i, h - 1) for i in range(w)),
     )
 
-    fill_mask_img = cv2.copyMakeBorder(outline_img, 1, 1, 1, 1, cv2.BORDER_CONSTANT)
-    bg_mask_img = np.zeros_like(outline_img)
+    fill_mask_img = cv2.copyMakeBorder(cv_img, 1, 1, 1, 1, cv2.BORDER_CONSTANT)
+    bg_mask_img = np.zeros_like(cv_img)
     for i in border_points:
         x, y = i
-        if outline_img[y, x] != 0:
+        if cv_img[y, x] != 0:
             continue
-        cv2.floodFill(bg_mask_img, fill_mask_img, (x, y), (255,), 0, 0)
+        cv2.floodFill(bg_mask_img, fill_mask_img, (x, y), color, 0, 0)
 
     return bg_mask_img
 
 
-def resize_by_heihgt(img: Image, height: int) -> Image:
+def bg_mask_by_outline(outline_img: np.ndarray) -> np.ndarray:
+    return border_flood_fill(outline_img)
+
+
+def resize_by_heihgt(img: Image, height: int, *, resample: int = BICUBIC) -> Image:
     w, h = img.width, img.height
     w = round(height / h * w)
     h = height
-    return img.resize((w, h))
+    return img.resize((w, h), resample=resample)
 
 
-def fill_area(img: np.ndarray, color: Tuple[int, ...], *, size_lt: int):
+def fill_area(
+    img: np.ndarray,
+    color: Tuple[int, ...],
+    *,
+    mode: int = cv2.RETR_EXTERNAL,
+    size_lt: int,
+):
     contours, _ = cv2.findContours(
-        (img * 255).astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE
+        (img * 255).astype(np.uint8), mode, cv2.CHAIN_APPROX_NONE
     )
     for i in contours:
         size = cv2.contourArea(i)

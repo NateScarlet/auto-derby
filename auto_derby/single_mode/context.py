@@ -1,18 +1,18 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
-import cv2
-import numpy as np
-
-from typing import Text, Tuple
-
-from PIL.Image import Image
-import PIL.ImageOps
-from PIL.Image import fromarray as image_from_array
-
-from .. import ocr, imagetools, templates, template
 
 import os
+from typing import Text, Tuple
+
+import cast_unknown as cast
+import cv2
+import numpy as np
+import PIL.ImageOps
+from PIL.Image import Image
+from PIL.Image import fromarray as image_from_array
+
+from .. import imagetools, ocr, template, templates
 
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
@@ -90,41 +90,19 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
     cv_img = cv2.copyMakeBorder(cv_img, 4, 4, 4, 4, cv2.BORDER_CONSTANT, value=(255,))
 
     blurred_img = cv2.medianBlur(cv_img, 7)
-    binary_img = cv2.adaptiveThreshold(
+
+    text_img = cv2.adaptiveThreshold(
         blurred_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 15, -1
     )
-
-    contours, hierarchy = cv2.findContours(
-        binary_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE
+    text_img = 255 - cast.instance(
+        np.maximum(text_img, imagetools.border_flood_fill(text_img)), np.ndarray
     )
-    if not contours:
-        raise ValueError("_recognize_status: image is empty")
-
-    text_img = np.zeros_like(binary_img)
-
-    def _contour_level(h: np.ndarray) -> int:
-        _, _, _, parent = h
-        if parent < 0:
-            return 0
-        return _contour_level(hierarchy[0][parent]) + 1
-
-    for index, h in enumerate(hierarchy[0]):
-        level = _contour_level(h)
-        if level < 2:
-            continue
-        is_white = level % 2 == 0
-        if is_white and cv2.contourArea(contours[index]) < 160:
-            continue
-        color = (255,) if is_white else (0,)
-        cv2.drawContours(text_img, contours, index, thickness=cv2.FILLED, color=color)
-        if color == (0,):
-            # use white border
-            cv2.drawContours(text_img, contours, index, thickness=1, color=(255,))
+    text_img = cv2.medianBlur(text_img, 5)
+    imagetools.fill_area(text_img, (0,), mode=cv2.RETR_LIST, size_lt=40)
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("blurred_img", blurred_img)
-        cv2.imshow("binary_img", binary_img)
         cv2.imshow("text_img", text_img)
         cv2.waitKey()
         cv2.destroyAllWindows()

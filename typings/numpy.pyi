@@ -33466,7 +33466,20 @@ mgrid: ...
 <numpy.lib.index_tricks.MGridClass object>
 """
 
-def minimum(*args, **kwargs):
+def minimum(
+    x1: ndarray,
+    x2: ndarray,
+    /,
+    out: Optional[ndarray] = None,
+    *,
+    where: bool = True,
+    casting: Text = "same_kind",
+    order: Text = "K",
+    dtype: Optional[Type[Any]] = None,
+    subok: bool = True,
+    signature: Any = ...,
+    extobj: Any = ...,
+) -> Union[ndarray, Scalar]:
     """
     <ufunc 'minimum'>
     """
