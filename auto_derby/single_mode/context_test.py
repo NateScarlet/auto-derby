@@ -259,7 +259,9 @@ def test_update_by_character_detail_4():
 
 
 def test_update_by_character_detail_issue39():
-    img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_issue39.png").convert("RGB")
+    img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_issue39.png").convert(
+        "RGB"
+    )
     ctx = Context()
     ctx.update_by_character_detail(img)
 
