@@ -154,16 +154,15 @@ class Training:
         )
 
     def score(self, ctx: Context) -> float:
-        training = self
         spd = _training_single_score(
             ctx.speed,
-            training.speed,
+            self.speed,
             ((0, 2.0), (300, 1.0), (600, 0.8), (900, 0.7), (1100, 0.5)),
         )
 
         sta = _training_single_score(
             ctx.stamina,
-            training.stamina,
+            self.stamina,
             (
                 (0, 2.0),
                 (300, ctx.speed / 600 + 0.3 * ctx.date[0] if ctx.speed > 600 else 1.0),
@@ -178,7 +177,7 @@ class Training:
         )
         pow = _training_single_score(
             ctx.power,
-            training.power,
+            self.power,
             (
                 (0, 1.0),
                 (300, 0.2 + ctx.speed / 600),
@@ -188,14 +187,14 @@ class Training:
         )
         per = _training_single_score(
             ctx.guts,
-            training.guts,
+            self.guts,
             ((0, 2.0), (300, 1.0), (400, 0.3), (600, 0.1))
             if ctx.speed > 400 / 24 * ctx.turn_count()
             else ((0, 2.0), (300, 0.5), (400, 0.1)),
         )
         int_ = _training_single_score(
             ctx.wisdom,
-            training.wisdom,
+            self.wisdom,
             ((0, 3.0), (300, 1.0), (400, 0.4), (600, 0.2))
             if ctx.vitality < 0.9
             else ((0, 2.0), (300, 0.8), (400, 0.1)),
@@ -204,5 +203,5 @@ class Training:
         if ctx.vitality < 0.9:
             int_ += 5 if ctx.date[1:] in ((7, 1), (7, 2), (8, 1)) else 3
 
-        skill = training.skill * 0.5
+        skill = self.skill * 0.5
         return spd + sta + pow + per + int_ + skill
