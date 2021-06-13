@@ -12,89 +12,6 @@ from ..single_mode import Context, Training, choice, race
 LOGGER = logging.getLogger(__name__)
 
 
-def _interpolate(value: int, value_map: Tuple[Tuple[int, float], ...]) -> float:
-    if len(value_map) == 0:
-        return 0
-    if len(value_map) == 1:
-        return value_map[0][1]
-    low = (0, 0.0)
-    high = (0, 0.0)
-    for v, w in value_map:
-        if v >= value:
-            high = (v, w)
-            break
-        low = (v, w)
-    v1, w1 = low
-    v2, w2 = high
-    if w2 == w1 or v1 == v2:
-        return w2
-    pos = (value - v1) / (v2 - v1)
-    weight = w1 + (w2 - w1) * pos
-    return weight
-
-
-def _training_single_score(
-    current: int, delta: int, value_map: Tuple[Tuple[int, float], ...]
-) -> float:
-
-    ret = 0
-    for i in range(current, current + delta):
-        ret += _interpolate(i, value_map)
-    return ret
-
-
-def _training_score(ctx: Context, training: Training) -> float:
-    spd = _training_single_score(
-        ctx.speed,
-        training.speed,
-        ((0, 2.0), (300, 1.0), (600, 0.8), (900, 0.7), (1100, 0.5)),
-    )
-
-    sta = _training_single_score(
-        ctx.stamina,
-        training.stamina,
-        (
-            (0, 2.0),
-            (300, ctx.speed / 600 + 0.3 * ctx.date[0] if ctx.speed > 600 else 1.0),
-            (
-                600,
-                ctx.speed / 900 * 0.6 + 0.1 * ctx.date[0] if ctx.speed > 900 else 0.6,
-            ),
-            (900, ctx.speed / 900 * 0.3),
-        ),
-    )
-    pow = _training_single_score(
-        ctx.power,
-        training.power,
-        (
-            (0, 1.0),
-            (300, 0.2 + ctx.speed / 600),
-            (600, 0.1 + ctx.speed / 900),
-            (900, ctx.speed / 900 / 3),
-        ),
-    )
-    per = _training_single_score(
-        ctx.guts,
-        training.guts,
-        ((0, 2.0), (300, 1.0), (400, 0.3), (600, 0.1))
-        if ctx.speed > 400 / 24 * ctx.turn_count()
-        else ((0, 2.0), (300, 0.5), (400, 0.1)),
-    )
-    int_ = _training_single_score(
-        ctx.wisdom,
-        training.wisdom,
-        ((0, 3.0), (300, 1.0), (400, 0.4), (600, 0.2))
-        if ctx.vitality < 0.9
-        else ((0, 2.0), (300, 0.8), (400, 0.1)),
-    )
-
-    if ctx.vitality < 0.9:
-        int_ += 5 if ctx.date[1:] in ((7, 1), (7, 2), (8, 1)) else 3
-
-    skill = training.skill * 0.5
-    return spd + sta + pow + per + int_ + skill
-
-
 _TRAINING_CONFIRM = template.Specification(
     templates.SINGLE_MODE_TRAINING_CONFIRM, threshold=0.8
 )
@@ -124,7 +41,7 @@ def _handle_training(ctx: Context):
     if ctx.date in ((4, 0, 0)):
         expected_score -= 20
     LOGGER.info("expected score:\t%2.2f", expected_score)
-    trainings_with_score = [(i, _training_score(ctx, i)) for i in trainings]
+    trainings_with_score = [(i, i.score(ctx)) for i in trainings]
     trainings_with_score = sorted(
         trainings_with_score, key=lambda x: x[1], reverse=True
     )

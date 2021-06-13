@@ -1,16 +1,18 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
-from auto_derby import imagetools
-import cv2
-import numpy as np
 
+import os
 from typing import Tuple
 
+import cv2
+import numpy as np
+from auto_derby import imagetools
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
-import os
-from .. import ocr, templates, template
+
+from .. import ocr, template, templates, mathtools
+from .context import Context
 
 
 def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarray:
@@ -85,6 +87,15 @@ def _ocr_training_effect(img: Image) -> int:
     return int(text.lstrip("+"))
 
 
+def _training_single_score(
+    current: int, delta: int, value_map: Tuple[Tuple[int, float], ...]
+) -> float:
+    ret = 0
+    for i in range(current, current + delta):
+        ret += mathtools.interpolate(i, value_map)
+    return ret
+
+
 class Training:
     def __init__(self):
         self.speed: int = 0
@@ -141,3 +152,57 @@ class Training:
             )
             + ">"
         )
+
+    def score(self, ctx: Context) -> float:
+        training = self
+        spd = _training_single_score(
+            ctx.speed,
+            training.speed,
+            ((0, 2.0), (300, 1.0), (600, 0.8), (900, 0.7), (1100, 0.5)),
+        )
+
+        sta = _training_single_score(
+            ctx.stamina,
+            training.stamina,
+            (
+                (0, 2.0),
+                (300, ctx.speed / 600 + 0.3 * ctx.date[0] if ctx.speed > 600 else 1.0),
+                (
+                    600,
+                    ctx.speed / 900 * 0.6 + 0.1 * ctx.date[0]
+                    if ctx.speed > 900
+                    else 0.6,
+                ),
+                (900, ctx.speed / 900 * 0.3),
+            ),
+        )
+        pow = _training_single_score(
+            ctx.power,
+            training.power,
+            (
+                (0, 1.0),
+                (300, 0.2 + ctx.speed / 600),
+                (600, 0.1 + ctx.speed / 900),
+                (900, ctx.speed / 900 / 3),
+            ),
+        )
+        per = _training_single_score(
+            ctx.guts,
+            training.guts,
+            ((0, 2.0), (300, 1.0), (400, 0.3), (600, 0.1))
+            if ctx.speed > 400 / 24 * ctx.turn_count()
+            else ((0, 2.0), (300, 0.5), (400, 0.1)),
+        )
+        int_ = _training_single_score(
+            ctx.wisdom,
+            training.wisdom,
+            ((0, 3.0), (300, 1.0), (400, 0.4), (600, 0.2))
+            if ctx.vitality < 0.9
+            else ((0, 2.0), (300, 0.8), (400, 0.1)),
+        )
+
+        if ctx.vitality < 0.9:
+            int_ += 5 if ctx.date[1:] in ((7, 1), (7, 2), (8, 1)) else 3
+
+        skill = training.skill * 0.5
+        return spd + sta + pow + per + int_ + skill
