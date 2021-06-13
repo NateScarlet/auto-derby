@@ -88,8 +88,12 @@ SINGLE_MODE_COMMAND_TRAINING = "single_mode_command_training.png"
 SINGLE_MODE_COMMAND_TRAINING_POS = "single_mode_command_training.pos.png"
 SINGLE_MODE_CONTINUE = "single_mode_continue.png"
 SINGLE_MODE_CONTINUOUS_RACE_TITLE = "single_mode_continuous_race_title.png"
-SINGLE_MODE_CRANE_GAME_PLAY_GUIDE_BUTTON = "single_mode_crane_game_play_guide_button.png"
-SINGLE_MODE_CRANE_GAME_PLAY_GUIDE_BUTTON_POS = "single_mode_crane_game_play_guide_button.pos.png"
+SINGLE_MODE_CRANE_GAME_PLAY_GUIDE_BUTTON = (
+    "single_mode_crane_game_play_guide_button.png"
+)
+SINGLE_MODE_CRANE_GAME_PLAY_GUIDE_BUTTON_POS = (
+    "single_mode_crane_game_play_guide_button.pos.png"
+)
 SINGLE_MODE_END_BUTTON = "single_mode_end_button.png"
 SINGLE_MODE_END_BUTTON_POS = "single_mode_end_button.pos.png"
 SINGLE_MODE_FANS_NOT_ENOUGH = "single_mode_fans_not_enough.png"
@@ -102,7 +106,9 @@ SINGLE_MODE_FORMAL_RACE_BANNER = "single_mode_formal_race_banner.png"
 SINGLE_MODE_FORMAL_RACE_BANNER_POS = "single_mode_formal_race_banner.pos.png"
 SINGLE_MODE_GENE_INHERIT = "single_mode_gene_inherit.png"
 SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON = "single_mode_go_to_scheduled_race_button.png"
-SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON_POS = "single_mode_go_to_scheduled_race_button.pos.png"
+SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON_POS = (
+    "single_mode_go_to_scheduled_race_button.pos.png"
+)
 SINGLE_MODE_GOOD_RACE_ADAPTABILITY_STAR = "single_mode_good_race_adaptability_star.png"
 SINGLE_MODE_HEALTH_CARE_CONFIRM = "single_mode_health_care_confirm.png"
 SINGLE_MODE_HEALTH_CARE_CONFIRM_POS = "single_mode_health_care_confirm.pos.png"
@@ -119,7 +125,9 @@ SINGLE_MODE_OPTION5_POS = "single_mode_option5.pos.png"
 SINGLE_MODE_RACE_DETAIL_BUTTON = "single_mode_race_detail_button.png"
 SINGLE_MODE_RACE_DETAIL_BUTTON_POS = "single_mode_race_detail_button.pos.png"
 SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT = "single_mode_race_detail_no1_fan_count.png"
-SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT_POS = "single_mode_race_detail_no1_fan_count.pos.png"
+SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT_POS = (
+    "single_mode_race_detail_no1_fan_count.pos.png"
+)
 SINGLE_MODE_RACE_DETAIL_TITLE = "single_mode_race_detail_title.png"
 SINGLE_MODE_RACE_DETAIL_TITLE_POS = "single_mode_race_detail_title.pos.png"
 SINGLE_MODE_RACE_NEXT_BUTTON = "single_mode_race_next_button.png"
@@ -128,8 +136,12 @@ SINGLE_MODE_REST = "single_mode_rest.png"
 SINGLE_MODE_REST_POS = "single_mode_rest.pos.png"
 SINGLE_MODE_SCHEDULED_RACE_OPENING = "single_mode_scheduled_race_opening.png"
 SINGLE_MODE_SCHEDULED_RACE_OPENING_POS = "single_mode_scheduled_race_opening.pos.png"
-SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER = "single_mode_scheduled_race_opening_banner.png"
-SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = "single_mode_scheduled_race_opening_banner.pos.png"
+SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER = (
+    "single_mode_scheduled_race_opening_banner.png"
+)
+SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = (
+    "single_mode_scheduled_race_opening_banner.pos.png"
+)
 SINGLE_MODE_TRAINING_CONFIRM = "single_mode_training_confirm.png"
 SINGLE_MODE_TRAINING_CONFIRM_POS = "single_mode_training_confirm.pos.png"
 SINGLE_MODE_URA_FINALS = "single_mode_ura_finals.png"
