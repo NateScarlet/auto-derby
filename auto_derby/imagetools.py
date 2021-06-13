@@ -11,7 +11,7 @@ import cast_unknown as cast
 import cv2
 import cv2.img_hash
 import numpy as np
-from PIL.Image import BICUBIC, BILINEAR, Image, fromarray
+from PIL.Image import BICUBIC, Image, fromarray
 
 
 def md5(b_img: np.ndarray, *, save_path: Optional[Text] = None) -> Text:
