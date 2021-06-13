@@ -21,6 +21,98 @@ LOGGER = logging.getLogger(__name__)
 DATA_PATH = os.getenv("AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH", "single_mode_races.json")
 
 
+def _running_style_single_score(
+    ctx: Context,
+    race1: Race,
+    status: Tuple[int, Text],
+    factors: Tuple[int, int, int, int, int],
+) -> float:
+    assert sum(factors) == 10000, factors
+    spd = ctx.speed
+    sta = ctx.stamina
+    pow = ctx.power
+    gut = ctx.guts
+    wis = ctx.wisdom
+
+    # proper ground
+    # from master.mdb `race_proper_ground_rate` table
+    ground = race1.ground_status(ctx)
+    ground_rate = {
+        "S": 1.05,
+        "A": 1.0,
+        "B": 0.9,
+        "C": 0.8,
+        "D": 0.7,
+        "E": 0.5,
+        "F": 0.3,
+        "G": 0.1,
+    }[ground[1]]
+
+    # proper distance
+    # from master.mdb `race_proper_distance_rate` table
+    distance = race1.distance_status(ctx)
+    d_spd_rate, d_pow_rate = {
+        "S": (1.05, 1.0),
+        "A": (1.0, 1.0),
+        "B": (0.9, 1.0),
+        "C": (0.8, 1.0),
+        "D": (0.6, 1.0),
+        "E": (0.4, 0.6),
+        "F": (0.2, 0.5),
+        "G": (0.1, 0.4),
+    }[distance[1]]
+
+    # proper running style
+    # from master.mdb `race_proper_runningstyle_rate` table
+
+    style_rate = {
+        "S": 1.1,
+        "A": 1.0,
+        "B": 0.85,
+        "C": 0.75,
+        "D": 0.6,
+        "E": 0.4,
+        "F": 0.2,
+        "G": 0.1,
+    }[status[1]]
+
+    # https://umamusume.cygames.jp/#/help?p=3
+
+    # 距離適性が低い距離のコースを走るとうまくスピードに乗れず、上位争いをすることが難しいことが多い。
+    spd *= d_spd_rate
+    pow *= d_pow_rate
+
+    # 適性が低い作戦で走ろうとすると冷静に走れないことが多い。
+    wis *= style_rate
+
+    # バ場適性が合わないバ場を走ると力強さに欠けうまく走れないことが多い。
+    pow *= ground_rate
+
+    total_factor = 1
+    for i in race1.target_statuses:
+        total_factor *= 1 + 0.1 * int(
+            {
+                race1.TARGET_STATUS_SPEED: spd,
+                race1.TARGET_STATUS_POWER: pow,
+                race1.TARGET_STATUS_STAMINA: sta,
+                race1.TARGET_STATUS_GUTS: gut,
+                race1.TARGET_STATUS_WISDOM: wis,
+            }[i]
+            / 300
+        )
+    return (
+        (
+            spd * factors[0]
+            + sta * factors[1]
+            + pow * factors[2]
+            + gut * factors[3]
+            + wis * factors[4]
+        )
+        * total_factor
+        / 10000
+    )
+
+
 class Race:
 
     GROUND_TURF = 1
@@ -143,6 +235,34 @@ class Race:
             return ctx.turf
         else:
             return ctx.dart
+
+    def style_scores(
+        self,
+        ctx: Context,
+    ) -> Tuple[float, float, float, float]:
+        lead = _running_style_single_score(
+            ctx, self, ctx.lead, (5000, 3000, 500, 500, 1000)
+        )
+        head = _running_style_single_score(
+            ctx, self, ctx.head, (4800, 2000, 1400, 500, 1300)
+        )
+        middle = _running_style_single_score(
+            ctx, self, ctx.middle, (4500, 1800, 2000, 200, 1500)
+        )
+        last = _running_style_single_score(
+            ctx, self, ctx.last, (4300, 1500, 2300, 200, 1700)
+        )
+
+        if (
+            ctx.speed > ctx.turn_count() * 400 / 24
+            and self.grade >= self.GRADE_G2
+            and self.distance <= 1800
+        ):
+            lead += 40
+        if self.distance >= 2400:
+            lead *= 0.9
+
+        return last, middle, head, lead
 
 
 def _load() -> Tuple[Race, ...]:
