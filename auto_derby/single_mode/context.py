@@ -61,7 +61,7 @@ def _recognize_vitality(img: Image) -> float:
     return 1 - np.average(np.apply_along_axis(_is_empty, 1, cv_img[0, :]))
 
 
-def _recognize_mood(rgb_color: Tuple[int, int, int]) -> float:
+def _recognize_mood(rgb_color: Tuple[int, int, int]) -> Tuple[float, float]:
     if imagetools.compare_color((250, 68, 126), rgb_color) > 0.9:
         return Context.MOOD_VERY_GOOD
     if imagetools.compare_color((255, 124, 57), rgb_color) > 0.9:
@@ -127,11 +127,11 @@ def _recognize_property(img: Image) -> int:
 
 
 class Context:
-    MOOD_VERY_BAD: float = 0.8
-    MOOD_BAD: float = 0.9
-    MOOD_NORMAL: float = 1.0
-    MOOD_GOOD: float = 1.1
-    MOOD_VERY_GOOD: float = 1.2
+    MOOD_VERY_BAD = (0.8, 0.95)
+    MOOD_BAD = (0.9, 0.98)
+    MOOD_NORMAL = (1.0, 1.0)
+    MOOD_GOOD = (1.1, 1.05)
+    MOOD_VERY_GOOD = (1.2, 1.1)
 
     STATUS_S = (8, "S")
     STATUS_A = (7, "A")
@@ -165,8 +165,10 @@ class Context:
         self.vitality = 0.0
         self.mood = Context.MOOD_NORMAL
         self.fan_count = 0
+        self.is_after_winning = False
 
         self._extra_turn_count = 0
+        self.target_fan_count = 0
 
         self.turf = Context.STATUS_NONE
         self.dart = Context.STATUS_NONE
@@ -229,7 +231,17 @@ class Context:
         self.wisdom = _recognize_property(screenshot.crop(wisdom_bbox))
 
     def update_by_class_detail(self, screenshot: Image) -> None:
+        winning_color_pos = (150, 470)
         fan_count_bbox = (220, 523, 420, 540)
+
+        self.is_after_winning = (
+            imagetools.compare_color(
+                screenshot.getpixel(winning_color_pos),
+                (244, 205, 52),
+            )
+            > 0.95
+        )
+
         self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
 
     def update_by_character_detail(self, screenshot: Image) -> None:

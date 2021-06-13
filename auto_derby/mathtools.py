@@ -17,6 +17,8 @@ def interpolate(value: int, value_map: Tuple[Tuple[int, float], ...]) -> float:
             high = (v, w)
             break
         low = (v, w)
+    else:
+        high = low
     v1, w1 = low
     v2, w2 = high
     if w2 == w1 or v1 == v2:
@@ -24,3 +26,12 @@ def interpolate(value: int, value_map: Tuple[Tuple[int, float], ...]) -> float:
     pos = (value - v1) / (v2 - v1)
     weight = w1 + (w2 - w1) * pos
     return weight
+
+
+def integrate(
+    current: int, delta: int, value_map: Tuple[Tuple[int, float], ...]
+) -> float:
+    ret = 0
+    for i in range(current, current + delta):
+        ret += interpolate(i, value_map)
+    return ret

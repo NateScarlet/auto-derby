@@ -59,6 +59,8 @@ def get_game() -> int:
 
 def set_game_size() -> None:
     # Need fixed height for easy template matching
+    # TODO: change size to 540 * 960
+    # set_client_size(get_game(), 540, 960)
     set_client_size(get_game(), 466, 828)
 
 

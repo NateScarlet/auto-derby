@@ -159,6 +159,8 @@ class Training:
             self.speed,
             ((0, 2.0), (300, 1.0), (600, 0.8), (900, 0.7), (1100, 0.5)),
         )
+        if ctx.speed < ctx.turn_count() / 24 * 300:
+            spd *= 1.5
 
         sta = _training_single_score(
             ctx.stamina,
@@ -204,4 +206,21 @@ class Training:
             int_ += 5 if ctx.date[1:] in ((7, 1), (7, 2), (8, 1)) else 3
 
         skill = self.skill * 0.5
-        return spd + sta + pow + per + int_ + skill
+
+        success_rate = mathtools.interpolate(
+            int(ctx.vitality * 10000),
+            (
+                (0, 0.15),
+                (1500, 0.3),
+                (4000, 1.0),
+            )
+            if self.wisdom > 0
+            else (
+                (0, 0.01),
+                (1500, 0.2),
+                (3000, 0.5),
+                (5000, 0.85),
+                (7000, 1.0),
+            ),
+        )
+        return (spd + sta + pow + per + int_ + skill) * success_rate

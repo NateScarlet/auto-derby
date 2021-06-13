@@ -13,7 +13,7 @@ import cv2
 import PIL.Image
 import PIL.ImageOps
 
-from .. import imagetools, ocr, templates, template
+from .. import imagetools, ocr, templates, template, mathtools
 from .context import Context
 
 LOGGER = logging.getLogger(__name__)
@@ -218,7 +218,21 @@ class Race:
         ground_text = {Race.GROUND_DART: "dart", Race.GROUND_TURF: "turf"}.get(
             self.ground, self.ground
         )
-        return f"Race<{self.stadium} {ground_text} {self.distance}m {self.name}>"
+        grade_text = {
+            Race.GRADE_DEBUT: "Debut",
+            Race.GRADE_NOT_WINNING: "Not-Winning",
+            Race.GRADE_PRE_OP: "Pre-OP",
+            Race.GRADE_OP: "OP",
+            Race.GRADE_G3: "G3",
+            Race.GRADE_G2: "G2",
+            Race.GRADE_G1: "G1",
+        }.get(self.grade, self.grade)
+        return f"Race<{self.stadium} {ground_text} {self.distance}m {grade_text} {self.name}>"
+
+    def __eq__(self, o: object) -> bool:
+        if not isinstance(o, Race):
+            return False
+        return self.to_dict() == o.to_dict()
 
     def distance_status(self, ctx: Context) -> Tuple[int, Text]:
         if self.distance <= 1400:
@@ -244,7 +258,7 @@ class Race:
             ctx, self, ctx.lead, (5000, 3000, 500, 500, 1000)
         )
         head = _running_style_single_score(
-            ctx, self, ctx.head, (4800, 2000, 1400, 500, 1300)
+            ctx, self, ctx.head, (4500, 2000, 2000, 500, 1000)
         )
         middle = _running_style_single_score(
             ctx, self, ctx.middle, (4500, 1800, 2000, 200, 1500)
@@ -264,6 +278,119 @@ class Race:
 
         return last, middle, head, lead
 
+    def estimate_order(self, ctx: Context) -> int:
+        best_style_score = sorted(self.style_scores(ctx), reverse=True)[0]
+        difficulty = {
+            Race.GRADE_DEBUT: 200,
+            Race.GRADE_NOT_WINNING: 200,
+            Race.GRADE_PRE_OP: 250,
+            Race.GRADE_OP: 250,
+            Race.GRADE_G3: 300,
+            Race.GRADE_G2: 320,
+            Race.GRADE_G1: 350,
+        }[self.grade]
+        if self.distance_status(ctx) < ctx.STATUS_B:
+            difficulty += 120
+        if self.ground_status(ctx) < ctx.STATUS_B:
+            difficulty += 120
+        difficulty = mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, difficulty * 0.8),
+                (24, difficulty),
+                (48, difficulty * 2),
+                (72, difficulty * 2.5),
+            ),
+        )
+        estimate_order = round(
+            mathtools.interpolate(
+                int(best_style_score * ctx.mood[1] / difficulty * 10000),
+                (
+                    (5000, 16),
+                    (6500, 5),
+                    (7000, 3),
+                    (9000, 2),
+                    (10000, 1),
+                ),
+            )
+        )
+        estimate_order = min(self.entry_count, estimate_order)
+        LOGGER.debug(
+            "estimate order: race=%s, order=%d, difficulty=%d, best_style_score=%.2f",
+            self,
+            estimate_order,
+            difficulty,
+            best_style_score,
+        )
+        return estimate_order
+
+    def score(self, ctx: Context) -> float:
+        estimate_order = self.estimate_order(ctx)
+        if estimate_order == 1:
+            prop, skill = {
+                Race.GRADE_G1: (10, 45),
+                Race.GRADE_G2: (8, 35),
+                Race.GRADE_G3: (8, 35),
+                Race.GRADE_OP: (5, 35),
+                Race.GRADE_PRE_OP: (5, 35),
+                Race.GRADE_NOT_WINNING: (0, 0),
+                Race.GRADE_DEBUT: (0, 0),
+            }[self.grade]
+        elif 2 <= estimate_order <= 5:
+            prop, skill = {
+                Race.GRADE_G1: (5, 40),
+                Race.GRADE_G2: (4, 30),
+                Race.GRADE_G3: (4, 30),
+                Race.GRADE_OP: (2, 20),
+                Race.GRADE_PRE_OP: (2, 20),
+                Race.GRADE_NOT_WINNING: (0, 0),
+                Race.GRADE_DEBUT: (0, 0),
+            }[self.grade]
+        else:
+            prop, skill = {
+                Race.GRADE_G1: (4, 25),
+                Race.GRADE_G2: (3, 20),
+                Race.GRADE_G3: (3, 20),
+                Race.GRADE_OP: (0, 10),
+                Race.GRADE_PRE_OP: (0, 10),
+                Race.GRADE_NOT_WINNING: (0, 0),
+                Race.GRADE_DEBUT: (0, 0),
+            }[self.grade]
+
+        fan_count = self.fan_counts[estimate_order - 1]
+
+        expected_fan_count = max(
+            ctx.target_fan_count,
+            mathtools.interpolate(
+                ctx.turn_count(),
+                (
+                    (0, 0),
+                    (24, 8000),
+                    (48, 10000),
+                    (54, 100000),
+                    (72, 150000),
+                ),
+            ),
+        )
+
+        fan_score = (
+            mathtools.integrate(
+                ctx.fan_count,
+                fan_count,
+                (
+                    (int(expected_fan_count * 0.1), 8.0),
+                    (int(expected_fan_count * 0.3), 6.0),
+                    (int(expected_fan_count * 0.5), 4.0),
+                    (int(expected_fan_count), 1.0),
+                ),
+            )
+            / 600
+        )
+
+        not_winning_score = 0 if ctx.is_after_winning else 1.5 * ctx.turn_count()
+
+        return fan_score + prop + skill * 0.5 + not_winning_score
+
 
 def _load() -> Tuple[Race, ...]:
     with open(DATA_PATH, "r", encoding="utf-8") as f:
@@ -280,7 +407,22 @@ def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
             continue
         if date == (1, 0, 0) and i.grade != Race.GRADE_DEBUT:
             continue
-        if (month, half) not in ((i.month, half), (0, 0)):
+        if (month, half) not in ((i.month, i.half), (0, 0)):
+            continue
+        yield i
+
+
+def find(ctx: Context) -> Iterator[Race]:
+    if ctx.date[1:] == (0, 0):
+        return
+    for i in find_by_date(ctx.date):
+        if i.grade == Race.GRADE_NOT_WINNING and (
+            ctx.is_after_winning or ctx.fan_count == 1
+        ):
+            continue
+        if i.grade < Race.GRADE_NOT_WINNING and not ctx.is_after_winning:
+            continue
+        if ctx.fan_count < i.min_fan_count:
             continue
         yield i
 

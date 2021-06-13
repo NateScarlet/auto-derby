@@ -86,7 +86,7 @@ def test_find_by_race_detail_image_8():
 def test_find_by_race_detail_image_9():
     img = PIL.Image.open(_test.DATA_PATH / "race_detail_9.png").convert("RGB")
     ctx = Context()
-    ctx.date = (1, 10, 2)
+    ctx.date = (1, 10, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
 
     assert race1.name == "紫菊賞", race1.name
@@ -96,7 +96,7 @@ def test_find_by_race_detail_image_9():
 def test_find_by_race_detail_image_issue31():
     img = PIL.Image.open(_test.DATA_PATH / "race_detail_issue31.png").convert("RGB")
     ctx = Context()
-    ctx.date = (2, 5, 1)
+    ctx.date = (2, 5, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
 
     assert race1.name == "東京優駿（日本ダービー）", race1.name

@@ -152,6 +152,7 @@ def test_update_by_class_detail():
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1, ctx.fan_count
+    assert ctx.is_after_winning == False, ctx.is_after_winning
 
 
 def test_update_by_class_detail_2():
@@ -159,6 +160,7 @@ def test_update_by_class_detail_2():
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1225, ctx.fan_count
+    assert ctx.is_after_winning == True, ctx.is_after_winning
 
 
 def test_update_by_class_detail_3():
@@ -166,6 +168,7 @@ def test_update_by_class_detail_3():
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 11950, ctx.fan_count
+    assert ctx.is_after_winning == True, ctx.is_after_winning
 
 
 def test_update_by_class_detail_4():
@@ -173,6 +176,7 @@ def test_update_by_class_detail_4():
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 148805, ctx.fan_count
+    assert ctx.is_after_winning == True, ctx.is_after_winning
 
 
 def test_update_by_class_detail_5():
@@ -180,6 +184,7 @@ def test_update_by_class_detail_5():
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 127591, ctx.fan_count
+    assert ctx.is_after_winning == True, ctx.is_after_winning
 
 
 def test_update_by_class_detail_issue35():
@@ -187,6 +192,7 @@ def test_update_by_class_detail_issue35():
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1129, ctx.fan_count
+    assert ctx.is_after_winning == True, ctx.is_after_winning
 
 
 def test_update_by_class_detail_issue35_2():
@@ -194,6 +200,7 @@ def test_update_by_class_detail_issue35_2():
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 4119, ctx.fan_count
+    assert ctx.is_after_winning == True, ctx.is_after_winning
 
 
 def test_update_by_character_detail():
