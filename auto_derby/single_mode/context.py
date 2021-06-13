@@ -115,6 +115,17 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
     raise ValueError("_recognize_status: unknown status: %s" % text)
 
 
+def _recognize_property(img: Image) -> int:
+    max_match = imagetools.constant_color_key(
+        imagetools.cv_image(img),
+        (210, 249, 255),
+        threshold=0.95,
+    )
+    if np.average(max_match) > 5:
+        return 1200
+    return int(ocr.text(PIL.ImageOps.invert(img)))
+
+
 class Context:
     MOOD_VERY_BAD: float = 0.8
     MOOD_BAD: float = 0.9
@@ -211,11 +222,11 @@ class Context:
         assert isinstance(mood_color, tuple), mood_color
         self.mood = _recognize_mood((mood_color[0], mood_color[1], mood_color[2]))
 
-        self.speed = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(speed_bbox))))
-        self.stamina = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(stamina_bbox))))
-        self.power = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(power_bbox))))
-        self.guts = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(guts_bbox))))
-        self.wisdom = int(ocr.text(PIL.ImageOps.invert(screenshot.crop(wisdom_bbox))))
+        self.speed = _recognize_property(screenshot.crop(speed_bbox))
+        self.stamina = _recognize_property(screenshot.crop(stamina_bbox))
+        self.power = _recognize_property(screenshot.crop(power_bbox))
+        self.guts = _recognize_property(screenshot.crop(guts_bbox))
+        self.wisdom = _recognize_property(screenshot.crop(wisdom_bbox))
 
     def update_by_class_detail(self, screenshot: Image) -> None:
         fan_count_bbox = (220, 523, 420, 540)

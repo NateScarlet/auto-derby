@@ -133,6 +133,20 @@ def test_update_by_command_scene_issue17_2():
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
 
+def test_update_by_command_scene_issue41():
+    img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue41.png").convert("RGB")
+    ctx = Context()
+    ctx.update_by_command_scene(img)
+    assert ctx.date == (3, 11, 1), ctx.date
+    assert ctx.vitality == 0.8212290502793296, ctx.vitality
+    assert ctx.speed == 1200, ctx.speed
+    assert ctx.stamina == 753, ctx.stamina
+    assert ctx.power == 616, ctx.power
+    assert ctx.guts == 364, ctx.guts
+    assert ctx.wisdom == 326, ctx.wisdom
+    assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+
+
 def test_update_by_class_detail():
     img = PIL.Image.open(_TEST_DATA_PATH / "class_detail.png").convert("RGB")
     ctx = Context()
