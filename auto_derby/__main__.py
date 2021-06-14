@@ -24,6 +24,7 @@ LOGGER = logging.getLogger(__name__)
 def main():
     avaliable_jobs = {
         "team_race": jobs.team_race,
+        "champions_meeting": jobs.champions_meeting,
         "legend_race": jobs.legend_race,
         "nurturing": jobs.nurturing,
         "daily_race_money": lambda: jobs.daily_race(templates.MOONLIGHT_PRIZE),

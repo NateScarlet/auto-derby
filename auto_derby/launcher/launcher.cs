@@ -20,6 +20,11 @@ namespace NateScarlet.AutoDerby {
         });
         Add(new JobOption()
         {
+          Label = "Champions meeting",
+          Value = "champions_meeting",
+        });
+        Add(new JobOption()
+        {
           Label = "Team race",
           Value = "team_race",
         });

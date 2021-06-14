@@ -19,6 +19,7 @@
 - [x] 团队赛 (Team race)
   - [x] 有胜利确定奖励时吃帕菲
 - [x] 日常赛 (Daily race)
+- [x] PvP 活动赛 (Champions meeting)
 - [x] 传奇赛 (Legend race)
   - [x] 自动领奖励
 - [x] 活动抽奖转盘 (Roulette derby)
