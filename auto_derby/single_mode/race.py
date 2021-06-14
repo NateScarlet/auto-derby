@@ -473,6 +473,7 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
         "右": (Race.TURN_RIGHT, Race.TRACK_MIDDLE),
         "左·外": (Race.TURN_LEFT, Race.TRACK_OUT),
         "右·外": (Race.TURN_RIGHT, Race.TRACK_OUT),
+        "直線": (Race.TURN_NONE, Race.TRACK_MIDDLE),
     }[text]
 
     return stadium, ground, distance, turn, track

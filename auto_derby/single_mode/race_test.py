@@ -123,3 +123,14 @@ def test_find_by_race_detail_image_issue49():
 
     assert race1.name == "コスモス賞", race1.name
     assert race1.stadium == "札幌", race1.stadium
+
+
+def test_find_by_race_detail_image_issue54():
+    img = PIL.Image.open(_test.DATA_PATH / "race_detail_issue54.png").convert("RGB")
+    clients.set_current(clients.SingleImageClient(img))
+    ctx = Context()
+    ctx.date = (2, 10, 2)
+    race1 = race.find_by_race_detail_image(ctx, img)
+
+    assert race1.name == "ルミエールオータムダッシュ", race1.name
+    assert race1.stadium == "新潟", race1.stadium
