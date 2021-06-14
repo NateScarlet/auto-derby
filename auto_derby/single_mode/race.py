@@ -497,8 +497,10 @@ def _recognize_grade(rgb_color: Tuple[int, ...]) -> Tuple[int, ...]:
 
 
 def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race:
-    grade_color_pos = (10, 75)
-    spec_bbox = (27, 260, 302, 279)
+    rp = mathtools.ResizeProxy(screenshot.width)
+
+    grade_color_pos = rp.vector2((10, 75), 466)
+    spec_bbox = rp.vector4((27, 260, 302, 279), 466)
     _, no1_fan_count_pos = next(
         template.match(screenshot, templates.SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT)
     )
