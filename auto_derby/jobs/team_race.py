@@ -28,7 +28,8 @@ def team_race():
         )
         name = tmpl.name
         if name == templates.TEAM_RACE_CHOOSE_COMPETITOR:
-            granted_reward_pos = (358, 300)
+            rp = action.resize_proxy()
+            granted_reward_pos = rp.vector2((358, 300), 466)
             granted_reward_pos_color = template.screenshot().getpixel(
                 granted_reward_pos
             )

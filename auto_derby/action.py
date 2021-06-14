@@ -9,18 +9,9 @@ from typing import Callable, Iterable, Iterator, Text, Tuple, Union
 from . import clients
 
 
-def vector(v: int, target_width: int) -> int:
-    return mathtools.ResizeProxy(clients.current().width).vector(v, target_width)
-
-
-def vector2(v: Tuple[int, int], target_width: int) -> Tuple[int, int]:
-    return mathtools.ResizeProxy(clients.current().width).vector2(v, target_width)
-
-
-def vector4(
-    v: Tuple[int, int, int, int], target_width: int
-) -> Tuple[int, int, int, int]:
-    return mathtools.ResizeProxy(clients.current().width).vector4(v, target_width)
+def resize_proxy() -> mathtools.ResizeProxy:
+    """Resize proxy to current client width."""
+    return mathtools.ResizeProxy(clients.current().width)
 
 
 def click(point: Tuple[int, int]):

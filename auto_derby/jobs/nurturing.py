@@ -32,8 +32,9 @@ def _current_race(ctx: Context) -> race.Race:
 
 
 def _choose_race(ctx: Context, race1: race.Race) -> None:
-    action.wheel((100, 500), 1)
-    action.click((100, 500))
+    rp = action.resize_proxy()
+    action.wheel(rp.vector2((100, 500), 466), 1)
+    action.click(rp.vector2((100, 500), 466))
 
     if _current_race(ctx) == race1:
         return
@@ -43,16 +44,27 @@ def _choose_race(ctx: Context, race1: race.Race) -> None:
         if _current_race(ctx) == race1:
             return
         for _ in action.drag_through(
-            (100, 600), (100, 500), (100, 490), (100, 490), duration=0.2
+            rp.vector2((100, 600), 466),
+            rp.vector2((100, 500), 466),
+            rp.vector2((100, 490), 466),
+            rp.vector2((100, 490), 466),
+            duration=0.2,
         ):
             pass
 
 
 def _handle_training(ctx: Context) -> None:
+    rp = action.resize_proxy()
     trainings: List[Training] = []
 
     action.wait_image(_TRAINING_CONFIRM)
-    for x, y in ((78, 700), (158, 700), (234, 700), (314, 700), (402, 700)):
+    for x, y in (
+        rp.vector2((78, 700), 466),
+        rp.vector2((158, 700), 466),
+        rp.vector2((234, 700), 466),
+        rp.vector2((314, 700), 466),
+        rp.vector2((402, 700), 466),
+    ):
         action.drag((x, y - 100), dy=100)
         action.wait_image(_TRAINING_CONFIRM)
         t = Training.from_training_scene(template.screenshot())
@@ -138,7 +150,8 @@ def _handle_training(ctx: Context) -> None:
             action.click(pos)
         return
     x, y = training.confirm_position
-    action.drag((x, y - 100), dy=100)
+    drag_y = rp.vector(100, 466)
+    action.drag((x, y - drag_y), dy=drag_y)
     action.click((x, y))
 
 
@@ -167,10 +180,15 @@ def _handle_race_result():
 
 def _choose_running_style(ctx: Context, race1: race.Race) -> None:
     action.wait_click_image(templates.RACE_RUNNING_STYLE_CHANGE_BUTTON)
-
+    rp = action.resize_proxy()
     names = ("last", "middle", "head", "lead")
     scores = race1.style_scores(ctx)
-    button_pos = ((60, 500), (160, 500), (260, 500), (360, 500))
+    button_pos = (
+        rp.vector2((60, 500), 466),
+        rp.vector2((160, 500), 466),
+        rp.vector2((260, 500), 466),
+        rp.vector2((360, 500), 466),
+    )
 
     style_scores = sorted(
         zip(names, scores, button_pos), key=lambda x: x[1], reverse=True
