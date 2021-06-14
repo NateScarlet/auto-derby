@@ -71,3 +71,14 @@ def test_update_by_training_scene_issue24():
     assert training.guts == 4
     assert training.wisdom == 0
     assert training.skill == 2
+
+
+def test_update_by_training_scene_issue51():
+    img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue51.png").convert("RGB")
+    training = Training.from_training_scene(img)
+    assert training.speed == 21
+    assert training.stamina == 0
+    assert training.power == 10
+    assert training.guts == 0
+    assert training.wisdom == 0
+    assert training.skill == 3

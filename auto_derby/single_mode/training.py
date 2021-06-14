@@ -29,8 +29,18 @@ def _ocr_training_effect(img: Image) -> int:
     cv_img = cv2.cvtColor(
         np.asarray(imagetools.resize_by_heihgt(img, 32)), cv2.COLOR_RGB2BGR
     )
-    sharpened_img = imagetools.sharpen(cv_img)
-    sharpened_img = ((sharpened_img / 2.0 + cv_img / 2.0)).astype(np.uint8)
+    sharpened_img = cv2.filter2D(
+        cv_img,
+        8,
+        np.array(
+            (
+                (0, -1, 0),
+                (-1, 5, -1),
+                (0, -1, 0),
+            )
+        ),
+    )
+    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
 
     outline_img = imagetools.color_key(
         sharpened_img, np.full_like(cv_img, (255, 255, 255))
