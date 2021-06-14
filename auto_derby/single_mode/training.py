@@ -130,13 +130,15 @@ class Training:
             )
         )[1]
 
+        rp = mathtools.ResizeProxy(img.width)
+
         t, b = 503, 532
-        self.speed = _ocr_training_effect(img.crop((18, t, 91, b)))
-        self.stamina = _ocr_training_effect(img.crop((91, t, 163, b)))
-        self.power = _ocr_training_effect(img.crop((163, t, 237, b)))
-        self.guts = _ocr_training_effect(img.crop((237, t, 309, b)))
-        self.wisdom = _ocr_training_effect(img.crop((309, t, 382, b)))
-        self.skill = _ocr_training_effect(img.crop((387, t, 450, b)))
+        self.speed = _ocr_training_effect(img.crop(rp.vector4((18, t, 91, b), 466)))
+        self.stamina = _ocr_training_effect(img.crop(rp.vector4((91, t, 163, b), 466)))
+        self.power = _ocr_training_effect(img.crop(rp.vector4((163, t, 237, b), 466)))
+        self.guts = _ocr_training_effect(img.crop(rp.vector4((237, t, 309, b), 466)))
+        self.wisdom = _ocr_training_effect(img.crop(rp.vector4((309, t, 382, b), 466)))
+        self.skill = _ocr_training_effect(img.crop(rp.vector4((387, t, 450, b), 466)))
         return self
 
     def __str__(self):
