@@ -2,6 +2,8 @@
 # pyright: strict
 
 
+import json
+import logging
 import os
 from typing import Dict, List, Optional, Text, Tuple
 
@@ -11,10 +13,7 @@ from PIL.Image import Image, fromarray
 
 from auto_derby import imagetools
 
-from . import window, action
-import json
-
-import logging
+from . import window
 
 LOGGER = logging.getLogger(__name__)
 
@@ -75,7 +74,7 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     close_msg = window.info("New text encountered\nplease do annotation in terminal")
     try:
-        with action.recover_cursor(), window.recover_foreground():  # may during a drag
+        with window.recover_cursor(), window.recover_foreground():  # may during a drag
             while len(ans) != 1:
                 ans = input("Corresponding text for current displaying image:")
         _LABELS[h] = ans

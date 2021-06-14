@@ -2,36 +2,21 @@
 # pyright: strict
 """template matching.  """
 
-import os
+from auto_derby import imagetools
+import datetime as dt
 import logging
+import os
 import pathlib
 from typing import Dict, Iterator, Literal, Optional, Set, Text, Tuple, Union
 
 import cv2
 import numpy as np
-import win32gui
-from PIL import ImageGrab
 from PIL.Image import Image
 from PIL.Image import open as open_image
 
-from . import window
-import datetime as dt
-
+from . import clients
 
 LOGGER = logging.getLogger(__name__)
-
-
-def screenshot_window(h_wnd: int) -> Image:
-    window.init()
-    # XXX: BitBlt capture not work, background window is not supportted
-    # Maybe use WindowsGraphicsCapture like obs do
-    with window.topmost(h_wnd):
-        # not use GetWindowRect to exclude border
-        _, _, w, h = win32gui.GetClientRect(h_wnd)
-        x, y = win32gui.ClientToScreen(h_wnd, (0, 0))
-        left, top, right, bottom = x, y, x + w, y + h
-        bbox = (left, top, right, bottom)
-        return ImageGrab.grab(bbox, True, True)
 
 
 _CACHED_SCREENSHOT: Dict[Literal["value"], Tuple[dt.datetime, Image]] = {
@@ -49,7 +34,9 @@ _LAST_SCREENSHOT_SAVE_PATH = os.getenv("AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH")
 def screenshot(*, max_age: float = 1) -> Image:
     cached_time, _ = _CACHED_SCREENSHOT["value"]
     if cached_time < dt.datetime.now() - dt.timedelta(seconds=max_age):
-        new_img = screenshot_window(window.get_game())
+        new_img = clients.current().screenshot()
+        # TODO: use 540 width
+        new_img = imagetools.resize(new_img, width=466)
         if _LAST_SCREENSHOT_SAVE_PATH:
             new_img.save(_LAST_SCREENSHOT_SAVE_PATH)
         LOGGER.debug("screenshot")

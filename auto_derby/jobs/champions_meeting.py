@@ -2,8 +2,6 @@
 # pyright: strict
 
 import time
-from auto_derby.jobs import limited_sale
-from typing import Text
 
 from .. import action, templates
 

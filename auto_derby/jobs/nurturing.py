@@ -32,10 +32,8 @@ def _current_race(ctx: Context) -> race.Race:
 
 
 def _choose_race(ctx: Context, race1: race.Race) -> None:
-    with action.recover_cursor():
-        action.move((100, 500))
-        action.wheel(1)
-        action.click((100, 500))
+    action.wheel((100, 500), 1)
+    action.click((100, 500))
 
     if _current_race(ctx) == race1:
         return

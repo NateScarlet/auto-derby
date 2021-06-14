@@ -3,12 +3,14 @@
 """umamusume pertty derby automation.  """
 
 import contextlib
-from ctypes import windll
 import logging
 import threading
 import time
-from typing import Callable, Dict, Literal, Optional, Set, Text, Tuple
+from ctypes import windll
+from typing import Callable, Dict, Iterator, Literal, Optional, Set, Text, Tuple
 
+import PIL.Image
+import PIL.ImageGrab
 import win32con
 import win32gui
 
@@ -55,31 +57,6 @@ def message_box(
 
 def get_game() -> int:
     return win32gui.FindWindow("UnityWndClass", "umamusume")
-
-
-# TODO: change size to 540 * 960
-_CLIENT_WIDTH = 466
-
-
-def set_game_size() -> None:
-    # Need fixed height for easy template matching
-    set_client_size(get_game(), _CLIENT_WIDTH, int(_CLIENT_WIDTH / (9 / 16)))
-
-
-def vector(v: int, target_width: int) -> int:
-    return int(v / (target_width / _CLIENT_WIDTH))
-
-
-def vector2(pos: Tuple[int, int], target_width: int) -> Tuple[int, int]:
-    x, y = (vector(i, target_width) for i in pos)
-    return x, y
-
-
-def vector4(
-    rect: Tuple[int, int, int, int], target_width: int
-) -> Tuple[int, int, int, int]:
-    l, t, r, b = (vector(i, target_width) for i in rect)
-    return l, t, r, b
 
 
 _INIT_ONCE: Dict[Literal["value"], bool] = {"value": False}
@@ -143,6 +120,82 @@ def recover_foreground():
 
 def info(msg: Text) -> Callable[[], None]:
     return message_box(msg, "auto-derby", h_wnd=get_game() if _IS_ADMIN else 0)
+
+
+import mouse
+
+
+@contextlib.contextmanager
+def recover_cursor():
+    ox, oy = win32gui.GetCursorPos()
+    yield
+    mouse.move(ox, oy)
+
+
+def click_at(h_wnd: int, point: Tuple[int, int]):
+    point = win32gui.ClientToScreen(h_wnd, point)
+    with topmost(h_wnd), recover_foreground(), recover_cursor():
+        mouse.move(point[0], point[1])
+        mouse.click()
+        time.sleep(0.2)
+
+
+def drag_at(
+    h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1
+):
+    x, y = win32gui.ClientToScreen(h_wnd, point)
+    with topmost(h_wnd), recover_foreground(), recover_cursor():
+        mouse.drag(x, y, x + dx, y + dy, duration=duration)
+
+
+@contextlib.contextmanager
+def _pressing_mouse(button: Text = "left"):
+    if mouse.is_pressed(button):
+        mouse.release()
+    mouse.press(button)
+    yield
+    mouse.release(button)
+
+
+def drag_through_at(
+    h_wnd: int, *points: Tuple[int, int], duration: float = 0.05
+) -> Iterator[Tuple[int, int]]:
+    with recover_cursor(), recover_foreground():
+        set_forground(h_wnd)
+        move_at(h_wnd, points[0])
+        yield points[0]
+        with _pressing_mouse(), topmost(h_wnd):
+            for p in points[1:]:
+                x, y = win32gui.ClientToScreen(h_wnd, p)
+                mouse.move(x, y, duration=duration)
+                yield p
+
+
+def wheel_at(h_wnd: int, delta: int) -> None:
+    with recover_foreground():
+        set_forground(h_wnd)
+        for _ in range(abs(delta)):
+            mouse.wheel(1 if delta > 0 else -1)
+            time.sleep(1 / 120.0)
+        time.sleep(1)
+
+
+def move_at(h_wnd: int, point: Tuple[int, int]):
+    x, y = win32gui.ClientToScreen(h_wnd, point)
+    mouse.move(x, y)
+
+
+def screenshot(h_wnd: int) -> PIL.Image.Image:
+    init()
+    # XXX: BitBlt capture not work, background window is not supportted
+    # Maybe use WindowsGraphicsCapture like obs do
+    with topmost(h_wnd):
+        # not use GetWindowRect to exclude border
+        _, _, w, h = win32gui.GetClientRect(h_wnd)
+        x, y = win32gui.ClientToScreen(h_wnd, (0, 0))
+        left, top, right, bottom = x, y, x + w, y + h
+        bbox = (left, top, right, bottom)
+        return PIL.ImageGrab.grab(bbox, True, True)
 
 
 # TODO: move client inside visible area

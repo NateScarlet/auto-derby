@@ -13,7 +13,7 @@ import webbrowser
 import win32con
 import win32gui
 
-from . import window, jobs
+from . import jobs, clients
 
 import logging
 import logging.handlers
@@ -44,8 +44,8 @@ def main():
         )
         exit(1)
 
-    h_wnd = window.get_game()
-    if not h_wnd:
+    c = clients.DMMClient.find()
+    if not c:
         if (
             win32gui.MessageBox(
                 0, "Launch DMM umamusume?", "Can not found window", win32con.MB_YESNO
@@ -53,14 +53,15 @@ def main():
             == 6
         ):
             webbrowser.open("dmmgameplayer://umamusume/cl/general/umamusume")
-            while not h_wnd:
+            while not c:
                 time.sleep(1)
                 LOGGER.info("waiting game launch")
-                h_wnd = window.get_game()
+                c = clients.DMMClient.find()
+            LOGGER.info("game window: %s", c.h_wnd)
         else:
             exit(1)
-    window.set_game_size()
-    LOGGER.info("game window: %s", h_wnd)
+    c.setup()
+    clients.set_current(c)
     job()
 
 

@@ -16,9 +16,7 @@ def buy_everything():
         for _, pos in action.match_image_until_disappear(templates.CLOSE_BUTTON):
             action.click(pos)
         action.wait_image(templates.CLOSE_NOW_BUTTON)
-        with action.recover_cursor():
-            action.move(pos)
-            action.wheel(-2)
+        action.wheel(pos, -2)
 
     action.wait_click_image(templates.CLOSE_NOW_BUTTON)
     action.wait_click_image(templates.GREEN_OK_BUTTON)

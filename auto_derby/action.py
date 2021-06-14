@@ -5,33 +5,27 @@ from . import template
 import time
 from typing import Callable, Iterable, Iterator, Text, Tuple, Union
 
-import mouse
-import win32gui
-
-from . import window
-
-import contextlib
+from . import clients
 
 
-@contextlib.contextmanager
-def recover_cursor():
-    ox, oy = win32gui.GetCursorPos()
-    yield
-    mouse.move(ox, oy)
+def vector(v: int, target_width: int) -> int:
+    return int(v / (target_width / clients.current().width))
 
 
-def click_at_window(h_wnd: int, point: Tuple[int, int]):
-    point = win32gui.ClientToScreen(h_wnd, point)
-    with window.topmost(h_wnd), window.recover_foreground(), recover_cursor():
-        mouse.move(point[0], point[1])
-        mouse.click()
-        time.sleep(0.2)
+def vector2(pos: Tuple[int, int], target_width: int) -> Tuple[int, int]:
+    x, y = (vector(i, target_width) for i in pos)
+    return x, y
+
+
+def vector4(
+    rect: Tuple[int, int, int, int], target_width: int
+) -> Tuple[int, int, int, int]:
+    l, t, r, b = (vector(i, target_width) for i in rect)
+    return l, t, r, b
 
 
 def click(point: Tuple[int, int]):
-    h_wnd = window.get_game()
-    click_at_window(h_wnd, point)
-    template.invalidate_screeshot()
+    clients.current().click(point)
 
 
 def count_image(*tmpl: Union[Text, template.Specification]) -> int:
@@ -95,68 +89,19 @@ def wait_click_image(
     click((pos[0] + x, pos[1] + y))
 
 
-def move_at_window(h_wnd: int, point: Tuple[int, int]):
-    x, y = win32gui.ClientToScreen(h_wnd, point)
-    mouse.move(x, y)
-
-
-def move(point: Tuple[int, int]):
-    move_at_window(window.get_game(), point)
-
-
-def wheel_at_window(h_wnd: int, delta: int) -> None:
-    with window.recover_foreground():
-        window.set_forground(h_wnd)
-        for _ in range(abs(delta)):
-            mouse.wheel(1 if delta > 0 else -1)
-            time.sleep(1 / 120.0)
-        time.sleep(1)
-
-
-def wheel(delta: int) -> None:
-    wheel_at_window(window.get_game(), delta)
+def wheel(point: Tuple[int, int], delta: int) -> None:
+    clients.current().wheel(point, delta)
     template.invalidate_screeshot()
-
-
-def drag_at_window(
-    h_wnd: int, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1
-):
-    x, y = win32gui.ClientToScreen(h_wnd, point)
-    with window.topmost(h_wnd), window.recover_foreground(), recover_cursor():
-        mouse.drag(x, y, x + dx, y + dy, duration=duration)
 
 
 def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.03):
-    drag_at_window(window.get_game(), point, dx=dx, dy=dy, duration=duration)
+    clients.current().drag(point, dx=dx, dy=dy, duration=duration)
     template.invalidate_screeshot()
-
-
-@contextlib.contextmanager
-def pressing_mouse(button: Text = "left"):
-    if mouse.is_pressed(button):
-        mouse.release()
-    mouse.press(button)
-    yield
-    mouse.release(button)
-
-
-def drag_through_at_window(
-    h_wnd: int, *points: Tuple[int, int], duration: float = 0.05
-) -> Iterator[Tuple[int, int]]:
-    with recover_cursor(), window.recover_foreground():
-        window.set_forground(h_wnd)
-        move_at_window(h_wnd, points[0])
-        yield points[0]
-        with pressing_mouse(), window.topmost(h_wnd):
-            for p in points[1:]:
-                x, y = win32gui.ClientToScreen(h_wnd, p)
-                mouse.move(x, y, duration=duration)
-                yield p
 
 
 def drag_through(
     *points: Tuple[int, int], duration: float = 0.02
 ) -> Iterator[Tuple[int, int]]:
-    for i in drag_through_at_window(window.get_game(), *points, duration=duration):
+    for i in clients.current().drag_through(*points, duration=duration):
         template.invalidate_screeshot()
         yield i
