@@ -7,7 +7,7 @@ from ctypes import windll
 import logging
 import threading
 import time
-from typing import Callable, Dict, Literal, Optional, Set, Text
+from typing import Callable, Dict, Literal, Optional, Set, Text, Tuple
 
 import win32con
 import win32gui
@@ -57,11 +57,29 @@ def get_game() -> int:
     return win32gui.FindWindow("UnityWndClass", "umamusume")
 
 
+# TODO: change size to 540 * 960
+_CLIENT_WIDTH = 466
+
+
 def set_game_size() -> None:
     # Need fixed height for easy template matching
-    # TODO: change size to 540 * 960
-    # set_client_size(get_game(), 540, 960)
-    set_client_size(get_game(), 466, 828)
+    set_client_size(get_game(), _CLIENT_WIDTH, int(_CLIENT_WIDTH / (9 / 16)))
+
+
+def vector(v: int, target_width: int) -> int:
+    return int(v / (target_width / _CLIENT_WIDTH))
+
+
+def vector2(pos: Tuple[int, int], target_width: int) -> Tuple[int, int]:
+    x, y = (vector(i, target_width) for i in pos)
+    return x, y
+
+
+def vector4(
+    rect: Tuple[int, int, int, int], target_width: int
+) -> Tuple[int, int, int, int]:
+    l, t, r, b = (vector(i, target_width) for i in rect)
+    return l, t, r, b
 
 
 _INIT_ONCE: Dict[Literal["value"], bool] = {"value": False}

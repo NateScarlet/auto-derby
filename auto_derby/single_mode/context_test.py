@@ -12,7 +12,7 @@ def test_update_by_command_scene():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 12, 2), ctx.date
-    assert ctx.vitality == 0.9162011173184358, ctx.vitality
+    assert round(ctx.vitality, 2) == 0.92, ctx.vitality
     assert ctx.speed == 281, ctx.speed
     assert ctx.stamina == 217, ctx.stamina
     assert ctx.power == 210, ctx.power
@@ -26,7 +26,7 @@ def test_update_by_command_scene_2():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (2, 1, 1), ctx.date
-    assert ctx.vitality == 0.9162011173184358, ctx.vitality
+    assert round(ctx.vitality, 2) == 0.92, ctx.vitality
     assert ctx.speed == 281, ctx.speed
     assert ctx.stamina == 217, ctx.stamina
     assert ctx.power == 210, ctx.power
@@ -40,7 +40,7 @@ def test_update_by_command_scene_3():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (3, 1, 1), ctx.date
-    assert ctx.vitality == 1, ctx.vitality
+    assert round(ctx.vitality, 2) == 1, ctx.vitality
     assert ctx.speed == 589, ctx.speed
     assert ctx.stamina == 375, ctx.stamina
     assert ctx.power == 461, ctx.power
@@ -54,7 +54,7 @@ def test_update_by_command_scene_4():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (2, 4, 1), ctx.date
-    assert ctx.vitality == 0.9441340782122905, ctx.vitality
+    assert round(ctx.vitality, 2) == 0.94, ctx.vitality
     assert ctx.speed == 357, ctx.speed
     assert ctx.stamina == 279, ctx.stamina
     assert ctx.power == 275, ctx.power
@@ -68,7 +68,7 @@ def test_update_by_command_scene_issue7():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 0, 0)
-    assert ctx.vitality == 1
+    assert round(ctx.vitality, 2) == 1
     assert ctx.speed == 158
     assert ctx.stamina == 190
     assert ctx.power == 67
@@ -82,7 +82,7 @@ def test_update_by_command_scene_issue12():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 12, 2), ctx.date
-    assert ctx.vitality == 0.7932960893854748, ctx.vitality
+    assert round(ctx.vitality, 2) == 0.79, ctx.vitality
     assert ctx.speed == 266, ctx.speed
     assert ctx.stamina == 228, ctx.stamina
     assert ctx.power == 196, ctx.power
@@ -96,7 +96,7 @@ def test_update_by_command_scene_issue12_2():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 10, 1), ctx.date
-    assert ctx.vitality == 0.7877094972067039, ctx.vitality
+    assert round(ctx.vitality, 2) == 0.79, ctx.vitality
     assert ctx.speed == 241, ctx.speed
     assert ctx.stamina == 237, ctx.stamina
     assert ctx.power == 144, ctx.power
@@ -110,7 +110,7 @@ def test_update_by_command_scene_issue17():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 0, 0), ctx.date
-    assert ctx.vitality == 0.5139664804469274, ctx.vitality
+    assert round(ctx.vitality, 2) == 0.51, ctx.vitality
     assert ctx.speed == 195, ctx.speed
     assert ctx.stamina == 150, ctx.stamina
     assert ctx.power == 119, ctx.power
@@ -124,7 +124,7 @@ def test_update_by_command_scene_issue17_2():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 11, 2), ctx.date
-    assert ctx.vitality == 1, ctx.vitality
+    assert round(ctx.vitality, 2) == 1, ctx.vitality
     assert ctx.speed == 262, ctx.speed
     assert ctx.stamina == 266, ctx.stamina
     assert ctx.power == 142, ctx.power
@@ -138,7 +138,7 @@ def test_update_by_command_scene_issue41():
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (3, 11, 1), ctx.date
-    assert ctx.vitality == 0.8212290502793296, ctx.vitality
+    assert round(ctx.vitality, 2) == 0.82, ctx.vitality
     assert ctx.speed == 1200, ctx.speed
     assert ctx.stamina == 753, ctx.stamina
     assert ctx.power == 616, ctx.power

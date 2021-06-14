@@ -8,18 +8,20 @@ from typing import Set, Text, Tuple
 import cast_unknown as cast
 import cv2
 import numpy as np
-import PIL.ImageOps
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import imagetools, ocr, template, templates
+from .. import imagetools, ocr, template, templates, window
 
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
     img = imagetools.resize_by_heihgt(img, 32)
     cv_img = np.asarray(img.convert("L"))
+    cv_img = imagetools.level(
+        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 80)
+    )
     sharpened_img = imagetools.sharpen(cv_img)
-
+    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
     _, binary_img = cv2.threshold(sharpened_img, 100, 255, cv2.THRESH_BINARY_INV)
     imagetools.fill_area(binary_img, (0,), size_lt=3)
 
@@ -123,7 +125,20 @@ def _recognize_property(img: Image) -> int:
     )
     if np.average(max_match) > 5:
         return 1200
-    return int(ocr.text(PIL.ImageOps.invert(img)))
+
+    cv_img = np.asarray(img.convert("L"))
+    cv_img = imagetools.level(
+        cv_img, np.percentile(cv_img, 10), np.percentile(cv_img, 80)
+    )
+    _, binary_img = cv2.threshold(cv_img, 80, 255, cv2.THRESH_BINARY_INV)
+    imagetools.fill_area(binary_img, (0,), size_lt=3)
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+
+    return int(ocr.text(imagetools.pil_image(binary_img)))
 
 
 class Context:
@@ -204,24 +219,25 @@ class Context:
             self._extra_turn_count = 0
 
     def update_by_command_scene(self, screenshot: Image) -> None:
-        date_bbox = (10, 27, 140, 43)
-        vitality_bbox = (148, 106, 327, 108)
+        date_bbox = window.vector4((10, 27, 140, 43), 466)
+        vitality_bbox = window.vector4((148, 106, 327, 108), 466)
 
         _, detail_button_pos = next(
             template.match(screenshot, templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON)
         )
-        base_y = detail_button_pos[1] + 71
-        speed_bbox = (45, base_y, 90, base_y + 19)
-        stamina_bbox = (125, base_y, 162, base_y + 19)
-        power_bbox = (192, base_y, 234, base_y + 19)
-        guts_bbox = (264, base_y, 308, base_y + 19)
-        wisdom_bbox = (337, base_y, 381, base_y + 19)
+        base_y = detail_button_pos[1] + window.vector(71, 466)
+        t, b = base_y, base_y + window.vector(19, 466)
+        speed_bbox = (window.vector(45, 466), t, window.vector(90, 466), b)
+        stamina_bbox = (window.vector(125, 466), t, window.vector(162, 466), b)
+        power_bbox = (window.vector(192, 466), t, window.vector(234, 466), b)
+        guts_bbox = (window.vector(264, 466), t, window.vector(308, 466), b)
+        wisdom_bbox = (window.vector(337, 466), t, window.vector(381, 466), b)
 
         self.date = _ocr_date(screenshot.crop(date_bbox))
 
         self.vitality = _recognize_vitality(screenshot.crop(vitality_bbox))
 
-        mood_color = screenshot.getpixel((395, 113))
+        mood_color = screenshot.getpixel(window.vector2((395, 113), 466))
         assert isinstance(mood_color, tuple), mood_color
         self.mood = _recognize_mood((mood_color[0], mood_color[1], mood_color[2]))
 
@@ -232,8 +248,8 @@ class Context:
         self.wisdom = _recognize_property(screenshot.crop(wisdom_bbox))
 
     def update_by_class_detail(self, screenshot: Image) -> None:
-        winning_color_pos = (150, 470)
-        fan_count_bbox = (220, 523, 420, 540)
+        winning_color_pos = window.vector2((150, 470), 466)
+        fan_count_bbox = window.vector4((220, 523, 420, 540), 466)
 
         self.is_after_winning = (
             imagetools.compare_color(
@@ -246,18 +262,18 @@ class Context:
         self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
 
     def update_by_character_detail(self, screenshot: Image) -> None:
-        grass_bbox = (158, 263, 173, 280)
-        dart_bbox = (244, 263, 258, 280)
+        grass_bbox = window.vector4((158, 263, 173, 280), 466)
+        dart_bbox = window.vector4((244, 263, 258, 280), 466)
 
-        sprint_bbox = (158, 289, 173, 305)
-        mile_bbox = (244, 289, 258, 305)
-        intermediate_bbox = (329, 289, 344, 305)
-        long_bbox = (414, 289, 430, 305)
+        sprint_bbox = window.vector4((158, 289, 173, 305), 466)
+        mile_bbox = window.vector4((244, 289, 258, 305), 466)
+        intermediate_bbox = window.vector4((329, 289, 344, 305), 466)
+        long_bbox = window.vector4((414, 289, 430, 305), 466)
 
-        lead_bbox = (158, 316, 173, 332)
-        head_bbox = (244, 316, 258, 332)
-        middle_bbox = (329, 316, 344, 332)
-        last_bbox = (414, 316, 430, 332)
+        lead_bbox = window.vector4((158, 316, 173, 332), 466)
+        head_bbox = window.vector4((244, 316, 258, 332), 466)
+        middle_bbox = window.vector4((329, 316, 344, 332), 466)
+        last_bbox = window.vector4((414, 316, 430, 332), 466)
 
         self.turf = _recognize_status(screenshot.crop(grass_bbox))
         self.dart = _recognize_status(screenshot.crop(dart_bbox))
