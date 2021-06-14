@@ -101,3 +101,13 @@ def test_find_by_race_detail_image_issue31():
 
     assert race1.name == "東京優駿（日本ダービー）", race1.name
     assert race1.stadium == "東京", race1.stadium
+
+
+def test_find_by_race_detail_image_issue49():
+    img = PIL.Image.open(_test.DATA_PATH / "race_detail_issue49.png").convert("RGB")
+    ctx = Context()
+    ctx.date = (1, 8, 1)
+    race1 = race.find_by_race_detail_image(ctx, img)
+
+    assert race1.name == "コスモス賞", race1.name
+    assert race1.stadium == "札幌", race1.stadium

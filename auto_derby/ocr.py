@@ -158,6 +158,7 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
 
     max_char_width = max(bbox[2] - bbox[0] for _, bbox in contours_with_bbox)
     max_char_height = max(bbox[3] - bbox[1] for _, bbox in contours_with_bbox)
+    max_char_width = max(max_char_height, max_char_width)
 
     char_img_list: List[Tuple[Tuple[int, int, int, int], np.ndarray]] = []
     char_parts: List[np.ndarray] = []
