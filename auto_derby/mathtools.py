@@ -35,3 +35,21 @@ def integrate(
     for i in range(current, current + delta):
         ret += interpolate(i, value_map)
     return ret
+
+
+class ResizeProxy:
+    def __init__(self, to: int):
+        self.to = to
+
+    def vector(self, v: int, from_: int) -> int:
+        return int(v / (from_ / self.to))
+
+    def vector2(self, pos: Tuple[int, int], from_: int) -> Tuple[int, int]:
+        x, y = (self.vector(i, from_) for i in pos)
+        return x, y
+
+    def vector4(
+        self, rect: Tuple[int, int, int, int], from_: int
+    ) -> Tuple[int, int, int, int]:
+        l, t, r, b = (self.vector(i, from_) for i in rect)
+        return l, t, r, b

@@ -1,6 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
+from . import mathtools
 from . import template
 import time
 from typing import Callable, Iterable, Iterator, Text, Tuple, Union
@@ -9,19 +10,17 @@ from . import clients
 
 
 def vector(v: int, target_width: int) -> int:
-    return int(v / (target_width / clients.current().width))
+    return mathtools.ResizeProxy(clients.current().width).vector(v, target_width)
 
 
-def vector2(pos: Tuple[int, int], target_width: int) -> Tuple[int, int]:
-    x, y = (vector(i, target_width) for i in pos)
-    return x, y
+def vector2(v: Tuple[int, int], target_width: int) -> Tuple[int, int]:
+    return mathtools.ResizeProxy(clients.current().width).vector2(v, target_width)
 
 
 def vector4(
-    rect: Tuple[int, int, int, int], target_width: int
+    v: Tuple[int, int, int, int], target_width: int
 ) -> Tuple[int, int, int, int]:
-    l, t, r, b = (vector(i, target_width) for i in rect)
-    return l, t, r, b
+    return mathtools.ResizeProxy(clients.current().width).vector4(v, target_width)
 
 
 def click(point: Tuple[int, int]):
