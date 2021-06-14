@@ -10,7 +10,7 @@ if True:
 
 from typing import Text
 import cv2
-from auto_derby import template, templates, window
+from auto_derby import template, templates, clients
 import pathlib
 import PIL.Image
 import numpy as np
@@ -73,10 +73,14 @@ def main():
     game_image_path = args.game_image
     if not name:
         name = _latest_file()
-    window.set_game_size()
     if game_image_path:
         game_image = PIL.Image.open(game_image_path)
     else:
+        c = clients.DMMClient.find()
+        assert c, "dmm client is not running"
+        c.setup()
+        clients.set_current(c)
+
         game_image = template.screenshot()
     create_pos_mask(name, game_image, threshold)
 
