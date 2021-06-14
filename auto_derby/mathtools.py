@@ -42,7 +42,7 @@ class ResizeProxy:
         self.to = to
 
     def vector(self, v: int, from_: int) -> int:
-        return int(v / (from_ / self.to))
+        return round(v / (from_ / self.to))
 
     def vector2(self, pos: Tuple[int, int], from_: int) -> Tuple[int, int]:
         x, y = (self.vector(i, from_) for i in pos)
