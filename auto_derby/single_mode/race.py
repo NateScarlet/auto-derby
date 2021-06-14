@@ -505,10 +505,10 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
         template.match(screenshot, templates.SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT)
     )
     no1_fan_count_bbox = (
-        150,
-        no1_fan_count_pos[1] + 1,
-        400,
-        no1_fan_count_pos[1] + 1 + 18,
+        rp.vector(150, 466),
+        no1_fan_count_pos[1],
+        rp.vector(400, 466),
+        no1_fan_count_pos[1] + rp.vector(18, 466),
     )
 
     grades = _recognize_grade(
