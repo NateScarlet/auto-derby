@@ -26,6 +26,7 @@ _RACE_DETAIL_BUTTON = template.Specification(
 
 def _current_race(ctx: Context) -> race.Race:
     action.wait_click_image(_RACE_DETAIL_BUTTON)
+    action.wait_image(templates.SINGLE_MODE_RACE_DETAIL_TITLE)
     race1 = race.find_by_race_detail_image(ctx, template.screenshot())
     action.wait_click_image(templates.CLOSE_BUTTON)
     return race1
