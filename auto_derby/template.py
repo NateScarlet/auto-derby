@@ -36,7 +36,7 @@ def screenshot(*, max_age: float = 1) -> Image:
     if cached_time < dt.datetime.now() - dt.timedelta(seconds=max_age):
         new_img = clients.current().screenshot()
         # TODO: use 540 width
-        new_img = imagetools.resize(new_img, width=466)
+        new_img = imagetools.resize(new_img, width=540)
         if _LAST_SCREENSHOT_SAVE_PATH:
             new_img.save(_LAST_SCREENSHOT_SAVE_PATH)
         LOGGER.debug("screenshot")

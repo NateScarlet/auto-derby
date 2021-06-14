@@ -8,7 +8,11 @@ _TEST_DATA_PATH = Path(__file__).parent / "test_data"
 
 
 def test_update_by_training_scene():
-    img = PIL.Image.open(_TEST_DATA_PATH / "training_scene.png").convert("RGB")
+    img = (
+        PIL.Image.open(_TEST_DATA_PATH / "training_scene.png")
+        .convert("RGB")
+        .resize((540, 960))
+    )
 
     training = Training.from_training_scene(img)
     assert training.speed == 26
@@ -20,7 +24,11 @@ def test_update_by_training_scene():
 
 
 def test_update_by_training_scene_2():
-    img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_2.png").convert("RGB")
+    img = (
+        PIL.Image.open(_TEST_DATA_PATH / "training_scene_2.png")
+        .convert("RGB")
+        .resize((540, 960))
+    )
 
     training = Training.from_training_scene(img)
     assert training.speed == 6
@@ -32,7 +40,11 @@ def test_update_by_training_scene_2():
 
 
 def test_update_by_training_scene_3():
-    img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_3.png").convert("RGB")
+    img = (
+        PIL.Image.open(_TEST_DATA_PATH / "training_scene_3.png")
+        .convert("RGB")
+        .resize((540, 960))
+    )
 
     training = Training.from_training_scene(img)
     assert training.speed == 6
@@ -44,7 +56,11 @@ def test_update_by_training_scene_3():
 
 
 def test_update_by_training_scene_4():
-    img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_4.png").convert("RGB")
+    img = (
+        PIL.Image.open(_TEST_DATA_PATH / "training_scene_4.png")
+        .convert("RGB")
+        .resize((540, 960))
+    )
 
     training = Training.from_training_scene(img)
     assert training.speed == 7
@@ -56,7 +72,11 @@ def test_update_by_training_scene_4():
 
 
 def test_update_by_training_scene_issue9():
-    img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue9.png").convert("RGB")
+    img = (
+        PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue9.png")
+        .convert("RGB")
+        .resize((540, 960))
+    )
 
     training = Training.from_training_scene(img)
     assert training.speed == 12
@@ -68,7 +88,11 @@ def test_update_by_training_scene_issue9():
 
 
 def test_update_by_training_scene_issue24():
-    img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue24.png").convert("RGB")
+    img = (
+        PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue24.png")
+        .convert("RGB")
+        .resize((540, 960))
+    )
 
     training = Training.from_training_scene(img)
     assert training.speed == 0
@@ -80,7 +104,11 @@ def test_update_by_training_scene_issue24():
 
 
 def test_update_by_training_scene_issue51():
-    img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue51.png").convert("RGB")
+    img = (
+        PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue51.png")
+        .convert("RGB")
+        .resize((540, 960))
+    )
 
     training = Training.from_training_scene(img)
     assert training.speed == 21

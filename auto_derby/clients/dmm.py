@@ -66,9 +66,7 @@ class DMMClient(Client):
         return
 
     def setup(self) -> None:
-        # TODO: use 540 width
-        # self.set_size(540, 960)
-        self.set_size(466, 828)
+        self.set_size(540, 960)
 
     def screenshot(self) -> PIL.Image.Image:
         return window.screenshot(self.h_wnd)

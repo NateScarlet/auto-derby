@@ -43,8 +43,16 @@ def _ocr_training_effect(img: Image) -> int:
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
 
     outline_img = imagetools.color_key(
-        sharpened_img, np.full_like(cv_img, (255, 255, 255))
+        sharpened_img,
+        np.full_like(cv_img, (255, 255, 255)),
     ).clip(0, 255)
+    outline_img = cv2.dilate(
+        outline_img,
+        cv2.getStructuringElement(
+            cv2.MORPH_DILATE,
+            (2, 2),
+        ),
+    )
 
     bg_mask_img = imagetools.bg_mask_by_outline(outline_img)
 

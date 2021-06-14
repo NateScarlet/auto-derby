@@ -41,7 +41,7 @@ def _choose_race(ctx: Context, race1: race.Race) -> None:
         return
 
     while True:
-        action.click((100, 600))
+        action.click(rp.vector2((100, 600), 466))
         if _current_race(ctx) == race1:
             return
         for _ in action.drag_through(

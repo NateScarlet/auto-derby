@@ -12,6 +12,7 @@ import cast_unknown as cast
 import cv2
 import PIL.Image
 import PIL.ImageOps
+import numpy as np
 
 from .. import imagetools, ocr, templates, template, mathtools
 from .context import Context
@@ -440,14 +441,25 @@ def find(ctx: Context) -> Iterator[Race]:
 
 def _recognize_fan_count(img: PIL.Image.Image) -> int:
     cv_img = imagetools.cv_image(img.convert("L"))
-    cv_img = imagetools.mix(cv_img, imagetools.sharpen(cv_img), 0.5)
-    text = ocr.text(imagetools.pil_image(255 - cv_img))
+    cv_img = imagetools.level(
+        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
+    )
+    _, binary_img = cv2.threshold(cv_img, 50, 255, cv2.THRESH_BINARY_INV)
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+    text = ocr.text(imagetools.pil_image(binary_img))
     return int(text.rstrip("人").replace(",", ""))
 
 
 def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
     cv_img = imagetools.cv_image(img.convert("L"))
-    _, binary_img = cv2.threshold(255 - cv_img, 150, 255, cv2.THRESH_BINARY)
+    cv_img = imagetools.level(
+        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
+    )
+    _, binary_img = cv2.threshold(cv_img, 50, 255, cv2.THRESH_BINARY_INV)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("binary_img", binary_img)

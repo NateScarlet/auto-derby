@@ -79,8 +79,16 @@ def _recognize_mood(rgb_color: Tuple[int, int, int]) -> Tuple[float, float]:
 
 def _recognize_fan_count(img: Image) -> int:
     cv_img = imagetools.cv_image(img.convert("L"))
-    cv_img = imagetools.mix(cv_img, imagetools.sharpen(cv_img), 0.5)
-    text = ocr.text(imagetools.pil_image(255 - cv_img))
+    cv_img = imagetools.level(
+        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
+    )
+    _, binary_img = cv2.threshold(cv_img, 50, 255, cv2.THRESH_BINARY_INV)
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+    text = ocr.text(imagetools.pil_image(binary_img))
     return int(text.rstrip("人").replace(",", ""))
 
 
@@ -130,7 +138,7 @@ def _recognize_property(img: Image) -> int:
     cv_img = imagetools.level(
         cv_img, np.percentile(cv_img, 10), np.percentile(cv_img, 80)
     )
-    _, binary_img = cv2.threshold(cv_img, 80, 255, cv2.THRESH_BINARY_INV)
+    _, binary_img = cv2.threshold(cv_img, 60, 255, cv2.THRESH_BINARY_INV)
     imagetools.fill_area(binary_img, (0,), size_lt=3)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)

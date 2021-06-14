@@ -176,7 +176,18 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
         char_img = char_img[t:b, l:r]
         char_img_list.append((char_bbox, char_img))
 
-    for i, bbox in contours_with_bbox:
+    def _get_expanded_bbox(index: int) -> Tuple[int, int, int, int]:
+        _, bbox = contours_with_bbox[index]
+        if index + 1 < len(contours_with_bbox):
+            _, next_bbox = contours_with_bbox[index + 1]
+            if next_bbox[0] - bbox[2] < 2:
+                bbox = _union_bbox(bbox, _get_expanded_bbox(index + 1))
+        return bbox
+
+    for index, v in enumerate(contours_with_bbox):
+        i, _ = v
+        bbox = _get_expanded_bbox(index)
+
         l, t, r, b = bbox
         is_new_char = (
             char_parts
