@@ -388,8 +388,19 @@ class Race:
         )
 
         not_winning_score = 0 if ctx.is_after_winning else 1.5 * ctx.turn_count()
+        continuous_race_penalty = mathtools.interpolate(
+            ctx.continuous_race_count(),
+            (
+                (2, 0),
+                (3, 5),
+                (4, 25),
+                (5, 50),
+            ),
+        )
 
-        return fan_score + prop + skill * 0.5 + not_winning_score
+        return (
+            fan_score + prop + skill * 0.5 + not_winning_score - continuous_race_penalty
+        )
 
 
 def _load() -> Tuple[Race, ...]:

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Text, Tuple
+from typing import Set, Text, Tuple
 
 import cast_unknown as cast
 import cv2
@@ -169,6 +169,7 @@ class Context:
 
         self._extra_turn_count = 0
         self.target_fan_count = 0
+        self.race_turns: Set[int] = set()
 
         self.turf = Context.STATUS_NONE
         self.dart = Context.STATUS_NONE
@@ -298,3 +299,10 @@ class Context:
 
     def total_turn_count(self) -> int:
         return 24 * 3 + 6
+
+    def continuous_race_count(self) -> int:
+        return len(
+            set(range(self.turn_count() - 3, self.turn_count())).intersection(
+                self.race_turns
+            )
+        )

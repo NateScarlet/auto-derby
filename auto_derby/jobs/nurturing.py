@@ -50,7 +50,7 @@ def _choose_race(ctx: Context, race1: race.Race) -> None:
             pass
 
 
-def _handle_training(ctx: Context):
+def _handle_training(ctx: Context) -> None:
     trainings: List[Training] = []
 
     action.wait_image(_TRAINING_CONFIRM)
@@ -97,7 +97,14 @@ def _handle_training(ctx: Context):
             action.wait_click_image(templates.SINGLE_MODE_COMMAND_RACE)
             time.sleep(0.5)
             if action.count_image(templates.SINGLE_MODE_CONTINUOUS_RACE_TITLE):
-                action.wait_click_image(templates.GREEN_OK_BUTTON)
+                if ctx.continuous_race_count() >= 3:
+                    action.wait_click_image(templates.GREEN_OK_BUTTON)
+                else:
+                    # continuous race count incorrect, evaluate again:
+                    ctx.race_turns.update(range(ctx.turn_count() - 3, ctx.turn_count()))
+                    action.wait_click_image(templates.CANCEL_BUTTON)
+                    action.wait_click_image(templates.SINGLE_MODE_COMMAND_TRAINING)
+                    _handle_training(ctx)
             _choose_race(ctx, r)
             _handle_race(ctx, r)
             return
@@ -194,6 +201,7 @@ def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
     action.wait_click_image(templates.SINGLE_MODE_RACE_START_BUTTON)
     action.wait_click_image(templates.SINGLE_MODE_RACE_START_BUTTON)
     action.wait_image(templates.RACE_RESULT_BUTTON)
+    ctx.race_turns.add(ctx.turn_count())
 
     _choose_running_style(ctx, race1)
 
