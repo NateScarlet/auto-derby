@@ -11,7 +11,7 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import imagetools, ocr, template, templates, action
+from .. import imagetools, ocr, template, templates, mathtools
 
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
@@ -219,25 +219,26 @@ class Context:
             self._extra_turn_count = 0
 
     def update_by_command_scene(self, screenshot: Image) -> None:
-        date_bbox = action.vector4((10, 27, 140, 43), 466)
-        vitality_bbox = action.vector4((148, 106, 327, 108), 466)
+        rp = mathtools.ResizeProxy(screenshot.width)
+        date_bbox = rp.vector4((10, 27, 140, 43), 466)
+        vitality_bbox = rp.vector4((148, 106, 327, 108), 466)
 
         _, detail_button_pos = next(
             template.match(screenshot, templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON)
         )
-        base_y = detail_button_pos[1] + action.vector(71, 466)
-        t, b = base_y, base_y + action.vector(19, 466)
-        speed_bbox = (action.vector(45, 466), t, action.vector(90, 466), b)
-        stamina_bbox = (action.vector(125, 466), t, action.vector(162, 466), b)
-        power_bbox = (action.vector(192, 466), t, action.vector(234, 466), b)
-        guts_bbox = (action.vector(264, 466), t, action.vector(308, 466), b)
-        wisdom_bbox = (action.vector(337, 466), t, action.vector(381, 466), b)
+        base_y = detail_button_pos[1] + rp.vector(71, 466)
+        t, b = base_y, base_y + rp.vector(19, 466)
+        speed_bbox = (rp.vector(45, 466), t, rp.vector(90, 466), b)
+        stamina_bbox = (rp.vector(125, 466), t, rp.vector(162, 466), b)
+        power_bbox = (rp.vector(192, 466), t, rp.vector(234, 466), b)
+        guts_bbox = (rp.vector(264, 466), t, rp.vector(308, 466), b)
+        wisdom_bbox = (rp.vector(337, 466), t, rp.vector(381, 466), b)
 
         self.date = _ocr_date(screenshot.crop(date_bbox))
 
         self.vitality = _recognize_vitality(screenshot.crop(vitality_bbox))
 
-        mood_color = screenshot.getpixel(action.vector2((395, 113), 466))
+        mood_color = screenshot.getpixel(rp.vector2((395, 113), 466))
         assert isinstance(mood_color, tuple), mood_color
         self.mood = _recognize_mood((mood_color[0], mood_color[1], mood_color[2]))
 
@@ -248,8 +249,9 @@ class Context:
         self.wisdom = _recognize_property(screenshot.crop(wisdom_bbox))
 
     def update_by_class_detail(self, screenshot: Image) -> None:
-        winning_color_pos = action.vector2((150, 470), 466)
-        fan_count_bbox = action.vector4((220, 523, 420, 540), 466)
+        rp = mathtools.ResizeProxy(screenshot.width)
+        winning_color_pos = rp.vector2((150, 470), 466)
+        fan_count_bbox = rp.vector4((220, 523, 420, 540), 466)
 
         self.is_after_winning = (
             imagetools.compare_color(
@@ -262,18 +264,19 @@ class Context:
         self.fan_count = _recognize_fan_count(screenshot.crop(fan_count_bbox))
 
     def update_by_character_detail(self, screenshot: Image) -> None:
-        grass_bbox = action.vector4((158, 263, 173, 280), 466)
-        dart_bbox = action.vector4((244, 263, 258, 280), 466)
+        rp = mathtools.ResizeProxy(screenshot.width)
+        grass_bbox = rp.vector4((158, 263, 173, 280), 466)
+        dart_bbox = rp.vector4((244, 263, 258, 280), 466)
 
-        sprint_bbox = action.vector4((158, 289, 173, 305), 466)
-        mile_bbox = action.vector4((244, 289, 258, 305), 466)
-        intermediate_bbox = action.vector4((329, 289, 344, 305), 466)
-        long_bbox = action.vector4((414, 289, 430, 305), 466)
+        sprint_bbox = rp.vector4((158, 289, 173, 305), 466)
+        mile_bbox = rp.vector4((244, 289, 258, 305), 466)
+        intermediate_bbox = rp.vector4((329, 289, 344, 305), 466)
+        long_bbox = rp.vector4((414, 289, 430, 305), 466)
 
-        lead_bbox = action.vector4((158, 316, 173, 332), 466)
-        head_bbox = action.vector4((244, 316, 258, 332), 466)
-        middle_bbox = action.vector4((329, 316, 344, 332), 466)
-        last_bbox = action.vector4((414, 316, 430, 332), 466)
+        lead_bbox = rp.vector4((158, 316, 173, 332), 466)
+        head_bbox = rp.vector4((244, 316, 258, 332), 466)
+        middle_bbox = rp.vector4((329, 316, 344, 332), 466)
+        last_bbox = rp.vector4((414, 316, 430, 332), 466)
 
         self.turf = _recognize_status(screenshot.crop(grass_bbox))
         self.dart = _recognize_status(screenshot.crop(dart_bbox))

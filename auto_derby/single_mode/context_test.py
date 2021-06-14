@@ -1,5 +1,4 @@
 from .context import Context
-from .. import clients
 
 from pathlib import Path
 import PIL.Image
@@ -10,7 +9,6 @@ _TEST_DATA_PATH = Path(__file__).parent / "test_data"
 
 def test_update_by_command_scene():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 12, 2), ctx.date
@@ -25,7 +23,6 @@ def test_update_by_command_scene():
 
 def test_update_by_command_scene_2():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_2.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (2, 1, 1), ctx.date
@@ -40,7 +37,6 @@ def test_update_by_command_scene_2():
 
 def test_update_by_command_scene_3():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_3.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (3, 1, 1), ctx.date
@@ -55,7 +51,6 @@ def test_update_by_command_scene_3():
 
 def test_update_by_command_scene_4():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_4.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (2, 4, 1), ctx.date
@@ -70,7 +65,6 @@ def test_update_by_command_scene_4():
 
 def test_update_by_command_scene_issue7():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue7.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 0, 0)
@@ -85,7 +79,6 @@ def test_update_by_command_scene_issue7():
 
 def test_update_by_command_scene_issue12():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue12.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 12, 2), ctx.date
@@ -100,7 +93,6 @@ def test_update_by_command_scene_issue12():
 
 def test_update_by_command_scene_issue12_2():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue12_2.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 10, 1), ctx.date
@@ -115,7 +107,6 @@ def test_update_by_command_scene_issue12_2():
 
 def test_update_by_command_scene_issue17():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue17.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 0, 0), ctx.date
@@ -130,7 +121,6 @@ def test_update_by_command_scene_issue17():
 
 def test_update_by_command_scene_issue17_2():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue17_2.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 11, 2), ctx.date
@@ -145,7 +135,6 @@ def test_update_by_command_scene_issue17_2():
 
 def test_update_by_command_scene_issue41():
     img = PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue41.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_command_scene(img)
     assert ctx.date == (3, 11, 1), ctx.date
@@ -160,7 +149,6 @@ def test_update_by_command_scene_issue41():
 
 def test_update_by_class_detail():
     img = PIL.Image.open(_TEST_DATA_PATH / "class_detail.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1, ctx.fan_count
@@ -169,7 +157,6 @@ def test_update_by_class_detail():
 
 def test_update_by_class_detail_2():
     img = PIL.Image.open(_TEST_DATA_PATH / "class_detail_2.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1225, ctx.fan_count
@@ -178,7 +165,6 @@ def test_update_by_class_detail_2():
 
 def test_update_by_class_detail_3():
     img = PIL.Image.open(_TEST_DATA_PATH / "class_detail_3.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 11950, ctx.fan_count
@@ -187,7 +173,6 @@ def test_update_by_class_detail_3():
 
 def test_update_by_class_detail_4():
     img = PIL.Image.open(_TEST_DATA_PATH / "class_detail_4.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 148805, ctx.fan_count
@@ -196,7 +181,6 @@ def test_update_by_class_detail_4():
 
 def test_update_by_class_detail_5():
     img = PIL.Image.open(_TEST_DATA_PATH / "class_detail_5.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 127591, ctx.fan_count
@@ -205,7 +189,6 @@ def test_update_by_class_detail_5():
 
 def test_update_by_class_detail_issue35():
     img = PIL.Image.open(_TEST_DATA_PATH / "class_detail_issue35.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1129, ctx.fan_count
@@ -214,7 +197,6 @@ def test_update_by_class_detail_issue35():
 
 def test_update_by_class_detail_issue35_2():
     img = PIL.Image.open(_TEST_DATA_PATH / "class_detail_issue35_2.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 4119, ctx.fan_count
@@ -223,7 +205,6 @@ def test_update_by_class_detail_issue35_2():
 
 def test_update_by_character_detail():
     img = PIL.Image.open(_TEST_DATA_PATH / "character_detail.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_character_detail(img)
 
@@ -243,7 +224,6 @@ def test_update_by_character_detail():
 
 def test_update_by_character_detail_2():
     img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_2.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_character_detail(img)
 
@@ -263,7 +243,6 @@ def test_update_by_character_detail_2():
 
 def test_update_by_character_detail_3():
     img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_3.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_character_detail(img)
 
@@ -283,7 +262,6 @@ def test_update_by_character_detail_3():
 
 def test_update_by_character_detail_4():
     img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_4.png").convert("RGB")
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_character_detail(img)
 
@@ -305,7 +283,6 @@ def test_update_by_character_detail_issue39():
     img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_issue39.png").convert(
         "RGB"
     )
-    clients.set_current(clients.SingleImageClient(img))
     ctx = Context()
     ctx.update_by_character_detail(img)
 

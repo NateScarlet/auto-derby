@@ -177,5 +177,3 @@ def match(
             yield j
     if match_count == 0:
         LOGGER.info("no match: tmpl=%s", tmpl)
-
-
