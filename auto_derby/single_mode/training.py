@@ -27,7 +27,7 @@ def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarra
 
 def _ocr_training_effect(img: Image) -> int:
     cv_img = cv2.cvtColor(
-        np.asarray(imagetools.resize_by_heihgt(img, 32)), cv2.COLOR_RGB2BGR
+        np.asarray(imagetools.resize(img, height=32)), cv2.COLOR_RGB2BGR
     )
     sharpened_img = cv2.filter2D(
         cv_img,

@@ -15,7 +15,7 @@ from .. import imagetools, ocr, template, templates, window
 
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
-    img = imagetools.resize_by_heihgt(img, 32)
+    img = imagetools.resize(img, height=32)
     cv_img = np.asarray(img.convert("L"))
     cv_img = imagetools.level(
         cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 80)
@@ -85,7 +85,7 @@ def _recognize_fan_count(img: Image) -> int:
 
 
 def _recognize_status(img: Image) -> Tuple[int, Text]:
-    cv_img = imagetools.cv_image(imagetools.resize_by_heihgt(img.convert("L"), 64))
+    cv_img = imagetools.cv_image(imagetools.resize(img.convert("L"), height=64))
     cv_img = imagetools.level(
         cv_img, np.percentile(cv_img, 5), np.percentile(cv_img, 95)
     )

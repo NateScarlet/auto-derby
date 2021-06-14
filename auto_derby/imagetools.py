@@ -185,10 +185,22 @@ def bg_mask_by_outline(outline_img: np.ndarray) -> np.ndarray:
     return border_flood_fill(outline_img)
 
 
-def resize_by_heihgt(img: Image, height: int, *, resample: int = BICUBIC) -> Image:
+def resize(
+    img: Image,
+    *,
+    height: Optional[int] = None,
+    width: Optional[int] = None,
+    resample: int = BICUBIC,
+) -> Image:
+    if height and width:
+        return img.resize((width, height), resample=resample)
     w, h = img.width, img.height
-    w = round(height / h * w)
-    h = height
+    if height:
+        w = round(height * (w / h))
+        h = height
+    elif width:
+        h = round(width * (h / w))
+        w = width
     return img.resize((w, h), resample=resample)
 
 
