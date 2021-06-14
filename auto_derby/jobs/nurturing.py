@@ -105,6 +105,7 @@ def _handle_training(ctx: Context) -> None:
                     action.wait_click_image(templates.CANCEL_BUTTON)
                     action.wait_click_image(templates.SINGLE_MODE_COMMAND_TRAINING)
                     _handle_training(ctx)
+                    return
             _choose_race(ctx, r)
             _handle_race(ctx, r)
             return
