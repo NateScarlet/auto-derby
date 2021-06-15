@@ -132,7 +132,7 @@ def color_key(
 def constant_color_key(
     img: np.ndarray, *colors: Tuple[int, ...], threshold: float = 0.8, bit_size: int = 8
 ) -> np.ndarray:
-    ret = np.zeros(img.shape[:2])
+    ret = np.zeros(img.shape[:2], dtype=img.dtype)
 
     for color in colors:
         match_img = color_key(

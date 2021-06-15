@@ -26,9 +26,7 @@ def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarra
 
 
 def _ocr_training_effect(img: Image) -> int:
-    cv_img = cv2.cvtColor(
-        np.asarray(imagetools.resize(img, height=32)), cv2.COLOR_RGB2BGR
-    )
+    cv_img = imagetools.cv_image(imagetools.resize(img, height=32))
     sharpened_img = cv2.filter2D(
         cv_img,
         8,
@@ -42,19 +40,30 @@ def _ocr_training_effect(img: Image) -> int:
     )
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
 
-    outline_img = imagetools.color_key(
-        sharpened_img,
-        np.full_like(cv_img, (255, 255, 255)),
-    ).clip(0, 255)
-    outline_img = cv2.dilate(
-        outline_img,
+    white_outline_img = imagetools.constant_color_key(sharpened_img, (255, 255, 255))
+    white_outline_img = cv2.dilate(
+        white_outline_img,
         cv2.getStructuringElement(
             cv2.MORPH_DILATE,
             (2, 2),
         ),
     )
 
-    bg_mask_img = imagetools.bg_mask_by_outline(outline_img)
+    bg_mask_img = imagetools.bg_mask_by_outline(white_outline_img)
+
+    masked_img = cv2.copyTo(cv_img, 255 - bg_mask_img)
+
+    brown_outline_img = imagetools.constant_color_key(
+        masked_img,
+        (29, 62, 194),
+        (24, 113, 218),
+        (30, 109, 216),
+        (69, 104, 197),
+        (119, 139, 224),
+    )
+
+    bg_mask_img = imagetools.bg_mask_by_outline(brown_outline_img)
+    masked_img = cv2.copyTo(masked_img, 255 - bg_mask_img)
 
     fill_gradient = _gradient(
         (
@@ -71,9 +80,6 @@ def _ocr_training_effect(img: Image) -> int:
     fill_img = np.repeat(np.expand_dims(fill_gradient, 1), cv_img.shape[1], axis=1)
     assert fill_img.shape == cv_img.shape
 
-    fg_mask_img = 255 - bg_mask_img
-    masked_img = cv2.copyTo(cv_img, fg_mask_img)
-
     text_img = imagetools.color_key(masked_img, fill_img)
 
     text_img_extra = imagetools.constant_color_key(
@@ -85,14 +91,9 @@ def _ocr_training_effect(img: Image) -> int:
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("sharpened_img", sharpened_img)
-        # cv2.imshow("fill_diff_img", imagetools.color_key(
-        #     masked_img,
-        #     fill_img,
-        #     threshold=0,
-        # ))
-        cv2.imshow("outline_img", outline_img)
+        cv2.imshow("white_outline_img", white_outline_img)
+        cv2.imshow("brown_outline_img", brown_outline_img)
         cv2.imshow("bg_mask_img", bg_mask_img)
-        cv2.imshow("fg_mask_img", fg_mask_img)
         cv2.imshow("masked_img", masked_img)
         cv2.imshow("text_img_extra", text_img_extra)
         cv2.imshow("text_img", text_img)
