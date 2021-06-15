@@ -129,6 +129,16 @@ def test_find_by_race_detail_image_9():
     assert race1.stadium == "京都", race1.stadium
 
 
+def test_find_by_race_detail_image_10():
+    img = PIL.Image.open(_test.DATA_PATH / "race_detail_10.png").convert("RGB")
+    ctx = Context()
+    ctx.date = (1, 9, 1)
+    race1 = race.find_by_race_detail_image(ctx, img)
+
+    assert race1.name == "小倉ジュニアステークス", race1.name
+    assert race1.stadium == "小倉", race1.stadium
+
+
 def test_find_by_race_detail_image_issue31():
     img = (
         PIL.Image.open(_test.DATA_PATH / "race_detail_issue31.png")
