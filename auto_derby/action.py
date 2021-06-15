@@ -1,7 +1,6 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from auto_derby import templates
 from . import mathtools
 from . import template
 import time
