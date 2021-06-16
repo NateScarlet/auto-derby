@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import time
 from typing import List, Optional
 
@@ -203,10 +204,13 @@ def _choose_running_style(ctx: Context, race1: race.Race) -> None:
     action.click(pos)
 
 
+_PAUSE_IF_RACE_ORDER_GT = int(os.getenv("AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT", "5"))
+
+
 def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
     race1 = race1 or _current_race(ctx)
     estimate_order = race1.estimate_order(ctx)
-    if estimate_order > 1:
+    if estimate_order > _PAUSE_IF_RACE_ORDER_GT:
         close_msg = window.info(
             "Race estimate result is No.%d\nplease learn skills before confirm in terminal"
             % estimate_order
