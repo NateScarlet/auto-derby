@@ -222,7 +222,7 @@ def _running_style_single_score(
             (
                 (0, 550),
                 (24, 700),
-                (48, 800),
+                (48, 850),
                 (72, 1000),
             ),
         )
@@ -285,8 +285,8 @@ def _running_style_single_score(
         int(hp / expected_hp * 10000),
         (
             (0, 1.0),
-            (5000, 0.5),
-            (8000, 0.3),
+            (5000, 0.6),
+            (8000, 0.4),
             (9000, 0.2),
             (10000, 0),
         ),
@@ -303,16 +303,7 @@ def _running_style_single_score(
         ),
     )
 
-    ret = mathtools.interpolate(
-        int(spd / expected_spd * 10000),
-        (
-            (0, 0),
-            (7000, 6500),
-            (10000, 8000),
-            (12000, 10000),
-            (20000, 15000),
-        ),
-    )
+    ret = spd / expected_spd * 10000
     ret *= 1 - block_rate
     ret *= 1 - hp_penality
     ret *= 1 - wis_penality
