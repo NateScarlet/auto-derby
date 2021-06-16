@@ -2,6 +2,7 @@
 # -*- coding=UTF-8 -*-
 """.  """
 from __future__ import annotations
+from auto_derby import single_mode
 
 import json
 import logging
@@ -28,7 +29,7 @@ def _running_style_single_score(
     race1: Race,
     status: Tuple[int, Text],
     block_factor: float,
-    stamina_factor: float,
+    hp_factor: float,
     wisdom_factor: float,
 ) -> float:
     """Score standard:
@@ -70,13 +71,13 @@ def _running_style_single_score(
 
     # TODO: race field affect
 
-    # single-mode race bonus
     # https://bbs.nga.cn/read.php?tid=26010713
-    spd += 400
-    sta += 400
-    pow_ += 400
-    gut += 400
-    wis += 400
+    single_mode_bonus = 400
+    spd += single_mode_bonus
+    sta += single_mode_bonus
+    pow_ += single_mode_bonus
+    gut += single_mode_bonus
+    wis += single_mode_bonus
 
     # proper ground
     # from master.mdb `race_proper_ground_rate` table
@@ -132,7 +133,7 @@ def _running_style_single_score(
     # バ場適性が合わないバ場を走ると力強さに欠けうまく走れないことが多い。
     pow_ *= ground_rate
 
-    sta *= stamina_factor
+    sta *= hp_factor
     wis *= wisdom_factor
 
     gut_as_sta = mathtools.interpolate(
@@ -153,7 +154,17 @@ def _running_style_single_score(
         ),
     )
     spd += wis_as_spd
+    wis_as_sta = mathtools.interpolate(
+        int(gut),
+        (
+            (0, 0),
+            (900, 100),
+            (1600, 200),
+        ),
+    )
+    sta += wis_as_sta
 
+    hp = race1.distance + hp_factor * 0.8 * sta
     expected_spd = (
         mathtools.interpolate(
             ctx.turn_count(),
@@ -183,16 +194,16 @@ def _running_style_single_score(
             ),
         )
     )
-    expected_sta = (
-        mathtools.interpolate(
-            race1.distance,
+    expected_hp = (
+        race1.distance
+        * mathtools.interpolate(
+            ctx.turn_count(),
             (
-                (0, 500),
-                (1200, 700),
-                (1600, 800),
-                (2400, 900),
-                (3200, 1100),
-                (4800, 1300),
+                (0, 1.0),
+                (24, 1.4),
+                (48, 1.6),
+                (72, 1.8),
+                (75, 2.0),
             ),
         )
         * {
@@ -209,29 +220,30 @@ def _running_style_single_score(
         mathtools.interpolate(
             ctx.turn_count(),
             (
-                (0, 500),
-                (24, 600),
+                (0, 550),
+                (24, 700),
                 (48, 800),
                 (72, 1000),
             ),
         )
         * {
             Race.GRADE_G1: 1,
-            Race.GRADE_G2: 0.9,
-            Race.GRADE_G3: 0.8,
-            Race.GRADE_PRE_OP: 0.7,
-            Race.GRADE_OP: 0.7,
+            Race.GRADE_G2: 0.95,
+            Race.GRADE_G3: 0.9,
+            Race.GRADE_PRE_OP: 0.8,
+            Race.GRADE_OP: 0.8,
             Race.GRADE_NOT_WINNING: 0.6,
             Race.GRADE_DEBUT: 0.6,
         }[race1.grade]
     )
+
     expected_wis = mathtools.interpolate(
-        race1.distance,
+        ctx.turn_count(),
         (
-            (0, 400),
-            (1600, 700),
-            (2400, 800),
-            (3200, 850),
+            (0, 500),
+            (24, 650),
+            (48, 700),
+            (72, 750),
         ),
     )
 
@@ -269,33 +281,25 @@ def _running_style_single_score(
     )
     block_rate = min(1.0, block_rate)
 
-    sta_penality = mathtools.interpolate(
-        int(sta / expected_sta * 10000),
+    hp_penality = mathtools.interpolate(
+        int(hp / expected_hp * 10000),
         (
-            (0, 10.0),
-            (5000, 0.9),
-            (8000, 0.7),
-            (9000, 0.3),
+            (0, 1.0),
+            (5000, 0.5),
+            (8000, 0.3),
+            (9000, 0.2),
             (10000, 0),
         ),
-    ) * mathtools.interpolate(
-        int(wis / expected_wis * 10000),
-        (
-            (0, 3.0),
-            (5000, 2.0),
-            (8000, 1.5),
-            (9000, 1.2),
-            (10000, 1),
-            (12000, 0.8),
-        ),
     )
+    hp_penality = min(1, hp_penality)
+
     wis_penality = mathtools.interpolate(
         int(wis / expected_wis * 10000),
         (
-            (0, 0.5),
+            (0, 0.3),
             (7000, 0.2),
             (9000, 0.1),
-            (10000, 0),
+            (10000, 0.0),
         ),
     )
 
@@ -310,7 +314,7 @@ def _running_style_single_score(
         ),
     )
     ret *= 1 - block_rate
-    ret *= 1 - sta_penality
+    ret *= 1 - hp_penality
     ret *= 1 - wis_penality
 
     LOGGER.debug(
@@ -318,27 +322,28 @@ def _running_style_single_score(
             "style: "
             "score=%d "
             "block_rate=%.2f "
-            "sta_penality=%0.2f "
+            "hp_penality=%0.2f "
             "wis_penality=%0.2f "
             "spd=%0.2f/%0.2f "
-            "sta=%0.2f/%0.2f "
+            "sta=%0.2f "
+            "hp=%0.2f/%0.2f "
             "pow=%0.2f/%0.2f "
             "gut=%0.2f "
-            "wis=%0.2f/%0.2f"
+            "wis=%0.2f"
         ),
         ret,
         block_rate,
-        sta_penality,
+        hp_penality,
         wis_penality,
         spd,
         expected_spd,
         sta,
-        expected_sta,
+        hp,
+        expected_hp,
         pow_,
         expected_pow,
         gut,
         wis,
-        expected_wis,
     )
     return ret
 
@@ -600,9 +605,9 @@ class Race:
         )
 
         status_penality = 0
-        if self.distance_status(ctx) < ctx.STATUS_A:
+        if self.distance_status(ctx) < ctx.STATUS_B:
             status_penality += 10
-        if self.ground_status(ctx) < ctx.STATUS_A:
+        if self.ground_status(ctx) < ctx.STATUS_B:
             status_penality += 10
 
         return (
