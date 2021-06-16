@@ -1,15 +1,15 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
-from auto_derby import mathtools
 
 import logging
 import time
 from typing import List, Optional
 
+from auto_derby import mathtools
+
 from .. import action, template, templates, window
 from ..single_mode import Context, Training, choice, race
-
 
 LOGGER = logging.getLogger(__name__)
 
@@ -34,7 +34,7 @@ def _current_race(ctx: Context) -> race.Race:
 
 def _choose_race(ctx: Context, race1: race.Race) -> None:
     rp = action.resize_proxy()
-    action.wheel(rp.vector2((100, 500), 466), 1)
+    action.wheel(rp.vector2((100, 500), 466), 10)
     action.click(rp.vector2((100, 500), 466))
 
     if _current_race(ctx) == race1:

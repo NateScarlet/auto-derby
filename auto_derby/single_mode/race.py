@@ -5,16 +5,17 @@ from __future__ import annotations
 
 import json
 import logging
+import math
 import os
 from typing import Any, Dict, Iterator, Text, Tuple
 
 import cast_unknown as cast
 import cv2
+import numpy as np
 import PIL.Image
 import PIL.ImageOps
-import numpy as np
 
-from .. import imagetools, ocr, templates, template, mathtools
+from .. import imagetools, mathtools, ocr, template, templates
 from .context import Context
 
 LOGGER = logging.getLogger(__name__)
@@ -26,14 +27,56 @@ def _running_style_single_score(
     ctx: Context,
     race1: Race,
     status: Tuple[int, Text],
-    factors: Tuple[int, int, int, int, int],
+    block_factor: float,
+    stamina_factor: float,
+    wisdom_factor: float,
 ) -> float:
-    assert sum(factors) == 10000, factors
+    """Score standard:
+
+    No1 P90: 10000
+    No2 P90: 9000
+    No3 P90: 7000
+    No5 P90: 6500
+    50% P90: 5000
+    """
     spd = ctx.speed
     sta = ctx.stamina
-    pow = ctx.power
+    pow_ = ctx.power
     gut = ctx.guts
     wis = ctx.wisdom
+
+    spd *= ctx.mood[1]
+    sta *= ctx.mood[1]
+    pow_ *= ctx.mood[1]
+    gut *= ctx.mood[1]
+    wis *= ctx.mood[1]
+
+    base_speed_coefficient = 1
+    for i in race1.target_statuses:
+        base_speed_coefficient *= 1 + 0.1 * min(
+            2,
+            int(
+                {
+                    race1.TARGET_STATUS_SPEED: ctx.speed,
+                    race1.TARGET_STATUS_POWER: ctx.power,
+                    race1.TARGET_STATUS_STAMINA: ctx.stamina,
+                    race1.TARGET_STATUS_GUTS: ctx.guts,
+                    race1.TARGET_STATUS_WISDOM: ctx.wisdom,
+                }[i]
+                / 300
+            ),
+        )
+    spd *= base_speed_coefficient
+
+    # TODO: race field affect
+
+    # single-mode race bonus
+    # https://bbs.nga.cn/read.php?tid=26010713
+    spd += 400
+    sta += 400
+    pow_ += 400
+    gut += 400
+    wis += 400
 
     # proper ground
     # from master.mdb `race_proper_ground_rate` table
@@ -81,37 +124,186 @@ def _running_style_single_score(
 
     # 距離適性が低い距離のコースを走るとうまくスピードに乗れず、上位争いをすることが難しいことが多い。
     spd *= d_spd_rate
-    pow *= d_pow_rate
+    pow_ *= d_pow_rate
 
     # 適性が低い作戦で走ろうとすると冷静に走れないことが多い。
     wis *= style_rate
 
     # バ場適性が合わないバ場を走ると力強さに欠けうまく走れないことが多い。
-    pow *= ground_rate
+    pow_ *= ground_rate
 
-    total_factor = 1
-    for i in race1.target_statuses:
-        total_factor *= 1 + 0.1 * int(
-            {
-                race1.TARGET_STATUS_SPEED: spd,
-                race1.TARGET_STATUS_POWER: pow,
-                race1.TARGET_STATUS_STAMINA: sta,
-                race1.TARGET_STATUS_GUTS: gut,
-                race1.TARGET_STATUS_WISDOM: wis,
-            }[i]
-            / 300
-        )
-    return (
+    sta *= stamina_factor
+    wis *= wisdom_factor
+
+    gut_as_sta = mathtools.interpolate(
+        int(gut),
         (
-            spd * factors[0]
-            + sta * factors[1]
-            + pow * factors[2]
-            + gut * factors[3]
-            + wis * factors[4]
-        )
-        * total_factor
-        / 10000
+            (0, 0),
+            (1200, 100),
+            (1600, 150),
+        ),
     )
+    sta += gut_as_sta
+    wis_as_spd = mathtools.interpolate(
+        int(gut),
+        (
+            (0, 0),
+            (900, 200),
+            (1600, 350),
+        ),
+    )
+    spd += wis_as_spd
+
+    expected_spd = (
+        mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 700),
+                (24, 700),
+                (48, 900),
+                (72, 1100),
+            ),
+        )
+        * {
+            Race.GRADE_G1: 1,
+            Race.GRADE_G2: 0.9,
+            Race.GRADE_G3: 0.8,
+            Race.GRADE_PRE_OP: 0.7,
+            Race.GRADE_OP: 0.7,
+            Race.GRADE_NOT_WINNING: 0.6,
+            Race.GRADE_DEBUT: 0.6,
+        }[race1.grade]
+        * mathtools.interpolate(
+            race1.distance,
+            (
+                (0, 1.1),
+                (1200, 1.05),
+                (1600, 1.0),
+                (3200, 0.9),
+            ),
+        )
+    )
+    expected_sta = (
+        mathtools.interpolate(
+            race1.distance,
+            (
+                (0, 500),
+                (1200, 700),
+                (1600, 800),
+                (2400, 900),
+                (3200, 1100),
+                (4800, 1300),
+            ),
+        )
+        * {
+            Race.GRADE_G1: 1,
+            Race.GRADE_G2: 0.9,
+            Race.GRADE_G3: 0.85,
+            Race.GRADE_PRE_OP: 0.8,
+            Race.GRADE_OP: 0.8,
+            Race.GRADE_NOT_WINNING: 0.7,
+            Race.GRADE_DEBUT: 0.7,
+        }[race1.grade]
+    )
+    expected_pow = (
+        mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 500),
+                (24, 600),
+                (48, 800),
+                (72, 1000),
+            ),
+        )
+        * {
+            Race.GRADE_G1: 1,
+            Race.GRADE_G2: 0.9,
+            Race.GRADE_G3: 0.8,
+            Race.GRADE_PRE_OP: 0.7,
+            Race.GRADE_OP: 0.7,
+            Race.GRADE_NOT_WINNING: 0.6,
+            Race.GRADE_DEBUT: 0.6,
+        }[race1.grade]
+    )
+    expected_wis = mathtools.interpolate(
+        race1.distance,
+        (
+            (0, 400),
+            (1600, 700),
+            (2400, 800),
+            (3200, 850),
+        ),
+    )
+
+    block_rate = (
+        mathtools.interpolate(
+            int(pow_ / expected_pow * 10000),
+            (
+                (0, 10.0),
+                (6000, 1.0),
+                (7000, 0.6),
+                (8000, 0.4),
+                (10000, 0.1),
+                (12000, 0.01),
+            ),
+        )
+        * mathtools.interpolate(
+            int(spd / expected_spd * 10000),
+            (
+                (6000, 10.0),
+                (8000, 2.0),
+                (10000, 1.0),
+                (12000, 0.8),
+            ),
+        )
+        * block_factor
+    )
+    block_rate = min(1.0, block_rate)
+
+    stamina_penality = mathtools.interpolate(
+        int(sta / expected_sta * 10000),
+        (
+            (0, 10.0),
+            (5000, 0.9),
+            (8000, 0.7),
+            (9000, 0.3),
+            (10000, 0),
+        ),
+    ) * mathtools.interpolate(
+        int(wis / expected_wis * 10000),
+        (
+            (0, 3.0),
+            (5000, 2.0),
+            (8000, 1.5),
+            (9000, 1.2),
+            (10000, 1),
+            (12000, 0.8),
+        ),
+    )
+    wis_penality = mathtools.interpolate(
+        int(wis / expected_wis * 10000),
+        (
+            (0, 0.5),
+            (7000, 0.2),
+            (9000, 0.1),
+            (10000, 0),
+        ),
+    )
+
+    ret = mathtools.interpolate(
+        int(spd / expected_spd * 10000),
+        (
+            (0, 0),
+            (7000, 6500),
+            (10000, 8000),
+            (12000, 10000),
+            (20000, 15000),
+        ),
+    )
+    ret *= 1 - block_rate
+    ret *= 1 - stamina_penality
+    ret *= 1 - wis_penality
+    return ret
 
 
 class Race:
@@ -255,59 +447,22 @@ class Race:
         self,
         ctx: Context,
     ) -> Tuple[float, float, float, float]:
-        lead = _running_style_single_score(
-            ctx, self, ctx.lead, (5000, 3000, 500, 500, 1000)
-        )
-        head = _running_style_single_score(
-            ctx, self, ctx.head, (4500, 2000, 2000, 500, 1000)
-        )
-        middle = _running_style_single_score(
-            ctx, self, ctx.middle, (4500, 1800, 2000, 200, 1500)
-        )
-        last = _running_style_single_score(
-            ctx, self, ctx.last, (4300, 1500, 2300, 200, 1700)
-        )
-
-        if (
-            ctx.speed > ctx.turn_count() * 400 / 24
-            and self.grade >= self.GRADE_G2
-            and self.distance <= 1800
-        ):
-            lead += 40
-        if self.distance >= 2400:
-            lead *= 0.9
+        last = _running_style_single_score(ctx, self, ctx.last, 1.1, 0.995, 0.9)
+        middle = _running_style_single_score(ctx, self, ctx.middle, 1.0, 1, 0.95)
+        head = _running_style_single_score(ctx, self, ctx.head, 0.8, 0.89, 1.0)
+        lead = _running_style_single_score(ctx, self, ctx.lead, 0.5, 0.95, 1.1)
 
         return last, middle, head, lead
 
     def estimate_order(self, ctx: Context) -> int:
-        best_style_score = sorted(self.style_scores(ctx), reverse=True)[0]
-        difficulty = {
-            Race.GRADE_DEBUT: 200,
-            Race.GRADE_NOT_WINNING: 200,
-            Race.GRADE_PRE_OP: 250,
-            Race.GRADE_OP: 250,
-            Race.GRADE_G3: 300,
-            Race.GRADE_G2: 320,
-            Race.GRADE_G1: 350,
-        }[self.grade]
-        if self.distance_status(ctx) < ctx.STATUS_B:
-            difficulty += 120
-        if self.ground_status(ctx) < ctx.STATUS_B:
-            difficulty += 120
-        difficulty = mathtools.interpolate(
-            ctx.turn_count(),
-            (
-                (0, difficulty * 0.8),
-                (24, difficulty),
-                (48, difficulty * 2),
-                (72, difficulty * 2.5),
-            ),
-        )
-        estimate_order = round(
+        style_scores = self.style_scores(ctx)
+        best_style_score = sorted(style_scores, reverse=True)[0]
+        estimate_order = math.ceil(
             mathtools.interpolate(
-                int(best_style_score * ctx.mood[1] / difficulty * 10000),
+                int(best_style_score),
                 (
-                    (5000, 16),
+                    (0, 100),
+                    (5000, self.entry_count * 0.5),
                     (6500, 5),
                     (7000, 3),
                     (9000, 2),
@@ -317,11 +472,10 @@ class Race:
         )
         estimate_order = min(self.entry_count, estimate_order)
         LOGGER.debug(
-            "estimate order: race=%s, order=%d, difficulty=%d, best_style_score=%.2f",
+            "estimate order: race=%s, order=%d, style_scores=%s",
             self,
             estimate_order,
-            difficulty,
-            best_style_score,
+            " ".join(f"{i:.2f}" for i in style_scores),
         )
         return estimate_order
 
@@ -398,9 +552,22 @@ class Race:
                 (5, 50),
             ),
         )
+        fail_penalty = mathtools.interpolate(
+            estimate_order,
+            (
+                (5, 0),
+                (6, 5),
+                (12, 15),
+            ),
+        )
 
         return (
-            fan_score + prop + skill * 0.5 + not_winning_score - continuous_race_penalty
+            fan_score
+            + prop
+            + skill * 0.5
+            + not_winning_score
+            - continuous_race_penalty
+            - fail_penalty
         )
 
 
