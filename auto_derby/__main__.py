@@ -6,7 +6,6 @@
 import argparse
 import os
 from auto_derby import templates
-import ctypes
 import time
 import webbrowser
 
@@ -65,14 +64,6 @@ def main():
     job()
 
 
-def is_admin():
-    # https://stackoverflow.com/a/41930586
-    try:
-        return ctypes.windll.shell32.IsUserAnAdmin()
-    except:
-        return False
-
-
 if __name__ == "__main__":
     logging.basicConfig(
         format="%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
@@ -97,11 +88,6 @@ if __name__ == "__main__":
             continue
         logging.getLogger(i).setLevel(logging.DEBUG)
 
-    if not is_admin():
-        LOGGER.error(
-            "admin permission is required, otherwise mouse event will be ignored by the game."
-        )
-        exit(1)
     try:
         main()
     except:

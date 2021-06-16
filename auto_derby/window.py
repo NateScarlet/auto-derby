@@ -15,7 +15,6 @@ import win32con
 import win32gui
 
 LOGGER = logging.getLogger(__name__)
-_IS_ADMIN = bool(windll.shell32.IsUserAnAdmin())
 
 
 def message_box(
@@ -53,10 +52,6 @@ def message_box(
         t.join()
 
     return _close
-
-
-def get_game() -> int:
-    return win32gui.FindWindow("UnityWndClass", "umamusume")
 
 
 _INIT_ONCE: Dict[Literal["value"], bool] = {"value": False}
@@ -119,7 +114,7 @@ def recover_foreground():
 
 
 def info(msg: Text) -> Callable[[], None]:
-    return message_box(msg, "auto-derby", h_wnd=get_game() if _IS_ADMIN else 0)
+    return message_box(msg, "auto-derby")
 
 
 import mouse

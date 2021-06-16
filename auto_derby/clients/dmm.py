@@ -17,6 +17,8 @@ _INIT_ONCE: Dict[Literal["value"], bool] = {"value": False}
 
 LOGGER = logging.getLogger(__name__)
 
+_IS_ADMIN = bool(windll.shell32.IsUserAnAdmin())
+
 
 def init():
     if _INIT_ONCE["value"]:
@@ -66,6 +68,8 @@ class DMMClient(Client):
         return
 
     def setup(self) -> None:
+        if not _IS_ADMIN:
+            raise PermissionError("DMMClient: require admin permission")
         self.set_size(540, 960)
 
     def screenshot(self) -> PIL.Image.Image:
