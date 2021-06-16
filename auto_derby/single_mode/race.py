@@ -256,11 +256,20 @@ def _running_style_single_score(
                 (12000, 0.8),
             ),
         )
+        * mathtools.interpolate(
+            race1.distance,
+            (
+                (0, 2.0),
+                (1200, 2.0),
+                (2000, 1.0),
+                (3200, 0.6),
+            ),
+        )
         * block_factor
     )
     block_rate = min(1.0, block_rate)
 
-    stamina_penality = mathtools.interpolate(
+    sta_penality = mathtools.interpolate(
         int(sta / expected_sta * 10000),
         (
             (0, 10.0),
@@ -301,8 +310,36 @@ def _running_style_single_score(
         ),
     )
     ret *= 1 - block_rate
-    ret *= 1 - stamina_penality
+    ret *= 1 - sta_penality
     ret *= 1 - wis_penality
+
+    LOGGER.debug(
+        (
+            "style: "
+            "score=%d "
+            "block_rate=%.2f "
+            "sta_penality=%0.2f "
+            "wis_penality=%0.2f "
+            "spd=%0.2f/%0.2f "
+            "sta=%0.2f/%0.2f "
+            "pow=%0.2f/%0.2f "
+            "gut=%0.2f "
+            "wis=%0.2f/%0.2f"
+        ),
+        ret,
+        block_rate,
+        sta_penality,
+        wis_penality,
+        spd,
+        expected_spd,
+        sta,
+        expected_sta,
+        pow_,
+        expected_pow,
+        gut,
+        wis,
+        expected_wis,
+    )
     return ret
 
 
