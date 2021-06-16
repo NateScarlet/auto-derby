@@ -543,6 +543,7 @@ class Race:
         )
 
         not_winning_score = 0 if ctx.is_after_winning else 1.5 * ctx.turn_count()
+
         continuous_race_penalty = mathtools.interpolate(
             ctx.continuous_race_count(),
             (
@@ -561,6 +562,12 @@ class Race:
             ),
         )
 
+        status_penality = 0
+        if self.distance_status(ctx) < ctx.STATUS_A:
+            status_penality += 10
+        if self.ground_status(ctx) < ctx.STATUS_A:
+            status_penality += 10
+
         return (
             fan_score
             + prop
@@ -568,6 +575,7 @@ class Race:
             + not_winning_score
             - continuous_race_penalty
             - fail_penalty
+            - status_penality
         )
 
 
