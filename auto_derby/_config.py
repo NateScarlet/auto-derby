@@ -5,7 +5,7 @@ import os
 
 class config:
     LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", "auto_derby.log")
-    PLUGINS = os.getenv("AUTO_DERBY_PLUGINS", "").split(",")
+    PLUGINS = tuple(i for i in os.getenv("AUTO_DERBY_PLUGINS", "").split(",") if i)
 
     single_mode_race_data_path = os.getenv(
         "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH", "single_mode_races.json"
