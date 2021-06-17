@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Tuple
+from typing import Tuple, Type
 
 import cv2
 import numpy as np
@@ -13,6 +13,10 @@ from PIL.Image import fromarray as image_from_array
 
 from .. import ocr, template, templates, mathtools
 from .context import Context
+
+
+class g:
+    TRAINING_CLASS: Type[Training]
 
 
 def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarray:
@@ -116,6 +120,10 @@ def _training_single_score(
 
 
 class Training:
+    @staticmethod
+    def new() -> Training:
+        return g.TRAINING_CLASS()
+
     def __init__(self):
         self.speed: int = 0
         self.stamina: int = 0
@@ -129,7 +137,7 @@ class Training:
 
     @classmethod
     def from_training_scene(cls, img: Image) -> Training:
-        self = cls()
+        self = cls.new()
         self.confirm_position = next(
             template.match(
                 img,
@@ -245,3 +253,6 @@ class Training:
             ),
         )
         return (spd + sta + pow + per + int_ + skill) * success_rate
+
+
+g.TRAINING_CLASS = Training
