@@ -35,7 +35,7 @@ class config:
         single_mode.training.g.TRAINING_CLASS = cls.SINGLE_MODE_TRAINING_CLASS
         template.g.LAST_SCREENSHOT_SAVE_PATH = cls.LAST_SCRENSHOT_SAVE_PATH
 
-        ocr.load()
+        ocr.reload()
         single_mode.choice.reload()
         single_mode.race.reload()
 

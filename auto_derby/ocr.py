@@ -25,7 +25,7 @@ class g:
     LABELS: Dict[Text, Text] = {}
 
 
-def load() -> None:
+def reload() -> None:
     try:
         with open(g.DATA_PATH, "r", encoding="utf-8") as f:
             g.LABELS = json.load(f)
