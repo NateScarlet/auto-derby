@@ -40,6 +40,7 @@ def main():
     )
     args = parser.parse_args()
     job = avaliable_jobs.get(args.job)
+    plugin.reload()
     plugins = args.plugin
     for i in plugins:
         plugin.install(i)
