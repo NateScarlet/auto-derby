@@ -19,23 +19,23 @@ LOGGER = logging.getLogger(__name__)
 
 
 class g:
-    DATA_PATH: str = ""
-    IMAGE_PATH: str = ""
+    data_path: str = ""
+    image_path: str = ""
 
-    LABELS: Dict[Text, Text] = {}
+    labels: Dict[Text, Text] = {}
 
 
 def reload() -> None:
     try:
-        with open(g.DATA_PATH, "r", encoding="utf-8") as f:
-            g.LABELS = json.load(f)
+        with open(g.data_path, "r", encoding="utf-8") as f:
+            g.labels = json.load(f)
     except OSError:
         pass
 
 
 def _save() -> None:
-    with open(g.DATA_PATH, "w", encoding="utf-8") as f:
-        json.dump(g.LABELS, f, indent=2, ensure_ascii=False)
+    with open(g.data_path, "w", encoding="utf-8") as f:
+        json.dump(g.labels, f, indent=2, ensure_ascii=False)
 
 
 _PREVIEW_PADDING = 4
@@ -48,10 +48,10 @@ def _pad_img(img: np.ndarray, padding: int = _PREVIEW_PADDING) -> np.ndarray:
 
 def _query(h: Text) -> Tuple[Text, Text, float]:
     # TODO: use a more efficient data structure, maybe vp-tree
-    if not g.LABELS:
+    if not g.labels:
         return "", "", 0
     return sorted(
-        ((k, v, imagetools.compare_hash(h, k)) for k, v in g.LABELS.items()),
+        ((k, v, imagetools.compare_hash(h, k)) for k, v in g.labels.items()),
         key=lambda x: x[2],
         reverse=True,
     )[0]
@@ -59,7 +59,7 @@ def _query(h: Text) -> Tuple[Text, Text, float]:
 
 def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     hash_img = cv2.GaussianBlur(img, (7, 7), 1, borderType=cv2.BORDER_CONSTANT)
-    h = imagetools.image_hash(fromarray(hash_img), save_path=g.IMAGE_PATH)
+    h = imagetools.image_hash(fromarray(hash_img), save_path=g.image_path)
     match, value, similarity = _query(h)
     LOGGER.debug(
         "match label: value=%s, current=%s, match=%s, similarity=%0.3f",
@@ -77,13 +77,13 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
         with window.recover_cursor(), window.recover_foreground():  # may during a drag
             while len(ans) != 1:
                 ans = input("Corresponding text for current displaying image:")
-        g.LABELS[h] = ans
+        g.labels[h] = ans
         LOGGER.info("labeled: hash=%s, value=%s", h, ans)
     finally:
         close_msg()
         close_img()
     _save()
-    ret = g.LABELS[h]
+    ret = g.labels[h]
     LOGGER.debug("use label: hash=%s, value=%s", h, ret)
     return ret
 

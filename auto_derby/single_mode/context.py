@@ -15,7 +15,7 @@ from .. import imagetools, ocr, template, templates, mathtools
 
 
 class g:
-    CONTEXT_CLASS: Type[Context]
+    context_class: Type[Context]
 
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
@@ -183,7 +183,7 @@ class Context:
 
     @staticmethod
     def new() -> Context:
-        return g.CONTEXT_CLASS()
+        return g.context_class()
 
     def __init__(self) -> None:
         self.speed = 0
@@ -344,4 +344,4 @@ class Context:
         return ret
 
 
-g.CONTEXT_CLASS = Context
+g.context_class = Context

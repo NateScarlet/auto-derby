@@ -14,22 +14,22 @@ LOGGER = logging.getLogger(__name__)
 
 
 class g:
-    EVENT_IMAGE_PATH: str = ""
-    DATA_PATH: str = ""
-    CHOICES: Dict[Text, int] = {}
+    event_image_path: str = ""
+    data_path: str = ""
+    choices: Dict[Text, int] = {}
 
 
 def reload() -> None:
     try:
-        with open(g.DATA_PATH, "r", encoding="utf-8") as f:
-            g.CHOICES = json.load(f)
+        with open(g.data_path, "r", encoding="utf-8") as f:
+            g.choices = json.load(f)
     except OSError:
         pass
 
 
 def _save() -> None:
-    with open(g.DATA_PATH, "w", encoding="utf-8") as f:
-        json.dump(g.CHOICES, f, indent=2)
+    with open(g.data_path, "w", encoding="utf-8") as f:
+        json.dump(g.choices, f, indent=2)
 
 
 def get(event_screen: Image) -> int:
@@ -58,16 +58,16 @@ def get(event_screen: Image) -> int:
     l, t, r, b = options_bbox
     b_img[t:b, l:r] = cv_options_img
 
-    event_id = imagetools.md5(b_img, save_path=g.EVENT_IMAGE_PATH)
-    if event_id not in g.CHOICES:
+    event_id = imagetools.md5(b_img, save_path=g.event_image_path)
+    if event_id not in g.choices:
         close = window.info("New event encountered\nplease choose option in terminal")
         while True:
             ans = input("Choose event option(1/2/3/4/5):")
             if ans in ["1", "2", "3", "4", "5"]:
-                g.CHOICES[event_id] = int(ans)
+                g.choices[event_id] = int(ans)
                 _save()
                 close()
                 break
-    ret = g.CHOICES[event_id]
+    ret = g.choices[event_id]
     LOGGER.info("event: id=%s choice=%d", event_id, ret)
     return ret

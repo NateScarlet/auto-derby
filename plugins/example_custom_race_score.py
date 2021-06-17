@@ -12,7 +12,7 @@ class Race(single_mode.Race):
 
 class Plugin(auto_derby.Plugin):
     def install(self) -> None:
-        auto_derby.config.SINGLE_MODE_RACE_CLASS = Race
+        auto_derby.config.single_mode_race_class = Race
 
 
 auto_derby.plugin.register(__name__, Plugin())

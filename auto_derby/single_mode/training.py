@@ -16,7 +16,7 @@ from .context import Context
 
 
 class g:
-    TRAINING_CLASS: Type[Training]
+    training_class: Type[Training]
 
 
 def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarray:
@@ -122,7 +122,7 @@ def _training_single_score(
 class Training:
     @staticmethod
     def new() -> Training:
-        return g.TRAINING_CLASS()
+        return g.training_class()
 
     def __init__(self):
         self.speed: int = 0
@@ -255,4 +255,4 @@ class Training:
         return (spd + sta + pow + per + int_ + skill) * success_rate
 
 
-g.TRAINING_CLASS = Training
+g.training_class = Training

@@ -11,7 +11,7 @@ class Training(single_mode.Training):
 
 class Plugin(auto_derby.Plugin):
     def install(self) -> None:
-        auto_derby.config.SINGLE_MODE_TRAINING_CLASS = Training
+        auto_derby.config.single_mode_training_class = Training
 
 
 auto_derby.plugin.register(__name__, Plugin())

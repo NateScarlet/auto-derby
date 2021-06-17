@@ -15,7 +15,7 @@ class Context(single_mode.Context):
 
 class Plugin(auto_derby.Plugin):
     def install(self) -> None:
-        auto_derby.config.SINGLE_MODE_CONTEXT_CLASS = Context
+        auto_derby.config.single_mode_context_class = Context
 
 
 auto_derby.plugin.register(__name__, Plugin())

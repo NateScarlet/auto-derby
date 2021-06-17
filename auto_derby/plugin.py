@@ -22,27 +22,27 @@ class Plugin(ABC):
 
 
 class g:
-    PLUGINS: Dict[str, Plugin] = {}
-    PATH: str = ""
+    plugins: Dict[str, Plugin] = {}
+    path: str = ""
 
 
 def register(name: str, plugin: Plugin) -> None:
-    if name in g.PLUGINS:
+    if name in g.plugins:
         raise ValueError("plugin.register: duplicated name is not allowed: %s" % name)
-    g.PLUGINS[name] = plugin
+    g.plugins[name] = plugin
 
 
 def reload():
-    g.PLUGINS.clear()
-    for i in Path(g.PATH).glob("*.py"):
+    g.plugins.clear()
+    for i in Path(g.path).glob("*.py"):
         spec = importlib.util.spec_from_file_location(i.stem, i)
         assert spec
         module = importlib.util.module_from_spec(spec)
         loader = cast.instance(spec.loader, SourceFileLoader)
         loader.exec_module(module)
-    LOGGER.debug("loaded: %s", ", ".join(g.PLUGINS.keys()))
+    LOGGER.debug("loaded: %s", ", ".join(g.plugins.keys()))
 
 
 def install(name: str) -> None:
-    g.PLUGINS[name].install()
+    g.plugins[name].install()
     LOGGER.info("installed: %s", name)

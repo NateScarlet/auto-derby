@@ -21,14 +21,14 @@ LOGGER = logging.getLogger(__name__)
 
 
 class g:
-    DATA_PATH: str = ""
-    RACES: Tuple[Race, ...] = ()
-    RACE_CLASS: Type[Race]
+    data_path: str = ""
+    races: Tuple[Race, ...] = ()
+    race_class: Type[Race]
 
 
 def reload() -> None:
-    with open(g.DATA_PATH, "r", encoding="utf-8") as f:
-        g.RACES = tuple(Race.new().from_dict(i) for i in json.load(f))
+    with open(g.data_path, "r", encoding="utf-8") as f:
+        g.races = tuple(Race.new().from_dict(i) for i in json.load(f))
 
 
 def _running_style_single_score(
@@ -381,7 +381,7 @@ class Race:
 
     @staticmethod
     def new() -> Race:
-        return g.RACE_CLASS()
+        return g.race_class()
 
     def __init__(self):
         self.name: Text = ""
@@ -623,12 +623,12 @@ class Race:
         )
 
 
-g.RACE_CLASS = Race
+g.race_class = Race
 
 
 def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
     year, month, half = date
-    for i in g.RACES:
+    for i in g.races:
         if year not in i.years:
             continue
         if date == (1, 0, 0) and i.grade != Race.GRADE_DEBUT:
