@@ -5,7 +5,7 @@ from auto_derby import single_mode
 class Context(single_mode.Context):
     def next_turn(self) -> None:
         super().next_turn()
-        auto_derby.config.PAUSE_IF_RACE_ORDER_GT = {
+        auto_derby.config.pause_if_race_order_gt = {
             1: 5,
             2: 3,
             3: 2,

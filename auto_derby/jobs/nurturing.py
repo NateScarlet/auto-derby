@@ -210,7 +210,7 @@ def _choose_running_style(ctx: Context, race1: race.Race) -> None:
 def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
     race1 = race1 or _current_race(ctx)
     estimate_order = race1.estimate_order(ctx)
-    if estimate_order > config.PAUSE_IF_RACE_ORDER_GT:
+    if estimate_order > config.pause_if_race_order_gt:
         close_msg = window.info(
             "Race estimate result is No.%d\nplease learn skills before confirm in terminal"
             % estimate_order
