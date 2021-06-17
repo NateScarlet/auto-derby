@@ -37,3 +37,6 @@ class config:
 
         ocr.load()
         single_mode.race.reload()
+
+
+config.apply()
