@@ -107,8 +107,11 @@ def _handle_training(ctx: Context) -> None:
             # go to race
             action.wait_click_image(templates.RETURN_BUTTON)
             action.wait_click_image(templates.SINGLE_MODE_COMMAND_RACE)
-            time.sleep(0.5)
-            if action.count_image(templates.SINGLE_MODE_CONTINUOUS_RACE_TITLE):
+            tmpl, _ = action.wait_image(
+                templates.SINGLE_MODE_RACE_START_BUTTON,
+                templates.SINGLE_MODE_CONTINUOUS_RACE_TITLE,
+            )
+            if tmpl.name == templates.SINGLE_MODE_CONTINUOUS_RACE_TITLE:
                 if ctx.continuous_race_count() >= 3:
                     action.wait_click_image(templates.GREEN_OK_BUTTON)
                 else:
