@@ -39,6 +39,7 @@ class config:
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
 
         ocr.reload()
+        plugin.reload()
         single_mode.choice.reload()
         single_mode.race.reload()
 
