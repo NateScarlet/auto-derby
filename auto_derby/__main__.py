@@ -20,7 +20,6 @@ LOGGER = logging.getLogger(__name__)
 
 
 def main():
-    config.apply()
     avaliable_jobs = {
         "team_race": jobs.team_race,
         "champions_meeting": jobs.champions_meeting,
@@ -44,6 +43,7 @@ def main():
     plugins = args.plugin
     for i in plugins:
         plugin.install(i)
+    config.apply()
 
     if not job:
         LOGGER.error(
