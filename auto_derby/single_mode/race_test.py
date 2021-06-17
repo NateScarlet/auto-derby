@@ -9,7 +9,7 @@ def test_find_by_race_detail_image():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (2, 3, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -23,7 +23,7 @@ def test_find_by_race_detail_image_2():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (2, 5, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -37,7 +37,7 @@ def test_find_by_race_detail_image_3():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (2, 3, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -51,7 +51,7 @@ def test_find_by_race_detail_image_4():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (3, 2, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -65,7 +65,7 @@ def test_find_by_race_detail_image_5():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (2, 10, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -79,7 +79,7 @@ def test_find_by_race_detail_image_6():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (3, 6, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -93,7 +93,7 @@ def test_find_by_race_detail_image_7():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (4, 0, 0)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -107,7 +107,7 @@ def test_find_by_race_detail_image_8():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (1, 0, 0)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -121,7 +121,7 @@ def test_find_by_race_detail_image_9():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (1, 10, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -131,7 +131,7 @@ def test_find_by_race_detail_image_9():
 
 def test_find_by_race_detail_image_10():
     img = PIL.Image.open(_test.DATA_PATH / "race_detail_10.png").convert("RGB")
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (1, 9, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -145,7 +145,7 @@ def test_find_by_race_detail_image_issue31():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (2, 5, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -159,7 +159,7 @@ def test_find_by_race_detail_image_issue49():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (1, 8, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
 
@@ -173,7 +173,7 @@ def test_find_by_race_detail_image_issue54():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.date = (2, 10, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
 

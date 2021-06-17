@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Set, Text, Tuple
+from typing import Set, Text, Tuple, Type
 
 import cast_unknown as cast
 import cv2
@@ -12,6 +12,10 @@ from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
 from .. import imagetools, ocr, template, templates, mathtools
+
+
+class g:
+    CONTEXT_CLASS: Type[Context]
 
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
@@ -177,6 +181,10 @@ class Context:
         STATUS_G,
     )
 
+    @staticmethod
+    def new() -> Context:
+        return g.CONTEXT_CLASS()
+
     def __init__(self) -> None:
         self.speed = 0
         self.stamina = 0
@@ -334,3 +342,6 @@ class Context:
             ret += 1
             turn -= 1
         return ret
+
+
+g.CONTEXT_CLASS = Context

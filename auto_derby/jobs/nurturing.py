@@ -269,7 +269,7 @@ def _update_context_by_command_scene(ctx: Context):
 
 
 def nurturing():
-    ctx = Context()
+    ctx = Context.new()
 
     while True:
         tmpl, pos = action.wait_image(

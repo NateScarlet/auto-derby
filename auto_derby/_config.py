@@ -22,6 +22,7 @@ class config:
     PLUGINS = os.getenv("AUTO_DERBY_PLUGINS", "").split(",")
     SINGLE_MODE_RACE_CLASS = single_mode.Race
     SINGLE_MODE_TRAINING_CLASS = single_mode.Training
+    SINGLE_MODE_CONTEXT_CLASS = single_mode.Context
 
     @classmethod
     def apply(cls) -> None:
@@ -30,6 +31,7 @@ class config:
         plugin.g.PATH = cls.PLUGIN_PATH
         single_mode.choice.g.DATA_PATH = cls.SINGLE_MODE_CHOICE_PATH
         single_mode.choice.g.EVENT_IMAGE_PATH = cls.SINGLE_MODE_EVENT_IMAGE_PATH
+        single_mode.context.g.CONTEXT_CLASS = cls.SINGLE_MODE_CONTEXT_CLASS
         single_mode.race.g.DATA_PATH = cls.SINGLE_MODE_RACE_DATA_PATH
         single_mode.race.g.RACE_CLASS = cls.SINGLE_MODE_RACE_CLASS
         single_mode.training.g.TRAINING_CLASS = cls.SINGLE_MODE_TRAINING_CLASS

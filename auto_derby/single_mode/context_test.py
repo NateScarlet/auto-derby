@@ -13,7 +13,7 @@ def test_update_by_command_scene():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 12, 2), ctx.date
     assert round(ctx.vitality, 2) == 0.92, ctx.vitality
@@ -31,7 +31,7 @@ def test_update_by_command_scene_2():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (2, 1, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.92, ctx.vitality
@@ -49,7 +49,7 @@ def test_update_by_command_scene_3():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (3, 1, 1), ctx.date
     assert round(ctx.vitality, 2) == 1, ctx.vitality
@@ -67,7 +67,7 @@ def test_update_by_command_scene_4():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (2, 4, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.95, ctx.vitality
@@ -85,7 +85,7 @@ def test_update_by_command_scene_issue7():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 0, 0)
     assert round(ctx.vitality, 2) == 1
@@ -103,7 +103,7 @@ def test_update_by_command_scene_issue12():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 12, 2), ctx.date
     assert round(ctx.vitality, 2) == 0.80, ctx.vitality
@@ -121,7 +121,7 @@ def test_update_by_command_scene_issue12_2():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 10, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.79, ctx.vitality
@@ -139,7 +139,7 @@ def test_update_by_command_scene_issue17():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 0, 0), ctx.date
     assert round(ctx.vitality, 2) == 0.53, ctx.vitality
@@ -157,7 +157,7 @@ def test_update_by_command_scene_issue17_2():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 11, 2), ctx.date
     assert round(ctx.vitality, 2) == 1, ctx.vitality
@@ -175,7 +175,7 @@ def test_update_by_command_scene_issue41():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (3, 11, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.84, ctx.vitality
@@ -193,7 +193,7 @@ def test_update_by_class_detail():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1, ctx.fan_count
     assert ctx.is_after_winning == False, ctx.is_after_winning
@@ -205,7 +205,7 @@ def test_update_by_class_detail_2():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1225, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
@@ -217,7 +217,7 @@ def test_update_by_class_detail_3():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 11950, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
@@ -229,7 +229,7 @@ def test_update_by_class_detail_4():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 148805, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
@@ -241,7 +241,7 @@ def test_update_by_class_detail_5():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 127591, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
@@ -249,7 +249,7 @@ def test_update_by_class_detail_5():
 
 def test_update_by_class_detail_6():
     img = PIL.Image.open(_TEST_DATA_PATH / "class_detail_6.png").convert("RGB")
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 121794, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
@@ -261,7 +261,7 @@ def test_update_by_class_detail_issue35():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1129, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
@@ -273,7 +273,7 @@ def test_update_by_class_detail_issue35_2():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 4119, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
@@ -285,7 +285,7 @@ def test_update_by_character_detail():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_character_detail(img)
 
     assert ctx.turf == ctx.STATUS_A, ctx.turf
@@ -308,7 +308,7 @@ def test_update_by_character_detail_2():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_character_detail(img)
 
     assert ctx.turf == ctx.STATUS_A, ctx.turf
@@ -331,7 +331,7 @@ def test_update_by_character_detail_3():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_character_detail(img)
 
     assert ctx.turf == ctx.STATUS_S, ctx.turf
@@ -354,7 +354,7 @@ def test_update_by_character_detail_4():
         .convert("RGB")
         .resize((540, 960))
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_character_detail(img)
 
     assert ctx.turf == ctx.STATUS_A, ctx.turf
@@ -375,7 +375,7 @@ def test_update_by_character_detail_issue39():
     img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_issue39.png").convert(
         "RGB"
     )
-    ctx = Context()
+    ctx = Context.new()
     ctx.update_by_character_detail(img)
 
     assert ctx.turf == ctx.STATUS_A, ctx.turf
