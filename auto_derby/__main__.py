@@ -4,18 +4,16 @@
 
 
 import argparse
+import logging
+import logging.handlers
 import os
-from auto_derby import templates
 import time
 import webbrowser
 
 import win32con
 import win32gui
 
-from . import jobs, clients
-
-import logging
-import logging.handlers
+from . import clients, config, jobs, templates
 
 LOGGER = logging.getLogger(__name__)
 
@@ -70,7 +68,7 @@ if __name__ == "__main__":
         level=logging.INFO,
         datefmt="%H:%M:%S",
     )
-    LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", "auto_derby.log")
+    LOG_PATH = config.LOG_PATH
     if LOG_PATH and LOG_PATH != "-":
         handler = logging.handlers.RotatingFileHandler(
             LOG_PATH, backupCount=3, encoding="utf-8"

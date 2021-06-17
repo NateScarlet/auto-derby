@@ -3,7 +3,6 @@
 
 import json
 import logging
-import os
 from typing import Dict, Text
 
 import cv2
@@ -13,21 +12,22 @@ from PIL.Image import Image
 
 LOGGER = logging.getLogger(__name__)
 
-EVENT_IMAGE_PATH = os.getenv("AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH", "")
 
-DATA_PATH = os.getenv("AUTO_DERBY_SINGLE_MODE_CHOICE_PATH", "single_mode_choices.json")
+class g:
+    EVENT_IMAGE_PATH: str = ""
+    DATA_PATH: str = ""
 
 
 def _load() -> Dict[Text, int]:
     try:
-        with open(DATA_PATH, "r", encoding="utf-8") as f:
+        with open(g.DATA_PATH, "r", encoding="utf-8") as f:
             return json.load(f)
     except OSError:
         return {}
 
 
 def _save() -> None:
-    with open(DATA_PATH, "w", encoding="utf-8") as f:
+    with open(g.DATA_PATH, "w", encoding="utf-8") as f:
         json.dump(_CHOICES, f, indent=2)
 
 
@@ -60,7 +60,7 @@ def get(event_screen: Image) -> int:
     l, t, r, b = options_bbox
     b_img[t:b, l:r] = cv_options_img
 
-    event_id = imagetools.md5(b_img, save_path=EVENT_IMAGE_PATH)
+    event_id = imagetools.md5(b_img, save_path=g.EVENT_IMAGE_PATH)
     if event_id not in _CHOICES:
         close = window.info("New event encountered\nplease choose option in terminal")
         while True:

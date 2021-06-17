@@ -1,8 +1,6 @@
 # pyright: strict
 # -*- coding=UTF-8 -*-
-""".  """
 from __future__ import annotations
-from auto_derby import single_mode
 
 import json
 import logging
@@ -21,7 +19,15 @@ from .context import Context
 
 LOGGER = logging.getLogger(__name__)
 
-DATA_PATH = os.getenv("AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH", "single_mode_races.json")
+
+class g:
+    DATA_PATH: str = ""
+    RACES: Tuple[Race, ...] = ()
+
+
+def load() -> None:
+    with open(g.DATA_PATH, "r", encoding="utf-8") as f:
+        g.RACES = tuple(Race.from_dict(i) for i in json.load(f))
 
 
 def _running_style_single_score(
@@ -612,17 +618,9 @@ class Race:
         )
 
 
-def _load() -> Tuple[Race, ...]:
-    with open(DATA_PATH, "r", encoding="utf-8") as f:
-        return tuple(Race.from_dict(i) for i in json.load(f))
-
-
-RACES = _load()
-
-
 def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
     year, month, half = date
-    for i in RACES:
+    for i in g.RACES:
         if year not in i.years:
             continue
         if date == (1, 0, 0) and i.grade != Race.GRADE_DEBUT:
