@@ -6,4 +6,4 @@ class Plugin(auto_derby.Plugin):
         print("hello world")
 
 
-auto_derby.plugin.register("hello-world", Plugin())
+auto_derby.plugin.register(__name__, Plugin())

@@ -6,7 +6,7 @@ import json
 import logging
 import math
 import os
-from typing import Any, Dict, Iterator, Text, Tuple
+from typing import Any, Dict, Iterator, Text, Tuple, Type
 
 import cast_unknown as cast
 import cv2
@@ -23,11 +23,12 @@ LOGGER = logging.getLogger(__name__)
 class g:
     DATA_PATH: str = ""
     RACES: Tuple[Race, ...] = ()
+    RACE_CLASS: Type[Race]
 
 
-def load() -> None:
+def reload() -> None:
     with open(g.DATA_PATH, "r", encoding="utf-8") as f:
-        g.RACES = tuple(Race.from_dict(i) for i in json.load(f))
+        g.RACES = tuple(Race.new().from_dict(i) for i in json.load(f))
 
 
 def _running_style_single_score(
@@ -378,6 +379,10 @@ class Race:
     TURN_LEFT = 2
     TURN_NONE = 4
 
+    @staticmethod
+    def new() -> Race:
+        return g.RACE_CLASS()
+
     def __init__(self):
         self.name: Text = ""
         self.stadium: Text = ""
@@ -616,6 +621,9 @@ class Race:
             - fail_penalty
             - status_penality
         )
+
+
+g.RACE_CLASS = Race
 
 
 def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:

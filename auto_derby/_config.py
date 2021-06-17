@@ -20,11 +20,12 @@ class config:
     )
     PLUGIN_PATH = os.getenv("AUTO_DERBY_PLUGIN_PATH", "plugins")
     PLUGINS = os.getenv("AUTO_DERBY_PLUGINS", "").split(",")
+    SINGLE_MODE_RACE_CLASS = single_mode.Race
 
     @classmethod
     def apply(cls) -> None:
         single_mode.race.g.DATA_PATH = cls.SINGLE_MODE_RACE_DATA_PATH
-        single_mode.race.load()
+        single_mode.race.reload()
         ocr.g.DATA_PATH = cls.OCR_DATA_PATH
         ocr.g.IMAGE_PATH = cls.OCR_IMAGE_PATH
         ocr.load()

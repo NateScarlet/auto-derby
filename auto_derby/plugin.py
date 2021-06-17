@@ -3,15 +3,16 @@
 """Simple plugin system, user can do what they want in install method.  """
 
 
-from importlib.machinery import SourceFileLoader
-from typing import Dict
-from abc import ABC, abstractmethod
-
-from pathlib import Path
-
 import importlib.util
+import logging
+from abc import ABC, abstractmethod
+from importlib.machinery import SourceFileLoader
+from pathlib import Path
+from typing import Dict
 
 import cast_unknown as cast
+
+LOGGER = logging.getLogger(__name__)
 
 
 class Plugin(ABC):
@@ -34,12 +35,14 @@ def register(name: str, plugin: Plugin) -> None:
 def reload():
     g.PLUGINS.clear()
     for i in Path(g.PATH).glob("*.py"):
-        spec = importlib.util.spec_from_file_location(__name__, i)
+        spec = importlib.util.spec_from_file_location(i.stem, i)
         assert spec
         module = importlib.util.module_from_spec(spec)
         loader = cast.instance(spec.loader, SourceFileLoader)
         loader.exec_module(module)
+    LOGGER.debug("loaded: %s", ", ".join(g.PLUGINS.keys()))
 
 
 def install(name: str) -> None:
     g.PLUGINS[name].install()
+    LOGGER.info("installed: %s", name)
