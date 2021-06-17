@@ -124,6 +124,19 @@ namespace NateScarlet.AutoDerby
             }
         }
 
+        public string Plugins
+        {
+            get
+            {
+                return (string)key.GetValue("Plugins", "");
+            }
+            set
+            {
+                key.SetValue("Plugins", value);
+                OnPropertyChanged("Plugins");
+            }
+        }
+
         public bool Debug
         {
             get

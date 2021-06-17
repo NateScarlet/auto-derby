@@ -1,3 +1,4 @@
+from auto_derby import plugin
 from . import single_mode, ocr, template
 import os
 
@@ -17,6 +18,8 @@ class config:
     SINGLE_MODE_CHOICE_PATH = os.getenv(
         "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH", "single_mode_choices.json"
     )
+    PLUGIN_PATH = os.getenv("AUTO_DERBY_PLUGIN_PATH", "plugins")
+    PLUGINS = os.getenv("AUTO_DERBY_PLUGINS", "").split(",")
 
     @classmethod
     def apply(cls) -> None:
@@ -28,6 +31,5 @@ class config:
         template.g.LAST_SCREENSHOT_SAVE_PATH = cls.LAST_SCRENSHOT_SAVE_PATH
         single_mode.choice.g.EVENT_IMAGE_PATH = cls.SINGLE_MODE_EVENT_IMAGE_PATH
         single_mode.choice.g.DATA_PATH = cls.SINGLE_MODE_CHOICE_PATH
-
-
-config.apply()
+        plugin.g.PATH = cls.PLUGIN_PATH
+        plugin.reload()

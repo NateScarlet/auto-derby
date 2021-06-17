@@ -4,6 +4,7 @@
 
 
 import argparse
+from auto_derby import plugin
 import logging
 import logging.handlers
 import os
@@ -30,8 +31,18 @@ def main():
     }
     parser = argparse.ArgumentParser()
     parser.add_argument("job")
+    parser.add_argument(
+        "-p",
+        "--plugin",
+        nargs="+",
+        default=config.PLUGINS,
+        help="plugin names to enable",
+    )
     args = parser.parse_args()
     job = avaliable_jobs.get(args.job)
+    plugins = args.plugin
+    for i in plugins:
+        plugin.install(i)
 
     if not job:
         LOGGER.error(
@@ -63,12 +74,13 @@ def main():
 
 
 if __name__ == "__main__":
+    config.apply()
+    LOG_PATH = config.LOG_PATH
     logging.basicConfig(
         format="%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
         level=logging.INFO,
         datefmt="%H:%M:%S",
     )
-    LOG_PATH = config.LOG_PATH
     if LOG_PATH and LOG_PATH != "-":
         handler = logging.handlers.RotatingFileHandler(
             LOG_PATH, backupCount=3, encoding="utf-8"
@@ -88,6 +100,8 @@ if __name__ == "__main__":
 
     try:
         main()
+    except SystemExit:
+        raise
     except:
         LOGGER.exception("unexpected exception")
         exit(1)

@@ -95,13 +95,22 @@ if (-not $mainWindow.ShowDialog()) {
     Exit 0
 }
 
-$data | Format-List -Property "Job", "Debug", "PythonExecutablePath", "SingleModeChoicesDataPath", "PauseIfRaceOrderGt", @{
-    Name       = "Version"
-    Expression = { $version }
-}, @{
-    Name       = "Python Version"
-    Expression = { & "$($Data.PythonExecutablePath)" -VV }
-}
+$data | Format-List -Property (
+    "Job",
+    "Debug", 
+    "PythonExecutablePath",
+    "SingleModeChoicesDataPath",
+    "PauseIfRaceOrderGt",
+    "Plugins",
+    @{
+        Name       = "Version"
+        Expression = { $version }
+    }, 
+    @{
+        Name       = "Python Version"
+        Expression = { & "$($Data.PythonExecutablePath)" -VV }
+    }
+)
 
 
 if ($data.Debug) {
@@ -128,6 +137,7 @@ if ($data.SingleModeChoicesDataPath) {
 }
 
 $env:AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT = $data.PauseIfRaceOrderGt
+$env:AUTO_DERBY_PLUGINS = $data.Plugins
 
 & cmd.exe /c "`"$($Data.PythonExecutablePath)`" -m auto_derby $($data.Job) 2>&1"
 
