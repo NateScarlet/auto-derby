@@ -140,7 +140,7 @@ def _handle_training(ctx: Context) -> None:
                 action.click_image(templates.GREEN_OK_BUTTON)
             return
 
-        if ctx.mood < ctx.MOOD_GOOD:
+        if ctx.mood < ctx.MOOD_VERY_GOOD:
             _, pos = action.wait_image(
                 templates.SINGLE_MODE_COMMAND_GO_OUT,
                 templates.SINGLE_MODE_COMMAND_SUMMER_REST,
