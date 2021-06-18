@@ -572,18 +572,23 @@ class Race:
             ),
         )
 
-        fan_score = (
-            mathtools.integrate(
-                ctx.fan_count,
-                fan_count,
-                (
-                    (int(expected_fan_count * 0.1), 8.0),
-                    (int(expected_fan_count * 0.3), 6.0),
-                    (int(expected_fan_count * 0.5), 4.0),
-                    (int(expected_fan_count), 1.0),
-                ),
-            )
-            / 600
+        fan_score = mathtools.integrate(
+            ctx.fan_count,
+            fan_count,
+            (
+                (int(expected_fan_count * 0.1), 8.0),
+                (int(expected_fan_count * 0.3), 6.0),
+                (int(expected_fan_count * 0.5), 4.0),
+                (int(expected_fan_count), 1.0),
+            ),
+        ) / mathtools.interpolate(
+            ctx.speed,
+            (
+                (0, 2400),
+                (300, 1800),
+                (600, 800),
+                (900, 600),
+            ),
         )
 
         not_winning_score = 0 if ctx.is_after_winning else 1.5 * ctx.turn_count()
