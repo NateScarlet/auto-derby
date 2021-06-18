@@ -8253,7 +8253,7 @@ class ndarray(object):
         numpy.repeat : equivalent function
         """
         ...
-    def reshape(self, shape: Tuple[int, ...], order: Text='C') -> ndarray:
+    def reshape(self, shape: Tuple[int, ...], order: Text = "C") -> ndarray:
         """
         a.reshape(shape, order='C')
 
@@ -19593,7 +19593,14 @@ def format_float_scientific(
     """
     ...
 
-def frombuffer(buffer: Any, dtype: Type[Any]=float, count: int=-1, offset: int=0, *, like: ArrayLike=None) -> ndarray:
+def frombuffer(
+    buffer: Any,
+    dtype: Type[Any] = float,
+    count: int = -1,
+    offset: int = 0,
+    *,
+    like: ArrayLike = None,
+) -> ndarray:
     """
     Interpret a buffer as a 1-dimensional array.
 
