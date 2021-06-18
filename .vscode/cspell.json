@@ -6,6 +6,7 @@
         "ndarray",
         "numpy",
         "tmpl",
-        "umamusume"
+        "umamusume",
+        "WINNT"
     ]
 }

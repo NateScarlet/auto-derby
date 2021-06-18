@@ -4,17 +4,24 @@
 
 import contextlib
 import logging
+import sys
 import threading
 import time
 from ctypes import windll
 from typing import Callable, Dict, Iterator, Literal, Optional, Set, Text, Tuple
 
+import mouse
 import PIL.Image
 import PIL.ImageGrab
 import win32con
 import win32gui
+import win32ui
 
 LOGGER = logging.getLogger(__name__)
+
+
+class g:
+    use_legacy_screenshot = False
 
 
 def message_box(
@@ -117,9 +124,6 @@ def info(msg: Text) -> Callable[[], None]:
     return message_box(msg, "auto-derby")
 
 
-import mouse
-
-
 @contextlib.contextmanager
 def recover_cursor():
     ox, oy = win32gui.GetCursorPos()
@@ -180,7 +184,7 @@ def move_at(h_wnd: int, point: Tuple[int, int]):
     mouse.move(x, y)
 
 
-def screenshot(h_wnd: int) -> PIL.Image.Image:
+def screenshot_pil_crop(h_wnd: int) -> PIL.Image.Image:
     init()
     # XXX: BitBlt capture not work, background window is not supportted
     # Maybe use WindowsGraphicsCapture like obs do
@@ -191,6 +195,55 @@ def screenshot(h_wnd: int) -> PIL.Image.Image:
         left, top, right, bottom = x, y, x + w, y + h
         bbox = (left, top, right, bottom)
         return PIL.ImageGrab.grab(bbox, True, True)
+
+
+# https://docs.microsoft.com/en-us/windows/win32/winprog/using-the-windows-headers
+_WIN32_WINNT_WINBLUE = 0x0603
+
+
+def _win_ver():
+    v = sys.getwindowsversion()
+    return v.major << 8 | v.minor
+
+
+_WIN32_WINNT = _win_ver()
+
+PW_CLIENT_ONLY = 1 << 0
+# https://stackoverflow.com/a/40042587
+PW_RENDERFULLCONTENT = 1 << 1 if _WIN32_WINNT >= _WIN32_WINNT_WINBLUE else 0
+
+# https://stackoverflow.com/a/24352388
+def screenshot_print_window(h_wnd: int) -> PIL.Image.Image:
+    window_dc = win32gui.GetWindowDC(h_wnd)
+    handle_dc = win32ui.CreateDCFromHandle(window_dc)
+    _, _, width, height = win32gui.GetClientRect(h_wnd)
+    compatible_dc = handle_dc.CreateCompatibleDC()
+    bitmap = win32ui.CreateBitmap()
+    try:
+        bitmap.CreateCompatibleBitmap(handle_dc, width, height)
+
+        compatible_dc.SelectObject(bitmap)
+        result = windll.user32.PrintWindow(
+            h_wnd,
+            compatible_dc.GetSafeHdc(),
+            PW_CLIENT_ONLY | PW_RENDERFULLCONTENT,
+        )
+        if result != 1:
+            raise RuntimeError("print window failed: %s" % result)
+        return PIL.Image.frombuffer(
+            "RGB", (width, height), bitmap.GetBitmapBits(True), "raw", "BGRX", 0, 1
+        )
+    finally:
+        win32gui.DeleteObject(bitmap.GetHandle())
+        handle_dc.DeleteDC()
+        compatible_dc.DeleteDC()
+        win32gui.ReleaseDC(h_wnd, window_dc)
+
+
+def screenshot(h_wnd: int) -> PIL.Image.Image:
+    if g.use_legacy_screenshot:
+        return screenshot_pil_crop(h_wnd)
+    return screenshot_print_window(h_wnd)
 
 
 # TODO: move client inside visible area

@@ -1,6 +1,12 @@
-from auto_derby import plugin
-from . import single_mode, ocr, template
+# -*- coding=UTF-8 -*-
+# pyright: strict
+
+
 import os
+
+from auto_derby import plugin
+
+from . import ocr, single_mode, template, window
 
 
 class config:
@@ -24,6 +30,9 @@ class config:
     single_mode_race_class = single_mode.Race
     single_mode_training_class = single_mode.Training
     single_mode_context_class = single_mode.Context
+    use_legacy_screenshot = (
+        os.getenv("AUTO_DERBY_USE_LEGACY_SCREENSHOT", "").lower() == "true"
+    )
 
     @classmethod
     def apply(cls) -> None:
@@ -37,6 +46,7 @@ class config:
         single_mode.race.g.race_class = cls.single_mode_race_class
         single_mode.training.g.training_class = cls.single_mode_training_class
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
+        window.g.use_legacy_screenshot = cls.use_legacy_screenshot
 
         ocr.reload()
         single_mode.choice.reload()
