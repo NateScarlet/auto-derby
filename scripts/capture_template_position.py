@@ -58,6 +58,7 @@ def create_pos_mask(name: Text, game_img: PIL.Image.Image, threshold: float):
     img.save(dest)
     cv2.imshow("out", out_img)
     cv2.waitKey()
+    cv2.destroyWindow("out")
 
 
 def main():
