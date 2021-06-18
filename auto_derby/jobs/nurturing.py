@@ -135,9 +135,6 @@ def _handle_training(ctx: Context) -> None:
         action.click_image(templates.RETURN_BUTTON)
         action.wait_image(templates.SINGLE_MODE_COMMAND_TRAINING)
         if action.click_image(templates.SINGLE_MODE_COMMAND_HEALTH_CARE):
-            time.sleep(2)
-            if action.count_image(templates.SINGLE_MODE_HEALTH_CARE_CONFIRM):
-                action.click_image(templates.GREEN_OK_BUTTON)
             return
 
         if ctx.mood < ctx.MOOD_VERY_GOOD:

@@ -119,8 +119,6 @@ SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON_POS = (
     "single_mode_go_to_scheduled_race_button.pos.png"
 )
 SINGLE_MODE_GOOD_RACE_ADAPTABILITY_STAR = "single_mode_good_race_adaptability_star.png"
-SINGLE_MODE_HEALTH_CARE_CONFIRM = "single_mode_health_care_confirm.png"
-SINGLE_MODE_HEALTH_CARE_CONFIRM_POS = "single_mode_health_care_confirm.pos.png"
 SINGLE_MODE_OPTION1 = "single_mode_option1.png"
 SINGLE_MODE_OPTION1_POS = "single_mode_option1.pos.png"
 SINGLE_MODE_OPTION2 = "single_mode_option2.png"
