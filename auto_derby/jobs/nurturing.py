@@ -79,6 +79,8 @@ def _handle_training(ctx: Context) -> None:
         reverse=True,
     )
 
+    is_summer_camp = ctx.date[1:] in ((7, 1), (7, 2), (8, 1))
+    can_heal_condition = not is_summer_camp
     if ctx.vitality > 0.5:
         expected_score *= 0.5
     if ctx.turn_count() >= ctx.total_turn_count() - 2:
@@ -87,10 +89,13 @@ def _handle_training(ctx: Context) -> None:
         expected_score += 10
     if ctx.date[1:] in ((6, 2),) and ctx.vitality < 0.9:
         expected_score += 20
-    if ctx.date[1:] in ((7, 1), (7, 2), (8, 1)) and ctx.vitality < 0.8:
+    if is_summer_camp and ctx.vitality < 0.8:
         expected_score += 10
     if ctx.date in ((4, 0, 0)):
         expected_score -= 20
+    if can_heal_condition and ctx.CONDITION_HEADACHE in ctx.conditions:
+        expected_score += 20
+
     LOGGER.info("expected score:\t%2.2f", expected_score)
     trainings_with_score = [(i, i.score(ctx)) for i in trainings]
     trainings_with_score = sorted(
@@ -128,6 +133,7 @@ def _handle_training(ctx: Context) -> None:
     if score < expected_score:
         # not worth, go rest
         action.click_image(templates.RETURN_BUTTON)
+        action.wait_image(templates.SINGLE_MODE_COMMAND_TRAINING)
         if action.click_image(templates.SINGLE_MODE_COMMAND_HEALTH_CARE):
             time.sleep(2)
             if action.count_image(templates.SINGLE_MODE_HEALTH_CARE_CONFIRM):
