@@ -1,3 +1,6 @@
 {
-    "reportMissingModuleSource": "none"
+    "reportMissingModuleSource": "none",
+    "exclude": [
+        "*_images.local",
+    ]
 }
