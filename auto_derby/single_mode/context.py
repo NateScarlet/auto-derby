@@ -160,6 +160,8 @@ class Context:
     MOOD_GOOD = (1.1, 1.05)
     MOOD_VERY_GOOD = (1.2, 1.1)
 
+    CONDITION_HEADACHE = 1
+
     STATUS_S = (8, "S")
     STATUS_A = (7, "A")
     STATUS_B = (6, "B")
@@ -195,6 +197,7 @@ class Context:
         self.date = (0, 0, 0)
         self.vitality = 0.0
         self.mood = Context.MOOD_NORMAL
+        self.conditions: Set[int] = set()
         self.fan_count = 0
         self.is_after_winning = False
 
@@ -294,6 +297,8 @@ class Context:
         middle_bbox = rp.vector4((329, 316, 344, 332), 466)
         last_bbox = rp.vector4((414, 316, 430, 332), 466)
 
+        conditions_bbox = rp.vector4((13, 506, 528, 832), 540)
+
         self.turf = _recognize_status(screenshot.crop(grass_bbox))
         self.dart = _recognize_status(screenshot.crop(dart_bbox))
 
@@ -306,6 +311,8 @@ class Context:
         self.head = _recognize_status(screenshot.crop(head_bbox))
         self.middle = _recognize_status(screenshot.crop(middle_bbox))
         self.last = _recognize_status(screenshot.crop(last_bbox))
+
+        self.conditions = _recognize_conditions(screenshot.crop(conditions_bbox))
 
     def __str__(self):
         return (
@@ -345,3 +352,17 @@ class Context:
 
 
 g.context_class = Context
+
+_CONDITION_TEMPLATES = {
+    templates.SINGLE_MODE_CONDITION_HEADACHE: Context.CONDITION_HEADACHE
+}
+
+
+def _recognize_conditions(img: Image) -> Set[int]:
+    ret: Set[int] = set()
+    for tmpl, _ in template.match(
+        img,
+        *_CONDITION_TEMPLATES.keys(),
+    ):
+        ret.add(_CONDITION_TEMPLATES[tmpl.name])
+    return ret
