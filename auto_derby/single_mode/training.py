@@ -110,15 +110,6 @@ def _ocr_training_effect(img: Image) -> int:
     return int(text.lstrip("+"))
 
 
-def _training_single_score(
-    current: int, delta: int, value_map: Tuple[Tuple[int, float], ...]
-) -> float:
-    ret = 0
-    for i in range(current, current + delta):
-        ret += mathtools.interpolate(i, value_map)
-    return ret
-
-
 class Training:
     @staticmethod
     def new() -> Training:
@@ -183,7 +174,7 @@ class Training:
         )
 
     def score(self, ctx: Context) -> float:
-        spd = _training_single_score(
+        spd = mathtools.integrate(
             ctx.speed,
             self.speed,
             ((0, 2.0), (300, 1.0), (600, 0.8), (900, 0.7), (1100, 0.5)),
@@ -191,7 +182,7 @@ class Training:
         if ctx.speed < ctx.turn_count() / 24 * 300:
             spd *= 1.5
 
-        sta = _training_single_score(
+        sta = mathtools.integrate(
             ctx.stamina,
             self.stamina,
             (
@@ -206,7 +197,7 @@ class Training:
                 (900, ctx.speed / 900 * 0.3),
             ),
         )
-        pow = _training_single_score(
+        pow = mathtools.integrate(
             ctx.power,
             self.power,
             (
@@ -216,14 +207,14 @@ class Training:
                 (900, ctx.speed / 900 / 3),
             ),
         )
-        per = _training_single_score(
+        per = mathtools.integrate(
             ctx.guts,
             self.guts,
             ((0, 2.0), (300, 1.0), (400, 0.3), (600, 0.1))
             if ctx.speed > 400 / 24 * ctx.turn_count()
             else ((0, 2.0), (300, 0.5), (400, 0.1)),
         )
-        int_ = _training_single_score(
+        int_ = mathtools.integrate(
             ctx.wisdom,
             self.wisdom,
             ((0, 3.0), (300, 1.0), (400, 0.4), (600, 0.2))
