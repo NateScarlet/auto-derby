@@ -8,6 +8,7 @@ from typing import Dict, Iterator, Literal, Optional, Tuple
 
 import PIL.Image
 import PIL.ImageGrab
+import win32con
 import win32gui
 
 from .client import Client
@@ -52,6 +53,7 @@ class DMMClient(Client):
 
     def set_size(self, width: int, height: int):
         init()
+        win32gui.ShowWindow(self.h_wnd, win32con.SW_NORMAL)
         left, top, right, bottom = win32gui.GetWindowRect(self.h_wnd)
         _, _, w, h = win32gui.GetClientRect(self.h_wnd)
         self._width, self._height = w, h

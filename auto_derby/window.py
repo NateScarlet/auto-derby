@@ -190,6 +190,7 @@ def screenshot_pil_crop(h_wnd: int) -> PIL.Image.Image:
     # Maybe use WindowsGraphicsCapture like obs do
     with topmost(h_wnd):
         # not use GetWindowRect to exclude border
+        win32gui.ShowWindow(h_wnd, win32con.SW_NORMAL)
         _, _, w, h = win32gui.GetClientRect(h_wnd)
         x, y = win32gui.ClientToScreen(h_wnd, (0, 0))
         left, top, right, bottom = x, y, x + w, y + h
@@ -216,6 +217,7 @@ PW_RENDERFULLCONTENT = 1 << 1 if _WIN32_WINNT >= _WIN32_WINNT_WINBLUE else 0
 def screenshot_print_window(h_wnd: int) -> PIL.Image.Image:
     window_dc = win32gui.GetWindowDC(h_wnd)
     handle_dc = win32ui.CreateDCFromHandle(window_dc)
+    win32gui.ShowWindow(h_wnd, win32con.SW_NORMAL)
     _, _, width, height = win32gui.GetClientRect(h_wnd)
     compatible_dc = handle_dc.CreateCompatibleDC()
     bitmap = win32ui.CreateBitmap()

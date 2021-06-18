@@ -1369,8 +1369,16 @@ def ShowCaret(*args, **kwargs):
     """ """
     ...
 
-def ShowWindow(*args, **kwargs):
-    """ """
+def ShowWindow(hWnd: int, cmdShow: int) -> None:
+    """Shows or hides a window and changes its state
+
+    Parameters
+        hWnd : int
+            The handle to the window
+
+        cmdShow : int
+            Combination of win32con.SW_* flags
+    """
     ...
 
 def StretchBlt(*args, **kwargs):
