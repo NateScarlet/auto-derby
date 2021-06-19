@@ -72,12 +72,12 @@ def _ocr_training_effect(img: Image) -> int:
     fill_gradient = _gradient(
         (
             ((140, 236, 255), 0),
-            ((140, 236, 255), round(img.height * 0.25)),
-            ((114, 229, 255), round(img.height * 0.35)),
-            ((113, 198, 255), round(img.height * 0.55)),
-            ((95, 179, 255), round(img.height * 0.63)),
-            ((74, 157, 255), round(img.height * 0.70)),
-            ((74, 117, 255), round(img.height * 0.83)),
+            ((140, 236, 255), round(cv_img.shape[0] * 0.25)),
+            ((114, 229, 255), round(cv_img.shape[0] * 0.35)),
+            ((113, 198, 255), round(cv_img.shape[0] * 0.55)),
+            ((95, 179, 255), round(cv_img.shape[0] * 0.63)),
+            ((74, 157, 255), round(cv_img.shape[0] * 0.70)),
+            ((74, 117, 255), round(cv_img.shape[0] * 0.83)),
             ((74, 117, 255), cv_img.shape[0]),
         )
     ).astype(np.uint8)
@@ -90,7 +90,8 @@ def _ocr_training_effect(img: Image) -> int:
         masked_img, (175, 214, 255), threshold=0.95
     )
     text_img = np.array(np.maximum(text_img, text_img_extra))
-    imagetools.fill_area(text_img, (0,), size_lt=20)
+    h = cv_img.shape[0]
+    imagetools.fill_area(text_img, (0,), size_lt=round(h * 0.2 ** 2))
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)

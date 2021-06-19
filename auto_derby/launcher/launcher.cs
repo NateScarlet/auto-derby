@@ -137,6 +137,19 @@ namespace NateScarlet.AutoDerby
             }
         }
 
+        public string ADBAddress
+        {
+            get
+            {
+                return (string)key.GetValue("ADBAddress", "");
+            }
+            set
+            {
+                key.SetValue("ADBAddress", value);
+                OnPropertyChanged("ADBAddress");
+            }
+        }
+
         public bool Debug
         {
             get

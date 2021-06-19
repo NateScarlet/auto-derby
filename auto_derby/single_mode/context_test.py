@@ -3,6 +3,7 @@ from .context import Context
 from pathlib import Path
 import PIL.Image
 
+from . import _test
 
 _TEST_DATA_PATH = Path(__file__).parent / "test_data"
 
@@ -77,6 +78,20 @@ def test_update_by_command_scene_4():
     assert ctx.guts == 216, ctx.guts
     assert ctx.wisdom == 250, ctx.wisdom
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+
+
+def test_update_by_command_scene_5():
+    with _test.screenshot("command_scene_5.png") as img:
+        ctx = Context.new()
+        ctx.update_by_command_scene(img)
+        assert ctx.date == (3, 3, 1), ctx.date
+        assert round(ctx.vitality, 2) == 0.74, ctx.vitality
+        assert ctx.speed == 568, ctx.speed
+        assert ctx.stamina == 368, ctx.stamina
+        assert ctx.power == 341, ctx.power
+        assert ctx.guts == 307, ctx.guts
+        assert ctx.wisdom == 329, ctx.wisdom
+        assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
 
 def test_update_by_command_scene_issue7():

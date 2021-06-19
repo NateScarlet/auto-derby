@@ -2,22 +2,6 @@
 $env:PYTHONIOENCODING = ""
 Start-Transcript "$WorkspaceFolder\launcher.log"
 
-# https://stackoverflow.com/a/11440595
-if (-not (
-        [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
-    ).IsInRole(
-        [Security.Principal.WindowsBuiltInRole]::Administrator
-    )
-) {
-    Start-Process PowerShell -Verb runAs -ArgumentList @(
-        "-Version", "3",
-        "-NoProfile",
-        "& '" + $MyInvocation.MyCommand.Definition + "'"
-    )
-    return
-}
-            
-
 $ErrorActionPreference = "Stop"
 Set-Location $WorkspaceFolder
 [System.Environment]::CurrentDirectory = $WorkspaceFolder
@@ -102,6 +86,7 @@ $data | Format-List -Property (
     "SingleModeChoicesDataPath",
     "PauseIfRaceOrderGt",
     "Plugins",
+    "ADBAddress",
     @{
         Name       = "Version"
         Expression = { $version }
@@ -138,7 +123,18 @@ if ($data.SingleModeChoicesDataPath) {
 
 $env:AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT = $data.PauseIfRaceOrderGt
 $env:AUTO_DERBY_PLUGINS = $data.Plugins
+$env:AUTO_DERBY_ADB_ADDRESS = $data.ADBAddress
 
-& cmd.exe /c "`"$($Data.PythonExecutablePath)`" -m auto_derby $($data.Job) 2>&1"
+$requireAdmin = (-not $data.ADBAddress)
+
+$verb = "open"
+if ($requireAdmin) {
+    $verb = "runAs"
+}
+
+Start-Process $Data.PythonExecutablePath -Verb $verb -ArgumentList @(
+    "-m", "auto_derby",
+    $data.Job
+)
 
 Stop-Transcript

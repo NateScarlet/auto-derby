@@ -7,11 +7,13 @@ import os
 from auto_derby import plugin
 
 from . import ocr, single_mode, template, window
+from .clients import ADBClient
 
 
 class config:
     LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", "auto_derby.log")
     PLUGINS = tuple(i for i in os.getenv("AUTO_DERBY_PLUGINS", "").split(",") if i)
+    ADB_ADDRESS = os.getenv("AUTO_DERBY_ADB_ADDRESS", "")
 
     single_mode_race_data_path = os.getenv(
         "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH", "single_mode_races.json"
@@ -33,9 +35,11 @@ class config:
     use_legacy_screenshot = (
         os.getenv("AUTO_DERBY_USE_LEGACY_SCREENSHOT", "").lower() == "true"
     )
+    adb_key_path = os.getenv("AUTO_DERBY_ADB_KEY_PATH", ADBClient.key_path)
 
     @classmethod
     def apply(cls) -> None:
+        ADBClient.key_path = cls.adb_key_path
         ocr.g.data_path = cls.ocr_data_path
         ocr.g.image_path = cls.ocr_image_path
         plugin.g.path = cls.plugin_path

@@ -5,6 +5,10 @@
 from typing import Tuple
 
 
+def linear_interpolate(a: float, b: float, pos: float) -> float:
+    return a + (b - a) * pos
+
+
 def interpolate(value: int, value_map: Tuple[Tuple[int, float], ...]) -> float:
     if len(value_map) == 0:
         return 0
@@ -24,7 +28,7 @@ def interpolate(value: int, value_map: Tuple[Tuple[int, float], ...]) -> float:
     if w2 == w1 or v1 == v2:
         return w2
     pos = (value - v1) / (v2 - v1)
-    weight = w1 + (w2 - w1) * pos
+    weight = linear_interpolate(w1, w2, pos)
     return weight
 
 

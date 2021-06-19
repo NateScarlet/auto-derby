@@ -8,7 +8,7 @@ import sys
 import threading
 import time
 from ctypes import windll
-from typing import Callable, Dict, Iterator, Literal, Optional, Set, Text, Tuple
+from typing import Callable, Dict, Literal, Optional, Set, Text, Tuple
 
 import mouse
 import PIL.Image
@@ -145,29 +145,6 @@ def drag_at(
     x, y = win32gui.ClientToScreen(h_wnd, point)
     with topmost(h_wnd), recover_foreground(), recover_cursor():
         mouse.drag(x, y, x + dx, y + dy, duration=duration)
-
-
-@contextlib.contextmanager
-def _pressing_mouse(button: Text = "left"):
-    if mouse.is_pressed(button):
-        mouse.release()
-    mouse.press(button)
-    yield
-    mouse.release(button)
-
-
-def drag_through_at(
-    h_wnd: int, *points: Tuple[int, int], duration: float = 0.05
-) -> Iterator[Tuple[int, int]]:
-    with recover_cursor(), recover_foreground():
-        set_forground(h_wnd)
-        move_at(h_wnd, points[0])
-        yield points[0]
-        with _pressing_mouse(), topmost(h_wnd):
-            for p in points[1:]:
-                x, y = win32gui.ClientToScreen(h_wnd, p)
-                mouse.move(x, y, duration=duration)
-                yield p
 
 
 def wheel_at(h_wnd: int, delta: int) -> None:

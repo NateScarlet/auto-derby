@@ -16,6 +16,7 @@ def resize_proxy() -> mathtools.ResizeProxy:
 
 def click(point: Tuple[int, int]):
     clients.current().click(point)
+    template.invalidate_screeshot()
 
 
 def count_image(*tmpl: Union[Text, template.Specification]) -> int:
@@ -87,11 +88,3 @@ def wheel(point: Tuple[int, int], delta: int) -> None:
 def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.03):
     clients.current().drag(point, dx=dx, dy=dy, duration=duration)
     template.invalidate_screeshot()
-
-
-def drag_through(
-    *points: Tuple[int, int], duration: float = 0.02
-) -> Iterator[Tuple[int, int]]:
-    for i in clients.current().drag_through(*points, duration=duration):
-        template.invalidate_screeshot()
-        yield i

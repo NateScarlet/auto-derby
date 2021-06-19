@@ -38,8 +38,14 @@ def main():
         default=config.PLUGINS,
         help="plugin names to enable",
     )
+    parser.add_argument(
+        "--adb",
+        help="adb connect address like `127.0.0.1:5037`",
+        default=config.ADB_ADDRESS,
+    )
     args = parser.parse_args()
     job = avaliable_jobs.get(args.job)
+    adb_address = args.adb
     plugin.reload()
     plugins = args.plugin
     for i in plugins:
@@ -54,22 +60,28 @@ def main():
         )
         exit(1)
 
-    c = clients.DMMClient.find()
-    if not c:
-        if (
-            win32gui.MessageBox(
-                0, "Launch DMM umamusume?", "Can not found window", win32con.MB_YESNO
-            )
-            == 6
-        ):
-            webbrowser.open("dmmgameplayer://umamusume/cl/general/umamusume")
-            while not c:
-                time.sleep(1)
-                LOGGER.info("waiting game launch")
-                c = clients.DMMClient.find()
-            LOGGER.info("game window: %s", c.h_wnd)
-        else:
-            exit(1)
+    if adb_address:
+        c = clients.ADBClient(adb_address)
+    else:
+        c = clients.DMMClient.find()
+        if not c:
+            if (
+                win32gui.MessageBox(
+                    0,
+                    "Launch DMM umamusume?",
+                    "Can not found window",
+                    win32con.MB_YESNO,
+                )
+                == 6
+            ):
+                webbrowser.open("dmmgameplayer://umamusume/cl/general/umamusume")
+                while not c:
+                    time.sleep(1)
+                    LOGGER.info("waiting game launch")
+                    c = clients.DMMClient.find()
+                LOGGER.info("game window: %s", c.h_wnd)
+            else:
+                exit(1)
     c.setup()
     clients.set_current(c)
     job()

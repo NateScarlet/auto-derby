@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 from ctypes import windll
-from typing import Dict, Iterator, Literal, Optional, Tuple
+from typing import Dict, Literal, Optional, Tuple
 
 import PIL.Image
 import PIL.ImageGrab
@@ -84,11 +84,6 @@ class DMMClient(Client):
         self, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1
     ) -> None:
         window.drag_at(self.h_wnd, point, dx=dx, dy=dy, duration=duration)
-
-    def drag_through(
-        self, *points: Tuple[int, int], duration: float = 0.02
-    ) -> Iterator[Tuple[int, int]]:
-        return window.drag_through_at(self.h_wnd, *points, duration=duration)
 
     def wheel(self, point: Tuple[int, int], delta: int) -> None:
         with window.recover_cursor(), window.recover_foreground(), window.topmost(

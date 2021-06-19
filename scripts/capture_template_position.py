@@ -10,7 +10,7 @@ if True:
 
 from typing import Text
 import cv2
-from auto_derby import template, templates, clients
+from auto_derby import template, templates, imagetools
 import pathlib
 import PIL.Image
 import numpy as np
@@ -66,7 +66,9 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--name", "-n", dest="name")
-    parser.add_argument("--game-image", "-g", dest="game_image")
+    parser.add_argument(
+        "--game-image", "-g", dest="game_image", default="last_screenshot.local.png"
+    )
     parser.add_argument("--threshold", "-t", dest="threshold", type=float, default=0.9)
     args = parser.parse_args()
     name = args.name
@@ -74,15 +76,9 @@ def main():
     game_image_path = args.game_image
     if not name:
         name = _latest_file()
-    if game_image_path:
-        game_image = PIL.Image.open(game_image_path)
-    else:
-        c = clients.DMMClient.find()
-        assert c, "dmm client is not running"
-        c.setup()
-        clients.set_current(c)
-
-        game_image = template.screenshot()
+    game_image = imagetools.resize(
+        PIL.Image.open(game_image_path), width=template.TARGET_WIDTH
+    )
     create_pos_mask(name, game_image, threshold)
 
 

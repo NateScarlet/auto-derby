@@ -27,7 +27,7 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     sharpened_img = imagetools.sharpen(cv_img)
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
     _, binary_img = cv2.threshold(sharpened_img, 100, 255, cv2.THRESH_BINARY_INV)
-    imagetools.fill_area(binary_img, (0,), size_lt=3)
+    imagetools.fill_area(binary_img, (0,), size_lt=2)
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
@@ -112,7 +112,10 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
         np.maximum(text_img, imagetools.border_flood_fill(text_img)), np.ndarray
     )
     text_img = cv2.medianBlur(text_img, 5)
-    imagetools.fill_area(text_img, (0,), mode=cv2.RETR_LIST, size_lt=40)
+    h = cv_img.shape[0]
+    imagetools.fill_area(
+        text_img, (0,), mode=cv2.RETR_LIST, size_lt=round(h * 0.2 ** 2)
+    )
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)

@@ -9,6 +9,8 @@ import cv2
 import numpy as np
 from auto_derby import imagetools, window
 from PIL.Image import Image
+import os
+from .. import mathtools
 
 LOGGER = logging.getLogger(__name__)
 
@@ -33,9 +35,10 @@ def _save() -> None:
 
 
 def get(event_screen: Image) -> int:
+    rp = mathtools.ResizeProxy(event_screen.width)
     b_img = np.zeros((event_screen.height, event_screen.width))
-    event_name_bbox = (75, 155, 305, 180)
-    options_bbox = (50, 200, 400, 570)
+    event_name_bbox = rp.vector4((75, 155, 305, 180), 466)
+    options_bbox = rp.vector4((50, 200, 400, 570), 466)
     cv_event_name_img = np.asarray(event_screen.crop(event_name_bbox).convert("L"))
     _, cv_event_name_img = cv2.threshold(cv_event_name_img, 220, 255, cv2.THRESH_TOZERO)
 
@@ -59,15 +62,26 @@ def get(event_screen: Image) -> int:
     b_img[t:b, l:r] = cv_options_img
 
     event_id = imagetools.md5(b_img, save_path=g.event_image_path)
+
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("option_mask", option_mask)
+        cv2.imshow("cv_event_name_img", cv_event_name_img)
+        cv2.imshow("cv_options_img", cv_options_img)
+        cv2.imshow("b_img", b_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+
     if event_id not in g.choices:
         close = window.info("New event encountered\nplease choose option in terminal")
-        while True:
-            ans = input("Choose event option(1/2/3/4/5):")
-            if ans in ["1", "2", "3", "4", "5"]:
-                g.choices[event_id] = int(ans)
-                _save()
-                close()
-                break
+        try:
+            while True:
+                ans = input("Choose event option(1/2/3/4/5):")
+                if ans in ["1", "2", "3", "4", "5"]:
+                    g.choices[event_id] = int(ans)
+                    _save()
+                    break
+        finally:
+            close()
     ret = g.choices[event_id]
     LOGGER.info("event: id=%s choice=%d", event_id, ret)
     return ret

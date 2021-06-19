@@ -74,9 +74,8 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     close_msg = window.info("New text encountered\nplease do annotation in terminal")
     try:
-        with window.recover_cursor(), window.recover_foreground():  # may during a drag
-            while len(ans) != 1:
-                ans = input("Corresponding text for current displaying image:")
+        while len(ans) != 1:
+            ans = input("Corresponding text for current displaying image:")
         g.labels[h] = ans
         LOGGER.info("labeled: hash=%s, value=%s", h, ans)
     finally:

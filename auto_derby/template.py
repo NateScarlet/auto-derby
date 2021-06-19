@@ -2,7 +2,7 @@
 # pyright: strict
 """template matching.  """
 
-from auto_derby import imagetools
+from auto_derby import imagetools, mathtools
 import datetime as dt
 import logging
 import os
@@ -18,6 +18,7 @@ from . import clients
 
 LOGGER = logging.getLogger(__name__)
 
+TARGET_WIDTH = 540
 
 _CACHED_SCREENSHOT: Dict[Literal["value"], Tuple[dt.datetime, Image]] = {
     "value": (dt.datetime.fromtimestamp(0), Image())
@@ -32,11 +33,16 @@ class g:
     last_screenshot_save_path: str = ""
 
 
+class _g:
+    screenshot_width = TARGET_WIDTH
+
+
 def screenshot(*, max_age: float = 1) -> Image:
     cached_time, _ = _CACHED_SCREENSHOT["value"]
     if cached_time < dt.datetime.now() - dt.timedelta(seconds=max_age):
         new_img = clients.current().screenshot()
-        new_img = imagetools.resize(new_img, width=540)
+        _g.screenshot_width = new_img.width
+        new_img = new_img.convert("RGB")
         if g.last_screenshot_save_path:
             new_img.save(g.last_screenshot_save_path)
         LOGGER.debug("screenshot")
@@ -54,9 +60,10 @@ def _cv_image(img: Image):
 def load(name: Text) -> Image:
     if name not in _LOADED_TEMPLATES:
         LOGGER.debug("load: %s", name)
-        _LOADED_TEMPLATES[name] = open_image(
-            pathlib.Path(__file__).parent / "templates" / name
-        )
+        # rp = mathtools.ResizeProxy(_g.screenshot_width)
+        img = open_image(pathlib.Path(__file__).parent / "templates" / name)
+        # img = imagetools.resize(img, width=rp.vector(img.width, TARGET_WIDTH))
+        _LOADED_TEMPLATES[name] = img
     return _LOADED_TEMPLATES[name]
 
 
@@ -135,12 +142,22 @@ _DEBUG_TMPL = os.getenv("DEBUG_TMPL") or "debug.png"
 def _match_one(
     img: Image, tmpl: Union[Text, Specification]
 ) -> Iterator[Tuple[Specification, Tuple[int, int]]]:
-    cv_img = _cv_image(img)
+    rp = mathtools.ResizeProxy(TARGET_WIDTH)
+    cv_img = _cv_image(
+        imagetools.resize(
+            img,
+            width=rp.vector(
+                img.width,
+                _g.screenshot_width,
+            ),
+        )
+    )
     if not isinstance(tmpl, Specification):
         tmpl = Specification(tmpl)
 
     pos = tmpl.load_pos()
-    cv_tmpl = _cv_image(load(tmpl.name))
+    pil_tmpl = load(tmpl.name)
+    cv_tmpl = _cv_image(pil_tmpl)
     tmpl_h, tmpl_w = cv_tmpl.shape[:2]
     if pos:
         cv_pos = np.array(pos.convert("L"))
@@ -148,13 +165,17 @@ def _match_one(
         cv_pos = np.full(cv_img.shape[:2], 255.0, dtype=np.uint8)
     res = cv2.matchTemplate(cv_img, cv_tmpl, cv2.TM_CCOEFF_NORMED)
     if tmpl.name == _DEBUG_TMPL:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("cv_tmpl", cv_tmpl)
         cv2.imshow("match", res)
         cv2.waitKey()
-        cv2.destroyWindow("match")
+        cv2.destroyAllWindows()
+    reverse_rp = mathtools.ResizeProxy(_g.screenshot_width)
     while True:
         mask = cv_pos[0 : res.shape[0], 0 : res.shape[1]]
         _, max_val, _, max_loc = cv2.minMaxLoc(res, mask=mask)
         x, y = max_loc
+        x, y = reverse_rp.vector2((x, y), TARGET_WIDTH)
         if max_val < tmpl.threshold or not tmpl.match(img, (x, y)):
             LOGGER.debug(
                 "not match: tmpl=%s, pos=%s, similarity=%.3f", tmpl, max_loc, max_val

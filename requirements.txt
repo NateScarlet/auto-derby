@@ -5,3 +5,4 @@ cast-unknown==0.1.6
 numpy==1.20.3
 pillow==8.2.0
 mouse==0.7.1
+adb-shell==0.3.3

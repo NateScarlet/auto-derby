@@ -11,6 +11,7 @@
       <RowDefinition Height="60" />
       <RowDefinition Height="60" />
       <RowDefinition Height="60" />
+      <RowDefinition Height="60" />
       <RowDefinition />
       <RowDefinition Height="40" />
     </Grid.RowDefinitions>
@@ -67,10 +68,16 @@
         MaxLines="1" />
     </StackPanel>
 
-    <Button x:Name="startButton"
-      Grid.Row="5">Start</Button>
+    <StackPanel Grid.Row="5">
+      <Label>ADB address (experimental, use format like 127.0.0.1:5073)</Label>
+      <TextBox Text="{Binding ADBAddress, UpdateSourceTrigger=PropertyChanged}"
+        MaxLines="1" />
+    </StackPanel>
 
-    <StackPanel Grid.Row="6"
+    <Button x:Name="startButton"
+      Grid.Row="6">Start</Button>
+
+    <StackPanel Grid.Row="7"
       Margin="8"
       VerticalAlignment="Center">
       <CheckBox IsChecked="{Binding Debug}"

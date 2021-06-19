@@ -45,14 +45,10 @@ def _choose_race(ctx: Context, race1: race.Race) -> None:
         action.click(rp.vector2((100, 600), 466))
         if _current_race(ctx) == race1:
             return
-        for _ in action.drag_through(
+        action.wheel(
             rp.vector2((100, 600), 466),
-            rp.vector2((100, 500), 466),
-            rp.vector2((100, 490), 466),
-            rp.vector2((100, 490), 466),
-            duration=0.2,
-        ):
-            pass
+            -1,
+        )
 
 
 def _handle_training(ctx: Context) -> None:
@@ -60,6 +56,7 @@ def _handle_training(ctx: Context) -> None:
     trainings: List[Training] = []
 
     action.wait_image(_TRAINING_CONFIRM)
+    dy = rp.vector(100, 466)
     for x, y in (
         rp.vector2((78, 700), 466),
         rp.vector2((158, 700), 466),
@@ -67,11 +64,10 @@ def _handle_training(ctx: Context) -> None:
         rp.vector2((314, 700), 466),
         rp.vector2((402, 700), 466),
     ):
-        action.drag((x, y - 100), dy=100)
+        action.drag((x, y - dy), dy=dy)
         action.wait_image(_TRAINING_CONFIRM)
         t = Training.from_training_scene(template.screenshot())
         trainings.append(t)
-
     expected_score = 15 + ctx.turn_count() * 10 / 24
     races_with_score = sorted(
         ((i, i.score(ctx)) for i in race.find(ctx)),

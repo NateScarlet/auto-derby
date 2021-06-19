@@ -21,13 +21,14 @@ _CLASS_INHERITED_CLASS_METHODS_START = "Class methods inherited from (.+):"
 _CLASS_INHERITED_STATIC_METHODS_START = "Static methods inherited from (.+):"
 _CLASS_INHERITED_DATA_ATTR_START = "Data and other attributes inherited from (.+):"
 _CLASS_INHERITED_DATA_DESC_START = "Data descriptors inherited from (.+):"
+_CLASS_INHERITED_READ_ONLY_PROPERTY_START = "Readonly properties inherited from (.+):"
 _CLASS_SECTION_END = "-{20,}"
 
 TYPE_MAP = {
-    "__builtin__.object": "",
-    "__builtin__.Knob": "",
     "object": "",
     "exceptions.Exception": "Exception",
+    "builtins.object": "object",
+    "builtins.tuple": "tuple",
     "String": "typing.Text",
     "string": "typing.Text",
     "str": "typing.Text",
@@ -110,6 +111,11 @@ def _iter_class_sections(lines):
         elif re.match(_CLASS_INHERITED_DATA_DESC_START, line):
             yield (section_type, section_values)
             match = re.match(_CLASS_INHERITED_DATA_DESC_START, line)
+            section_type = "inherited-data"
+            section_values = [match.group(1)]
+        elif re.match(_CLASS_INHERITED_READ_ONLY_PROPERTY_START, line):
+            yield (section_type, section_values)
+            match = re.match(_CLASS_INHERITED_READ_ONLY_PROPERTY_START, line)
             section_type = "inherited-data"
             section_values = [match.group(1)]
         elif re.match(_CLASS_SECTION_END, line):
