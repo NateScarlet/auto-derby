@@ -78,6 +78,16 @@ def wait_click_image(
     _, pos = wait_image(name)
     click((pos[0] + x, pos[1] + y))
 
+def wait_click_image_disappear(
+    name: Union[Text, template.Specification], *, x: int = 0, y: int = 0
+) -> None:
+    while True:
+        try:
+            _, pos = next(template.match(template.screenshot(max_age=0), name))
+            click((pos[0] + x, pos[1] + y))
+            time.sleep(0.5)
+        except StopIteration:
+            break
 
 def wheel(point: Tuple[int, int], delta: int) -> None:
     clients.current().wheel(point, delta)

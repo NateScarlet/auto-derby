@@ -206,8 +206,7 @@ def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
         finally:
             close_msg()
 
-    action.wait_click_image(templates.SINGLE_MODE_RACE_START_BUTTON)
-    action.wait_click_image(templates.SINGLE_MODE_RACE_START_BUTTON)
+    action.wait_click_image_disappear(templates.SINGLE_MODE_RACE_START_BUTTON)
     action.wait_image(templates.RACE_RESULT_BUTTON)
     ctx.race_turns.add(ctx.turn_count())
 
