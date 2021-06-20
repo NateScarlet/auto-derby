@@ -108,7 +108,8 @@ if ($data.Debug) {
         '^numpy\b',
         '^Pillow\b',
         '^mouse\b',
-        '^cast-unknown\b'
+        '^cast-unknown\b',
+        '^adb-shell\b'
     )
     ""
     $env:DEBUG = "auto_derby"
