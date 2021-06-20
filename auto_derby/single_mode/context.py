@@ -374,6 +374,7 @@ class Context:
             expected_score -= 20
         if can_heal_condition and self.CONDITION_HEADACHE in self.conditions:
             expected_score += 20
+        expected_score += (self.MOOD_VERY_GOOD[0] - self.mood[0]) * 40 * 3
 
         return expected_score
 
