@@ -68,6 +68,9 @@ class ADBClient(Client):
         assert match, "unexpected command result: %s" % res
         self._width = int(match.group(2))
         self._height = int(match.group(1))
+        if self._width > self._height:
+            # handle orientation
+            self._height, self._width = self._width, self._height
         LOGGER.debug("screen size: width=%d height=%d", self.width, self.height)
 
     def setup(self) -> None:
