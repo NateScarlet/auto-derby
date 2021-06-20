@@ -348,7 +348,7 @@ class Context:
         return 24 * 3 + 6
 
     def continuous_race_count(self) -> int:
-        ret = 0
+        ret = 1
         turn = self.turn_count() - 1
         while turn in self.race_turns:
             ret += 1
