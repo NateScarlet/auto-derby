@@ -51,7 +51,9 @@ class ADBClient(Client):
 
     def click(self, point: Tuple[int, int]) -> None:
         x, y = point
-        res = self.device.shell(f"input tap {x} {y}")
+        command = f"input tap {x} {y}"
+        LOGGER.debug("click: %s", command)
+        res = self.device.shell(command)
         assert not res, res
         time.sleep(0.5)
 
@@ -105,8 +107,10 @@ class ADBClient(Client):
         x2, y2 = x1 + dx, y1 + dy
         duration_ms = int(duration * 1e3)
         duration_ms = max(100, duration_ms)  # drag not work if too fast
+        command = f"input swipe {x1} {y1} {x2} {y2} {duration_ms}"
+        LOGGER.debug("drag: %s", command)
         res = self.device.shell(
-            f"input swipe {x1} {y1} {x2} {y2} {duration_ms}",
+            command,
             read_timeout_s=10 + duration,
         )
         assert not res, res
