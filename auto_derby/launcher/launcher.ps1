@@ -133,9 +133,39 @@ if ($requireAdmin) {
     $verb = "runAs"
 }
 
-Start-Process $Data.PythonExecutablePath -Verb $verb -ArgumentList @(
-    "-m", "auto_derby",
-    $data.Job
+# # https://stackoverflow.com/a/11440595
+# if (-not (
+#         [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
+#     ).IsInRole(
+#         [Security.Principal.WindowsBuiltInRole]::Administrator
+#     )
+# ) {
+#     Start-Process PowerShell -Verb runAs -ArgumentList @(
+#         "-Version", "3",
+#         "-NoProfile",
+#         "& '" + $MyInvocation.MyCommand.Definition + "'"
+#     )
+#     return
+# }
+
+$command = @"
+cd /d "$WorkspaceFolder"
+set "DEBUG=$($env:DEBUG)"
+set "AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH=$($env:AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH)"
+set "AUTO_DERBY_OCR_IMAGE_PATH=$($env:AUTO_DERBY_OCR_IMAGE_PATH)"
+set "AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH=$($env:AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH)"
+set "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH=$($env:AUTO_DERBY_SINGLE_MODE_CHOICE_PATH)"
+set "AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT=$($env:AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT)"
+set "AUTO_DERBY_PLUGINS=$($env:AUTO_DERBY_PLUGINS)"
+set "AUTO_DERBY_ADB_ADDRESS=$($env:AUTO_DERBY_ADB_ADDRESS)"
+"$($Data.PythonExecutablePath)" -m auto_derby $($data.Job)
+"@
+
+"command: "
+$command
+Start-Process cmd.exe -Verb $verb -ArgumentList @(
+    "/K",
+    ($command -split "`n" -join " && ")
 )
 
 Stop-Transcript
