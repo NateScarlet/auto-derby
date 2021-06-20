@@ -22,7 +22,9 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     img = imagetools.resize(img, height=32)
     cv_img = np.asarray(img.convert("L"))
     cv_img = imagetools.level(
-        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 80)
+        cv_img,
+        np.array(10),
+        np.array(240),
     )
     sharpened_img = imagetools.sharpen(cv_img)
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)

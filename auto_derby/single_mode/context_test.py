@@ -94,6 +94,20 @@ def test_update_by_command_scene_5():
         assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
 
+def test_update_by_command_scene_6():
+    with _test.screenshot("command_scene_6.png") as img:
+        ctx = Context.new()
+        ctx.update_by_command_scene(img)
+        assert ctx.date == (2, 10, 1), ctx.date
+        assert round(ctx.vitality, 2) == 0.46, ctx.vitality
+        assert ctx.speed == 510, ctx.speed
+        assert ctx.stamina == 317, ctx.stamina
+        assert ctx.power == 351, ctx.power
+        assert ctx.guts == 298, ctx.guts
+        assert ctx.wisdom == 314, ctx.wisdom
+        assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+
+
 def test_update_by_command_scene_issue7():
     img = (
         PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue7.png")
