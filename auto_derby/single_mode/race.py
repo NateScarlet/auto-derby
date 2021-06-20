@@ -287,6 +287,15 @@ def _running_style_single_score(
         * block_factor
     )
     block_rate = min(1.0, block_rate)
+    block_penality = mathtools.interpolate(
+        int(block_rate * 10000),
+        (
+            (0, 1),
+            (1000, 0.8),
+            (2000, 0.5),
+            (3000, 0.3),
+        ),
+    )
 
     hp_penality = mathtools.interpolate(
         int(hp / expected_hp * 10000),
@@ -311,7 +320,7 @@ def _running_style_single_score(
     )
 
     ret = spd / expected_spd * 10000
-    ret *= 1 - block_rate
+    ret *= 1 - block_penality
     ret *= 1 - hp_penality
     ret *= 1 - wis_penality
 
@@ -320,6 +329,7 @@ def _running_style_single_score(
             "style: "
             "score=%d "
             "block_rate=%.2f "
+            "block_penality=%.2f "
             "hp_penality=%0.2f "
             "wis_penality=%0.2f "
             "spd=%0.2f/%0.2f "
@@ -331,6 +341,7 @@ def _running_style_single_score(
         ),
         ret,
         block_rate,
+        block_penality,
         hp_penality,
         wis_penality,
         spd,
