@@ -207,7 +207,11 @@ def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
         finally:
             close_msg()
 
-    action.wait_click_image_disappear(templates.SINGLE_MODE_RACE_START_BUTTON)
+    for _, pos in action.match_image_until_disappear(
+        templates.SINGLE_MODE_RACE_START_BUTTON
+    ):
+        action.click(pos)
+        time.sleep(0.5)
     action.wait_image(templates.RACE_RESULT_BUTTON)
     ctx.race_turns.add(ctx.turn_count())
 
