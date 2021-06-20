@@ -68,40 +68,26 @@ def _handle_training(ctx: Context) -> None:
         action.wait_image(_TRAINING_CONFIRM)
         t = Training.from_training_scene(template.screenshot())
         trainings.append(t)
-    expected_score = 15 + ctx.turn_count() * 10 / 24
+
     races_with_score = sorted(
         ((i, i.score(ctx)) for i in race.find(ctx)),
         key=lambda x: x[1],
         reverse=True,
     )
 
-    is_summer_camp = ctx.date[1:] in ((7, 1), (7, 2), (8, 1))
-    can_heal_condition = not is_summer_camp
-    if ctx.vitality > 0.5:
-        expected_score *= 0.5
-    if ctx.turn_count() >= ctx.total_turn_count() - 2:
-        expected_score *= 0.1
-    if ctx.date[1:] in ((6, 1),) and ctx.vitality < 0.8:
-        expected_score += 10
-    if ctx.date[1:] in ((6, 2),) and ctx.vitality < 0.9:
-        expected_score += 20
-    if is_summer_camp and ctx.vitality < 0.8:
-        expected_score += 10
-    if ctx.date in ((4, 0, 0)):
-        expected_score -= 20
-    if can_heal_condition and ctx.CONDITION_HEADACHE in ctx.conditions:
-        expected_score += 20
-
-    LOGGER.info("expected score:\t%2.2f", expected_score)
     trainings_with_score = [(i, i.score(ctx)) for i in trainings]
     trainings_with_score = sorted(
         trainings_with_score, key=lambda x: x[1], reverse=True
     )
+
+    expected_score = ctx.expected_score()
+    LOGGER.info("expected score:\t%2.2f", expected_score)
     for r, s in races_with_score:
         LOGGER.info("score:\trace:\t%2.2f:\t%s", s, r)
     for t, s in trainings_with_score:
         LOGGER.info("score:\ttraining:\t%2.2f:\t%s", s, t)
     training, score = trainings_with_score[0]
+    
     if races_with_score:
         r, s = races_with_score[0]
         if s > expected_score and s > score:
