@@ -160,6 +160,7 @@ set "AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT=$($env:AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT)
 set "AUTO_DERBY_PLUGINS=$($env:AUTO_DERBY_PLUGINS)"
 set "AUTO_DERBY_ADB_ADDRESS=$($env:AUTO_DERBY_ADB_ADDRESS)"
 "$($Data.PythonExecutablePath)" -m auto_derby $($data.Job)
+exit
 "@
 
 "command: "
