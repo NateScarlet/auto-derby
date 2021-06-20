@@ -189,6 +189,7 @@ def _choose_running_style(ctx: Context, race1: race.Race) -> None:
         LOGGER.info("running style score:\t%.2f:\t%s", score, name)
 
     _, pos = action.wait_image(templates.RACE_CONFIRM_BUTTON)
+    time.sleep(0.5)
     action.click(style_scores[0][2])
     action.click(pos)
 
@@ -206,8 +207,11 @@ def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
         finally:
             close_msg()
 
-    action.wait_click_image(templates.SINGLE_MODE_RACE_START_BUTTON)
-    action.wait_click_image(templates.SINGLE_MODE_RACE_START_BUTTON)
+    for _, pos in action.match_image_until_disappear(
+        templates.SINGLE_MODE_RACE_START_BUTTON
+    ):
+        action.click(pos)
+        time.sleep(0.5)
     action.wait_image(templates.RACE_RESULT_BUTTON)
     ctx.race_turns.add(ctx.turn_count())
 
