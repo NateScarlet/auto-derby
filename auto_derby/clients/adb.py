@@ -117,7 +117,7 @@ class ADBClient(Client):
             read_timeout_s=10 + duration,
         )
         assert not res, res
-        time.sleep(duration_ms / 1e3 + 0.5)
+        time.sleep(0.5)
 
     def wheel(self, point: Tuple[int, int], delta: int) -> None:
         self.drag(point, dx=0, dy=round(delta * self.height * 0.02), duration=0.2)
