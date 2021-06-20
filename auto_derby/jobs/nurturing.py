@@ -45,9 +45,9 @@ def _choose_race(ctx: Context, race1: race.Race) -> None:
         action.click(rp.vector2((100, 600), 466))
         if _current_race(ctx) == race1:
             return
-        action.wheel(
+        action.drag(
             rp.vector2((100, 600), 466),
-            -1,
+            dy=rp.vector(-50, 466),
         )
 
 
