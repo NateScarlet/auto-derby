@@ -78,14 +78,17 @@ class DMMClient(Client):
         return window.screenshot(self.h_wnd)
 
     def click(self, point: Tuple[int, int]) -> None:
+        LOGGER.debug("click: point=%s", point)
         window.click_at(self.h_wnd, point)
 
     def drag(
         self, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1
     ) -> None:
+        LOGGER.debug("drag: point=%s dx=%d dy=%d", point, dx, dy)
         window.drag_at(self.h_wnd, point, dx=dx, dy=dy, duration=duration)
 
     def wheel(self, point: Tuple[int, int], delta: int) -> None:
+        LOGGER.debug("wheel: point=%s delta=%d", point, delta)
         with window.recover_cursor(), window.recover_foreground(), window.topmost(
             self.h_wnd
         ):
