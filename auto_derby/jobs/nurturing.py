@@ -48,6 +48,7 @@ def _choose_race(ctx: Context, race1: race.Race) -> None:
         action.drag(
             rp.vector2((100, 600), 466),
             dy=rp.vector(-50, 466),
+            duration=0.2,
         )
 
 
@@ -87,7 +88,7 @@ def _handle_training(ctx: Context) -> None:
     for t, s in trainings_with_score:
         LOGGER.info("score:\ttraining:\t%2.2f:\t%s", s, t)
     training, score = trainings_with_score[0]
-    
+
     if races_with_score:
         r, s = races_with_score[0]
         if s > expected_score and s > score:
