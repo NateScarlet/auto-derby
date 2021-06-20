@@ -290,10 +290,10 @@ def _running_style_single_score(
     block_penality = mathtools.interpolate(
         int(block_rate * 10000),
         (
-            (0, 1),
-            (1000, 0.8),
+            (0, 0),
+            (1000, 0.2),
             (2000, 0.5),
-            (3000, 0.3),
+            (3000, 0.7),
         ),
     )
 
