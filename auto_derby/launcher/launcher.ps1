@@ -149,6 +149,7 @@ if ($requireAdmin) {
 # }
 
 $command = @"
+title auto-derby: $version
 cd /d "$WorkspaceFolder"
 set "DEBUG=$($env:DEBUG)"
 set "AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH=$($env:AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH)"
