@@ -189,6 +189,7 @@ def _choose_running_style(ctx: Context, race1: race.Race) -> None:
         LOGGER.info("running style score:\t%.2f:\t%s", score, name)
 
     _, pos = action.wait_image(templates.RACE_CONFIRM_BUTTON)
+    time.sleep(0.5)
     action.click(style_scores[0][2])
     action.click(pos)
 
