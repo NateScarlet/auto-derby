@@ -38,7 +38,6 @@ def match_image_until_disappear(
         for i in sort(template.match(template.screenshot(max_age=0), *tmpl)):
             count += 1
             yield i
-            break  # actions will make screenshot outdate
         if count == 0:
             break
 

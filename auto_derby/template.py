@@ -175,14 +175,14 @@ def _match_one(
         mask = cv_pos[0 : res.shape[0], 0 : res.shape[1]]
         _, max_val, _, max_loc = cv2.minMaxLoc(res, mask=mask)
         x, y = max_loc
-        x, y = reverse_rp.vector2((x, y), TARGET_WIDTH)
-        if max_val < tmpl.threshold or not tmpl.match(img, (x, y)):
+        client_pos = reverse_rp.vector2((x, y), TARGET_WIDTH)
+        if max_val < tmpl.threshold or not tmpl.match(img, client_pos):
             LOGGER.debug(
                 "not match: tmpl=%s, pos=%s, similarity=%.3f", tmpl, max_loc, max_val
             )
             break
         LOGGER.info("match: tmpl=%s, pos=%s, similarity=%.2f", tmpl, max_loc, max_val)
-        yield (tmpl, (x, y))
+        yield (tmpl, client_pos)
 
         # mark position unavailable to avoid overlap
         cv_pos[max(0, y - tmpl_h) : y + tmpl_h, max(0, x - tmpl_w) : x + tmpl_w] = 0
