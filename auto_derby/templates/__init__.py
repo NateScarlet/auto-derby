@@ -95,6 +95,7 @@ SINGLE_MODE_COMMAND_SUMMER_REST_POS = "single_mode_command_summer_rest.pos.png"
 SINGLE_MODE_COMMAND_TRAINING = "single_mode_command_training.png"
 SINGLE_MODE_COMMAND_TRAINING_POS = "single_mode_command_training.pos.png"
 SINGLE_MODE_CONDITION_HEADACHE = "single_mode_condition_headache.png"
+SINGLE_MODE_CONDITION_OVERWEIGHT = "single_mode_condition_overweight.png"
 SINGLE_MODE_CONTINUE = "single_mode_continue.png"
 SINGLE_MODE_CONTINUOUS_RACE_TITLE = "single_mode_continuous_race_title.png"
 SINGLE_MODE_CRANE_GAME_PLAY_GUIDE_BUTTON = (

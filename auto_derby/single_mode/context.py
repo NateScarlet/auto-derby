@@ -166,6 +166,7 @@ class Context:
     MOOD_VERY_GOOD = (1.2, 1.1)
 
     CONDITION_HEADACHE = 1
+    CONDITION_OVERWEIGHT = 2
 
     STATUS_S = (8, "S")
     STATUS_A = (7, "A")
@@ -372,8 +373,18 @@ class Context:
             expected_score += 10
         if self.date in ((4, 0, 0)):
             expected_score -= 20
-        if can_heal_condition and self.CONDITION_HEADACHE in self.conditions:
-            expected_score += 20
+        if can_heal_condition:
+            expected_score += (
+                len(
+                    set(
+                        (
+                            Context.CONDITION_HEADACHE,
+                            Context.CONDITION_OVERWEIGHT,
+                        )
+                    ).intersection(self.conditions)
+                )
+                * 20
+            )
         expected_score += (self.MOOD_VERY_GOOD[0] - self.mood[0]) * 40 * 3
 
         return expected_score
@@ -382,7 +393,8 @@ class Context:
 g.context_class = Context
 
 _CONDITION_TEMPLATES = {
-    templates.SINGLE_MODE_CONDITION_HEADACHE: Context.CONDITION_HEADACHE
+    templates.SINGLE_MODE_CONDITION_HEADACHE: Context.CONDITION_HEADACHE,
+    templates.SINGLE_MODE_CONDITION_OVERWEIGHT: Context.CONDITION_OVERWEIGHT,
 }
 
 

@@ -421,6 +421,27 @@ def test_update_by_character_detail_5():
     assert ctx.conditions == set((ctx.CONDITION_HEADACHE,)), ctx.conditions
 
 
+def test_update_by_character_detail_6():
+    with _test.screenshot("character_detail_6.png") as img:
+        ctx = Context.new()
+        ctx.update_by_character_detail(img)
+
+    assert ctx.turf == ctx.STATUS_A, ctx.turf
+    assert ctx.dart == ctx.STATUS_E, ctx.dart
+
+    assert ctx.sprint == ctx.STATUS_G, ctx.sprint
+    assert ctx.mile == ctx.STATUS_E, ctx.mile
+    assert ctx.intermediate == ctx.STATUS_A, ctx.intermediate
+    assert ctx.long == ctx.STATUS_A, ctx.long
+
+    assert ctx.lead == ctx.STATUS_C, ctx.lead
+    assert ctx.head == ctx.STATUS_A, ctx.head
+    assert ctx.middle == ctx.STATUS_A, ctx.middle
+    assert ctx.last == ctx.STATUS_G, ctx.last
+
+    assert ctx.conditions == set((ctx.CONDITION_OVERWEIGHT,)), ctx.conditions
+
+
 def test_update_by_character_detail_issue39():
     img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_issue39.png").convert(
         "RGB"
