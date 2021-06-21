@@ -215,10 +215,9 @@ def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
             templates.SINGLE_MODE_RACE_START_BUTTON,
             templates.RETRY_BUTTON,
         )
-        action.click(pos)
         if tmpl.name == templates.RACE_RESULT_BUTTON:
-            action.wait_image_disappear(tmpl)
             break
+        action.click(pos)
     ctx.race_turns.add(ctx.turn_count())
 
     _choose_running_style(ctx, race1)
@@ -305,7 +304,7 @@ def nurturing():
             x, y = pos
             y += 60
             action.click((x, y))
-            time.sleep(0.5)
+            action.wait_image_disappear(tmpl)
             if action.count_image(templates.SINGLE_MODE_CONTINUOUS_RACE_TITLE):
                 action.wait_click_image(templates.GREEN_OK_BUTTON)
             _handle_race(ctx)
