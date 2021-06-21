@@ -121,13 +121,14 @@ def _handle_training(ctx: Context) -> None:
             return
 
         if ctx.mood < ctx.MOOD_VERY_GOOD:
-            _, pos = action.wait_image(
+            tmpl, pos = action.wait_image(
                 templates.SINGLE_MODE_COMMAND_GO_OUT,
                 templates.SINGLE_MODE_COMMAND_SUMMER_REST,
             )
             action.click(pos)
+            action.wait_image_disappear(tmpl)
         else:
-            _, pos = (
+            tmpl, pos = (
                 action.wait_image(
                     templates.SINGLE_MODE_REST,
                     templates.SINGLE_MODE_COMMAND_SUMMER_REST,
@@ -139,6 +140,7 @@ def _handle_training(ctx: Context) -> None:
                 )
             )
             action.click(pos)
+            action.wait_image_disappear(tmpl)
         return
     x, y = training.confirm_position
     drag_y = rp.vector(100, 466)
@@ -207,12 +209,16 @@ def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
         finally:
             close_msg()
 
-    for _, pos in action.match_image_until_disappear(
-        templates.SINGLE_MODE_RACE_START_BUTTON
-    ):
+    while True:
+        tmpl, pos = action.wait_image(
+            templates.RACE_RESULT_BUTTON,
+            templates.SINGLE_MODE_RACE_START_BUTTON,
+            templates.RETRY_BUTTON,
+        )
         action.click(pos)
-        time.sleep(0.5)
-    action.wait_image(templates.RACE_RESULT_BUTTON)
+        if tmpl.name == templates.RACE_RESULT_BUTTON:
+            action.wait_image_disappear(tmpl)
+            break
     ctx.race_turns.add(ctx.turn_count())
 
     _choose_running_style(ctx, race1)
