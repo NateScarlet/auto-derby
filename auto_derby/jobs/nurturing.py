@@ -91,7 +91,7 @@ def _handle_training(ctx: Context) -> None:
 
     if races_with_score:
         r, s = races_with_score[0]
-        if s > expected_score and s > score:
+        if s > expected_score and (s > score or ctx.fan_count < ctx.target_fan_count):
             # go to race
             action.wait_click_image(templates.RETURN_BUTTON)
             action.wait_click_image(templates.SINGLE_MODE_COMMAND_RACE)

@@ -242,6 +242,7 @@ class Context:
             self._extra_turn_count += 1
         else:
             self._extra_turn_count = 0
+        self.target_fan_count = 0
 
     def update_by_command_scene(self, screenshot: Image) -> None:
         rp = mathtools.ResizeProxy(screenshot.width)
