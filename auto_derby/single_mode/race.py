@@ -233,6 +233,15 @@ def _running_style_single_score(
                 (72, 1000),
             ),
         )
+        * mathtools.interpolate(
+            race1.distance,
+            (
+                (0, 0.8),
+                (1600, 1),
+                (3200, 1.5),
+                (4800, 1.8),
+            ),
+        )
         * {
             Race.GRADE_G1: 1,
             Race.GRADE_G2: 0.95,
