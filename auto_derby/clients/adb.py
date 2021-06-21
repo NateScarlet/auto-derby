@@ -109,7 +109,7 @@ class ADBClient(Client):
         x1, y1 = point
         x2, y2 = x1 + dx, y1 + dy
         duration_ms = int(duration * 1e3)
-        duration_ms = max(100, duration_ms)  # drag not work if too fast
+        duration_ms = max(200, duration_ms)  # drag not work if too fast
         command = f"input swipe {x1} {y1} {x2} {y2} {duration_ms}"
         LOGGER.debug("drag: %s", command)
         res = self.device.shell(
