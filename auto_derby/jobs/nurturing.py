@@ -66,6 +66,7 @@ def _handle_training(ctx: Context) -> None:
         rp.vector2((402, 700), 466),
     ):
         action.drag((x, y - dy), dy=dy)
+        time.sleep(0.5)  # wait cursor effect finish
         action.wait_image(_TRAINING_CONFIRM)
         t = Training.from_training_scene(template.screenshot())
         trainings.append(t)
