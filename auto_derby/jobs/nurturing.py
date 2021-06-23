@@ -93,9 +93,7 @@ def _handle_training(ctx: Context) -> None:
     if races_with_score:
         r, s = races_with_score[0]
         if (s > expected_score and s > training_score) or (
-            ctx.fan_count < ctx.target_fan_count
-            and r.fan_counts[r.estimate_order(ctx) - 1]
-            > (ctx.target_fan_count - ctx.fan_count) * 0.4
+            ctx.fan_count < ctx.target_fan_count and r.estimate_order(ctx) <= 3
         ):
             # go to race
             action.wait_click_image(templates.RETURN_BUTTON)
@@ -300,6 +298,7 @@ def nurturing():
                     ),
                 )
             )
+            ctx.target_fan_count = max(ctx.fan_count + 1, ctx.target_fan_count)
             action.wait_click_image(templates.CANCEL_BUTTON)
         elif name == templates.SINGLE_MODE_FINISH_BUTTON:
             break
