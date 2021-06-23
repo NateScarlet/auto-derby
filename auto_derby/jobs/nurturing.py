@@ -94,7 +94,8 @@ def _handle_training(ctx: Context) -> None:
         r, s = races_with_score[0]
         if (s > expected_score and s > training_score) or (
             ctx.fan_count < ctx.target_fan_count
-            and r.fan_counts[r.estimate_order(ctx) - 1] > ctx.target_fan_count * 0.3
+            and r.fan_counts[r.estimate_order(ctx) - 1]
+            > (ctx.target_fan_count - ctx.fan_count) * 0.4
         ):
             # go to race
             action.wait_click_image(templates.RETURN_BUTTON)
