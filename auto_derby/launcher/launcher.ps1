@@ -86,6 +86,7 @@ $data | Format-List -Property (
     "SingleModeChoicesDataPath",
     "PauseIfRaceOrderGt",
     "Plugins",
+    "TargetTrainingLevels",
     "ADBAddress",
     @{
         Name       = "Version"
@@ -125,6 +126,7 @@ if ($data.SingleModeChoicesDataPath) {
 $env:AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT = $data.PauseIfRaceOrderGt
 $env:AUTO_DERBY_PLUGINS = $data.Plugins
 $env:AUTO_DERBY_ADB_ADDRESS = $data.ADBAddress
+$env:AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS = $data.TargetTrainingLevels
 
 $requireAdmin = (-not $data.ADBAddress)
 
@@ -158,6 +160,7 @@ set "AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH=$($env:AUTO_DERBY_SINGLE_MODE_EVENT
 set "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH=$($env:AUTO_DERBY_SINGLE_MODE_CHOICE_PATH)"
 set "AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT=$($env:AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT)"
 set "AUTO_DERBY_PLUGINS=$($env:AUTO_DERBY_PLUGINS)"
+set "AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS=$($env:AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS)"
 set "AUTO_DERBY_ADB_ADDRESS=$($env:AUTO_DERBY_ADB_ADDRESS)"
 "$($Data.PythonExecutablePath)" -m auto_derby $($data.Job)
 exit

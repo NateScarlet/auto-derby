@@ -137,6 +137,19 @@ namespace NateScarlet.AutoDerby
             }
         }
 
+        public string TargetTrainingLevels
+        {
+            get
+            {
+                return (string)key.GetValue("TargetTrainingLevels", "5,3,3,0,");
+            }
+            set
+            {
+                key.SetValue("TargetTrainingLevels", value);
+                OnPropertyChanged("TargetTrainingLevels");
+            }
+        }
+
         public string ADBAddress
         {
             get
