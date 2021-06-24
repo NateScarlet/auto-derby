@@ -285,6 +285,7 @@ def nurturing():
         if name == templates.CONNECTING:
             pass
         elif name == templates.SINGLE_MODE_FANS_NOT_ENOUGH:
+
             def _set_target_fan_count():
                 ctx.target_fan_count = max(ctx.fan_count + 1, ctx.target_fan_count)
 
