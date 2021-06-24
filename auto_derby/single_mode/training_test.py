@@ -82,7 +82,6 @@ def test_update_by_training_scene_4():
 
 def test_update_by_training_scene_5():
     with _test.screenshot("training_scene_5.png") as img:
-
         training = Training.from_training_scene(img)
         assert training.type == training.TYPE_WISDOM
         assert training.level == 2
@@ -92,6 +91,19 @@ def test_update_by_training_scene_5():
         assert training.guts == 0
         assert training.wisdom == 13
         assert training.skill == 4
+
+
+def test_update_by_training_scene_6():
+    with _test.screenshot("training_scene_6.png") as img:
+        training = Training.from_training_scene(img)
+        assert training.type == training.TYPE_SPEED
+        assert training.level == 4
+        assert training.speed == 22
+        assert training.stamina == 0
+        assert training.power == 10
+        assert training.guts == 0
+        assert training.wisdom == 0
+        assert training.skill == 3
 
 
 def test_update_by_training_scene_issue9():

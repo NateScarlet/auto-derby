@@ -120,6 +120,8 @@ def _recognize_level(rgb_color: Tuple[int, ...]) -> int:
         return 2
     if imagetools.compare_color((255, 134, 0), rgb_color) > 0.9:
         return 3
+    if imagetools.compare_color((244, 69, 132), rgb_color) > 0.9:
+        return 4
     if imagetools.compare_color((165, 78, 255), rgb_color) > 0.9:
         return 5
     raise ValueError("_recognize_level: unknown level color: %s" % (rgb_color,))
