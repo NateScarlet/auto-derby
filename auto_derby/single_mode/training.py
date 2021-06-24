@@ -301,7 +301,9 @@ class Training:
 
         target_level = g.target_levels.get(self.type, self.level)
         target_level_score = 0
-        if self.level < target_level:
+        if ctx.is_summer_camp:
+            pass
+        elif self.level < target_level:
             target_level_score += mathtools.interpolate(
                 ctx.turn_count(),
                 (
