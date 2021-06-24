@@ -11,9 +11,9 @@ DATA_PATH = Path(__file__).parent / "test_data"
 def screenshot(name: Text):
     img = PIL.Image.open(DATA_PATH / name).convert("RGB")
 
-    original_screenshot_width = template._g.screenshot_width
-    template._g.screenshot_width = img.width
+    original_screenshot_width = template.g.screenshot_width
+    template.g.screenshot_width = img.width
     try:
         yield img
     finally:
-        template._g.screenshot_width = original_screenshot_width
+        template.g.screenshot_width = original_screenshot_width
