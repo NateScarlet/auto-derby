@@ -62,8 +62,6 @@ class ResizeProxy:
         return l, t, r, b
 
 
-
-
 def distance(a: Tuple[int, ...], b: Tuple[int, ...]) -> float:
     assert len(a) == len(b), f"length must be same, got len(a)={len(a)} len(b)={len(b)}"
     return cast.instance(
