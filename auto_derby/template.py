@@ -31,9 +31,6 @@ def invalidate_screeshot():
 
 class g:
     last_screenshot_save_path: str = ""
-
-
-class _g:
     screenshot_width = TARGET_WIDTH
 
 
@@ -41,7 +38,7 @@ def screenshot(*, max_age: float = 1) -> Image:
     cached_time, _ = _CACHED_SCREENSHOT["value"]
     if cached_time < dt.datetime.now() - dt.timedelta(seconds=max_age):
         new_img = clients.current().screenshot()
-        _g.screenshot_width = new_img.width
+        g.screenshot_width = new_img.width
         new_img = new_img.convert("RGB")
         if g.last_screenshot_save_path:
             new_img.save(g.last_screenshot_save_path)
@@ -148,7 +145,7 @@ def _match_one(
             img,
             width=rp.vector(
                 img.width,
-                _g.screenshot_width,
+                g.screenshot_width,
             ),
         )
     )
@@ -170,7 +167,7 @@ def _match_one(
         cv2.imshow("match", res)
         cv2.waitKey()
         cv2.destroyAllWindows()
-    reverse_rp = mathtools.ResizeProxy(_g.screenshot_width)
+    reverse_rp = mathtools.ResizeProxy(g.screenshot_width)
     while True:
         mask = cv_pos[0 : res.shape[0], 0 : res.shape[1]]
         _, max_val, _, max_loc = cv2.minMaxLoc(res, mask=mask)

@@ -37,6 +37,7 @@ def _latest_file():
 
 
 def create_pos_mask(name: Text, game_img: PIL.Image.Image, threshold: float):
+    template.g.screenshot_width = game_img.width
     pos_name = template.add_middle_ext(name, "pos")
     pos_img = template.try_load(pos_name)
 
