@@ -13,6 +13,7 @@ from PIL.Image import fromarray as image_from_array
 
 from .. import ocr, template, templates, mathtools
 from .context import Context
+import cast_unknown as cast
 
 
 class g:
@@ -111,12 +112,26 @@ def _ocr_training_effect(img: Image) -> int:
     return int(text.lstrip("+"))
 
 
+def _recognize_level(rgb_color: Tuple[int, ...]) -> int:
+    if imagetools.compare_color((49, 178, 22), rgb_color) > 0.9:
+        return 1
+    if imagetools.compare_color((46, 139, 244), rgb_color) > 0.9:
+        return 2
+    if imagetools.compare_color((255, 134, 0), rgb_color) > 0.9:
+        return 3
+    if imagetools.compare_color((165, 78, 255), rgb_color) > 0.9:
+        return 5
+    raise ValueError("_recognize_level: unknown level color: %s" % (rgb_color,))
+
+
 class Training:
     @staticmethod
     def new() -> Training:
         return g.training_class()
 
     def __init__(self):
+        self.level = 0
+
         self.speed: int = 0
         self.stamina: int = 0
         self.power: int = 0
@@ -141,6 +156,10 @@ class Training:
 
         rp = mathtools.ResizeProxy(img.width)
 
+        self.level = _recognize_level(
+            tuple(cast.list_(img.getpixel(rp.vector2((10, 200), 540)), int))
+        )
+
         t, b = 503, 532
         self.speed = _ocr_training_effect(img.crop(rp.vector4((18, t, 91, b), 466)))
         self.stamina = _ocr_training_effect(img.crop(rp.vector4((91, t, 163, b), 466)))
@@ -162,7 +181,8 @@ class Training:
         )
         return (
             "Training<"
-            + ", ".join(
+            f"lv={self.level} "
+            + " ".join(
                 (
                     f"{name}={value}"
                     for name, value in sorted(
