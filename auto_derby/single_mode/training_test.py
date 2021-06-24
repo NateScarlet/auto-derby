@@ -16,6 +16,7 @@ def test_update_by_training_scene():
     )
 
     training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_SPEED
     assert training.level == 5
     assert training.speed == 26
     assert training.stamina == 0
@@ -33,6 +34,7 @@ def test_update_by_training_scene_2():
     )
 
     training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_WISDOM
     assert training.level == 3
     assert training.speed == 6
     assert training.stamina == 0
@@ -50,6 +52,7 @@ def test_update_by_training_scene_3():
     )
 
     training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_GUTS
     assert training.level == 5
     assert training.speed == 6
     assert training.stamina == 0
@@ -67,6 +70,7 @@ def test_update_by_training_scene_4():
     )
 
     training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_GUTS
     assert training.level == 5
     assert training.speed == 7
     assert training.stamina == 0
@@ -80,6 +84,7 @@ def test_update_by_training_scene_5():
     with _test.screenshot("training_scene_5.png") as img:
 
         training = Training.from_training_scene(img)
+        assert training.type == training.TYPE_WISDOM
         assert training.level == 2
         assert training.speed == 2
         assert training.stamina == 0
@@ -97,6 +102,7 @@ def test_update_by_training_scene_issue9():
     )
 
     training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_SPEED
     assert training.level == 1
     assert training.speed == 12
     assert training.stamina == 0
@@ -114,6 +120,7 @@ def test_update_by_training_scene_issue24():
     )
 
     training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_STAMINA
     assert training.level == 1
     assert training.speed == 0
     assert training.stamina == 9
@@ -131,6 +138,7 @@ def test_update_by_training_scene_issue51():
     )
 
     training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_SPEED
     assert training.level == 5
     assert training.speed == 21
     assert training.stamina == 0
@@ -144,6 +152,7 @@ def test_update_by_training_scene_issue55():
     img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue55.png").convert("RGB")
 
     training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_SPEED
     assert training.level == 5
     assert training.speed == 30
     assert training.stamina == 0

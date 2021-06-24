@@ -4,6 +4,9 @@
 
 from typing import Tuple
 
+import cast_unknown as cast
+import numpy as np
+
 
 def linear_interpolate(a: float, b: float, pos: float) -> float:
     return a + (b - a) * pos
@@ -57,3 +60,12 @@ class ResizeProxy:
     ) -> Tuple[int, int, int, int]:
         l, t, r, b = (self.vector(i, from_) for i in rect)
         return l, t, r, b
+
+
+
+
+def distance(a: Tuple[int, ...], b: Tuple[int, ...]) -> float:
+    assert len(a) == len(b), f"length must be same, got len(a)={len(a)} len(b)={len(b)}"
+    return cast.instance(
+        np.sqrt(np.sum((np.array(a) - np.array(b)) ** 2, axis=0)), float
+    )
