@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Set, Text, Tuple, Type
+from typing import Callable, List, Set, Text, Tuple, Type
 
 import cast_unknown as cast
 import cv2
@@ -237,12 +237,19 @@ class Context:
         # ・追込：最後方に控え、最後に勝負をかける作戦。
         self.last = Context.STATUS_NONE
 
+        self._next_turn_cb: List[Callable[[], None]] = []
+
     def next_turn(self) -> None:
         if self.date in ((1, 0, 0), (4, 0, 0)):
             self._extra_turn_count += 1
         else:
             self._extra_turn_count = 0
-        self.target_fan_count = 0
+
+        while self._next_turn_cb:
+            self._next_turn_cb.pop()()
+
+    def defer_next_turn(self, cb: Callable[[], None]) -> None:
+        self._next_turn_cb.append(cb)
 
     def update_by_command_scene(self, screenshot: Image) -> None:
         rp = mathtools.ResizeProxy(screenshot.width)

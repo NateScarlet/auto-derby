@@ -6,8 +6,6 @@ import logging
 import time
 from typing import List, Optional
 
-from auto_derby import mathtools
-
 from .. import action, template, templates, window, config
 from ..single_mode import Context, Training, choice, race
 
@@ -287,18 +285,10 @@ def nurturing():
         if name == templates.CONNECTING:
             pass
         elif name == templates.SINGLE_MODE_FANS_NOT_ENOUGH:
-            ctx.target_fan_count = int(
-                mathtools.interpolate(
-                    ctx.turn_count(),
-                    (
-                        (0, 8000),
-                        (24, 10000),
-                        (48, 25000),
-                        (72, 50000),
-                    ),
-                )
-            )
-            ctx.target_fan_count = max(ctx.fan_count + 1, ctx.target_fan_count)
+            def _set_target_fan_count():
+                ctx.target_fan_count = max(ctx.fan_count + 1, ctx.target_fan_count)
+
+            ctx.defer_next_turn(_set_target_fan_count)
             action.wait_click_image(templates.CANCEL_BUTTON)
         elif name == templates.SINGLE_MODE_FINISH_BUTTON:
             break
