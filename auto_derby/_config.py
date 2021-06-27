@@ -11,6 +11,8 @@ from auto_derby import plugin
 from . import ocr, single_mode, template, window
 from .clients import ADBClient
 
+import warnings
+
 
 def _parse_training_levels(spec: Text) -> Dict[int, int]:
     ret: Dict[int, int] = {}
@@ -27,6 +29,11 @@ def _parse_training_levels(spec: Text) -> Dict[int, int]:
         if not v:
             continue
         ret[k] = int(v)
+        if ret[k] > 6:
+            warnings.warn(
+                "target training level greater than 6 has same effect as 6",
+                RuntimeWarning,
+            )
     return ret
 
 
