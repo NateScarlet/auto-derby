@@ -6,8 +6,9 @@ import logging
 import time
 from typing import List, Optional
 
-from .. import action, template, templates, window, config
+from .. import action, template, templates, window, config, imagetools
 from ..single_mode import Context, Training, choice, race
+import cast_unknown as cast
 
 
 LOGGER = logging.getLogger(__name__)
@@ -31,9 +32,18 @@ def _current_race(ctx: Context) -> race.Race:
     return race1
 
 
+def _is_race_list_scroll_to_top() -> bool:
+    rp = action.resize_proxy()
+    color = template.screenshot().getpixel(rp.vector2((525, 525), 540))
+    return (
+        imagetools.compare_color((123, 121, 140), tuple(cast.list_(color, int))) > 0.9
+    )
+
+
 def _choose_race(ctx: Context, race1: race.Race) -> None:
     rp = action.resize_proxy()
-    action.wheel(rp.vector2((100, 500), 466), 10)
+    while not _is_race_list_scroll_to_top():
+        action.drag(rp.vector2((100, 500), 466), dy=rp.vector(100, 466), duration=0.2)
     action.click(rp.vector2((100, 500), 466))
 
     if _current_race(ctx) == race1:
