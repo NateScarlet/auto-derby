@@ -17,7 +17,7 @@ def buy_everything():
             pass
         action.wait_click_image(templates.CLOSE_BUTTON)
         action.wait_image(templates.CLOSE_NOW_BUTTON)
-        action.drag(pos, dx=rp.vector(-80, 540))
+        action.swipe(pos, dx=rp.vector(-80, 540))
 
     action.wait_click_image(templates.CLOSE_NOW_BUTTON)
     action.wait_click_image(templates.GREEN_OK_BUTTON)

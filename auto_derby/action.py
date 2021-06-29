@@ -80,6 +80,6 @@ def wait_click_image(
     click((pos[0] + x, pos[1] + y))
 
 
-def drag(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.03):
-    clients.current().drag(point, dx=dx, dy=dy, duration=duration)
+def swipe(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.03):
+    clients.current().swipe(point, dx=dx, dy=dy, duration=duration)
     template.invalidate_screeshot()
