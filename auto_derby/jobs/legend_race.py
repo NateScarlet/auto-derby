@@ -26,7 +26,7 @@ def legend_race():
         elif name == templates.LIMITED_SALE_OPEN:
             limited_sale.buy_everything()
         elif name == templates.LEGEND_RACE_COLLECT_ALL_REWARD:
-            action.click(pos)
+            action.tap(pos)
             return
         else:
-            action.click(pos)
+            action.tap(pos)

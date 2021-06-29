@@ -23,4 +23,4 @@ def roulette_derby():
             if not action.count_image(templates.ROULETTE_DERBY_TAP_BUTTON_DISABLED):
                 continue
             return
-        action.click(pos)
+        action.tap(pos)

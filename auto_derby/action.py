@@ -14,8 +14,8 @@ def resize_proxy() -> mathtools.ResizeProxy:
     return mathtools.ResizeProxy(clients.current().width)
 
 
-def click(point: Tuple[int, int]):
-    clients.current().click(point)
+def tap(point: Tuple[int, int]):
+    clients.current().tap(point)
     template.invalidate_screeshot()
 
 
@@ -62,22 +62,22 @@ def wait_image_disappear(*tmpl: Union[Text, template.Specification]) -> None:
             break
 
 
-def click_image(
+def tap_image(
     name: Union[Text, template.Specification], *, x: int = 0, y: int = 0
 ) -> bool:
     try:
         name, pos = next(template.match(template.screenshot(), name))
-        click((pos[0] + x, pos[1] + y))
+        tap((pos[0] + x, pos[1] + y))
         return True
     except StopIteration:
         return False
 
 
-def wait_click_image(
+def wait_tap_image(
     name: Union[Text, template.Specification], *, x: int = 0, y: int = 0
 ) -> None:
     _, pos = wait_image(name)
-    click((pos[0] + x, pos[1] + y))
+    tap((pos[0] + x, pos[1] + y))
 
 
 def swipe(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.03):

@@ -26,7 +26,7 @@ class Client(ABC):
 
     # TODO: rename to tap
     @abstractmethod
-    def click(self, point: Tuple[int, int]) -> None:
+    def tap(self, point: Tuple[int, int]) -> None:
         ...
 
     @abstractmethod

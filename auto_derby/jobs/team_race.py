@@ -40,15 +40,15 @@ def team_race():
                 > 0.99
             )
             if has_granted_reward:
-                action.click(granted_reward_pos)
-                action.wait_click_image(templates.GREEN_NEXT_BUTTON)
-                action.wait_click_image(templates.RACE_ITEM_PARFAIT)
+                action.tap(granted_reward_pos)
+                action.wait_tap_image(templates.GREEN_NEXT_BUTTON)
+                action.wait_tap_image(templates.RACE_ITEM_PARFAIT)
             else:
                 x, y = pos
                 y += 300
-                action.click((x, y))
+                action.tap((x, y))
         elif name == templates.TEAM_RACE_NEXT_BUTTON:
-            action.click(pos)
+            action.tap(pos)
         elif name == templates.RP_NOT_ENOUGH:
             break
         elif name == templates.CONNECTING:
@@ -56,4 +56,4 @@ def team_race():
         elif name == templates.LIMITED_SALE_OPEN:
             limited_sale.buy_everything()
         else:
-            action.click(pos)
+            action.tap(pos)

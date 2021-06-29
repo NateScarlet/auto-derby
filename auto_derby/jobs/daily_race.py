@@ -40,4 +40,4 @@ def daily_race(race_name: Text):
         elif name == templates.LIMITED_SALE_OPEN:
             limited_sale.buy_everything()
         else:
-            action.click(pos)
+            action.tap(pos)

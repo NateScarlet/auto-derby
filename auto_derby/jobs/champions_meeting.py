@@ -32,6 +32,6 @@ def champions_meeting():
             time.sleep(1)
             if not action.count_image(templates.CHAMPIONS_MEETING_USING_TICKET):
                 exit(0)
-            action.wait_click_image(templates.GREEN_OK_BUTTON)
+            action.wait_tap_image(templates.GREEN_OK_BUTTON)
         else:
-            action.click(pos)
+            action.tap(pos)

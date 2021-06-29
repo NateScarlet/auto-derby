@@ -49,10 +49,10 @@ class ADBClient(Client):
         signer = PythonRSASigner.FromRSAKeyPath(self.key_path)
         self.device.connect(rsa_keys=[signer])
 
-    def click(self, point: Tuple[int, int]) -> None:
+    def tap(self, point: Tuple[int, int]) -> None:
         x, y = point
         command = f"input tap {x} {y}"
-        LOGGER.debug("click: %s", command)
+        LOGGER.debug("tap: %s", command)
         res = self.device.shell(command)
         assert not res, res
         time.sleep(0.5)

@@ -77,8 +77,8 @@ class DMMClient(Client):
     def screenshot(self) -> PIL.Image.Image:
         return window.screenshot(self.h_wnd)
 
-    def click(self, point: Tuple[int, int]) -> None:
-        LOGGER.debug("click: point=%s", point)
+    def tap(self, point: Tuple[int, int]) -> None:
+        LOGGER.debug("tap: point=%s", point)
         window.click_at(self.h_wnd, point)
 
     def swipe(
