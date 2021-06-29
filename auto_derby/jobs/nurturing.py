@@ -324,9 +324,7 @@ def nurturing():
             ctx.next_turn()
             LOGGER.info("update context: %s", ctx)
             if action.tap_image(templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER):
-                action.wait_tap_image(
-                    templates.SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON
-                )
+                action.wait_tap_image(templates.SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON)
                 _handle_race(ctx)
                 continue
 
