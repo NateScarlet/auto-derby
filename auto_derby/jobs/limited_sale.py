@@ -5,6 +5,7 @@ from .. import action, templates
 
 
 def buy_everything():
+    rp = action.resize_proxy()
     action.wait_click_image(templates.GO_TO_LIMITED_SALE)
     action.wait_image(templates.CLOSE_NOW_BUTTON)
     for _, pos in action.match_image_until_disappear(
@@ -16,7 +17,7 @@ def buy_everything():
             pass
         action.wait_click_image(templates.CLOSE_BUTTON)
         action.wait_image(templates.CLOSE_NOW_BUTTON)
-        action.wheel(pos, -2)
+        action.drag(pos, dx=rp.vector(-80, 540))
 
     action.wait_click_image(templates.CLOSE_NOW_BUTTON)
     action.wait_click_image(templates.GREEN_OK_BUTTON)
