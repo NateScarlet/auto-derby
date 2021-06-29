@@ -28,7 +28,7 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     )
     sharpened_img = imagetools.sharpen(cv_img)
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
-    _, binary_img = cv2.threshold(sharpened_img, 100, 255, cv2.THRESH_BINARY_INV)
+    _, binary_img = cv2.threshold(sharpened_img, 120, 255, cv2.THRESH_BINARY_INV)
     imagetools.fill_area(binary_img, (0,), size_lt=2)
 
     if os.getenv("DEBUG") == __name__:
