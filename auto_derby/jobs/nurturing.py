@@ -254,6 +254,7 @@ def _handle_option():
 
 def _update_context_by_class_menu(ctx: Context):
     action.wait_tap_image(templates.SINGLE_MODE_CLASS_DETAIL_BUTTON)
+    time.sleep(0.2)  # wait animation
     action.wait_image(templates.SINGLE_MODE_CLASS_DETAIL_TITLE)
     ctx.update_by_class_detail(template.screenshot())
     action.wait_tap_image(templates.CLOSE_BUTTON)
@@ -261,6 +262,7 @@ def _update_context_by_class_menu(ctx: Context):
 
 def _update_context_by_status_menu(ctx: Context):
     action.wait_tap_image(templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON)
+    time.sleep(0.2)  # wait animation
     action.wait_image(templates.SINGLE_MODE_CHARACTER_DETAIL_TITLE)
     ctx.update_by_character_detail(template.screenshot())
     action.wait_tap_image(templates.CLOSE_BUTTON)
