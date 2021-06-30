@@ -33,7 +33,7 @@
     </StackPanel>
 
     <StackPanel Grid.Row="1">
-      <Label>ADB address (experimental, use format like 127.0.0.1:5073)</Label>
+      <Label>ADB address (experimental, use format like 127.0.0.1:5555)</Label>
       <TextBox Text="{Binding ADBAddress, UpdateSourceTrigger=PropertyChanged}"
         MaxLines="1" />
     </StackPanel>
