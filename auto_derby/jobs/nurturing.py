@@ -248,7 +248,8 @@ ALL_OPTIONS = [
 
 
 def _handle_option():
-    ans = choice.get(template.screenshot())
+    time.sleep(0.2)  # wait animation
+    ans = choice.get(template.screenshot(max_age=0))
     action.tap_image(ALL_OPTIONS[ans - 1])
 
 
