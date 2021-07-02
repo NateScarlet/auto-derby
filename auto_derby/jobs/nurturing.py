@@ -43,7 +43,7 @@ def _is_race_list_scroll_to_top() -> bool:
 def _choose_race(ctx: Context, race1: race.Race) -> None:
     rp = action.resize_proxy()
 
-    time.sleep(0.2) # wait animation
+    time.sleep(0.2)  # wait animation
     while not _is_race_list_scroll_to_top():
         action.swipe(rp.vector2((100, 500), 466), dy=rp.vector(100, 466), duration=0.2)
     action.tap(rp.vector2((100, 500), 466))
