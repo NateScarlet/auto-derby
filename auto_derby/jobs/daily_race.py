@@ -1,10 +1,9 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from auto_derby.jobs import limited_sale
 from typing import Text
 
-from .. import action, templates
+from .. import action, config, templates
 
 
 def daily_race(race_name: Text):
@@ -38,6 +37,6 @@ def daily_race(race_name: Text):
         elif name == templates.DAILY_RACE_TICKET_NOT_ENOUGH:
             break
         elif name == templates.LIMITED_SALE_OPEN:
-            limited_sale.buy_everything()
+            config.on_limited_sale()
         else:
             action.tap(pos)

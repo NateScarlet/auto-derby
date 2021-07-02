@@ -1,7 +1,12 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from .. import action, templates
+from __future__ import annotations
+
+import auto_derby
+
+
+from auto_derby import action, templates
 
 
 def buy_everything():
@@ -24,3 +29,11 @@ def buy_everything():
     action.wait_image(templates.RETURN_BUTTON)
     for _, pos in action.match_image_until_disappear(templates.RETURN_BUTTON):
         action.tap(pos)
+
+
+class Plugin(auto_derby.Plugin):
+    def install(self) -> None:
+        auto_derby.config.on_limited_sale = buy_everything
+
+
+auto_derby.plugin.register(__name__, Plugin())

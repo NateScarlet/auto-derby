@@ -1,8 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from auto_derby.jobs import limited_sale
-from .. import action, templates
+from .. import action, templates, config
 
 
 def legend_race():
@@ -24,7 +23,7 @@ def legend_race():
         if name == templates.CONNECTING:
             pass
         elif name == templates.LIMITED_SALE_OPEN:
-            limited_sale.buy_everything()
+            config.on_limited_sale()
         elif name == templates.LEGEND_RACE_COLLECT_ALL_REWARD:
             action.tap(pos)
             return

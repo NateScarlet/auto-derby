@@ -67,6 +67,11 @@ class config:
     )
     adb_key_path = os.getenv("AUTO_DERBY_ADB_KEY_PATH", ADBClient.key_path)
 
+    on_limited_sale = lambda: window.pause(
+        "Please handle limited shop manually before confirm in terminal.\n"
+        "You can also try `limited_sale_buy_everything` plugin."
+    )
+
     @classmethod
     def apply(cls) -> None:
         ADBClient.key_path = cls.adb_key_path

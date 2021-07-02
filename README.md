@@ -18,7 +18,8 @@
 - [x] 传奇赛 (Legend race)
   - [x] 自动领奖励
 - [x] 活动抽奖转盘 (Roulette derby)
-- [x] 遇到限时商店自动买空
+- [x] 自定义限时商店处理
+  - [x] 插件 limited_sale_buy_everything：自动买下所有物品
 - [x] 育成 (Nurturing)
   - [x] 自动选择训练
     - [x] 基于当前属性
@@ -44,6 +45,7 @@
 ### 安装依赖
 
 Shift + 右键 点击项目文件夹空白处 - `在此处打开命令窗口` 在其中运行
+
 ```shell
 py -3.8 -m pip install -r requirements.txt
 ```

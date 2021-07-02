@@ -2,9 +2,8 @@
 # pyright: strict
 
 from auto_derby import imagetools
-from .. import action, templates, template
 
-from . import limited_sale
+from .. import action, config, template, templates
 
 
 def team_race():
@@ -54,6 +53,6 @@ def team_race():
         elif name == templates.CONNECTING:
             pass
         elif name == templates.LIMITED_SALE_OPEN:
-            limited_sale.buy_everything()
+            config.on_limited_sale()
         else:
             action.tap(pos)
