@@ -322,6 +322,14 @@ def test_update_by_class_detail_issue35_2():
     assert ctx.is_after_winning == True, ctx.is_after_winning
 
 
+def test_update_by_class_detail_issue86():
+    with _test.screenshot("class_detail_issue86.png") as img:
+        ctx = Context.new()
+        ctx.update_by_class_detail(img)
+    assert ctx.fan_count == 88556, ctx.fan_count
+    assert ctx.is_after_winning == True, ctx.is_after_winning
+
+
 def test_update_by_character_detail():
     img = (
         PIL.Image.open(_TEST_DATA_PATH / "character_detail.png")
