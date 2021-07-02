@@ -225,4 +225,9 @@ def screenshot(h_wnd: int) -> PIL.Image.Image:
     return screenshot_print_window(h_wnd)
 
 
-# TODO: move client inside visible area
+def pause(message: Text) -> None:
+    close_msg = info(message)
+    try:
+        input("Press enter to continue...")
+    finally:
+        close_msg()

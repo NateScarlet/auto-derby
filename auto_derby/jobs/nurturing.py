@@ -213,14 +213,10 @@ def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
     race1 = race1 or _current_race(ctx)
     estimate_order = race1.estimate_order(ctx)
     if estimate_order > config.pause_if_race_order_gt:
-        close_msg = window.info(
+        window.pause(
             "Race estimate result is No.%d\nplease learn skills before confirm in terminal"
             % estimate_order
         )
-        try:
-            input("Press enter to continue...")
-        finally:
-            close_msg()
 
     while True:
         tmpl, pos = action.wait_image(
