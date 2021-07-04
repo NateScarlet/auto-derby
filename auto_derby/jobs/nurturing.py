@@ -46,6 +46,7 @@ def _choose_race(ctx: Context, race1: race.Race) -> None:
     time.sleep(0.2)  # wait animation
     while not _is_race_list_scroll_to_top():
         action.swipe(rp.vector2((100, 500), 466), dy=rp.vector(100, 466), duration=0.2)
+        time.sleep(0.2)
     action.tap(rp.vector2((100, 500), 466))
 
     if _current_race(ctx) == race1:
