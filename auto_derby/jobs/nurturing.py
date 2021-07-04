@@ -158,6 +158,7 @@ def _handle_training(ctx: Context) -> None:
     x, y = training.confirm_position
     drag_y = rp.vector(100, 466)
     action.swipe((x, y - drag_y), dy=drag_y)
+    time.sleep(0.2)
     action.tap((x, y))
 
 
