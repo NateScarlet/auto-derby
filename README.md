@@ -1,6 +1,7 @@
 # auto-derby
 
-[![python](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml/badge.svg)](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml) [![Join the chat at https://gitter.im/auto-derby/community](https://badges.gitter.im/auto-derby/community.svg)](https://gitter.im/auto-derby/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![python](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml/badge.svg)](https://github.com/NateScarlet/auto-derby/actions/workflows/python-app.yml) 
+[![Join the chat at https://gitter.im/auto-derby/community](https://badges.gitter.im/auto-derby/community.svg)](https://gitter.im/auto-derby/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 自动化养马
 
