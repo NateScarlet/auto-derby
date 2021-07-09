@@ -3,14 +3,14 @@
 
 import json
 import logging
+import os
 from typing import Dict, Text
 
 import cv2
 import numpy as np
-from auto_derby import imagetools, window
 from PIL.Image import Image
-import os
-from .. import mathtools
+
+from .. import imagetools, mathtools, terminal
 
 LOGGER = logging.getLogger(__name__)
 
@@ -72,16 +72,12 @@ def get(event_screen: Image) -> int:
         cv2.destroyAllWindows()
 
     if event_id not in g.choices:
-        close = window.info("New event encountered\nplease choose option in terminal")
-        try:
-            while True:
-                ans = input("Choose event option(1/2/3/4/5):")
-                if ans in ["1", "2", "3", "4", "5"]:
-                    g.choices[event_id] = int(ans)
-                    _save()
-                    break
-        finally:
-            close()
+        while True:
+            ans = terminal.prompt("Choose event option(1/2/3/4/5):")
+            if ans in ["1", "2", "3", "4", "5"]:
+                g.choices[event_id] = int(ans)
+                _save()
+                break
     ret = g.choices[event_id]
     LOGGER.info("event: id=%s choice=%d", event_id, ret)
     return ret

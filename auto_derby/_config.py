@@ -72,7 +72,10 @@ class config:
         "You can also try `limited_sale_buy_everything` plugin."
     )
 
-    terminal_pause_sound_path = os.path.expandvars("${WinDir}/Media/Windows Background.wav")
+    terminal_pause_sound_path = os.path.expandvars(
+        "${WinDir}/Media/Windows Background.wav"
+    )
+    terminal_prompt_sound_path = terminal_pause_sound_path
 
     @classmethod
     def apply(cls) -> None:
@@ -90,6 +93,7 @@ class config:
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
         window.g.use_legacy_screenshot = cls.use_legacy_screenshot
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path
+        terminal.g.prompt_sound_path = cls.terminal_prompt_sound_path
 
         ocr.reload()
         single_mode.choice.reload()

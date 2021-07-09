@@ -11,9 +11,7 @@ import cv2
 import numpy as np
 from PIL.Image import Image, fromarray
 
-from auto_derby import imagetools
-
-from . import window
+from . import imagetools, terminal
 
 LOGGER = logging.getLogger(__name__)
 
@@ -72,14 +70,12 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
         return value
     ans = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
-    close_msg = window.info("New text encountered\nplease do annotation in terminal")
     try:
         while len(ans) != 1:
-            ans = input("Corresponding text for current displaying image:")
+            ans = terminal.prompt("Corresponding text for current displaying image:")
         g.labels[h] = ans
         LOGGER.info("labeled: hash=%s, value=%s", h, ans)
     finally:
-        close_msg()
         close_img()
     _save()
     ret = g.labels[h]

@@ -10,6 +10,7 @@ from . import sound, window
 
 class g:
     pause_sound_path = ""
+    prompt_sound_path = ""
 
 
 def pause(message: Text) -> None:
@@ -17,5 +18,14 @@ def pause(message: Text) -> None:
     try:
         sound.play_file(g.pause_sound_path)
         input("Press enter to continue...")
+    finally:
+        close_msg()
+
+
+def prompt(message: Text) -> Text:
+    close_msg = window.info("Interaction required in terminal.")
+    try:
+        sound.play_file(g.pause_sound_path)
+        return input(message)
     finally:
         close_msg()
