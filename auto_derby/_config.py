@@ -72,6 +72,8 @@ class config:
         "You can also try `limited_sale_buy_everything` plugin."
     )
 
+    pause_sound_path = os.path.expandvars("${WinDir}/Media/Windows Background.wav")
+
     @classmethod
     def apply(cls) -> None:
         ADBClient.key_path = cls.adb_key_path

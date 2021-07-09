@@ -14,6 +14,7 @@ import mouse
 import PIL.Image
 import PIL.ImageGrab
 import win32con
+import winsound
 import win32gui
 import win32ui
 
@@ -22,6 +23,7 @@ LOGGER = logging.getLogger(__name__)
 
 class g:
     use_legacy_screenshot = False
+    pause_sound_path = ""
 
 
 def message_box(
@@ -228,6 +230,11 @@ def screenshot(h_wnd: int) -> PIL.Image.Image:
 def pause(message: Text) -> None:
     close_msg = info(message)
     try:
+        if g.pause_sound_path:
+            winsound.PlaySound(
+                g.pause_sound_path,
+                winsound.SND_ASYNC | winsound.SND_FILENAME,
+            )
         input("Press enter to continue...")
     finally:
         close_msg()
