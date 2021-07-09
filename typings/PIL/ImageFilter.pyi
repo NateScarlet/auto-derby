@@ -17,7 +17,13 @@ class BuiltinFilter(MultibandFilter):
 class Kernel(BuiltinFilter):
     name: str
     filterargs: _FilterArgs
-    def __init__(self, size: Sequence[int], kernel: Sequence[int], scale: Any | None = ..., offset: int = ...) -> None: ...
+    def __init__(
+        self,
+        size: Sequence[int],
+        kernel: Sequence[int],
+        scale: Any | None = ...,
+        offset: int = ...,
+    ) -> None: ...
 
 class RankFilter(Filter):
     name: str
@@ -67,7 +73,9 @@ class UnsharpMask(MultibandFilter):
     radius: float
     percent: int
     threshold: int
-    def __init__(self, radius: float = ..., percent: int = ..., threshold: int = ...) -> None: ...
+    def __init__(
+        self, radius: float = ..., percent: int = ..., threshold: int = ...
+    ) -> None: ...
     def filter(self, image) -> Image: ...
 
 class BLUR(BuiltinFilter):
@@ -117,7 +125,12 @@ class Color3DLUT(MultibandFilter):
     mode: str | None
     table: Any
     def __init__(
-        self, size: int | Iterable[int], table, channels: int = ..., target_mode: str | None = ..., **kwargs
+        self,
+        size: int | Iterable[int],
+        table,
+        channels: int = ...,
+        target_mode: str | None = ...,
+        **kwargs,
     ) -> None: ...
     @classmethod
     def generate(

@@ -86,7 +86,12 @@ class PdfParser:
     trailer_dict: Any
     xref_table: Any
     def __init__(
-        self, filename: Any | None = ..., f: Any | None = ..., buf: Any | None = ..., start_offset: int = ..., mode: str = ...
+        self,
+        filename: Any | None = ...,
+        f: Any | None = ...,
+        buf: Any | None = ...,
+        start_offset: int = ...,
+        mode: str = ...,
     ) -> None: ...
     def __enter__(self): ...
     def __exit__(self, exc_type, exc_value, traceback): ...
@@ -145,7 +150,9 @@ class PdfParser:
     re_stream_start: Any
     re_stream_end: Any
     @classmethod
-    def get_value(cls, data, offset, expect_indirect: Any | None = ..., max_nesting: int = ...): ...
+    def get_value(
+        cls, data, offset, expect_indirect: Any | None = ..., max_nesting: int = ...
+    ): ...
     re_lit_str_token: Any
     escaped_chars: Any
     @classmethod
