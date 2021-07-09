@@ -22,8 +22,6 @@ LOGGER = logging.getLogger(__name__)
 
 class g:
     use_legacy_screenshot = False
-    pause_sound_path = ""
-
 
 def message_box(
     msg: Text,
