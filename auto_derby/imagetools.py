@@ -13,6 +13,8 @@ import cv2.img_hash
 import numpy as np
 from PIL.Image import BICUBIC, Image, fromarray
 
+_Resample = Literal[0, 1, 2, 3, 4, 5]
+
 
 def md5(b_img: np.ndarray, *, save_path: Optional[Text] = None) -> Text:
     _id = hashlib.md5(b_img.tobytes()).hexdigest()
@@ -190,7 +192,7 @@ def resize(
     *,
     height: Optional[int] = None,
     width: Optional[int] = None,
-    resample: int = BICUBIC,
+    resample: _Resample = BICUBIC,
 ) -> Image:
     if height and width:
         return img.resize((width, height), resample=resample)

@@ -1,11 +1,11 @@
 from .clients import DMMClient
 from .window import screenshot_pil_crop, screenshot_print_window
 import timeit
+import cast_unknown as cast
 
 
 def benchmark_screenshot():
-    client = DMMClient.find()
-    assert client, "dmm client not running"
+    client = cast.not_none(DMMClient.find())
 
     run_count = 10
     print_window = (
