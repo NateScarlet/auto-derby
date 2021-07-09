@@ -8,7 +8,7 @@ import os
 
 from auto_derby import plugin
 
-from . import ocr, single_mode, template, window
+from . import ocr, single_mode, template, window, terminal
 from .clients import ADBClient
 
 import warnings
@@ -67,12 +67,12 @@ class config:
     )
     adb_key_path = os.getenv("AUTO_DERBY_ADB_KEY_PATH", ADBClient.key_path)
 
-    on_limited_sale = lambda: window.pause(
+    on_limited_sale = lambda: terminal.pause(
         "Please handle limited shop manually before confirm in terminal.\n"
         "You can also try `limited_sale_buy_everything` plugin."
     )
 
-    pause_sound_path = os.path.expandvars("${WinDir}/Media/Windows Background.wav")
+    terminal_pause_sound_path = os.path.expandvars("${WinDir}/Media/Windows Background.wav")
 
     @classmethod
     def apply(cls) -> None:
@@ -89,7 +89,7 @@ class config:
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
         window.g.use_legacy_screenshot = cls.use_legacy_screenshot
-        window.g.pause_sound_path = cls.pause_sound_path
+        terminal.g.pause_sound_path = cls.terminal_pause_sound_path
 
         ocr.reload()
         single_mode.choice.reload()

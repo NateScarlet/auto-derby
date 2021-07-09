@@ -14,7 +14,6 @@ import mouse
 import PIL.Image
 import PIL.ImageGrab
 import win32con
-import winsound
 import win32gui
 import win32ui
 
@@ -225,16 +224,3 @@ def screenshot(h_wnd: int) -> PIL.Image.Image:
     if g.use_legacy_screenshot:
         return screenshot_pil_crop(h_wnd)
     return screenshot_print_window(h_wnd)
-
-
-def pause(message: Text) -> None:
-    close_msg = info(message)
-    try:
-        if g.pause_sound_path:
-            winsound.PlaySound(
-                g.pause_sound_path,
-                winsound.SND_ASYNC | winsound.SND_FILENAME,
-            )
-        input("Press enter to continue...")
-    finally:
-        close_msg()
