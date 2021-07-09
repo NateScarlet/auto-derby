@@ -89,6 +89,7 @@ class config:
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
         window.g.use_legacy_screenshot = cls.use_legacy_screenshot
+        window.g.pause_sound_path = cls.pause_sound_path
 
         ocr.reload()
         single_mode.choice.reload()
