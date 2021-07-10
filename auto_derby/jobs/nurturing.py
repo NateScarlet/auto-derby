@@ -6,7 +6,7 @@ import logging
 import time
 from typing import List, Optional
 
-from .. import action, template, templates, config, imagetools, terminal 
+from .. import action, template, templates, config, imagetools, terminal
 from ..single_mode import Context, Training, choice, race
 import cast_unknown as cast
 

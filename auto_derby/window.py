@@ -23,6 +23,7 @@ LOGGER = logging.getLogger(__name__)
 class g:
     use_legacy_screenshot = False
 
+
 def message_box(
     msg: Text,
     caption: Text,
