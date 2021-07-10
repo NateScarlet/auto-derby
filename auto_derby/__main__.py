@@ -28,6 +28,7 @@ def main():
         "daily_race_money": lambda: jobs.daily_race(templates.MOONLIGHT_PRIZE),
         "daily_race_sp": lambda: jobs.daily_race(templates.JUPITER_CUP),
         "roulette_derby": jobs.roulette_derby,
+        "experience_race": jobs.experience_race,
     }
     parser = argparse.ArgumentParser()
     parser.add_argument("job")
@@ -74,7 +75,8 @@ def main():
                 )
                 == 6
             ):
-                webbrowser.open("dmmgameplayer://umamusume/cl/general/umamusume")
+                webbrowser.open(
+                    "dmmgameplayer://umamusume/cl/general/umamusume")
                 while not c:
                     time.sleep(1)
                     LOGGER.info("waiting game launch")

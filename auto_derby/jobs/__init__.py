@@ -4,3 +4,4 @@ from .daily_race import daily_race
 from .legend_race import legend_race
 from .roulette_derby import roulette_derby
 from .champions_meeting import champions_meeting
+from .experience_race import experience_race
