@@ -6,7 +6,7 @@ import json
 import logging
 import math
 import os
-from typing import Any, Dict, Iterator, Text, Tuple, Type
+from typing import Any, Dict, Iterator, Set, Text, Tuple, Type
 
 import cast_unknown as cast
 import cv2
@@ -419,6 +419,7 @@ class Race:
         self.turn: int = 0
         self.target_statuses: Tuple[int, ...] = ()
         self.fan_counts: Tuple[int, ...] = ()
+        self.characters: Set[Text] = set()
 
     def to_dict(self) -> Dict[Text, Any]:
         return {
@@ -436,6 +437,7 @@ class Race:
             "targetStatuses": self.target_statuses,
             "minFanCount": self.min_fan_count,
             "fanCounts": self.fan_counts,
+            "characters": sorted(self.characters),
         }
 
     @classmethod
@@ -455,6 +457,7 @@ class Race:
         self.target_statuses = tuple(data["targetStatuses"])
         self.min_fan_count = data["minFanCount"]
         self.fan_counts = tuple(data["fanCounts"])
+        self.characters = set(data.get("characters", []))
         return self
 
     @property
@@ -680,6 +683,10 @@ def find(ctx: Context) -> Iterator[Race]:
         if i.grade < Race.GRADE_NOT_WINNING and not ctx.is_after_winning:
             continue
         if ctx.fan_count < i.min_fan_count:
+            continue
+        # character specific race always be target race,
+        # should be excluded when finding available race
+        if i.characters:
             continue
         yield i
 

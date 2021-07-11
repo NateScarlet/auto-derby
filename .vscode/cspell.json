@@ -2,8 +2,10 @@
     "version": "0.1",
     "words": [
         "astype",
+        "cygames",
         "dmmgameplayer",
         "LANCZOS",
+        "nargs",
         "ndarray",
         "numpy",
         "pyright",

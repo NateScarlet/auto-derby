@@ -179,3 +179,14 @@ def test_find_by_race_detail_image_issue54():
 
     assert race1.name == "ルミエールオータムダッシュ", race1.name
     assert race1.stadium == "新潟", race1.stadium
+
+
+def test_find_by_race_detail_image_issue58():
+    ctx = Context.new()
+    ctx.date = (3, 6, 2)
+    with _test.screenshot("race_detail_issue58.png") as img:
+        race1 = race.find_by_race_detail_image(ctx, img)
+
+    assert race1.name == "宝塚記念", race1.name
+    assert race1.stadium == "京都", race1.stadium
+    assert race1.characters == {"メジロマックイーン", "メジロライアン", "ライスシャワー"}, race1.characters

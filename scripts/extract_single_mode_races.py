@@ -1,5 +1,6 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
+# spell-checker: words chara inout
 """.  """
 
 
@@ -9,12 +10,12 @@ if True:
 
     sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from typing import Iterator, Text, Tuple
+from typing import Iterator, Set, Text, Tuple
 import sqlite3
 import argparse
 import os
 import contextlib
-from auto_derby.single_mode.race import Race, DATA_PATH
+from auto_derby.single_mode.race import Race, g
 import json
 import pathlib
 
@@ -36,6 +37,23 @@ SELECT fan_count
         return tuple(i[0] for i in cur.fetchall())
 
 
+def _program_group_characters(db: sqlite3.Connection, program_group: int) -> Set[Text]:
+    with contextlib.closing(
+        db.execute(
+            """
+SELECT t2.text
+  FROM single_mode_chara_program as t1
+  LEFT JOIN text_data AS t2 ON t2.category = 182 AND t1.chara_id = t2."index"
+  WHERE program_group = ?
+  ORDER BY t2.text
+;
+""",
+            (program_group,),
+        )
+    ) as cur:
+        return set(i[0] for i in cur.fetchall())
+
+
 def _read_master_mdb(path: Text) -> Iterator[Race]:
 
     db = sqlite3.connect(path)
@@ -55,6 +73,7 @@ SELECT
   t5.ground,
   t5.inout,
   t5.turn,
+  t1.program_group,
   t6.target_status_1,
   t6.target_status_2
   FROM single_mode_program AS t1
@@ -64,7 +83,6 @@ SELECT
   LEFT JOIN race_course_set AS t5 ON t5.id = t3.course_set
   LEFT JOIN race_course_set_status AS t6 ON t6.course_set_status_id = t5.course_set_status_id
   LEFT JOIN text_data AS t7 ON t7.category = 35 AND t7."index" = t5.race_track_id
-  WHERE t1.base_program_id = 0
   ORDER BY t1.race_permission, t1.month, t1.half, t3.grade DESC
 ;
     """
@@ -72,7 +90,7 @@ SELECT
 
     with contextlib.closing(cur):
         for i in cur:
-            assert len(i) == 15, i
+            assert len(i) == 16, i
             v = Race()
             (
                 v.name,
@@ -88,9 +106,12 @@ SELECT
                 v.ground,
                 v.track,
                 v.turn,
+                program_group,
             ) = i[:-2]
             v.target_statuses = tuple(j for j in i[-2:] if j)
             v.fan_counts = _get_fan_set(db, fan_set_id)
+            if program_group:
+                v.characters = _program_group_characters(db, program_group)
             yield v
 
 
@@ -107,7 +128,7 @@ def main():
     path: Text = args.path
 
     data = [i.to_dict() for i in _read_master_mdb(path)]
-    with pathlib.Path(DATA_PATH).open("w", encoding="utf-8") as f:
+    with pathlib.Path(g.data_path).open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
