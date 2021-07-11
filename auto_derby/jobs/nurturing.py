@@ -68,15 +68,21 @@ def _handle_training(ctx: Context) -> None:
     trainings: List[Training] = []
 
     action.wait_image(_TRAINING_CONFIRM)
-    dy = rp.vector(100, 466)
-    for x, y in (
-        rp.vector2((78, 700), 466),
-        rp.vector2((158, 700), 466),
-        rp.vector2((234, 700), 466),
-        rp.vector2((314, 700), 466),
-        rp.vector2((402, 700), 466),
+    trainings.append(Training.from_training_scene(template.screenshot()))
+
+    for t, pos in zip(
+        Training.ALL_TYPES,
+        (
+            rp.vector2((78, 850), 540),
+            rp.vector2((171, 850), 540),
+            rp.vector2((268, 850), 540),
+            rp.vector2((367, 850), 540),
+            rp.vector2((461, 850), 540),
+        ),
     ):
-        action.swipe((x, y - dy), dy=dy)
+        if t in (i.type for i in trainings):
+            continue
+        action.tap(pos)
         time.sleep(0.5)  # wait cursor effect finish
         action.wait_image(_TRAINING_CONFIRM)
         t = Training.from_training_scene(template.screenshot())
@@ -310,7 +316,11 @@ def nurturing():
         name = tmpl.name
         if name == templates.CONNECTING:
             pass
-        elif name in (templates.SINGLE_MODE_FANS_NOT_ENOUGH, templates.SINGLE_MODE_TARGET_RACE_NO_PERMISSION):
+        elif name in (
+            templates.SINGLE_MODE_FANS_NOT_ENOUGH,
+            templates.SINGLE_MODE_TARGET_RACE_NO_PERMISSION,
+        ):
+
             def _set_target_fan_count():
                 ctx.target_fan_count = max(ctx.fan_count + 1, ctx.target_fan_count)
 
