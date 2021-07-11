@@ -233,7 +233,7 @@ def show(img: Image, title: Text = "") -> Callable[[], None]:
     title = f"{title} - {_WINDOW_ID['value']}"
 
     def _run():
-        cv_img = np.asarray(img)
+        cv_img = cv_image(img)
         try:
             cv2.imshow(title, cv_img)
             while not stop_event.is_set() and cv2.getWindowProperty(title, 0) >= 0:

@@ -59,6 +59,7 @@ class config:
     single_mode_race_class = single_mode.Race
     single_mode_training_class = single_mode.Training
     single_mode_context_class = single_mode.Context
+    single_mode_go_out_option_class = single_mode.go_out.Option
     single_mode_target_training_levels = _parse_training_levels(
         os.getenv("AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS", "")
     )
@@ -86,10 +87,11 @@ class config:
         single_mode.choice.g.data_path = cls.single_mode_choice_path
         single_mode.choice.g.event_image_path = cls.single_mode_event_image_path
         single_mode.context.g.context_class = cls.single_mode_context_class
+        single_mode.go_out.g.option_class = cls.single_mode_go_out_option_class
         single_mode.race.g.data_path = cls.single_mode_race_data_path
         single_mode.race.g.race_class = cls.single_mode_race_class
-        single_mode.training.g.training_class = cls.single_mode_training_class
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels
+        single_mode.training.g.training_class = cls.single_mode_training_class
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
         window.g.use_legacy_screenshot = cls.use_legacy_screenshot
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path

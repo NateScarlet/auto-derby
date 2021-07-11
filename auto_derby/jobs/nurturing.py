@@ -7,7 +7,7 @@ import time
 from typing import List, Optional
 
 from .. import action, template, templates, config, imagetools, terminal
-from ..single_mode import Context, Training, choice, race
+from ..single_mode import Context, Training, choice, race, go_out
 import cast_unknown as cast
 
 
@@ -155,6 +155,18 @@ def _handle_training(ctx: Context) -> None:
             )
             action.tap(pos)
             action.wait_image_disappear(tmpl)
+        time.sleep(0.5)
+        if action.count_image(templates.SINGLE_MODE_GO_OUT_MENU_TITLE):
+            options_with_score = sorted(
+                [
+                    (i, i.score(ctx))
+                    for i in go_out.Option.from_menu(template.screenshot())
+                ],
+                key=lambda x: x[1],
+            )
+            for option, score in options_with_score:
+                LOGGER.info("go out option:\t%s:\tscore:%.2f", option, score)
+            action.tap(options_with_score[0][0].position)
         return
     x, y = training.confirm_position
     drag_y = rp.vector(100, 466)
