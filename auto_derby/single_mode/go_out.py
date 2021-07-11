@@ -17,35 +17,35 @@ class g:
 
 
 class Option:
-    KIND_UNDEFINED = 0
+    TYPE_UNDEFINED = 0
     # main character
-    KIND_MAIN = 1
+    TYPE_MAIN = 1
     # support card
-    KIND_SUPPORT = 2
+    TYPE_SUPPORT = 2
 
     @classmethod
     def new(cls) -> Option:
         return g.option_class()
 
     def __init__(self) -> None:
-        self.kind = Option.KIND_UNDEFINED
+        self.type = Option.TYPE_UNDEFINED
         self.current_event_count = 0
         self.total_event_count = 0
         self.position = (0, 0)
 
     def __str__(self) -> Text:
-        kind_text = {
-            Option.KIND_MAIN: "MAIN",
-            Option.KIND_SUPPORT: "SUPPORT",
-            Option.KIND_UNDEFINED: "UNDEFINED",
-        }.get(self.kind, "UNKNOWN")
-        return f"Option<kind={kind_text},event={self.current_event_count}/{self.total_event_count},pos={self.position}>"
+        type_text = {
+            Option.TYPE_MAIN: "MAIN",
+            Option.TYPE_SUPPORT: "SUPPORT",
+            Option.TYPE_UNDEFINED: "UNDEFINED",
+        }.get(self.type, "UNKNOWN")
+        return f"Option<type={type_text},event={self.current_event_count}/{self.total_event_count},pos={self.position}>"
 
     def score(self, ctx: Context) -> float:
         ret = 0
-        if self.kind == Option.KIND_MAIN:
+        if self.type == Option.TYPE_MAIN:
             ret += (ctx.MOOD_VERY_GOOD[0] - ctx.mood[0]) * 300
-        elif self.kind == Option.KIND_SUPPORT:
+        elif self.type == Option.TYPE_SUPPORT:
             ret += 20
         return ret
 
@@ -53,7 +53,7 @@ class Option:
         if os.getenv("DEBUG") == __name__:
             imagetools.show(img, "option image")
 
-        if self.kind == Option.KIND_SUPPORT:
+        if self.type == Option.TYPE_SUPPORT:
             rp = mathtools.ResizeProxy(img.width)
 
             event1_pos = rp.vector2((338 - 18, 353 - 286), 500)
@@ -95,9 +95,9 @@ class Option:
             option = cls.new()
             option.position = (x + rp.vector(100, 540), y + rp.vector(46, 540))
             if has_friend_ship_gauge:
-                option.kind = cls.KIND_SUPPORT
+                option.type = cls.TYPE_SUPPORT
             else:
-                option.kind = cls.KIND_MAIN
+                option.type = cls.TYPE_MAIN
 
             option.update_by_option_image(img.crop(bbox))
             yield option
