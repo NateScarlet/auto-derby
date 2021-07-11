@@ -298,6 +298,7 @@ def nurturing():
             templates.RETRY_BUTTON,
             templates.SINGLE_MODE_COMMAND_TRAINING,
             templates.SINGLE_MODE_FANS_NOT_ENOUGH,
+            templates.SINGLE_MODE_TARGET_RACE_NO_PERMISSION,
             templates.SINGLE_MODE_FINISH_BUTTON,
             templates.SINGLE_MODE_FORMAL_RACE_BANNER,
             templates.SINGLE_MODE_RACE_NEXT_BUTTON,
@@ -309,8 +310,7 @@ def nurturing():
         name = tmpl.name
         if name == templates.CONNECTING:
             pass
-        elif name == templates.SINGLE_MODE_FANS_NOT_ENOUGH:
-
+        elif name in (templates.SINGLE_MODE_FANS_NOT_ENOUGH, templates.SINGLE_MODE_TARGET_RACE_NO_PERMISSION):
             def _set_target_fan_count():
                 ctx.target_fan_count = max(ctx.fan_count + 1, ctx.target_fan_count)
 

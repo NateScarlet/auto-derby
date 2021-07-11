@@ -153,6 +153,10 @@ SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER = (
 SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = (
     "single_mode_scheduled_race_opening_banner.pos.png"
 )
+SINGLE_MODE_TARGET_RACE_NO_PERMISSION = "single_mode_target_race_no_permission.png"
+SINGLE_MODE_TARGET_RACE_NO_PERMISSION_POS = (
+    "single_mode_target_race_no_permission.pos.png"
+)
 SINGLE_MODE_TRAINING_CONFIRM = "single_mode_training_confirm.png"
 SINGLE_MODE_TRAINING_CONFIRM_POS = "single_mode_training_confirm.pos.png"
 SINGLE_MODE_URA_FINALS = "single_mode_ura_finals.png"
