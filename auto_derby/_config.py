@@ -69,7 +69,7 @@ class config:
 
     on_limited_sale = lambda: terminal.pause(
         "Please handle limited shop manually before confirm in terminal.\n"
-        "You can also try `limited_sale_buy_everything` plugin."
+        "You can also try `limited_sale_buy_first_3` / `limited_sale_buy_everything` plugin."
     )
 
     terminal_pause_sound_path = os.path.expandvars(
