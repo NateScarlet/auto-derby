@@ -80,6 +80,6 @@ def wait_tap_image(
     tap((pos[0] + x, pos[1] + y))
 
 
-def swipe(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.03):
+def swipe(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.1):
     clients.current().swipe(point, dx=dx, dy=dy, duration=duration)
     template.invalidate_screeshot()

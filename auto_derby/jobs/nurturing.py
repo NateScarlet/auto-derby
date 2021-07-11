@@ -59,7 +59,7 @@ def _choose_race(ctx: Context, race1: race.Race) -> None:
         action.swipe(
             rp.vector2((100, 600), 466),
             dy=rp.vector(-50, 466),
-            duration=0.5,
+            duration=0.2,
         )
 
 

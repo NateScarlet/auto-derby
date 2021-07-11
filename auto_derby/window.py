@@ -128,6 +128,7 @@ def info(msg: Text) -> Callable[[], None]:
 def recover_cursor():
     ox, oy = win32gui.GetCursorPos()
     yield
+    time.sleep(0.05)
     mouse.move(ox, oy)
 
 
