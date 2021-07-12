@@ -744,17 +744,17 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
 
 
 def _recognize_grade(rgb_color: Tuple[int, ...]) -> Tuple[int, ...]:
-    if imagetools.compare_color((54, 133, 228), rgb_color) > 0.9:
+    if imagetools.compare_color((54, 133, 228), rgb_color) > 0.8:
         return (Race.GRADE_G1,)
-    if imagetools.compare_color((244, 85, 129), rgb_color) > 0.9:
+    if imagetools.compare_color((244, 85, 129), rgb_color) > 0.8:
         return (Race.GRADE_G2,)
-    if imagetools.compare_color((57, 187, 85), rgb_color) > 0.9:
+    if imagetools.compare_color((57, 187, 85), rgb_color) > 0.8:
         return (Race.GRADE_G3,)
-    if imagetools.compare_color((252, 169, 5), rgb_color) > 0.9:
+    if imagetools.compare_color((252, 169, 5), rgb_color) > 0.8:
         return Race.GRADE_OP, Race.GRADE_PRE_OP
-    if imagetools.compare_color((148, 203, 8), rgb_color) > 0.9:
+    if imagetools.compare_color((148, 203, 8), rgb_color) > 0.8:
         return Race.GRADE_DEBUT, Race.GRADE_NOT_WINNING
-    if imagetools.compare_color((247, 209, 41), rgb_color) > 0.9:
+    if imagetools.compare_color((247, 209, 41), rgb_color) > 0.8:
         # EX(URA)
         return (Race.GRADE_G1,)
     raise ValueError("_recognize_grade: unknown grade color: %s" % (rgb_color,))

@@ -136,7 +136,17 @@ def test_find_by_race_detail_image_10():
     race1 = race.find_by_race_detail_image(ctx, img)
 
     assert race1.name == "小倉ジュニアステークス", race1.name
-    assert race1.stadium == "小倉", race1.stadium
+
+
+def test_find_by_race_detail_image_11():
+    ctx = Context.new()
+    ctx.date = (2, 4, 1)
+    with _test.screenshot("race_detail_11.png") as img:
+        race1 = race.find_by_race_detail_image(ctx, img)
+
+    assert race1.name == "忘れな草賞", race1.name
+    assert race1.stadium == "阪神", race1.stadium
+    assert race1.characters == set(), race1.characters
 
 
 def test_find_by_race_detail_image_issue31():
