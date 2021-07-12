@@ -253,7 +253,13 @@ def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
 
     _handle_race_result()
     ctx.fan_count = 0  # request update in next turn
-    action.wait_tap_image(templates.SINGLE_MODE_RACE_NEXT_BUTTON)
+    tmpl, pos = action.wait_image(
+        templates.SINGLE_MODE_LIVE_BUTTON,
+        templates.SINGLE_MODE_RACE_NEXT_BUTTON,
+    )
+    if tmpl.name == templates.SINGLE_MODE_LIVE_BUTTON:
+        config.on_single_mode_live(ctx)
+    action.tap_image(templates.TEAM_RACE_NEXT_BUTTON)
 
 
 ALL_OPTIONS = [

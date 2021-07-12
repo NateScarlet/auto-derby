@@ -2,7 +2,7 @@
 # pyright: strict
 
 
-from typing import Dict, Text
+from typing import Callable, Dict, Text
 from auto_derby.single_mode.training import Training
 import os
 
@@ -72,6 +72,8 @@ class config:
         "Please handle limited shop manually before confirm in terminal.\n"
         "You can also try `limited_sale_buy_first_3` / `limited_sale_buy_everything` plugin."
     )
+
+    on_single_mode_live: Callable[[single_mode.Context], None] = lambda *_: None
 
     terminal_pause_sound_path = os.path.expandvars(
         "${WinDir}/Media/Windows Background.wav"
