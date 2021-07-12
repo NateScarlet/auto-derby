@@ -15,7 +15,7 @@ def _handle_live(ctx: single_mode.Context) -> None:
 
     action.wait_tap_image(templates.SINGLE_MODE_LIVE_BUTTON)
     action.wait_tap_image(templates.GREEN_OK_BUTTON)
-    time.sleep(10) # wait possible orientation change.
+    time.sleep(10)  # wait possible orientation change.
     while _is_landscape():
         time.sleep(1)
     action.reset_client_size()
