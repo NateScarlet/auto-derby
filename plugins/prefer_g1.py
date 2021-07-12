@@ -3,7 +3,7 @@ from auto_derby import single_mode
 
 
 class Plugin(auto_derby.Plugin):
-    """Use this after other plugin, increase g1 score if estimate order <= 3.  """
+    """Use this after other plugin, increase g1 score if estimate order <= 3."""
 
     def install(self) -> None:
         class Race(auto_derby.config.single_mode_race_class):
