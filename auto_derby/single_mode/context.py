@@ -2,6 +2,7 @@
 # pyright: strict
 from __future__ import annotations
 
+import functools
 import os
 from typing import Callable, List, Set, Text, Tuple, Type
 
@@ -11,7 +12,7 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import imagetools, ocr, template, templates, mathtools
+from .. import imagetools, mathtools, ocr, template, templates
 
 
 class g:
@@ -165,8 +166,8 @@ class Context:
     MOOD_GOOD = (1.1, 1.05)
     MOOD_VERY_GOOD = (1.2, 1.1)
 
-    CONDITION_HEADACHE = 1
-    CONDITION_OVERWEIGHT = 2
+    CONDITION_HEADACHE = 1 << 0
+    CONDITION_OVERWEIGHT = 1 << 1
 
     STATUS_S = (8, "S")
     STATUS_A = (7, "A")
@@ -342,7 +343,8 @@ class Context:
             f"fan={self.fan_count},"
             f"ground={''.join(i[1] for i in (self.turf, self.dart))},"
             f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"
-            f"style={''.join(i[1] for i in (self.last, self.middle, self.head, self.lead))}"
+            f"style={''.join(i[1] for i in (self.last, self.middle, self.head, self.lead))},"
+            f"condition={functools.reduce(lambda a, b: a | b, self.conditions, 0)}"
             ">"
         )
 
