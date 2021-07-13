@@ -1,14 +1,16 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
+from auto_derby import mathtools
 
 import logging
 import time
-from typing import List, Optional
+from typing import Optional
 
 from .. import action, template, templates, config, imagetools, terminal
 from ..single_mode import Context, Training, choice, race, go_out
 import cast_unknown as cast
+from concurrent import futures
 
 
 LOGGER = logging.getLogger(__name__)
@@ -63,30 +65,35 @@ def _choose_race(ctx: Context, race1: race.Race) -> None:
         )
 
 
-def _handle_training(ctx: Context) -> None:
+def _iter_training_images():
     rp = action.resize_proxy()
-    trainings: List[Training] = []
-
-    action.wait_image(_TRAINING_CONFIRM)
-    trainings.append(Training.from_training_scene(template.screenshot()))
-
-    for t, pos in zip(
-        Training.ALL_TYPES,
-        (
-            rp.vector2((78, 850), 540),
-            rp.vector2((171, 850), 540),
-            rp.vector2((268, 850), 540),
-            rp.vector2((367, 850), 540),
-            rp.vector2((461, 850), 540),
-        ),
+    radius = rp.vector(30, 540)
+    _, first_confirm_pos = action.wait_image(_TRAINING_CONFIRM)
+    yield template.screenshot()
+    for pos in (
+        rp.vector2((78, 850), 540),
+        rp.vector2((171, 850), 540),
+        rp.vector2((268, 850), 540),
+        rp.vector2((367, 850), 540),
+        rp.vector2((461, 850), 540),
     ):
-        if t in (i.type for i in trainings):
+        if mathtools.distance(first_confirm_pos, pos) < radius:
             continue
         action.tap(pos)
         time.sleep(0.5)  # wait cursor effect finish
         action.wait_image(_TRAINING_CONFIRM)
-        t = Training.from_training_scene(template.screenshot())
-        trainings.append(t)
+        yield template.screenshot()
+
+
+def _handle_training(ctx: Context) -> None:
+    with futures.ThreadPoolExecutor() as pool:
+        trainings = [
+            i.result()
+            for i in [
+                pool.submit(Training.from_training_scene, j)
+                for j in _iter_training_images()
+            ]
+        ]
 
     races_with_score = sorted(
         ((i, i.score(ctx)) for i in race.find(ctx)),

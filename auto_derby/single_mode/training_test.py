@@ -1,9 +1,12 @@
+import time
+import timeit
+from concurrent import futures
 from pathlib import Path
 
 import PIL.Image
 
-from .training import Training
 from . import _test
+from .training import Training
 
 _TEST_DATA_PATH = Path(__file__).parent / "test_data"
 
@@ -172,3 +175,48 @@ def test_update_by_training_scene_issue55():
     assert training.guts == 0
     assert training.wisdom == 0
     assert training.skill == 4
+
+
+def benchmark_from_training_scene():
+    RUN_COUNT = 10
+    img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_5.png").convert("RGB")
+
+    def iter_images():
+        for _ in range(5):
+            time.sleep(1)  # simulate game wait
+            yield img
+
+    def use_sync():
+        for i in iter_images():
+            Training.from_training_scene(i)
+
+    def use_thread():
+        with futures.ThreadPoolExecutor() as pool:
+            [
+                i.result()
+                for i in [
+                    pool.submit(Training.from_training_scene, j) for j in iter_images()
+                ]
+            ]
+
+    def use_process():
+        with futures.ProcessPoolExecutor() as pool:
+            [
+                i.result()
+                for i in [
+                    pool.submit(Training.from_training_scene, j) for j in iter_images()
+                ]
+            ]
+
+    print("sync:")
+    print(timeit.timeit(use_sync, number=RUN_COUNT) / RUN_COUNT)
+    print("thread:")
+    print(timeit.timeit(use_thread, number=RUN_COUNT) / RUN_COUNT)
+    print("process:")
+    print(timeit.timeit(use_process, number=RUN_COUNT) / RUN_COUNT)
+    # sync:
+    # 5.7888625
+    # thread:
+    # 5.17410499
+    # process:
+    # 5.811807080000001
