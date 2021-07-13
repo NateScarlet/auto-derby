@@ -80,7 +80,6 @@ def _iter_training_images():
         if mathtools.distance(first_confirm_pos, pos) < radius:
             continue
         action.tap(pos)
-        time.sleep(0.5)  # wait cursor effect finish
         action.wait_image(_TRAINING_CONFIRM)
         yield template.screenshot()
 
