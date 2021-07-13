@@ -10,7 +10,9 @@ class Plugin(auto_derby.Plugin):
             def score(self, ctx: single_mode.Context) -> float:
                 ret = super().score(ctx)
                 if self.grade == Race.GRADE_G1 and self.estimate_order(ctx) <= 3:
-                    ret += 10
+                    ret += 5
+                else:
+                    ret -= 5
                 return ret
 
         auto_derby.config.single_mode_race_class = Race
@@ -19,4 +21,4 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 # Deprecated: remove at next major version
-auto_derby.plugin.register('prefer_g1', Plugin())
+auto_derby.plugin.register("prefer_g1", Plugin())
