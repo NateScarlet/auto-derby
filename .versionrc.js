@@ -1,4 +1,4 @@
-const URL = "https://github.com/NateScarlet/auto_derby";
+const URL = "https://github.com/NateScarlet/auto-derby";
 
 /**
  * @type {import("standard-version").Options}
