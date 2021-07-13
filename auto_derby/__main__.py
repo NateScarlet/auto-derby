@@ -14,12 +14,14 @@ import webbrowser
 import win32con
 import win32gui
 
-from . import clients, config, jobs, templates
+from . import clients, config, jobs, templates, version
 
 LOGGER = logging.getLogger(__name__)
 
 
 def main():
+    if config.CHECK_UPDATE:
+        version.check_update()
     avaliable_jobs = {
         "team_race": jobs.team_race,
         "champions_meeting": jobs.champions_meeting,

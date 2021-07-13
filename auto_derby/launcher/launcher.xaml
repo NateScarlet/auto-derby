@@ -91,9 +91,11 @@
 
     <StackPanel Grid.Row="8"
       Margin="8"
-      VerticalAlignment="Center">
+      Orientation="Horizontal"
+      HorizontalAlignment="Right">
+      <CheckBox IsChecked="{Binding CheckUpdate}">Check update</CheckBox>
       <CheckBox IsChecked="{Binding Debug}"
-        HorizontalAlignment="Right">Debug</CheckBox>
+        Margin="8,0,0,0">Debug</CheckBox>
     </StackPanel>
   </Grid>
 </Window>

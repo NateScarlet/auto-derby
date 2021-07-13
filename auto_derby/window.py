@@ -30,12 +30,12 @@ def message_box(
     *,
     flags: int = 0,
     h_wnd: int = 0,
-    on_close: Optional[Callable[[], None]] = None,
+    on_close: Optional[Callable[[int], None]] = None,
 ) -> Callable[[], None]:
     def _run():
-        win32gui.MessageBox(h_wnd, msg, caption, flags)
+        res = win32gui.MessageBox(h_wnd, msg, caption, flags)
         if callable(on_close):
-            on_close()
+            on_close(res)
 
     t = threading.Thread(target=_run)
     t.start()

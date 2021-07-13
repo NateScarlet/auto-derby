@@ -176,6 +176,19 @@ namespace NateScarlet.AutoDerby
             }
         }
 
+        public bool CheckUpdate
+        {
+            get
+            {
+                return (int)key.GetValue("CheckUpdate", 1) != 0;
+            }
+            set
+            {
+                key.SetValue("CheckUpdate", value, RegistryValueKind.DWord);
+                OnPropertyChanged("CheckUpdate");
+            }
+        }
+
 
         public string Job
         {
