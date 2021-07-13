@@ -796,4 +796,4 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
             LOGGER.info("image match: %s", i)
             return i
 
-    raise ValueError("find_by_race_details_image: can race match spec: %s", full_spec)
+    raise ValueError("find_by_race_details_image: no race match spec: %s", full_spec)
