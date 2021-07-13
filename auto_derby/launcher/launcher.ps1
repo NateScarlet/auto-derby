@@ -140,21 +140,6 @@ if ($requireAdmin) {
     $verb = "runAs"
 }
 
-# # https://stackoverflow.com/a/11440595
-# if (-not (
-#         [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
-#     ).IsInRole(
-#         [Security.Principal.WindowsBuiltInRole]::Administrator
-#     )
-# ) {
-#     Start-Process PowerShell -Verb runAs -ArgumentList @(
-#         "-Version", "3",
-#         "-NoProfile",
-#         "& '" + $MyInvocation.MyCommand.Definition + "'"
-#     )
-#     return
-# }
-
 $command = @"
 title auto-derby: $version
 cd /d "$WorkspaceFolder"
