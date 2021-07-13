@@ -13,7 +13,7 @@ try {
 catch {
 }
 if (-not $version) {
-    $version = Get-Date -Format "yyyy-MM-dd HH:mm"
+    $version = Get-Content "$WorkspaceFolder\version"
 }
 
 $host.ui.RawUI.WindowTitle = "auto-derby: $version"
