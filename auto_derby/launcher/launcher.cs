@@ -167,7 +167,7 @@ namespace NateScarlet.AutoDerby
         {
             get
             {
-                return (int)key.GetValue("Debug", 0) != 0;
+                return (int)key.GetValue("Debug", 1) != 0;
             }
             set
             {
