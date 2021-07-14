@@ -26,6 +26,9 @@ class g:
 
     labels: Dict[Text, Text] = {}
 
+class _g:
+    loaded_data_path = ""
+
 
 def _migrate_json_to_csv() -> None:
     path = g.data_path
@@ -57,7 +60,11 @@ def reload() -> None:
             g.labels = dict((k, v) for k, v in csv.reader(f))
     except OSError:
         pass
+    _g.loaded_data_path = g.data_path
 
+def reload_on_demand() -> None:
+    if _g.loaded_data_path != g.data_path:
+        reload()
 
 def _label(image_hash: Text, value: Text) -> None:
     g.labels[image_hash] = value
@@ -74,6 +81,7 @@ def _pad_img(img: np.ndarray, padding: int = _PREVIEW_PADDING) -> np.ndarray:
 
 
 def _query(h: Text) -> Tuple[Text, Text, float]:
+    reload_on_demand()
     # TODO: use a more efficient data structure, maybe vp-tree
     if not g.labels:
         return "", "", 0

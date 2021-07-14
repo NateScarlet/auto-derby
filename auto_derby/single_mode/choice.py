@@ -25,6 +25,10 @@ class g:
     choices: Dict[Text, int] = {}
 
 
+class _g:
+    loaded_data_path = ""
+
+
 def _set(event_id: Text, value: int) -> None:
     g.choices[event_id] = value
     with open(g.data_path, "a", encoding="utf-8", newline="") as f:
@@ -61,7 +65,12 @@ def reload() -> None:
             g.choices = dict((k, int(v)) for k, v in csv.reader(f))
     except OSError:
         pass
+    _g.loaded_data_path = g.data_path
 
+
+def reload_on_demand() -> None:
+    if _g.loaded_data_path != g.data_path:
+        reload()
 
 
 def get(event_screen: Image) -> int:
@@ -101,6 +110,7 @@ def get(event_screen: Image) -> int:
         cv2.waitKey()
         cv2.destroyAllWindows()
 
+    reload_on_demand()
     if event_id not in g.choices:
         while True:
             ans = terminal.prompt("Choose event option(1/2/3/4/5):")

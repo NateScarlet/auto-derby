@@ -100,9 +100,5 @@ class config:
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path
         terminal.g.prompt_sound_path = cls.terminal_prompt_sound_path
 
-        ocr.reload()
-        single_mode.choice.reload()
-        single_mode.race.reload()
-
 
 config.apply()
