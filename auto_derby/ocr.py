@@ -26,6 +26,7 @@ class g:
 
     labels: Dict[Text, Text] = {}
 
+
 class _g:
     loaded_data_path = ""
 
@@ -62,9 +63,11 @@ def reload() -> None:
         pass
     _g.loaded_data_path = g.data_path
 
+
 def reload_on_demand() -> None:
     if _g.loaded_data_path != g.data_path:
         reload()
+
 
 def _label(image_hash: Text, value: Text) -> None:
     g.labels[image_hash] = value

@@ -26,8 +26,10 @@ class g:
     races: Tuple[Race, ...] = ()
     race_class: Type[Race]
 
+
 class _g:
     loaded_data_path = ""
+
 
 def _iter_races():
     with open(g.data_path, "r", encoding="utf-8") as f:
@@ -51,9 +53,11 @@ def reload() -> None:
     g.races = tuple(_iter_races())
     _g.loaded_data_path = g.data_path
 
+
 def reload_on_demand() -> None:
     if _g.loaded_data_path != g.data_path:
         reload()
+
 
 def _running_style_single_score(
     ctx: Context,
