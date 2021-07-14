@@ -7,6 +7,8 @@
 
 自动化养马
 
+[FAQ](https://github.com/NateScarlet/auto-derby/wiki/FAQ)
+
 [育成结果 Nurturing result](https://github.com/NateScarlet/auto-derby/wiki/Nurturing-result)
 
 ## 功能
