@@ -112,7 +112,18 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     try:
         while len(ret) != 1:
-            ret = terminal.prompt("Corresponding text for current displaying image:")
+            ans = ""
+            while value and ans not in ("Y", "N"):
+                ans = terminal.prompt(
+                    f"Matching current displaying image: value={value}, similarity={similarity:0.3f}.\n"
+                    "Is this correct? (Y/N)"
+                ).upper()
+            if ans == "Y":
+                ret = value
+            else:
+                ret = terminal.prompt(
+                    "Corresponding text for current displaying image:"
+                )
     finally:
         close_img()
     _label(h, ret)
