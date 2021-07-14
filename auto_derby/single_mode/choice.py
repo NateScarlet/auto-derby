@@ -1,9 +1,13 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
+import csv
+import errno
 import json
 import logging
 import os
+import warnings
+from pathlib import Path
 from typing import Dict, Text
 
 import cv2
@@ -21,17 +25,43 @@ class g:
     choices: Dict[Text, int] = {}
 
 
+def _set(event_id: Text, value: int) -> None:
+    g.choices[event_id] = value
+    with open(g.data_path, "a", encoding="utf-8", newline="") as f:
+        csv.writer(f).writerow((event_id, value))
+
+
+def _migrate_json_to_csv() -> None:
+    path = g.data_path
+    if not path.endswith(".json"):
+        return
+
+    g.data_path = str(Path(path).with_suffix(".csv"))
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            g.choices = json.load(f)
+        warnings.warn(
+            f"migrating json single mode choices to {g.data_path}, this support will be removed at next major version.",
+            DeprecationWarning,
+        )
+        for k, v in g.choices.items():
+            _set(k, v)
+        os.rename(path, path + "~")
+    except OSError as ex:
+        if ex.errno == errno.ENOENT:
+            pass
+        else:
+            raise
+
+
 def reload() -> None:
+    _migrate_json_to_csv()
     try:
         with open(g.data_path, "r", encoding="utf-8") as f:
-            g.choices = json.load(f)
+            g.choices = dict((k, int(v)) for k, v in csv.reader(f))
     except OSError:
         pass
 
-
-def _save() -> None:
-    with open(g.data_path, "w", encoding="utf-8") as f:
-        json.dump(g.choices, f, indent=2)
 
 
 def get(event_screen: Image) -> int:
@@ -75,8 +105,7 @@ def get(event_screen: Image) -> int:
         while True:
             ans = terminal.prompt("Choose event option(1/2/3/4/5):")
             if ans in ["1", "2", "3", "4", "5"]:
-                g.choices[event_id] = int(ans)
-                _save()
+                _set(event_id, int(ans))
                 break
     ret = g.choices[event_id]
     LOGGER.info("event: id=%s choice=%d", event_id, ret)

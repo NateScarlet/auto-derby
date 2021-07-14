@@ -10,5 +10,7 @@ __pycache__
 
 *.log
 *.log.*
+*~
 
 single_mode_choices.json
+single_mode_choices.csv
