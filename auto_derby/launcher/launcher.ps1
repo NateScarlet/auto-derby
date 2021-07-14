@@ -100,6 +100,26 @@ $data | Format-List -Property (
 )
 
 
+function Remove-OldFiles {
+    Param (
+        [string]$Path
+    )
+
+    Get-ChildItem -Recurse -File $Path  |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-3) } |
+    ForEach-Object {
+        "Remove: $($_.FullName)"
+        $_ | Remove-Item
+    }
+
+    Get-ChildItem -Recurse -Directory  $Path  |
+    Where-Object { -Not ($_.EnumerateFiles('*',1) | Select-Object -First 1) } |
+    ForEach-Object {
+        "Remove: $($_.FullName)"
+        $_ | Remove-Item -Recurse
+    }
+}
+
 if ($data.Debug) {
     "Installed packages: "
     
@@ -119,6 +139,9 @@ if ($data.Debug) {
     $env:AUTO_DERBY_OCR_IMAGE_PATH = "ocr_images.local"
     $env:AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH = "single_mode_event_images.local"
     $env:AUTO_DERBY_SINGLE_MODE_TRAINING_IMAGE_PATH = "single_mode_training_images.local"
+    Remove-OldFiles $env:AUTO_DERBY_OCR_IMAGE_PATH
+    Remove-OldFiles $env:AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH
+    Remove-OldFiles $env:AUTO_DERBY_SINGLE_MODE_TRAINING_IMAGE_PATH
 }
 
 if ($data.CheckUpdate) {
