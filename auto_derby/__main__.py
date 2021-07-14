@@ -4,15 +4,17 @@
 
 
 import argparse
-from auto_derby import plugin
 import logging
 import logging.handlers
 import os
 import time
+import warnings
 import webbrowser
 
 import win32con
 import win32gui
+
+from auto_derby import plugin
 
 from . import clients, config, jobs, templates, version
 
@@ -113,6 +115,7 @@ if __name__ == "__main__":
             continue
         logging.getLogger(i).setLevel(logging.DEBUG)
 
+    warnings.filterwarnings("once", module="auto_derby(\\..*)?")
     try:
         main()
     except SystemExit:

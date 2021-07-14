@@ -44,7 +44,7 @@ class config:
     CHECK_UPDATE = os.getenv("AUTO_DERBY_CHECK_UPDATE", "").lower() == "true"
 
     single_mode_race_data_path = os.getenv(
-        "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH", "single_mode_races.json"
+        "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH", "single_mode_races.jsonl"
     )
     ocr_data_path = os.getenv("AUTO_DERBY_OCR_LABEL_PATH", "ocr_labels.json")
     ocr_image_path = os.getenv("AUTO_DERBY_OCR_IMAGE_PATH", "")

@@ -116,20 +116,21 @@ SELECT
 
 
 def main():
-
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "path",
         nargs="?",
-        default=os.getenv("LocalAppData", "")
-        + "Low/cygames/umamusume/master/master.mdb",
+        default=os.path.expandvars(
+            "${LocalAppData}Low/cygames/umamusume/master/master.mdb"
+        ),
     )
     args = parser.parse_args()
     path: Text = args.path
 
-    data = [i.to_dict() for i in _read_master_mdb(path)]
     with pathlib.Path(g.data_path).open("w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+        for race in _read_master_mdb(path):
+            json.dump(race.to_dict(), f, ensure_ascii=False)
+            f.write("\n")
 
 
 if __name__ == "__main__":
