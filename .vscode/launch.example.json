@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "name": "Python: 模块",
+      "type": "python",
+      "request": "launch",
+      "module": "auto_derby"
+    }
+  ]
+}
