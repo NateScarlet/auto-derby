@@ -53,6 +53,9 @@ class config:
     single_mode_event_image_path = os.getenv(
         "AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH", ""
     )
+    single_mode_training_image_path = os.getenv(
+        "AUTO_DERBY_SINGLE_MODE_TRAINING_IMAGE_PATH", ""
+    )
     single_mode_choice_path = os.getenv(
         "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH", "single_mode_choices.json"
     )
@@ -94,12 +97,13 @@ class config:
         single_mode.go_out.g.option_class = cls.single_mode_go_out_option_class
         single_mode.race.g.data_path = cls.single_mode_race_data_path
         single_mode.race.g.race_class = cls.single_mode_race_class
+        single_mode.training.g.image_path = cls.single_mode_training_image_path
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels
         single_mode.training.g.training_class = cls.single_mode_training_class
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
-        window.g.use_legacy_screenshot = cls.use_legacy_screenshot
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path
         terminal.g.prompt_sound_path = cls.terminal_prompt_sound_path
+        window.g.use_legacy_screenshot = cls.use_legacy_screenshot
 
 
 config.apply()

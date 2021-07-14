@@ -2,23 +2,27 @@
 # pyright: strict
 from __future__ import annotations
 
+import logging
 import os
 from typing import Dict, Tuple, Type
 
+import cast_unknown as cast
 import cv2
 import numpy as np
 from auto_derby import imagetools
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import ocr, template, templates, mathtools
+from .. import mathtools, ocr, template, templates
 from .context import Context
-import cast_unknown as cast
+
+LOGGER = logging.getLogger(__name__)
 
 
 class g:
     training_class: Type[Training]
     target_levels: Dict[int, int] = {}
+    image_path: str = ""
 
 
 def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarray:
@@ -162,6 +166,13 @@ class Training:
 
     @classmethod
     def from_training_scene(cls, img: Image) -> Training:
+        if g.image_path:
+            image_id = imagetools.md5(
+                imagetools.cv_image(img.convert("RGB")),
+                save_path=g.image_path,
+                save_mode="RGB",
+            )
+            LOGGER.debug("from_training_scene: image=%s", image_id)
         rp = mathtools.ResizeProxy(img.width)
 
         self = cls.new()
