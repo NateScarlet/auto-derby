@@ -4,6 +4,8 @@
         "astype",
         "cygames",
         "dmmgameplayer",
+        "ENOENT",
+        "errno",
         "jsonl",
         "LANCZOS",
         "nargs",

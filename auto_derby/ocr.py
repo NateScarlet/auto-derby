@@ -2,9 +2,13 @@
 # pyright: strict
 
 
+import csv
+import errno
 import json
 import logging
 import os
+import warnings
+from pathlib import Path
 from typing import Dict, List, Optional, Text, Tuple
 
 import cv2
@@ -23,17 +27,42 @@ class g:
     labels: Dict[Text, Text] = {}
 
 
+def _migrate_json_to_csv() -> None:
+    path = g.data_path
+    if not path.endswith(".json"):
+        return
+
+    g.data_path = str(Path(path).with_suffix(".csv"))
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            g.labels = json.load(f)
+        warnings.warn(
+            f"migrating json ocr labels to {g.data_path}, this support will be removed at next major version.",
+            DeprecationWarning,
+        )
+        for k, v in g.labels.items():
+            _label(k, v)
+        os.rename(path, path + "~")
+    except OSError as ex:
+        if ex.errno == errno.ENOENT:
+            pass
+        else:
+            raise
+
+
 def reload() -> None:
+    _migrate_json_to_csv()
     try:
         with open(g.data_path, "r", encoding="utf-8") as f:
-            g.labels = json.load(f)
+            g.labels = dict((k, v) for k, v in csv.reader(f))
     except OSError:
         pass
 
 
-def _save() -> None:
-    with open(g.data_path, "w", encoding="utf-8") as f:
-        json.dump(g.labels, f, indent=2, ensure_ascii=False)
+def _label(image_hash: Text, value: Text) -> None:
+    g.labels[image_hash] = value
+    with open(g.data_path, "a", encoding="utf-8", newline="") as f:
+        csv.writer(f).writerow((image_hash, value))
 
 
 _PREVIEW_PADDING = 4
@@ -68,18 +97,15 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     )
     if similarity > threshold:
         return value
-    ans = ""
+    ret = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     try:
-        while len(ans) != 1:
-            ans = terminal.prompt("Corresponding text for current displaying image:")
-        g.labels[h] = ans
-        LOGGER.info("labeled: hash=%s, value=%s", h, ans)
+        while len(ret) != 1:
+            ret = terminal.prompt("Corresponding text for current displaying image:")
     finally:
         close_img()
-    _save()
-    ret = g.labels[h]
-    LOGGER.debug("use label: hash=%s, value=%s", h, ret)
+    _label(h, ret)
+    LOGGER.info("labeled: hash=%s, value=%s", h, ret)
     return ret
 
 
