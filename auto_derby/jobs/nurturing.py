@@ -324,6 +324,7 @@ def nurturing():
             templates.GREEN_NEXT_BUTTON,
             templates.SINGLE_MODE_URA_FINALS,
             templates.SINGLE_MODE_GENE_INHERIT,
+            templates.SINGLE_MODE_CRANE_GAME_BUTTON,
         )
         name = tmpl.name
         if name == templates.CONNECTING:
@@ -369,5 +370,7 @@ def nurturing():
             _handle_training(ctx)
         elif name == templates.SINGLE_MODE_OPTION1:
             _handle_option()
+        elif name == templates.SINGLE_MODE_CRANE_GAME_BUTTON:
+            config.on_single_mode_crane_game(ctx)
         else:
             action.tap(pos)

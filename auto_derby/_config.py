@@ -75,6 +75,7 @@ class config:
     )
 
     on_single_mode_live: Callable[[single_mode.Context], None] = lambda *_: None
+    on_single_mode_crane_game: Callable[[single_mode.Context], None] = lambda *_: None
 
     terminal_pause_sound_path = os.path.expandvars(
         "${WinDir}/Media/Windows Background.wav"

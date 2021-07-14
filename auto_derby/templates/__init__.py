@@ -98,6 +98,8 @@ SINGLE_MODE_CONDITION_HEADACHE = "single_mode_condition_headache.png"
 SINGLE_MODE_CONDITION_OVERWEIGHT = "single_mode_condition_overweight.png"
 SINGLE_MODE_CONTINUE = "single_mode_continue.png"
 SINGLE_MODE_CONTINUOUS_RACE_TITLE = "single_mode_continuous_race_title.png"
+SINGLE_MODE_CRANE_GAME_BUTTON = "single_mode_crane_game_button.png"
+SINGLE_MODE_CRANE_GAME_BUTTON_POS = "single_mode_crane_game_button.pos.png"
 SINGLE_MODE_CRANE_GAME_PLAY_GUIDE_BUTTON = (
     "single_mode_crane_game_play_guide_button.png"
 )
