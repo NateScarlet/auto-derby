@@ -5,6 +5,7 @@ __pycache__
 
 .vscode/*
 !.vscode/cspell.json
+!.vscode/extensions.json
 
 *.log
 *.log.*
