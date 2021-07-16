@@ -300,6 +300,7 @@ def _update_context_by_status_menu(ctx: Context):
 
 
 def _update_context_by_command_scene(ctx: Context):
+    action.reset_client_size()
     ctx.update_by_command_scene(template.screenshot(max_age=0))
     if not ctx.fan_count:
         _update_context_by_class_menu(ctx)
