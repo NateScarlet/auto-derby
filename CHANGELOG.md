@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/NateScarlet/auto-derby/compare/v1.0.0...v1.1.0) (2021-07-16)
+
+### Features
+
+- include context condition in log ([d7a2a35](https://github.com/NateScarlet/auto-derby/commit/d7a2a35e050f31622d0c6e8c946780a981feb485))
+- **launcher:** enable debug by default ([fc991d9](https://github.com/NateScarlet/auto-derby/commit/fc991d90caeaba1f882a2cc2316956eb2271c15b))
+- **launcher:** prune debug data after job start ([ff2ae92](https://github.com/NateScarlet/auto-derby/commit/ff2ae92dce9325fbcb633d9d307c8e25b95e9c3a))
+- **launcher:** prune debug files ([ffc3d74](https://github.com/NateScarlet/auto-derby/commit/ffc3d74091192c1b54c53594a448f77ec22cecca))
+- lazy load data files ([57ac7c7](https://github.com/NateScarlet/auto-derby/commit/57ac7c7af8a7ad929460313a9c8140d300be1c30)), closes [#107](https://github.com/NateScarlet/auto-derby/issues/107)
+- **nurturing:** reset client size every turn ([48739be](https://github.com/NateScarlet/auto-derby/commit/48739be953f18c9f12ab0b97cde43a51188a8228))
+- **ocr:** suggest most similar text when prompting ([2a8ab45](https://github.com/NateScarlet/auto-derby/commit/2a8ab45b235318dbf94ead88116c42231440bbeb)), closes [#108](https://github.com/NateScarlet/auto-derby/issues/108)
+- **ocr:** use csv to store ocr labels ([b33a3e7](https://github.com/NateScarlet/auto-derby/commit/b33a3e70cb49da82ad79b1af3ca2887c497461a7)), closes [#107](https://github.com/NateScarlet/auto-derby/issues/107)
+- **plugin:** rename prefer_g1 -> more_g1 ([1b9cc61](https://github.com/NateScarlet/auto-derby/commit/1b9cc61250c36b4654e147a03b4dc310dc4311c5))
+- **plugin:** add auto_crane plugin ([ee109de](https://github.com/NateScarlet/auto-derby/commit/ee109de340ac54a847b0ae69dddddd0d0dda36a0))
+- **plugin:** more_g1: ajust race score ([2817982](https://github.com/NateScarlet/auto-derby/commit/2817982f107dc2370d24de0000269544b7898a58))
+- save training images when debug ([9c4b802](https://github.com/NateScarlet/auto-derby/commit/9c4b8027b804ebd8897b238ceca51ce7dd730ff1))
+- **single-mode:** use csv to store event choice ([cf4d231](https://github.com/NateScarlet/auto-derby/commit/cf4d231bc7377e63258d692c25b2f540e304afe9)), closes [#107](https://github.com/NateScarlet/auto-derby/issues/107)
+- use jsonl to store race data ([72aadee](https://github.com/NateScarlet/auto-derby/commit/72aadee5006ef8b93fe8df15699769456ddcb812)), closes [#107](https://github.com/NateScarlet/auto-derby/issues/107)
+- version update check ([ef64c7e](https://github.com/NateScarlet/auto-derby/commit/ef64c7ee8e66588866aacc63f447aaa58bcde64e)), closes [#101](https://github.com/NateScarlet/auto-derby/issues/101)
+
+### Bug Fixes
+
+- **plugin:** auto_crane may not success ([217993c](https://github.com/NateScarlet/auto-derby/commit/217993c423fd6c4927b12f5abe4e69656378bbc7))
+
+### Performance
+
+- **nurturing:** improve training recognize time 0.6s per turn ([d43587d](https://github.com/NateScarlet/auto-derby/commit/d43587d842719abbe8fc082c81e56b40295632fe))
+- **nurturing:** remove unessary cursor effect wait ([8754e59](https://github.com/NateScarlet/auto-derby/commit/8754e5966a734dcc8420b3b50d93e938793bea11))
+
 ## 1.0.0 (2021-07-13)
 
 ### ⚠ BREAKING CHANGES
