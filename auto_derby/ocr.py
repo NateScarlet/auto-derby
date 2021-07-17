@@ -23,6 +23,7 @@ LOGGER = logging.getLogger(__name__)
 class g:
     data_path: str = ""
     image_path: str = ""
+    prompt_disabled = False
 
     labels: Dict[Text, Text] = {}
 
@@ -95,19 +96,16 @@ def _query(h: Text) -> Tuple[Text, Text, float]:
     )[0]
 
 
-def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
-    hash_img = cv2.GaussianBlur(img, (7, 7), 1, borderType=cv2.BORDER_CONSTANT)
-    h = imagetools.image_hash(fromarray(hash_img), save_path=g.image_path)
-    match, value, similarity = _query(h)
-    LOGGER.debug(
-        "match label: value=%s, current=%s, match=%s, similarity=%0.3f",
-        value,
-        h,
-        match,
-        similarity,
-    )
-    if similarity > threshold:
+def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
+    if g.prompt_disabled:
+        LOGGER.warning(
+            "using low similarity label: hash=%s, value=%s, similarity",
+            h,
+            value,
+            similarity,
+        )
         return value
+
     ret = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     try:
@@ -129,6 +127,22 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     _label(h, ret)
     LOGGER.info("labeled: hash=%s, value=%s", h, ret)
     return ret
+
+
+def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
+    hash_img = cv2.GaussianBlur(img, (7, 7), 1, borderType=cv2.BORDER_CONSTANT)
+    h = imagetools.image_hash(fromarray(hash_img), save_path=g.image_path)
+    match, value, similarity = _query(h)
+    LOGGER.debug(
+        "match label: value=%s, current=%s, match=%s, similarity=%0.3f",
+        value,
+        h,
+        match,
+        similarity,
+    )
+    if similarity > threshold:
+        return value
+    return _prompt(img, h, value, similarity)
 
 
 def _union_bbox(

@@ -70,6 +70,9 @@ class config:
     use_legacy_screenshot = (
         os.getenv("AUTO_DERBY_USE_LEGACY_SCREENSHOT", "").lower() == "true"
     )
+    ocr_prompt_disabled = (
+        os.getenv("AUTO_DERBY_OCR_PROMPT_DISABLED", "").lower() == "true"
+    )
     adb_key_path = os.getenv("AUTO_DERBY_ADB_KEY_PATH", ADBClient.key_path)
 
     on_limited_sale = lambda: terminal.pause(
@@ -90,6 +93,7 @@ class config:
         ADBClient.key_path = cls.adb_key_path
         ocr.g.data_path = cls.ocr_data_path
         ocr.g.image_path = cls.ocr_image_path
+        ocr.g.prompt_disabled = cls.ocr_prompt_disabled
         plugin.g.path = cls.plugin_path
         single_mode.choice.g.data_path = cls.single_mode_choice_path
         single_mode.choice.g.event_image_path = cls.single_mode_event_image_path
