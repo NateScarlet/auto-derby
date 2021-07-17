@@ -7,4 +7,3 @@ class Plugin(auto_derby.Plugin):
 
 
 auto_derby.plugin.register(__name__, Plugin())
-
