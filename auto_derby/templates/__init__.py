@@ -97,6 +97,7 @@ SINGLE_MODE_COMMAND_TRAINING_POS = "single_mode_command_training.pos.png"
 SINGLE_MODE_CONDITION_HEADACHE = "single_mode_condition_headache.png"
 SINGLE_MODE_CONDITION_OVERWEIGHT = "single_mode_condition_overweight.png"
 SINGLE_MODE_CONTINUE = "single_mode_continue.png"
+SINGLE_MODE_CONTINUE_POS = "single_mode_continue.pos.png"
 SINGLE_MODE_CONTINUOUS_RACE_TITLE = "single_mode_continuous_race_title.png"
 SINGLE_MODE_CRANE_GAME_BUTTON = "single_mode_crane_game_button.png"
 SINGLE_MODE_CRANE_GAME_BUTTON_POS = "single_mode_crane_game_button.pos.png"
@@ -160,6 +161,8 @@ SINGLE_MODE_TARGET_RACE_NO_PERMISSION = "single_mode_target_race_no_permission.p
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION_POS = (
     "single_mode_target_race_no_permission.pos.png"
 )
+SINGLE_MODE_TARGET_UNFINISHED = "single_mode_target_unfinished.png"
+SINGLE_MODE_TARGET_UNFINISHED_POS = "single_mode_target_unfinished.pos.png"
 SINGLE_MODE_TRAINING_CONFIRM = "single_mode_training_confirm.png"
 SINGLE_MODE_TRAINING_CONFIRM_POS = "single_mode_training_confirm.pos.png"
 SINGLE_MODE_URA_FINALS = "single_mode_ura_finals.png"
