@@ -9,8 +9,7 @@ from typing import Optional
 
 import cast_unknown as cast
 
-from .. import (action, config, imagetools, mathtools, template, templates,
-                terminal)
+from .. import action, config, imagetools, mathtools, template, templates, terminal
 from ..single_mode import Context, Training, event, go_out, race
 
 LOGGER = logging.getLogger(__name__)
