@@ -23,6 +23,7 @@ class g:
     event_image_path: str = ""
     data_path: str = ""
     choices: Dict[Text, int] = {}
+    prompt_disabled = False
 
 
 class _g:
@@ -73,6 +74,17 @@ def reload_on_demand() -> None:
         reload()
 
 
+def _prompt_choice(event_id: Text) -> int:
+    if g.prompt_disabled:
+        return 1
+    ans = ""
+    while ans not in ["1", "2", "3", "4", "5"]:
+        ans = terminal.prompt("Choose event option(1/2/3/4/5):")
+    ret = int(ans)
+    _set(event_id, ret)
+    return ret
+
+
 def get_choice(event_screen: Image) -> int:
     rp = mathtools.ResizeProxy(event_screen.width)
     b_img = np.zeros((event_screen.height, event_screen.width))
@@ -111,12 +123,9 @@ def get_choice(event_screen: Image) -> int:
         cv2.destroyAllWindows()
 
     reload_on_demand()
-    if event_id not in g.choices:
-        while True:
-            ans = terminal.prompt("Choose event option(1/2/3/4/5):")
-            if ans in ["1", "2", "3", "4", "5"]:
-                _set(event_id, int(ans))
-                break
-    ret = g.choices[event_id]
+    if event_id in g.choices:
+        ret = g.choices[event_id]
+    else:
+        ret = _prompt_choice(event_id)
     LOGGER.info("event: id=%s choice=%d", event_id, ret)
     return ret
