@@ -73,7 +73,7 @@ def reload_on_demand() -> None:
         reload()
 
 
-def get(event_screen: Image) -> int:
+def get_choice(event_screen: Image) -> int:
     rp = mathtools.ResizeProxy(event_screen.width)
     b_img = np.zeros((event_screen.height, event_screen.width))
     event_name_bbox = rp.vector4((75, 155, 305, 180), 466)

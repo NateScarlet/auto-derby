@@ -1,17 +1,17 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
-from auto_derby import mathtools
 
 import logging
 import time
+from concurrent import futures
 from typing import Optional
 
-from .. import action, template, templates, config, imagetools, terminal
-from ..single_mode import Context, Training, choice, race, go_out
 import cast_unknown as cast
-from concurrent import futures
 
+from .. import (action, config, imagetools, mathtools, template, templates,
+                terminal)
+from ..single_mode import Context, Training, event, go_out, race
 
 LOGGER = logging.getLogger(__name__)
 
@@ -279,7 +279,7 @@ ALL_OPTIONS = [
 
 def _handle_option():
     time.sleep(0.2)  # wait animation
-    ans = choice.get(template.screenshot(max_age=0))
+    ans = event.get_choice(template.screenshot(max_age=0))
     action.tap_image(ALL_OPTIONS[ans - 1])
 
 

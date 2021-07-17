@@ -95,8 +95,8 @@ class config:
         ocr.g.image_path = cls.ocr_image_path
         ocr.g.prompt_disabled = cls.ocr_prompt_disabled
         plugin.g.path = cls.plugin_path
-        single_mode.choice.g.data_path = cls.single_mode_choice_path
-        single_mode.choice.g.event_image_path = cls.single_mode_event_image_path
+        single_mode.event.g.data_path = cls.single_mode_choice_path
+        single_mode.event.g.event_image_path = cls.single_mode_event_image_path
         single_mode.context.g.context_class = cls.single_mode_context_class
         single_mode.go_out.g.option_class = cls.single_mode_go_out_option_class
         single_mode.race.g.data_path = cls.single_mode_race_data_path
