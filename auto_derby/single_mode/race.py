@@ -854,7 +854,7 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
 
 def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Race:
     rp = mathtools.ResizeProxy(img.width)
-    spec_bbox = rp.vector4((221, 11, 478, 32), 492)
+    spec_bbox = rp.vector4((221, 12, 478, 32), 492)
     no1_fan_count_bbox = rp.vector4((207, 54, 360, 72), 492)
     grade_color_pos = rp.vector2((182, 14), 492)
 

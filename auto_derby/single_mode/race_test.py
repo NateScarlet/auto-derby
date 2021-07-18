@@ -279,3 +279,24 @@ def test_find_by_race_menu_image_5():
     assert race1.name == "URAファイナルズ予選", race1.name
     assert race1.stadium == "中山", race1.stadium
     assert race1.characters == set(), race1.characters
+
+
+def test_find_by_race_menu_image_issue112():
+    ctx = Context.new()
+    ctx.date = (1, 12, 1)
+    with _test.screenshot("race_menu_issue112.png") as img:
+        res1, res2 = sorted(
+            race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1]
+        )
+        race1, pos1 = res1
+        race2, pos2 = res2
+
+    assert pos1 == (203, 586), pos1
+    assert race1.name == "さざんか賞", race1.name
+    assert race1.stadium == "阪神", race1.stadium
+    assert race1.characters == set(), race1.characters
+
+    assert pos2 == (203, 701), pos2
+    assert race2.name == "朝日杯フューチュリティステークス", race2.name
+    assert race2.stadium == "阪神", race2.stadium
+    assert race2.characters == set(), race2.characters
