@@ -145,6 +145,8 @@ SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT_POS = (
 )
 SINGLE_MODE_RACE_DETAIL_TITLE = "single_mode_race_detail_title.png"
 SINGLE_MODE_RACE_DETAIL_TITLE_POS = "single_mode_race_detail_title.pos.png"
+SINGLE_MODE_RACE_MENU_FAN_ICON = "single_mode_race_menu_fan_icon.png"
+SINGLE_MODE_RACE_MENU_FAN_ICON_POS = "single_mode_race_menu_fan_icon.pos.png"
 SINGLE_MODE_RACE_NEXT_BUTTON = "single_mode_race_next_button.png"
 SINGLE_MODE_RACE_START_BUTTON = "single_mode_race_start_button.png"
 SINGLE_MODE_REST = "single_mode_rest.png"

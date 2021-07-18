@@ -200,3 +200,82 @@ def test_find_by_race_detail_image_issue58():
     assert race1.name == "宝塚記念", race1.name
     assert race1.stadium == "京都", race1.stadium
     assert race1.characters == {"メジロマックイーン", "メジロライアン", "ライスシャワー"}, race1.characters
+
+
+def test_find_by_race_menu_image():
+    ctx = Context.new()
+    ctx.date = (1, 6, 2)
+    with _test.screenshot("race_menu.png") as img:
+        (res1,) = race.find_by_race_menu_image(ctx, img)
+        race1, pos1 = res1
+
+    assert pos1 == (203, 586), pos1
+    assert race1.name == "ジュニア級メイクデビュー", race1.name
+    assert race1.stadium == "札幌", race1.stadium
+    assert race1.characters == {"ゴールドシップ", "エアグルーヴ", "ナリタタイシン"}, race1.characters
+
+
+def test_find_by_race_menu_image_2():
+    ctx = Context.new()
+    ctx.date = (1, 10, 2)
+    with _test.screenshot("race_menu_2.png") as img:
+        res1, res2 = race.find_by_race_menu_image(ctx, img)
+        race1, pos1 = res1
+        race2, pos2 = res2
+
+    assert pos1 == (203, 586), pos1
+    assert race1.name == "アルテミスステークス", race1.name
+    assert race1.stadium == "東京", race1.stadium
+    assert race1.characters == set(), race1.characters
+
+    assert pos2 == (203, 701), pos2
+    assert race2.name == "アイビーステークス", race2.name
+    assert race2.stadium == "東京", race2.stadium
+    assert race2.characters == set(), race2.characters
+
+
+def test_find_by_race_menu_image_3():
+    ctx = Context.new()
+    ctx.date = (1, 10, 2)
+    with _test.screenshot("race_menu_3.png") as img:
+        (res1,) = race.find_by_race_menu_image(ctx, img)
+        race1, pos1 = res1
+
+    assert pos1 == (203, 646), pos1
+    assert race1.name == "萩ステークス", race1.name
+    assert race1.stadium == "京都", race1.stadium
+    assert race1.characters == set(), race1.characters
+
+
+def test_find_by_race_menu_image_4():
+    ctx = Context.new()
+    ctx.date = (1, 10, 2)
+    with _test.screenshot("race_menu_4.png") as img:
+        res1, res2 = sorted(
+            race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1]
+        )
+        race1, pos1 = res1
+        race2, pos2 = res2
+
+    assert pos1 == (203, 585), pos1
+    assert race1.name == "萩ステークス", race1.name
+    assert race1.stadium == "京都", race1.stadium
+    assert race1.characters == set(), race1.characters
+
+    assert pos2 == (203, 700), pos2
+    assert race2.name == "なでしこ賞", race2.name
+    assert race2.stadium == "京都", race2.stadium
+    assert race2.characters == set(), race2.characters
+
+
+def test_find_by_race_menu_image_5():
+    ctx = Context.new()
+    ctx.date = (4, 0, 0)
+    with _test.screenshot("race_menu_5.png") as img:
+        (res1,) = race.find_by_race_menu_image(ctx, img)
+        race1, pos1 = res1
+
+    assert pos1 == (203, 586), pos1
+    assert race1.name == "URAファイナルズ予選", race1.name
+    assert race1.stadium == "中山", race1.stadium
+    assert race1.characters == set(), race1.characters

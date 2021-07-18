@@ -20,17 +20,9 @@ _TRAINING_CONFIRM = template.Specification(
 )
 
 
-_RACE_DETAIL_BUTTON = template.Specification(
-    templates.SINGLE_MODE_RACE_DETAIL_BUTTON, threshold=0.8
-)
-
-
-def _current_race(ctx: Context) -> race.Race:
-    action.wait_tap_image(_RACE_DETAIL_BUTTON)
-    action.wait_image(templates.SINGLE_MODE_RACE_DETAIL_TITLE)
-    race1 = race.find_by_race_detail_image(ctx, template.screenshot())
-    action.wait_tap_image(templates.CLOSE_BUTTON)
-    return race1
+def _first_race(ctx: Context) -> race.Race:
+    action.wait_image(templates.SINGLE_MODE_RACE_MENU_FAN_ICON)
+    return next(race.find_by_race_menu_image(ctx, template.screenshot()))[0]
 
 
 def _is_race_list_scroll_to_top() -> bool:
@@ -41,27 +33,30 @@ def _is_race_list_scroll_to_top() -> bool:
     )
 
 
+def _stop_race_menu_scroll():
+    rp = action.resize_proxy()
+    action.tap(rp.vector2((15, 600), 540))
+
+
 def _choose_race(ctx: Context, race1: race.Race) -> None:
     rp = action.resize_proxy()
 
     time.sleep(0.2)  # wait animation
     while not _is_race_list_scroll_to_top():
         action.swipe(rp.vector2((100, 500), 466), dy=rp.vector(100, 466), duration=0.2)
-        time.sleep(0.2)
-    action.tap(rp.vector2((100, 500), 466))
-
-    if _current_race(ctx) == race1:
-        return
+        _stop_race_menu_scroll()
 
     while True:
-        action.tap(rp.vector2((100, 600), 466))
-        if _current_race(ctx) == race1:
-            return
+        for race2, pos in race.find_by_race_menu_image(ctx, template.screenshot()):
+            if race2 == race1:
+                action.tap(pos)
+                return
         action.swipe(
             rp.vector2((100, 600), 466),
             dy=rp.vector(-50, 466),
             duration=0.2,
         )
+        _stop_race_menu_scroll()
 
 
 def _iter_training_images():
@@ -235,7 +230,7 @@ def _choose_running_style(ctx: Context, race1: race.Race) -> None:
 
 
 def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
-    race1 = race1 or _current_race(ctx)
+    race1 = race1 or _first_race(ctx)
     estimate_order = race1.estimate_order(ctx)
     if estimate_order > config.pause_if_race_order_gt:
         terminal.pause(

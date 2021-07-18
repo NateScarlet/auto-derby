@@ -721,11 +721,11 @@ def find(ctx: Context) -> Iterator[Race]:
 
 
 def _recognize_fan_count(img: PIL.Image.Image) -> int:
-    cv_img = imagetools.cv_image(img.convert("L"))
+    cv_img = imagetools.cv_image(imagetools.resize(img.convert("L"), height=32))
     cv_img = imagetools.level(
         cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
     )
-    _, binary_img = cv2.threshold(cv_img, 50, 255, cv2.THRESH_BINARY_INV)
+    _, binary_img = cv2.threshold(cv_img, 60, 255, cv2.THRESH_BINARY_INV)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("binary_img", binary_img)
@@ -736,11 +736,11 @@ def _recognize_fan_count(img: PIL.Image.Image) -> int:
 
 
 def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
-    cv_img = imagetools.cv_image(img.convert("L"))
+    cv_img = imagetools.cv_image(imagetools.resize(img.convert("L"), height=32))
     cv_img = imagetools.level(
         cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
     )
-    _, binary_img = cv2.threshold(cv_img, 50, 255, cv2.THRESH_BINARY_INV)
+    _, binary_img = cv2.threshold(cv_img, 60, 255, cv2.THRESH_BINARY_INV)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("binary_img", binary_img)
@@ -773,6 +773,9 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
 
 
 def _recognize_grade(rgb_color: Tuple[int, ...]) -> Tuple[int, ...]:
+    if imagetools.compare_color((247, 209, 41), rgb_color) > 0.9:
+        # EX(URA)
+        return (Race.GRADE_G1,)
     if imagetools.compare_color((54, 133, 228), rgb_color) > 0.8:
         return (Race.GRADE_G1,)
     if imagetools.compare_color((244, 85, 129), rgb_color) > 0.8:
@@ -783,10 +786,32 @@ def _recognize_grade(rgb_color: Tuple[int, ...]) -> Tuple[int, ...]:
         return Race.GRADE_OP, Race.GRADE_PRE_OP
     if imagetools.compare_color((148, 203, 8), rgb_color) > 0.8:
         return Race.GRADE_DEBUT, Race.GRADE_NOT_WINNING
-    if imagetools.compare_color((247, 209, 41), rgb_color) > 0.8:
-        # EX(URA)
-        return (Race.GRADE_G1,)
     raise ValueError("_recognize_grade: unknown grade color: %s" % (rgb_color,))
+
+
+def _find_by_spec(
+    date: Tuple[int, int, int],
+    stadium: Text,
+    ground: int,
+    distance: int,
+    turn: int,
+    track: int,
+    no1_fan_count: int,
+    grades: Tuple[int, ...],
+):
+    full_spec = (stadium, ground, distance, turn, track, no1_fan_count)
+    for i in find_by_date(date):
+        if i.grade not in grades:
+            continue
+        if full_spec == (
+            i.stadium,
+            i.ground,
+            i.distance,
+            i.turn,
+            i.track,
+            i.fan_counts[0],
+        ):
+            yield i
 
 
 def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race:
@@ -810,19 +835,58 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
     stadium, ground, distance, turn, track = _recognize_spec(screenshot.crop(spec_bbox))
     no1_fan_count = _recognize_fan_count(screenshot.crop(no1_fan_count_bbox))
 
-    full_spec = (stadium, ground, distance, turn, track, no1_fan_count)
-    for i in find_by_date(ctx.date):
-        if i.grade not in grades:
-            continue
-        if full_spec == (
-            i.stadium,
-            i.ground,
-            i.distance,
-            i.turn,
-            i.track,
-            i.fan_counts[0],
-        ):
-            LOGGER.info("image match: %s", i)
-            return i
+    full_spec = (
+        ctx.date,
+        stadium,
+        ground,
+        distance,
+        turn,
+        track,
+        no1_fan_count,
+        grades,
+    )
+    for i in _find_by_spec(*full_spec):
+        LOGGER.info("image match: %s", i)
+        return i
 
     raise ValueError("find_by_race_details_image: no race match spec: %s", full_spec)
+
+
+def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Race:
+    rp = mathtools.ResizeProxy(img.width)
+    spec_bbox = rp.vector4((221, 11, 478, 32), 492)
+    no1_fan_count_bbox = rp.vector4((207, 54, 360, 72), 492)
+    grade_color_pos = rp.vector2((182, 14), 492)
+
+    stadium, ground, distance, turn, track = _recognize_spec(img.crop(spec_bbox))
+    no1_fan_count = _recognize_fan_count(img.crop(no1_fan_count_bbox))
+    grades = _recognize_grade(tuple(cast.list_(img.getpixel(grade_color_pos), int)))
+    full_spec = (
+        ctx.date,
+        stadium,
+        ground,
+        distance,
+        turn,
+        track,
+        no1_fan_count,
+        grades,
+    )
+    for i in _find_by_spec(*full_spec):
+        LOGGER.info("image match: %s", i)
+        return i
+    raise ValueError("_find_by_race_menu_item: no race match spec: %s", full_spec)
+
+
+def find_by_race_menu_image(
+    ctx: Context, screenshot: PIL.Image.Image
+) -> Iterator[Tuple[Race, Tuple[int, int]]]:
+    rp = mathtools.ResizeProxy(screenshot.width)
+    for _, pos in template.match(screenshot, templates.SINGLE_MODE_RACE_MENU_FAN_ICON):
+        _, y = pos
+        bbox = (
+            rp.vector(23, 540),
+            y - rp.vector(51, 540),
+            rp.vector(515, 540),
+            y + rp.vector(46, 540),
+        )
+        yield _find_by_race_menu_item(ctx, screenshot.crop(bbox)), pos
