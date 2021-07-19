@@ -230,6 +230,21 @@ def test_update_by_command_scene_issue41():
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
 
+def test_update_by_command_scene_issue113():
+    ctx = Context.new()
+    with _test.screenshot("command_scene_issue113.png") as img:
+        ctx.update_by_command_scene(img)
+
+    assert ctx.date == (4, 0, 0), ctx.date
+    assert round(ctx.vitality, 2) == 0.72, ctx.vitality
+    assert ctx.speed == 1144, ctx.speed
+    assert ctx.stamina == 482, ctx.stamina
+    assert ctx.power == 459, ctx.power
+    assert ctx.guts == 343, ctx.guts
+    assert ctx.wisdom == 437, ctx.wisdom
+    assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+
+
 def test_update_by_class_detail():
     img = (
         PIL.Image.open(_TEST_DATA_PATH / "class_detail.png")

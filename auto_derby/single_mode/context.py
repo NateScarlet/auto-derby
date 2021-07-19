@@ -136,6 +136,7 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
 
 
 def _recognize_property(img: Image) -> int:
+    img = imagetools.resize(img, height=32)
     max_match = imagetools.constant_color_key(
         imagetools.cv_image(img),
         (210, 249, 255),
@@ -145,10 +146,7 @@ def _recognize_property(img: Image) -> int:
         return 1200
 
     cv_img = np.asarray(img.convert("L"))
-    cv_img = imagetools.level(
-        cv_img, np.percentile(cv_img, 10), np.percentile(cv_img, 80)
-    )
-    _, binary_img = cv2.threshold(cv_img, 60, 255, cv2.THRESH_BINARY_INV)
+    _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
     imagetools.fill_area(binary_img, (0,), size_lt=3)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
