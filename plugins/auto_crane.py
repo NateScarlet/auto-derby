@@ -10,7 +10,7 @@ def play(ctx: single_mode.Context):
         time.sleep(3)
         _, pos = action.wait_image(templates.SINGLE_MODE_CRANE_GAME_BUTTON)
         action.swipe(pos, duration=duration)
-    action.wait_tap_image(templates.GREEN_OK_BUTTON)
+    action.wait_tap_image(templates.GREEN_TIGHT_OK_BUTTON)
 
 
 class Plugin(auto_derby.Plugin):
