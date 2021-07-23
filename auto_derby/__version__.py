@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.1.0"
-RELEASE_DATE = datetime.fromtimestamp(1626462845)
-LAST_GIT_COMMIT_DESCRIBE = "v1.0.0-28-g48739be"
-LAST_GIT_COMMIT_HASH = "48739be953f18c9f12ab0b97cde43a51188a8228"
+VERSION = "1.2.0"
+RELEASE_DATE = datetime.fromtimestamp(1627049507)
+LAST_GIT_COMMIT_DESCRIBE = "v1.1.0-21-g9306e11"
+LAST_GIT_COMMIT_HASH = "9306e11448d778805d5421fb66aa0bf72cdf32a0"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1626460884)
-LAST_GIT_COMMIT_SUBJECT = "feat(nurturing): reset client size every turn"
-LAST_GIT_COMMIT_BODY = ""
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1627043048)
+LAST_GIT_COMMIT_SUBJECT = "fix(launcher): should accept csv file"
+LAST_GIT_COMMIT_BODY = "fix #116"

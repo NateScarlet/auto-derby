@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/NateScarlet/auto-derby/compare/v1.1.0...v1.2.0) (2021-07-23)
+
+### Features
+
+- handle target unfinished message ([92bc7ec](https://github.com/NateScarlet/auto-derby/commit/92bc7ecbbe53c419ffcf446ccf40e9c2cef3a730)), closes [#104](https://github.com/NateScarlet/auto-derby/issues/104)
+- **ocr:** allow disable prompt ([6365dd6](https://github.com/NateScarlet/auto-derby/commit/6365dd6290643773cbb9fb9a1833dabda38a5f0f)), closes [#105](https://github.com/NateScarlet/auto-derby/issues/105)
+- **plugin:** add afk plugin ([851b774](https://github.com/NateScarlet/auto-derby/commit/851b7743fd11b83c90d57fd07b95a56753049917)), closes [#105](https://github.com/NateScarlet/auto-derby/issues/105)
+- **single-mode:** allow disable event prompt ([1aa9b4d](https://github.com/NateScarlet/auto-derby/commit/1aa9b4d268e3178f7e50059c4751262f3a9c87e0)), closes [#105](https://github.com/NateScarlet/auto-derby/issues/105)
+- **single-mode:** recognize race from menu ([90b69b3](https://github.com/NateScarlet/auto-derby/commit/90b69b3fb9995d25981313c07e2092509eaf0869)), closes [#106](https://github.com/NateScarlet/auto-derby/issues/106)
+
+### Bug Fixes
+
+- **launcher:** should accept csv file ([9306e11](https://github.com/NateScarlet/auto-derby/commit/9306e11448d778805d5421fb66aa0bf72cdf32a0)), closes [#116](https://github.com/NateScarlet/auto-derby/issues/116)
+- **nurturing:** should wait continue menu animation ([d2f030a](https://github.com/NateScarlet/auto-derby/commit/d2f030af4bfa0914484d792daf8fad6da9d7e582))
+- **plugin:** auto crane not work ([8a73cb0](https://github.com/NateScarlet/auto-derby/commit/8a73cb0e0d83e2d3671e987b87d0709170fec2db))
+- **plugin:** auto crane should wait animation ([1a14061](https://github.com/NateScarlet/auto-derby/commit/1a1406191255e033fc388d12ca91578b51706fde))
+- **plugin:** auto_crane: wrong template ([2d0188e](https://github.com/NateScarlet/auto-derby/commit/2d0188e7b1ae39c6b0496fb8b73e04a0376df8be))
+- **single-mode:** can not recognize recommended race ([d3b4ec1](https://github.com/NateScarlet/auto-derby/commit/d3b4ec1d48b5e0b1ce06768ac67f02d9795f7495)), closes [#112](https://github.com/NateScarlet/auto-derby/issues/112)
+- **single-mode:** error when recognize property ([2455b5c](https://github.com/NateScarlet/auto-derby/commit/2455b5ca64491bf095ad5e26ed356743381edfff)), closes [#113](https://github.com/NateScarlet/auto-derby/issues/113)
+
+### Performance
+
+- **ocr:** remove duplicated lines in ocr_labels.csv ([0cc0518](https://github.com/NateScarlet/auto-derby/commit/0cc0518649bba192840cfc4e5920fcf909574732))
+
 ## [1.1.0](https://github.com/NateScarlet/auto-derby/compare/v1.0.0...v1.1.0) (2021-07-16)
 
 ### Features
