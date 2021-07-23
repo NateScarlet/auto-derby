@@ -50,7 +50,7 @@ $mainWindow.Content.FindName('chooseSingleModeChoicesDataPathButton').add_Click(
             Title            = "Choose single mode choices"
             AddExtension     = $true
             DefaultExt       = ".json"
-            Filter           = "JSON data Files|*.json"
+            Filter           = "CSV data file|*.csv|Legacy JSON data file|*.json|Any file|*.*"
             FileName         = $data.SingleModeChoicesDataPath
             InitialDirectory = (Split-Path $data.SingleModeChoicesDataPath -Parent)
         }
@@ -63,7 +63,7 @@ $mainWindow.Content.FindName('choosePythonExecutablePathButton').add_Click(
     {
         $dialog = New-Object Microsoft.Win32.OpenFileDialog -Property @{
             Title            = "Choose python executable"
-            Filter           = "Executable|*.exe|Any File|*.*"
+            Filter           = "Executable|*.exe|Any file|*.*"
             FileName         = $data.PythonExecutablePath
             InitialDirectory = (Split-Path $data.PythonExecutablePath -Parent)
         }
