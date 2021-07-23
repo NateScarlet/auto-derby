@@ -15,7 +15,7 @@ import win32con
 from . import window
 from .__version__ import VERSION
 
-_VERSION_URL = "https://cdn.jsdelivr.net/gh/NateScarlet/auto-derby/version"
+_VERSION_URL = "https://cdn.jsdelivr.net/gh/NateScarlet/auto-derby@master/version"
 _CHANGELOG_URL = "https://github.com/NateScarlet/auto-derby/blob/master/CHANGELOG.md"
 
 
