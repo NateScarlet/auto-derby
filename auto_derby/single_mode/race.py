@@ -7,7 +7,7 @@ import logging
 import math
 import os
 import warnings
-from typing import Any, Dict, Iterator, Set, Text, Tuple, Type
+from typing import Any, Dict, Iterator, Optional, Set, Text, Tuple, Type
 
 import cast_unknown as cast
 import cv2
@@ -684,6 +684,14 @@ class Race:
             - status_penality
         )
 
+    def is_target_race(self, ctx: Context) -> Optional[bool]:
+        """return None when result is unknown."""
+
+        if not self.characters:
+            return None
+        if len(self.characters) < 10:
+            return True
+
 
 g.race_class = Race
 
@@ -713,9 +721,8 @@ def find(ctx: Context) -> Iterator[Race]:
             continue
         if ctx.fan_count < i.min_fan_count:
             continue
-        # character specific race always be target race,
-        # should be excluded when finding available race
-        if i.characters:
+        # target race should be excluded when finding available race
+        if i.is_target_race(ctx):
             continue
         yield i
 
