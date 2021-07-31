@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.2.0"
-RELEASE_DATE = datetime.fromtimestamp(1627049507)
-LAST_GIT_COMMIT_DESCRIBE = "v1.1.0-21-g9306e11"
-LAST_GIT_COMMIT_HASH = "9306e11448d778805d5421fb66aa0bf72cdf32a0"
+VERSION = "1.2.1"
+RELEASE_DATE = datetime.fromtimestamp(1627724803)
+LAST_GIT_COMMIT_DESCRIBE = "v1.2.0-5-gc225e8b"
+LAST_GIT_COMMIT_HASH = "c225e8b68ee66e7852a63fab1e61755e9745015f"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1627043048)
-LAST_GIT_COMMIT_SUBJECT = "fix(launcher): should accept csv file"
-LAST_GIT_COMMIT_BODY = "fix #116"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1627724517)
+LAST_GIT_COMMIT_SUBJECT = "fix(launcher): can not launcher when folder name contains space"
+LAST_GIT_COMMIT_BODY = "fix #120"
