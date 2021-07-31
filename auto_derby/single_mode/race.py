@@ -859,7 +859,7 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
     raise ValueError("find_by_race_details_image: no race match spec: %s", full_spec)
 
 
-def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Race:
+def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Iterator[Race]:
     rp = mathtools.ResizeProxy(img.width)
     spec_bbox = rp.vector4((221, 12, 478, 32), 492)
     no1_fan_count_bbox = rp.vector4((207, 54, 360, 72), 492)
@@ -878,10 +878,13 @@ def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Race:
         no1_fan_count,
         grades,
     )
+    match_count = 0
     for i in _find_by_spec(*full_spec):
         LOGGER.info("image match: %s", i)
-        return i
-    raise ValueError("_find_by_race_menu_item: no race match spec: %s", full_spec)
+        yield i
+        match_count += 1
+    if not match_count:
+        raise ValueError("_find_by_race_menu_item: no race match spec: %s", full_spec)
 
 
 def find_by_race_menu_image(
@@ -896,4 +899,5 @@ def find_by_race_menu_image(
             rp.vector(515, 540),
             y + rp.vector(46, 540),
         )
-        yield _find_by_race_menu_item(ctx, screenshot.crop(bbox)), pos
+        for i in _find_by_race_menu_item(ctx, screenshot.crop(bbox)):
+            yield i, pos
