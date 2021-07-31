@@ -99,7 +99,7 @@ def _query(h: Text) -> Tuple[Text, Text, float]:
 def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
     if g.prompt_disabled:
         LOGGER.warning(
-            "using low similarity label: hash=%s, value=%s, similarity",
+            "using low similarity label: hash=%s, value=%s, similarity=%s",
             h,
             value,
             similarity,
