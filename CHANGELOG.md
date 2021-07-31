@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.2](https://github.com/NateScarlet/auto-derby/compare/v1.2.1...v1.2.2) (2021-07-31)
+
+### Bug Fixes
+
+- **single-mode:** unable to choose 有馬記念 ([5a3e684](https://github.com/NateScarlet/auto-derby/commit/5a3e6847e457687dd1e2130430076c038d26f9d4))
+- wrong log formatting ([86f499e](https://github.com/NateScarlet/auto-derby/commit/86f499ee6b3513a6e0376fb676988deaf8ada94e))
+
 ## [1.2.1](https://github.com/NateScarlet/auto-derby/compare/v1.2.0...v1.2.1) (2021-07-31)
 
 ### Bug Fixes
