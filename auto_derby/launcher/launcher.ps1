@@ -26,7 +26,7 @@ Add-Type –AssemblyName PresentationFramework
 Add-Type -Language CSharp ([string](Get-Content "$PSScriptRoot\launcher.cs"))
 
 $data = New-Object NateScarlet.AutoDerby.DataContext -Property @{
-    DefaultSingleModeChoicesDataPath = [System.IO.Path]::GetFullPath("single_mode_choices.json")
+    DefaultSingleModeChoicesDataPath = [System.IO.Path]::GetFullPath("single_mode_choices.csv")
     DefaultPythonExecutablePath      = . {
         try {
             & py.exe -3.8 -c 'import sys; print(sys.executable)'
