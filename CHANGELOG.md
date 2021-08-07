@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/NateScarlet/auto-derby/compare/v1.2.2...v1.3.0) (2021-08-07)
+
+### Features
+
+- **launcher:** only keep debug data for recent 4 runs ([50e2a4b](https://github.com/NateScarlet/auto-derby/commit/50e2a4b3aff6f1c277f3778dd58bec04c0398ebd)), closes [#134](https://github.com/NateScarlet/auto-derby/issues/134)
+
+### Bug Fixes
+
+- **launcher:** should use csv as default event data file ([45232ea](https://github.com/NateScarlet/auto-derby/commit/45232ea0e0e51457024ab8ebeac59c7623764e20))
+- **single-mode:** handle 4 options ([5922635](https://github.com/NateScarlet/auto-derby/commit/5922635ead0f876dd838c123c9a8697e38f6fe45)), closes [#129](https://github.com/NateScarlet/auto-derby/issues/129)
+- **single-mode:** training recognition fail ([6c1682c](https://github.com/NateScarlet/auto-derby/commit/6c1682cc4cb70a14304cf1652f12653fdb76f788)), closes [#130](https://github.com/NateScarlet/auto-derby/issues/130)
+
 ## [1.2.2](https://github.com/NateScarlet/auto-derby/compare/v1.2.1...v1.2.2) (2021-07-31)
 
 ### Bug Fixes
