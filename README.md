@@ -72,7 +72,7 @@ py -3.8 -m auto_derby 工作名称
 
 通过 [Github issues](https://github.com/NateScarlet/auto-derby/issues) 提交反馈
 
-启动器勾选 debug 时会在同目录下生成相关调试信息，反馈时请将相关信息一同附上
+启动器勾选 debug 时会在项目目录下生成相关调试信息，反馈时请将相关信息一同附上
 
 反馈前请手动清理敏感信息（例如用户名、机器名）
 
@@ -84,14 +84,6 @@ py -3.8 -m auto_derby 工作名称
 
 运行日志，`.1` `.2` `.3` 后缀的文件为之前日志的备份
 
-## last_screenshot.local.png
+## debug
 
-脚本的最后一次截图
-
-## ocr_images.local
-
-文本识别时使用的图片
-
-## single_mode_event_images.local
-
-育成事件选择时用于匹配的图片
+调试数据，`.1` `.2` `.3` 后缀的文件夹为之前调试数据的备份

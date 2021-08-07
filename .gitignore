@@ -14,3 +14,6 @@ __pycache__
 
 single_mode_choices.json
 single_mode_choices.csv
+
+/debug
+/debug.*

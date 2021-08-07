@@ -102,10 +102,11 @@ $data | Format-List -Property (
 
 if ($data.Debug) {   
     $env:DEBUG = "auto_derby"
-    $env:AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH = "last_screenshot.local.png"
-    $env:AUTO_DERBY_OCR_IMAGE_PATH = "ocr_images.local"
-    $env:AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH = "single_mode_event_images.local"
-    $env:AUTO_DERBY_SINGLE_MODE_TRAINING_IMAGE_PATH = "single_mode_training_images.local"
+    $env:AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH = "debug/last_screenshot.png"
+    $env:AUTO_DERBY_OCR_IMAGE_PATH = "debug/ocr_images"
+    $env:AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH = "debug/single_mode_event_images"
+    $env:AUTO_DERBY_SINGLE_MODE_TRAINING_IMAGE_PATH = "debug/single_mode_training_images"
+    & "$WorkspaceFolder/auto_derby/launcher/rotate_debug_data.ps1"
 }
 
 if ($data.CheckUpdate) {
@@ -155,26 +156,6 @@ Start-Process cmd.exe -Verb $verb -ArgumentList @(
 )
 
 
-function Remove-OldFiles {
-    Param (
-        [string]$Path
-    )
-
-    Get-ChildItem -Recurse -File $Path  |
-    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-3) } |
-    ForEach-Object {
-        "Remove: $($_.FullName)"
-        $_ | Remove-Item
-    }
-
-    Get-ChildItem -Recurse -Directory  $Path  |
-    Where-Object { -Not ($_.EnumerateFiles('*',1) | Select-Object -First 1) } |
-    ForEach-Object {
-        "Remove: $($_.FullName)"
-        $_ | Remove-Item -Recurse
-    }
-}
-
 if ($data.Debug) {
     "Installed packages: "
     
@@ -189,9 +170,6 @@ if ($data.Debug) {
         '^adb-shell\b'
     )
     ""
-    Remove-OldFiles $env:AUTO_DERBY_OCR_IMAGE_PATH
-    Remove-OldFiles $env:AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH
-    Remove-OldFiles $env:AUTO_DERBY_SINGLE_MODE_TRAINING_IMAGE_PATH
 }
 
 
