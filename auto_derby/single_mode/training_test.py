@@ -177,6 +177,19 @@ def test_update_by_training_scene_issue55():
     assert training.skill == 4
 
 
+def test_update_by_training_scene_issue130():
+    with _test.screenshot("training_scene_issue130.png") as img:
+        training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_POWER
+    assert training.level == 5
+    assert training.speed == 0
+    assert training.stamina == 9
+    assert training.power == 17
+    assert training.guts == 0
+    assert training.wisdom == 0
+    assert training.skill == 2
+
+
 def benchmark_from_training_scene():
     RUN_COUNT = 10
     img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_5.png").convert("RGB")

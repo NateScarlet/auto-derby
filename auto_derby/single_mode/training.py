@@ -91,6 +91,7 @@ def _ocr_training_effect(img: Image) -> int:
     assert fill_img.shape == cv_img.shape
 
     text_img = imagetools.color_key(masked_img, fill_img)
+    imagetools.fill_area(text_img, (0,), size_lt=4)
 
     text_img_extra = imagetools.constant_color_key(
         masked_img, (175, 214, 255), threshold=0.95
