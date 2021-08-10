@@ -20,7 +20,7 @@ function Move-LegacyDebugData() {
 
 function Get-DebugDataPath() {
     Param (
-        [int]$BackupCount=0
+        [int]$BackupCount = 0
     )
     if ($BackupCount -eq 0) {
         return "debug"
@@ -37,7 +37,8 @@ function Backup-DebugData() {
         $path = Get-DebugDataPath $i
         if (Test-Path $path) {
             if ($i -eq $MaxBackupCount) {
-                Remove-Item -Recurse $path
+                [void](New-Item -Force -ItemType Directory trash.local)
+                Move-Item $path trash.local
             }
             else {
                 Move-Item $path (Get-DebugDataPath ($i + 1))

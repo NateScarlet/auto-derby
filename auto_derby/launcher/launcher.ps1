@@ -157,6 +157,8 @@ Start-Process cmd.exe -Verb $verb -ArgumentList @(
 
 
 if ($data.Debug) {
+    Remove-Item -Recurse -Force trash.local
+
     "Installed packages: "
     
     & cmd.exe /c "`"$($Data.PythonExecutablePath)`" -m pip list 2>&1" | Select-String (
