@@ -38,7 +38,7 @@ function Backup-DebugData() {
         if (Test-Path $path) {
             if ($i -eq $MaxBackupCount) {
                 [void](New-Item -Force -ItemType Directory trash.local)
-                Move-Item $path trash.local
+                Move-Item $path trash.local/$((Get-Date).Ticks)
             }
             else {
                 Move-Item $path (Get-DebugDataPath ($i + 1))
