@@ -10,8 +10,9 @@ _SIMILARITIES: Dict[Text, Dict[Text, float]] = dict()
 
 
 def _set_similarity(a: Text, b: Text, v: float) -> None:
+    if b < a:
+        a, b = b, a
     _SIMILARITIES.setdefault(a, {})[b] = v
-    _SIMILARITIES.setdefault(b, {})[a] = v
 
 
 _set_similarity("ア", "ァ", 0.95)
@@ -62,6 +63,8 @@ _set_similarity("ワ", "ヷ", 0.8)
 def _compare_char(a: Text, b: Text) -> float:
     if a == b:
         return 1
+    if b < a:
+        a, b = b, a
     return _SIMILARITIES.get(a, {}).get(b, 0)
 
 
