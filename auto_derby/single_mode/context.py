@@ -12,7 +12,7 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import imagetools, mathtools, ocr, template, templates
+from .. import imagetools, mathtools, ocr, template, templates, texttools
 
 
 class g:
@@ -41,9 +41,9 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
 
     text = ocr.text(image_from_array(binary_img))
 
-    if text == "ジュニア級デビュー前":
+    if texttools.compare(text, "ジュニア級デビュー前") > 0.8:
         return (1, 0, 0)
-    if text == "ファイナルズ開催中":
+    if texttools.compare(text, "ファイナルズ開催中") > 0.8:
         return (4, 0, 0)
     year_end = text.index("級") + 1
     month_end = year_end + text[year_end:].index("月") + 1
@@ -51,7 +51,8 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     month_text = text[year_end:month_end]
     date_text = text[month_end:]
 
-    year = {"ジュニア級": 1, "クラシック級": 2, "シニア級": 3}[year_text]
+    year_dict = {"ジュニア級": 1, "クラシック級": 2, "シニア級": 3}
+    year = year_dict[texttools.choose(year_text, year_dict.keys())]
     month = int(month_text[:-1])
     date = {"前半": 1, "後半": 2}[date_text]
     return (year, month, date)

@@ -281,6 +281,35 @@ def test_find_by_race_menu_image_5():
     assert race1.characters == set(), race1.characters
 
 
+def test_find_by_race_menu_image_6():
+    ctx = Context.new()
+    ctx.date = (1, 11, 2)
+    with _test.screenshot("race_menu_6.png") as img:
+        res1, res2, res3 = sorted(
+            race.find_by_race_menu_image(ctx, img),
+            key=lambda x: (x[1][1], x[0].name),
+        )
+        race1, pos1 = res1
+        # 2 race has exact same spec
+        race2, pos2 = res2
+        race3, pos3 = res3
+
+    assert pos1 == (203, 595), pos1
+    assert race1.name == "もちの木賞", race1.name
+    assert race1.stadium == "京都", race1.stadium
+    assert race1.characters == set(), race1.characters
+
+    assert pos2 == (203, 710), pos2
+    assert race2.name == "ベゴニア賞", race2.name
+    assert race2.stadium == "東京", race2.stadium
+    assert race2.characters == set(), race2.characters
+
+    assert pos3 == (203, 710), pos3
+    assert race3.name == "赤松賞", race3.name
+    assert race3.stadium == "東京", race3.stadium
+    assert race3.characters == set(), race3.characters
+
+
 def test_find_by_race_menu_image_issue112():
     ctx = Context.new()
     ctx.date = (1, 12, 1)
