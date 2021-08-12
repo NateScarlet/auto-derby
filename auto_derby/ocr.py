@@ -76,7 +76,7 @@ def _label(image_hash: Text, value: Text) -> None:
         csv.writer(f).writerow((image_hash, value))
 
 
-_PREVIEW_PADDING = 4
+_PREVIEW_PADDING = 0
 
 
 def _pad_img(img: np.ndarray, padding: int = _PREVIEW_PADDING) -> np.ndarray:
@@ -166,6 +166,12 @@ def _rect2bbox(rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
     return l, t, r, b
 
 
+def _bbox2rect(bbox: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
+    l, t, r, b = bbox
+    x, y, w, h = l, b, r - l, b - t
+    return x, y, w, h
+
+
 def _pad_bbox(v: Tuple[int, int, int, int], padding: int) -> Tuple[int, int, int, int]:
     l, t, r, b = v
     l -= padding
@@ -221,15 +227,34 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
     char_bbox = contours_with_bbox[0][1]
     char_non_zero_bbox = contours_with_bbox[0][1]
 
+    def _crop_char(bbox: Tuple[int, int, int, int], img: np.ndarray):
+        non_zero_pos_list = cv2.findNonZero(img)
+        l0, t0, r0, b0 = bbox
+        _, _, w0, h0 = _bbox2rect(bbox)
+        non_zero_rect = cv2.boundingRect(non_zero_pos_list)
+        _, _, w1, h1 = non_zero_rect
+
+        l1, t1, r1, b1 = _rect2bbox(non_zero_rect)
+        ml, mt, mr, mb = l1, t1, w0 - r1, h0 - b1
+        ret = img
+        if w1 > max_char_width * 0.3:
+            l0 += ml
+            r0 -= mr
+            ret = ret[:, l1:r1]
+        if h1 > max_char_height * 0.5:
+            t0 += mt
+            b0 -= mb
+            ret = ret[t1:b1]
+
+        return (l0, t0, r0, b0), ret
+
     def _push_char():
         if not char_parts:
             return
         mask = np.zeros_like(binary_img)
         cv2.drawContours(mask, char_parts, -1, (255,), thickness=cv2.FILLED)
         char_img = cv2.copyTo(binary_img, mask)
-        l, t, r, b = char_non_zero_bbox
-        if r - l < max_char_width * 0.5 or b - t < max_char_height * 0.8:
-            l, t, r, b = char_bbox
+        l, t, r, b = char_bbox
         char_img = char_img[t:b, l:r]
         char_img_list.append((char_bbox, char_img))
 
@@ -290,6 +315,8 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
         char_bbox = _union_bbox(char_bbox, bbox)
     _push_char()
 
+    cropped_char_img_list = [_crop_char(bbox, img) for (bbox, img) in char_img_list]
+
     if os.getenv("DEBUG") == __name__:
         segmentation_img = cv2.cvtColor(binary_img, cv2.COLOR_GRAY2BGR)
         for i in contours:
@@ -301,14 +328,19 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
         for bbox, _ in char_img_list:
             l, t, r, b = bbox
             cv2.rectangle(chars_img, (l, t), (r, b), (0, 0, 255), thickness=1)
+        cropped_chars_img = cv2.cvtColor(binary_img, cv2.COLOR_GRAY2BGR)
+        for bbox, _ in cropped_char_img_list:
+            l, t, r, b = bbox
+            cv2.rectangle(cropped_chars_img, (l, t), (r, b), (0, 0, 255), thickness=1)
         cv2.imshow("ocr input", cv_img)
         cv2.imshow("ocr binary", binary_img)
         cv2.imshow("ocr segmentation", segmentation_img)
         cv2.imshow("ocr chars", chars_img)
+        cv2.imshow("ocr cropped chars", cropped_chars_img)
         cv2.waitKey()
         cv2.destroyAllWindows()
 
-    for _, i in char_img_list:
+    for _, i in cropped_char_img_list:
         ret += _text_from_image(i, threshold)
 
     LOGGER.debug("ocr result: %s", ret)
