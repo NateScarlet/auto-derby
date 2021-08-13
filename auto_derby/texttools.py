@@ -4,68 +4,66 @@
 from __future__ import annotations
 
 import itertools
-from typing import Dict, Iterable, Iterator, Text
+from typing import Dict, Iterable, Iterator, Text, Tuple
 
-_SIMILARITIES: Dict[Text, Dict[Text, float]] = dict()
+_SIMILARITIES: Dict[Tuple[Text, Text], float] = dict()
 
 
-def _set_similarity(a: Text, b: Text, v: float) -> None:
+def _similarity_key(a: Text, b: Text):
     if b < a:
-        a, b = b, a
-    _SIMILARITIES.setdefault(a, {})[b] = v
+        return (b, a)
+    return (a, b)
 
 
-_set_similarity("ア", "ァ", 0.95)
-_set_similarity("イ", "ィ", 0.95)
-_set_similarity("ウ", "ゥ", 0.95)
-_set_similarity("エ", "ェ", 0.95)
-_set_similarity("オ", "ォ", 0.95)
-_set_similarity("カ", "ガ", 0.8)
-_set_similarity("キ", "ギ", 0.8)
-_set_similarity("ク", "グ", 0.8)
-_set_similarity("ケ", "ゲ", 0.8)
-_set_similarity("コ", "ゴ", 0.8)
-_set_similarity("サ", "ザ", 0.8)
-_set_similarity("シ", "ジ", 0.8)
-_set_similarity("ス", "ズ", 0.8)
-_set_similarity("セ", "ゼ", 0.8)
-_set_similarity("ソ", "ゾ", 0.8)
-_set_similarity("タ", "ダ", 0.8)
-_set_similarity("チ", "ヂ", 0.8)
-_set_similarity("ッ", "ツ", 0.8)
-_set_similarity("ッ", "ヅ", 0.8)
-_set_similarity("ツ", "ヅ", 0.8)
-_set_similarity("テ", "デ", 0.8)
-_set_similarity("ト", "ド", 0.8)
-_set_similarity("ハ", "バ", 0.8)
-_set_similarity("ハ", "パ", 0.8)
-_set_similarity("バ", "パ", 0.8)
-_set_similarity("ヒ", "ビ", 0.8)
-_set_similarity("ヒ", "ピ", 0.8)
-_set_similarity("ビ", "ピ", 0.8)
-_set_similarity("フ", "ブ", 0.8)
-_set_similarity("フ", "プ", 0.8)
-_set_similarity("プ", "ブ", 0.8)
-_set_similarity("ヘ", "ベ", 0.8)
-_set_similarity("ヘ", "ペ", 0.8)
-_set_similarity("ペ", "ベ", 0.8)
-_set_similarity("ホ", "ボ", 0.8)
-_set_similarity("ホ", "ポ", 0.8)
-_set_similarity("ポ", "ボ", 0.8)
-_set_similarity("ャ", "ヤ", 0.95)
-_set_similarity("ュ", "ユ", 0.95)
-_set_similarity("ョ", "ヨ", 0.95)
-_set_similarity("ヮ", "ワ", 0.95)
-_set_similarity("ヮ", "ヷ", 0.8)
-_set_similarity("ワ", "ヷ", 0.8)
+_SIMILARITIES[_similarity_key("ア", "ァ")] = 0.95
+_SIMILARITIES[_similarity_key("イ", "ィ")] = 0.95
+_SIMILARITIES[_similarity_key("ウ", "ゥ")] = 0.95
+_SIMILARITIES[_similarity_key("エ", "ェ")] = 0.95
+_SIMILARITIES[_similarity_key("オ", "ォ")] = 0.95
+_SIMILARITIES[_similarity_key("カ", "ガ")] = 0.8
+_SIMILARITIES[_similarity_key("キ", "ギ")] = 0.8
+_SIMILARITIES[_similarity_key("ク", "グ")] = 0.8
+_SIMILARITIES[_similarity_key("ケ", "ゲ")] = 0.8
+_SIMILARITIES[_similarity_key("コ", "ゴ")] = 0.8
+_SIMILARITIES[_similarity_key("サ", "ザ")] = 0.8
+_SIMILARITIES[_similarity_key("シ", "ジ")] = 0.8
+_SIMILARITIES[_similarity_key("ス", "ズ")] = 0.8
+_SIMILARITIES[_similarity_key("セ", "ゼ")] = 0.8
+_SIMILARITIES[_similarity_key("ソ", "ゾ")] = 0.8
+_SIMILARITIES[_similarity_key("タ", "ダ")] = 0.8
+_SIMILARITIES[_similarity_key("チ", "ヂ")] = 0.8
+_SIMILARITIES[_similarity_key("ッ", "ツ")] = 0.8
+_SIMILARITIES[_similarity_key("ッ", "ヅ")] = 0.8
+_SIMILARITIES[_similarity_key("ツ", "ヅ")] = 0.8
+_SIMILARITIES[_similarity_key("テ", "デ")] = 0.8
+_SIMILARITIES[_similarity_key("ト", "ド")] = 0.8
+_SIMILARITIES[_similarity_key("ハ", "バ")] = 0.8
+_SIMILARITIES[_similarity_key("ハ", "パ")] = 0.8
+_SIMILARITIES[_similarity_key("バ", "パ")] = 0.8
+_SIMILARITIES[_similarity_key("ヒ", "ビ")] = 0.8
+_SIMILARITIES[_similarity_key("ヒ", "ピ")] = 0.8
+_SIMILARITIES[_similarity_key("ビ", "ピ")] = 0.8
+_SIMILARITIES[_similarity_key("フ", "ブ")] = 0.8
+_SIMILARITIES[_similarity_key("フ", "プ")] = 0.8
+_SIMILARITIES[_similarity_key("プ", "ブ")] = 0.8
+_SIMILARITIES[_similarity_key("ヘ", "ベ")] = 0.8
+_SIMILARITIES[_similarity_key("ヘ", "ペ")] = 0.8
+_SIMILARITIES[_similarity_key("ペ", "ベ")] = 0.8
+_SIMILARITIES[_similarity_key("ホ", "ボ")] = 0.8
+_SIMILARITIES[_similarity_key("ホ", "ポ")] = 0.8
+_SIMILARITIES[_similarity_key("ポ", "ボ")] = 0.8
+_SIMILARITIES[_similarity_key("ャ", "ヤ")] = 0.95
+_SIMILARITIES[_similarity_key("ュ", "ユ")] = 0.95
+_SIMILARITIES[_similarity_key("ョ", "ヨ")] = 0.95
+_SIMILARITIES[_similarity_key("ヮ", "ワ")] = 0.95
+_SIMILARITIES[_similarity_key("ヮ", "ヷ")] = 0.8
+_SIMILARITIES[_similarity_key("ワ", "ヷ")] = 0.8
 
 
 def _compare_char(a: Text, b: Text) -> float:
     if a == b:
         return 1
-    if b < a:
-        a, b = b, a
-    return _SIMILARITIES.get(a, {}).get(b, 0)
+    return _SIMILARITIES.get(_similarity_key(a, b), 0)
 
 
 def _compare_same_length(a: Text, b: Text) -> float:
