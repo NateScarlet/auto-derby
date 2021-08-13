@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import itertools
-from typing import Dict, Iterable, Iterator, Text, Tuple
+from typing import Dict, Iterable, Iterator, Set, Text, Tuple, TypeVar
 
 _SIMILARITIES: Dict[Tuple[Text, Text], float] = dict()
 
@@ -71,13 +71,25 @@ def _compare_same_length(a: Text, b: Text) -> float:
     return sum(_compare_char(i, j) for i, j in zip(a, b)) / len(a)
 
 
-def _iterate_padding(v: Text, size: int) -> Iterator[Text]:
+def _iter_padded(v: Text, size: int) -> Iterator[Text]:
     if size == len(v):
         yield v
         return
     assert size > len(v)
     for i in range(len(v) + 1):
-        yield from _iterate_padding(v[:i] + " " + v[i:], size)
+        yield from _iter_padded(v[:i] + " " + v[i:], size)
+
+
+T = TypeVar("T")
+
+
+def _distinct(v: Iterator[T]) -> Iterator[T]:
+    s: Set[T] = set()
+    for i in v:
+        if i in s:
+            continue
+        yield i
+        s.add(i)
 
 
 def compare(a: Text, b: Text, *, max_missing_chars: int = 5) -> float:
@@ -89,8 +101,8 @@ def compare(a: Text, b: Text, *, max_missing_chars: int = 5) -> float:
     return max(
         _compare_same_length(i, j)
         for i, j in itertools.product(
-            _iterate_padding(a, size),
-            _iterate_padding(b, size),
+            _distinct(_iter_padded(a, size)),
+            _distinct(_iter_padded(b, size)),
         )
     )
 
