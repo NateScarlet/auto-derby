@@ -10,3 +10,4 @@ def test_compare():
     assert texttools.compare("ァ", "ア1") == 0.475
     assert texttools.compare("ア", "ァ") == 0.95
     assert texttools.compare("アフアイナルズ", "ァファイナルズ") == 0.9857142857142858
+    assert texttools.compare("", "123456", max_missing_chars=5) == -1

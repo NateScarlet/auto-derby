@@ -80,22 +80,18 @@ def _iterate_padding(v: Text, size: int) -> Iterator[Text]:
         yield from _iterate_padding(v[:i] + " " + v[i:], size)
 
 
-def compare(a: Text, b: Text) -> float:
-    if len(b) > len(a):
-        a, b = b, a
-
+def compare(a: Text, b: Text, *, max_missing_chars: int = 5) -> float:
     size = max(len(a), len(b))
     if size == 0:
         return 1
+    if abs(len(a) - len(b)) > max_missing_chars:
+        return -1
     return max(
-        (
-            _compare_same_length(i, j)
-            for i, j in itertools.product(
-                _iterate_padding(a, size),
-                _iterate_padding(b, size),
-            )
-        ),
-        default=0,
+        _compare_same_length(i, j)
+        for i, j in itertools.product(
+            _iterate_padding(a, size),
+            _iterate_padding(b, size),
+        )
     )
 
 
