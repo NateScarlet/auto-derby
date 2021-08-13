@@ -25,6 +25,7 @@
 - [x] 活动抽奖转盘 (Roulette derby)
 - [x] 自定义限时商店处理
   - [x] 插件 limited_sale_buy_everything：自动买下所有物品
+  - [x] 插件 limited_sale_close：直接跳过限时商店提示窗口
 - [x] 育成 (Nurturing)
   - [x] 自动选择训练
     - [x] 基于当前属性
