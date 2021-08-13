@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import itertools
-from typing import Dict, Iterable, Iterator, Set, Text, Tuple, TypeVar
+from typing import Dict, Iterable, Iterator, Text, Tuple
 
 _SIMILARITIES: Dict[Tuple[Text, Text], float] = dict()
 
@@ -71,25 +71,41 @@ def _compare_same_length(a: Text, b: Text) -> float:
     return sum(_compare_char(i, j) for i, j in zip(a, b)) / len(a)
 
 
-def _iter_padded(v: Text, size: int) -> Iterator[Text]:
+def fill(
+    v: Text,
+    size: int,
+    *,
+    start: int = 0,
+    char: Text = " ",
+) -> Iterator[Text]:
+    """Fill text by given character to reach expected size.
+
+    Args:
+        v (Text): text
+        size (int): expected size
+        start (int, optional): fill start index. Defaults to 0.
+        char (Text, optional): character to fill. Defaults to "".
+
+    Yields:
+        Iterator[Text]: All possible fill solutions.
+    """
+    assert len(char) == 1, char
+    if size < len(v):
+        return
     if size == len(v):
         yield v
         return
     assert size > len(v)
-    for i in range(len(v) + 1):
-        yield from _iter_padded(v[:i] + " " + v[i:], size)
-
-
-T = TypeVar("T")
-
-
-def _distinct(v: Iterator[T]) -> Iterator[T]:
-    s: Set[T] = set()
-    for i in v:
-        if i in s:
+    for i in range(start, len(v) + 1):
+        # skip duplicated result
+        if i > 0 and v[i - 1] == char:
             continue
-        yield i
-        s.add(i)
+        yield from fill(
+            v[:i] + char + v[i:],
+            size,
+            start=i,
+            char=char,
+        )
 
 
 def compare(a: Text, b: Text, *, max_missing_chars: int = 5) -> float:
@@ -101,8 +117,8 @@ def compare(a: Text, b: Text, *, max_missing_chars: int = 5) -> float:
     return max(
         _compare_same_length(i, j)
         for i, j in itertools.product(
-            _distinct(_iter_padded(a, size)),
-            _distinct(_iter_padded(b, size)),
+            fill(a, size),
+            fill(b, size),
         )
     )
 

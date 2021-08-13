@@ -1,6 +1,24 @@
 from . import texttools
 
 
+def test_fill():
+    assert list(texttools.fill("ab", 1)) == []
+    assert list(texttools.fill("a", 1)) == ["a"]
+    assert list(texttools.fill("a", 2)) == [" a", "a "]
+    assert list(texttools.fill("a", 3)) == ["  a", " a ", "a  "]
+    assert list(texttools.fill("a", 4)) == ["   a", "  a ", " a  ", "a   "]
+
+    assert list(texttools.fill("ab", 3)) == [" ab", "a b", "ab "]
+    assert list(texttools.fill("ab", 4)) == [
+        "  ab",
+        " a b",
+        " ab ",
+        "a  b",
+        "a b ",
+        "ab  ",
+    ]
+
+
 def test_compare():
     assert texttools.compare("", "") == 1
     assert texttools.compare("", "a") == 0
