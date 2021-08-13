@@ -76,7 +76,7 @@ def _label(image_hash: Text, value: Text) -> None:
         csv.writer(f).writerow((image_hash, value))
 
 
-_PREVIEW_PADDING = 0
+_PREVIEW_PADDING = 4
 
 
 def _pad_img(img: np.ndarray, padding: int = _PREVIEW_PADDING) -> np.ndarray:
