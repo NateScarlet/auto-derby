@@ -80,7 +80,7 @@ class config:
 
     on_limited_sale = lambda: terminal.pause(
         "Please handle limited shop manually before confirm in terminal.\n"
-        "You can also try `limited_sale_buy_first_3` / `limited_sale_buy_everything` plugin."
+        "You can also try `limited_sale_buy_first_3` / `limited_sale_buy_everything` / `limited_sale_close` plugin."
     )
 
     on_single_mode_live: Callable[[single_mode.Context], None] = lambda *_: None
