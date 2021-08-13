@@ -6,6 +6,7 @@
         "dmmgameplayer",
         "ENOENT",
         "errno",
+        "itertools",
         "jsonl",
         "LANCZOS",
         "nargs",
