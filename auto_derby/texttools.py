@@ -84,7 +84,7 @@ def fill(
         v (Text): text
         size (int): expected size
         start (int, optional): fill start index. Defaults to 0.
-        char (Text, optional): character to fill. Defaults to "".
+        char (Text, optional): character to fill. Defaults to " ".
 
     Yields:
         Iterator[Text]: All possible fill solutions.
