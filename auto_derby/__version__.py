@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.4.0"
-RELEASE_DATE = datetime.fromtimestamp(1628915881)
-LAST_GIT_COMMIT_DESCRIBE = "v1.3.0-22-gd9ab5ec"
-LAST_GIT_COMMIT_HASH = "d9ab5ec0027aa618e9ef8a54d51a41927a8466b2"
+VERSION = "1.4.1"
+RELEASE_DATE = datetime.fromtimestamp(1628925886)
+LAST_GIT_COMMIT_DESCRIBE = "v1.4.0-4-g18727ef"
+LAST_GIT_COMMIT_HASH = "18727ef7c2960c9ee216103784bb7b514a29aa37"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1628915708)
-LAST_GIT_COMMIT_SUBJECT = "docs: update README.md"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1628925852)
+LAST_GIT_COMMIT_SUBJECT = "fix: version check response outdated"
 LAST_GIT_COMMIT_BODY = ""
