@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.4.1"
-RELEASE_DATE = datetime.fromtimestamp(1628925886)
-LAST_GIT_COMMIT_DESCRIBE = "v1.4.0-4-g18727ef"
-LAST_GIT_COMMIT_HASH = "18727ef7c2960c9ee216103784bb7b514a29aa37"
+VERSION = "1.4.2"
+RELEASE_DATE = datetime.fromtimestamp(1628926789)
+LAST_GIT_COMMIT_DESCRIBE = "v1.4.1-1-gb436929"
+LAST_GIT_COMMIT_HASH = "b436929e2b318b39375ddab5db818d0c9527fe3a"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1628925852)
-LAST_GIT_COMMIT_SUBJECT = "fix: version check response outdated"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1628926479)
+LAST_GIT_COMMIT_SUBJECT = "fix: should not notify when local version is newer"
 LAST_GIT_COMMIT_BODY = ""
