@@ -7,7 +7,7 @@ from __future__ import annotations
 import http.client
 import urllib.request
 import webbrowser
-from typing import Text
+from typing import Text, Tuple
 
 import cast_unknown as cast
 import win32con
@@ -21,19 +21,27 @@ _CHANGELOG_URL = "https://github.com/NateScarlet/auto-derby/blob/master/CHANGELO
 
 def latest() -> Text:
     # Use `requests` if we have more http related feature
-    req = urllib.request.Request(_VERSION_URL)
-    # server may returns cached value with Accept-Encoding: identity
-    req.add_header("Accept-Encoding", "gzip, deflate")
     resp = cast.instance(
-        urllib.request.urlopen(req),
+        urllib.request.urlopen(_VERSION_URL),
         http.client.HTTPResponse,
     )
     return cast.text(resp.read())
 
 
+def parse(v: Text) -> Tuple[int, int, int, Text]:
+    main, *extras = v.split("-")
+    if main.count(".") != 2:
+        return 0, 0, 0, v
+    if main.startswith("v"):
+        main = main[1:]
+    extra = "-".join(extras)
+    major, minor, patch = main.split(".")
+    return int(major), int(minor), int(patch), extra
+
+
 def check_update() -> None:
     latest_version = latest()
-    if latest_version == VERSION:
+    if parse(latest_version) <= parse(VERSION):
         return
 
     def on_close(res: int):
