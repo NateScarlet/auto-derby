@@ -33,5 +33,5 @@ def buy_first_n(n: int) -> None:
         action.tap(pos)
 
 
-def close() -> None:
+def ignore() -> None:
     action.wait_tap_image(templates.CANCEL_BUTTON)
