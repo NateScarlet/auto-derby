@@ -44,7 +44,7 @@ _define_rule(22, "寒椿賞", _ACTION_PICK)
 _define_rule(21, "カトレア賞", _ACTION_PICK)
 
 # 小倉
-_define_rule(38, "阿蘇ステークス", _ACTION_PICK)
+_define_rule(38, "阿蘇ステークス", _ACTION_MORE)
 # 北海道
 _define_rule(62, "エルムステークス", _ACTION_PICK)
 
