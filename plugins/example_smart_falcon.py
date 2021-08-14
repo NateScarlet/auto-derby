@@ -42,7 +42,11 @@ _define_rule(19, "なでしこ賞", _ACTION_MORE)
 _define_rule(20, "オキザリス賞", _ACTION_MORE)
 _define_rule(22, "寒椿賞", _ACTION_PICK)
 _define_rule(21, "カトレア賞", _ACTION_PICK)
+
+# 小倉
 _define_rule(38, "阿蘇ステークス", _ACTION_PICK)
+# 北海道
+_define_rule(62, "エルムステークス", _ACTION_PICK)
 
 
 class Plugin(auto_derby.Plugin):
