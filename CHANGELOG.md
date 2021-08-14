@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/NateScarlet/auto-derby/compare/v1.3.0...v1.4.0) (2021-08-14)
+
+### Features
+
+- **plugin:** add limited_sale_close plugin ([26cfc6e](https://github.com/NateScarlet/auto-derby/commit/26cfc6e9c0667e268c3fc27d658413291769dec7)), closes [#142](https://github.com/NateScarlet/auto-derby/issues/142)
+
+### Bug Fixes
+
+- **launcher:** error when rotate debug data ([43cd9fb](https://github.com/NateScarlet/auto-derby/commit/43cd9fbf4425b7a9c6d1463c17f004eea634ed67))
+- **single-mode:** can not recognize class detail button ([5422f0b](https://github.com/NateScarlet/auto-derby/commit/5422f0b7f880d09902ee1c07955d7d2f5113ef2e)), closes [#135](https://github.com/NateScarlet/auto-derby/issues/135)
+- **single-mode:** can not recognize race menu ([8f16a38](https://github.com/NateScarlet/auto-derby/commit/8f16a384620fe6e0bea006cd87c1947fd124c5cd))
+
+### Performance
+
+- **launcher:** delete old files after script start ([3050e55](https://github.com/NateScarlet/auto-derby/commit/3050e55b9ce52e391add94b521a78c112cec4240))
+
 ## [1.3.0](https://github.com/NateScarlet/auto-derby/compare/v1.2.2...v1.3.0) (2021-08-07)
 
 ### Features

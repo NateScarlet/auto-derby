@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.3.0"
-RELEASE_DATE = datetime.fromtimestamp(1628313560)
-LAST_GIT_COMMIT_DESCRIBE = "v1.2.2-5-g50e2a4b"
-LAST_GIT_COMMIT_HASH = "50e2a4b3aff6f1c277f3778dd58bec04c0398ebd"
+VERSION = "1.4.0"
+RELEASE_DATE = datetime.fromtimestamp(1628915881)
+LAST_GIT_COMMIT_DESCRIBE = "v1.3.0-22-gd9ab5ec"
+LAST_GIT_COMMIT_HASH = "d9ab5ec0027aa618e9ef8a54d51a41927a8466b2"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1628313123)
-LAST_GIT_COMMIT_SUBJECT = "feat(launcher): only keep debug data for recent 4 runs"
-LAST_GIT_COMMIT_BODY = "resolve #134"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1628915708)
+LAST_GIT_COMMIT_SUBJECT = "docs: update README.md"
+LAST_GIT_COMMIT_BODY = ""
