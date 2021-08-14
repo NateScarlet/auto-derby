@@ -21,8 +21,11 @@ _CHANGELOG_URL = "https://github.com/NateScarlet/auto-derby/blob/master/CHANGELO
 
 def latest() -> Text:
     # Use `requests` if we have more http related feature
+    req = urllib.request.Request(_VERSION_URL)
+    # server may returns cached value with Accept-Encoding: identity
+    req.add_header("Accept-Encoding", "gzip, deflate")
     resp = cast.instance(
-        urllib.request.urlopen(_VERSION_URL),
+        urllib.request.urlopen(req),
         http.client.HTTPResponse,
     )
     return cast.text(resp.read())
