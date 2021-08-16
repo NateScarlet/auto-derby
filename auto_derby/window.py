@@ -191,6 +191,15 @@ _WIN32_WINNT = _win_ver()
 PW_CLIENT_ONLY = 1 << 0
 # https://stackoverflow.com/a/40042587
 PW_RENDERFULLCONTENT = 1 << 1 if _WIN32_WINNT >= _WIN32_WINNT_WINBLUE else 0
+if PW_RENDERFULLCONTENT == 0:
+    LOGGER.info(
+        (
+            "background screenshot not work before windows8.1, "
+            "will use legacy screenshot."
+        )
+    )
+    g.use_legacy_screenshot = True
+
 
 # https://stackoverflow.com/a/24352388
 def screenshot_print_window(h_wnd: int) -> PIL.Image.Image:
