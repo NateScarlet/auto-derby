@@ -623,7 +623,7 @@ class Race:
                     (46, 25000),
                     # valentine
                     (50, 60000),
-                    # chrisman's
+                    # christmas
                     (71, 120000),
                 ),
             ),
