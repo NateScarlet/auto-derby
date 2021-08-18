@@ -34,6 +34,7 @@ def test_update_by_training_scene():
     assert partner1.level == 4
     assert partner1.has_hint == False
 
+
 def test_update_by_training_scene_2():
     img = (
         PIL.Image.open(_TEST_DATA_PATH / "training_scene_2.png")
@@ -144,6 +145,7 @@ def test_update_by_training_scene_6():
         assert partner1.type == Partner.TYPE_SPEED
         assert partner1.level == 5
         assert partner1.has_hint == False
+
 
 def test_update_by_training_scene_7():
     with _test.screenshot("training_scene_7.png") as img:
