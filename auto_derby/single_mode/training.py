@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import Dict, Iterator, Optional, Tuple, Type
+from typing import Dict, Iterator, Optional, Text, Tuple, Type
 
 import cast_unknown as cast
 import cv2
@@ -146,15 +146,18 @@ class Partner:
         self.icon_bbox = (0, 0, 0, 0)
 
     def __str__(self):
-        type_text = {
+        return f"Partner<type={self.type_text(self.type)} lv={self.level} icon_bbox={self.icon_bbox}>"
+
+    @staticmethod
+    def type_text(v: int) -> Text:
+        return {
             Partner.TYPE_SPEED: "spd",
             Partner.TYPE_STAMINA: "sta",
             Partner.TYPE_POWER: "pow",
             Partner.TYPE_GUTS: "gut",
             Partner.TYPE_WISDOM: "wis",
             Partner.TYPE_OTHER: "oth",
-        }.get(self.type, str(self.type))
-        return f"Partner<type={type_text}  lv={self.level} icon={self.icon_bbox}>"
+        }.get(v, f"unknown({v})")
 
     @staticmethod
     def _recognize_type_color(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
@@ -381,6 +384,9 @@ class Training:
             ("wis", self.wisdom),
             ("ski", self.skill),
         )
+        partner_text = ",".join(
+            f"{i.type_text(i.type)}@{i.level}" for i in self.partners
+        )
         return (
             "Training<"
             f"lv={self.level} "
@@ -393,6 +399,7 @@ class Training:
                     if value
                 )
             )
+            + (f" ptn={partner_text}" if partner_text else "")
             + ">"
         )
 
