@@ -143,10 +143,14 @@ class Partner:
     def __init__(self):
         self.level = 0
         self.type = 0
+        self.has_hint = False
         self.icon_bbox = (0, 0, 0, 0)
 
     def __str__(self):
-        return f"Partner<type={self.type_text(self.type)} lv={self.level} icon_bbox={self.icon_bbox}>"
+        return (
+            f"Partner<type={self.type_text(self.type)} lv={self.level} "
+            f"hint={self.has_hint} icon_bbox={self.icon_bbox}>)"
+        )
 
     def score(self, ctx: Context) -> float:
         if self.type == self.TYPE_OTHER:
@@ -187,6 +191,16 @@ class Partner:
             if imagetools.compare_color(icon_img.getpixel(type_pos), color) > 0.8:
                 return v
         return Partner.TYPE_OTHER
+
+    @staticmethod
+    def _recognize_has_hint(rp: mathtools.ResizeProxy, icon_img: Image) -> bool:
+        bbox = rp.vector4((50, 0, 58, 8), 540)
+        hint_mark_color = (127, 67, 255)
+        hint_mark_img = icon_img.crop(bbox)
+        hint_mask = imagetools.constant_color_key(
+            imagetools.cv_image(hint_mark_img), hint_mark_color
+        )
+        return np.average(hint_mask) > 200
 
     @staticmethod
     def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
@@ -268,16 +282,18 @@ class Partner:
     ) -> Optional[Partner]:
         rp = mathtools.ResizeProxy(img.width)
         icon_img = img.crop(bbox)
+        if os.getenv("DEBUG") == __name__:
+            cv2.imshow("icon_img", imagetools.cv_image(icon_img))
+            cv2.waitKey()
+            cv2.destroyAllWindows()
         level = cls._recognize_level(rp, icon_img)
         if level < 0:
             return None
         self = cls()
         self.icon_bbox = bbox
         self.level = level
-        self.type = cls._recognize_type_color(
-            rp,
-            icon_img,
-        )
+        self.has_hint = cls._recognize_has_hint(rp, icon_img)
+        self.type = cls._recognize_type_color(rp, icon_img)
         LOGGER.debug("partner: %s", self)
         return self
 

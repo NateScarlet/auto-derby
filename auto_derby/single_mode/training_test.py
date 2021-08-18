@@ -32,7 +32,7 @@ def test_update_by_training_scene():
     (partner1,) = training.partners
     assert partner1.type == Partner.TYPE_SPEED
     assert partner1.level == 4
-
+    assert partner1.has_hint == False
 
 def test_update_by_training_scene_2():
     img = (
@@ -55,10 +55,13 @@ def test_update_by_training_scene_2():
     (partner1, partner2, partner3) = training.partners
     assert partner1.type == Partner.TYPE_OTHER
     assert partner1.level == 4
+    assert partner1.has_hint == False
     assert partner2.type == Partner.TYPE_SPEED
     assert partner2.level == 5
+    assert partner2.has_hint == False
     assert partner3.type == Partner.TYPE_WISDOM
     assert partner3.level == 5
+    assert partner3.has_hint == False
 
 
 def test_update_by_training_scene_3():
@@ -82,6 +85,7 @@ def test_update_by_training_scene_3():
     (partner1,) = training.partners
     assert partner1.type == Partner.TYPE_STAMINA
     assert partner1.level == 5
+    assert partner1.has_hint == False
 
 
 def test_update_by_training_scene_4():
@@ -105,6 +109,7 @@ def test_update_by_training_scene_4():
     (partner1,) = training.partners
     assert partner1.type == Partner.TYPE_SPEED
     assert partner1.level == 5
+    assert partner1.has_hint == True
 
 
 def test_update_by_training_scene_5():
@@ -138,7 +143,7 @@ def test_update_by_training_scene_6():
         (partner1,) = training.partners
         assert partner1.type == Partner.TYPE_SPEED
         assert partner1.level == 5
-
+        assert partner1.has_hint == False
 
 def test_update_by_training_scene_7():
     with _test.screenshot("training_scene_7.png") as img:
@@ -156,12 +161,16 @@ def test_update_by_training_scene_7():
         partner1, partner2, partner3, partner4 = training.partners
         assert partner1.type == Partner.TYPE_WISDOM
         assert partner1.level == 5
+        assert partner1.has_hint == False
         assert partner2.type == Partner.TYPE_POWER
         assert partner2.level == 5
+        assert partner2.has_hint == False
         assert partner3.type == Partner.TYPE_POWER
         assert partner3.level == 3
+        assert partner3.has_hint == False
         assert partner4.type == Partner.TYPE_POWER
         assert partner4.level == 3
+        assert partner4.has_hint == False
 
 
 def test_update_by_training_scene_8():
@@ -180,10 +189,13 @@ def test_update_by_training_scene_8():
         partner1, partner2, partner3 = training.partners
         assert partner1.type == Partner.TYPE_OTHER
         assert partner1.level == 1
+        assert partner1.has_hint == False
         assert partner2.type == Partner.TYPE_POWER
         assert partner2.level == 4
+        assert partner2.has_hint == False
         assert partner3.type == Partner.TYPE_POWER
         assert partner3.level == 2
+        assert partner3.has_hint == False
 
 
 def test_update_by_training_scene_issue9():
@@ -207,6 +219,7 @@ def test_update_by_training_scene_issue9():
     (partner1,) = training.partners
     assert partner1.type == Partner.TYPE_SPEED
     assert partner1.level == 2
+    assert partner1.has_hint == False
 
 
 def test_update_by_training_scene_issue24():
@@ -250,6 +263,7 @@ def test_update_by_training_scene_issue51():
     (partner1,) = training.partners
     assert partner1.type == Partner.TYPE_SPEED
     assert partner1.level == 5
+    assert partner1.has_hint == False
 
 
 def test_update_by_training_scene_issue55():
@@ -269,8 +283,10 @@ def test_update_by_training_scene_issue55():
     (partner1, partner2) = training.partners
     assert partner1.type == Partner.TYPE_SPEED
     assert partner1.level == 5
+    assert partner1.has_hint == False
     assert partner2.type == Partner.TYPE_WISDOM
     assert partner2.level == 3
+    assert partner2.has_hint == False
 
 
 def test_update_by_training_scene_issue130():
@@ -289,6 +305,7 @@ def test_update_by_training_scene_issue130():
     (partner1,) = training.partners
     assert partner1.type == Partner.TYPE_POWER
     assert partner1.level == 3
+    assert partner1.has_hint == False
 
 
 def benchmark_from_training_scene():
