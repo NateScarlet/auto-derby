@@ -415,7 +415,8 @@ class Training:
             ("ski", self.skill),
         )
         partner_text = ",".join(
-            f"{i.type_text(i.type)}@{i.level}" for i in self.partners
+            f"{i.type_text(i.type)}@{i.level}{'!' if i.has_hint else ''}"
+            for i in self.partners
         )
         return (
             "Training<"
@@ -525,8 +526,10 @@ class Training:
         elif self.level > target_level:
             target_level_score -= (self.level - target_level) * 5
 
+        has_hint = any(i for i in self.partners if i.has_hint)
+        hint = 3 if has_hint else 0
         return (
-            spd + sta + pow + per + int_ + skill + partner + target_level_score
+            spd + sta + pow + per + int_ + skill + partner + target_level_score + hint
         ) * success_rate
 
 
