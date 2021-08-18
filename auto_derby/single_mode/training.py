@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import Dict, Tuple, Type
+from typing import Dict, Iterator, Optional, Tuple, Type
 
 import cast_unknown as cast
 import cv2
@@ -132,6 +132,158 @@ def _recognize_level(rgb_color: Tuple[int, ...]) -> int:
     raise ValueError("_recognize_level: unknown level color: %s" % (rgb_color,))
 
 
+class Partner:
+    TYPE_SPEED: int = 1
+    TYPE_STAMINA: int = 2
+    TYPE_POWER: int = 3
+    TYPE_GUTS: int = 4
+    TYPE_WISDOM: int = 5
+    TYPE_OTHER: int = 6
+
+    def __init__(self):
+        self.level = 0
+        self.type = 0
+        self.icon_bbox = (0, 0, 0, 0)
+
+    def __str__(self):
+        type_text = {
+            Partner.TYPE_SPEED: "spd",
+            Partner.TYPE_STAMINA: "sta",
+            Partner.TYPE_POWER: "pow",
+            Partner.TYPE_GUTS: "gut",
+            Partner.TYPE_WISDOM: "wis",
+            Partner.TYPE_OTHER: "oth",
+        }.get(self.type, str(self.type))
+        return f"Partner<type={type_text}  lv={self.level} icon={self.icon_bbox}>"
+
+    @staticmethod
+    def _recognize_type_color(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
+        type_pos = rp.vector2((7, 18), 540)
+        type_colors = (
+            ((36, 170, 255), Partner.TYPE_SPEED),
+            ((255, 106, 86), Partner.TYPE_STAMINA),
+            ((255, 151, 27), Partner.TYPE_POWER),
+            ((255, 96, 156), Partner.TYPE_GUTS),
+            ((3, 191, 126), Partner.TYPE_WISDOM),
+        )
+        for color, v in type_colors:
+            if imagetools.compare_color(icon_img.getpixel(type_pos), color) > 0.8:
+                return v
+        return Partner.TYPE_OTHER
+
+    @staticmethod
+    def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
+        pos = (
+            rp.vector2((10, 65), 540),  # level 1
+            rp.vector2((20, 65), 540),  # level 2
+            rp.vector2((33, 65), 540),  # level 3
+            rp.vector2((43, 65), 540),  # level 4
+            rp.vector2((55, 65), 540),  # level 5
+        )
+        colors = (
+            (109, 108, 119),  # empty
+            (42, 192, 255),  # level 1
+            (42, 192, 255),  # level 2
+            (162, 230, 30),  # level 3
+            (255, 173, 30),  # level 4
+            (255, 235, 120),  # level 5
+        )
+        spec: Tuple[Tuple[Tuple[Tuple[int, int], Tuple[int, int, int]], ...], ...] = (
+            # level 0
+            (
+                (pos[0], colors[0]),
+                (pos[1], colors[0]),
+                (pos[2], colors[0]),
+                (pos[3], colors[0]),
+                (pos[4], colors[0]),
+            ),
+            # level 1
+            (
+                (pos[0], colors[1]),
+                (pos[1], colors[0]),
+                (pos[2], colors[0]),
+                (pos[3], colors[0]),
+                (pos[4], colors[0]),
+            ),
+            # level 2
+            (
+                (pos[0], colors[2]),
+                (pos[1], colors[2]),
+                (pos[3], colors[0]),
+                (pos[4], colors[0]),
+            ),
+            # level 3
+            (
+                (pos[0], colors[3]),
+                (pos[1], colors[3]),
+                (pos[2], colors[3]),
+                (pos[4], colors[0]),
+            ),
+            # level 4
+            (
+                (pos[0], colors[4]),
+                (pos[1], colors[4]),
+                (pos[2], colors[4]),
+                (pos[3], colors[4]),
+            ),
+            # level 5
+            (
+                (pos[0], colors[5]),
+                (pos[4], colors[5]),
+            ),
+        )
+
+        for level, s in enumerate(spec):
+            if all(
+                imagetools.compare_color(
+                    icon_img.getpixel(pos),
+                    color,
+                )
+                > 0.9
+                for pos, color in s
+            ):
+                return level
+        return -1
+
+    @classmethod
+    def _from_training_scene_icon(
+        cls, img: Image, bbox: Tuple[int, int, int, int]
+    ) -> Optional[Partner]:
+        rp = mathtools.ResizeProxy(img.width)
+        icon_img = img.crop(bbox)
+        level = cls._recognize_level(rp, icon_img)
+        if level < 0:
+            return None
+        self = cls()
+        self.icon_bbox = bbox
+        self.level = level
+        self.type = cls._recognize_type_color(
+            rp,
+            icon_img,
+        )
+        LOGGER.debug("partner: %s", self)
+        return self
+
+    @classmethod
+    def from_training_scene(cls, img: Image) -> Iterator[Partner]:
+        rp = mathtools.ResizeProxy(img.width)
+
+        icon_bbox = rp.vector4((448, 146, 516, 220), 540)
+        icon_y_offset = rp.vector(90, 540)
+        icons_bottom = rp.vector(578, 540)
+        while icon_bbox[2] < icons_bottom:
+            v = cls._from_training_scene_icon(img, icon_bbox)
+            if not v:
+                break
+            yield v
+            icon_bbox = (
+                icon_bbox[0],
+                icon_bbox[1] + icon_y_offset,
+                icon_bbox[2],
+                icon_bbox[3] + icon_y_offset,
+            )
+
+
 class Training:
     TYPE_SPEED: int = 1
     TYPE_STAMINA: int = 2
@@ -164,6 +316,7 @@ class Training:
         # self.friendship: int = 0
         # self.failure_rate: float = 0.0
         self.confirm_position: Tuple[int, int] = (0, 0)
+        self.partners: Tuple[Partner, ...] = tuple()
 
     @classmethod
     def from_training_scene(cls, img: Image) -> Training:
@@ -215,6 +368,7 @@ class Training:
         self.guts = _ocr_training_effect(img.crop(rp.vector4((237, t, 309, b), 466)))
         self.wisdom = _ocr_training_effect(img.crop(rp.vector4((309, t, 382, b), 466)))
         self.skill = _ocr_training_effect(img.crop(rp.vector4((387, t, 450, b), 466)))
+        self.partners = tuple(Partner.from_training_scene(img))
         return self
 
     def __str__(self):

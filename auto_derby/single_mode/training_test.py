@@ -6,7 +6,7 @@ from pathlib import Path
 import PIL.Image
 
 from . import _test
-from .training import Training
+from .training import Partner, Training
 
 _TEST_DATA_PATH = Path(__file__).parent / "test_data"
 
@@ -28,6 +28,11 @@ def test_update_by_training_scene():
     assert training.wisdom == 0
     assert training.skill == 3
 
+    assert len(training.partners) == 1
+    (partner1,) = training.partners
+    assert partner1.type == Partner.TYPE_SPEED
+    assert partner1.level == 4
+
 
 def test_update_by_training_scene_2():
     img = (
@@ -45,6 +50,15 @@ def test_update_by_training_scene_2():
     assert training.guts == 0
     assert training.wisdom == 24
     assert training.skill == 8
+
+    assert len(training.partners) == 3, len(training.partners)
+    (partner1, partner2, partner3) = training.partners
+    assert partner1.type == Partner.TYPE_OTHER
+    assert partner1.level == 4
+    assert partner2.type == Partner.TYPE_SPEED
+    assert partner2.level == 5
+    assert partner3.type == Partner.TYPE_WISDOM
+    assert partner3.level == 5
 
 
 def test_update_by_training_scene_3():
@@ -64,6 +78,11 @@ def test_update_by_training_scene_3():
     assert training.wisdom == 0
     assert training.skill == 2
 
+    assert len(training.partners) == 1, len(training.partners)
+    (partner1,) = training.partners
+    assert partner1.type == Partner.TYPE_STAMINA
+    assert partner1.level == 5
+
 
 def test_update_by_training_scene_4():
     img = (
@@ -82,6 +101,11 @@ def test_update_by_training_scene_4():
     assert training.wisdom == 0
     assert training.skill == 2
 
+    assert len(training.partners) == 1, len(training.partners)
+    (partner1,) = training.partners
+    assert partner1.type == Partner.TYPE_SPEED
+    assert partner1.level == 5
+
 
 def test_update_by_training_scene_5():
     with _test.screenshot("training_scene_5.png") as img:
@@ -95,6 +119,8 @@ def test_update_by_training_scene_5():
         assert training.wisdom == 13
         assert training.skill == 4
 
+        assert len(training.partners) == 0, len(training.partners)
+
 
 def test_update_by_training_scene_6():
     with _test.screenshot("training_scene_6.png") as img:
@@ -107,6 +133,57 @@ def test_update_by_training_scene_6():
         assert training.guts == 0
         assert training.wisdom == 0
         assert training.skill == 3
+
+        assert len(training.partners) == 1, len(training.partners)
+        (partner1,) = training.partners
+        assert partner1.type == Partner.TYPE_SPEED
+        assert partner1.level == 5
+
+
+def test_update_by_training_scene_7():
+    with _test.screenshot("training_scene_7.png") as img:
+        training = Training.from_training_scene(img)
+        assert training.type == training.TYPE_STAMINA
+        assert training.level == 5
+        assert training.speed == 0
+        assert training.stamina == 15
+        assert training.power == 0
+        assert training.guts == 6
+        assert training.wisdom == 0
+        assert training.skill == 2
+
+        assert len(training.partners) == 4
+        partner1, partner2, partner3, partner4 = training.partners
+        assert partner1.type == Partner.TYPE_WISDOM
+        assert partner1.level == 5
+        assert partner2.type == Partner.TYPE_POWER
+        assert partner2.level == 5
+        assert partner3.type == Partner.TYPE_POWER
+        assert partner3.level == 3
+        assert partner4.type == Partner.TYPE_POWER
+        assert partner4.level == 3
+
+
+def test_update_by_training_scene_8():
+    with _test.screenshot("training_scene_8.png") as img:
+        training = Training.from_training_scene(img)
+        assert training.type == training.TYPE_STAMINA
+        assert training.level == 1
+        assert training.speed == 0
+        assert training.stamina == 15
+        assert training.power == 0
+        assert training.guts == 6
+        assert training.wisdom == 0
+        assert training.skill == 3
+
+        assert len(training.partners) == 3, len(training.partners)
+        partner1, partner2, partner3 = training.partners
+        assert partner1.type == Partner.TYPE_OTHER
+        assert partner1.level == 1
+        assert partner2.type == Partner.TYPE_POWER
+        assert partner2.level == 4
+        assert partner3.type == Partner.TYPE_POWER
+        assert partner3.level == 2
 
 
 def test_update_by_training_scene_issue9():
@@ -126,6 +203,11 @@ def test_update_by_training_scene_issue9():
     assert training.wisdom == 0
     assert training.skill == 2
 
+    assert len(training.partners) == 1, len(training.partners)
+    (partner1,) = training.partners
+    assert partner1.type == Partner.TYPE_SPEED
+    assert partner1.level == 2
+
 
 def test_update_by_training_scene_issue24():
     img = (
@@ -143,6 +225,8 @@ def test_update_by_training_scene_issue24():
     assert training.guts == 4
     assert training.wisdom == 0
     assert training.skill == 2
+
+    assert len(training.partners) == 0, len(training.partners)
 
 
 def test_update_by_training_scene_issue51():
@@ -162,6 +246,11 @@ def test_update_by_training_scene_issue51():
     assert training.wisdom == 0
     assert training.skill == 3
 
+    assert len(training.partners) == 1, len(training.partners)
+    (partner1,) = training.partners
+    assert partner1.type == Partner.TYPE_SPEED
+    assert partner1.level == 5
+
 
 def test_update_by_training_scene_issue55():
     img = PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue55.png").convert("RGB")
@@ -176,6 +265,13 @@ def test_update_by_training_scene_issue55():
     assert training.wisdom == 0
     assert training.skill == 4
 
+    assert len(training.partners) == 2, len(training.partners)
+    (partner1, partner2) = training.partners
+    assert partner1.type == Partner.TYPE_SPEED
+    assert partner1.level == 5
+    assert partner2.type == Partner.TYPE_WISDOM
+    assert partner2.level == 3
+
 
 def test_update_by_training_scene_issue130():
     with _test.screenshot("training_scene_issue130.png") as img:
@@ -188,6 +284,11 @@ def test_update_by_training_scene_issue130():
     assert training.guts == 0
     assert training.wisdom == 0
     assert training.skill == 2
+
+    assert len(training.partners) == 1, len(training.partners)
+    (partner1,) = training.partners
+    assert partner1.type == Partner.TYPE_POWER
+    assert partner1.level == 3
 
 
 def benchmark_from_training_scene():
