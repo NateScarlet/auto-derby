@@ -148,6 +148,20 @@ class Partner:
     def __str__(self):
         return f"Partner<type={self.type_text(self.type)} lv={self.level} icon_bbox={self.icon_bbox}>"
 
+    def score(self, ctx: Context) -> float:
+        if self.type == self.TYPE_OTHER:
+            return 2 + self.level
+        ret = mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 5),
+                (24, 3),
+                (48, 2),
+                (72, 0),
+            ),
+        )
+        return ret
+
     @staticmethod
     def type_text(v: int) -> Text:
         return {
@@ -474,23 +488,9 @@ class Training:
             ),
         )
 
-        partner_effect = 0
+        partner = 0
         for i in self.partners:
-            if i.type != i.TYPE_OTHER:
-                # already included in other attrs
-                continue
-            partner_effect = 2 + i.level
-        friendship_score = len(
-            tuple(i for i in self.partners if i.level < 4 and i.type != i.TYPE_OTHER)
-        ) * mathtools.interpolate(
-            ctx.turn_count(),
-            (
-                (0, 5),
-                (24, 3),
-                (48, 2),
-                (72, 0),
-            ),
-        )
+            partner += i.score(ctx)
 
         target_level = g.target_levels.get(self.type, self.level)
         target_level_score = 0
@@ -510,15 +510,7 @@ class Training:
             target_level_score -= (self.level - target_level) * 5
 
         return (
-            spd
-            + sta
-            + pow
-            + per
-            + int_
-            + skill
-            + partner_effect
-            + friendship_score
-            + target_level_score
+            spd + sta + pow + per + int_ + skill + partner + target_level_score
         ) * success_rate
 
 
