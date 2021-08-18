@@ -474,6 +474,12 @@ class Training:
             ),
         )
 
+        partner_effect = 0
+        for i in self.partners:
+            if i.type != i.TYPE_OTHER:
+                # already included in other attrs
+                continue
+            partner_effect = 2 + i.level
         friendship_score = len(
             tuple(i for i in self.partners if i.level < 4 and i.type != i.TYPE_OTHER)
         ) * mathtools.interpolate(
@@ -504,7 +510,15 @@ class Training:
             target_level_score -= (self.level - target_level) * 5
 
         return (
-            spd + sta + pow + per + int_ + skill + target_level_score + friendship_score
+            spd
+            + sta
+            + pow
+            + per
+            + int_
+            + skill
+            + partner_effect
+            + friendship_score
+            + target_level_score
         ) * success_rate
 
 
