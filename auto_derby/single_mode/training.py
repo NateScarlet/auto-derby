@@ -467,6 +467,18 @@ class Training:
             ),
         )
 
+        friendship_score = len(
+            tuple(i for i in self.partners if i.level < 4 and i.type != i.TYPE_OTHER)
+        ) * mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 5),
+                (24, 3),
+                (48, 2),
+                (72, 0),
+            ),
+        )
+
         target_level = g.target_levels.get(self.type, self.level)
         target_level_score = 0
         if ctx.is_summer_camp:
@@ -485,7 +497,7 @@ class Training:
             target_level_score -= (self.level - target_level) * 5
 
         return (
-            spd + sta + pow + per + int_ + skill + target_level_score
+            spd + sta + pow + per + int_ + skill + target_level_score + friendship_score
         ) * success_rate
 
 
