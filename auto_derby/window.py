@@ -8,7 +8,7 @@ import sys
 import threading
 import time
 from ctypes import windll
-from typing import Callable, Dict, Literal, Optional, Set, Text, Tuple
+from typing import Callable, Optional, Set, Text, Tuple
 
 import mouse
 import PIL.Image
@@ -18,6 +18,10 @@ import win32gui
 import win32ui
 
 LOGGER = logging.getLogger(__name__)
+
+
+class _g:
+    init_once = False
 
 
 class g:
@@ -61,13 +65,10 @@ def message_box(
     return _close
 
 
-_INIT_ONCE: Dict[Literal["value"], bool] = {"value": False}
-
-
 def init():
-    if _INIT_ONCE["value"]:
+    if _g.init_once:
         return
-    _INIT_ONCE["value"] = True
+    _g.init_once = True
     # Window size related function will returns incorrect result
     # if we don't make python process dpi aware
     # https://github.com/NateScarlet/auto-derby/issues/11

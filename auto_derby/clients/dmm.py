@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 from ctypes import windll
-from typing import Dict, Literal, Optional, Tuple
+from typing import Optional, Tuple
 
 import PIL.Image
 import PIL.ImageGrab
@@ -14,21 +14,10 @@ import win32gui
 from .client import Client
 from .. import window
 
-_INIT_ONCE: Dict[Literal["value"], bool] = {"value": False}
 
 LOGGER = logging.getLogger(__name__)
 
 _IS_ADMIN = bool(windll.shell32.IsUserAnAdmin())
-
-
-def init():
-    if _INIT_ONCE["value"]:
-        return
-    _INIT_ONCE["value"] = True
-    # Window size related function will returns incorrect result
-    # if we don't make python process dpi aware
-    # https://github.com/NateScarlet/auto-derby/issues/11
-    windll.user32.SetProcessDPIAware()
 
 
 class DMMClient(Client):
@@ -52,21 +41,10 @@ class DMMClient(Client):
         return self._height
 
     def set_size(self, width: int, height: int):
-        init()
+        window.init()
         win32gui.ShowWindow(self.h_wnd, win32con.SW_NORMAL)
-        left, top, right, bottom = win32gui.GetWindowRect(self.h_wnd)
-        _, _, w, h = win32gui.GetClientRect(self.h_wnd)
-        self._width, self._height = w, h
-        LOGGER.info("width=%s height=%s", w, h)
-        if h == height and w == width:
-            LOGGER.info("already in wanted size")
-            return
-        borderWidth = right - left - w
-        borderHeight = bottom - top - h
-        win32gui.SetWindowPos(
-            self.h_wnd, 0, left, top, width + borderWidth, height + borderHeight, 0
-        )
-        self.set_size(width, height)  # repeat until exact match
+        window.set_client_size(self.h_wnd, width, height)
+        self._width, self._height = width, height
         return
 
     def setup(self) -> None:

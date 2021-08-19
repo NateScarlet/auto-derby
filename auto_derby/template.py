@@ -7,7 +7,7 @@ import datetime as dt
 import logging
 import os
 import pathlib
-from typing import Dict, Iterator, Literal, Optional, Set, Text, Tuple, Union
+from typing import Dict, Iterator, Optional, Set, Text, Tuple, Union
 
 import cv2
 import numpy as np
@@ -20,13 +20,13 @@ LOGGER = logging.getLogger(__name__)
 
 TARGET_WIDTH = 540
 
-_CACHED_SCREENSHOT: Dict[Literal["value"], Tuple[dt.datetime, Image]] = {
-    "value": (dt.datetime.fromtimestamp(0), Image())
-}
+
+class _g:
+    cached_screenshot = (dt.datetime.fromtimestamp(0), Image())
 
 
 def invalidate_screeshot():
-    _CACHED_SCREENSHOT["value"] = (dt.datetime.fromtimestamp(0), Image())
+    _g.cached_screenshot = (dt.datetime.fromtimestamp(0), Image())
 
 
 class g:
@@ -35,7 +35,7 @@ class g:
 
 
 def screenshot(*, max_age: float = 1) -> Image:
-    cached_time, _ = _CACHED_SCREENSHOT["value"]
+    cached_time, _ = _g.cached_screenshot
     if cached_time < dt.datetime.now() - dt.timedelta(seconds=max_age):
         new_img = clients.current().screenshot()
         g.screenshot_width = new_img.width
@@ -43,8 +43,8 @@ def screenshot(*, max_age: float = 1) -> Image:
         if g.last_screenshot_save_path:
             new_img.save(g.last_screenshot_save_path)
         LOGGER.debug("screenshot")
-        _CACHED_SCREENSHOT["value"] = (dt.datetime.now(), new_img)
-    return _CACHED_SCREENSHOT["value"][1]
+        _g.cached_screenshot = (dt.datetime.now(), new_img)
+    return _g.cached_screenshot[1]
 
 
 _LOADED_TEMPLATES: Dict[Text, Image] = {}

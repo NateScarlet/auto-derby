@@ -5,13 +5,18 @@
 import hashlib
 import threading
 from pathlib import Path
-from typing import Any, Callable, Dict, Literal, Optional, Text, Tuple, Union
+from typing import Any, Callable, Literal, Optional, Text, Tuple, Union
 
 import cast_unknown as cast
 import cv2
 import cv2.img_hash
 import numpy as np
 from PIL.Image import BICUBIC, Image, fromarray
+
+
+class _g:
+    window_id = 0
+
 
 _Resample = Literal[0, 1, 2, 3, 4, 5]
 
@@ -224,15 +229,12 @@ def fill_area(
             cv2.drawContours(img, [i], -1, color, cv2.FILLED)
 
 
-_WINDOW_ID: Dict[Literal["value"], int] = {"value": 0}
-
-
 def show(img: Image, title: Text = "") -> Callable[[], None]:
 
     stop_event = threading.Event()
     stop_event.is_set()
-    _WINDOW_ID["value"] += 1
-    title = f"{title} - {_WINDOW_ID['value']}"
+    _g.window_id += 1
+    title = f"{title} - {_g.window_id}"
 
     def _run():
         cv_img = cv_image(img)

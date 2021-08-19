@@ -1,9 +1,15 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
-from abc import abstractmethod, ABC
-from typing import Dict, Literal, Tuple
+
+from abc import ABC, abstractmethod
+from typing import Tuple
+
 import PIL.Image
+
+
+class _g:
+    current_client: Client
 
 
 class Client(ABC):
@@ -36,12 +42,9 @@ class Client(ABC):
         ...
 
 
-_CURRENT_CLIENT: Dict[Literal["value"], Client] = {}
-
-
 def current() -> Client:
-    return _CURRENT_CLIENT["value"]
+    return _g.current_client
 
 
 def set_current(c: Client) -> None:
-    _CURRENT_CLIENT["value"] = c
+    _g.current_client = c
