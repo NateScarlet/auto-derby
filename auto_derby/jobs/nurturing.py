@@ -40,6 +40,7 @@ def _handle_turn(ctx: Context):
         key=lambda x: x[1],
         reverse=True,
     )
+    LOGGER.info("context: %s", ctx)
     for c, s in command_with_scores:
         LOGGER.info("score:\t%2.2f:\t%s", s, c.name())
     command_with_scores[0][0].execute(ctx)
