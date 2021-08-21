@@ -1,6 +1,6 @@
 import PIL.Image
-from . import race, _test
-from .context import Context
+from .. import race, _test
+from ..context import Context
 
 
 def test_find_by_race_detail_image():

@@ -1,0 +1,262 @@
+# pyright: strict
+# -*- coding=UTF-8 -*-
+from __future__ import annotations
+
+import json
+import logging
+import os
+import warnings
+from typing import Iterator, Text, Tuple
+
+import cast_unknown as cast
+import cv2
+import numpy as np
+import PIL.Image
+import PIL.ImageOps
+
+from ... import imagetools, mathtools, ocr, template, templates
+from ..context import Context
+
+LOGGER = logging.getLogger(__name__)
+
+from .race import Race
+from .globals import g
+
+
+class _g:
+    loaded_data_path = ""
+
+
+def _iter_races():
+    with open(g.data_path, "r", encoding="utf-8") as f:
+        for line in f:
+            yield Race.new().from_dict(json.loads(line))
+
+
+def _load_legacy_json():
+    warnings.warn(
+        "json race data support will be removed at next major version, use jsonl instead",
+        DeprecationWarning,
+    )
+    with open(g.data_path, "r", encoding="utf-8") as f:
+        g.races = tuple(Race.new().from_dict(i) for i in json.load(f))
+
+
+def reload() -> None:
+    if g.data_path.endswith(".json"):
+        _load_legacy_json()
+        return
+    g.races = tuple(_iter_races())
+    _g.loaded_data_path = g.data_path
+
+
+def reload_on_demand() -> None:
+    if _g.loaded_data_path != g.data_path:
+        reload()
+
+
+def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
+    reload_on_demand()
+    year, month, half = date
+    for i in g.races:
+        if year not in i.years:
+            continue
+        if date == (1, 0, 0) and i.grade != Race.GRADE_DEBUT:
+            continue
+        if (month, half) not in ((i.month, i.half), (0, 0)):
+            continue
+        yield i
+
+
+def find(ctx: Context) -> Iterator[Race]:
+    if ctx.date[1:] == (0, 0):
+        return
+    for i in find_by_date(ctx.date):
+        if i.grade == Race.GRADE_NOT_WINNING and (
+            ctx.is_after_winning or ctx.fan_count == 1
+        ):
+            continue
+        if i.grade < Race.GRADE_NOT_WINNING and not ctx.is_after_winning:
+            continue
+        if ctx.fan_count < i.min_fan_count:
+            continue
+        # target race should be excluded when finding available race
+        if i.is_target_race(ctx):
+            continue
+        yield i
+
+
+def _recognize_fan_count(img: PIL.Image.Image) -> int:
+    cv_img = imagetools.cv_image(imagetools.resize(img.convert("L"), height=32))
+    cv_img = imagetools.level(
+        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
+    )
+    _, binary_img = cv2.threshold(cv_img, 60, 255, cv2.THRESH_BINARY_INV)
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+    text = ocr.text(imagetools.pil_image(binary_img))
+    return int(text.rstrip("人").replace(",", ""))
+
+
+def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
+    cv_img = imagetools.cv_image(imagetools.resize(img.convert("L"), height=32))
+    cv_img = imagetools.level(
+        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
+    )
+    _, binary_img = cv2.threshold(cv_img, 60, 255, cv2.THRESH_BINARY_INV)
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+    text = ocr.text(imagetools.pil_image(binary_img))
+    stadium, text = text[:2], text[2:]
+    if text[0] == "芝":
+        text = text[1:]
+        ground = Race.GROUND_TURF
+    elif text[0] == "ダ":
+        text = text[3:]
+        ground = Race.GROUND_DART
+    else:
+        raise ValueError("_recognize_spec: invalid spec: %s", text)
+
+    distance, text = int(text[:4]), text[10:]
+
+    turn, track = {
+        "左·内": (Race.TURN_LEFT, Race.TRACK_IN),
+        "右·内": (Race.TURN_RIGHT, Race.TRACK_IN),
+        "左": (Race.TURN_LEFT, Race.TRACK_MIDDLE),
+        "右": (Race.TURN_RIGHT, Race.TRACK_MIDDLE),
+        "左·外": (Race.TURN_LEFT, Race.TRACK_OUT),
+        "右·外": (Race.TURN_RIGHT, Race.TRACK_OUT),
+        "直線": (Race.TURN_NONE, Race.TRACK_MIDDLE),
+    }[text]
+
+    return stadium, ground, distance, turn, track
+
+
+def _recognize_grade(rgb_color: Tuple[int, ...]) -> Tuple[int, ...]:
+    if imagetools.compare_color((247, 209, 41), rgb_color) > 0.9:
+        # EX(URA)
+        return (Race.GRADE_G1,)
+    if imagetools.compare_color((54, 133, 228), rgb_color) > 0.8:
+        return (Race.GRADE_G1,)
+    if imagetools.compare_color((244, 85, 129), rgb_color) > 0.8:
+        return (Race.GRADE_G2,)
+    if imagetools.compare_color((57, 187, 85), rgb_color) > 0.8:
+        return (Race.GRADE_G3,)
+    if imagetools.compare_color((252, 169, 5), rgb_color) > 0.8:
+        return Race.GRADE_OP, Race.GRADE_PRE_OP
+    if imagetools.compare_color((148, 203, 8), rgb_color) > 0.8:
+        return Race.GRADE_DEBUT, Race.GRADE_NOT_WINNING
+    raise ValueError("_recognize_grade: unknown grade color: %s" % (rgb_color,))
+
+
+def _find_by_spec(
+    date: Tuple[int, int, int],
+    stadium: Text,
+    ground: int,
+    distance: int,
+    turn: int,
+    track: int,
+    no1_fan_count: int,
+    grades: Tuple[int, ...],
+):
+    full_spec = (stadium, ground, distance, turn, track, no1_fan_count)
+    for i in find_by_date(date):
+        if i.grade not in grades:
+            continue
+        if full_spec == (
+            i.stadium,
+            i.ground,
+            i.distance,
+            i.turn,
+            i.track,
+            i.fan_counts[0],
+        ):
+            yield i
+
+
+def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race:
+    rp = mathtools.ResizeProxy(screenshot.width)
+
+    grade_color_pos = rp.vector2((10, 75), 466)
+    spec_bbox = rp.vector4((27, 260, 302, 279), 466)
+    _, no1_fan_count_pos = next(
+        template.match(screenshot, templates.SINGLE_MODE_RACE_DETAIL_NO1_FAN_COUNT)
+    )
+    no1_fan_count_bbox = (
+        rp.vector(150, 466),
+        no1_fan_count_pos[1],
+        rp.vector(400, 466),
+        no1_fan_count_pos[1] + rp.vector(18, 466),
+    )
+
+    grades = _recognize_grade(
+        tuple(cast.list_(screenshot.getpixel(grade_color_pos), int))
+    )
+    stadium, ground, distance, turn, track = _recognize_spec(screenshot.crop(spec_bbox))
+    no1_fan_count = _recognize_fan_count(screenshot.crop(no1_fan_count_bbox))
+
+    full_spec = (
+        ctx.date,
+        stadium,
+        ground,
+        distance,
+        turn,
+        track,
+        no1_fan_count,
+        grades,
+    )
+    for i in _find_by_spec(*full_spec):
+        LOGGER.info("image match: %s", i)
+        return i
+
+    raise ValueError("find_by_race_details_image: no race match spec: %s", full_spec)
+
+
+def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Iterator[Race]:
+    rp = mathtools.ResizeProxy(img.width)
+    spec_bbox = rp.vector4((221, 12, 478, 32), 492)
+    no1_fan_count_bbox = rp.vector4((207, 54, 360, 72), 492)
+    grade_color_pos = rp.vector2((182, 14), 492)
+
+    stadium, ground, distance, turn, track = _recognize_spec(img.crop(spec_bbox))
+    no1_fan_count = _recognize_fan_count(img.crop(no1_fan_count_bbox))
+    grades = _recognize_grade(tuple(cast.list_(img.getpixel(grade_color_pos), int)))
+    full_spec = (
+        ctx.date,
+        stadium,
+        ground,
+        distance,
+        turn,
+        track,
+        no1_fan_count,
+        grades,
+    )
+    match_count = 0
+    for i in _find_by_spec(*full_spec):
+        LOGGER.info("image match: %s", i)
+        yield i
+        match_count += 1
+    if not match_count:
+        raise ValueError("_find_by_race_menu_item: no race match spec: %s", full_spec)
+
+
+def find_by_race_menu_image(
+    ctx: Context, screenshot: PIL.Image.Image
+) -> Iterator[Tuple[Race, Tuple[int, int]]]:
+    rp = mathtools.ResizeProxy(screenshot.width)
+    for _, pos in template.match(screenshot, templates.SINGLE_MODE_RACE_MENU_FAN_ICON):
+        _, y = pos
+        bbox = (
+            rp.vector(23, 540),
+            y - rp.vector(51, 540),
+            rp.vector(515, 540),
+            y + rp.vector(46, 540),
+        )
+        for i in _find_by_race_menu_item(ctx, screenshot.crop(bbox)):
+            yield i, pos
