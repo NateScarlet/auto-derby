@@ -35,18 +35,19 @@ class GoOutCommand(Command):
         return
 
     def score(self, ctx: Context) -> float:
-        if ctx.mood == ctx.MOOD_VERY_GOOD:
-            return 0
-        ret = 15 + ctx.turn_count() * 10 / 24
+        ret = 0
 
-        if ctx.vitality > 0.5:
-            ret *= 0.7
+        if ctx.vitality < 0.8:
+            ret += 10 + ctx.turn_count() * 10 / 24
+        if ctx.mood < ctx.MOOD_VERY_GOOD:
+            ret += (ctx.MOOD_VERY_GOOD[0] - ctx.mood[0]) * 40 * 3
+            if ctx.date[1:] in ((6, 1),):
+                ret += 10
+            if ctx.date[1:] in ((6, 2),):
+                ret += 20
+
         if ctx.turn_count() >= ctx.total_turn_count() - 2:
             ret *= 0.1
-        if ctx.date[1:] in ((6, 1),) and ctx.vitality < 0.8:
-            ret += 10
-        if ctx.date[1:] in ((6, 2),) and ctx.vitality < 0.9:
-            ret += 20
         if ctx.date in ((4, 0, 0)):
             ret -= 20
         ret += (
@@ -60,5 +61,4 @@ class GoOutCommand(Command):
             )
             * 20
         )
-        ret += (ctx.MOOD_VERY_GOOD[0] - ctx.mood[0]) * 40 * 3
         return ret
