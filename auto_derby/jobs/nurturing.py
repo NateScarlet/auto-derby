@@ -4,89 +4,24 @@ from __future__ import annotations
 
 import logging
 import time
-from concurrent import futures
 from typing import Optional
 
-import cast_unknown as cast
-
-from .. import action, config, imagetools, mathtools, template, templates, terminal
-from ..single_mode import Context, Training, event, go_out, race
+from .. import action, config, template, templates, terminal
+from ..single_mode import Context, event, go_out, race
+from ..scenes import (
+    SingleModeCommandScene as CommandScene,
+    SingleModeRaceMenuScene as RaceMenuScene,
+    SingleModeTrainingScene as TrainingScene,
+    PaddockScene,
+    RaceTurnsIncorrect,
+)
 
 LOGGER = logging.getLogger(__name__)
 
 
-_TRAINING_CONFIRM = template.Specification(
-    templates.SINGLE_MODE_TRAINING_CONFIRM, threshold=0.8
-)
-
-
-def _first_race(ctx: Context) -> race.Race:
-    action.wait_image(templates.SINGLE_MODE_RACE_MENU_FAN_ICON)
-    return next(race.find_by_race_menu_image(ctx, template.screenshot()))[0]
-
-
-def _is_race_list_scroll_to_top() -> bool:
-    rp = action.resize_proxy()
-    color = template.screenshot(max_age=0).getpixel(rp.vector2((525, 525), 540))
-    return (
-        imagetools.compare_color((123, 121, 140), tuple(cast.list_(color, int))) > 0.9
-    )
-
-
-def _stop_race_menu_scroll():
-    rp = action.resize_proxy()
-    action.tap(rp.vector2((15, 600), 540))
-
-
-def _choose_race(ctx: Context, race1: race.Race) -> None:
-    rp = action.resize_proxy()
-
-    time.sleep(0.2)  # wait animation
-    while not _is_race_list_scroll_to_top():
-        action.swipe(rp.vector2((100, 500), 466), dy=rp.vector(100, 466), duration=0.2)
-        _stop_race_menu_scroll()
-
-    while True:
-        for race2, pos in race.find_by_race_menu_image(ctx, template.screenshot()):
-            if race2 == race1:
-                action.tap(pos)
-                return
-        action.swipe(
-            rp.vector2((100, 600), 466),
-            dy=rp.vector(-50, 466),
-            duration=0.2,
-        )
-        _stop_race_menu_scroll()
-
-
-def _iter_training_images():
-    rp = action.resize_proxy()
-    radius = rp.vector(30, 540)
-    _, first_confirm_pos = action.wait_image(_TRAINING_CONFIRM)
-    yield template.screenshot()
-    for pos in (
-        rp.vector2((78, 850), 540),
-        rp.vector2((171, 850), 540),
-        rp.vector2((268, 850), 540),
-        rp.vector2((367, 850), 540),
-        rp.vector2((461, 850), 540),
-    ):
-        if mathtools.distance(first_confirm_pos, pos) < radius:
-            continue
-        action.tap(pos)
-        action.wait_image(_TRAINING_CONFIRM)
-        yield template.screenshot()
-
-
 def _handle_training(ctx: Context) -> None:
-    with futures.ThreadPoolExecutor() as pool:
-        trainings = [
-            i.result()
-            for i in [
-                pool.submit(Training.from_training_scene, j)
-                for j in _iter_training_images()
-            ]
-        ]
+    scene = TrainingScene.enter(ctx)
+    scene.recognize()
 
     races_with_score = sorted(
         ((i, i.score(ctx)) for i in race.find(ctx)),
@@ -94,7 +29,7 @@ def _handle_training(ctx: Context) -> None:
         reverse=True,
     )
 
-    trainings_with_score = [(i, i.score(ctx)) for i in trainings]
+    trainings_with_score = [(i, i.score(ctx)) for i in scene.trainings]
     trainings_with_score = sorted(
         trainings_with_score, key=lambda x: x[1], reverse=True
     )
@@ -113,30 +48,18 @@ def _handle_training(ctx: Context) -> None:
             ctx.fan_count < ctx.target_fan_count and r.estimate_order(ctx) <= 3
         ):
             # go to race
-            action.wait_tap_image(templates.RETURN_BUTTON)
-            action.wait_tap_image(templates.SINGLE_MODE_COMMAND_RACE)
-            tmpl, _ = action.wait_image(
-                templates.SINGLE_MODE_RACE_START_BUTTON,
-                templates.SINGLE_MODE_CONTINUOUS_RACE_TITLE,
-            )
-            if tmpl.name == templates.SINGLE_MODE_CONTINUOUS_RACE_TITLE:
-                if ctx.continuous_race_count() >= 3:
-                    action.wait_tap_image(templates.GREEN_OK_BUTTON)
-                else:
-                    # continuous race count incorrect, evaluate again:
-                    ctx.race_turns.update(range(ctx.turn_count() - 3, ctx.turn_count()))
-                    action.wait_tap_image(templates.CANCEL_BUTTON)
-                    action.wait_tap_image(templates.SINGLE_MODE_COMMAND_TRAINING)
-                    _handle_training(ctx)
-                    return
-            _choose_race(ctx, r)
-            _handle_race(ctx, r)
-            return
+            try:
+                scene = RaceMenuScene.enter(ctx)
+                scene.choose_race(ctx, r)
+                _handle_race(ctx, r)
+                return
+            except RaceTurnsIncorrect:
+                _handle_training(ctx)
+                return
 
     if training_score < expected_score:
         # not worth, go rest
-        action.tap_image(templates.RETURN_BUTTON)
-        action.wait_image(templates.SINGLE_MODE_COMMAND_TRAINING)
+        CommandScene.enter(ctx)
         if action.tap_image(templates.SINGLE_MODE_COMMAND_HEALTH_CARE):
             return
 
@@ -175,7 +98,7 @@ def _handle_training(ctx: Context) -> None:
             action.tap(options_with_score[0][0].position)
         return
     x, y = training.confirm_position
-    if trainings[-1] != training:
+    if scene.trainings[-1] != training:
         action.tap((x, y))
         time.sleep(0.1)
     action.tap((x, y))
@@ -205,32 +128,25 @@ def _handle_race_result():
 
 
 def _choose_running_style(ctx: Context, race1: race.Race) -> None:
+    scene = PaddockScene.enter(ctx)
     action.wait_tap_image(templates.RACE_RUNNING_STYLE_CHANGE_BUTTON)
-    rp = action.resize_proxy()
-    names = ("last", "middle", "head", "lead")
     scores = race1.style_scores(ctx)
-    button_pos = (
-        rp.vector2((60, 500), 466),
-        rp.vector2((160, 500), 466),
-        rp.vector2((260, 500), 466),
-        rp.vector2((360, 500), 466),
-    )
 
     style_scores = sorted(
-        zip(names, scores, button_pos), key=lambda x: x[1], reverse=True
+        zip(ctx.ALL_RUNING_STYLES, scores), key=lambda x: x[1], reverse=True
     )
 
-    for name, score, _ in style_scores:
-        LOGGER.info("running style score:\t%.2f:\t%s", score, name)
+    for style, score in style_scores:
+        LOGGER.info(
+            "running style score:\t%.2f:\t%s", score, ctx.runing_style_text(style)
+        )
 
-    _, pos = action.wait_image(templates.RACE_CONFIRM_BUTTON)
-    time.sleep(0.5)
-    action.tap(style_scores[0][2])
-    action.tap(pos)
+    scene.choose_runing_style(style_scores[0][0])
 
 
 def _handle_race(ctx: Context, race1: Optional[race.Race] = None):
-    race1 = race1 or _first_race(ctx)
+    scene = RaceMenuScene.enter(ctx)
+    race1 = race1 or scene.first_race(ctx)
     estimate_order = race1.estimate_order(ctx)
     if estimate_order > config.pause_if_race_order_gt:
         terminal.pause(
@@ -277,31 +193,6 @@ def _handle_option():
     action.tap_image(ALL_OPTIONS[ans - 1])
 
 
-def _update_context_by_class_menu(ctx: Context):
-    action.wait_tap_image(templates.SINGLE_MODE_CLASS_DETAIL_BUTTON)
-    time.sleep(0.2)  # wait animation
-    action.wait_image(templates.SINGLE_MODE_CLASS_DETAIL_TITLE)
-    ctx.update_by_class_detail(template.screenshot())
-    action.wait_tap_image(templates.CLOSE_BUTTON)
-
-
-def _update_context_by_status_menu(ctx: Context):
-    action.wait_tap_image(templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON)
-    time.sleep(0.2)  # wait animation
-    action.wait_image(templates.SINGLE_MODE_CHARACTER_DETAIL_TITLE)
-    ctx.update_by_character_detail(template.screenshot())
-    action.wait_tap_image(templates.CLOSE_BUTTON)
-
-
-def _update_context_by_command_scene(ctx: Context):
-    action.reset_client_size()
-    ctx.update_by_command_scene(template.screenshot(max_age=0))
-    if not ctx.fan_count:
-        _update_context_by_class_menu(ctx)
-    if ctx.turf == ctx.STATUS_NONE or ctx.date[1:] == (4, 1):
-        _update_context_by_status_menu(ctx)
-
-
 def nurturing():
     ctx = Context.new()
 
@@ -339,24 +230,18 @@ def nurturing():
             action.wait_tap_image(templates.CANCEL_BUTTON)
         elif name == templates.SINGLE_MODE_FINISH_BUTTON:
             break
-        elif name == templates.SINGLE_MODE_FORMAL_RACE_BANNER:
-            _update_context_by_command_scene(ctx)
+        elif name in (
+            templates.SINGLE_MODE_FORMAL_RACE_BANNER,
+            templates.SINGLE_MODE_URA_FINALS,
+        ):
+            ctx.scene = CommandScene()
+            ctx.scene.recognize(ctx)
             ctx.next_turn()
-            x, y = pos
-            y += 60
-            action.tap((x, y))
-            action.wait_image_disappear(tmpl)
-            if action.count_image(templates.SINGLE_MODE_CONTINUOUS_RACE_TITLE):
-                action.wait_tap_image(templates.GREEN_OK_BUTTON)
-            _handle_race(ctx)
-        elif name == templates.SINGLE_MODE_URA_FINALS:
-            _update_context_by_command_scene(ctx)
-            ctx.next_turn()
-            action.tap(pos)
             _handle_race(ctx)
         elif name == templates.SINGLE_MODE_COMMAND_TRAINING:
             time.sleep(0.2)  # wait animation
-            _update_context_by_command_scene(ctx)
+            ctx.scene = CommandScene()
+            ctx.scene.recognize(ctx)
             ctx.next_turn()
             LOGGER.info("update context: %s", ctx)
             if action.tap_image(templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER):
@@ -364,7 +249,7 @@ def nurturing():
                 _handle_race(ctx)
                 continue
 
-            action.tap(pos)
+            TrainingScene.enter(ctx)
             _handle_training(ctx)
         elif name == templates.SINGLE_MODE_OPTION1:
             _handle_option()

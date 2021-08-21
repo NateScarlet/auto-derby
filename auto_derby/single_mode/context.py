@@ -2,9 +2,13 @@
 # pyright: strict
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, Callable, List, Set, Text, Tuple, Type
+
+if TYPE_CHECKING:
+    from ..scenes import Scene
+
 import functools
 import os
-from typing import Callable, List, Set, Text, Tuple, Type
 
 import cast_unknown as cast
 import cv2
@@ -17,6 +21,7 @@ from .. import imagetools, mathtools, ocr, template, templates, texttools
 
 class g:
     context_class: Type[Context]
+    default_scene: Callable[[], Scene]
 
 
 def _ocr_date(img: Image) -> Tuple[int, int, int]:
@@ -189,6 +194,27 @@ class Context:
         STATUS_G,
     )
 
+    RUNING_STYLE_LEAD = 1
+    RUNING_STYLE_HEAD = 2
+    RUNING_STYLE_MIDDLE = 3
+    RUNING_STYLE_LAST = 4
+
+    ALL_RUNING_STYLES = (
+        RUNING_STYLE_LEAD,
+        RUNING_STYLE_HEAD,
+        RUNING_STYLE_MIDDLE,
+        RUNING_STYLE_LAST,
+    )
+
+    @classmethod
+    def runing_style_text(cls, v: int) -> Text:
+        return {
+            cls.RUNING_STYLE_LEAD: "lead",
+            cls.RUNING_STYLE_HEAD: "head",
+            cls.RUNING_STYLE_MIDDLE: "middle",
+            cls.RUNING_STYLE_LAST: "last",
+        }.get(v, f"unknown({v})")
+
     @staticmethod
     def new() -> Context:
         return g.context_class()
@@ -238,6 +264,8 @@ class Context:
         self.last = Context.STATUS_NONE
 
         self._next_turn_cb: List[Callable[[], None]] = []
+
+        self.scene = g.default_scene()
 
     def next_turn(self) -> None:
         if self.date in ((1, 0, 0), (4, 0, 0)):

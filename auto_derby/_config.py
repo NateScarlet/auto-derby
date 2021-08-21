@@ -2,16 +2,13 @@
 # pyright: strict
 
 
-from typing import Callable, Dict, Text
-from auto_derby.single_mode.training import Training
 import os
-
-from auto_derby import plugin
-
-from . import ocr, single_mode, template, window, terminal
-from .clients import ADBClient
-
 import warnings
+from typing import Callable, Dict, Text
+
+from . import ocr, plugin, scenes, single_mode, template, terminal, window
+from .clients import ADBClient
+from .single_mode.training import Training
 
 
 def _parse_training_levels(spec: Text) -> Dict[int, int]:
@@ -67,6 +64,7 @@ class config:
     single_mode_training_class = single_mode.Training
     single_mode_training_partner_class = single_mode.training.Partner
     single_mode_context_class = single_mode.Context
+    single_mode_default_scene = scenes.UnknownScene
     single_mode_go_out_option_class = single_mode.go_out.Option
     single_mode_target_training_levels = _parse_training_levels(
         os.getenv("AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS", "")
@@ -103,6 +101,7 @@ class config:
         single_mode.event.g.event_image_path = cls.single_mode_event_image_path
         single_mode.event.g.prompt_disabled = cls.single_mode_event_prompt_disabled
         single_mode.context.g.context_class = cls.single_mode_context_class
+        single_mode.context.g.default_scene = cls.single_mode_default_scene
         single_mode.go_out.g.option_class = cls.single_mode_go_out_option_class
         single_mode.race.g.data_path = cls.single_mode_race_data_path
         single_mode.race.g.race_class = cls.single_mode_race_class
