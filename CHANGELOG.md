@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/NateScarlet/auto-derby/compare/v1.4.2...v1.5.0) (2021-08-21)
+
+### Features
+
+- auto use legacy screenshot on legacy windows ([4510301](https://github.com/NateScarlet/auto-derby/commit/4510301c11c77183029f1c058844f2609500547f)), closes [#145](https://github.com/NateScarlet/auto-derby/issues/145)
+- **plugin:** allow change training partner class ([5f73cde](https://github.com/NateScarlet/auto-derby/commit/5f73cdea332f473bdd30914b973de9374f338417))
+- **plugin:** rename limited_sale_close -> limited_sale_ignore ([f2dc639](https://github.com/NateScarlet/auto-derby/commit/f2dc639eed6c153ad1c3e2e2a29e57e79c531264))
+- **single-mode:** adjust training score ([c40fda9](https://github.com/NateScarlet/auto-derby/commit/c40fda90dbbd0d1b7c99a5c4a0c1bd00fadd15c1))
+- **single-mode:** increase score when training has hint ([817abdb](https://github.com/NateScarlet/auto-derby/commit/817abdbfbe9e10eec44e625b0f38843844d6e412))
+- **single-mode:** increase training score when partner level < 4 ([ea6a325](https://github.com/NateScarlet/auto-derby/commit/ea6a32592ff588acfcd11dc21f388695b743044b))
+- **single-mode:** recognize training hint ([cff58a1](https://github.com/NateScarlet/auto-derby/commit/cff58a1dfa811d72516db07b5a8bf7ca0c97aec4))
+- **single-mode:** recognize training partner ([ae100c1](https://github.com/NateScarlet/auto-derby/commit/ae100c136b2a7fbcd577b66653f5089da8164284))
+
+### Bug Fixes
+
+- error when recognize training ([2d34537](https://github.com/NateScarlet/auto-derby/commit/2d3453793729d44d331b1e3bcd00e606968c38e1)), closes [#156](https://github.com/NateScarlet/auto-derby/issues/156)
+- **single-mode:** recognize friend type partner ([8514182](https://github.com/NateScarlet/auto-derby/commit/851418294e8cfe675541a00b65ccd0d88d5b5781))
+- **team-race:** update template for adb device ([2f265db](https://github.com/NateScarlet/auto-derby/commit/2f265db6995ebeeb69dc7d92f392f1ffc7eb1ae9)), closes [#144](https://github.com/NateScarlet/auto-derby/issues/144)
+
 ## [1.4.2](https://github.com/NateScarlet/auto-derby/compare/v1.4.1...v1.4.2) (2021-08-14)
 
 ### Bug Fixes
