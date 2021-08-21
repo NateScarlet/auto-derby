@@ -1,14 +1,13 @@
 import time
 import timeit
 from concurrent import futures
-from pathlib import Path
 
 import PIL.Image
 
-from . import _test
-from .training import Partner, Training
+from .. import _test
+from . import Partner, Training
 
-_TEST_DATA_PATH = Path(__file__).parent / "test_data"
+_TEST_DATA_PATH = _test.DATA_PATH
 
 
 def test_update_by_training_scene():
