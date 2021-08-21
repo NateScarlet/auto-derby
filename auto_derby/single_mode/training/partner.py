@@ -26,9 +26,10 @@ def _recognize_type_color(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
         ((255, 151, 27), Partner.TYPE_POWER),
         ((255, 96, 156), Partner.TYPE_GUTS),
         ((3, 191, 126), Partner.TYPE_WISDOM),
+        ((255, 179, 22), Partner.TYPE_FRIEND),
     )
     for color, v in type_colors:
-        if imagetools.compare_color(icon_img.getpixel(type_pos), color) > 0.8:
+        if imagetools.compare_color(icon_img.getpixel(type_pos), color) > 0.9:
             return v
     return Partner.TYPE_OTHER
 
@@ -123,7 +124,8 @@ class Partner:
     TYPE_POWER: int = 3
     TYPE_GUTS: int = 4
     TYPE_WISDOM: int = 5
-    TYPE_OTHER: int = 6
+    TYPE_FRIEND: int = 6
+    TYPE_OTHER: int = 7
 
     def __init__(self):
         self.level = 0
@@ -163,6 +165,7 @@ class Partner:
             Partner.TYPE_POWER: "pow",
             Partner.TYPE_GUTS: "gut",
             Partner.TYPE_WISDOM: "wis",
+            Partner.TYPE_FRIEND: "frd",
             Partner.TYPE_OTHER: "oth",
         }.get(v, f"unknown({v})")
 

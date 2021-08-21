@@ -199,6 +199,28 @@ def test_update_by_training_scene_8():
         assert partner3.has_hint == False
 
 
+def test_update_by_training_scene_9():
+    with _test.screenshot("training_scene_9.png") as img:
+        training = Training.from_training_scene(img)
+    assert training.type == training.TYPE_SPEED
+    assert training.level == 2
+    assert training.speed == 19
+    assert training.stamina == 0
+    assert training.power == 10
+    assert training.guts == 0
+    assert training.wisdom == 0
+    assert training.skill == 3
+
+    assert len(training.partners) == 2, len(training.partners)
+    partner1, partner2 = training.partners
+    assert partner1.type == Partner.TYPE_FRIEND
+    assert partner1.level == 4
+    assert partner1.has_hint == False
+    assert partner2.type == Partner.TYPE_WISDOM
+    assert partner2.level == 5
+    assert partner2.has_hint == False
+
+
 def test_update_by_training_scene_issue9():
     img = (
         PIL.Image.open(_TEST_DATA_PATH / "training_scene_issue9.png")
@@ -323,7 +345,7 @@ def test_update_by_training_scene_issue156():
 
     assert len(training.partners) == 3, len(training.partners)
     partner1, partner2, partner3 = training.partners
-    assert partner1.type == Partner.TYPE_POWER
+    assert partner1.type == Partner.TYPE_FRIEND
     assert partner1.level == 2
     assert partner1.has_hint == False
     assert partner2.type == Partner.TYPE_SPEED
