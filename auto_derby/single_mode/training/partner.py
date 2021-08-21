@@ -17,6 +17,105 @@ from ..context import Context
 _LOGGER = logging.getLogger(__name__)
 
 
+def _recognize_type_color(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
+    type_pos = rp.vector2((7, 18), 540)
+    type_colors = (
+        ((36, 170, 255), Partner.TYPE_SPEED),
+        ((255, 106, 86), Partner.TYPE_STAMINA),
+        ((255, 151, 27), Partner.TYPE_POWER),
+        ((255, 96, 156), Partner.TYPE_GUTS),
+        ((3, 191, 126), Partner.TYPE_WISDOM),
+    )
+    for color, v in type_colors:
+        if imagetools.compare_color(icon_img.getpixel(type_pos), color) > 0.8:
+            return v
+    return Partner.TYPE_OTHER
+
+
+def _recognize_has_hint(rp: mathtools.ResizeProxy, icon_img: Image) -> bool:
+    bbox = rp.vector4((50, 0, 58, 8), 540)
+    hint_mark_color = (127, 67, 255)
+    hint_mark_img = icon_img.crop(bbox)
+    hint_mask = imagetools.constant_color_key(
+        imagetools.cv_image(hint_mark_img), hint_mark_color
+    )
+    return np.average(hint_mask) > 200
+
+
+def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
+    pos = (
+        rp.vector2((10, 65), 540),  # level 1
+        rp.vector2((20, 65), 540),  # level 2
+        rp.vector2((33, 65), 540),  # level 3
+        rp.vector2((43, 65), 540),  # level 4
+        rp.vector2((55, 65), 540),  # level 5
+    )
+    colors = (
+        (109, 108, 119),  # empty
+        (42, 192, 255),  # level 1
+        (42, 192, 255),  # level 2
+        (162, 230, 30),  # level 3
+        (255, 173, 30),  # level 4
+        (255, 235, 120),  # level 5
+    )
+    spec: Tuple[Tuple[Tuple[Tuple[int, int], Tuple[int, int, int]], ...], ...] = (
+        # level 0
+        (
+            (pos[0], colors[0]),
+            (pos[1], colors[0]),
+            (pos[2], colors[0]),
+            (pos[3], colors[0]),
+            (pos[4], colors[0]),
+        ),
+        # level 1
+        (
+            (pos[0], colors[1]),
+            (pos[1], colors[0]),
+            (pos[2], colors[0]),
+            (pos[3], colors[0]),
+            (pos[4], colors[0]),
+        ),
+        # level 2
+        (
+            (pos[0], colors[2]),
+            (pos[1], colors[2]),
+            (pos[3], colors[0]),
+            (pos[4], colors[0]),
+        ),
+        # level 3
+        (
+            (pos[0], colors[3]),
+            (pos[1], colors[3]),
+            (pos[2], colors[3]),
+            (pos[4], colors[0]),
+        ),
+        # level 4
+        (
+            (pos[0], colors[4]),
+            (pos[1], colors[4]),
+            (pos[2], colors[4]),
+            (pos[3], colors[4]),
+        ),
+        # level 5
+        (
+            (pos[0], colors[5]),
+            (pos[4], colors[5]),
+        ),
+    )
+
+    for level, s in enumerate(spec):
+        if all(
+            imagetools.compare_color(
+                icon_img.getpixel(pos),
+                color,
+            )
+            > 0.9
+            for pos, color in s
+        ):
+            return level
+    return -1
+
+
 class Partner:
     TYPE_SPEED: int = 1
     TYPE_STAMINA: int = 2
@@ -62,105 +161,6 @@ class Partner:
             Partner.TYPE_OTHER: "oth",
         }.get(v, f"unknown({v})")
 
-    @staticmethod
-    def _recognize_type_color(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
-        type_pos = rp.vector2((7, 18), 540)
-        type_colors = (
-            ((36, 170, 255), Partner.TYPE_SPEED),
-            ((255, 106, 86), Partner.TYPE_STAMINA),
-            ((255, 151, 27), Partner.TYPE_POWER),
-            ((255, 96, 156), Partner.TYPE_GUTS),
-            ((3, 191, 126), Partner.TYPE_WISDOM),
-        )
-        for color, v in type_colors:
-            if imagetools.compare_color(icon_img.getpixel(type_pos), color) > 0.8:
-                return v
-        return Partner.TYPE_OTHER
-
-    @staticmethod
-    def _recognize_has_hint(rp: mathtools.ResizeProxy, icon_img: Image) -> bool:
-        bbox = rp.vector4((50, 0, 58, 8), 540)
-        hint_mark_color = (127, 67, 255)
-        hint_mark_img = icon_img.crop(bbox)
-        hint_mask = imagetools.constant_color_key(
-            imagetools.cv_image(hint_mark_img), hint_mark_color
-        )
-        return np.average(hint_mask) > 200
-
-    @staticmethod
-    def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
-        pos = (
-            rp.vector2((10, 65), 540),  # level 1
-            rp.vector2((20, 65), 540),  # level 2
-            rp.vector2((33, 65), 540),  # level 3
-            rp.vector2((43, 65), 540),  # level 4
-            rp.vector2((55, 65), 540),  # level 5
-        )
-        colors = (
-            (109, 108, 119),  # empty
-            (42, 192, 255),  # level 1
-            (42, 192, 255),  # level 2
-            (162, 230, 30),  # level 3
-            (255, 173, 30),  # level 4
-            (255, 235, 120),  # level 5
-        )
-        spec: Tuple[Tuple[Tuple[Tuple[int, int], Tuple[int, int, int]], ...], ...] = (
-            # level 0
-            (
-                (pos[0], colors[0]),
-                (pos[1], colors[0]),
-                (pos[2], colors[0]),
-                (pos[3], colors[0]),
-                (pos[4], colors[0]),
-            ),
-            # level 1
-            (
-                (pos[0], colors[1]),
-                (pos[1], colors[0]),
-                (pos[2], colors[0]),
-                (pos[3], colors[0]),
-                (pos[4], colors[0]),
-            ),
-            # level 2
-            (
-                (pos[0], colors[2]),
-                (pos[1], colors[2]),
-                (pos[3], colors[0]),
-                (pos[4], colors[0]),
-            ),
-            # level 3
-            (
-                (pos[0], colors[3]),
-                (pos[1], colors[3]),
-                (pos[2], colors[3]),
-                (pos[4], colors[0]),
-            ),
-            # level 4
-            (
-                (pos[0], colors[4]),
-                (pos[1], colors[4]),
-                (pos[2], colors[4]),
-                (pos[3], colors[4]),
-            ),
-            # level 5
-            (
-                (pos[0], colors[5]),
-                (pos[4], colors[5]),
-            ),
-        )
-
-        for level, s in enumerate(spec):
-            if all(
-                imagetools.compare_color(
-                    icon_img.getpixel(pos),
-                    color,
-                )
-                > 0.9
-                for pos, color in s
-            ):
-                return level
-        return -1
-
     @classmethod
     def _from_training_scene_icon(
         cls, img: Image, bbox: Tuple[int, int, int, int]
@@ -171,14 +171,14 @@ class Partner:
             cv2.imshow("icon_img", imagetools.cv_image(icon_img))
             cv2.waitKey()
             cv2.destroyAllWindows()
-        level = cls._recognize_level(rp, icon_img)
+        level = _recognize_level(rp, icon_img)
         if level < 0:
             return None
         self = cls()
         self.icon_bbox = bbox
         self.level = level
-        self.has_hint = cls._recognize_has_hint(rp, icon_img)
-        self.type = cls._recognize_type_color(rp, icon_img)
+        self.has_hint = _recognize_has_hint(rp, icon_img)
+        self.type = _recognize_type_color(rp, icon_img)
         _LOGGER.debug("partner: %s", self)
         return self
 
