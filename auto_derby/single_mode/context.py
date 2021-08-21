@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import functools
+import logging
 import os
 from typing import Callable, List, Set, Text, Tuple, Type
 
@@ -13,6 +14,8 @@ from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
 from .. import imagetools, mathtools, ocr, scenes, template, templates, texttools
+
+_LOGGER = logging.getLogger(__name__)
 
 
 class g:
@@ -249,6 +252,7 @@ class Context:
 
         while self._next_turn_cb:
             self._next_turn_cb.pop()()
+        _LOGGER.info("next turn: %s", self)
 
     def defer_next_turn(self, cb: Callable[[], None]) -> None:
         self._next_turn_cb.append(cb)

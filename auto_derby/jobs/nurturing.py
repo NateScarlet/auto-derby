@@ -35,7 +35,6 @@ def _handle_turn(ctx: Context):
     ctx.scene = CommandScene()
     ctx.scene.recognize(ctx)
     ctx.next_turn()
-    LOGGER.info("update context: %s", ctx)
     command_with_scores = sorted(
         ((i, i.score(ctx)) for i in commands.from_context(ctx)),
         key=lambda x: x[1],
