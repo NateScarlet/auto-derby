@@ -50,7 +50,11 @@ def _ocr_training_effect(img: Image) -> int:
     )
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
 
-    white_outline_img = imagetools.constant_color_key(sharpened_img, (255, 255, 255))
+    white_outline_img = imagetools.constant_color_key(
+        sharpened_img,
+        (255, 255, 255),
+        (234, 245, 240),
+    )
     white_outline_img = cv2.dilate(
         white_outline_img,
         cv2.getStructuringElement(
@@ -70,6 +74,7 @@ def _ocr_training_effect(img: Image) -> int:
         (30, 109, 216),
         (69, 104, 197),
         (119, 139, 224),
+        (103, 147, 223),
     )
 
     bg_mask_img = imagetools.bg_mask_by_outline(brown_outline_img)
@@ -91,7 +96,7 @@ def _ocr_training_effect(img: Image) -> int:
     assert fill_img.shape == cv_img.shape
 
     text_img = imagetools.color_key(masked_img, fill_img)
-    imagetools.fill_area(text_img, (0,), size_lt=4)
+    imagetools.fill_area(text_img, (0,), size_lt=8)
 
     text_img_extra = imagetools.constant_color_key(
         masked_img, (175, 214, 255), threshold=0.95
