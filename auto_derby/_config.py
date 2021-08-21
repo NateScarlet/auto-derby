@@ -65,6 +65,7 @@ class config:
     plugin_path = os.getenv("AUTO_DERBY_PLUGIN_PATH", "plugins")
     single_mode_race_class = single_mode.Race
     single_mode_training_class = single_mode.Training
+    single_mode_training_partner_class = single_mode.training.Partner
     single_mode_context_class = single_mode.Context
     single_mode_go_out_option_class = single_mode.go_out.Option
     single_mode_target_training_levels = _parse_training_levels(
@@ -108,6 +109,7 @@ class config:
         single_mode.training.g.image_path = cls.single_mode_training_image_path
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels
         single_mode.training.g.training_class = cls.single_mode_training_class
+        single_mode.training.g.partner_class = cls.single_mode_training_partner_class
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path
         terminal.g.prompt_sound_path = cls.terminal_prompt_sound_path

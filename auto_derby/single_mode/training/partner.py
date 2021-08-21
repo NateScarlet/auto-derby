@@ -13,6 +13,7 @@ from PIL.Image import Image
 
 from ... import mathtools
 from ..context import Context
+from .globals import g
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -151,6 +152,10 @@ class Partner:
         return ret
 
     @staticmethod
+    def new() -> Partner:
+        return g.partner_class()
+
+    @staticmethod
     def type_text(v: int) -> Text:
         return {
             Partner.TYPE_SPEED: "spd",
@@ -174,7 +179,7 @@ class Partner:
         level = _recognize_level(rp, icon_img)
         if level < 0:
             return None
-        self = cls()
+        self = cls.new()
         self.icon_bbox = bbox
         self.level = level
         self.has_hint = _recognize_has_hint(rp, icon_img)
@@ -200,3 +205,6 @@ class Partner:
                 icon_bbox[2],
                 icon_bbox[3] + icon_y_offset,
             )
+
+
+g.partner_class = Partner
