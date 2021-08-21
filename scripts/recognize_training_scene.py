@@ -14,7 +14,7 @@ if True:
 import argparse
 
 import PIL.Image
-from auto_derby import imagetools, single_mode, template
+from auto_derby import imagetools, single_mode, template, config
 
 
 def recognize_training(img: PIL.Image.Image):
@@ -34,6 +34,9 @@ def main():
         os.environ["DEBUG"] = "auto_derby.single_mode.training.training"
     if args.debug_partner:
         os.environ["DEBUG"] = "auto_derby.single_mode.training.partner"
+    if os.getenv("DEBUG", "").startswith("auto_derby.single_mode.training"):
+        config.single_mode_training_image_path = "debug/recognize_training_scene"
+        config.apply()
     for i in os.getenv("DEBUG", "").split(","):
         if not i:
             continue
@@ -43,7 +46,7 @@ def main():
     recognize_training(image)
 
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     logging.basicConfig(
         format="%(levelname)-6s[%(asctime)s]:%(name)s:%(lineno)d: %(message)s",
         level=logging.INFO,

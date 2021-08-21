@@ -173,6 +173,10 @@ class Partner:
         rp = mathtools.ResizeProxy(img.width)
         icon_img = img.crop(bbox)
         if os.getenv("DEBUG") == __name__:
+            _LOGGER.debug(
+                "icon: img=%s",
+                imagetools.image_hash(icon_img, save_path=g.image_path),
+            )
             cv2.imshow("icon_img", imagetools.cv_image(icon_img))
             cv2.waitKey()
             cv2.destroyAllWindows()
