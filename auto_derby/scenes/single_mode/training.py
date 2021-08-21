@@ -6,10 +6,10 @@ from __future__ import annotations
 from concurrent import futures
 from typing import Tuple
 
-from .. import action, mathtools, template, templates
-from ..single_mode import Training
-from .scene import Scene, SceneHolder
-from .single_mode_command import SingleModeCommandScene
+from ... import action, mathtools, template, templates
+from ...single_mode import Training
+from ..scene import Scene, SceneHolder
+from .command import CommandScene
 
 _TRAINING_CONFIRM = template.Specification(
     templates.SINGLE_MODE_TRAINING_CONFIRM, threshold=0.8
@@ -35,14 +35,14 @@ def _iter_training_images():
         yield template.screenshot()
 
 
-class SingleModeTrainingScene(Scene):
+class TrainingScene(Scene):
     @classmethod
     def name(cls):
         return "single-mode-training"
 
     @classmethod
     def _enter(cls, ctx: SceneHolder) -> Scene:
-        SingleModeCommandScene.enter(ctx)
+        CommandScene.enter(ctx)
         action.tap_image(templates.SINGLE_MODE_COMMAND_TRAINING)
         action.wait_image(_TRAINING_CONFIRM)
         return cls()

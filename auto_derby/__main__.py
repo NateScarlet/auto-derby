@@ -14,9 +14,7 @@ import webbrowser
 import win32con
 import win32gui
 
-from auto_derby import plugin
-
-from . import clients, config, jobs, templates, version
+from . import clients, config, jobs, plugin, templates, version
 
 LOGGER = logging.getLogger(__name__)
 

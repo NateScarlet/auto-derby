@@ -8,10 +8,9 @@ from typing import Iterator, Optional, Text, Tuple
 
 import cv2
 import numpy as np
-from auto_derby import imagetools
 from PIL.Image import Image
 
-from ... import mathtools
+from ... import imagetools, mathtools
 from ..context import Context
 from .globals import g
 

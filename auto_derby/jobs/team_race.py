@@ -1,9 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from auto_derby import imagetools
-
-from .. import action, config, template, templates
+from .. import action, config, imagetools, template, templates
 
 
 def team_race():

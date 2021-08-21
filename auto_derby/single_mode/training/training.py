@@ -9,15 +9,14 @@ from typing import Tuple
 import cast_unknown as cast
 import cv2
 import numpy as np
-from auto_derby import imagetools
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from ... import mathtools, ocr, template, templates
+from ... import imagetools, mathtools, ocr, template, templates
 from ..context import Context
+from . import training_score
 from .globals import g
 from .partner import Partner
-from . import training_score
 
 _LOGGER = logging.getLogger(__name__)
 

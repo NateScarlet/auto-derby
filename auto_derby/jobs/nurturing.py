@@ -7,14 +7,15 @@ import time
 from typing import Optional
 
 from .. import action, config, template, templates, terminal
-from ..single_mode import Context, event, go_out, race
-from ..scenes import (
-    SingleModeCommandScene as CommandScene,
-    SingleModeRaceMenuScene as RaceMenuScene,
-    SingleModeTrainingScene as TrainingScene,
-    PaddockScene,
+from ..constants import RuningStyle
+from ..scenes import PaddockScene
+from ..scenes.single_mode import (
+    CommandScene,
+    RaceMenuScene,
     RaceTurnsIncorrect,
+    TrainingScene,
 )
+from ..single_mode import Context, event, go_out, race
 
 LOGGER = logging.getLogger(__name__)
 
@@ -132,14 +133,10 @@ def _choose_running_style(ctx: Context, race1: race.Race) -> None:
     action.wait_tap_image(templates.RACE_RUNNING_STYLE_CHANGE_BUTTON)
     scores = race1.style_scores(ctx)
 
-    style_scores = sorted(
-        zip(ctx.ALL_RUNING_STYLES, scores), key=lambda x: x[1], reverse=True
-    )
+    style_scores = sorted(zip(RuningStyle, scores), key=lambda x: x[1], reverse=True)
 
     for style, score in style_scores:
-        LOGGER.info(
-            "running style score:\t%.2f:\t%s", score, ctx.runing_style_text(style)
-        )
+        LOGGER.info("running style score:\t%.2f:\t%s", score, style)
 
     scene.choose_runing_style(style_scores[0][0])
 

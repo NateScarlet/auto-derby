@@ -2,7 +2,6 @@
 # pyright: strict
 """template matching.  """
 
-from auto_derby import imagetools, mathtools
 import datetime as dt
 import logging
 import os
@@ -14,7 +13,7 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import open as open_image
 
-from . import clients
+from . import clients, imagetools, mathtools
 
 LOGGER = logging.getLogger(__name__)
 

@@ -6,12 +6,11 @@ from __future__ import annotations
 import time
 
 import cast_unknown as cast
-from auto_derby import single_mode
 
-from .. import action, imagetools, template, templates
-from ..single_mode.race import Race, find_by_race_menu_image
-from .scene import Scene, SceneHolder
-from .single_mode_command import SingleModeCommandScene
+from ... import action, imagetools, single_mode, template, templates
+from ...single_mode.race import Race, find_by_race_menu_image
+from ..scene import Scene, SceneHolder
+from .command import CommandScene
 
 
 class RaceTurnsIncorrect(ValueError):
@@ -32,14 +31,14 @@ def _stop_race_menu_scroll():
     action.tap(rp.vector2((15, 600), 540))
 
 
-class SingleModeRaceMenuScene(Scene):
+class RaceMenuScene(Scene):
     @classmethod
     def name(cls):
         return "single-mode-race-menu"
 
     @classmethod
     def _enter(cls, ctx: SceneHolder) -> Scene:
-        SingleModeCommandScene.enter(ctx)
+        CommandScene.enter(ctx)
         tmpl, pos = action.wait_image(
             templates.SINGLE_MODE_COMMAND_RACE,
             templates.SINGLE_MODE_FORMAL_RACE_BANNER,

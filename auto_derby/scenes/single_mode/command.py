@@ -5,11 +5,11 @@ from __future__ import annotations
 
 import time
 
-from .. import action, single_mode, template, templates
-from .scene import Scene, SceneHolder
+from ... import action, single_mode, template, templates
+from ..scene import Scene, SceneHolder
 
 
-class SingleModeCommandScene(Scene):
+class CommandScene(Scene):
     @classmethod
     def name(cls):
         return "single-mode-command"
