@@ -2,10 +2,9 @@
 # pyright: strict
 from __future__ import annotations
 
-from typing import Callable, List, Set, Text, Tuple, Type
-
 import functools
 import os
+from typing import Callable, List, Set, Text, Tuple, Type
 
 import cast_unknown as cast
 import cv2
@@ -13,7 +12,7 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import imagetools, mathtools, ocr, template, templates, texttools, scenes
+from .. import imagetools, mathtools, ocr, scenes, template, templates, texttools
 
 
 class g:
@@ -373,6 +372,13 @@ class Context:
         return self.date[1:] in ((7, 1), (7, 2), (8, 1))
 
     def expected_score(self) -> float:
+        import warnings
+
+        warnings.warn(
+            "expected score is deprecated, use rest/go-out command score instead",
+            DeprecationWarning,
+        )
+
         expected_score = 15 + self.turn_count() * 10 / 24
 
         can_heal_condition = not self.is_summer_camp

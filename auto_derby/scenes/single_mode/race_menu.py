@@ -43,12 +43,15 @@ class RaceMenuScene(Scene):
             templates.SINGLE_MODE_COMMAND_RACE,
             templates.SINGLE_MODE_FORMAL_RACE_BANNER,
             templates.SINGLE_MODE_URA_FINALS,
+            templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER,
         )
         x, y = pos
         rp = action.resize_proxy()
         if tmpl.name == templates.SINGLE_MODE_FORMAL_RACE_BANNER:
             y += rp.vector(60, 540)
         action.tap((x, y))
+        if tmpl.name == templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER:
+            action.wait_tap_image(templates.SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON)
         tmpl, _ = action.wait_image(
             templates.SINGLE_MODE_RACE_START_BUTTON,
             templates.SINGLE_MODE_CONTINUOUS_RACE_TITLE,

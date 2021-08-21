@@ -6,11 +6,11 @@ import logging
 from typing import Text, Tuple, TYPE_CHECKING
 
 from ... import mathtools
-from ..context import Context
 
 _LOGGER = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
+    from ..context import Context
     from .race import Race
 
 

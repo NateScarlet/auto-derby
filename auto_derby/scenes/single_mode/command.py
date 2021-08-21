@@ -8,8 +8,15 @@ import time
 from ... import action, single_mode, template, templates
 from ..scene import Scene, SceneHolder
 
+from ...scenes import Scene
+
 
 class CommandScene(Scene):
+    def __init__(self) -> None:
+        super().__init__()
+        self.has_health_care = False
+        self.has_scheduled_race = False
+
     @classmethod
     def name(cls):
         return "single-mode-command"
@@ -42,6 +49,12 @@ class CommandScene(Scene):
     def recognize(self, ctx: single_mode.Context):
         action.reset_client_size()
         ctx.update_by_command_scene(template.screenshot(max_age=0))
+        self.has_health_care = (
+            action.count_image(templates.SINGLE_MODE_COMMAND_HEALTH_CARE) > 0
+        )
+        self.has_scheduled_race = (
+            action.count_image(templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER) > 0
+        )
         if not ctx.fan_count:
             self.recognize_class(ctx)
         if ctx.turf == ctx.STATUS_NONE or ctx.date[1:] == (4, 1):

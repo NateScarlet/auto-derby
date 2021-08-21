@@ -2,13 +2,16 @@
 # -*- coding=UTF-8 -*-
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, Any, Dict, Optional, Set, Text, Tuple
+
+if TYPE_CHECKING:
+    from ..context import Context
+
 import logging
 import math
-from typing import Any, Dict, Optional, Set, Text, Tuple
 
 from ... import mathtools
-from ..context import Context
-from . import runing_style_score, race_score
+from . import race_score, runing_style_score
 from .globals import g
 
 _LOGGER = logging.getLogger(__name__)

@@ -2,11 +2,15 @@
 # -*- coding=UTF-8 -*-
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, Iterator, Text, Tuple
+
+if TYPE_CHECKING:
+    from ..context import Context
+
 import json
 import logging
 import os
 import warnings
-from typing import Iterator, Text, Tuple
 
 import cast_unknown as cast
 import cv2
@@ -15,12 +19,10 @@ import PIL.Image
 import PIL.ImageOps
 
 from ... import imagetools, mathtools, ocr, template, templates
-from ..context import Context
+from .globals import g
+from .race import Race
 
 LOGGER = logging.getLogger(__name__)
-
-from .race import Race
-from .globals import g
 
 
 class _g:
