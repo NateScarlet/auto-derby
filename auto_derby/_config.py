@@ -8,6 +8,7 @@ from typing import Callable, Dict, Text
 
 from . import ocr, plugin, single_mode, template, terminal, window
 from .clients import ADBClient
+from .single_mode import commands as sc
 from .single_mode.training import Training
 
 
@@ -65,6 +66,9 @@ class config:
     single_mode_training_partner_class = single_mode.training.Partner
     single_mode_context_class = single_mode.Context
     single_mode_go_out_option_class = single_mode.go_out.Option
+    single_mode_health_care_score = sc.g.health_care_score
+    single_mode_rest_score = sc.g.health_care_score
+    single_mode_summer_rest_score = sc.g.summer_rest_score
     single_mode_target_training_levels = _parse_training_levels(
         os.getenv("AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS", "")
     )
@@ -107,6 +111,9 @@ class config:
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels
         single_mode.training.g.training_class = cls.single_mode_training_class
         single_mode.training.g.partner_class = cls.single_mode_training_partner_class
+        sc.g.rest_score = cls.single_mode_summer_rest_score
+        sc.g.summer_rest_score = cls.single_mode_summer_rest_score
+        sc.g.health_care_score = cls.single_mode_health_care_score
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path
         terminal.g.prompt_sound_path = cls.terminal_prompt_sound_path

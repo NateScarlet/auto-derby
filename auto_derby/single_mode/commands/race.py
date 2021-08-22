@@ -7,12 +7,13 @@ import logging
 import time
 from typing import Text
 
-from ... import action, config, templates, terminal
+from ... import action, templates, terminal
 from ...constants import RuningStyle
 from ...scenes import PaddockScene
 from ...scenes.single_mode import RaceMenuScene
 from .. import Context, Race
 from .command import Command
+from .globals import g
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -68,7 +69,7 @@ class RaceCommand(Command):
             self.selected = True
         race1 = self.race
         estimate_order = race1.estimate_order(ctx)
-        if estimate_order > config.pause_if_race_order_gt:
+        if g.pause_if_race_order_gt >= 0 and estimate_order > g.pause_if_race_order_gt:
             terminal.pause(
                 "Race estimate result is No.%d\nplease learn skills before confirm in terminal"
                 % estimate_order
@@ -94,7 +95,7 @@ class RaceCommand(Command):
             templates.SINGLE_MODE_RACE_NEXT_BUTTON,
         )
         if tmpl.name == templates.SINGLE_MODE_LIVE_BUTTON:
-            config.on_single_mode_live(ctx)
+            g.on_single_mode_live(ctx)
         action.tap_image(templates.TEAM_RACE_NEXT_BUTTON)
 
     def score(self, ctx: Context) -> float:
