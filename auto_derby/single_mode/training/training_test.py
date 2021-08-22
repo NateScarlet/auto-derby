@@ -10,6 +10,7 @@ def test_update_by_training_scene():
     img, _ = _test.use_screenshot("single_mode/training_scene.png")
 
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_SPEED
     assert training.level == 5
     assert training.speed == 26
@@ -30,6 +31,7 @@ def test_update_by_training_scene_2():
     img, _ = _test.use_screenshot("single_mode/training_scene_2.png")
 
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_WISDOM
     assert training.level == 3
     assert training.speed == 6
@@ -56,6 +58,7 @@ def test_update_by_training_scene_3():
     img, _ = _test.use_screenshot("single_mode/training_scene_3.png")
 
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_GUTS
     assert training.level == 5
     assert training.speed == 6
@@ -76,6 +79,7 @@ def test_update_by_training_scene_4():
     img, _ = _test.use_screenshot("single_mode/training_scene_4.png")
 
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_GUTS
     assert training.level == 5
     assert training.speed == 7
@@ -95,6 +99,7 @@ def test_update_by_training_scene_4():
 def test_update_by_training_scene_5():
     img, _ = _test.use_screenshot("single_mode/training_scene_5.png")
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_WISDOM
     assert training.level == 2
     assert training.speed == 2
@@ -110,6 +115,7 @@ def test_update_by_training_scene_5():
 def test_update_by_training_scene_6():
     img, _ = _test.use_screenshot("single_mode/training_scene_6.png")
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_SPEED
     assert training.level == 4
     assert training.speed == 22
@@ -129,6 +135,7 @@ def test_update_by_training_scene_6():
 def test_update_by_training_scene_7():
     img, _ = _test.use_screenshot("single_mode/training_scene_7.png")
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_STAMINA
     assert training.level == 5
     assert training.speed == 0
@@ -157,6 +164,7 @@ def test_update_by_training_scene_7():
 def test_update_by_training_scene_8():
     img, _ = _test.use_screenshot("single_mode/training_scene_8.png")
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_STAMINA
     assert training.level == 1
     assert training.speed == 0
@@ -182,6 +190,7 @@ def test_update_by_training_scene_8():
 def test_update_by_training_scene_9():
     img, _ = _test.use_screenshot("single_mode/training_scene_9.png")
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_SPEED
     assert training.level == 2
     assert training.speed == 19
@@ -205,6 +214,7 @@ def test_update_by_training_scene_issue9():
     img, _ = _test.use_screenshot("single_mode/training_scene_issue9.png")
 
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_SPEED
     assert training.level == 1
     assert training.speed == 12
@@ -225,6 +235,7 @@ def test_update_by_training_scene_issue24():
     img, _ = _test.use_screenshot("single_mode/training_scene_issue24.png")
 
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_STAMINA
     assert training.level == 1
     assert training.speed == 0
@@ -241,6 +252,7 @@ def test_update_by_training_scene_issue51():
     img, _ = _test.use_screenshot("single_mode/training_scene_issue51.png")
 
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_SPEED
     assert training.level == 5
     assert training.speed == 21
@@ -261,6 +273,7 @@ def test_update_by_training_scene_issue55():
     img, _ = _test.use_screenshot("single_mode/training_scene_issue55.png")
 
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_SPEED
     assert training.level == 5
     assert training.speed == 30
@@ -283,6 +296,7 @@ def test_update_by_training_scene_issue55():
 def test_update_by_training_scene_issue130():
     img, _ = _test.use_screenshot("single_mode/training_scene_issue130.png")
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_POWER
     assert training.level == 5
     assert training.speed == 0
@@ -302,6 +316,7 @@ def test_update_by_training_scene_issue130():
 def test_update_by_training_scene_issue156():
     img, _ = _test.use_screenshot("single_mode/training_scene_issue156.png")
     training = Training.from_training_scene(img)
+    _test.snapshot_match(training)
     assert training.type == training.TYPE_SPEED
     assert training.level == 1
     assert training.speed == 21

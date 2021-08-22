@@ -1,0 +1,38 @@
+{
+  "stadium": "阪神",
+  "name": "URAファイナルズ準決勝",
+  "grade": 100,
+  "ground": 1,
+  "distance": 2200,
+  "permission": 5,
+  "month": 1,
+  "half": 2,
+  "entryCount": 18,
+  "track": 2,
+  "turn": 1,
+  "targetStatuses": [
+    1
+  ],
+  "minFanCount": 0,
+  "fanCounts": [
+    10000,
+    4000,
+    2500,
+    1500,
+    1000,
+    900,
+    800,
+    700,
+    600,
+    500,
+    400,
+    300,
+    250,
+    200,
+    150,
+    100,
+    100,
+    100
+  ],
+  "characters": []
+}

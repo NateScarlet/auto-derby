@@ -1,0 +1,38 @@
+{
+  "stadium": "新潟",
+  "name": "ルミエールオータムダッシュ",
+  "grade": 400,
+  "ground": 1,
+  "distance": 1000,
+  "permission": 3,
+  "month": 10,
+  "half": 2,
+  "entryCount": 18,
+  "track": 1,
+  "turn": 4,
+  "targetStatuses": [
+    3
+  ],
+  "minFanCount": 350,
+  "fanCounts": [
+    2500,
+    1000,
+    625,
+    375,
+    250,
+    225,
+    200,
+    175,
+    150,
+    125,
+    100,
+    75,
+    63,
+    50,
+    38,
+    25,
+    25,
+    25
+  ],
+  "characters": []
+}

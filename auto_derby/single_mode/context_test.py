@@ -7,6 +7,7 @@ def test_update_by_command_scene():
     img, _ = _test.use_screenshot("single_mode/command_scene.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (1, 12, 2), ctx.date
     assert round(ctx.vitality, 2) == 0.92, ctx.vitality
     assert ctx.speed == 281, ctx.speed
@@ -21,6 +22,7 @@ def test_update_by_command_scene_2():
     img, _ = _test.use_screenshot("single_mode/command_scene_2.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (2, 1, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.92, ctx.vitality
     assert ctx.speed == 281, ctx.speed
@@ -35,6 +37,7 @@ def test_update_by_command_scene_3():
     img, _ = _test.use_screenshot("single_mode/command_scene_3.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (3, 1, 1), ctx.date
     assert round(ctx.vitality, 2) == 1, ctx.vitality
     assert ctx.speed == 589, ctx.speed
@@ -49,6 +52,7 @@ def test_update_by_command_scene_4():
     img, _ = _test.use_screenshot("single_mode/command_scene_4.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (2, 4, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.95, ctx.vitality
     assert ctx.speed == 357, ctx.speed
@@ -63,6 +67,7 @@ def test_update_by_command_scene_5():
     img, _ = _test.use_screenshot("single_mode/command_scene_5.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (3, 3, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.74, ctx.vitality
     assert ctx.speed == 568, ctx.speed
@@ -77,6 +82,7 @@ def test_update_by_command_scene_6():
     img, _ = _test.use_screenshot("single_mode/command_scene_6.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (2, 10, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.46, ctx.vitality
     assert ctx.speed == 510, ctx.speed
@@ -91,6 +97,7 @@ def test_update_by_command_scene_7():
     img, _ = _test.use_screenshot("single_mode/command_scene_7.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (2, 12, 2), ctx.date
     assert round(ctx.vitality, 2) == 0.33, ctx.vitality
     assert ctx.speed == 615, ctx.speed
@@ -105,6 +112,7 @@ def test_update_by_command_scene_issue7():
     img, _ = _test.use_screenshot("single_mode/command_scene_issue7.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (1, 0, 0)
     assert round(ctx.vitality, 2) == 1
     assert ctx.speed == 158
@@ -119,6 +127,7 @@ def test_update_by_command_scene_issue12():
     img, _ = _test.use_screenshot("single_mode/command_scene_issue12.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (1, 12, 2), ctx.date
     assert round(ctx.vitality, 2) == 0.80, ctx.vitality
     assert ctx.speed == 266, ctx.speed
@@ -133,6 +142,7 @@ def test_update_by_command_scene_issue12_2():
     img, _ = _test.use_screenshot("single_mode/command_scene_issue12_2.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (1, 10, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.79, ctx.vitality
     assert ctx.speed == 241, ctx.speed
@@ -147,6 +157,7 @@ def test_update_by_command_scene_issue17():
     img, _ = _test.use_screenshot("single_mode/command_scene_issue17.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (1, 0, 0), ctx.date
     assert round(ctx.vitality, 2) == 0.53, ctx.vitality
     assert ctx.speed == 195, ctx.speed
@@ -161,6 +172,7 @@ def test_update_by_command_scene_issue17_2():
     img, _ = _test.use_screenshot("single_mode/command_scene_issue17_2.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (1, 11, 2), ctx.date
     assert round(ctx.vitality, 2) == 1, ctx.vitality
     assert ctx.speed == 262, ctx.speed
@@ -175,6 +187,7 @@ def test_update_by_command_scene_issue41():
     img, _ = _test.use_screenshot("single_mode/command_scene_issue41.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
     assert ctx.date == (3, 11, 1), ctx.date
     assert round(ctx.vitality, 2) == 0.84, ctx.vitality
     assert ctx.speed == 1200, ctx.speed
@@ -189,6 +202,7 @@ def test_update_by_command_scene_issue113():
     ctx = Context.new()
     img, _ = _test.use_screenshot("single_mode/command_scene_issue113.png")
     ctx.update_by_command_scene(img)
+    _test.snapshot_match(ctx)
 
     assert ctx.date == (4, 0, 0), ctx.date
     assert round(ctx.vitality, 2) == 0.72, ctx.vitality
@@ -204,6 +218,7 @@ def test_update_by_class_detail():
     img, _ = _test.use_screenshot("single_mode/class_detail.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
+    _test.snapshot_match(ctx)
     assert ctx.fan_count == 1, ctx.fan_count
     assert ctx.is_after_winning == False, ctx.is_after_winning
 
@@ -212,6 +227,7 @@ def test_update_by_class_detail_2():
     img, _ = _test.use_screenshot("single_mode/class_detail_2.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
+    _test.snapshot_match(ctx)
     assert ctx.fan_count == 1225, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
 
@@ -220,6 +236,7 @@ def test_update_by_class_detail_3():
     img, _ = _test.use_screenshot("single_mode/class_detail_3.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
+    _test.snapshot_match(ctx)
     assert ctx.fan_count == 11950, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
 
@@ -228,6 +245,7 @@ def test_update_by_class_detail_4():
     img, _ = _test.use_screenshot("single_mode/class_detail_4.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
+    _test.snapshot_match(ctx)
     assert ctx.fan_count == 148805, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
 
@@ -236,6 +254,7 @@ def test_update_by_class_detail_5():
     img, _ = _test.use_screenshot("single_mode/class_detail_5.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
+    _test.snapshot_match(ctx)
     assert ctx.fan_count == 127591, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
 
@@ -244,6 +263,7 @@ def test_update_by_class_detail_6():
     img, _ = _test.use_screenshot("single_mode/class_detail_6.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
+    _test.snapshot_match(ctx)
     assert ctx.fan_count == 121794, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
 
@@ -252,6 +272,7 @@ def test_update_by_class_detail_issue35():
     img, _ = _test.use_screenshot("single_mode/class_detail_issue35.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
+    _test.snapshot_match(ctx)
     assert ctx.fan_count == 1129, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
 
@@ -260,6 +281,7 @@ def test_update_by_class_detail_issue35_2():
     img, _ = _test.use_screenshot("single_mode/class_detail_issue35_2.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
+    _test.snapshot_match(ctx)
     assert ctx.fan_count == 4119, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
 
@@ -268,6 +290,7 @@ def test_update_by_class_detail_issue86():
     img, _ = _test.use_screenshot("single_mode/class_detail_issue86.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
+    _test.snapshot_match(ctx)
     assert ctx.fan_count == 88556, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
 

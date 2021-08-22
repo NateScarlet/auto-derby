@@ -1,0 +1,38 @@
+{
+  "stadium": "中山",
+  "name": "弥生賞",
+  "grade": 200,
+  "ground": 1,
+  "distance": 2000,
+  "permission": 2,
+  "month": 3,
+  "half": 1,
+  "entryCount": 18,
+  "track": 2,
+  "turn": 1,
+  "targetStatuses": [
+    1
+  ],
+  "minFanCount": 1750,
+  "fanCounts": [
+    5400,
+    2160,
+    1350,
+    810,
+    540,
+    486,
+    432,
+    378,
+    324,
+    270,
+    216,
+    162,
+    135,
+    108,
+    81,
+    54,
+    54,
+    54
+  ],
+  "characters": []
+}

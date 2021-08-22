@@ -1,0 +1,42 @@
+{
+  "stadium": "札幌",
+  "name": "ジュニア級メイクデビュー",
+  "grade": 900,
+  "ground": 1,
+  "distance": 2000,
+  "permission": 1,
+  "month": 6,
+  "half": 2,
+  "entryCount": 9,
+  "track": 1,
+  "turn": 1,
+  "targetStatuses": [
+    3
+  ],
+  "minFanCount": 0,
+  "fanCounts": [
+    700,
+    280,
+    175,
+    105,
+    70,
+    63,
+    56,
+    49,
+    42,
+    35,
+    28,
+    21,
+    18,
+    14,
+    11,
+    7,
+    7,
+    7
+  ],
+  "characters": [
+    "エアグルーヴ",
+    "ゴールドシップ",
+    "ナリタタイシン"
+  ]
+}

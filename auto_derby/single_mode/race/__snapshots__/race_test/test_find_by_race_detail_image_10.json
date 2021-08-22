@@ -1,0 +1,38 @@
+{
+  "stadium": "小倉",
+  "name": "小倉ジュニアステークス",
+  "grade": 300,
+  "ground": 1,
+  "distance": 1200,
+  "permission": 1,
+  "month": 9,
+  "half": 1,
+  "entryCount": 18,
+  "track": 1,
+  "turn": 1,
+  "targetStatuses": [
+    1
+  ],
+  "minFanCount": 350,
+  "fanCounts": [
+    3100,
+    1240,
+    775,
+    465,
+    310,
+    279,
+    248,
+    217,
+    186,
+    155,
+    124,
+    93,
+    78,
+    62,
+    47,
+    31,
+    31,
+    31
+  ],
+  "characters": []
+}

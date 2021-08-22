@@ -1,0 +1,38 @@
+{
+  "stadium": "京都",
+  "name": "紫菊賞",
+  "grade": 700,
+  "ground": 1,
+  "distance": 2000,
+  "permission": 1,
+  "month": 10,
+  "half": 1,
+  "entryCount": 18,
+  "track": 2,
+  "turn": 1,
+  "targetStatuses": [
+    3
+  ],
+  "minFanCount": 350,
+  "fanCounts": [
+    1000,
+    400,
+    250,
+    150,
+    100,
+    90,
+    80,
+    70,
+    60,
+    50,
+    40,
+    30,
+    25,
+    20,
+    15,
+    7,
+    7,
+    7
+  ],
+  "characters": []
+}

@@ -1,0 +1,1 @@
+Training<lv=4 spd=22 pow=10 ski=3 ptn=spd@5>

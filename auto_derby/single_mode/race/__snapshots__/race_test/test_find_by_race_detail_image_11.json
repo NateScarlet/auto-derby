@@ -1,0 +1,38 @@
+{
+  "stadium": "阪神",
+  "name": "忘れな草賞",
+  "grade": 400,
+  "ground": 1,
+  "distance": 2000,
+  "permission": 2,
+  "month": 4,
+  "half": 1,
+  "entryCount": 16,
+  "track": 2,
+  "turn": 1,
+  "targetStatuses": [
+    4
+  ],
+  "minFanCount": 350,
+  "fanCounts": [
+    2000,
+    800,
+    500,
+    300,
+    200,
+    180,
+    160,
+    140,
+    120,
+    100,
+    80,
+    60,
+    50,
+    40,
+    30,
+    20,
+    20,
+    20
+  ],
+  "characters": []
+}
