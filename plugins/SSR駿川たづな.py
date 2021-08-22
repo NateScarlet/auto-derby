@@ -1,6 +1,10 @@
+from typing import Callable, List
 import auto_derby
 from auto_derby import mathtools
 from auto_derby.single_mode import Context
+from auto_derby.__version__ import VERSION
+from auto_derby import version
+
 
 _NAME = "駿川たづな"
 
@@ -70,6 +74,7 @@ _MOOD[4] = 2
 class Plugin(auto_derby.Plugin):
     """
     Use this when friend cards include SSR駿川たづな.
+    Multiple friend type support card is not supported.
     """
 
     def install(self) -> None:
@@ -108,16 +113,48 @@ class Plugin(auto_derby.Plugin):
                 # attributes reward gain
                 if self.current_event_count in (0, 2, 4):
                     ret += 20
+
                 return ret
 
         auto_derby.config.single_mode_go_out_option_class = Option
 
         class Training(auto_derby.config.single_mode_training_class):
             def score(self, ctx: Context) -> float:
+                try:
+                    partner = next(i for i in self.partners if i.type == i.TYPE_FRIEND)
+                except StopIteration:
+                    return super().score(ctx)
+
+                cleanup: List[Callable[[], None]] = []
+                # TODO: update version here if these implemented:
+                # https://github.com/NateScarlet/auto-derby/issues/152
+                # https://github.com/NateScarlet/auto-derby/issues/160
+                if version.parse(VERSION) < version.parse("v2.0.0"):
+                    # assume lv 50 effect
+                    if self._use_estimate_vitality and self.vitality < 0:
+                        _orig_vit = self.vitality
+
+                        def _c1():
+                            self.vitality = _orig_vit
+
+                        self.vitality *= 0.7
+
+                        cleanup.append(_c1)
+                    if self._use_estimate_failure_rate:
+                        _orig_failure = self.failure_rate
+
+                        def _c2():
+                            self.failure_rate = _orig_failure
+
+                        self.failure_rate *= 0.6
+
+                        cleanup.append(_c2)
+
                 ret = super().score(ctx)
-                if any(
-                    i for i in self.partners if i.type == i.TYPE_FRIEND and i.level < 4
-                ):
+                for i in cleanup:
+                    i()
+
+                if partner.level < 4:
                     ret += mathtools.interpolate(
                         ctx.turn_count(),
                         (
@@ -127,6 +164,9 @@ class Plugin(auto_derby.Plugin):
                             (72, 20),
                         ),
                     )
+                elif not ctx.go_out_options:
+                    # go out unlock event not happened
+                    ret += 10
                 return ret
 
         auto_derby.config.single_mode_training_class = Training
