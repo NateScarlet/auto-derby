@@ -72,7 +72,7 @@ def _json_transform(v: object) -> object:
 
 
 def _default_encode(v: object) -> Tuple[Text, Text]:
-    if isinstance(v, (SupportsToDict, list, tuple, int, float)):
+    if isinstance(v, (SupportsToDict, list, tuple, int, float, dict)):
         return (
             json.dumps(
                 v,
