@@ -68,7 +68,7 @@ class config:
     single_mode_go_out_option_class = single_mode.go_out.Option
     single_mode_go_out_names = single_mode.go_out.g.names
     single_mode_health_care_score = sc.g.health_care_score
-    single_mode_rest_score = sc.g.health_care_score
+    single_mode_rest_score = sc.g.rest_score
     single_mode_summer_rest_score = sc.g.summer_rest_score
     single_mode_ignore_training_commands = sc.g.ignore_training_commands
     single_mode_target_training_levels = _parse_training_levels(
@@ -115,7 +115,7 @@ class config:
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels
         single_mode.training.g.training_class = cls.single_mode_training_class
         single_mode.training.g.partner_class = cls.single_mode_training_partner_class
-        sc.g.rest_score = cls.single_mode_summer_rest_score
+        sc.g.rest_score = cls.single_mode_rest_score
         sc.g.summer_rest_score = cls.single_mode_summer_rest_score
         sc.g.health_care_score = cls.single_mode_health_care_score
         sc.g.ignore_training_commands = cls.single_mode_ignore_training_commands
