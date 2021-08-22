@@ -1,10 +1,11 @@
+import inspect
+import json
 import os
 from pathlib import Path
 from typing import (
     Any,
     Callable,
     Dict,
-    Iterable,
     Optional,
     Protocol,
     Text,
@@ -14,13 +15,30 @@ from typing import (
 
 import PIL.Image
 
-import inspect
-
-import json
-
-from . import mathtools, template
+from . import clients, mathtools, template
 
 DATA_PATH = Path(__file__).parent / "test_data"
+
+
+class ImageClient(clients.Client):
+    def __init__(self, img: PIL.Image.Image):
+        super().__init__()
+        self.image = img
+
+    def width(self) -> int:
+        return self.image.width
+
+    def height(self) -> int:
+        return self.image.height
+
+    def screenshot(self) -> PIL.Image.Image:
+        return self.image
+
+    def tap(self, point: Tuple[int, int]) -> None:
+        raise NotImplementedError()
+
+    def swipe(self, point: Tuple[int, int]) -> None:
+        raise NotImplementedError()
 
 
 def use_screenshot(name: Text):
@@ -28,6 +46,8 @@ def use_screenshot(name: Text):
     # resize old test data
     if img.width == 466:
         img = img.resize((540, 960))
+    template.invalidate_screeshot()
+    clients.set_current(ImageClient(img))
     template.g.screenshot_width = img.width
     return img, mathtools.ResizeProxy(img.width)
 
