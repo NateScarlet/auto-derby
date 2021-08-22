@@ -1,19 +1,10 @@
 from .context import Context
 
-from pathlib import Path
-import PIL.Image
-
-from . import _test
-
-_TEST_DATA_PATH = Path(__file__).parent / "test_data"
+from .. import _test
 
 
 def test_update_by_command_scene():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 12, 2), ctx.date
@@ -27,11 +18,7 @@ def test_update_by_command_scene():
 
 
 def test_update_by_command_scene_2():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene_2.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene_2.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (2, 1, 1), ctx.date
@@ -45,11 +32,7 @@ def test_update_by_command_scene_2():
 
 
 def test_update_by_command_scene_3():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene_3.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene_3.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (3, 1, 1), ctx.date
@@ -63,11 +46,7 @@ def test_update_by_command_scene_3():
 
 
 def test_update_by_command_scene_4():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene_4.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene_4.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (2, 4, 1), ctx.date
@@ -81,53 +60,49 @@ def test_update_by_command_scene_4():
 
 
 def test_update_by_command_scene_5():
-    with _test.screenshot("command_scene_5.png") as img:
-        ctx = Context.new()
-        ctx.update_by_command_scene(img)
-        assert ctx.date == (3, 3, 1), ctx.date
-        assert round(ctx.vitality, 2) == 0.74, ctx.vitality
-        assert ctx.speed == 568, ctx.speed
-        assert ctx.stamina == 368, ctx.stamina
-        assert ctx.power == 341, ctx.power
-        assert ctx.guts == 307, ctx.guts
-        assert ctx.wisdom == 329, ctx.wisdom
-        assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+    img, _ = _test.use_screenshot("single_mode/command_scene_5.png")
+    ctx = Context.new()
+    ctx.update_by_command_scene(img)
+    assert ctx.date == (3, 3, 1), ctx.date
+    assert round(ctx.vitality, 2) == 0.74, ctx.vitality
+    assert ctx.speed == 568, ctx.speed
+    assert ctx.stamina == 368, ctx.stamina
+    assert ctx.power == 341, ctx.power
+    assert ctx.guts == 307, ctx.guts
+    assert ctx.wisdom == 329, ctx.wisdom
+    assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
 
 def test_update_by_command_scene_6():
-    with _test.screenshot("command_scene_6.png") as img:
-        ctx = Context.new()
-        ctx.update_by_command_scene(img)
-        assert ctx.date == (2, 10, 1), ctx.date
-        assert round(ctx.vitality, 2) == 0.46, ctx.vitality
-        assert ctx.speed == 510, ctx.speed
-        assert ctx.stamina == 317, ctx.stamina
-        assert ctx.power == 351, ctx.power
-        assert ctx.guts == 298, ctx.guts
-        assert ctx.wisdom == 314, ctx.wisdom
-        assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+    img, _ = _test.use_screenshot("single_mode/command_scene_6.png")
+    ctx = Context.new()
+    ctx.update_by_command_scene(img)
+    assert ctx.date == (2, 10, 1), ctx.date
+    assert round(ctx.vitality, 2) == 0.46, ctx.vitality
+    assert ctx.speed == 510, ctx.speed
+    assert ctx.stamina == 317, ctx.stamina
+    assert ctx.power == 351, ctx.power
+    assert ctx.guts == 298, ctx.guts
+    assert ctx.wisdom == 314, ctx.wisdom
+    assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
 
 def test_update_by_command_scene_7():
-    with _test.screenshot("command_scene_7.png") as img:
-        ctx = Context.new()
-        ctx.update_by_command_scene(img)
-        assert ctx.date == (2, 12, 2), ctx.date
-        assert round(ctx.vitality, 2) == 0.33, ctx.vitality
-        assert ctx.speed == 615, ctx.speed
-        assert ctx.stamina == 316, ctx.stamina
-        assert ctx.power == 459, ctx.power
-        assert ctx.guts == 251, ctx.guts
-        assert ctx.wisdom == 382, ctx.wisdom
-        assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
+    img, _ = _test.use_screenshot("single_mode/command_scene_7.png")
+    ctx = Context.new()
+    ctx.update_by_command_scene(img)
+    assert ctx.date == (2, 12, 2), ctx.date
+    assert round(ctx.vitality, 2) == 0.33, ctx.vitality
+    assert ctx.speed == 615, ctx.speed
+    assert ctx.stamina == 316, ctx.stamina
+    assert ctx.power == 459, ctx.power
+    assert ctx.guts == 251, ctx.guts
+    assert ctx.wisdom == 382, ctx.wisdom
+    assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
 
 def test_update_by_command_scene_issue7():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue7.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene_issue7.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 0, 0)
@@ -141,11 +116,7 @@ def test_update_by_command_scene_issue7():
 
 
 def test_update_by_command_scene_issue12():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue12.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene_issue12.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 12, 2), ctx.date
@@ -159,11 +130,7 @@ def test_update_by_command_scene_issue12():
 
 
 def test_update_by_command_scene_issue12_2():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue12_2.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene_issue12_2.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 10, 1), ctx.date
@@ -177,11 +144,7 @@ def test_update_by_command_scene_issue12_2():
 
 
 def test_update_by_command_scene_issue17():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue17.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene_issue17.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 0, 0), ctx.date
@@ -195,11 +158,7 @@ def test_update_by_command_scene_issue17():
 
 
 def test_update_by_command_scene_issue17_2():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue17_2.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene_issue17_2.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (1, 11, 2), ctx.date
@@ -213,11 +172,7 @@ def test_update_by_command_scene_issue17_2():
 
 
 def test_update_by_command_scene_issue41():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "command_scene_issue41.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/command_scene_issue41.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     assert ctx.date == (3, 11, 1), ctx.date
@@ -232,8 +187,8 @@ def test_update_by_command_scene_issue41():
 
 def test_update_by_command_scene_issue113():
     ctx = Context.new()
-    with _test.screenshot("command_scene_issue113.png") as img:
-        ctx.update_by_command_scene(img)
+    img, _ = _test.use_screenshot("single_mode/command_scene_issue113.png")
+    ctx.update_by_command_scene(img)
 
     assert ctx.date == (4, 0, 0), ctx.date
     assert round(ctx.vitality, 2) == 0.72, ctx.vitality
@@ -246,11 +201,7 @@ def test_update_by_command_scene_issue113():
 
 
 def test_update_by_class_detail():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "class_detail.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/class_detail.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1, ctx.fan_count
@@ -258,11 +209,7 @@ def test_update_by_class_detail():
 
 
 def test_update_by_class_detail_2():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "class_detail_2.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/class_detail_2.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1225, ctx.fan_count
@@ -270,11 +217,7 @@ def test_update_by_class_detail_2():
 
 
 def test_update_by_class_detail_3():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "class_detail_3.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/class_detail_3.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 11950, ctx.fan_count
@@ -282,11 +225,7 @@ def test_update_by_class_detail_3():
 
 
 def test_update_by_class_detail_4():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "class_detail_4.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/class_detail_4.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 148805, ctx.fan_count
@@ -294,11 +233,7 @@ def test_update_by_class_detail_4():
 
 
 def test_update_by_class_detail_5():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "class_detail_5.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/class_detail_5.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 127591, ctx.fan_count
@@ -306,7 +241,7 @@ def test_update_by_class_detail_5():
 
 
 def test_update_by_class_detail_6():
-    img = PIL.Image.open(_TEST_DATA_PATH / "class_detail_6.png").convert("RGB")
+    img, _ = _test.use_screenshot("single_mode/class_detail_6.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 121794, ctx.fan_count
@@ -314,11 +249,7 @@ def test_update_by_class_detail_6():
 
 
 def test_update_by_class_detail_issue35():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "class_detail_issue35.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/class_detail_issue35.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 1129, ctx.fan_count
@@ -326,11 +257,7 @@ def test_update_by_class_detail_issue35():
 
 
 def test_update_by_class_detail_issue35_2():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "class_detail_issue35_2.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/class_detail_issue35_2.png")
     ctx = Context.new()
     ctx.update_by_class_detail(img)
     assert ctx.fan_count == 4119, ctx.fan_count
@@ -338,19 +265,15 @@ def test_update_by_class_detail_issue35_2():
 
 
 def test_update_by_class_detail_issue86():
-    with _test.screenshot("class_detail_issue86.png") as img:
-        ctx = Context.new()
-        ctx.update_by_class_detail(img)
+    img, _ = _test.use_screenshot("single_mode/class_detail_issue86.png")
+    ctx = Context.new()
+    ctx.update_by_class_detail(img)
     assert ctx.fan_count == 88556, ctx.fan_count
     assert ctx.is_after_winning == True, ctx.is_after_winning
 
 
 def test_update_by_character_detail():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "character_detail.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/character_detail.png")
     ctx = Context.new()
     ctx.update_by_character_detail(img)
 
@@ -369,11 +292,7 @@ def test_update_by_character_detail():
 
 
 def test_update_by_character_detail_2():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "character_detail_2.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/character_detail_2.png")
     ctx = Context.new()
     ctx.update_by_character_detail(img)
 
@@ -392,11 +311,7 @@ def test_update_by_character_detail_2():
 
 
 def test_update_by_character_detail_3():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "character_detail_3.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/character_detail_3.png")
     ctx = Context.new()
     ctx.update_by_character_detail(img)
 
@@ -415,11 +330,7 @@ def test_update_by_character_detail_3():
 
 
 def test_update_by_character_detail_4():
-    img = (
-        PIL.Image.open(_TEST_DATA_PATH / "character_detail_4.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/character_detail_4.png")
     ctx = Context.new()
     ctx.update_by_character_detail(img)
 
@@ -438,7 +349,7 @@ def test_update_by_character_detail_4():
 
 
 def test_update_by_character_detail_5():
-    img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_5.png").convert("RGB")
+    img, _ = _test.use_screenshot("single_mode/character_detail_5.png")
     ctx = Context.new()
     ctx.update_by_character_detail(img)
 
@@ -459,9 +370,9 @@ def test_update_by_character_detail_5():
 
 
 def test_update_by_character_detail_6():
-    with _test.screenshot("character_detail_6.png") as img:
-        ctx = Context.new()
-        ctx.update_by_character_detail(img)
+    img, _ = _test.use_screenshot("single_mode/character_detail_6.png")
+    ctx = Context.new()
+    ctx.update_by_character_detail(img)
 
     assert ctx.turf == ctx.STATUS_A, ctx.turf
     assert ctx.dart == ctx.STATUS_E, ctx.dart
@@ -480,9 +391,7 @@ def test_update_by_character_detail_6():
 
 
 def test_update_by_character_detail_issue39():
-    img = PIL.Image.open(_TEST_DATA_PATH / "character_detail_issue39.png").convert(
-        "RGB"
-    )
+    img, _ = _test.use_screenshot("single_mode/character_detail_issue39.png")
     ctx = Context.new()
     ctx.update_by_character_detail(img)
 

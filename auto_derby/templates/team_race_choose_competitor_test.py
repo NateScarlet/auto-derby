@@ -1,5 +1,5 @@
 from .. import mathtools, template, templates
-from . import _test
+from .. import _test
 
 _EXPECTED_POS = (240, 154)
 

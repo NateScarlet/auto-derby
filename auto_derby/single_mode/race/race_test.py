@@ -1,14 +1,10 @@
-import PIL.Image
-from .. import race, _test
+from .. import race
+from ... import _test
 from ..context import Context
 
 
 def test_find_by_race_detail_image():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail.png")
     ctx = Context.new()
     ctx.date = (2, 3, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -18,11 +14,7 @@ def test_find_by_race_detail_image():
 
 
 def test_find_by_race_detail_image_2():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_2.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_2.png")
     ctx = Context.new()
     ctx.date = (2, 5, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -32,11 +24,7 @@ def test_find_by_race_detail_image_2():
 
 
 def test_find_by_race_detail_image_3():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_3.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_3.png")
     ctx = Context.new()
     ctx.date = (2, 3, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -46,11 +34,7 @@ def test_find_by_race_detail_image_3():
 
 
 def test_find_by_race_detail_image_4():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_4.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_4.png")
     ctx = Context.new()
     ctx.date = (3, 2, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -60,11 +44,7 @@ def test_find_by_race_detail_image_4():
 
 
 def test_find_by_race_detail_image_5():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_5.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_5.png")
     ctx = Context.new()
     ctx.date = (2, 10, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -74,11 +54,7 @@ def test_find_by_race_detail_image_5():
 
 
 def test_find_by_race_detail_image_6():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_6.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_6.png")
     ctx = Context.new()
     ctx.date = (3, 6, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -88,11 +64,7 @@ def test_find_by_race_detail_image_6():
 
 
 def test_find_by_race_detail_image_7():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_7.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_7.png")
     ctx = Context.new()
     ctx.date = (4, 0, 0)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -102,11 +74,7 @@ def test_find_by_race_detail_image_7():
 
 
 def test_find_by_race_detail_image_8():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_8.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_8.png")
     ctx = Context.new()
     ctx.date = (1, 0, 0)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -116,11 +84,7 @@ def test_find_by_race_detail_image_8():
 
 
 def test_find_by_race_detail_image_9():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_9.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_9.png")
     ctx = Context.new()
     ctx.date = (1, 10, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -130,7 +94,7 @@ def test_find_by_race_detail_image_9():
 
 
 def test_find_by_race_detail_image_10():
-    img = PIL.Image.open(_test.DATA_PATH / "race_detail_10.png").convert("RGB")
+    img, _ = _test.use_screenshot("single_mode/race_detail_10.png")
     ctx = Context.new()
     ctx.date = (1, 9, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -139,10 +103,10 @@ def test_find_by_race_detail_image_10():
 
 
 def test_find_by_race_detail_image_11():
+    img, _ = _test.use_screenshot("single_mode/race_detail_11.png")
     ctx = Context.new()
     ctx.date = (2, 4, 1)
-    with _test.screenshot("race_detail_11.png") as img:
-        race1 = race.find_by_race_detail_image(ctx, img)
+    race1 = race.find_by_race_detail_image(ctx, img)
 
     assert race1.name == "忘れな草賞", race1.name
     assert race1.stadium == "阪神", race1.stadium
@@ -150,11 +114,7 @@ def test_find_by_race_detail_image_11():
 
 
 def test_find_by_race_detail_image_issue31():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_issue31.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_issue31.png")
     ctx = Context.new()
     ctx.date = (2, 5, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -164,11 +124,7 @@ def test_find_by_race_detail_image_issue31():
 
 
 def test_find_by_race_detail_image_issue49():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_issue49.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_issue49.png")
     ctx = Context.new()
     ctx.date = (1, 8, 1)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -178,11 +134,7 @@ def test_find_by_race_detail_image_issue49():
 
 
 def test_find_by_race_detail_image_issue54():
-    img = (
-        PIL.Image.open(_test.DATA_PATH / "race_detail_issue54.png")
-        .convert("RGB")
-        .resize((540, 960))
-    )
+    img, _ = _test.use_screenshot("single_mode/race_detail_issue54.png")
     ctx = Context.new()
     ctx.date = (2, 10, 2)
     race1 = race.find_by_race_detail_image(ctx, img)
@@ -194,8 +146,8 @@ def test_find_by_race_detail_image_issue54():
 def test_find_by_race_detail_image_issue58():
     ctx = Context.new()
     ctx.date = (3, 6, 2)
-    with _test.screenshot("race_detail_issue58.png") as img:
-        race1 = race.find_by_race_detail_image(ctx, img)
+    img, _ = _test.use_screenshot("single_mode/race_detail_issue58.png")
+    race1 = race.find_by_race_detail_image(ctx, img)
 
     assert race1.name == "宝塚記念", race1.name
     assert race1.stadium == "京都", race1.stadium
@@ -205,9 +157,9 @@ def test_find_by_race_detail_image_issue58():
 def test_find_by_race_menu_image():
     ctx = Context.new()
     ctx.date = (1, 6, 2)
-    with _test.screenshot("race_menu.png") as img:
-        (res1,) = race.find_by_race_menu_image(ctx, img)
-        race1, pos1 = res1
+    img, _ = _test.use_screenshot("single_mode/race_menu.png")
+    (res1,) = race.find_by_race_menu_image(ctx, img)
+    race1, pos1 = res1
 
     assert pos1 == (203, 586), pos1
     assert race1.name == "ジュニア級メイクデビュー", race1.name
@@ -218,10 +170,10 @@ def test_find_by_race_menu_image():
 def test_find_by_race_menu_image_2():
     ctx = Context.new()
     ctx.date = (1, 10, 2)
-    with _test.screenshot("race_menu_2.png") as img:
-        res1, res2 = race.find_by_race_menu_image(ctx, img)
-        race1, pos1 = res1
-        race2, pos2 = res2
+    img, _ = _test.use_screenshot("single_mode/race_menu_2.png")
+    res1, res2 = race.find_by_race_menu_image(ctx, img)
+    race1, pos1 = res1
+    race2, pos2 = res2
 
     assert pos1 == (203, 586), pos1
     assert race1.name == "アルテミスステークス", race1.name
@@ -237,9 +189,9 @@ def test_find_by_race_menu_image_2():
 def test_find_by_race_menu_image_3():
     ctx = Context.new()
     ctx.date = (1, 10, 2)
-    with _test.screenshot("race_menu_3.png") as img:
-        (res1,) = race.find_by_race_menu_image(ctx, img)
-        race1, pos1 = res1
+    img, _ = _test.use_screenshot("single_mode/race_menu_3.png")
+    (res1,) = race.find_by_race_menu_image(ctx, img)
+    race1, pos1 = res1
 
     assert pos1 == (203, 646), pos1
     assert race1.name == "萩ステークス", race1.name
@@ -250,12 +202,10 @@ def test_find_by_race_menu_image_3():
 def test_find_by_race_menu_image_4():
     ctx = Context.new()
     ctx.date = (1, 10, 2)
-    with _test.screenshot("race_menu_4.png") as img:
-        res1, res2 = sorted(
-            race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1]
-        )
-        race1, pos1 = res1
-        race2, pos2 = res2
+    img, _ = _test.use_screenshot("single_mode/race_menu_4.png")
+    res1, res2 = sorted(race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1])
+    race1, pos1 = res1
+    race2, pos2 = res2
 
     assert pos1 == (203, 585), pos1
     assert race1.name == "萩ステークス", race1.name
@@ -271,9 +221,9 @@ def test_find_by_race_menu_image_4():
 def test_find_by_race_menu_image_5():
     ctx = Context.new()
     ctx.date = (4, 0, 0)
-    with _test.screenshot("race_menu_5.png") as img:
-        (res1,) = race.find_by_race_menu_image(ctx, img)
-        race1, pos1 = res1
+    img, _ = _test.use_screenshot("single_mode/race_menu_5.png")
+    (res1,) = race.find_by_race_menu_image(ctx, img)
+    race1, pos1 = res1
 
     assert pos1 == (203, 586), pos1
     assert race1.name == "URAファイナルズ予選", race1.name
@@ -284,15 +234,15 @@ def test_find_by_race_menu_image_5():
 def test_find_by_race_menu_image_6():
     ctx = Context.new()
     ctx.date = (1, 11, 2)
-    with _test.screenshot("race_menu_6.png") as img:
-        res1, res2, res3 = sorted(
-            race.find_by_race_menu_image(ctx, img),
-            key=lambda x: (x[1][1], x[0].name),
-        )
-        race1, pos1 = res1
-        # 2 race has exact same spec
-        race2, pos2 = res2
-        race3, pos3 = res3
+    img, _ = _test.use_screenshot("single_mode/race_menu_6.png")
+    res1, res2, res3 = sorted(
+        race.find_by_race_menu_image(ctx, img),
+        key=lambda x: (x[1][1], x[0].name),
+    )
+    race1, pos1 = res1
+    # 2 race has exact same spec
+    race2, pos2 = res2
+    race3, pos3 = res3
 
     assert pos1 == (203, 595), pos1
     assert race1.name == "もちの木賞", race1.name
@@ -313,12 +263,10 @@ def test_find_by_race_menu_image_6():
 def test_find_by_race_menu_image_issue112():
     ctx = Context.new()
     ctx.date = (1, 12, 1)
-    with _test.screenshot("race_menu_issue112.png") as img:
-        res1, res2 = sorted(
-            race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1]
-        )
-        race1, pos1 = res1
-        race2, pos2 = res2
+    img, _ = _test.use_screenshot("single_mode/race_menu_issue112.png")
+    res1, res2 = sorted(race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1])
+    race1, pos1 = res1
+    race2, pos2 = res2
 
     assert pos1 == (203, 586), pos1
     assert race1.name == "さざんか賞", race1.name
