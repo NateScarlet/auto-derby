@@ -275,7 +275,7 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
             char_parts
             and l > char_non_zero_bbox[2]
             and (
-                l - char_non_zero_bbox[0] > max_char_width * 0.7
+                l - char_non_zero_bbox[0] > max_char_width * 0.8
                 or l - char_non_zero_bbox[2] > max_char_width * 0.2
                 or r - char_non_zero_bbox[0] > max_char_width
                 or (

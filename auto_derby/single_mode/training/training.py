@@ -133,6 +133,40 @@ def _recognize_level(rgb_color: Tuple[int, ...]) -> int:
     raise ValueError("_recognize_level: unknown level color: %s" % (rgb_color,))
 
 
+def _estimate_failure_rate(ctx: Context, trn: Training) -> float:
+    return mathtools.interpolate(
+        int(ctx.vitality * 10000),
+        (
+            (0, 0.85),
+            (1500, 0.7),
+            (4000, 0.0),
+        )
+        if trn.wisdom > 0
+        else (
+            (0, 0.99),
+            (1500, 0.8),
+            (3000, 0.5),
+            (5000, 0.15),
+            (7000, 0.0),
+        ),
+    )
+
+
+def _estimate_vitality(ctx: Context, trn: Training) -> float:
+    # https://gamewith.jp/uma-musume/article/show/257432
+    vit_data = {
+        trn.TYPE_SPEED: (-21, -22, -23, -25, -27),
+        trn.TYPE_STAMINA: (-19, -20, -21, -23, -25),
+        trn.TYPE_POWER: (-20, -21, -22, -24, -26),
+        trn.TYPE_GUTS: (-22, -23, -24, -26, -28),
+        trn.TYPE_WISDOM: (5, 5, 5, 5, 5),
+    }
+
+    if trn.type not in vit_data:
+        return 0
+    return vit_data[trn.type][trn.level - 1] / ctx.total_vitality
+
+
 class Training:
     TYPE_SPEED: int = 1
     TYPE_STAMINA: int = 2
@@ -162,8 +196,10 @@ class Training:
         self.guts: int = 0
         self.wisdom: int = 0
         self.skill: int = 0
-        # self.friendship: int = 0
-        # self.failure_rate: float = 0.0
+        self.vitality: float = 0.0
+        self._use_estimate_vitality = False
+        self.failure_rate: float = 0.0
+        self._use_estimate_failure_rate = False
         self.confirm_position: Tuple[int, int] = (0, 0)
         self.partners: Tuple[Partner, ...] = tuple()
 
@@ -217,6 +253,10 @@ class Training:
         self.guts = _ocr_training_effect(img.crop(rp.vector4((237, t, 309, b), 466)))
         self.wisdom = _ocr_training_effect(img.crop(rp.vector4((309, t, 382, b), 466)))
         self.skill = _ocr_training_effect(img.crop(rp.vector4((387, t, 450, b), 466)))
+        # TODO: recognize vitality
+        self._use_estimate_vitality = True
+        # TODO: recognize failure rate
+        self._use_estimate_failure_rate = True
         self.partners = tuple(Partner.from_training_scene(img))
         return self
 
@@ -251,6 +291,10 @@ class Training:
         )
 
     def score(self, ctx: Context) -> float:
+        if self._use_estimate_failure_rate:
+            self.failure_rate = _estimate_failure_rate(ctx, self)
+        if self._use_estimate_vitality:
+            self.vitality = _estimate_vitality(ctx, self)
         return training_score.compute(ctx, self)
 
 

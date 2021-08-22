@@ -3,18 +3,34 @@
 
 from __future__ import annotations
 
-import logging
 import time
+from typing import Optional, Text
 
-from ... import action, template, templates
+from ... import action, templates
 from ...scenes.single_mode.command import CommandScene
 from .. import Context, go_out
 from .command import Command
 
-_LOGGER = logging.getLogger(__name__)
+
+def _main_option() -> go_out.Option:
+    ret = go_out.Option.new()
+    ret.type = ret.TYPE_MAIN
+    return ret
 
 
 class GoOutCommand(Command):
+    def __init__(self, option: Optional[go_out.Option] = None) -> None:
+        super().__init__()
+        self.option = option or _main_option()
+
+    def name(self) -> Text:
+        o = self.option
+        if o.type == o.TYPE_MAIN:
+            return "GoOut<main>"
+        if o.type == o.TYPE_SUPPORT:
+            return f"GoOut<support:{o.name or o.position}:{o.current_event_count}/{o.total_event_count}>"
+        return f"GoOut<{o}>"
+
     def execute(self, ctx: Context) -> None:
         CommandScene.enter(ctx)
         action.tap_image(
@@ -22,43 +38,10 @@ class GoOutCommand(Command):
         )
         time.sleep(0.5)
         if action.count_image(templates.SINGLE_MODE_GO_OUT_MENU_TITLE):
-            options_with_score = sorted(
-                [
-                    (i, i.score(ctx))
-                    for i in go_out.Option.from_menu(template.screenshot())
-                ],
-                key=lambda x: x[1],
-            )
-            for option, score in options_with_score:
-                _LOGGER.info("go out option:\t%s:\tscore:%.2f", option, score)
-            action.tap(options_with_score[0][0].position)
+            action.tap(self.option.position)
+        if self.option.total_event_count > 0:
+            self.option.current_event_count += 1
         return
 
     def score(self, ctx: Context) -> float:
-        ret = 0
-
-        if ctx.vitality < 0.8:
-            ret += 10 + ctx.turn_count() * 10 / 24
-        if ctx.mood < ctx.MOOD_VERY_GOOD:
-            ret += (ctx.MOOD_VERY_GOOD[0] - ctx.mood[0]) * 40 * 3
-            if ctx.date[1:] in ((6, 1),):
-                ret += 10
-            if ctx.date[1:] in ((6, 2),):
-                ret += 20
-
-        if ctx.turn_count() >= ctx.total_turn_count() - 2:
-            ret *= 0.1
-        if ctx.date in ((4, 0, 0)):
-            ret -= 20
-        ret += (
-            len(
-                set(
-                    (
-                        Context.CONDITION_HEADACHE,
-                        Context.CONDITION_OVERWEIGHT,
-                    )
-                ).intersection(ctx.conditions)
-            )
-            * 20
-        )
-        return ret
+        return self.option.score(ctx)

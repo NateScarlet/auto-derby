@@ -43,7 +43,7 @@
       - [x] 基于属性和适性
       - [ ] 基于对手跑法选择跑法（倾向人数少的跑法）
   - [x] 支持友人卡
-    - [ ] 基于友人卡事件效果主动外出
+    - [x] 基于友人卡事件效果主动外出
 - [x] 支持 [python 插件](https://github.com/NateScarlet/auto-derby/wiki/Plugins)
 
 ## 使用方法

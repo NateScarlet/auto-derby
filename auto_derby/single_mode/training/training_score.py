@@ -54,32 +54,18 @@ def compute(ctx: Context, trn: Training) -> float:
     int_ = mathtools.integrate(
         ctx.wisdom,
         trn.wisdom,
-        ((0, 3.0), (300, 1.0), (400, 0.4), (600, 0.2))
-        if ctx.vitality < 0.9
-        else ((0, 2.0), (300, 0.8), (400, 0.1)),
+        ((0, 2.0), (300, 0.8), (400, 0.1)),
     )
 
-    if ctx.vitality < 0.9:
-        int_ += 5 if ctx.date[1:] in ((7, 1), (7, 2), (8, 1)) else 3
+    vit = max(min(trn.vitality, 1 - ctx.vitality), 0) * ctx.total_vitality * 0.6
+    if ctx.date[1:] in ((6, 1),):
+        vit *= 1.2
+    if ctx.date[1:] in ((6, 2), (7, 1), (7, 2), (8, 1)):
+        vit *= 1.5
 
     skill = trn.skill * 0.5
 
-    success_rate = mathtools.interpolate(
-        int(ctx.vitality * 10000),
-        (
-            (0, 0.15),
-            (1500, 0.3),
-            (4000, 1.0),
-        )
-        if trn.wisdom > 0
-        else (
-            (0, 0.01),
-            (1500, 0.2),
-            (3000, 0.5),
-            (5000, 0.85),
-            (7000, 1.0),
-        ),
-    )
+    success_rate = 1 - trn.failure_rate
 
     partner = 0
     for i in trn.partners:
@@ -106,4 +92,4 @@ def compute(ctx: Context, trn: Training) -> float:
     hint = 3 if has_hint else 0
     return (
         spd + sta + pow + per + int_ + skill + partner + target_level_score + hint
-    ) * success_rate
+    ) * success_rate + vit

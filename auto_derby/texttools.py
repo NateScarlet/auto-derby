@@ -124,13 +124,14 @@ def compare(a: Text, b: Text, *, max_missing_chars: int = 5) -> float:
 
 
 def choose(v: Text, options: Iterable[Text], threshold: float = 0.5) -> Text:
-    if not options:
-        return v
-    res, similarity = sorted(
+    option_with_similarites = sorted(
         ((i, compare(v, i)) for i in options),
         key=lambda x: x[1],
         reverse=True,
-    )[0]
+    )
+    if not option_with_similarites:
+        return v
+    res, similarity = option_with_similarites[0]
     if similarity < threshold:
         return v
     return res

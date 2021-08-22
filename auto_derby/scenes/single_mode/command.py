@@ -65,6 +65,18 @@ class CommandScene(Scene):
             action.count_image(templates.SINGLE_MODE_GO_OUT_FRIEND_ICON) > 0
         )
 
+    def recognize_go_out_options(self, ctx: single_mode.Context) -> None:
+        if not self.can_go_out_with_friend:
+            return
+
+        action.wait_tap_image(templates.SINGLE_MODE_COMMAND_GO_OUT)
+        time.sleep(0.5)
+        if action.count_image(templates.SINGLE_MODE_GO_OUT_MENU_TITLE):
+            ctx.go_out_options = tuple(
+                single_mode.go_out.Option.from_menu(template.screenshot(max_age=0))
+            )
+            action.wait_tap_image(templates.CANCEL_BUTTON)
+
     def recognize(self, ctx: single_mode.Context):
         action.reset_client_size()
         ctx.update_by_command_scene(template.screenshot(max_age=0))
@@ -73,3 +85,5 @@ class CommandScene(Scene):
             self.recognize_class(ctx)
         if ctx.turf == ctx.STATUS_NONE or ctx.date[1:] == (4, 1):
             self.recognize_status(ctx)
+        if not ctx.go_out_options:
+            self.recognize_go_out_options(ctx)

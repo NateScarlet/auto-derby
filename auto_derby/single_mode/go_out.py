@@ -3,17 +3,35 @@
 
 from __future__ import annotations
 
-from typing import Iterator, Text, Type
+import os
+from typing import Iterator, Set, Text, Type
 
+import cv2
 from PIL.Image import Image
 
-from .. import imagetools, mathtools, template, templates
+from .. import imagetools, mathtools, ocr, template, templates, texttools
 from .context import Context
-import os
+from .training import Training
 
 
 class g:
     option_class: Type[Option]
+    names: Set[Text] = set()
+
+
+def _ocr_name(img: Image) -> Text:
+    img = imagetools.resize(img, height=32)
+    cv_img = imagetools.cv_image(img.convert("L"))
+    _, binary_img = cv2.threshold(cv_img, 120, 255, cv2.THRESH_BINARY_INV)
+
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+
+    text = ocr.text(imagetools.pil_image(binary_img))
+    return texttools.choose(text, g.names)
 
 
 class Option:
@@ -32,6 +50,8 @@ class Option:
         self.current_event_count = 0
         self.total_event_count = 0
         self.position = (0, 0)
+        self.bbox = (0, 0, 0, 0)
+        self.name = ""
 
     def __str__(self) -> Text:
         type_text = {
@@ -39,14 +59,90 @@ class Option:
             Option.TYPE_SUPPORT: "SUPPORT",
             Option.TYPE_UNDEFINED: "UNDEFINED",
         }.get(self.type, "UNKNOWN")
-        return f"Option<type={type_text},event={self.current_event_count}/{self.total_event_count},pos={self.position}>"
+        return f"Option<name={self.name},type={type_text},event={self.current_event_count}/{self.total_event_count},pos={self.position}>"
+
+    def disabled(self, ctx: Context) -> bool:
+        if (
+            self.total_event_count > 0
+            and self.current_event_count >= self.total_event_count
+        ):
+            return True
+        return False
+
+    def heal_rate(self, ctx: Context) -> float:
+        if self.type == self.TYPE_MAIN:
+            if ctx.CONDITION_HEADACHE in ctx.conditions:
+                return 0
+            return 0.5
+        if self.type == self.TYPE_SUPPORT:
+            return 0.4
+        return 0
+
+    def mood_rate(self, ctx: Context) -> float:
+        if ctx.mood == ctx.MOOD_VERY_GOOD:
+            return 0
+        if self.type == self.TYPE_MAIN:
+            return 1
+        if self.type == self.TYPE_SUPPORT:
+            return 0.5
+        return 0
+
+    def vitality(self, ctx: Context) -> float:
+        ret = 5
+        if self.type == self.TYPE_SUPPORT:
+            ret = 15
+        return ret / ctx.total_vitality
 
     def score(self, ctx: Context) -> float:
         ret = 0
-        if self.type == Option.TYPE_MAIN:
-            ret += (ctx.MOOD_VERY_GOOD[0] - ctx.mood[0]) * 300
-        elif self.type == Option.TYPE_SUPPORT:
-            ret += 20
+
+        mood = mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 20),
+                (24, 25),
+                (48, 30),
+                (72, 40),
+            ),
+        )
+        max_mood_rate = {
+            ctx.MOOD_VERY_GOOD: 0,
+            ctx.MOOD_GOOD: 1,
+            ctx.MOOD_NORMAL: 2,
+            ctx.MOOD_BAD: 3,
+            ctx.MOOD_VERY_BAD: 4,
+        }[ctx.mood]
+        ret += mood * min(self.mood_rate(ctx), max_mood_rate)
+
+        heal = (
+            len(
+                set(
+                    (
+                        Context.CONDITION_HEADACHE,
+                        Context.CONDITION_OVERWEIGHT,
+                    )
+                ).intersection(ctx.conditions)
+            )
+            * 20
+        )
+        ret += heal * self.heal_rate(ctx)
+
+        t = Training.new()
+        t.vitality = self.vitality(ctx)
+        ret += t.score(ctx)
+
+        # try finish all events
+        if self.type == self.TYPE_SUPPORT:
+            ret += mathtools.interpolate(
+                ctx.turn_count(),
+                (
+                    (0, 0),
+                    (48, 5),
+                    (72, 20),
+                    (78, 30),
+                ),
+            )
+
         return ret
 
     def update_by_option_image(self, img: Image) -> None:
@@ -77,6 +173,9 @@ class Option:
                 if not is_gray:
                     self.current_event_count += 1
 
+            name_bbox = rp.vector4((95, 16, 316, 38), 540)
+            self.name = _ocr_name(img.crop(name_bbox))
+
     @classmethod
     def from_menu(cls, img: Image) -> Iterator[Option]:
         rp = mathtools.ResizeProxy(img.width)
@@ -94,6 +193,7 @@ class Option:
             )
             option = cls.new()
             option.position = (x + rp.vector(100, 540), y + rp.vector(46, 540))
+            option.bbox = bbox
             if has_friend_ship_gauge:
                 option.type = cls.TYPE_SUPPORT
             else:

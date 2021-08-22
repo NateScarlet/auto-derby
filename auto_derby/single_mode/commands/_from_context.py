@@ -31,7 +31,13 @@ def from_context(ctx: Context) -> Iterator[Command]:
         yield SummerRestCommand()
     else:
         yield RestCommand()
-        yield GoOutCommand()
+        if ctx.go_out_options:
+            for i in ctx.go_out_options:
+                if i.disabled(ctx):
+                    continue
+                yield GoOutCommand(i)
+        else:
+            yield GoOutCommand()
     for i in race.find(ctx):
         yield RaceCommand(i)
     if not g.ignore_training_commands(ctx):

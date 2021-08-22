@@ -66,6 +66,7 @@ class config:
     single_mode_training_partner_class = single_mode.training.Partner
     single_mode_context_class = single_mode.Context
     single_mode_go_out_option_class = single_mode.go_out.Option
+    single_mode_go_out_names = single_mode.go_out.g.names
     single_mode_health_care_score = sc.g.health_care_score
     single_mode_rest_score = sc.g.health_care_score
     single_mode_summer_rest_score = sc.g.summer_rest_score
@@ -106,6 +107,7 @@ class config:
         single_mode.event.g.prompt_disabled = cls.single_mode_event_prompt_disabled
         single_mode.context.g.context_class = cls.single_mode_context_class
         single_mode.go_out.g.option_class = cls.single_mode_go_out_option_class
+        single_mode.go_out.g.names = cls.single_mode_go_out_names
         single_mode.race.g.data_path = cls.single_mode_race_data_path
         single_mode.race.g.race_class = cls.single_mode_race_class
         single_mode.training.g.image_path = cls.single_mode_training_image_path
