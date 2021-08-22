@@ -1,4 +1,5 @@
 {
   "hasHealthCare": false,
-  "hasScheduledRace": true
+  "hasScheduledRace": true,
+  "canGoOutWithFriend": false
 }

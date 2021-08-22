@@ -16,6 +16,7 @@ class CommandScene(Scene):
         super().__init__()
         self.has_health_care = False
         self.has_scheduled_race = False
+        self.can_go_out_with_friend = False
 
     @classmethod
     def name(cls):
@@ -36,6 +37,7 @@ class CommandScene(Scene):
         return {
             "hasHealthCare": self.has_health_care,
             "hasScheduledRace": self.has_scheduled_race,
+            "canGoOutWithFriend": self.can_go_out_with_friend,
         }
 
     def recognize_class(self, ctx: single_mode.Context):
@@ -58,6 +60,9 @@ class CommandScene(Scene):
         )
         self.has_scheduled_race = (
             action.count_image(templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER) > 0
+        )
+        self.can_go_out_with_friend = (
+            action.count_image(templates.SINGLE_MODE_GO_OUT_FRIEND_ICON) > 0
         )
 
     def recognize(self, ctx: single_mode.Context):
