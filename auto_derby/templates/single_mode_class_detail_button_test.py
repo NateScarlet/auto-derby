@@ -4,7 +4,7 @@ _EXPECTED_POS = (114, 165)
 
 
 def test_match():
-    img, rp = _test.use_screenshot("single_mode/command_scene_10.png")
+    img, rp = _test.use_screenshot("single_mode/command_scene_8.png")
     res = tuple(template.match(img, templates.SINGLE_MODE_CLASS_DETAIL_BUTTON))
     assert len(res) == 1
     (match1,) = res
