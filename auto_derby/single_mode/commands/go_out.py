@@ -10,6 +10,7 @@ from ... import action, templates
 from ...scenes.single_mode.command import CommandScene
 from .. import Context, go_out
 from .command import Command
+from .globals import g
 
 
 def _main_option() -> go_out.Option:
@@ -32,6 +33,7 @@ class GoOutCommand(Command):
         return f"GoOut<{o}>"
 
     def execute(self, ctx: Context) -> None:
+        g.on_command(ctx, self)
         CommandScene.enter(ctx)
         action.tap_image(
             templates.SINGLE_MODE_COMMAND_GO_OUT,

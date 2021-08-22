@@ -63,6 +63,7 @@ class RaceCommand(Command):
         return str(self.race)
 
     def execute(self, ctx: Context) -> None:
+        g.on_command(ctx, self)
         scene = RaceMenuScene.enter(ctx)
         if not self.selected:
             scene.choose_race(ctx, self.race)

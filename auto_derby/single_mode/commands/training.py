@@ -21,6 +21,7 @@ class TrainingCommand(Command):
         return str(self.training)
 
     def execute(self, ctx: Context) -> None:
+        g.on_command(ctx, self)
         scene = TrainingScene.enter(ctx)
         x, y = self.training.confirm_position
         if scene.trainings[-1] != self.training:

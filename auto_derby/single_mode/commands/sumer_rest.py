@@ -12,6 +12,7 @@ from .globals import g
 
 class SummerRestCommand(Command):
     def execute(self, ctx: Context) -> None:
+        g.on_command(ctx, self)
         CommandScene.enter(ctx)
         action.tap_image(
             templates.SINGLE_MODE_COMMAND_SUMMER_REST,
