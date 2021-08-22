@@ -4,7 +4,7 @@ from .. import _test
 
 
 def test_update_by_command_scene():
-    img, _ = _test.use_screenshot("single_mode/command_scene.png")
+    img, _ = _test.use_screenshot("single_mode/command_scene_1.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
     _test.snapshot_match(ctx)
