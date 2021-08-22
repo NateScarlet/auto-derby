@@ -69,6 +69,7 @@ class config:
     single_mode_health_care_score = sc.g.health_care_score
     single_mode_rest_score = sc.g.health_care_score
     single_mode_summer_rest_score = sc.g.summer_rest_score
+    single_mode_ignore_training_commands = sc.g.ignore_training_commands
     single_mode_target_training_levels = _parse_training_levels(
         os.getenv("AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS", "")
     )
@@ -114,6 +115,9 @@ class config:
         sc.g.rest_score = cls.single_mode_summer_rest_score
         sc.g.summer_rest_score = cls.single_mode_summer_rest_score
         sc.g.health_care_score = cls.single_mode_health_care_score
+        sc.g.ignore_training_commands = cls.single_mode_ignore_training_commands
+        sc.g.pause_if_race_order_gt = cls.pause_if_race_order_gt
+        sc.g.on_single_mode_live = cls.on_single_mode_live
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path
         terminal.g.prompt_sound_path = cls.terminal_prompt_sound_path
