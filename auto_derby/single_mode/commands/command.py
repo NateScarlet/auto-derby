@@ -3,10 +3,9 @@
 
 from __future__ import annotations
 
-from typing import Iterator, Text
+from typing import Text
 from abc import ABC, abstractmethod
 from ..context import Context
-from ...scenes import Scene
 
 
 class Command(ABC):
@@ -22,6 +21,3 @@ class Command(ABC):
 
     def score(self, ctx: Context) -> float:
         return 0
-
-    def from_scene(self, ctx: Context, scene: Scene) -> Iterator[Command]:
-        return iter(())
