@@ -1,7 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
-from auto_derby.scenes.single_mode.race_menu import RaceMenuScene
+from auto_derby.scenes.single_mode.race_menu import RaceMenuScene, RaceTurnsIncorrect
 
 import logging
 import time
@@ -43,7 +43,10 @@ def _handle_turn(ctx: Context):
     LOGGER.info("context: %s", ctx)
     for c, s in command_with_scores:
         LOGGER.info("score:\t%2.2f:\t%s", s, c.name())
-    command_with_scores[0][0].execute(ctx)
+    try:
+        command_with_scores[0][0].execute(ctx)
+    except RaceTurnsIncorrect:
+        _handle_turn(ctx)
 
 
 def nurturing():
