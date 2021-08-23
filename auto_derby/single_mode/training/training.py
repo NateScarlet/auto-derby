@@ -113,6 +113,16 @@ def _ocr_training_effect(img: Image) -> int:
         cv2.waitKey()
         cv2.destroyAllWindows()
 
+    # +100 has different color
+    hash100 = "0000000000006066607770ff70df60df00000000000000000000000000000000"
+    if (
+        imagetools.compare_hash(
+            imagetools.image_hash(imagetools.pil_image(text_img)),
+            hash100,
+        )
+        > 0.9
+    ):
+        return 100
     text = ocr.text(image_from_array(text_img))
     if not text:
         return 0
