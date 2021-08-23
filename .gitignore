@@ -19,3 +19,5 @@ single_mode_choices.csv
 /debug.*
 
 .env
+
+/data

@@ -3,19 +3,18 @@
 
 
 import csv
-import errno
 import json
 import logging
 import os
 import warnings
 from pathlib import Path
-from typing import Dict, List, Optional, Text, Tuple
+from typing import Any, Dict, List, Optional, Text, Tuple
 
 import cv2
 import numpy as np
 from PIL.Image import Image, fromarray
 
-from . import imagetools, terminal
+from . import data, imagetools, terminal
 
 LOGGER = logging.getLogger(__name__)
 
@@ -28,8 +27,12 @@ class g:
     labels: Dict[Text, Text] = {}
 
 
+def _data_key():
+    return (len(g.labels), g.data_path)
+
+
 class _g:
-    loaded_data_path = ""
+    loaded_data_key: Any = None
 
 
 def _migrate_json_to_csv() -> None:
@@ -40,40 +43,52 @@ def _migrate_json_to_csv() -> None:
     g.data_path = str(Path(path).with_suffix(".csv"))
     try:
         with open(path, "r", encoding="utf-8") as f:
-            g.labels = json.load(f)
+            labels = json.load(f)
         warnings.warn(
             f"migrating json ocr labels to {g.data_path}, this support will be removed at next major version.",
             DeprecationWarning,
         )
-        for k, v in g.labels.items():
-            _label(k, v)
+        for k, v in labels.items():
+            _label(path, k, v)
         os.rename(path, path + "~")
-    except OSError as ex:
-        if ex.errno == errno.ENOENT:
-            pass
-        else:
-            raise
+    except FileNotFoundError:
+        pass
+
+
+def _load(path: Text):
+    with open(path, "r", encoding="utf-8") as f:
+        for k, v in csv.reader(f):
+            g.labels[k] = v
 
 
 def reload() -> None:
+    g.labels.clear()
+    _load(data.path("ocr_labels.csv"))
     _migrate_json_to_csv()
     try:
-        with open(g.data_path, "r", encoding="utf-8") as f:
-            g.labels = dict((k, v) for k, v in csv.reader(f))
-    except OSError:
+        _load(g.data_path)
+    except FileNotFoundError:
         pass
-    _g.loaded_data_path = g.data_path
+    _g.loaded_data_key = _data_key()
 
 
 def reload_on_demand() -> None:
-    if _g.loaded_data_path != g.data_path:
+    if _data_key() != _g.loaded_data_key:
         reload()
 
 
-def _label(image_hash: Text, value: Text) -> None:
+def _label(path: Text, image_hash: Text, value: Text) -> None:
     g.labels[image_hash] = value
-    with open(g.data_path, "a", encoding="utf-8", newline="") as f:
-        csv.writer(f).writerow((image_hash, value))
+
+    def _do():
+        with open(path, "a", encoding="utf-8", newline="") as f:
+            csv.writer(f).writerow((image_hash, value))
+
+    try:
+        _do()
+    except FileNotFoundError:
+        os.makedirs(os.path.dirname(path))
+        _do()
 
 
 _PREVIEW_PADDING = 4
@@ -124,7 +139,7 @@ def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
                 )
     finally:
         close_img()
-    _label(h, ret)
+    _label(g.data_path, h, ret)
     LOGGER.info("labeled: hash=%s, value=%s", h, ret)
     return ret
 

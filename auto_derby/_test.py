@@ -15,7 +15,13 @@ from typing import (
 
 import PIL.Image
 
-from . import clients, mathtools, template
+from . import clients, mathtools, template, config
+
+
+def ignore_user_data():
+    config.ocr_data_path = ""
+    config.apply()
+
 
 DATA_PATH = Path(__file__).parent / "test_data"
 
@@ -42,6 +48,7 @@ class ImageClient(clients.Client):
 
 
 def use_screenshot(name: Text):
+    ignore_user_data()
     img = PIL.Image.open(DATA_PATH / name).convert("RGB")
     # resize old test data
     if img.width == 466:

@@ -44,7 +44,7 @@ class config:
     single_mode_race_data_path = os.getenv(
         "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH", "single_mode_races.jsonl"
     )
-    ocr_data_path = os.getenv("AUTO_DERBY_OCR_LABEL_PATH", "ocr_labels.json")
+    ocr_data_path = os.getenv("AUTO_DERBY_OCR_LABEL_PATH", "data/ocr_labels.csv")
     ocr_image_path = os.getenv("AUTO_DERBY_OCR_IMAGE_PATH", "")
     last_screenshot_save_path = os.getenv("AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH", "")
     pause_if_race_order_gt = int(os.getenv("AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT", "5"))
