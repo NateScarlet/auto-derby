@@ -14,12 +14,13 @@ import webbrowser
 import win32con
 import win32gui
 
-from . import clients, config, jobs, plugin, templates, version
+from . import __version__, clients, config, jobs, plugin, templates, version
 
 LOGGER = logging.getLogger(__name__)
 
 
 def main():
+    LOGGER.info(f"auto_derby: {__version__.VERSION} ({__version__.RELEASE_DATE})")
     if config.CHECK_UPDATE:
         version.check_update()
     avaliable_jobs = {
