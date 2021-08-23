@@ -99,10 +99,10 @@ class Option:
         mood = mathtools.interpolate(
             ctx.turn_count(),
             (
-                (0, 20),
-                (24, 25),
-                (48, 30),
-                (72, 40),
+                (0, 25),
+                (24, 20),
+                (48, 15),
+                (72, 10),
             ),
         )
         max_mood_rate = {
