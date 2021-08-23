@@ -6,8 +6,9 @@ from ... import _test
 from . import Partner, Training
 
 
-def test_update_by_training_scene():
-    img, _ = _test.use_screenshot("single_mode/training_scene.png")
+
+def test_update_by_training_scene_1():
+    img, _ = _test.use_screenshot("single_mode/training_scene_1.png")
 
     training = Training.from_training_scene(img)
     _test.snapshot_match(training)
