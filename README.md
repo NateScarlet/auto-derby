@@ -70,6 +70,12 @@ py -3.8 -m auto_derby 工作名称
 
 工作名称随便输入错误的名字会提示当前支持的工作
 
+### 更新版本
+
+用户数据默认储存在 `data` 文件夹下。
+
+复制 `data` 文件夹到新版本项目文件夹即可继承数据。
+
 ## 问题反馈
 
 通过 [Github issues](https://github.com/NateScarlet/auto-derby/issues) 提交反馈
