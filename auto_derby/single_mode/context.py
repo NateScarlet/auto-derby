@@ -391,9 +391,12 @@ class Context:
 
     @property
     def is_summer_camp(self) -> bool:
-        if self.date[0] not in (2, 3):
-            return False
-        return self.date[1:] in ((7, 1), (7, 2), (8, 1))
+        return self.date[0] in (2, 3) and self.date[1:] in (
+            (7, 1),
+            (7, 2),
+            (8, 1),
+            (8, 2),
+        )
 
     def expected_score(self) -> float:
         import warnings
