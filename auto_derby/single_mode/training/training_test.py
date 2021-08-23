@@ -1,10 +1,23 @@
 import time
 import timeit
 from concurrent import futures
+from typing import Text
 
 from ... import _test
 from . import Partner, Training
+import pytest
 
+
+@pytest.mark.parametrize(
+    "name",
+    tuple(
+        i.stem for i in ((_test.DATA_PATH / "single_mode").glob("training_scene_*.png"))
+    ),
+)
+def test_from_training_scene(name: Text):
+    img, _ = _test.use_screenshot(f"single_mode/{name}.png")
+    training = Training.from_training_scene(img)
+    _test.snapshot_match(training, name=name)
 
 
 def test_update_by_training_scene_1():
