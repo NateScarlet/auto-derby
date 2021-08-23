@@ -32,8 +32,16 @@ class _g:
 
 def _set(event_id: Text, value: int) -> None:
     g.choices[event_id] = value
-    with open(g.data_path, "a", encoding="utf-8", newline="") as f:
-        csv.writer(f).writerow((event_id, value))
+
+    def _do():
+        with open(g.data_path, "a", encoding="utf-8", newline="") as f:
+            csv.writer(f).writerow((event_id, value))
+
+    try:
+        _do()
+    except FileNotFoundError:
+        os.makedirs(os.path.dirname(g.data_path))
+        _do()
 
 
 def _migrate_json_to_csv() -> None:

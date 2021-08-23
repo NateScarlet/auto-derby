@@ -26,7 +26,7 @@ Add-Type –AssemblyName PresentationFramework
 Add-Type -Language CSharp ([string](Get-Content "$PSScriptRoot\launcher.cs"))
 
 $data = New-Object NateScarlet.AutoDerby.DataContext -Property @{
-    DefaultSingleModeChoicesDataPath = [System.IO.Path]::GetFullPath("single_mode_choices.csv")
+    DefaultSingleModeChoicesDataPath = [System.IO.Path]::GetFullPath("data/single_mode_choices.csv")
     DefaultPythonExecutablePath      = . {
         try {
             & py.exe -3.8 -c 'import sys; print(sys.executable)'
@@ -100,6 +100,7 @@ $data | Format-List -Property (
 )
 
 
+& "$WorkspaceFolder/auto_derby/launcher/migrate_data.ps1"
 if ($data.Debug) {   
     $env:DEBUG = "auto_derby"
     $env:AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH = "debug/last_screenshot.png"

@@ -55,7 +55,7 @@ class config:
         "AUTO_DERBY_SINGLE_MODE_TRAINING_IMAGE_PATH", ""
     )
     single_mode_choice_path = os.getenv(
-        "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH", "single_mode_choices.json"
+        "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH", "data/single_mode_choices.csv"
     )
     single_mode_event_prompt_disabled = (
         os.getenv("AUTO_DERBY_EVENT_PROMPT_DISABLED", "").lower() == "true"
