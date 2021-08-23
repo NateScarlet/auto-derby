@@ -6,7 +6,7 @@ import os
 import warnings
 from typing import Callable, Dict, Text
 
-from . import ocr, plugin, single_mode, template, terminal, window
+from . import ocr, plugin, single_mode, template, terminal, window, data
 from .clients import ADBClient
 from .single_mode import commands as sc
 from .single_mode.training import Training
@@ -42,7 +42,8 @@ class config:
     CHECK_UPDATE = os.getenv("AUTO_DERBY_CHECK_UPDATE", "").lower() == "true"
 
     single_mode_race_data_path = os.getenv(
-        "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH", "single_mode_races.jsonl"
+        "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH",
+        data.path("single_mode_races.jsonl"),
     )
     ocr_data_path = os.getenv("AUTO_DERBY_OCR_LABEL_PATH", "data/ocr_labels.csv")
     ocr_image_path = os.getenv("AUTO_DERBY_OCR_IMAGE_PATH", "")
