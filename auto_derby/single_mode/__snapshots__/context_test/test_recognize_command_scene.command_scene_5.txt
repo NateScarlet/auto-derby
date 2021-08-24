@@ -1,0 +1,1 @@
+Context<turn=52,mood=(1.2, 1.1),vit=0.740,spd=568,sta=368,pow=341,gut=307,wis=329,fan=0,ground=,distance=,style=,condition=0>

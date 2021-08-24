@@ -1,9 +1,28 @@
-from .context import Context
+from typing import Text
+
+import pytest
 
 from .. import _test
+from .context import Context
 
 
-def test_update_by_command_scene():
+@pytest.mark.parametrize(
+    "name",
+    tuple(
+        i.stem for i in ((_test.DATA_PATH / "single_mode").glob("command_scene_*.png"))
+    ),
+)
+def test_recognize_command_scene(name: Text):
+    img, _ = _test.use_screenshot(f"single_mode/{name}.png")
+    ctx = Context.new()
+    ctx.update_by_command_scene(img)
+    _test.snapshot_match(
+        ctx,
+        name=name,
+    )
+
+
+def test_update_by_command_scene_1():
     img, _ = _test.use_screenshot("single_mode/command_scene_1.png")
     ctx = Context.new()
     ctx.update_by_command_scene(img)
