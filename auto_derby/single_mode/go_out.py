@@ -91,7 +91,7 @@ class Option:
         ret = 5
         if self.type == self.TYPE_SUPPORT:
             ret = 15
-        return ret / ctx.total_vitality
+        return ret / ctx.max_vitality
 
     def score(self, ctx: Context) -> float:
         ret = 0

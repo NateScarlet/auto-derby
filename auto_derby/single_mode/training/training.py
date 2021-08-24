@@ -174,7 +174,7 @@ def _estimate_vitality(ctx: Context, trn: Training) -> float:
 
     if trn.type not in vit_data:
         return 0
-    return vit_data[trn.type][trn.level - 1] / ctx.total_vitality
+    return vit_data[trn.type][trn.level - 1] / ctx.max_vitality
 
 
 class Training:

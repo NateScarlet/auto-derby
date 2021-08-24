@@ -211,7 +211,7 @@ class Context:
         # (year, month, half-month), 1-base
         self.date = (0, 0, 0)
         self.vitality = 0.0
-        self.total_vitality = 100
+        self.max_vitality = 100
         self.mood = Context.MOOD_NORMAL
         self.conditions: Set[int] = set()
         self.fan_count = 0

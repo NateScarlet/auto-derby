@@ -57,7 +57,7 @@ def compute(ctx: Context, trn: Training) -> float:
         ((0, 2.0), (300, 0.8), (400, 0.1)),
     )
 
-    vit = max(min(trn.vitality, 1 - ctx.vitality), 0) * ctx.total_vitality * 0.6
+    vit = max(min(trn.vitality, 1 - ctx.vitality), 0) * ctx.max_vitality * 0.6
     if ctx.date[1:] in ((6, 1),):
         vit *= 1.2
     if ctx.date[1:] in ((6, 2), (7, 1), (7, 2), (8, 1)):

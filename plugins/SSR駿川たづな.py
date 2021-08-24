@@ -97,7 +97,7 @@ class Plugin(auto_derby.Plugin):
                 if self.name != _NAME:
                     return super().vitality(ctx)
 
-                return _VIT[self.current_event_count] / ctx.total_vitality
+                return _VIT[self.current_event_count] / ctx.max_vitality
 
             def score(self, ctx: Context) -> float:
                 ret = super().score(ctx)

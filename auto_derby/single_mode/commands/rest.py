@@ -24,7 +24,7 @@ class RestCommand(Command):
 
 def default_score(ctx: Context) -> float:
     t = Training.new()
-    t.vitality = 50 / ctx.total_vitality
+    t.vitality = 50 / ctx.max_vitality
     return t.score(ctx)
 
 
