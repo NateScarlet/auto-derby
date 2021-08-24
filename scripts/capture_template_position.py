@@ -44,7 +44,7 @@ def create_pos_mask(name: Text, game_img: PIL.Image.Image, threshold: float):
     if pos_img:
         out_img = np.array(pos_img.convert("L"), dtype=np.uint8)
     else:
-        out_img = np.zeros((game_img.height, game_img.width), dtype=np.uint8)
+        out_img = np.zeros((540, 960), dtype=np.uint8)
 
     padding = 2
     for _, pos in template.match(
