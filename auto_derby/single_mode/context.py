@@ -285,9 +285,23 @@ class Context:
 
         self.vitality = _recognize_vitality(screenshot.crop(vitality_bbox))
 
-        mood_color = screenshot.getpixel(rp.vector2((395, 113), 466))
-        assert isinstance(mood_color, tuple), mood_color
-        self.mood = _recognize_mood((mood_color[0], mood_color[1], mood_color[2]))
+        # mood_pos change when vitality increase
+        for index, mood_pos in enumerate(
+            (
+                rp.vector2((395, 113), 466),
+                rp.vector2((473, 133), 540),
+            )
+        ):
+            mood_color = screenshot.getpixel(mood_pos)
+            assert isinstance(mood_color, tuple), mood_color
+            try:
+                self.mood = _recognize_mood(
+                    (mood_color[0], mood_color[1], mood_color[2])
+                )
+                break
+            except ValueError:
+                if index == 1:
+                    raise
 
         self.speed = _recognize_property(screenshot.crop(speed_bbox))
         self.stamina = _recognize_property(screenshot.crop(stamina_bbox))
