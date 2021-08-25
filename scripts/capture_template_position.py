@@ -44,7 +44,7 @@ def create_pos_mask(name: Text, game_img: PIL.Image.Image, threshold: float):
     if pos_img:
         out_img = np.array(pos_img.convert("L"), dtype=np.uint8)
     else:
-        out_img = np.zeros((540, 960), dtype=np.uint8)
+        out_img = np.zeros((960, 540), dtype=np.uint8)
 
     padding = 2
     for _, pos in template.match(
@@ -71,8 +71,11 @@ def main():
         "--game-image", "-g", dest="game_image", default="last_screenshot.local.png"
     )
     parser.add_argument("--threshold", "-t", dest="threshold", type=float, default=0.9)
+    parser.add_argument("--debug", "-d", action="store_true")
     args = parser.parse_args()
     name = args.name
+    if args.debug:
+        template._DEBUG_TMPL = name  # type: ignore
     threshold = args.threshold
     game_image_path = args.game_image
     if not name:
