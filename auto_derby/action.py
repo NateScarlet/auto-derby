@@ -76,7 +76,12 @@ def tap_image(
 def wait_tap_image(
     name: Union[Text, template.Specification], *, x: int = 0, y: int = 0
 ) -> None:
-    _, pos = wait_image(name)
+    _, last_pos = wait_image(name)
+    while True:
+        _, pos = wait_image(name)
+        if pos == last_pos:
+            break
+        last_pos = pos
     tap((pos[0] + x, pos[1] + y))
 
 
