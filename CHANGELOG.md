@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/NateScarlet/auto-derby/compare/v1.5.0...v1.6.0) (2021-08-28)
+
+### Features
+
+- adjust go out command score ([6abd08f](https://github.com/NateScarlet/auto-derby/commit/6abd08f4b4a27a5f6db7e634dc9b9c64ad38fd8e))
+- log context before score ([1ea5ac8](https://github.com/NateScarlet/auto-derby/commit/1ea5ac8d4a8c6752817a60708c7487eaf9a65e13))
+- log context every turn ([a1f15cf](https://github.com/NateScarlet/auto-derby/commit/a1f15cf276e909f405936572b5da857c6e51b49c))
+- log version on start ([b0c2cf6](https://github.com/NateScarlet/auto-derby/commit/b0c2cf6bbf556e962ed682b4dac7d1433fb3ad90))
+- move single_mode_races.jsonl to auto_derby/data/ ([33d2618](https://github.com/NateScarlet/auto-derby/commit/33d2618854eb802cc6ea3d02ef7d5516d8de2c67)), closes [#161](https://github.com/NateScarlet/auto-derby/issues/161)
+- **nurturing:** log message on end ([9f5aed5](https://github.com/NateScarlet/auto-derby/commit/9f5aed54ae79c63bd3410f1d8c8b16759f090132))
+- **ocr:** separate user data from default data ([ec995d1](https://github.com/NateScarlet/auto-derby/commit/ec995d14744cbab3ba32e1bbb8e96149537358bb)), closes [#161](https://github.com/NateScarlet/auto-derby/issues/161)
+- **plugin:** add `pause_before_command` plugin ([ae40787](https://github.com/NateScarlet/auto-derby/commit/ae40787f2b3000190a0c28ebe232b627e123d6ab))
+- **plugin:** add `pause_before_race_continue` plugin ([7130c05](https://github.com/NateScarlet/auto-derby/commit/7130c05a934f500e0bb4d061ba268a95a494dea7)), closes [#170](https://github.com/NateScarlet/auto-derby/issues/170)
+- **plugin:** allow change single mode command score ([73c453b](https://github.com/NateScarlet/auto-derby/commit/73c453b919b3810b6ba78b09a8e4a14a7cf4c671))
+- **plugin:** allow ignore single mode training commands ([1750f0e](https://github.com/NateScarlet/auto-derby/commit/1750f0eca56ef9cb68256efd5f00da6f2c85a546)), closes [#96](https://github.com/NateScarlet/auto-derby/issues/96)
+- **plugin:** allow run code before single mode command ([4d15048](https://github.com/NateScarlet/auto-derby/commit/4d15048ff99e3fc52515e6d413561d54444442e0))
+- **plugin:** allow run code on race result ([d11d2cf](https://github.com/NateScarlet/auto-derby/commit/d11d2cfdb3c204094eb312976fa6fafb39342809)), closes [#170](https://github.com/NateScarlet/auto-derby/issues/170)
+- **plugin:** allow run code on single mode end ([24885c4](https://github.com/NateScarlet/auto-derby/commit/24885c4e919cff334b1ccd1f0a5713be7eef2ec9)), closes [#170](https://github.com/NateScarlet/auto-derby/issues/170)
+- **plugin:** SSR 駿川たづな: adjust score ([133dd94](https://github.com/NateScarlet/auto-derby/commit/133dd94c150735e2c3226fcfa6f5e1a98a772789))
+- **plugin:** SSR 駿川たづな: adjust score ([09c746b](https://github.com/NateScarlet/auto-derby/commit/09c746b9350b1d815916e1d29fc6fe714cd7cb10))
+- **plugin:** SSR 駿川たづな: adjust training score ([005cb26](https://github.com/NateScarlet/auto-derby/commit/005cb2609d284968b71a3ed930dafa28cafc620a))
+- **single-mode:** adjust go out score ([8e903f6](https://github.com/NateScarlet/auto-derby/commit/8e903f6d3c3725e87f065c5f079855e762587e69))
+- **single-mode:** adjust race score ([dd46632](https://github.com/NateScarlet/auto-derby/commit/dd466329a21fb3b10fbd35f9a2ff40847fd55a3d)), closes [#171](https://github.com/NateScarlet/auto-derby/issues/171)
+- **single-mode:** adjust rest score ([f2483d0](https://github.com/NateScarlet/auto-derby/commit/f2483d0b1dec03f6515ca41d1ae7d963ecebc2ff))
+- **single-mode:** change default event choice data path ([9a525ea](https://github.com/NateScarlet/auto-derby/commit/9a525ea94c12b459abd1886235a2db9ed9140505)), closes [#161](https://github.com/NateScarlet/auto-derby/issues/161)
+- **single-mode:** go out with friend by score ([e89e4c9](https://github.com/NateScarlet/auto-derby/commit/e89e4c9283dbeb7cfc83b24521bf85be4d1a5971))
+- **single-mode:** recognize go out with friend ([2ba7b66](https://github.com/NateScarlet/auto-derby/commit/2ba7b66f2dd68bd3a1eb5541f19f06e6d1970f65))
+
+### Bug Fixes
+
+- **config:** apply wrong single_mode_rest_score ([4280df4](https://github.com/NateScarlet/auto-derby/commit/4280df4f6f662d91cf4328e6cb841d5b93dc7d4a))
+- **nurturing:** error when race turns incorrect ([b913793](https://github.com/NateScarlet/auto-derby/commit/b913793a698305893e04116b941527ab34d1a42a))
+- **single-mode:** error when recognize +100 ([15509d6](https://github.com/NateScarlet/auto-derby/commit/15509d683249ef27abaef823c5649e2a46f011f6)), closes [#162](https://github.com/NateScarlet/auto-derby/issues/162)
+- **single-mode:** error when recognize mood ([8178937](https://github.com/NateScarlet/auto-derby/commit/817893748570cfb93fbbc23623d8582f89d0996d)), closes [#164](https://github.com/NateScarlet/auto-derby/issues/164)
+- **single-mode:** update template position mask ([80c1f33](https://github.com/NateScarlet/auto-derby/commit/80c1f33d1ea72dd882b28b6173633f5f5baca7b5)), closes [#131](https://github.com/NateScarlet/auto-derby/issues/131)
+- **single-mode:** update templates for option{4,5} ([c7dae4a](https://github.com/NateScarlet/auto-derby/commit/c7dae4a06ae459f5f53e36811810e368d7fea116)), closes [#129](https://github.com/NateScarlet/auto-derby/issues/129) [#131](https://github.com/NateScarlet/auto-derby/issues/131)
+- **single-mode:** wrong Context.is_summer_camp ([b66fdb1](https://github.com/NateScarlet/auto-derby/commit/b66fdb19a8c3c4875855bd5b1eb77e4e0ddcb245))
+- **single-mode:** wrong Context.is_summer_camp for second half of august ([6f26dd6](https://github.com/NateScarlet/auto-derby/commit/6f26dd608fda9b5fd5eb09b4745f42514432d8eb))
+- wait_tap_image should wait position animation ([76f3697](https://github.com/NateScarlet/auto-derby/commit/76f3697060130c6b32c6614cb0da56c9f65a76fe))
+
 ## [1.5.0](https://github.com/NateScarlet/auto-derby/compare/v1.4.2...v1.5.0) (2021-08-21)
 
 ### Features

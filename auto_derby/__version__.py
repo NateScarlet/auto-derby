@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.5.0"
-RELEASE_DATE = datetime.fromtimestamp(1629528461)
-LAST_GIT_COMMIT_DESCRIBE = "v1.4.2-23-g8514182"
-LAST_GIT_COMMIT_HASH = "851418294e8cfe675541a00b65ccd0d88d5b5781"
+VERSION = "1.6.0"
+RELEASE_DATE = datetime.fromtimestamp(1630148326)
+LAST_GIT_COMMIT_DESCRIBE = "v1.5.0-53-g9f5aed5"
+LAST_GIT_COMMIT_HASH = "9f5aed54ae79c63bd3410f1d8c8b16759f090132"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1629526559)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): recognize friend type partner"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1630147436)
+LAST_GIT_COMMIT_SUBJECT = "feat(nurturing): log message on end"
 LAST_GIT_COMMIT_BODY = ""
