@@ -85,6 +85,8 @@ def compute(ctx: Context, race: Race) -> float:
             (900, 600),
         ),
     )
+    if ctx.target_fan_count > ctx.fan_count:
+        fan_count *= 3
 
     not_winning_score = 0 if ctx.is_after_winning else 1.5 * ctx.turn_count()
 
