@@ -35,6 +35,10 @@ def _parse_training_levels(spec: Text) -> Dict[int, int]:
     return ret
 
 
+def _default_on_single_mode_crane_game(ctx: single_mode.Context) -> None:
+    pass
+
+
 class config:
     LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", "auto_derby.log")
     PLUGINS = tuple(i for i in os.getenv("AUTO_DERBY_PLUGINS", "").split(",") if i)
@@ -90,7 +94,9 @@ class config:
 
     on_single_mode_live = sc.g.on_winning_live
     on_single_mode_command = sc.g.on_command
-    on_single_mode_crane_game: Callable[[single_mode.Context], None] = lambda *_: None
+    on_single_mode_crane_game: Callable[
+        [single_mode.Context], None
+    ] = _default_on_single_mode_crane_game
 
     terminal_pause_sound_path = os.path.expandvars(
         "${WinDir}/Media/Windows Background.wav"
