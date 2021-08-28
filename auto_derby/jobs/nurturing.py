@@ -85,6 +85,7 @@ def nurturing():
             ctx.defer_next_turn(_set_target_fan_count)
             action.wait_tap_image(templates.CANCEL_BUTTON)
         elif name == templates.SINGLE_MODE_FINISH_BUTTON:
+            LOGGER.info("end: %s", ctx)
             config.on_single_mode_end(ctx)
             break
         elif name in (
