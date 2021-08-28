@@ -94,6 +94,7 @@ class config:
 
     on_single_mode_live = sc.g.on_winning_live
     on_single_mode_command = sc.g.on_command
+    on_single_mode_race_result = sc.g.on_race_result
     on_single_mode_crane_game: Callable[
         [single_mode.Context], None
     ] = _default_on_single_mode_crane_game
@@ -129,6 +130,7 @@ class config:
         sc.g.pause_if_race_order_gt = cls.pause_if_race_order_gt
         sc.g.on_winning_live = cls.on_single_mode_live
         sc.g.on_command = cls.on_single_mode_command
+        sc.g.on_race_result = cls.on_single_mode_race_result
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path
         terminal.g.prompt_sound_path = cls.terminal_prompt_sound_path
