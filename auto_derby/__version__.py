@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.6.0"
-RELEASE_DATE = datetime.fromtimestamp(1630148326)
-LAST_GIT_COMMIT_DESCRIBE = "v1.5.0-53-g9f5aed5"
-LAST_GIT_COMMIT_HASH = "9f5aed54ae79c63bd3410f1d8c8b16759f090132"
+VERSION = "1.6.1"
+RELEASE_DATE = datetime.fromtimestamp(1630217346)
+LAST_GIT_COMMIT_DESCRIBE = "v1.6.0-1-gac85efa"
+LAST_GIT_COMMIT_HASH = "ac85efa47595a9586822d5d5fb244a51ccc0595f"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1630147436)
-LAST_GIT_COMMIT_SUBJECT = "feat(nurturing): log message on end"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1630208564)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): should call on_race_result before continue"
 LAST_GIT_COMMIT_BODY = ""

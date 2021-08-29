@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.1](https://github.com/NateScarlet/auto-derby/compare/v1.6.0...v1.6.1) (2021-08-29)
+
+### Bug Fixes
+
+- **single-mode:** should call on_race_result before continue ([ac85efa](https://github.com/NateScarlet/auto-derby/commit/ac85efa47595a9586822d5d5fb244a51ccc0595f))
+
 ## [1.6.0](https://github.com/NateScarlet/auto-derby/compare/v1.5.0...v1.6.0) (2021-08-28)
 
 ### Features
