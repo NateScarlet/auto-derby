@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import logging
-import time
 from typing import Text
 
 from ... import action, templates, terminal
@@ -56,26 +55,23 @@ _RACE_ORDER_TEMPLATES = {
 def _handle_race_result(ctx: Context, race: Race):
     action.wait_tap_image(templates.RACE_RESULT_BUTTON)
 
-    tmpl, pos = action.wait_image(*_RACE_ORDER_TEMPLATES.keys())
     res = RaceResult()
     res.race = race
+
+    tmpl, pos = action.wait_image(*_RACE_ORDER_TEMPLATES.keys())
     res.order = _RACE_ORDER_TEMPLATES[tmpl.name]
+    action.tap(pos)
 
-    def _emit_result():
-        _LOGGER.info("race result: %s", res)
-        g.on_race_result(ctx, res)
-
-    while True:
-        time.sleep(1)
-        if action.tap_image(templates.GREEN_NEXT_BUTTON):
-            break
-        if action.tap_image(templates.SINGLE_MODE_CONTINUE):
-            res.is_failed = True
-            _emit_result()
-            _handle_race_result(ctx, race)
-            return
-        action.tap(pos)
-    _emit_result()
+    tmpl, pos = action.wait_image(
+        templates.GREEN_NEXT_BUTTON,
+        templates.SINGLE_MODE_CONTINUE,
+    )
+    res.is_failed = tmpl.name == templates.SINGLE_MODE_CONTINUE
+    _LOGGER.info("race result: %s", res)
+    g.on_race_result(ctx, res)
+    action.tap(pos)
+    if res.is_failed:
+        _handle_race_result(ctx, race)
 
 
 class RaceCommand(Command):
