@@ -211,15 +211,17 @@ class Partner:
     def score(self, ctx: Context) -> float:
         if self.type == self.TYPE_OTHER:
             return 2 + self.level
-        ret = mathtools.interpolate(
-            ctx.turn_count(),
-            (
-                (0, 5),
-                (24, 3),
-                (48, 2),
-                (72, 0),
-            ),
-        )
+        ret = 0
+        if 0 <= self.level < 4:
+            ret = mathtools.interpolate(
+                ctx.turn_count(),
+                (
+                    (0, 5),
+                    (24, 3),
+                    (48, 2),
+                    (72, 0),
+                ),
+            )
         if self.has_training:
             ret += 7
         return ret
