@@ -159,6 +159,8 @@ class Partner:
                 (72, 0),
             ),
         )
+        if self.has_training:
+            ret += 7
         return ret
 
     @staticmethod
