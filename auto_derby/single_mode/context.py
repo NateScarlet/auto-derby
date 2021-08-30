@@ -167,6 +167,22 @@ def _recognize_property(img: Image) -> int:
     return int(ocr.text(imagetools.pil_image(binary_img)))
 
 
+def _recognize_scenario(rp: mathtools.ResizeProxy, img: Image) -> Text:
+    _, pos = next(
+        template.match(
+            img,
+            templates.SINGLE_MODE_CLASS_DETAIL_BUTTON,
+        )
+    )
+    radius = rp.vector(10, 540)
+
+    if mathtools.distance(rp.vector2((114, 165), 540), pos) < radius:
+        return Context.SCENARIO_URA
+    if mathtools.distance(rp.vector2((126, 591), 540), pos) < radius:
+        return Context.SCENARIO_AOHARU
+    return Context.SCENARIO_UNKNOWN
+
+
 class Context:
     MOOD_VERY_BAD = (0.8, 0.95)
     MOOD_BAD = (0.9, 0.98)
@@ -197,6 +213,12 @@ class Context:
         STATUS_F,
         STATUS_G,
     )
+
+    # master.mdb
+    # SELECT text FROM text_data WHERE category=119;
+    SCENARIO_UNKNOWN = ""
+    SCENARIO_URA = "新設！　URAファイナルズ！！"
+    SCENARIO_AOHARU = "アオハル杯～輝け、チームの絆～"
 
     @staticmethod
     def new() -> Context:
@@ -251,6 +273,7 @@ class Context:
 
         self.scene: scenes.Scene = scenes.UnknownScene()
         self.go_out_options: Tuple[go_out.Option, ...] = ()
+        self.scenario = Context.SCENARIO_UNKNOWN
 
     def next_turn(self) -> None:
         if self.date in ((1, 0, 0), (4, 0, 0)):
@@ -267,7 +290,13 @@ class Context:
 
     def update_by_command_scene(self, screenshot: Image) -> None:
         rp = mathtools.ResizeProxy(screenshot.width)
-        date_bbox = rp.vector4((10, 27, 140, 43), 466)
+        self.scenario = _recognize_scenario(rp, screenshot)
+        if not self.scenario:
+            raise ValueError("unknown scenario")
+        date_bbox = {
+            Context.SCENARIO_URA: rp.vector4((10, 27, 140, 43), 466),
+            Context.SCENARIO_AOHARU: rp.vector4((125, 32, 278, 48), 540),
+        }[self.scenario]
         vitality_bbox = rp.vector4((148, 106, 327, 108), 466)
 
         _, detail_button_pos = next(
