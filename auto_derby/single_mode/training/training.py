@@ -306,7 +306,7 @@ class Training:
         self._use_estimate_vitality = True
         # TODO: recognize failure rate
         self._use_estimate_failure_rate = True
-        self.partners = tuple(Partner.from_training_scene(img))
+        self.partners = tuple(Partner.from_training_scene_v2(ctx, img))
         return self
 
     def __str__(self):
@@ -319,10 +319,7 @@ class Training:
             ("wis", self.wisdom),
             ("ski", self.skill),
         )
-        partner_text = ",".join(
-            f"{i.type_text(i.type)}@{i.level}{'!' if i.has_hint else ''}{'^' if i.has_training else ''}"
-            for i in self.partners
-        )
+        partner_text = ",".join(i.to_short_text() for i in self.partners)
         return (
             "Training<"
             f"lv={self.level} "

@@ -1,1 +1,1 @@
-Training<lv=1 gut=10 pow=8 spd=6 ski=5 ptn=spd@1^,oth@1^>
+Training<lv=1 gut=10 pow=8 spd=6 ski=5 ptn=spd@1^[0%],pow@1^[0%]>

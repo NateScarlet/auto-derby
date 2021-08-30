@@ -194,6 +194,12 @@ def bg_mask_by_outline(outline_img: np.ndarray) -> np.ndarray:
     return border_flood_fill(outline_img)
 
 
+def inside_outline(img: np.ndarray, outline_img: np.ndarray) -> np.ndarray:
+    bg_mask = border_flood_fill(outline_img)
+    fg_mask = 255 - bg_mask
+    return cv2.copyTo(img, fg_mask)
+
+
 def resize(
     img: Image,
     *,

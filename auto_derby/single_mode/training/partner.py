@@ -125,6 +125,52 @@ def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
     return -1
 
 
+def _recognize_soul(img: Image) -> float:
+    img = imagetools.resize(img, height=40)
+    soul_img = imagetools.cv_image(img)
+    blue_outline_img = imagetools.constant_color_key(
+        soul_img,
+        (251, 109, 0),
+        (255, 178, 99),
+        threshold=0.6,
+    )
+    soul_img = imagetools.inside_outline(soul_img, blue_outline_img)
+    shapened_img = imagetools.mix(imagetools.sharpen(soul_img, 1), soul_img, 0.5)
+    white_outline_img = imagetools.constant_color_key(
+        shapened_img,
+        (255, 255, 255),
+        (252, 251, 251),
+        (248, 227, 159),
+        threshold=0.9,
+    )
+    bg_mask = imagetools.border_flood_fill(white_outline_img)
+    fg_mask = 255 - bg_mask
+    imagetools.fill_area(fg_mask, (0,), size_lt=100)
+    fg_img = cv2.copyTo(soul_img, fg_mask)
+    empty_mask = imagetools.constant_color_key(fg_img, (126, 121, 121))
+    if os.getenv("DEBUG") == __name__:
+        _LOGGER.debug(
+            "soul: img=%s",
+            imagetools.image_hash(img, save_path=g.image_path),
+        )
+        cv2.imshow("soul_img", soul_img)
+        cv2.imshow("sharpened_img", shapened_img)
+        cv2.imshow("blue_outline_img", blue_outline_img)
+        cv2.imshow("white_outline_img", white_outline_img)
+        cv2.imshow("bg_mask", bg_mask)
+        cv2.imshow("fg_mask", fg_mask)
+        cv2.imshow("empty_mask", empty_mask)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+
+    fg_avg = np.average(fg_mask)
+    if fg_avg < 100:
+        return -1
+    empty_avg = np.average(empty_mask)
+    outline_avg = 45
+    return max(0, min(1, 1 - (empty_avg / (fg_avg - outline_avg))))
+
+
 class Partner:
     TYPE_SPEED: int = 1
     TYPE_STAMINA: int = 2
@@ -133,18 +179,20 @@ class Partner:
     TYPE_WISDOM: int = 5
     TYPE_FRIEND: int = 6
     TYPE_OTHER: int = 7
+    TYPE_TEAMMATE: int = 8
 
     def __init__(self):
         self.level = 0
         self.type = 0
         self.has_hint = False
         self.has_training = False
+        self.soul = -1
         self.icon_bbox = (0, 0, 0, 0)
 
     def __str__(self):
         return (
             f"Partner<type={self.type_text(self.type)} lv={self.level} "
-            f"hint={self.has_hint} training={self.has_training} icon_bbox={self.icon_bbox}>)"
+            f"hint={self.has_hint} training={self.has_training} soul={self.soul} icon_bbox={self.icon_bbox}>)"
         )
 
     def score(self, ctx: Context) -> float:
@@ -177,14 +225,26 @@ class Partner:
             Partner.TYPE_WISDOM: "wis",
             Partner.TYPE_FRIEND: "frd",
             Partner.TYPE_OTHER: "oth",
+            Partner.TYPE_TEAMMATE: "tm",
         }.get(v, f"unknown({v})")
 
     @classmethod
     def _from_training_scene_icon(
-        cls, img: Image, bbox: Tuple[int, int, int, int]
+        cls, ctx: Context, img: Image, bbox: Tuple[int, int, int, int]
     ) -> Optional[Partner]:
         rp = mathtools.ResizeProxy(img.width)
         icon_img = img.crop(bbox)
+        soul = -1
+        if ctx.scenario == ctx.SCENARIO_AOHARU:
+            soul_bbox = (
+                bbox[0] - rp.vector(35, 540),
+                bbox[1] + rp.vector(33, 540),
+                bbox[0] + rp.vector(2, 540),
+                bbox[3] - rp.vector(0, 540),
+            )
+            soul_img = img.crop(soul_bbox)
+            soul = _recognize_soul(soul_img)
+
         if os.getenv("DEBUG") == __name__:
             _LOGGER.debug(
                 "icon: img=%s",
@@ -194,26 +254,43 @@ class Partner:
             cv2.waitKey()
             cv2.destroyAllWindows()
         level = _recognize_level(rp, icon_img)
-        if level < 0:
+        if level < 0 and soul < 0:
             return None
         self = cls.new()
         self.icon_bbox = bbox
         self.level = level
+        self.soul = soul
         self.has_hint = _recognize_has_hint(rp, icon_img)
         self.has_training = _recognize_has_training(rp, icon_img)
         self.type = _recognize_type_color(rp, icon_img)
+        if soul >= 0 and self.type == Partner.TYPE_OTHER:
+            self.type = Partner.TYPE_TEAMMATE
         _LOGGER.debug("partner: %s", self)
         return self
 
     @classmethod
     def from_training_scene(cls, img: Image) -> Iterator[Partner]:
+        ctx = Context()
+        ctx.scenario = ctx.SCENARIO_URA
+        return cls.from_training_scene_v2(ctx, img)
+
+    @classmethod
+    def from_training_scene_v2(cls, ctx: Context, img: Image) -> Iterator[Partner]:
         rp = mathtools.ResizeProxy(img.width)
 
-        icon_bbox = rp.vector4((448, 146, 516, 220), 540)
-        icon_y_offset = rp.vector(90, 540)
+        icon_bbox, icon_y_offset = {
+            ctx.SCENARIO_URA: (
+                rp.vector4((448, 146, 516, 220), 540),
+                rp.vector(90, 540),
+            ),
+            ctx.SCENARIO_AOHARU: (
+                rp.vector4((448, 147, 516, 220), 540),
+                rp.vector(86, 540),
+            ),
+        }[ctx.scenario]
         icons_bottom = rp.vector(578, 540)
         while icon_bbox[2] < icons_bottom:
-            v = cls._from_training_scene_icon(img, icon_bbox)
+            v = cls._from_training_scene_icon(ctx, img, icon_bbox)
             if not v:
                 break
             yield v
@@ -223,6 +300,18 @@ class Partner:
                 icon_bbox[2],
                 icon_bbox[3] + icon_y_offset,
             )
+
+    def to_short_text(self):
+        ret = self.type_text(self.type)
+        if self.level > 0:
+            ret += f"@{self.level}"
+        if self.has_hint:
+            ret += "!"
+        if self.has_training:
+            ret += "^"
+        if self.soul >= 0:
+            ret += f"[{round(self.soul * 100)}%]"
+        return ret
 
 
 g.partner_class = Partner

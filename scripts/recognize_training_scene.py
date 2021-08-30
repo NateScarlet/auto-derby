@@ -44,7 +44,9 @@ def main():
         "aoharu": Context.SCENARIO_AOHARU,
     }.get(args.scenario, args.scenario)
     image = imagetools.resize(PIL.Image.open(image_path), width=template.TARGET_WIDTH)
-    training = single_mode.Training.from_training_scene(image, scenario=scenario)
+    ctx = Context.new()
+    ctx.scenario = scenario
+    training = single_mode.Training.from_training_scene_v2(ctx, image)
     print(training)
 
 
