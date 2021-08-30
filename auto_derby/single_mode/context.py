@@ -174,8 +174,7 @@ def _recognize_scenario(rp: mathtools.ResizeProxy, img: Image) -> Text:
             templates.SINGLE_MODE_CLASS_DETAIL_BUTTON,
         )
     )
-    radius = rp.vector(10, 540)
-
+    radius = rp.vector(60, 540)
     if mathtools.distance(rp.vector2((114, 165), 540), pos) < radius:
         return Context.SCENARIO_URA
     if mathtools.distance(rp.vector2((126, 591), 540), pos) < radius:
@@ -388,8 +387,8 @@ class Context:
     def __str__(self):
         msg = ""
         if self.go_out_options:
-            msg += ", go_out="
-            msg += ",".join(
+            msg += ",go_out="
+            msg += " ".join(
                 (
                     f"{i.current_event_count}/{i.total_event_count}"
                     for i in self.go_out_options
@@ -397,6 +396,7 @@ class Context:
             )
         return (
             "Context<"
+            f"scenario={self.scenario},"
             f"turn={self.turn_count()},"
             f"mood={self.mood},"
             f"vit={self.vitality:.3f},"
