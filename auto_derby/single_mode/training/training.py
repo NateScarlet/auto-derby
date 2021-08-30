@@ -129,6 +129,88 @@ def _ocr_training_effect(img: Image) -> int:
     return int(text.lstrip("+"))
 
 
+def _ocr_red_training_effect(img: Image) -> int:
+    cv_img = imagetools.cv_image(imagetools.resize(img, height=32))
+    sharpened_img = cv2.filter2D(
+        cv_img,
+        8,
+        np.array(
+            (
+                (0, -1, 0),
+                (-1, 5, -1),
+                (0, -1, 0),
+            )
+        ),
+    )
+    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
+
+    white_outline_img = imagetools.constant_color_key(
+        sharpened_img,
+        (255, 255, 255),
+    )
+
+    masked_img = imagetools.inside_outline(cv_img, white_outline_img)
+
+    red_outline_img = imagetools.constant_color_key(
+        masked_img,
+        (15, 18, 216),
+        (34, 42, 234),
+    )
+
+    masked_img = imagetools.inside_outline(masked_img, red_outline_img)
+
+    height = cv_img.shape[0]
+    fill_gradient = _gradient(
+        (
+            ((129, 211, 255), 0),
+            ((126, 188, 255), round(height * 0.5)),
+            ((57, 112, 255), height),
+        )
+    ).astype(np.uint8)
+    fill_img = np.repeat(np.expand_dims(fill_gradient, 1), cv_img.shape[1], axis=1)
+    assert fill_img.shape == cv_img.shape
+
+    text_img = imagetools.color_key(masked_img, fill_img)
+    imagetools.fill_area(text_img, (0,), size_lt=8)
+
+    text_img_extra = imagetools.constant_color_key(
+        masked_img,
+        (128, 196, 253),
+        (136, 200, 255),
+        (144, 214, 255),
+        threshold=0.95,
+    )
+    text_img = np.array(np.maximum(text_img, text_img_extra))
+    h = cv_img.shape[0]
+    imagetools.fill_area(text_img, (0,), size_lt=round(h * 0.2 ** 2))
+
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("sharpened_img", sharpened_img)
+        cv2.imshow("white_outline_img", white_outline_img)
+        cv2.imshow("red_outline_img", red_outline_img)
+        cv2.imshow("masked_img", masked_img)
+        cv2.imshow("text_img_extra", text_img_extra)
+        cv2.imshow("text_img", text_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+
+    # +100 has different color
+    hash100 = "0000000000006066607770ff70df60df00000000000000000000000000000000"
+    if (
+        imagetools.compare_hash(
+            imagetools.image_hash(imagetools.pil_image(text_img)),
+            hash100,
+        )
+        > 0.9
+    ):
+        return 100
+    text = ocr.text(image_from_array(text_img))
+    if not text:
+        return 0
+    return int(text.lstrip("+"))
+
+
 def _recognize_level(rgb_color: Tuple[int, ...]) -> int:
     if imagetools.compare_color((49, 178, 22), rgb_color) > 0.9:
         return 1
@@ -277,7 +359,7 @@ class Training:
             tuple(cast.list_(img.getpixel(rp.vector2((10, 200), 540)), int))
         )
 
-        bbox_data = {
+        bbox_group = {
             ctx.SCENARIO_URA: (
                 rp.vector4((18, 503, 91, 532), 466),
                 rp.vector4((91, 503, 163, 532), 466),
@@ -296,12 +378,31 @@ class Training:
             ),
         }[ctx.scenario]
 
-        self.speed = _ocr_training_effect(img.crop(bbox_data[0]))
-        self.stamina = _ocr_training_effect(img.crop(bbox_data[1]))
-        self.power = _ocr_training_effect(img.crop(bbox_data[2]))
-        self.guts = _ocr_training_effect(img.crop(bbox_data[3]))
-        self.wisdom = _ocr_training_effect(img.crop(bbox_data[4]))
-        self.skill = _ocr_training_effect(img.crop(bbox_data[5]))
+        self.speed = _ocr_training_effect(img.crop(bbox_group[0]))
+        self.stamina = _ocr_training_effect(img.crop(bbox_group[1]))
+        self.power = _ocr_training_effect(img.crop(bbox_group[2]))
+        self.guts = _ocr_training_effect(img.crop(bbox_group[3]))
+        self.wisdom = _ocr_training_effect(img.crop(bbox_group[4]))
+        self.skill = _ocr_training_effect(img.crop(bbox_group[5]))
+
+        extra_bbox_group = {
+            ctx.SCENARIO_AOHARU: (
+                rp.vector4((18, 572, 104, 595), 540),
+                rp.vector4((104, 572, 190, 595), 540),
+                rp.vector4((190, 572, 273, 595), 540),
+                rp.vector4((273, 572, 358, 595), 540),
+                rp.vector4((358, 572, 441, 595), 540),
+                rp.vector4((448, 572, 521, 595), 540),
+            )
+        }.get(ctx.scenario)
+        if extra_bbox_group:
+            self.speed += _ocr_red_training_effect(img.crop(extra_bbox_group[0]))
+            self.stamina += _ocr_red_training_effect(img.crop(extra_bbox_group[1]))
+            self.power += _ocr_red_training_effect(img.crop(extra_bbox_group[2]))
+            self.guts += _ocr_red_training_effect(img.crop(extra_bbox_group[3]))
+            self.wisdom += _ocr_red_training_effect(img.crop(extra_bbox_group[4]))
+            self.skill += _ocr_red_training_effect(img.crop(extra_bbox_group[5]))
+
         # TODO: recognize vitality
         self._use_estimate_vitality = True
         # TODO: recognize failure rate
