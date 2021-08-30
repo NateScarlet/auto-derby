@@ -1,0 +1,1 @@
+Training<lv=1  ptn=spd@1,oth@2^>

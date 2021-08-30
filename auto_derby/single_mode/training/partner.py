@@ -43,6 +43,14 @@ def _recognize_has_hint(rp: mathtools.ResizeProxy, icon_img: Image) -> bool:
     return np.average(hint_mask) > 200
 
 
+def _recognize_has_training(rp: mathtools.ResizeProxy, icon_img: Image) -> bool:
+    bbox = rp.vector4((52, 0, 65, 8), 540)
+    mark_color = (67, 131, 255)
+    mark_img = icon_img.crop(bbox)
+    mask = imagetools.constant_color_key(imagetools.cv_image(mark_img), mark_color)
+    return np.average(mask) > 100
+
+
 def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
     pos = (
         rp.vector2((10, 65), 540),  # level 1
@@ -130,12 +138,13 @@ class Partner:
         self.level = 0
         self.type = 0
         self.has_hint = False
+        self.has_training = False
         self.icon_bbox = (0, 0, 0, 0)
 
     def __str__(self):
         return (
             f"Partner<type={self.type_text(self.type)} lv={self.level} "
-            f"hint={self.has_hint} icon_bbox={self.icon_bbox}>)"
+            f"hint={self.has_hint} training={self.has_training} icon_bbox={self.icon_bbox}>)"
         )
 
     def score(self, ctx: Context) -> float:
@@ -189,6 +198,7 @@ class Partner:
         self.icon_bbox = bbox
         self.level = level
         self.has_hint = _recognize_has_hint(rp, icon_img)
+        self.has_training = _recognize_has_training(rp, icon_img)
         self.type = _recognize_type_color(rp, icon_img)
         _LOGGER.debug("partner: %s", self)
         return self

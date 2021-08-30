@@ -281,7 +281,7 @@ class Training:
             ("ski", self.skill),
         )
         partner_text = ",".join(
-            f"{i.type_text(i.type)}@{i.level}{'!' if i.has_hint else ''}"
+            f"{i.type_text(i.type)}@{i.level}{'!' if i.has_hint else ''}{'^' if i.has_training else ''}"
             for i in self.partners
         )
         return (
