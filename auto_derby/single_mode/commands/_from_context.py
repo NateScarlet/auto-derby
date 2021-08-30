@@ -42,6 +42,6 @@ def from_context(ctx: Context) -> Iterator[Command]:
         yield RaceCommand(i)
     if not g.ignore_training_commands(ctx):
         scene = TrainingScene.enter(ctx)
-        scene.recognize()
+        scene.recognize_v2(ctx)
         for i in scene.trainings:
             yield TrainingCommand(i)

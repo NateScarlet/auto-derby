@@ -1,3 +1,4 @@
+from auto_derby.single_mode.context import Context
 import time
 import timeit
 from concurrent import futures
@@ -16,7 +17,11 @@ import pytest
 )
 def test_from_training_scene(name: Text):
     img, _ = _test.use_screenshot(f"single_mode/{name}.png")
-    training = Training.from_training_scene(img)
+    ctx = Context.new()
+    ctx.scenario = ctx.SCENARIO_URA
+    if "+aoharu+" in name:
+        ctx.scenario = ctx.SCENARIO_AOHARU
+    training = Training.from_training_scene_v2(ctx, img)
     _test.snapshot_match(training, name=name)
 
 

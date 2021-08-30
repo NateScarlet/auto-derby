@@ -15,11 +15,7 @@ import argparse
 
 import PIL.Image
 from auto_derby import imagetools, single_mode, template, config
-
-
-def recognize_training(img: PIL.Image.Image):
-    training = single_mode.Training.from_training_scene(img)
-    print(training)
+from auto_derby.single_mode import Context
 
 
 def main():
@@ -27,6 +23,7 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("image", default="debug/last_screenshot.png")
+    parser.add_argument("-s", "--scenario", default="ura")
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--debug-partner", action="store_true")
     args = parser.parse_args()
@@ -42,8 +39,13 @@ def main():
             continue
         logging.getLogger(i).setLevel(logging.DEBUG)
     image_path = args.image
+    scenario = {
+        "ura": Context.SCENARIO_URA,
+        "aoharu": Context.SCENARIO_AOHARU,
+    }.get(args.scenario, args.scenario)
     image = imagetools.resize(PIL.Image.open(image_path), width=template.TARGET_WIDTH)
-    recognize_training(image)
+    training = single_mode.Training.from_training_scene(image, scenario=scenario)
+    print(training)
 
 
 if __name__ == "__main__":

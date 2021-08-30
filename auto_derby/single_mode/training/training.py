@@ -214,7 +214,28 @@ class Training:
         self.partners: Tuple[Partner, ...] = tuple()
 
     @classmethod
-    def from_training_scene(cls, img: Image) -> Training:
+    def from_training_scene(
+        cls,
+        img: Image,
+    ) -> Training:
+        # TODO: remove old api at next major version
+        import warnings
+
+        warnings.warn(
+            "use from_training_scene_v2 instead",
+            DeprecationWarning,
+        )
+        ctx = Context()
+        ctx.scenario = ctx.SCENARIO_URA
+        return cls.from_training_scene_v2(ctx, img)
+
+    @classmethod
+    def from_training_scene_v2(
+        cls,
+        ctx: Context,
+        img: Image,
+    ) -> Training:
+
         if g.image_path:
             image_id = imagetools.md5(
                 imagetools.cv_image(img.convert("RGB")),
@@ -256,13 +277,31 @@ class Training:
             tuple(cast.list_(img.getpixel(rp.vector2((10, 200), 540)), int))
         )
 
-        t, b = 503, 532
-        self.speed = _ocr_training_effect(img.crop(rp.vector4((18, t, 91, b), 466)))
-        self.stamina = _ocr_training_effect(img.crop(rp.vector4((91, t, 163, b), 466)))
-        self.power = _ocr_training_effect(img.crop(rp.vector4((163, t, 237, b), 466)))
-        self.guts = _ocr_training_effect(img.crop(rp.vector4((237, t, 309, b), 466)))
-        self.wisdom = _ocr_training_effect(img.crop(rp.vector4((309, t, 382, b), 466)))
-        self.skill = _ocr_training_effect(img.crop(rp.vector4((387, t, 450, b), 466)))
+        bbox_data = {
+            ctx.SCENARIO_URA: (
+                rp.vector4((18, 503, 91, 532), 466),
+                rp.vector4((91, 503, 163, 532), 466),
+                rp.vector4((163, 503, 237, 532), 466),
+                rp.vector4((237, 503, 309, 532), 466),
+                rp.vector4((309, 503, 382, 532), 466),
+                rp.vector4((387, 503, 450, 532), 466),
+            ),
+            ctx.SCENARIO_AOHARU: (
+                rp.vector4((18, 597, 104, 625), 540),
+                rp.vector4((104, 597, 190, 625), 540),
+                rp.vector4((190, 597, 273, 625), 540),
+                rp.vector4((273, 597, 358, 625), 540),
+                rp.vector4((358, 597, 441, 625), 540),
+                rp.vector4((448, 597, 521, 625), 540),
+            ),
+        }[ctx.scenario]
+
+        self.speed = _ocr_training_effect(img.crop(bbox_data[0]))
+        self.stamina = _ocr_training_effect(img.crop(bbox_data[1]))
+        self.power = _ocr_training_effect(img.crop(bbox_data[2]))
+        self.guts = _ocr_training_effect(img.crop(bbox_data[3]))
+        self.wisdom = _ocr_training_effect(img.crop(bbox_data[4]))
+        self.skill = _ocr_training_effect(img.crop(bbox_data[5]))
         # TODO: recognize vitality
         self._use_estimate_vitality = True
         # TODO: recognize failure rate

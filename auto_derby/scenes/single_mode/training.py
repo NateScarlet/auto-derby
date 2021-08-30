@@ -2,6 +2,7 @@
 # pyright: strict
 
 from __future__ import annotations
+from auto_derby.single_mode.context import Context
 
 from concurrent import futures
 from typing import Tuple
@@ -51,11 +52,23 @@ class TrainingScene(Scene):
         self.trainings: Tuple[Training, ...] = ()
 
     def recognize(self) -> None:
+        # TODO: remove old api at next major version
+        import warnings
+
+        warnings.warn(
+            "use recognize_v2 instead",
+            DeprecationWarning,
+        )
+        ctx = Context()
+        ctx.scenario = ctx.SCENARIO_URA
+        return self.recognize_v2(ctx)
+
+    def recognize_v2(self, ctx: Context) -> None:
         with futures.ThreadPoolExecutor() as pool:
             self.trainings = tuple(
                 i.result()
                 for i in [
-                    pool.submit(Training.from_training_scene, j)
+                    pool.submit(Training.from_training_scene_v2, ctx, j)
                     for j in _iter_training_images()
                 ]
             )
