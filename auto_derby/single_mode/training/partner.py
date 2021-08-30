@@ -43,12 +43,25 @@ def _recognize_has_hint(rp: mathtools.ResizeProxy, icon_img: Image) -> bool:
     return np.average(hint_mask) > 200
 
 
-def _recognize_has_training(rp: mathtools.ResizeProxy, icon_img: Image) -> bool:
+def _recognize_has_training(
+    ctx: Context, rp: mathtools.ResizeProxy, icon_img: Image
+) -> bool:
+    if ctx.scenario != ctx.SCENARIO_AOHARU:
+        return False
     bbox = rp.vector4((52, 0, 65, 8), 540)
-    mark_color = (67, 131, 255)
     mark_img = icon_img.crop(bbox)
-    mask = imagetools.constant_color_key(imagetools.cv_image(mark_img), mark_color)
-    return np.average(mask) > 100
+    mask = imagetools.constant_color_key(
+        imagetools.cv_image(mark_img),
+        (67, 131, 255),
+        (82, 171, 255),
+    )
+
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("training_mark_mask", mask)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+        _LOGGER.debug("training mark mask: avg=%0.2f", np.average(mask))
+    return np.average(mask) > 80
 
 
 def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
@@ -261,7 +274,7 @@ class Partner:
         self.level = level
         self.soul = soul
         self.has_hint = _recognize_has_hint(rp, icon_img)
-        self.has_training = _recognize_has_training(rp, icon_img)
+        self.has_training = _recognize_has_training(ctx, rp, icon_img)
         self.type = _recognize_type_color(rp, icon_img)
         if soul >= 0 and self.type == Partner.TYPE_OTHER:
             self.type = Partner.TYPE_TEAMMATE
