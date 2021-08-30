@@ -325,7 +325,7 @@ class Partner:
         if self.has_training:
             ret += "^"
         if self.soul >= 0:
-            ret += f"[{round(self.soul * 100)}%]"
+            ret += f"({round(self.soul * 100)}%)"
         return ret
 
 
