@@ -1,0 +1,1 @@
+Training<lv=1 fail=0% sta=31 gut=13 ski=6 ptn=oth,spd@1(49%),spd@4^^(100%),pow@3^(85%),tm(15%)>

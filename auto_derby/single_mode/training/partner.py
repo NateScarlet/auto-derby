@@ -148,9 +148,10 @@ def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
 
     for level, s in enumerate(spec):
         if all(
-            imagetools.compare_color(
-                icon_img.getpixel(pos),
-                color,
+            imagetools.compare_color_near(
+                imagetools.cv_image(icon_img),
+                pos,
+                color[::-1],
             )
             > 0.9
             for pos, color in s
@@ -279,6 +280,16 @@ class Partner:
     ) -> Optional[Partner]:
         rp = mathtools.ResizeProxy(img.width)
         icon_img = img.crop(bbox)
+        if os.getenv("DEBUG") == __name__:
+            _LOGGER.debug(
+                "icon: img=%s",
+                imagetools.image_hash(icon_img, save_path=g.image_path),
+            )
+            cv2.imshow("icon_img", imagetools.cv_image(icon_img))
+            cv2.waitKey()
+            cv2.destroyAllWindows()
+        level = _recognize_level(rp, icon_img)
+
         soul = -1
         if ctx.scenario == ctx.SCENARIO_AOHARU:
             soul_bbox = (
@@ -290,15 +301,6 @@ class Partner:
             soul_img = img.crop(soul_bbox)
             soul = _recognize_soul(soul_img)
 
-        if os.getenv("DEBUG") == __name__:
-            _LOGGER.debug(
-                "icon: img=%s",
-                imagetools.image_hash(icon_img, save_path=g.image_path),
-            )
-            cv2.imshow("icon_img", imagetools.cv_image(icon_img))
-            cv2.waitKey()
-            cv2.destroyAllWindows()
-        level = _recognize_level(rp, icon_img)
         if level < 0 and soul < 0:
             return None
         self = cls.new()
