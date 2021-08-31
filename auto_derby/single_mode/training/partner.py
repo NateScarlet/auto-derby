@@ -153,7 +153,7 @@ def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
                 pos,
                 color[::-1],
             )
-            > 0.9
+            > 0.95
             for pos, color in s
         ):
             return level
