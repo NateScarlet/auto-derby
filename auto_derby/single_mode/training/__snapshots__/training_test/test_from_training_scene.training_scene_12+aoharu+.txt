@@ -1,1 +1,1 @@
-Training<lv=1 spd=12 pow=5 ski=2 ptn=tm^(0%)>
+Training<lv=1 fail=0% spd=12 pow=5 ski=2 ptn=tm^(0%)>

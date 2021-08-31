@@ -225,23 +225,39 @@ def _recognize_level(rgb_color: Tuple[int, ...]) -> int:
     raise ValueError("_recognize_level: unknown level color: %s" % (rgb_color,))
 
 
-def _estimate_failure_rate(ctx: Context, trn: Training) -> float:
-    return mathtools.interpolate(
-        int(ctx.vitality * 10000),
-        (
-            (0, 0.85),
-            (1500, 0.7),
-            (4000, 0.0),
-        )
-        if trn.wisdom > 0
-        else (
-            (0, 0.99),
-            (1500, 0.8),
-            (3000, 0.5),
-            (5000, 0.15),
-            (7000, 0.0),
-        ),
+def _recognize_failure_rate(
+    rp: mathtools.ResizeProxy, trn: Training, img: Image
+) -> float:
+    x, y = trn.confirm_position
+    bbox = (
+        x + rp.vector(20, 540),
+        y + rp.vector(-155, 540),
+        x + rp.vector(70, 540),
+        y + rp.vector(-120, 540),
     )
+    rate_img = imagetools.cv_image(img.crop(bbox))
+    outline_img = imagetools.constant_color_key(
+        rate_img,
+        (252, 150, 14),
+        (255, 183, 89),
+        (0, 150, 255),
+        (0, 69, 255),
+    )
+    fg_img = imagetools.inside_outline(rate_img, outline_img)
+    text_img = imagetools.constant_color_key(
+        fg_img,
+        (255, 255, 255),
+        (18, 218, 255),
+    )
+    if __name__ == os.getenv("DEBUG"):
+        cv2.imshow("rate", rate_img)
+        cv2.imshow("outline", outline_img)
+        cv2.imshow("fg", fg_img)
+        cv2.imshow("text", text_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+    text = ocr.text(imagetools.pil_image(text_img))
+    return int(text.strip("%")) / 100
 
 
 def _estimate_vitality(ctx: Context, trn: Training) -> float:
@@ -291,7 +307,6 @@ class Training:
         self.vitality: float = 0.0
         self._use_estimate_vitality = False
         self.failure_rate: float = 0.0
-        self._use_estimate_failure_rate = False
         self.confirm_position: Tuple[int, int] = (0, 0)
         self.partners: Tuple[Partner, ...] = tuple()
 
@@ -405,8 +420,7 @@ class Training:
 
         # TODO: recognize vitality
         self._use_estimate_vitality = True
-        # TODO: recognize failure rate
-        self._use_estimate_failure_rate = True
+        self.failure_rate = _recognize_failure_rate(rp, self, img)
         self.partners = tuple(Partner.from_training_scene_v2(ctx, img))
         return self
 
@@ -424,22 +438,21 @@ class Training:
         return (
             "Training<"
             f"lv={self.level} "
-            + " ".join(
+            + (f"fail={int(self.failure_rate*100)}% ")
+            + "".join(
                 (
-                    f"{name}={value}"
+                    f"{name}={value} "
                     for name, value in sorted(
                         named_data, key=lambda x: x[1], reverse=True
                     )
                     if value
                 )
             )
-            + (f" ptn={partner_text}" if partner_text else "")
+            + (f"ptn={partner_text}" if partner_text else "")
             + ">"
         )
 
     def score(self, ctx: Context) -> float:
-        if self._use_estimate_failure_rate:
-            self.failure_rate = _estimate_failure_rate(ctx, self)
         if self._use_estimate_vitality:
             self.vitality = _estimate_vitality(ctx, self)
         return training_score.compute(ctx, self)

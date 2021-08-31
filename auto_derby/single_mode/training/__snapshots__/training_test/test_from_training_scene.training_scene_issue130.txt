@@ -1,1 +1,1 @@
-Training<lv=5 pow=17 sta=9 ski=2 ptn=pow@3>
+Training<lv=5 fail=0% pow=17 sta=9 ski=2 ptn=pow@3>

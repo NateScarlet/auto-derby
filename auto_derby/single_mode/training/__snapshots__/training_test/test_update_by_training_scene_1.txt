@@ -1,1 +1,1 @@
-Training<lv=5 spd=26 pow=14 ski=3 ptn=spd@4>
+Training<lv=5 fail=0% spd=26 pow=14 ski=3 ptn=spd@4>
