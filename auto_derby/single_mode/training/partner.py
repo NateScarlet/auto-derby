@@ -10,7 +10,7 @@ import cv2
 import numpy as np
 from PIL.Image import Image
 
-from ... import imagetools, mathtools
+from ... import imagetools, mathtools, template, templates
 from ..context import Context
 from .globals import g
 
@@ -59,6 +59,7 @@ def _recognize_has_training(
         imagetools.cv_image(mark_img),
         (67, 131, 255),
         (82, 171, 255),
+        threshold=0.9,
     )
 
     if os.getenv("DEBUG") == __name__:
@@ -165,17 +166,40 @@ def _recognize_level(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
     return -1
 
 
-def _recognize_soul(img: Image) -> float:
+def _recognize_soul(
+    rp: mathtools.ResizeProxy, screenshot: Image, icon_bbox: Tuple[int, int, int, int]
+) -> float:
+    right_bottom_icon_bbox = (
+        icon_bbox[0] + rp.vector(49, 540),
+        icon_bbox[1] + rp.vector(32, 540),
+        icon_bbox[0] + rp.vector(74, 540),
+        icon_bbox[1] + rp.vector(58, 540),
+    )
+
+    right_bottom_icon_img = screenshot.crop(right_bottom_icon_bbox)
+    is_full = any(
+        template.match(right_bottom_icon_img, templates.SINGLE_MODE_AOHARU_SOUL_FULL)
+    )
+    if is_full:
+        return 1
+
+    soul_bbox = (
+        icon_bbox[0] - rp.vector(35, 540),
+        icon_bbox[1] + rp.vector(33, 540),
+        icon_bbox[0] + rp.vector(2, 540),
+        icon_bbox[3] - rp.vector(0, 540),
+    )
+    img = screenshot.crop(soul_bbox)
     img = imagetools.resize(img, height=40)
-    soul_img = imagetools.cv_image(img)
+    cv_img = imagetools.cv_image(img)
     blue_outline_img = imagetools.constant_color_key(
-        soul_img,
+        cv_img,
         (251, 109, 0),
         (255, 178, 99),
         threshold=0.6,
     )
-    soul_img = imagetools.inside_outline(soul_img, blue_outline_img)
-    shapened_img = imagetools.mix(imagetools.sharpen(soul_img, 1), soul_img, 0.5)
+    masked_img = imagetools.inside_outline(cv_img, blue_outline_img)
+    shapened_img = imagetools.mix(imagetools.sharpen(masked_img, 1), masked_img, 0.5)
     white_outline_img = imagetools.constant_color_key(
         shapened_img,
         (255, 255, 255),
@@ -186,17 +210,18 @@ def _recognize_soul(img: Image) -> float:
     bg_mask = imagetools.border_flood_fill(white_outline_img)
     fg_mask = 255 - bg_mask
     imagetools.fill_area(fg_mask, (0,), size_lt=100)
-    fg_img = cv2.copyTo(soul_img, fg_mask)
+    fg_img = cv2.copyTo(masked_img, fg_mask)
     empty_mask = imagetools.constant_color_key(fg_img, (126, 121, 121))
     if os.getenv("DEBUG") == __name__:
         _LOGGER.debug(
             "soul: img=%s",
             imagetools.image_hash(img, save_path=g.image_path),
         )
-        cv2.imshow("soul_img", soul_img)
-        cv2.imshow("sharpened_img", shapened_img)
-        cv2.imshow("blue_outline_img", blue_outline_img)
-        cv2.imshow("white_outline_img", white_outline_img)
+        cv2.imshow("soul", cv_img)
+        cv2.imshow("sharpened", shapened_img)
+        cv2.imshow("right_bottom_icon", imagetools.cv_image(right_bottom_icon_img))
+        cv2.imshow("blue_outline", blue_outline_img)
+        cv2.imshow("white_outline", white_outline_img)
         cv2.imshow("bg_mask", bg_mask)
         cv2.imshow("fg_mask", fg_mask)
         cv2.imshow("empty_mask", empty_mask)
@@ -297,26 +322,16 @@ class Partner:
 
         soul = -1
         if ctx.scenario == ctx.SCENARIO_AOHARU:
-            soul_bbox = (
-                bbox[0] - rp.vector(35, 540),
-                bbox[1] + rp.vector(33, 540),
-                bbox[0] + rp.vector(2, 540),
-                bbox[3] - rp.vector(0, 540),
-            )
-            soul_img = img.crop(soul_bbox)
-            soul = _recognize_soul(soul_img)
+            soul = _recognize_soul(rp, img, bbox)
 
-        has_training = _recognize_has_training(ctx, rp, icon_img)
-        if has_training and soul < 0:
-            soul = 1
-        if level < 0 and soul < 0 and not has_training:
+        if level < 0 and soul < 0:
             return None
         self = cls.new()
         self.icon_bbox = bbox
         self.level = level
         self.soul = soul
         self.has_hint = _recognize_has_hint(rp, icon_img)
-        self.has_training = has_training
+        self.has_training = _recognize_has_training(ctx, rp, icon_img)
         self.has_soul_burst = _recognize_has_soul_burst(ctx, rp, icon_img)
         if self.has_soul_burst:
             self.has_training = True

@@ -77,6 +77,7 @@ ROULETTE_DERBY_TAP_BUTTON_DISABLED_POS = "roulette_derby_tap_button_disabled.pos
 RP_NOT_ENOUGH = "rp_not_enough.png"
 SCROLL_TO_END = "scroll_to_end.png"
 SCROLL_TO_END_POS = "scroll_to_end.pos.png"
+SINGLE_MODE_AOHARU_SOUL_FULL = "single_mode_aoharu_soul_full.png"
 SINGLE_MODE_CHARACTER_DETAIL_BUTTON = "single_mode_character_detail_button.png"
 SINGLE_MODE_CHARACTER_DETAIL_BUTTON_POS = "single_mode_character_detail_button.pos.png"
 SINGLE_MODE_CHARACTER_DETAIL_TITLE = "single_mode_character_detail_title.png"
