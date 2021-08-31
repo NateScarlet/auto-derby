@@ -281,10 +281,11 @@ class Partner:
                     (72, 0),
                 ),
             )
-        if self.has_training and self.soul < 1:
-            ret += 7
-        if self.has_soul_burst:
-            ret += 4
+        if ctx.date[0] < 4:
+            if self.has_training and self.soul < 1:
+                ret += 7
+            if self.has_soul_burst:
+                ret += 4
         return ret
 
     @staticmethod
