@@ -439,16 +439,16 @@ class Training:
             "Training<"
             f"lv={self.level} "
             + (f"fail={int(self.failure_rate*100)}% ")
-            + "".join(
+            + " ".join(
                 (
-                    f"{name}={value} "
+                    f"{name}={value}"
                     for name, value in sorted(
                         named_data, key=lambda x: x[1], reverse=True
                     )
                     if value
                 )
             )
-            + (f"ptn={partner_text}" if partner_text else "")
+            + (f" ptn={partner_text}" if partner_text else "")
             + ">"
         )
 
