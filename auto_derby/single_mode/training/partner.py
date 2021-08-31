@@ -252,6 +252,8 @@ class Partner:
             )
         if self.has_training:
             ret += 7
+        if self.has_soul_burst:
+            ret += 4
         return ret
 
     @staticmethod
