@@ -28,7 +28,12 @@ def _recognize_type_color(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
         ((255, 179, 22), Partner.TYPE_FRIEND),
     )
     for color, v in type_colors:
-        if imagetools.compare_color(icon_img.getpixel(type_pos), color) > 0.9:
+        if (
+            imagetools.compare_color_near(
+                imagetools.cv_image(icon_img), type_pos, color[::-1]
+            )
+            > 0.9
+        ):
             return v
     return Partner.TYPE_OTHER
 
