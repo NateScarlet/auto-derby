@@ -127,29 +127,27 @@ class Plugin(auto_derby.Plugin):
                     return super().score(ctx)
 
                 cleanup: List[Callable[[], None]] = []
-                # TODO: update version here if these implemented:
-                # https://github.com/NateScarlet/auto-derby/issues/152
+                # assume lv 50 effect
                 # https://github.com/NateScarlet/auto-derby/issues/160
-                if version.parse(VERSION) < version.parse("v2.0.0"):
-                    # assume lv 50 effect
-                    if self._use_estimate_vitality and self.vitality < 0:
-                        _orig_vit = self.vitality
+                if getattr(self, "_use_estimate_vitality", False) and self.vitality < 0:
+                    _orig_vit = self.vitality
 
-                        def _c1():
-                            self.vitality = _orig_vit
+                    def _c1():
+                        self.vitality = _orig_vit
 
-                        self.vitality *= 0.7
+                    self.vitality *= 0.7
 
-                        cleanup.append(_c1)
-                    if self._use_estimate_failure_rate:
-                        _orig_failure = self.failure_rate
+                    cleanup.append(_c1)
+                # https://github.com/NateScarlet/auto-derby/issues/152
+                if getattr(self, "_use_estimate_failure_rate", False):
+                    _orig_failure = self.failure_rate
 
-                        def _c2():
-                            self.failure_rate = _orig_failure
+                    def _c2():
+                        self.failure_rate = _orig_failure
 
-                        self.failure_rate *= 0.6
+                    self.failure_rate *= 0.6
 
-                        cleanup.append(_c2)
+                    cleanup.append(_c2)
 
                 ret = super().score(ctx)
                 for i in cleanup:
