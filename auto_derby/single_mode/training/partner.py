@@ -256,7 +256,7 @@ class Partner:
                     (72, 0),
                 ),
             )
-        if self.has_training:
+        if self.has_training and self.soul < 1:
             ret += 7
         if self.has_soul_burst:
             ret += 4
@@ -306,14 +306,17 @@ class Partner:
             soul_img = img.crop(soul_bbox)
             soul = _recognize_soul(soul_img)
 
-        if level < 0 and soul < 0:
+        has_training = _recognize_has_training(ctx, rp, icon_img)
+        if has_training and soul < 0:
+            soul = 1
+        if level < 0 and soul < 0 and not has_training:
             return None
         self = cls.new()
         self.icon_bbox = bbox
         self.level = level
         self.soul = soul
         self.has_hint = _recognize_has_hint(rp, icon_img)
-        self.has_training = _recognize_has_training(ctx, rp, icon_img)
+        self.has_training = has_training
         self.has_soul_burst = _recognize_has_soul_burst(ctx, rp, icon_img)
         if self.has_soul_burst:
             self.has_training = True
