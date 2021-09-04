@@ -36,9 +36,8 @@ def _handle_option():
 
 
 def _handle_turn(ctx: Context):
-    time.sleep(0.2)  # wait animation
-    ctx.scene = CommandScene()
-    ctx.scene.recognize(ctx)
+    scene = CommandScene.enter(ctx)
+    scene.recognize(ctx)
     ctx.next_turn()
     command_with_scores = sorted(
         ((i, i.score(ctx)) for i in commands.from_context(ctx)),

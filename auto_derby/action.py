@@ -53,6 +53,23 @@ def wait_image(
             time.sleep(0.01)
 
 
+def wait_image_stable(
+    *tmpl: Union[Text, template.Specification],
+    duration: float = 1.0,
+) -> Tuple[template.Specification, Tuple[int, int]]:
+    t, last_pos = wait_image(*tmpl)
+    start_time = time.time()
+    while True:
+        time.sleep(0.01)
+        _, pos = wait_image(t)
+        if pos != last_pos:
+            start_time = time.time()
+        if time.time() - start_time > duration:
+            break
+        last_pos = pos
+    return t, last_pos
+
+
 def wait_image_disappear(*tmpl: Union[Text, template.Specification]) -> None:
     while True:
         try:

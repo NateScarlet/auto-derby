@@ -26,7 +26,7 @@ class CommandScene(Scene):
     def _enter(cls, ctx: SceneHolder) -> Scene:
         if ctx.scene.name() == "single-mode-training":
             action.tap_image(templates.RETURN_BUTTON)
-        action.wait_image(
+        action.wait_image_stable(
             templates.SINGLE_MODE_COMMAND_TRAINING,
             templates.SINGLE_MODE_FORMAL_RACE_BANNER,
             templates.SINGLE_MODE_URA_FINALS,
