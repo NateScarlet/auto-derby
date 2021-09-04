@@ -44,7 +44,7 @@ class TrainingScene(Scene):
     @classmethod
     def _enter(cls, ctx: SceneHolder) -> Scene:
         CommandScene.enter(ctx)
-        action.tap_image(templates.SINGLE_MODE_COMMAND_TRAINING)
+        action.wait_tap_image(templates.SINGLE_MODE_COMMAND_TRAINING)
         action.wait_image(_TRAINING_CONFIRM)
         return cls()
 
