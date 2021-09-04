@@ -28,6 +28,9 @@
   - [x] 插件 limited_sale_buy_first_3：自动买前 3 个物品
   - [x] 插件 limited_sale_ignore：无视限时商店
 - [x] 育成 (Nurturing)
+  - 剧本适配
+    - [x] 新設！　 URA ファイナルズ！！
+    - [x] アオハル杯～輝け、チームの絆～
   - [x] 自动选择训练
     - [x] 基于当前属性
     - [x] 基于训练效果
