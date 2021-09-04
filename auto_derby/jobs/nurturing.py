@@ -11,6 +11,7 @@ from .. import action, config, template, templates
 from ..scenes.single_mode import (
     AoharuBattleConfirmScene,
     AoharuCompetitorScene,
+    AoharuMainScene,
     CommandScene,
     RaceMenuScene,
     RaceTurnsIncorrect,
@@ -133,31 +134,41 @@ def _set_scenario(scenario: Text, _handler: _Handler) -> _Handler:
 
 
 def _handle_aoharu_team_race(ac: _ActionContext):
-    rp = action.resize_proxy()
-    x, y = ac.pos
     ctx = ac.ctx
-    action.tap((x, y + rp.vector(10, 540)))
+    scene = AoharuMainScene.enter(ctx)
+    scene.recognize()
+    scene.go_race()
 
-    for index in range(3):
-        scene = AoharuCompetitorScene.enter(ctx)
-        scene.choose_competitor(index)
-        action.wait_tap_image(templates.GREEN_BATTLE_BUTTON)
-        scene = AoharuBattleConfirmScene.enter(ctx)
-        scene.recognize_predictions()
-        if (
-            len(
-                tuple(
-                    i
-                    for i in scene.predictions.values()
-                    if i in (RacePrediction.HONNMEI, RacePrediction.TAIKOU)
+    if scene.is_final:
+        action.wait_tap_image(templates.SINGLE_MODE_AOHARU_FINAL_BATTLE_BUTTON)
+    else:
+        for index in range(3):
+            scene = AoharuCompetitorScene.enter(ctx)
+            scene.choose_competitor(index)
+            action.wait_tap_image(templates.GREEN_BATTLE_BUTTON)
+            scene = AoharuBattleConfirmScene.enter(ctx)
+            scene.recognize_predictions()
+            if (
+                len(
+                    tuple(
+                        i
+                        for i in scene.predictions.values()
+                        if i in (RacePrediction.HONNMEI, RacePrediction.TAIKOU)
+                    )
                 )
-            )
-            >= 3
-        ):
-            break
+                >= 3
+            ):
+                break
 
     action.wait_tap_image(templates.GREEN_BATTLE_BUTTON)
-    action.wait_tap_image(templates.SINGLE_MODE_AOHARU_RACE_RESULT_BUTTON)
+    tmpl, pos = action.wait_image(
+        templates.SINGLE_MODE_AOHARU_RACE_RESULT_BUTTON,
+        templates.SINGLE_MODE_AOHARU_MAIN_RACE_BUTTON,
+    )
+    action.tap(pos)
+    if tmpl.name == templates.SINGLE_MODE_AOHARU_MAIN_RACE_BUTTON:
+        action.wait_tap_image(templates.GO_TO_RACE_BUTTON)
+        action.wait_tap_image(templates.RACE_START_BUTTON)
 
     while True:
         tmpl, pos = action.wait_image(

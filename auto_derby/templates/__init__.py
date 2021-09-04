@@ -25,6 +25,7 @@ EXCHANGE_CONFIRM_BUTTON_POS = "exchange_confirm_button.pos.png"
 GO_HOME_BUTTON = "go_home_button.png"
 GO_HOME_BUTTON_POS = "go_home_button.pos.png"
 GO_TO_LIMITED_SALE = "go_to_limited_sale.png"
+GO_TO_RACE_BUTTON = "go_to_race_button.png"
 GREEN_BATTLE_BUTTON = "green_battle_button.png"
 GREEN_NEXT_BUTTON = "green_next_button.png"
 GREEN_OK_BUTTON = "green_ok_button.png"
@@ -93,10 +94,17 @@ SINGLE_MODE_AOHARU_CHOOSE_COMPETITOR = "single_mode_aoharu_choose_competitor.png
 SINGLE_MODE_AOHARU_CHOOSE_COMPETITOR_POS = (
     "single_mode_aoharu_choose_competitor.pos.png"
 )
+SINGLE_MODE_AOHARU_FINAL_BANNER = "single_mode_aoharu_final_banner.png"
+SINGLE_MODE_AOHARU_FINAL_BATTLE_BUTTON = "single_mode_aoharu_final_battle_button.png"
+SINGLE_MODE_AOHARU_FINAL_BATTLE_BUTTON_POS = (
+    "single_mode_aoharu_final_battle_button.pos.png"
+)
 SINGLE_MODE_AOHARU_FORMAL_RACE_BANNER = "single_mode_aoharu_formal_race_banner.png"
 SINGLE_MODE_AOHARU_FORMAL_RACE_BANNER_POS = (
     "single_mode_aoharu_formal_race_banner.pos.png"
 )
+SINGLE_MODE_AOHARU_MAIN_RACE_BUTTON = "single_mode_aoharu_main_race_button.png"
+SINGLE_MODE_AOHARU_MAIN_RACE_BUTTON_POS = "single_mode_aoharu_main_race_button.pos.png"
 SINGLE_MODE_AOHARU_RACE_RESULT_BUTTON = "single_mode_aoharu_race_result_button.png"
 SINGLE_MODE_AOHARU_RACE_RESULT_BUTTON_POS = (
     "single_mode_aoharu_race_result_button.pos.png"
