@@ -68,7 +68,7 @@ def main():
 
     parser.add_argument("--name", "-n", dest="name")
     parser.add_argument(
-        "--game-image", "-g", dest="game_image", default="last_screenshot.local.png"
+        "--game-image", "-g", dest="game_image", default="debug/last_screenshot.png"
     )
     parser.add_argument("--threshold", "-t", dest="threshold", type=float, default=0.9)
     parser.add_argument("--debug", "-d", action="store_true")

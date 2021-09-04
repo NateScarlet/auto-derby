@@ -25,6 +25,7 @@ EXCHANGE_CONFIRM_BUTTON_POS = "exchange_confirm_button.pos.png"
 GO_HOME_BUTTON = "go_home_button.png"
 GO_HOME_BUTTON_POS = "go_home_button.pos.png"
 GO_TO_LIMITED_SALE = "go_to_limited_sale.png"
+GREEN_BATTLE_BUTTON = "green_battle_button.png"
 GREEN_NEXT_BUTTON = "green_next_button.png"
 GREEN_OK_BUTTON = "green_ok_button.png"
 GREEN_TIGHT_OK_BUTTON = "green_tight_ok_button.png"
@@ -44,6 +45,9 @@ LEGEND_RACE_START_BUTTON_POS = "legend_race_start_button.pos.png"
 LIMITED_SALE_OPEN = "limited_sale_open.png"
 MOONLIGHT_PRIZE = "moonlight_prize.png"
 MOONLIGHT_PRIZE_POS = "moonlight_prize.pos.png"
+PREDICTION_CIRCLE_OUTLINE = "prediction_circle_outline.png"
+PREDICTION_DOUBLE_CIRCLE = "prediction_double_circle.png"
+PREDICTION_TRIANGLE_OUTLINE = "prediction_triangle_outline.png"
 RACE_AGAIN_BUTTON = "race_again_button.png"
 RACE_BUTTON = "race_button.png"
 RACE_CHOOSE_ITEM = "race_choose_item.png"
@@ -77,6 +81,26 @@ ROULETTE_DERBY_TAP_BUTTON_DISABLED_POS = "roulette_derby_tap_button_disabled.pos
 RP_NOT_ENOUGH = "rp_not_enough.png"
 SCROLL_TO_END = "scroll_to_end.png"
 SCROLL_TO_END_POS = "scroll_to_end.pos.png"
+SINGLE_MODE_AOHARU_AUTO_FORMATION_TITLE = "single_mode_aoharu_auto_formation_title.png"
+SINGLE_MODE_AOHARU_AUTO_FORMATION_TITLE_POS = (
+    "single_mode_aoharu_auto_formation_title.pos.png"
+)
+SINGLE_MODE_AOHARU_BATTLE_CONFIRM_TITLE = "single_mode_aoharu_battle_confirm_title.png"
+SINGLE_MODE_AOHARU_BATTLE_CONFIRM_TITLE_POS = (
+    "single_mode_aoharu_battle_confirm_title.pos.png"
+)
+SINGLE_MODE_AOHARU_CHOOSE_COMPETITOR = "single_mode_aoharu_choose_competitor.png"
+SINGLE_MODE_AOHARU_CHOOSE_COMPETITOR_POS = (
+    "single_mode_aoharu_choose_competitor.pos.png"
+)
+SINGLE_MODE_AOHARU_FORMAL_RACE_BANNER = "single_mode_aoharu_formal_race_banner.png"
+SINGLE_MODE_AOHARU_FORMAL_RACE_BANNER_POS = (
+    "single_mode_aoharu_formal_race_banner.pos.png"
+)
+SINGLE_MODE_AOHARU_RACE_RESULT_BUTTON = "single_mode_aoharu_race_result_button.png"
+SINGLE_MODE_AOHARU_RACE_RESULT_BUTTON_POS = (
+    "single_mode_aoharu_race_result_button.pos.png"
+)
 SINGLE_MODE_AOHARU_SOUL_FULL = "single_mode_aoharu_soul_full.png"
 SINGLE_MODE_CHARACTER_DETAIL_BUTTON = "single_mode_character_detail_button.png"
 SINGLE_MODE_CHARACTER_DETAIL_BUTTON_POS = "single_mode_character_detail_button.pos.png"

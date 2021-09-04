@@ -71,6 +71,8 @@ class SupportsToDict(Protocol):
 def _json_transform(v: object) -> object:
     if isinstance(v, SupportsToDict):
         return {k: _json_transform(v) for k, v in v.to_dict().items()}
+    if isinstance(v, dict):
+        return {str(k): _json_transform(v) for k, v in v.items()}
     if isinstance(v, (list, tuple)):
         return [_json_transform(i) for i in v]
     if isinstance(v, (int, float)):

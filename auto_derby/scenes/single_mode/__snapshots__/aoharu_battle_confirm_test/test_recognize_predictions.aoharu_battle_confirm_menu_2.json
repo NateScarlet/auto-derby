@@ -1,0 +1,9 @@
+{
+  "predictions": {
+    "RaceType.SPRINT": "RacePrediction.HONNMEI",
+    "RaceType.MILE": "RacePrediction.HONNMEI",
+    "RaceType.INTERMEDIATE": "RacePrediction.HONNMEI",
+    "RaceType.LONG": "RacePrediction.TAIKOU",
+    "RaceType.DART": "RacePrediction.HONNMEI"
+  }
+}
