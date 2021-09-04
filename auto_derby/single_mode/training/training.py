@@ -130,7 +130,7 @@ def _ocr_training_effect(img: Image) -> int:
 
 
 def _ocr_red_training_effect(img: Image) -> int:
-    cv_img = imagetools.cv_image(imagetools.resize(img, height=32))
+    cv_img = imagetools.cv_image(imagetools.resize(img, height=48))
     sharpened_img = cv2.filter2D(
         cv_img,
         8,
@@ -147,6 +147,8 @@ def _ocr_red_training_effect(img: Image) -> int:
     white_outline_img = imagetools.constant_color_key(
         sharpened_img,
         (255, 255, 255),
+        (222, 220, 237),
+        (252, 254, 202),
     )
 
     masked_img = imagetools.inside_outline(cv_img, white_outline_img)
@@ -402,12 +404,12 @@ class Training:
 
         extra_bbox_group = {
             ctx.SCENARIO_AOHARU: (
-                rp.vector4((18, 572, 104, 595), 540),
-                rp.vector4((104, 572, 190, 595), 540),
-                rp.vector4((190, 572, 273, 595), 540),
-                rp.vector4((273, 572, 358, 595), 540),
-                rp.vector4((358, 572, 441, 595), 540),
-                rp.vector4((448, 572, 521, 595), 540),
+                rp.vector4((18, 570, 104, 595), 540),
+                rp.vector4((104, 570, 190, 595), 540),
+                rp.vector4((190, 570, 273, 595), 540),
+                rp.vector4((273, 570, 358, 595), 540),
+                rp.vector4((358, 570, 441, 595), 540),
+                rp.vector4((448, 570, 521, 595), 540),
             )
         }.get(ctx.scenario)
         if extra_bbox_group:

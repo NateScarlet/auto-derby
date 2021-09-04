@@ -1,0 +1,1 @@
+Training<lv=1 fail=0% gut=11 pow=8 spd=4 ski=4 ptn=spd@2,gut^,pow@2^>
