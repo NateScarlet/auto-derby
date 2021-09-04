@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.1](https://github.com/NateScarlet/auto-derby/compare/v1.7.0...v1.7.1) (2021-09-04)
+
+### Bug Fixes
+
+- **single-mode:** error when recognize training ([5d334fc](https://github.com/NateScarlet/auto-derby/commit/5d334fca51513cfbdb2473112d8926cd9b097469)), closes [#177](https://github.com/NateScarlet/auto-derby/issues/177)
+- **single-mode:** should wait button when entering training scene ([e8d3b2d](https://github.com/NateScarlet/auto-derby/commit/e8d3b2d71cb0716ec8018629b61545500611754c)), closes [#177](https://github.com/NateScarlet/auto-derby/issues/177)
+
 ## [1.7.0](https://github.com/NateScarlet/auto-derby/compare/v1.6.1...v1.7.0) (2021-09-04)
 
 ### Features
