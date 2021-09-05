@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.7.4"
-RELEASE_DATE = datetime.fromtimestamp(1630831552)
-LAST_GIT_COMMIT_DESCRIBE = "v1.7.3-1-g7021d0c"
-LAST_GIT_COMMIT_HASH = "7021d0c35cb5a8c6527e710f1b2a82c2c0bb66e2"
+VERSION = "1.7.5"
+RELEASE_DATE = datetime.fromtimestamp(1630835383)
+LAST_GIT_COMMIT_DESCRIBE = "v1.7.4-1-g610ae1f"
+LAST_GIT_COMMIT_HASH = "610ae1f97d103bfcebca60f5b768df8ada73e4e0"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1630831283)
-LAST_GIT_COMMIT_SUBJECT = "fix: wrong version code generated"
-LAST_GIT_COMMIT_BODY = "when last commit has multiple line\n\nlike this"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1630835249)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error when recognize aoharu training"
+LAST_GIT_COMMIT_BODY = "fix #179"
