@@ -154,6 +154,7 @@ def _ocr_red_training_effect(img: Image) -> int:
     )
 
     masked_img = imagetools.inside_outline(cv_img, white_outline_img)
+    masked_img = cv2.medianBlur(masked_img, 3)
 
     red_outline_img = imagetools.constant_color_key(
         masked_img,
