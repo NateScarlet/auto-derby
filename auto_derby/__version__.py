@@ -9,12 +9,14 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.7.2"
-RELEASE_DATE = datetime.fromtimestamp(1630827743)
-LAST_GIT_COMMIT_DESCRIBE = "v1.7.1-1-gb25d324"
-LAST_GIT_COMMIT_HASH = "b25d3249efa6b8bed4915e669214818119a4c469"
+VERSION = "1.7.3"
+RELEASE_DATE = datetime.fromtimestamp(1630831053)
+LAST_GIT_COMMIT_DESCRIBE = "v1.7.2-2-g8bfe47e"
+LAST_GIT_COMMIT_HASH = "8bfe47e3f7454f0303488ffe64e75b88ec3f9314"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1630827687)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error when recognize aoharu training"
-LAST_GIT_COMMIT_BODY = "fix #179"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1630830943)
+LAST_GIT_COMMIT_SUBJECT = "fix(nurturing): stuck when fan not enough"
+LAST_GIT_COMMIT_BODY = "close #180
+
+Co-Authored-By: Small_Ku <small_ku@outlook.com>"

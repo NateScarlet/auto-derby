@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.3](https://github.com/NateScarlet/auto-derby/compare/v1.7.2...v1.7.3) (2021-09-05)
+
+### Bug Fixes
+
+- **nurturing:** stuck when fan not enough ([8bfe47e](https://github.com/NateScarlet/auto-derby/commit/8bfe47e3f7454f0303488ffe64e75b88ec3f9314)), closes [#180](https://github.com/NateScarlet/auto-derby/issues/180)
+- **single-mode:** wrong scenario recognition ([9c6d07b](https://github.com/NateScarlet/auto-derby/commit/9c6d07b0c1301f5238adb02e824633481a4984aa)), closes [#178](https://github.com/NateScarlet/auto-derby/issues/178)
+
 ## [1.7.2](https://github.com/NateScarlet/auto-derby/compare/v1.7.1...v1.7.2) (2021-09-05)
 
 ### Bug Fixes
