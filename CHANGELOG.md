@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.6](https://github.com/NateScarlet/auto-derby/compare/v1.7.5...v1.7.6) (2021-09-05)
+
+### Bug Fixes
+
+- **single-mode:** error when recognize aoharu training ([65400ec](https://github.com/NateScarlet/auto-derby/commit/65400ec4635703ffc303951f56c54e99f0a9fb31)), closes [#182](https://github.com/NateScarlet/auto-derby/issues/182)
+
 ## [1.7.5](https://github.com/NateScarlet/auto-derby/compare/v1.7.4...v1.7.5) (2021-09-05)
 
 ### Bug Fixes
