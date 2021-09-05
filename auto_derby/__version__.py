@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.7.1"
-RELEASE_DATE = datetime.fromtimestamp(1630769578)
-LAST_GIT_COMMIT_DESCRIBE = "v1.7.0-2-g5d334fc"
-LAST_GIT_COMMIT_HASH = "5d334fca51513cfbdb2473112d8926cd9b097469"
+VERSION = "1.7.2"
+RELEASE_DATE = datetime.fromtimestamp(1630827743)
+LAST_GIT_COMMIT_DESCRIBE = "v1.7.1-1-gb25d324"
+LAST_GIT_COMMIT_HASH = "b25d3249efa6b8bed4915e669214818119a4c469"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1630769361)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error when recognize training"
-LAST_GIT_COMMIT_BODY = "fix #177"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1630827687)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error when recognize aoharu training"
+LAST_GIT_COMMIT_BODY = "fix #179"
