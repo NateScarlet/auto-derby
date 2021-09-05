@@ -1,0 +1,1 @@
+Training<lv=2 fail=0% sta=21 gut=5 ski=3 ptn=oth,sta@4^(86%),tm^(52%),tm(0%),tm(22%)>

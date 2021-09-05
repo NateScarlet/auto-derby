@@ -1,1 +1,1 @@
-Training<lv=3 fail=6% wis=13 ski=4 spd=3 ptn=frd@4,tm(49%),tm(15%),tm^(100%),tm(49%)>
+Training<lv=3 fail=6% wis=13 ski=4 spd=3 ptn=frd@4,tm(50%),tm(17%),tm^(100%),tm(50%)>

@@ -149,6 +149,8 @@ def _ocr_red_training_effect(img: Image) -> int:
         (255, 255, 255),
         (222, 220, 237),
         (252, 254, 202),
+        (236, 249, 105),
+        (243, 220, 160),
     )
 
     masked_img = imagetools.inside_outline(cv_img, white_outline_img)
@@ -157,7 +159,9 @@ def _ocr_red_training_effect(img: Image) -> int:
         masked_img,
         (15, 18, 216),
         (34, 42, 234),
+        (56, 72, 218),
     )
+    imagetools.fill_area(red_outline_img, (0,), mode=cv2.RETR_LIST, size_lt=8)
 
     masked_img = imagetools.inside_outline(masked_img, red_outline_img)
 
@@ -166,7 +170,8 @@ def _ocr_red_training_effect(img: Image) -> int:
         (
             ((129, 211, 255), 0),
             ((126, 188, 255), round(height * 0.5)),
-            ((57, 112, 255), height),
+            ((82, 134, 255), round(height * 0.75)),
+            ((36, 62, 211), height),
         )
     ).astype(np.uint8)
     fill_img = np.repeat(np.expand_dims(fill_gradient, 1), cv_img.shape[1], axis=1)
@@ -180,6 +185,11 @@ def _ocr_red_training_effect(img: Image) -> int:
         (128, 196, 253),
         (136, 200, 255),
         (144, 214, 255),
+        (58, 116, 255),
+        (64, 111, 238),
+        (114, 174, 251),
+        (89, 140, 240),
+        (92, 145, 244),
         threshold=0.95,
     )
     text_img = np.array(np.maximum(text_img, text_img_extra))
@@ -192,6 +202,7 @@ def _ocr_red_training_effect(img: Image) -> int:
         cv2.imshow("white_outline_img", white_outline_img)
         cv2.imshow("red_outline_img", red_outline_img)
         cv2.imshow("masked_img", masked_img)
+        cv2.imshow("fill", fill_img)
         cv2.imshow("text_img_extra", text_img_extra)
         cv2.imshow("text_img", text_img)
         cv2.waitKey()

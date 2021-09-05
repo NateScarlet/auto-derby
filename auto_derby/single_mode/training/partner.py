@@ -76,14 +76,15 @@ def _recognize_has_soul_burst(
     if ctx.scenario != ctx.SCENARIO_AOHARU:
         return False
     bbox = rp.vector4((52, 0, 65, 8), 540)
-    mark_img = icon_img.crop(bbox)
+    mark_img = imagetools.cv_image(icon_img.crop(bbox))
     mask = imagetools.constant_color_key(
-        imagetools.cv_image(mark_img),
+        mark_img,
         (198, 255, 255),
         threshold=0.9,
     )
 
     if os.getenv("DEBUG") == __name__:
+        cv2.imshow("soul_burst_mark", mark_img)
         cv2.imshow("soul_burst_mark_mask", mask)
         cv2.waitKey()
         cv2.destroyAllWindows()
@@ -198,19 +199,23 @@ def _recognize_soul(
         (255, 178, 99),
         threshold=0.6,
     )
-    masked_img = imagetools.inside_outline(cv_img, blue_outline_img)
+    bg_mask1 = imagetools.border_flood_fill(blue_outline_img)
+    fg_mask1 = 255 - bg_mask1
+    masked_img = cv2.copyTo(cv_img, fg_mask1)
     shapened_img = imagetools.mix(imagetools.sharpen(masked_img, 1), masked_img, 0.5)
     white_outline_img = imagetools.constant_color_key(
         shapened_img,
         (255, 255, 255),
         (252, 251, 251),
         (248, 227, 159),
+        (254, 245, 238),
+        (253, 233, 218),
         threshold=0.9,
     )
-    bg_mask = imagetools.border_flood_fill(white_outline_img)
-    fg_mask = 255 - bg_mask
-    imagetools.fill_area(fg_mask, (0,), size_lt=100)
-    fg_img = cv2.copyTo(masked_img, fg_mask)
+    bg_mask2 = imagetools.border_flood_fill(white_outline_img)
+    fg_mask2 = 255 - bg_mask2
+    imagetools.fill_area(fg_mask2, (0,), size_lt=100)
+    fg_img = cv2.copyTo(masked_img, fg_mask2)
     empty_mask = imagetools.constant_color_key(fg_img, (126, 121, 121))
     if os.getenv("DEBUG") == __name__:
         _LOGGER.debug(
@@ -222,13 +227,13 @@ def _recognize_soul(
         cv2.imshow("right_bottom_icon", imagetools.cv_image(right_bottom_icon_img))
         cv2.imshow("blue_outline", blue_outline_img)
         cv2.imshow("white_outline", white_outline_img)
-        cv2.imshow("bg_mask", bg_mask)
-        cv2.imshow("fg_mask", fg_mask)
+        cv2.imshow("fg_mask1", fg_mask1)
+        cv2.imshow("fg_mask2", fg_mask2)
         cv2.imshow("empty_mask", empty_mask)
         cv2.waitKey()
         cv2.destroyAllWindows()
 
-    fg_avg = np.average(fg_mask)
+    fg_avg = np.average(fg_mask2)
     if fg_avg < 100:
         return -1
     empty_avg = np.average(empty_mask)
@@ -322,8 +327,16 @@ class Partner:
         level = _recognize_level(rp, icon_img)
 
         soul = -1
+        has_training = False
+        has_soul_burst = False
         if ctx.scenario == ctx.SCENARIO_AOHARU:
-            soul = _recognize_soul(rp, img, bbox)
+            has_soul_burst = _recognize_has_soul_burst(ctx, rp, icon_img)
+            if has_soul_burst:
+                has_training = True
+                soul = 1
+            else:
+                has_training = _recognize_has_training(ctx, rp, icon_img)
+                soul = _recognize_soul(rp, img, bbox)
 
         if level < 0 and soul < 0:
             return None
@@ -332,8 +345,8 @@ class Partner:
         self.level = level
         self.soul = soul
         self.has_hint = _recognize_has_hint(rp, icon_img)
-        self.has_training = _recognize_has_training(ctx, rp, icon_img)
-        self.has_soul_burst = _recognize_has_soul_burst(ctx, rp, icon_img)
+        self.has_training = has_training
+        self.has_soul_burst = has_soul_burst
         if self.has_soul_burst:
             self.has_training = True
             self.soul = 1

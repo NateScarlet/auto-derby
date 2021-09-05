@@ -1,1 +1,1 @@
-Training<lv=4 fail=0% spd=22 pow=7 ski=3 ptn=frd@4,tm^(49%),tm(100%),tm^(49%)>
+Training<lv=4 fail=0% spd=22 pow=7 ski=3 ptn=frd@4,tm^(50%),tm(100%),tm^(51%)>
