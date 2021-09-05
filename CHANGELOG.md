@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.4](https://github.com/NateScarlet/auto-derby/compare/v1.7.3...v1.7.4) (2021-09-05)
+
+### Bug Fixes
+
+- wrong version code generated ([7021d0c](https://github.com/NateScarlet/auto-derby/commit/7021d0c35cb5a8c6527e710f1b2a82c2c0bb66e2))
+
 ## [1.7.3](https://github.com/NateScarlet/auto-derby/compare/v1.7.2...v1.7.3) (2021-09-05)
 
 ### Bug Fixes
