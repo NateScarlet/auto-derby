@@ -18,7 +18,7 @@ function shell(command) {
  * @return {string}
  */
 function quotePython(text) {
-  return text.replace(/\\/, "\\\\").replace(/'/g, `\\'`);
+  return text.replace(/\\/g, "\\\\").replace(/'/g, `\\'`).replace(/\n/g, "\\n");
 }
 
 /**
