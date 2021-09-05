@@ -1,0 +1,1 @@
+Training<lv=5 fail=0% pow=25 sta=18 ski=5 ptn=spd@5(100%),sta@5^(100%),spd@5^(100%),tm(0%),tm^(52%)>

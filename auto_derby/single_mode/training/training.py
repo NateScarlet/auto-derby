@@ -143,6 +143,7 @@ def _ocr_red_training_effect(img: Image) -> int:
         ),
     )
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
+    sharpened_img = cv2.medianBlur(sharpened_img, 3)
 
     white_outline_img = imagetools.constant_color_key(
         sharpened_img,
@@ -154,10 +155,9 @@ def _ocr_red_training_effect(img: Image) -> int:
     )
 
     masked_img = imagetools.inside_outline(cv_img, white_outline_img)
-    masked_img = cv2.medianBlur(masked_img, 3)
 
     red_outline_img = imagetools.constant_color_key(
-        masked_img,
+        sharpened_img,
         (15, 18, 216),
         (34, 42, 234),
         (56, 72, 218),
