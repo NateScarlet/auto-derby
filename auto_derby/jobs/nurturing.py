@@ -106,6 +106,7 @@ def _handle_fan_not_enough(ac: _ActionContext):
         ctx.target_fan_count = max(ctx.fan_count + 1, ctx.target_fan_count)
 
     ctx.defer_next_turn(_set_target_fan_count)
+    action.wait_tap_image(templates.CANCEL_BUTTON)
 
 
 def _handle_target_race(ac: _ActionContext):
