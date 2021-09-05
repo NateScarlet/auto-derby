@@ -94,6 +94,10 @@ SINGLE_MODE_AOHARU_CHOOSE_COMPETITOR = "single_mode_aoharu_choose_competitor.png
 SINGLE_MODE_AOHARU_CHOOSE_COMPETITOR_POS = (
     "single_mode_aoharu_choose_competitor.pos.png"
 )
+SINGLE_MODE_AOHARU_CLASS_DETAIL_BUTTON = "single_mode_aoharu_class_detail_button.png"
+SINGLE_MODE_AOHARU_CLASS_DETAIL_BUTTON_POS = (
+    "single_mode_aoharu_class_detail_button.pos.png"
+)
 SINGLE_MODE_AOHARU_FINAL_BANNER = "single_mode_aoharu_final_banner.png"
 SINGLE_MODE_AOHARU_FINAL_BATTLE_BUTTON = "single_mode_aoharu_final_battle_button.png"
 SINGLE_MODE_AOHARU_FINAL_BATTLE_BUTTON_POS = (

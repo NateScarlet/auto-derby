@@ -168,18 +168,20 @@ def _recognize_property(img: Image) -> int:
 
 
 def _recognize_scenario(rp: mathtools.ResizeProxy, img: Image) -> Text:
-    _, pos = next(
-        template.match(
-            img,
-            templates.SINGLE_MODE_CLASS_DETAIL_BUTTON,
-        )
+    spec = (
+        (templates.SINGLE_MODE_AOHARU_CLASS_DETAIL_BUTTON, Context.SCENARIO_AOHARU),
+        (templates.SINGLE_MODE_CLASS_DETAIL_BUTTON, Context.SCENARIO_URA),
     )
-    radius = rp.vector(60, 540)
-    if mathtools.distance(rp.vector2((114, 165), 540), pos) < radius:
-        return Context.SCENARIO_URA
-    if mathtools.distance(rp.vector2((126, 591), 540), pos) < radius:
-        return Context.SCENARIO_AOHARU
-    return Context.SCENARIO_UNKNOWN
+    ret = Context.SCENARIO_UNKNOWN
+    for tmpl, scenario in spec:
+        try:
+            next(template.match(img, tmpl))
+            ret = scenario
+            break
+        except StopIteration:
+            pass
+    _LOGGER.debug("_recognize_scenario: %s", ret)
+    return ret
 
 
 class Context:
@@ -287,9 +289,11 @@ class Context:
     def defer_next_turn(self, cb: Callable[[], None]) -> None:
         self._next_turn_cb.append(cb)
 
+    # TODO: refactor update_by_* to *Scene.recognize
     def update_by_command_scene(self, screenshot: Image) -> None:
         rp = mathtools.ResizeProxy(screenshot.width)
-        self.scenario = _recognize_scenario(rp, screenshot)
+        if not self.scenario:
+            self.scenario = _recognize_scenario(rp, screenshot)
         if not self.scenario:
             raise ValueError("unknown scenario")
         date_bbox = {
