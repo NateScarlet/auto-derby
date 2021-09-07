@@ -26023,7 +26023,13 @@ def obj2sctype(rep, default=None):
     """
     ...
 
-def ones(shape, dtype=None, order="C", *, like=None):
+def ones(
+    shape: Union[int, Sequence[int]],
+    dtype: type = None,
+    order: Text = "C",
+    *,
+    like: ArrayLike = None,
+) -> ndarray:
     """
     Return a new array of given shape and type, filled with ones.
 

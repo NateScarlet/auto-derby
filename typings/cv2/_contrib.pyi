@@ -3,7 +3,7 @@
 
 """
 
-from typing import Any, Text
+from typing import Any, Text, Tuple
 
 from numpy import ArrayLike, Scalar, ndarray
 
@@ -30384,15 +30384,15 @@ def moments(array, binaryImage=...) -> retval:
     ...
 
 def morphologyEx(
-    src,
-    op,
-    kernel,
-    dst=...,
-    anchor=...,
-    iterations=...,
-    borderType=...,
-    borderValue=...,
-) -> dst:
+    src: ndarray,
+    op: int,
+    kernel: ndarray,
+    dst: ndarray = ...,
+    anchor: Tuple[int, int] = ...,
+    iterations: int = ...,
+    borderType: int = ...,
+    borderValue: Any = ...,
+) -> ndarray:
     """
     .   @brief Performs advanced morphological transformations.
     .

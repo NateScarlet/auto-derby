@@ -162,7 +162,11 @@ def _ocr_red_training_effect(img: Image) -> int:
         (34, 42, 234),
         (56, 72, 218),
     )
-    imagetools.fill_area(red_outline_img, (0,), mode=cv2.RETR_LIST, size_lt=8)
+    red_outline_img = cv2.morphologyEx(
+        red_outline_img,
+        cv2.MORPH_CLOSE,
+        np.ones((3, 3)),
+    )
 
     masked_img = imagetools.inside_outline(masked_img, red_outline_img)
 

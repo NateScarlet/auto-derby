@@ -19149,43 +19149,6 @@ def moments(array, binaryImage=...) -> retval:
     """
     ...
 
-def morphologyEx(
-    src,
-    op,
-    kernel,
-    dst=...,
-    anchor=...,
-    iterations=...,
-    borderType=...,
-    borderValue=...,
-) -> dst:
-    """
-    .   @brief Performs advanced morphological transformations.
-    .
-    .   The function cv::morphologyEx can perform advanced morphological transformations using an erosion and dilation as
-    .   basic operations.
-    .
-    .   Any of the operations can be done in-place. In case of multi-channel images, each channel is
-    .   processed independently.
-    .
-    .   @param src Source image. The number of channels can be arbitrary. The depth should be one of
-    .   CV_8U, CV_16U, CV_16S, CV_32F or CV_64F.
-    .   @param dst Destination image of the same size and type as source image.
-    .   @param op Type of a morphological operation, see #MorphTypes
-    .   @param kernel Structuring element. It can be created using #getStructuringElement.
-    .   @param anchor Anchor position with the kernel. Negative values mean that the anchor is at the
-    .   kernel center.
-    .   @param iterations Number of times erosion and dilation are applied.
-    .   @param borderType Pixel extrapolation method, see #BorderTypes. #BORDER_WRAP is not supported.
-    .   @param borderValue Border value in case of a constant border. The default value has a special
-    .   meaning.
-    .   @sa  dilate, erode, getStructuringElement
-    .   @note The number of iterations is the number of times erosion or dilatation operation will be applied.
-    .   For instance, an opening operation (#MORPH_OPEN) with two iterations is equivalent to apply
-    .   successively: erode -> erode -> dilate -> dilate (and not erode -> dilate -> erode -> dilate).
-    """
-    ...
-
 def moveWindow(winname, x, y) -> None:
     """
     .   @brief Moves the window to the specified position
