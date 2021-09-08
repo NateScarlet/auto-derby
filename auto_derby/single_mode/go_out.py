@@ -79,8 +79,6 @@ class Option:
         return 0
 
     def mood_rate(self, ctx: Context) -> float:
-        if ctx.mood == ctx.MOOD_VERY_GOOD:
-            return 0
         if self.type == self.TYPE_MAIN:
             return 1
         if self.type == self.TYPE_SUPPORT:
