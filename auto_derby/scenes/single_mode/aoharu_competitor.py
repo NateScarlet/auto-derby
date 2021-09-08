@@ -1,6 +1,7 @@
 # pyright: strict
 
 from __future__ import annotations
+from auto_derby import template
 
 
 from ... import action, templates
@@ -20,7 +21,12 @@ class AoharuCompetitorScene(Scene):
     def _enter(cls, ctx: SceneHolder) -> Scene:
         if ctx.scene.name() == "single-mode-aoharu-battle-confirm":
             action.wait_tap_image(templates.CANCEL_BUTTON)
-        action.wait_image(templates.SINGLE_MODE_AOHARU_CHOOSE_COMPETITOR)
+        action.wait_image(
+            template.Specification(
+                templates.SINGLE_MODE_AOHARU_CHOOSE_COMPETITOR,
+                threshold=0.8,
+            ),
+        )
         return cls()
 
     def choose_competitor(self, index: int) -> None:
