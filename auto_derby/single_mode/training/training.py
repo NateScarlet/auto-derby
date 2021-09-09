@@ -253,7 +253,7 @@ def _recognize_failure_rate(
         x + rp.vector(70, 540),
         y + rp.vector(-120, 540),
     )
-    rate_img = imagetools.cv_image(img.crop(bbox))
+    rate_img = imagetools.cv_image(imagetools.resize(img.crop(bbox), height=48))
     outline_img = imagetools.constant_color_key(
         rate_img,
         (252, 150, 14),
