@@ -64,7 +64,9 @@ class AoharuBattleConfirmScene(Scene):
 
     @classmethod
     def _enter(cls, ctx: SceneHolder) -> Scene:
-        action.wait_image(templates.SINGLE_MODE_AOHARU_BATTLE_CONFIRM_TITLE)
+        action.wait_image_stable(
+            templates.SINGLE_MODE_AOHARU_BATTLE_CONFIRM_TITLE, duration=0.2
+        )
         return cls()
 
     def recognize_predictions(self) -> None:
