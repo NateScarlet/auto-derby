@@ -7,7 +7,6 @@ import logging
 from typing import Text
 
 from ... import action, templates, terminal
-from ...constants import RuningStyle
 from ...scenes import PaddockScene
 from ...scenes.single_mode import RaceMenuScene
 from .. import Context, Race
@@ -19,11 +18,7 @@ _LOGGER = logging.getLogger(__name__)
 
 def _choose_running_style(ctx: Context, race1: Race) -> None:
     scene = PaddockScene.enter(ctx)
-    scores = race1.style_scores(ctx)
-
-    style_scores = sorted(
-        zip(RuningStyle, reversed(scores)), key=lambda x: x[1], reverse=True
-    )
+    style_scores = sorted(race1.style_scores_v2(ctx), key=lambda x: x[1], reverse=True)
 
     for style, score in style_scores:
         _LOGGER.info("running style score:\t%.2f:\t%s", score, style)

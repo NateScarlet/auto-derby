@@ -1,8 +1,9 @@
 # pyright: strict
 # -*- coding=UTF-8 -*-
 from __future__ import annotations
+from auto_derby.constants import RuningStyle
 
-from typing import TYPE_CHECKING, Any, Dict, Optional, Set, Text, Tuple
+from typing import TYPE_CHECKING, Any, Dict, Iterator, Optional, Set, Text, Tuple
 
 if TYPE_CHECKING:
     from ..context import Context
@@ -164,13 +165,31 @@ class Race:
     def style_scores(
         self,
         ctx: Context,
+        *,
+        _no_warn: bool = False,
     ) -> Tuple[float, float, float, float]:
+        if not _no_warn:
+            # TODO: remove old api at next major version
+            import warnings
+
+            warnings.warn(
+                "use style_scores_v2 instead",
+                DeprecationWarning,
+            )
+
         last = runing_style_score.compute(ctx, self, ctx.last, 1.1, 0.995, 0.9)
         middle = runing_style_score.compute(ctx, self, ctx.middle, 1.0, 1, 0.95)
         head = runing_style_score.compute(ctx, self, ctx.head, 0.8, 0.89, 1.0)
         lead = runing_style_score.compute(ctx, self, ctx.lead, 0.5, 0.95, 1.1)
 
         return last, middle, head, lead
+
+    def style_scores_v2(self, ctx: Context) -> Iterator[Tuple[RuningStyle, float]]:
+        last, middle, head, lead = self.style_scores(ctx, _no_warn=True)
+        yield RuningStyle.LEAD, lead
+        yield RuningStyle.MIDDLE, middle
+        yield RuningStyle.HEAD, head
+        yield RuningStyle.LAST, last
 
     def estimate_order(self, ctx: Context) -> int:
         style_scores = self.style_scores(ctx)
