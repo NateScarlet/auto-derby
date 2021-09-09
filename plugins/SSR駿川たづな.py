@@ -109,6 +109,8 @@ class Plugin(auto_derby.Plugin):
                 c = self.current_event_count
                 t.wisdom = _WIS[c]
                 t.stamina = _STA[c]
+                t.speed = _SPD[c]
+                t.skill = _SKILL[c]
                 ret += t.score(ctx)
 
                 # attributes reward gain
