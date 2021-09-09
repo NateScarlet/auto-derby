@@ -30,7 +30,6 @@ class Client(ABC):
     def screenshot(self) -> PIL.Image.Image:
         ...
 
-    # TODO: rename to tap
     @abstractmethod
     def tap(self, point: Tuple[int, int]) -> None:
         ...
