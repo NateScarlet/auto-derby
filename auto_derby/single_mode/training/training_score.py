@@ -88,8 +88,21 @@ def compute(ctx: Context, trn: Training) -> float:
     elif trn.level > target_level:
         target_level_score -= (trn.level - target_level) * 5
 
+    fail_penality = 0
+    if trn.type != trn.TYPE_WISDOM:
+        fail_penality = mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 30),
+                (72, 60),
+            ),
+        )
+
     has_hint = any(i for i in trn.partners if i.has_hint)
     hint = 3 if has_hint else 0
     return (
-        spd + sta + pow + per + int_ + skill + partner + target_level_score + hint
-    ) * success_rate + vit
+        (spd + sta + pow + per + int_ + skill + partner + target_level_score + hint)
+        * success_rate
+        + vit
+        - fail_penality * trn.failure_rate
+    )
