@@ -28,7 +28,7 @@ class PaddockScene(Scene):
             RuningStyle.MIDDLE: rp.vector2((160, 500), 466),
             RuningStyle.LAST: rp.vector2((60, 500), 466),
         }[style]
-        action.tap_image(templates.RACE_RUNNING_STYLE_CHANGE_BUTTON)
+        action.wait_tap_image(templates.RACE_RUNNING_STYLE_CHANGE_BUTTON)
         _, pos = action.wait_image(templates.RACE_CONFIRM_BUTTON)
         time.sleep(0.5)
         action.tap(button_pos)
