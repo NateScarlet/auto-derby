@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/NateScarlet/auto-derby/compare/v1.7.7...v1.8.0) (2021-09-11)
+
+### Features
+
+- **plugin:** add `less_op` plugin ([19e9f0b](https://github.com/NateScarlet/auto-derby/commit/19e9f0b5b3c2cac0dd6c4fcb758769545e71ef3d))
+- **plugin:** add plugin `SSR樫本理子` ([2f920c5](https://github.com/NateScarlet/auto-derby/commit/2f920c584449722e50653f65a4499e61f79f79c2))
+- **plugin:** SSR 駿川たづな: adjust go out score ([f735486](https://github.com/NateScarlet/auto-derby/commit/f73548687d704d7a4d70118cbed42b295e94a1f2))
+- **single-mode:** adjust go out score ([e539a2f](https://github.com/NateScarlet/auto-derby/commit/e539a2f0b908ae6119461dcddf69db57ca4d5b1e)), closes [#185](https://github.com/NateScarlet/auto-derby/issues/185)
+- **single-mode:** adjust training score ([a3dd24b](https://github.com/NateScarlet/auto-derby/commit/a3dd24b4081dd63bdd050a1c4341be716413b591))
+- **single-mode:** resize image before recognize failure rate ([0f83d76](https://github.com/NateScarlet/auto-derby/commit/0f83d76a64c30148bbe4828d2e36f26976a4d4e4))
+
+### Bug Fixes
+
+- should wait template in paddock scene ([cd10e97](https://github.com/NateScarlet/auto-derby/commit/cd10e971724dd0a5ebdcb8af08949a533ae6499e))
+- **single-mode:** should wait menu animation ([0f81898](https://github.com/NateScarlet/auto-derby/commit/0f818981bd53a772a65f44b01192a722e2cf262e))
+- **single-mode:** template can not match ([a71e820](https://github.com/NateScarlet/auto-derby/commit/a71e820f61f122d5ce992c55c4f6314e8a5987bb)), closes [#186](https://github.com/NateScarlet/auto-derby/issues/186)
+- wrong button pos in PaddockScene.choose_runing_style ([#187](https://github.com/NateScarlet/auto-derby/issues/187)) ([0dc8cc0](https://github.com/NateScarlet/auto-derby/commit/0dc8cc036e88af5d80f615a943e001cbcffbb5cf))
+
 ## [1.7.7](https://github.com/NateScarlet/auto-derby/compare/v1.7.6...v1.7.7) (2021-09-07)
 
 ### Bug Fixes

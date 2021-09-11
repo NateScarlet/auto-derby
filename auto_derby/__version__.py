@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.7.7"
-RELEASE_DATE = datetime.fromtimestamp(1631016469)
-LAST_GIT_COMMIT_DESCRIBE = "v1.7.6-1-g3acd2c4"
-LAST_GIT_COMMIT_HASH = "3acd2c4cc010098b2d94168d97e8f5f805a29c7c"
+VERSION = "1.8.0"
+RELEASE_DATE = datetime.fromtimestamp(1631398145)
+LAST_GIT_COMMIT_DESCRIBE = "v1.7.7-14-g19e9f0b"
+LAST_GIT_COMMIT_HASH = "19e9f0b5b3c2cac0dd6c4fcb758769545e71ef3d"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1631015486)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error when recognize aoharu training"
-LAST_GIT_COMMIT_BODY = "fix #183"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1631389451)
+LAST_GIT_COMMIT_SUBJECT = "feat(plugin): add `less_op` plugin"
+LAST_GIT_COMMIT_BODY = ""
