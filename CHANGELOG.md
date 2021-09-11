@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file. See [standa
 - should wait template in paddock scene ([cd10e97](https://github.com/NateScarlet/auto-derby/commit/cd10e971724dd0a5ebdcb8af08949a533ae6499e))
 - **single-mode:** should wait menu animation ([0f81898](https://github.com/NateScarlet/auto-derby/commit/0f818981bd53a772a65f44b01192a722e2cf262e))
 - **single-mode:** template can not match ([a71e820](https://github.com/NateScarlet/auto-derby/commit/a71e820f61f122d5ce992c55c4f6314e8a5987bb)), closes [#186](https://github.com/NateScarlet/auto-derby/issues/186)
-- wrong button pos in PaddockScene.choose_runing_style ([#187](https://github.com/NateScarlet/auto-derby/issues/187)) ([0dc8cc0](https://github.com/NateScarlet/auto-derby/commit/0dc8cc036e88af5d80f615a943e001cbcffbb5cf))
+- wrong button pos in PaddockScene.choose_running_style ([#187](https://github.com/NateScarlet/auto-derby/issues/187)) ([0dc8cc0](https://github.com/NateScarlet/auto-derby/commit/0dc8cc036e88af5d80f615a943e001cbcffbb5cf))
 
 ## [1.7.7](https://github.com/NateScarlet/auto-derby/compare/v1.7.6...v1.7.7) (2021-09-07)
 
