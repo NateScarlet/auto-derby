@@ -6,7 +6,7 @@ from __future__ import annotations
 import time
 from typing import Optional, Text
 
-from ... import action, templates
+from ... import action, templates, template
 from ...scenes.single_mode.command import CommandScene
 from .. import Context, go_out
 from .command import Command
@@ -40,6 +40,15 @@ class GoOutCommand(Command):
         )
         time.sleep(0.5)
         if action.count_image(templates.SINGLE_MODE_GO_OUT_MENU_TITLE):
+            if (
+                self.option.position == (0, 0)
+                and self.option.type == go_out.Option.TYPE_MAIN
+            ):
+                self.option = next(
+                    i
+                    for i in go_out.Option.from_menu(template.screenshot())
+                    if i.type == self.option.type
+                )
             action.tap(self.option.position)
         if self.option.total_event_count > 0:
             self.option.current_event_count += 1
