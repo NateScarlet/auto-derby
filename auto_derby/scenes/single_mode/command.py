@@ -27,10 +27,11 @@ class CommandScene(Scene):
         if ctx.scene.name() == "single-mode-training":
             action.tap_image(templates.RETURN_BUTTON)
 
-        action.wait_image(
+        action.wait_image_stable(
             templates.SINGLE_MODE_COMMAND_TRAINING,
             templates.SINGLE_MODE_FORMAL_RACE_BANNER,
             templates.SINGLE_MODE_URA_FINALS,
+            duration=2,
         )
 
         return cls()
@@ -96,7 +97,7 @@ class CommandScene(Scene):
             (7, 2),
             (10, 1),
         ):
-            time.sleep(5)
+            time.sleep(3)
         self.recognize_commands(ctx)
         if not ctx.fan_count:
             self.recognize_class(ctx)
