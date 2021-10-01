@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.8.0"
-RELEASE_DATE = datetime.fromtimestamp(1631398145)
-LAST_GIT_COMMIT_DESCRIBE = "v1.7.7-14-g19e9f0b"
-LAST_GIT_COMMIT_HASH = "19e9f0b5b3c2cac0dd6c4fcb758769545e71ef3d"
+VERSION = "1.8.1"
+RELEASE_DATE = datetime.fromtimestamp(1633060557)
+LAST_GIT_COMMIT_DESCRIBE = "v1.8.0-5-gf9caaef"
+LAST_GIT_COMMIT_HASH = "f9caaeffd70b3080be9f397fa65143e6a36f27e1"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1631389451)
-LAST_GIT_COMMIT_SUBJECT = "feat(plugin): add `less_op` plugin"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1633060066)
+LAST_GIT_COMMIT_SUBJECT = "fix(roulette-derby): update roulette_derby_get.png"
 LAST_GIT_COMMIT_BODY = ""

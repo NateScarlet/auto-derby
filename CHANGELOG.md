@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.1](https://github.com/NateScarlet/auto-derby/compare/v1.8.0...v1.8.1) (2021-10-01)
+
+### Bug Fixes
+
+- **roulette-derby:** update roulette_derby_get.png ([f9caaef](https://github.com/NateScarlet/auto-derby/commit/f9caaeffd70b3080be9f397fa65143e6a36f27e1))
+- **single-mode:** can not go out with main character ([1bfea5b](https://github.com/NateScarlet/auto-derby/commit/1bfea5bceed31f370a1abd919e6266c7d60d0a34))
+- **single-mode:** increase command scene animation wait ([0ed876e](https://github.com/NateScarlet/auto-derby/commit/0ed876e6b54c038e0d454cb6801730cc2b9fbb7d))
+- **single-mode:** should wait aoharu countdown animation ([e7598fd](https://github.com/NateScarlet/auto-derby/commit/e7598fdb1ae3e771480eb0a3642ee4dfa4ec5dfb))
+
 ## [1.8.0](https://github.com/NateScarlet/auto-derby/compare/v1.7.7...v1.8.0) (2021-09-11)
 
 ### Features
