@@ -57,6 +57,8 @@ def compute(ctx: Context, race: Race) -> float:
                 (18, 1000),
                 # 皐月賞
                 (30, 4500),
+                # 日本ダービー
+                (33, 6000),
                 # 有馬記念
                 (46, 25000),
                 # valentine
