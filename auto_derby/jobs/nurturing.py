@@ -113,7 +113,10 @@ def _handle_target_race(ac: _ActionContext):
     ctx = ac.ctx
     CommandScene().recognize(ctx)
     ctx.next_turn()
-    scene = RaceMenuScene().enter(ctx)
+    try:
+        scene = RaceMenuScene().enter(ctx)
+    except RaceTurnsIncorrect:
+        scene = RaceMenuScene().enter(ctx)
     commands.RaceCommand(scene.first_race(ctx), selected=True).execute(ctx)
 
 
