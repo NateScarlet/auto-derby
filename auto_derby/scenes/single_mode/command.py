@@ -89,7 +89,6 @@ class CommandScene(Scene):
 
     def recognize(self, ctx: single_mode.Context):
         action.reset_client_size()
-        ctx.update_by_command_scene(template.screenshot())
         # wait aoharu countdown animation
         if ctx.scenario == ctx.SCENARIO_AOHARU and ctx.date[1:] in (
             (1, 2),
@@ -97,7 +96,11 @@ class CommandScene(Scene):
             (7, 2),
             (10, 1),
         ):
-            time.sleep(3)
+            action.wait_image_stable(
+                templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON,
+                duration=3,
+            )
+        ctx.update_by_command_scene(template.screenshot())
         self.recognize_commands(ctx)
         if not ctx.fan_count:
             self.recognize_class(ctx)
