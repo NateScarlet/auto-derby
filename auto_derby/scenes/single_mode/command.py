@@ -27,11 +27,10 @@ class CommandScene(Scene):
         if ctx.scene.name() == "single-mode-training":
             action.tap_image(templates.RETURN_BUTTON)
 
-        action.wait_image_stable(
+        action.wait_image(
             templates.SINGLE_MODE_COMMAND_TRAINING,
             templates.SINGLE_MODE_FORMAL_RACE_BANNER,
             templates.SINGLE_MODE_URA_FINALS,
-            duration=2,
         )
 
         return cls()
