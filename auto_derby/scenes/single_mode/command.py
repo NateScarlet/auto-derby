@@ -89,18 +89,11 @@ class CommandScene(Scene):
 
     def recognize(self, ctx: single_mode.Context):
         action.reset_client_size()
-        # wait aoharu countdown animation
-        if ctx.scenario == ctx.SCENARIO_AOHARU and ctx.date[1:] in (
-            (1, 2),
-            (4, 1),
-            (7, 2),
-            (10, 1),
-        ):
-            action.wait_image_stable(
-                templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON,
-                duration=3,
-            )
-        ctx.update_by_command_scene(template.screenshot())
+        # animation may not finished
+        # https://github.com/NateScarlet/auto-derby/issues/201
+        action.run_with_retry(
+            lambda: ctx.update_by_command_scene(template.screenshot())
+        )
         self.recognize_commands(ctx)
         if not ctx.fan_count:
             self.recognize_class(ctx)
