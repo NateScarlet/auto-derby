@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/NateScarlet/auto-derby/compare/v1.8.1...v1.9.0) (2021-10-15)
+
+### Features
+
+- **single-mode:** adjust race score ([464c9fb](https://github.com/NateScarlet/auto-derby/commit/464c9fbcadafb000527f5df0ed57a8e609278ecd))
+
+### Bug Fixes
+
+- **single-mode:** handle race turns incorrect on target race ([e5e5a30](https://github.com/NateScarlet/auto-derby/commit/e5e5a30ac9a6645619b51fdb522d1da60539dc9a))
+- **single-mode:** should retry on context update failed ([c17cd95](https://github.com/NateScarlet/auto-derby/commit/c17cd9583879994d8aab1665bd6e1804ab9752b2)), closes [#201](https://github.com/NateScarlet/auto-derby/issues/201)
+- **single-mode:** update race data ([6afcf39](https://github.com/NateScarlet/auto-derby/commit/6afcf3937805d008cfa55c2eb3d638ce58eb0f70)), closes [#204](https://github.com/NateScarlet/auto-derby/issues/204)
+- **single-mode:** wait aoharu countdown animation ([9f12ff8](https://github.com/NateScarlet/auto-derby/commit/9f12ff800e169a07e801eee93506b9c8eb5f3361))
+
+### Performance
+
+- **single-mode:** remove command scene animation vwait ([8f52ee3](https://github.com/NateScarlet/auto-derby/commit/8f52ee3e2287a9db329b4dd80eff6536af3507cf))
+
 ## [1.8.1](https://github.com/NateScarlet/auto-derby/compare/v1.8.0...v1.8.1) (2021-10-01)
 
 ### Bug Fixes

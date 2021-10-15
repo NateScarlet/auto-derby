@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.8.1"
-RELEASE_DATE = datetime.fromtimestamp(1633060557)
-LAST_GIT_COMMIT_DESCRIBE = "v1.8.0-5-gf9caaef"
-LAST_GIT_COMMIT_HASH = "f9caaeffd70b3080be9f397fa65143e6a36f27e1"
+VERSION = "1.9.0"
+RELEASE_DATE = datetime.fromtimestamp(1634318889)
+LAST_GIT_COMMIT_DESCRIBE = "v1.8.1-6-g6afcf39"
+LAST_GIT_COMMIT_HASH = "6afcf3937805d008cfa55c2eb3d638ce58eb0f70"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1633060066)
-LAST_GIT_COMMIT_SUBJECT = "fix(roulette-derby): update roulette_derby_get.png"
-LAST_GIT_COMMIT_BODY = ""
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1634312734)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): update race data"
+LAST_GIT_COMMIT_BODY = "fix #204"
