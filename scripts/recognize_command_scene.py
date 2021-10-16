@@ -14,11 +14,10 @@ if True:
 import argparse
 
 import PIL.Image
-from auto_derby import imagetools, single_mode, template
+from auto_derby import single_mode, template
 
 
 def main():
-
     parser = argparse.ArgumentParser()
 
     parser.add_argument("image", default="debug/last_screenshot.png")
@@ -27,7 +26,8 @@ def main():
     if args.debug:
         logging.getLogger("auto_derby").setLevel(logging.DEBUG)
     image_path = args.image
-    image = imagetools.resize(PIL.Image.open(image_path), width=template.TARGET_WIDTH)
+    image = PIL.Image.open(image_path)
+    template.g.screenshot_width = image.width
     ctx = single_mode.Context()
     ctx.update_by_command_scene(image)
     print(ctx)
