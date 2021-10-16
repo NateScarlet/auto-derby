@@ -14,7 +14,7 @@ if True:
 import argparse
 
 import PIL.Image
-from auto_derby import imagetools, single_mode, template, config
+from auto_derby import single_mode, template, config
 from auto_derby.single_mode import Context
 
 
@@ -43,7 +43,8 @@ def main():
         "ura": Context.SCENARIO_URA,
         "aoharu": Context.SCENARIO_AOHARU,
     }.get(args.scenario, args.scenario)
-    image = imagetools.resize(PIL.Image.open(image_path), width=template.TARGET_WIDTH)
+    image = PIL.Image.open(image_path)
+    template.g.screenshot_width = image.width
     ctx = Context.new()
     ctx.scenario = scenario
     training = single_mode.Training.from_training_scene_v2(ctx, image)
