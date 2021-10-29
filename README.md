@@ -87,14 +87,14 @@ py -3.8 -m auto_derby 工作名称
 
 反馈前请手动清理敏感信息（例如用户名、机器名）
 
-## launcher.log
+### launcher.log
 
 启动器日志
 
-## auto_derby.log
+### auto_derby.log
 
 运行日志，`.1` `.2` `.3` 后缀的文件为之前日志的备份
 
-## debug
+### debug
 
 调试数据，`.1` `.2` `.3` 后缀的文件夹为之前调试数据的备份
