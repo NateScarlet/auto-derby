@@ -145,6 +145,7 @@ set "AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS=$($env:AUTO_DERBY_SINGLE_MODE
 set "AUTO_DERBY_ADB_ADDRESS=$($env:AUTO_DERBY_ADB_ADDRESS)"
 set "AUTO_DERBY_CHECK_UPDATE=$($env:AUTO_DERBY_CHECK_UPDATE)"
 "$($Data.PythonExecutablePath)" -m auto_derby $($data.Job)
+start "auto-derby launcher" cmd.exe /c .\launcher.cmd
 exit
 "@
 
