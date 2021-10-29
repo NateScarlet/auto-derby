@@ -6,7 +6,7 @@ from __future__ import annotations
 import time
 from typing import Any, Dict, Text
 
-from ... import action, single_mode, template, templates
+from ... import action, single_mode, template, templates, ocr
 from ...scenes import Scene
 from ..scene import Scene, SceneHolder
 
@@ -90,8 +90,19 @@ class CommandScene(Scene):
         action.reset_client_size()
         # animation may not finished
         # https://github.com/NateScarlet/auto-derby/issues/201
+        class local:
+            retry_count = 0
+
+        max_retry = 10
+
+        def _update_with_retry():
+            local.retry_count += 1
+            with ocr.prompt_disabled(ocr.g.prompt_disabled or local.retry_count < max_retry):
+                ctx.update_by_command_scene(template.screenshot())
+
         action.run_with_retry(
-            lambda: ctx.update_by_command_scene(template.screenshot())
+            _update_with_retry,
+            max_retry,
         )
         self.recognize_commands(ctx)
         if not ctx.fan_count:
