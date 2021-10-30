@@ -6,7 +6,7 @@ from __future__ import annotations
 import time
 from typing import Any, Dict, Text
 
-from ... import action, single_mode, template, templates, ocr
+from ... import action, single_mode, template, templates, ocr, terminal
 from ...scenes import Scene
 from ..scene import Scene, SceneHolder
 
@@ -91,16 +91,17 @@ class CommandScene(Scene):
         # animation may not finished
         # https://github.com/NateScarlet/auto-derby/issues/201
         class local:
-            retry_count = 0
+            next_retry_count = 0
 
         max_retry = 10
 
         def _update_with_retry():
-            local.retry_count += 1
-            with ocr.prompt_disabled(
-                ocr.g.prompt_disabled or local.retry_count < max_retry
-            ):
+            local.next_retry_count += 1
+            if local.next_retry_count > max_retry:
                 ctx.update_by_command_scene(template.screenshot())
+            else:
+                with ocr.prompt_disabled(False), terminal.prompt_disabled(True):
+                    ctx.update_by_command_scene(template.screenshot())
 
         action.run_with_retry(
             _update_with_retry,
