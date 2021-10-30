@@ -775,7 +775,7 @@ def GetWindowRgn(*args, **kwargs):
     ...
 
 def GetWindowText(hwnd: int) -> Text:
-    """Get the window text. """
+    """Get the window text."""
     ...
 
 def GetWindowTextLength(*args, **kwargs):
