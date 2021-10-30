@@ -51,6 +51,8 @@ class DMMClient(Client):
         if not _IS_ADMIN:
             raise PermissionError("DMMClient: require admin permission")
         self.set_size(540, 960)
+        window.set_foreground(self.h_wnd)
+        LOGGER.info("foregrounded game window: handle=%s", self.h_wnd)
 
     def screenshot(self) -> PIL.Image.Image:
         return window.screenshot(self.h_wnd)

@@ -106,19 +106,32 @@ def topmost(h_wnd: int):
     )
 
 
+def set_foreground(h_wnd: int) -> None:
+    LOGGER.debug("set foreground window: h_wnd=%s", h_wnd)
+    try:
+        win32gui.SetForegroundWindow(h_wnd)
+    except Exception as ex:
+        LOGGER.warn(
+            "set foreground window failed: h_wnd=%s error='%s'",
+            h_wnd,
+            ex,
+        )
+
+
 def set_forground(h_wnd: int) -> None:
-    win32gui.SetForegroundWindow(h_wnd)
+    import warnings
+
+    warnings.warn("use set_foreground instead", DeprecationWarning)
+    return set_foreground(h_wnd)
 
 
 @contextlib.contextmanager
 def recover_foreground():
-    fg_h_wnd = win32gui.GetForegroundWindow()
+    h_wnd = win32gui.GetForegroundWindow()
+    LOGGER.debug("foreground window: h_wnd=%s", h_wnd)
     yield
     time.sleep(0.1)  # switch too fast may cause issue
-    try:
-        win32gui.SetForegroundWindow(fg_h_wnd)
-    except Exception as ex:
-        LOGGER.warn("recover foreground window failed: %s", ex)
+    set_foreground(h_wnd)
 
 
 def info(msg: Text) -> Callable[[], None]:
@@ -152,7 +165,7 @@ def drag_at(
 
 def wheel_at(h_wnd: int, delta: int) -> None:
     with recover_foreground():
-        set_forground(h_wnd)
+        set_foreground(h_wnd)
         for _ in range(abs(delta)):
             mouse.wheel(1 if delta > 0 else -1)
             time.sleep(1 / 120.0)
