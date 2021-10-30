@@ -31,6 +31,7 @@ class g:
 def _data_key():
     return (len(g.labels), g.data_path)
 
+
 @contextlib.contextmanager
 def prompt_disabled(v: bool):
     original = g.prompt_disabled
@@ -39,6 +40,7 @@ def prompt_disabled(v: bool):
         yield
     finally:
         g.prompt_disabled = original
+
 
 class _g:
     loaded_data_key: Any = None

@@ -97,7 +97,9 @@ class CommandScene(Scene):
 
         def _update_with_retry():
             local.retry_count += 1
-            with ocr.prompt_disabled(ocr.g.prompt_disabled or local.retry_count < max_retry):
+            with ocr.prompt_disabled(
+                ocr.g.prompt_disabled or local.retry_count < max_retry
+            ):
                 ctx.update_by_command_scene(template.screenshot())
 
         action.run_with_retry(
