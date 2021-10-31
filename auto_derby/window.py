@@ -26,6 +26,7 @@ class _g:
 
 class g:
     use_legacy_screenshot = False
+    on_foreground_will_change = lambda: None
 
 
 def message_box(
@@ -107,6 +108,7 @@ def topmost(h_wnd: int):
 
 
 def set_foreground(h_wnd: int) -> None:
+    g.on_foreground_will_change()
     LOGGER.debug("set foreground window: h_wnd=%s", h_wnd)
     try:
         win32gui.SetForegroundWindow(h_wnd)
@@ -129,6 +131,7 @@ def set_forground(h_wnd: int) -> None:
 def recover_foreground():
     h_wnd = win32gui.GetForegroundWindow()
     LOGGER.debug("foreground window: h_wnd=%s", h_wnd)
+    g.on_foreground_will_change()
     yield
     time.sleep(0.1)  # switch too fast may cause issue
     set_foreground(h_wnd)
