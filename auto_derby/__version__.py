@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.9.1"
-RELEASE_DATE = datetime.fromtimestamp(1634371352)
-LAST_GIT_COMMIT_DESCRIBE = "v1.9.0-2-g11a5df5"
-LAST_GIT_COMMIT_HASH = "11a5df5912bac812701b9a4e2b111ae8707a3021"
+VERSION = "1.10.0"
+RELEASE_DATE = datetime.fromtimestamp(1635869213)
+LAST_GIT_COMMIT_DESCRIBE = "v1.9.1-11-g21d6a9f"
+LAST_GIT_COMMIT_HASH = "21d6a9fbb03f6e3934772e0ad01cd2864665e9c3"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1634371075)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error when recognize aoharu training scene"
-LAST_GIT_COMMIT_BODY = "fix #205"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1635654462)
+LAST_GIT_COMMIT_SUBJECT = "feat(plugin): add `debug_window` plugin"
+LAST_GIT_COMMIT_BODY = "for #210"
