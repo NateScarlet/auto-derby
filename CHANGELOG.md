@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features
 
 - **launcher:** reopen after script normal exit ([8ae48f4](https://github.com/NateScarlet/auto-derby/commit/8ae48f4c3617057b79085905cfbcb5f525f13c3e))
-- **plugin:** add `debug_window` plugin ([21d6a9f](https://github.com/NateScarlet/auto-derby/commit/21d6a9fbb03f6e3934772e0ad01cd2864665e9c3)), closes [#210](https://github.com/NateScarlet/auto-derby/issues/210)
+- **plugin:** add `debug_window` plugin ([21d6a9f](https://github.com/NateScarlet/auto-derby/commit/21d6a9fbb03f6e3934772e0ad01cd2864665e9c3)), for [#210](https://github.com/NateScarlet/auto-derby/issues/210)
 - **plugin:** add `pause_on_last_turn` plugin ([05a8ad1](https://github.com/NateScarlet/auto-derby/commit/05a8ad19e91c3f04e9888b7e3aea5921df981c75))
 - set game window foreground at start ([df5c667](https://github.com/NateScarlet/auto-derby/commit/df5c667b8466e1f5bd1e652c264c3c746db3e6ba))
 
