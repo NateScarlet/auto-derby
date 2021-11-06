@@ -3,9 +3,12 @@
 
 from __future__ import annotations
 
-
+import io
+import logging
+import re
+import time
 from pathlib import Path
-from typing import Text, Tuple
+from typing import Callable, List, Text, Tuple
 
 import PIL.Image
 from adb_shell.adb_device import AdbDeviceTcp
@@ -13,11 +16,6 @@ from adb_shell.auth.keygen import keygen
 from adb_shell.auth.sign_pythonrsa import PythonRSASigner
 
 from .client import Client
-
-import re
-
-import logging
-import time
 
 LOGGER = logging.getLogger(__name__)
 
@@ -34,6 +32,7 @@ class ADBClient(Client):
         self.port = int(port)
         self.device = AdbDeviceTcp(self.hostname, self.port)
         self._height, self._width = 0, 0
+        self._screenshot = self._screenshot_init
 
     @property
     def width(self) -> int:
@@ -73,20 +72,52 @@ class ADBClient(Client):
             self._height, self._width = self._width, self._height
         LOGGER.debug("screen size: width=%d height=%d", self.width, self.height)
 
-    def setup(self) -> None:
-        self.connect()
-        self.load_size()
-        self.start_game()
+    def _screenshot_init(self) -> PIL.Image.Image:
+        screenshot_perf: List[Tuple[Callable[[], PIL.Image.Image], int]] = []
+        for screenshot_method in (
+            self._screenshot_raw,
+            self._screenshot_png,
+        ):
+            start_counter_ns = time.perf_counter_ns()
+            img = screenshot_method()
+            perf_counter_ns = time.perf_counter_ns() - start_counter_ns
+            extrema: Tuple[int, int] = img.convert("L").getextrema()  # type: ignore
+            min_color, max_color = extrema
+            is_constant = min_color == max_color
+            LOGGER.debug(
+                "screenshot method performance: name=%s perf_counter_ns=%d",
+                screenshot_method.__name__,
+                perf_counter_ns,
+            )
+            if is_constant:
+                LOGGER.info(
+                    "skip screenshot method that returns constant image: name=%s color=%s",
+                    screenshot_method.__name__,
+                    min_color,
+                )
+            else:
+                screenshot_perf.append((screenshot_method, perf_counter_ns))
+        if not screenshot_perf:
+            raise RuntimeError("no screenshot method avaliable")
+        screenshot_perf = sorted(screenshot_perf, key=lambda x: x[1])
+        self._screenshot, perf = screenshot_perf[0]
+        LOGGER.info(
+            "selected screenshot method: name=%s perf_counter_ns=%d",
+            self._screenshot.__name__,
+            perf,
+        )
+        return self._screenshot()
 
-    def screenshot(self) -> PIL.Image.Image:
-        # img_data = self.device.shell(
-        #     f"screencap -p",
-        #     decode=False,
-        #     transport_timeout_s=None,
-        # )
-        # img = PIL.Image.open(io.BytesIO(img_data))
+    def _screenshot_png(self) -> PIL.Image.Image:
+        img_data = self.device.shell(
+            f"screencap -p",
+            decode=False,
+            transport_timeout_s=None,
+        )
+        img = PIL.Image.open(io.BytesIO(img_data))
+        return img
 
-        # TODO: compare with png format screenshot
+    def _screenshot_raw(self) -> PIL.Image.Image:
         # https://stackoverflow.com/a/59470924
         img_data = self.device.shell(
             f"screencap",
@@ -102,6 +133,14 @@ class ADBClient(Client):
             "RGBA", (width, height), img_data[12:], "raw", "RGBX", 0, 1
         ).convert("RGBA")
         return img
+
+    def setup(self) -> None:
+        self.connect()
+        self.load_size()
+        self.start_game()
+
+    def screenshot(self) -> PIL.Image.Image:
+        return self._screenshot()
 
     def swipe(
         self, point: Tuple[int, int], *, dx: int, dy: int, duration: float
