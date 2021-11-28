@@ -7,6 +7,9 @@
 
 自动化养马
 
+| :exclamation:  脚本违反用户协议 请勿公开宣传 <br> The script violates the user agreement, please do not publicize |
+|-----------------------------------------|
+
 [FAQ](https://github.com/NateScarlet/auto-derby/wiki/FAQ)
 
 [育成结果 Nurturing result](https://github.com/NateScarlet/auto-derby/wiki/Nurturing-result)
