@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/NateScarlet/auto-derby/compare/v1.10.0...v1.11.0) (2021-11-28)
+
+### Features
+
+- **adb:** auto choose screenshot method ([c8045ae](https://github.com/NateScarlet/auto-derby/commit/c8045ae2e1efdc196cba7c0a5b95a8d0432ac5e6))
+
+### Bug Fixes
+
+- **launcher:** error when current path is empty ([9b28291](https://github.com/NateScarlet/auto-derby/commit/9b282918705bec4188bcfd3e9f6c5a4d3b5b81a1))
+
 ## [1.10.0](https://github.com/NateScarlet/auto-derby/compare/v1.9.1...v1.10.0) (2021-11-02)
 
 ### Features

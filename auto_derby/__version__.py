@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.10.0"
-RELEASE_DATE = datetime.fromtimestamp(1635869213)
-LAST_GIT_COMMIT_DESCRIBE = "v1.9.1-11-g21d6a9f"
-LAST_GIT_COMMIT_HASH = "21d6a9fbb03f6e3934772e0ad01cd2864665e9c3"
+VERSION = "1.11.0"
+RELEASE_DATE = datetime.fromtimestamp(1638075144)
+LAST_GIT_COMMIT_DESCRIBE = "v1.10.0-5-g82d0421"
+LAST_GIT_COMMIT_HASH = "82d042163f5ffcc5408c52b03c483861d559eada"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1635654462)
-LAST_GIT_COMMIT_SUBJECT = "feat(plugin): add `debug_window` plugin"
-LAST_GIT_COMMIT_BODY = "for #210"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1638071928)
+LAST_GIT_COMMIT_SUBJECT = "docs: update README.md"
+LAST_GIT_COMMIT_BODY = ""
