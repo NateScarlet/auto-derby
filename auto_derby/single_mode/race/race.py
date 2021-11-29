@@ -26,6 +26,7 @@ class Race:
     TRACK_MIDDLE = 1
     TRACK_IN = 2
     TRACK_OUT = 3
+    TRACE_OUT_TO_IN = 4
 
     TARGET_STATUS_SPEED = 1
     TARGET_STATUS_STAMINA = 2
