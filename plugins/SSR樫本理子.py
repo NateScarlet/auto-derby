@@ -132,10 +132,6 @@ class Plugin(auto_derby.Plugin):
                 t.skill = _SKILL[c]
                 ret += t.score(ctx)
 
-                # attributes reward gain
-                if self.current_event_count in (0, 2, 4):
-                    ret += 20
-
                 return ret
 
         auto_derby.config.single_mode_go_out_option_class = Option
