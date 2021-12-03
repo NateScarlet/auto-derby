@@ -17,6 +17,7 @@
         "nargs",
         "ndarray",
         "numpy",
+        "oguri",
         "pyright",
         "PYTHONIIOENCODING",
         "RENNSHITA",
