@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://github.com/NateScarlet/auto-derby/compare/v1.11.0...v1.12.0) (2021-12-03)
+
+### Features
+
+- **plugin:** add `example_oguri_cap` plugin ([cbdcdcc](https://github.com/NateScarlet/auto-derby/commit/cbdcdcc4cacb0889b31d77e6bb855862c12ff447))
+- **plugin:** adjust friend card score ([815d3d7](https://github.com/NateScarlet/auto-derby/commit/815d3d7a59432cba60b5cbb2a5eb6b9c22986c20))
+- **single-mode:** support race track type 4 ([50ccbe2](https://github.com/NateScarlet/auto-derby/commit/50ccbe28bd7b050162660a051dacbae00d76d8a5))
+
 ## [1.11.0](https://github.com/NateScarlet/auto-derby/compare/v1.10.0...v1.11.0) (2021-11-28)
 
 ### Features
