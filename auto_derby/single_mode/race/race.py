@@ -26,7 +26,7 @@ class Race:
     TRACK_MIDDLE = 1
     TRACK_IN = 2
     TRACK_OUT = 3
-    TRACE_OUT_TO_IN = 4
+    TRACK_OUT_TO_IN = 4
 
     TARGET_STATUS_SPEED = 1
     TARGET_STATUS_STAMINA = 2
@@ -230,3 +230,7 @@ class Race:
 
 
 g.race_class = Race
+
+
+# Deprecated members, removal on v2
+Race.TRACE_OUT_TO_IN = Race.TRACK_OUT_TO_IN  # type: ignore
