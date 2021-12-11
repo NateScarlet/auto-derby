@@ -292,3 +292,11 @@ def test_find_by_race_menu_image_issue112():
     assert race2.name == "朝日杯フューチュリティステークス", race2.name
     assert race2.stadium == "阪神", race2.stadium
     assert race2.characters == set(), race2.characters
+
+
+def test_find_by_race_menu_image_issue216():
+    ctx = Context.new()
+    ctx.date = (1, 12, 1)
+    img, _ = _test.use_screenshot("single_mode/race_menu_issue216.png")
+    res = sorted(race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1])
+    _test.snapshot_match(res)

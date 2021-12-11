@@ -1,0 +1,88 @@
+[
+  [
+    {
+      "stadium": "阪神",
+      "name": "さざんか賞",
+      "grade": 700,
+      "ground": 1,
+      "distance": 1200,
+      "permission": 1,
+      "month": 12,
+      "half": 1,
+      "entryCount": 16,
+      "track": 2,
+      "turn": 1,
+      "targetStatuses": [],
+      "minFanCount": 350,
+      "fanCounts": [
+        1000,
+        400,
+        250,
+        150,
+        100,
+        90,
+        80,
+        70,
+        60,
+        50,
+        40,
+        30,
+        25,
+        20,
+        15,
+        7,
+        7,
+        7
+      ],
+      "characters": []
+    },
+    [
+      203,
+      586
+    ]
+  ],
+  [
+    {
+      "stadium": "阪神",
+      "name": "阪神ジュベナイルフィリーズ",
+      "grade": 100,
+      "ground": 1,
+      "distance": 1600,
+      "permission": 1,
+      "month": 12,
+      "half": 1,
+      "entryCount": 18,
+      "track": 3,
+      "turn": 1,
+      "targetStatuses": [
+        3
+      ],
+      "minFanCount": 1000,
+      "fanCounts": [
+        6500,
+        2600,
+        1625,
+        975,
+        650,
+        585,
+        520,
+        455,
+        390,
+        325,
+        260,
+        195,
+        163,
+        130,
+        98,
+        65,
+        65,
+        65
+      ],
+      "characters": []
+    },
+    [
+      203,
+      701
+    ]
+  ]
+]
