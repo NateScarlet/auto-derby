@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.12.0"
-RELEASE_DATE = datetime.fromtimestamp(1638531262)
-LAST_GIT_COMMIT_DESCRIBE = "v1.11.0-4-g50ccbe2"
-LAST_GIT_COMMIT_HASH = "50ccbe28bd7b050162660a051dacbae00d76d8a5"
-LAST_GIT_COMMIT_AUTHOR_NAME = "CNA-Bld"
-LAST_GIT_COMMIT_AUTHOR_EMAIL = "cna.bld@gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1638188791)
-LAST_GIT_COMMIT_SUBJECT = "feat(single-mode): support race track type 4"
-LAST_GIT_COMMIT_BODY = ""
+VERSION = "1.12.1"
+RELEASE_DATE = datetime.fromtimestamp(1639237050)
+LAST_GIT_COMMIT_DESCRIBE = "v1.12.0-2-g1c599a1"
+LAST_GIT_COMMIT_HASH = "1c599a14942002acb51df1e8cf89394c15b5ad1d"
+LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
+LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1639236855)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-race): can not regonize race menu item with reward"
+LAST_GIT_COMMIT_BODY = "fix #216"
