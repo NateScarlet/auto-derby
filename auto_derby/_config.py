@@ -43,6 +43,13 @@ def _default_on_single_mode_end(ctx: single_mode.Context) -> None:
     pass
 
 
+def _getenv_int(key: Text, d: int) -> int:
+    try:
+        return int(os.getenv(key, ""))
+    except:
+        return d
+
+
 class config:
     LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", "auto_derby.log")
     PLUGINS = tuple(i for i in os.getenv("AUTO_DERBY_PLUGINS", "").split(",") if i)
@@ -56,6 +63,10 @@ class config:
     single_mode_race_result_path = os.getenv(
         "AUTO_DERBY_SINGLE_MODE_RACE_RESULT_PATH",
         "data/single_mode_race_result.jsonl",
+    )
+    single_mode_race_result_max_bytes = _getenv_int(
+        "AUTO_DERBY_SINGLE_MODE_RACE_RESULT_MAX_BYTES",
+        single_mode.race.g.result_max_bytes,
     )
     ocr_data_path = os.getenv("AUTO_DERBY_OCR_LABEL_PATH", "data/ocr_labels.csv")
     ocr_image_path = os.getenv("AUTO_DERBY_OCR_IMAGE_PATH", "")
@@ -130,6 +141,7 @@ class config:
         single_mode.go_out.g.names = cls.single_mode_go_out_names
         single_mode.race.g.data_path = cls.single_mode_race_data_path
         single_mode.race.g.result_path = cls.single_mode_race_result_path
+        single_mode.race.g.result_max_bytes = cls.single_mode_race_result_max_bytes
         single_mode.race.g.race_class = cls.single_mode_race_class
         single_mode.training.g.image_path = cls.single_mode_training_image_path
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels

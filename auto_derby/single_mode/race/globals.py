@@ -13,5 +13,6 @@ if TYPE_CHECKING:
 class g:
     data_path: str = ""
     result_path: str = ""
+    result_max_bytes: int = 10 << 20
     races: Tuple[Race, ...] = ()
     race_class: Type[Race]
