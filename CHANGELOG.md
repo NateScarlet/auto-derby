@@ -6,13 +6,13 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- **single-mode:** can not recgonize ura race ([269ea03](https://github.com/NateScarlet/auto-derby/commit/269ea03e80e4e01ef4238e776aea6c20189028b3)), closes [#217](https://github.com/NateScarlet/auto-derby/issues/217)
+- **single-mode:** can not recognize ura race ([269ea03](https://github.com/NateScarlet/auto-derby/commit/269ea03e80e4e01ef4238e776aea6c20189028b3)), closes [#217](https://github.com/NateScarlet/auto-derby/issues/217)
 
 ## [1.12.1](https://github.com/NateScarlet/auto-derby/compare/v1.12.0...v1.12.1) (2021-12-11)
 
 ### Bug Fixes
 
-- **single-race:** can not regonize race menu item with reward ([1c599a1](https://github.com/NateScarlet/auto-derby/commit/1c599a14942002acb51df1e8cf89394c15b5ad1d)), closes [#216](https://github.com/NateScarlet/auto-derby/issues/216)
+- **single-race:** can not recognize race menu item with reward ([1c599a1](https://github.com/NateScarlet/auto-derby/commit/1c599a14942002acb51df1e8cf89394c15b5ad1d)), closes [#216](https://github.com/NateScarlet/auto-derby/issues/216)
 
 ## [1.12.0](https://github.com/NateScarlet/auto-derby/compare/v1.11.0...v1.12.0) (2021-12-03)
 
