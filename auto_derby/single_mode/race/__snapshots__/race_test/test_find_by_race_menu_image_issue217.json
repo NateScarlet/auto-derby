@@ -1,0 +1,47 @@
+[
+  [
+    {
+      "stadium": "東京",
+      "name": "URAファイナルズ予選",
+      "grade": 100,
+      "ground": 1,
+      "distance": 1600,
+      "permission": 5,
+      "month": 1,
+      "half": 2,
+      "entryCount": 18,
+      "track": 1,
+      "turn": 2,
+      "targetStatuses": [
+        2,
+        4
+      ],
+      "minFanCount": 0,
+      "fanCounts": [
+        7000,
+        2800,
+        1750,
+        1050,
+        700,
+        630,
+        560,
+        490,
+        420,
+        350,
+        280,
+        210,
+        175,
+        140,
+        105,
+        70,
+        70,
+        70
+      ],
+      "characters": []
+    },
+    [
+      406,
+      1172
+    ]
+  ]
+]

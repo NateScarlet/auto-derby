@@ -144,7 +144,8 @@ def _recognize_grade(
     img: PIL.Image.Image, pos: Tuple[int, int], radius: int = 2
 ) -> Tuple[int, ...]:
     cv_img = imagetools.cv_image(img)
-    if imagetools.compare_color_near(cv_img, pos, (0, 139, 214), radius=radius) > 0.9:
+    # TODO: get dominance color, then find most similar match instead
+    if imagetools.compare_color_near(cv_img, pos, (0, 140, 215), radius=radius) > 0.9:
         # EX(URA)
         return (Race.GRADE_G1,)
     if imagetools.compare_color_near(cv_img, pos, (228, 133, 54), radius=radius) > 0.8:
