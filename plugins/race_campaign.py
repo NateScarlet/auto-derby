@@ -1,68 +1,127 @@
 # -*- coding=UTF-8 -*-
 
+from abc import abstractmethod
 import auto_derby
 from auto_derby import single_mode
 
 
-from typing import Text, Dict, Tuple
+from typing import List, Text
 import datetime
 
 import logging
+from auto_derby.single_mode.context import Context
+
+from auto_derby.single_mode.race.race import Race
+from auto_derby.single_mode.race import race_result
 
 _LOGGER = logging.getLogger(__name__)
-
-_ACTION_NONE = 0
-_ACTION_BAN = 1
-_ACTION_LESS = 2
-_ACTION_MORE = 3
-_ACTION_PICK = 4
-
-_DEFAULT_ACTION = _ACTION_NONE
-
-_RULES: Dict[Tuple[int, Text], int] = {}
 
 
 JST = datetime.timezone(datetime.timedelta(hours=9), name="JST")
 
 
-def _define_race_schedule(
-    start: datetime.date, end: datetime.datetime, turn: int, race_name: Text
+class Campaign:
+    def __init__(
+        self,
+        start: datetime.datetime,
+        end: datetime.datetime,
+        race_name: Text,
+    ) -> None:
+        self.start = start
+        self.end = end
+        self.race_name = race_name
+        super().__init__()
+
+    @abstractmethod
+    def match(self, ctx: Context, race: Race) -> bool:
+        if race.name != self.race_name:
+            return False
+        now = datetime.datetime.now(JST)
+        if not (self.start <= now <= self.end):
+            return False
+        return True
+
+
+class OncePerDayCampaign(Campaign):
+    def __init__(
+        self,
+        start: datetime.datetime,
+        end: datetime.datetime,
+        race_name: Text,
+        *,
+        order_lte: int = 999,
+    ) -> None:
+        super().__init__(
+            start,
+            end,
+            race_name,
+        )
+        self.order_lte = order_lte
+
+    def match(self, ctx: Context, race: Race) -> bool:
+        if not super().match(ctx, race):
+            return False
+        for r in race_result.iterate():
+            if (
+                r.race.name == race.name
+                and r.order <= self.order_lte
+                and r.time.astimezone(JST).date() == datetime.datetime.now(JST).date()
+            ):
+                return False
+
+        return True
+
+
+_CAMPAIGNS: List[Campaign] = []
+
+
+def _add_compagin(
+    c: Campaign,
 ) -> None:
 
     now = datetime.datetime.now(JST)
-    if not (start <= now <= end):
+    # include tomorrow's campaign
+    if not (c.start - datetime.timedelta(days=1) <= now <= c.end):
         return
 
-    _RULES[(turn, race_name)] = _ACTION_PICK
+    _CAMPAIGNS.append(c)
 
 
 # https://dmg.umamusume.jp/news/detail/?id=470
-_define_race_schedule(
-    datetime.datetime(2021, 12, 11, 5, 0, tzinfo=JST),
-    datetime.datetime(2021, 12, 13, 4, 59, tzinfo=JST),
-    22,
-    "阪神ジュベナイルフィリーズ",
+_add_compagin(
+    OncePerDayCampaign(
+        datetime.datetime(2021, 12, 11, 5, 0, tzinfo=JST),
+        datetime.datetime(2021, 12, 13, 4, 59, tzinfo=JST),
+        "阪神ジュベナイルフィリーズ",
+        order_lte=1,
+    )
 )
 
-_define_race_schedule(
-    datetime.datetime(2021, 12, 18, 5, 0, tzinfo=JST),
-    datetime.datetime(2021, 12, 20, 4, 59, tzinfo=JST),
-    22,
-    "朝日杯フューチュリティステークス",
+_add_compagin(
+    OncePerDayCampaign(
+        datetime.datetime(2021, 12, 18, 5, 0, tzinfo=JST),
+        datetime.datetime(2021, 12, 20, 4, 59, tzinfo=JST),
+        "朝日杯フューチュリティステークス",
+        order_lte=1,
+    ),
 )
 
-_define_race_schedule(
-    datetime.datetime(2021, 12, 25, 5, 0, tzinfo=JST),
-    datetime.datetime(2021, 12, 27, 4, 59, tzinfo=JST),
-    47,
-    "有馬記念",
+_add_compagin(
+    OncePerDayCampaign(
+        datetime.datetime(2021, 12, 25, 5, 0, tzinfo=JST),
+        datetime.datetime(2021, 12, 27, 4, 59, tzinfo=JST),
+        "有馬記念",
+        order_lte=1,
+    )
 )
 
-_define_race_schedule(
-    datetime.datetime(2021, 12, 27, 5, 0, tzinfo=JST),
-    datetime.datetime(2021, 12, 29, 4, 59, tzinfo=JST),
-    23,
-    "ホープフルステークス",
+_add_compagin(
+    OncePerDayCampaign(
+        datetime.datetime(2021, 12, 27, 5, 0, tzinfo=JST),
+        datetime.datetime(2021, 12, 29, 4, 59, tzinfo=JST),
+        "ホープフルステークス",
+        order_lte=1,
+    ),
 )
 
 
@@ -70,27 +129,17 @@ class Plugin(auto_derby.Plugin):
     """Pick race by compagin."""
 
     def install(self) -> None:
-        if not _RULES:
+        if not _CAMPAIGNS:
             _LOGGER.info("no race campaign today")
             return
 
-        for i in _RULES.keys():
-            _LOGGER.info("scheduled race: turn=%d name=%s", i[0], i[1])
+        for i in _CAMPAIGNS:
+            _LOGGER.info("race campaign: %s~%s %s", i.start, i.end, i.race_name)
 
         class Race(auto_derby.config.single_mode_race_class):
             def score(self, ctx: single_mode.Context) -> float:
                 ret = super().score(ctx)
-                action = _RULES.get(
-                    (ctx.turn_count(), self.name),
-                    _DEFAULT_ACTION,
-                )
-                if action == _ACTION_BAN:
-                    ret = 0
-                elif action == _ACTION_LESS:
-                    ret -= 5
-                elif action == _ACTION_MORE:
-                    ret += 5
-                elif action == _ACTION_PICK:
+                if any(i.match(ctx, self) for i in _CAMPAIGNS):
                     ret += 100
                 return ret
 

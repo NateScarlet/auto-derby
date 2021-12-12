@@ -66,7 +66,7 @@ class RaceResult:
             f.write("\n")
 
 
-def iter_results() -> Iterator[RaceResult]:
+def iterate() -> Iterator[RaceResult]:
     p = g.result_path
     if not p:
         return
@@ -81,7 +81,7 @@ def prune(time_lt: datetime.datetime) -> None:
     p = g.result_path
     tmp_path = p + ".tmp"
     with open(tmp_path, "w", encoding="utf-8") as f:
-        for res in iter_results():
+        for res in iterate():
             if res.time < time_lt:
                 continue
             json.dump(res.to_dict(), f, ensure_ascii=False)
