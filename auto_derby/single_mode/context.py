@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Dict
 
 if TYPE_CHECKING:
     from . import go_out
@@ -138,9 +138,9 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
         cv2.destroyAllWindows()
 
     text = ocr.text(imagetools.pil_image(text_img))
-    for i in Context.ALL_STATUSES:
-        if i[1] == text:
-            return i
+    ret = Context.status_by_name(text)
+    if ret != Context.STATUS_NONE:
+        return ret
 
     raise ValueError("_recognize_status: unknown status: %s" % text)
 
@@ -413,10 +413,21 @@ class Context:
             f"ground={''.join(i[1] for i in (self.turf, self.dart))},"
             f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"
             f"style={''.join(i[1] for i in (self.last, self.middle, self.head, self.lead))},"
-            f"condition={functools.reduce(lambda a, b: a | b, self.conditions, 0)}"
+            f"condition={self.condition}"
             f"{msg}"
             ">"
         )
+
+    @property
+    def condition(self) -> int:
+        return functools.reduce(lambda a, b: a | b, self.conditions, 0)
+
+    @condition.setter
+    def condition(self, v: int):
+        self.conditions.clear()
+        for i in (self.CONDITION_HEADACHE, self.CONDITION_OVERWEIGHT):
+            if i & v:
+                self.conditions.add(i)
 
     def turn_count(self) -> int:
         if self.date == (1, 0, 0):
@@ -483,6 +494,68 @@ class Context:
         expected_score += (self.MOOD_VERY_GOOD[0] - self.mood[0]) * 40 * 3
 
         return expected_score
+
+    def to_dict(self) -> Dict[Text, Any]:
+        return {
+            "date": self.date,
+            "mood": self.mood,
+            "scenario": self.scenario,
+            "vitality": self.vitality,
+            "maxVitality": self.max_vitality,
+            "speed": self.speed,
+            "stamina": self.stamina,
+            "power": self.power,
+            "guts": self.guts,
+            "wisdom": self.wisdom,
+            "fanCount": self.fan_count,
+            "turf": self.turf[1],
+            "dart": self.dart[1],
+            "sprint": self.sprint[1],
+            "mile": self.mile[1],
+            "intermediate": self.intermediate[1],
+            "long": self.long[1],
+            "last": self.last[1],
+            "middle": self.middle[1],
+            "head": self.head[1],
+            "lead": self.lead[1],
+            "condition": self.condition,
+        }
+
+    @classmethod
+    def status_by_name(cls, name: Text) -> Tuple[int, Text]:
+        for i in cls.ALL_STATUSES:
+            if i[1] == name:
+                return i
+        return cls.STATUS_NONE
+
+    @classmethod
+    def from_dict(cls, data: Dict[Text, Any]) -> Context:
+
+        ret = cls()
+        ret.speed = data["speed"]
+        ret.stamina = data["stamina"]
+        ret.power = data["power"]
+        ret.guts = data["guts"]
+        ret.wisdom = data["wisdom"]
+        ret.date = tuple(data["date"])
+        ret.vitality = data["vitality"]
+        ret.max_vitality = data["maxVitality"]
+        ret.mood = tuple(data["mood"])
+        ret.condition = data["condition"]
+        ret.fan_count = data["fanCount"]
+        ret.turf = cls.status_by_name(data["turf"])
+        ret.dart = cls.status_by_name(data["dart"])
+        ret.sprint = cls.status_by_name(data["sprint"])
+        ret.mile = cls.status_by_name(data["mile"])
+        ret.intermediate = cls.status_by_name(data["intermediate"])
+        ret.long = cls.status_by_name(data["long"])
+        ret.lead = cls.status_by_name(data["lead"])
+        ret.head = cls.status_by_name(data["head"])
+        ret.middle = cls.status_by_name(data["middle"])
+        ret.last = cls.status_by_name(data["last"])
+        ret.scenario = data["scenario"]
+
+        return ret
 
 
 g.context_class = Context

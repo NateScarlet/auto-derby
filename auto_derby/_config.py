@@ -53,6 +53,10 @@ class config:
         "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH",
         data.path("single_mode_races.jsonl"),
     )
+    single_mode_race_result_path = os.getenv(
+        "AUTO_DERBY_SINGLE_MODE_RACE_RESULT_PATH",
+        "data/single_mode_race_result.jsonl",
+    )
     ocr_data_path = os.getenv("AUTO_DERBY_OCR_LABEL_PATH", "data/ocr_labels.csv")
     ocr_image_path = os.getenv("AUTO_DERBY_OCR_IMAGE_PATH", "")
     last_screenshot_save_path = os.getenv("AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH", "")
@@ -125,6 +129,7 @@ class config:
         single_mode.go_out.g.option_class = cls.single_mode_go_out_option_class
         single_mode.go_out.g.names = cls.single_mode_go_out_names
         single_mode.race.g.data_path = cls.single_mode_race_data_path
+        single_mode.race.g.result_path = cls.single_mode_race_result_path
         single_mode.race.g.race_class = cls.single_mode_race_class
         single_mode.training.g.image_path = cls.single_mode_training_image_path
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels

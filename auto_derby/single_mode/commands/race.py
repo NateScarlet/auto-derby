@@ -9,7 +9,7 @@ from typing import Text
 from ... import action, templates, terminal
 from ...scenes import PaddockScene
 from ...scenes.single_mode import RaceMenuScene
-from .. import Context, Race
+from .. import Context, Race, RaceResult
 from .command import Command
 from .globals import g
 
@@ -24,16 +24,6 @@ def _choose_running_style(ctx: Context, race1: Race) -> None:
         _LOGGER.info("running style score:\t%.2f:\t%s", score, style)
 
     scene.choose_runing_style(style_scores[0][0])
-
-
-class RaceResult:
-    def __init__(self) -> None:
-        self.race = Race()
-        self.order = 0
-        self.is_failed = False
-
-    def __str__(self) -> str:
-        return f"RaceResult<race={self.race} order={self.order} fail={self.is_failed}>"
 
 
 _RACE_ORDER_TEMPLATES = {
@@ -52,6 +42,7 @@ def _handle_race_result(ctx: Context, race: Race):
     action.wait_tap_image(templates.RACE_RESULT_BUTTON)
 
     res = RaceResult()
+    res.ctx = Context.from_dict(ctx.to_dict())
     res.race = race
 
     tmpl, pos = action.wait_image(*_RACE_ORDER_TEMPLATES.keys())
@@ -65,6 +56,7 @@ def _handle_race_result(ctx: Context, race: Race):
     res.is_failed = tmpl.name == templates.SINGLE_MODE_CONTINUE
     _LOGGER.info("race result: %s", res)
     g.on_race_result(ctx, res)
+    res.write()
     action.tap(pos)
     if res.is_failed:
         _handle_race_result(ctx, race)
