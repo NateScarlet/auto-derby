@@ -59,6 +59,13 @@ def _handle_race_result(ctx: Context, race: Race):
     res.write()
     action.tap(pos)
     if res.is_failed:
+        ctx.mood = {
+            ctx.MOOD_VERY_BAD: ctx.MOOD_BAD,
+            ctx.MOOD_BAD: ctx.MOOD_NORMAL,
+            ctx.MOOD_NORMAL: ctx.MOOD_GOOD,
+            ctx.MOOD_GOOD: ctx.MOOD_VERY_GOOD,
+            ctx.MOOD_VERY_GOOD: ctx.MOOD_VERY_GOOD,
+        }[ctx.mood]
         _handle_race_result(ctx, race)
 
 
