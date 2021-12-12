@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.2](https://github.com/NateScarlet/auto-derby/compare/v1.12.1...v1.12.2) (2021-12-12)
+
+### Bug Fixes
+
+- **single-mode:** can not recgonize ura race ([269ea03](https://github.com/NateScarlet/auto-derby/commit/269ea03e80e4e01ef4238e776aea6c20189028b3)), closes [#217](https://github.com/NateScarlet/auto-derby/issues/217)
+
 ## [1.12.1](https://github.com/NateScarlet/auto-derby/compare/v1.12.0...v1.12.1) (2021-12-11)
 
 ### Bug Fixes
