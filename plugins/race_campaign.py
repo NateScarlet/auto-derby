@@ -139,6 +139,8 @@ class Plugin(auto_derby.Plugin):
         class Race(auto_derby.config.single_mode_race_class):
             def score(self, ctx: single_mode.Context) -> float:
                 ret = super().score(ctx)
+                if ret < 0:
+                    return ret 
                 if any(i.match(ctx, self) for i in _CAMPAIGNS):
                     ret += 100
                 return ret
