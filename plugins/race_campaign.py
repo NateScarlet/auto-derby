@@ -72,6 +72,36 @@ class OncePerDayCampaign(Campaign):
         return True
 
 
+class OneTimeCampaign(Campaign):
+    def __init__(
+        self,
+        start: datetime.datetime,
+        end: datetime.datetime,
+        race_name: Text,
+        *,
+        order_lte: int = 999,
+    ) -> None:
+        super().__init__(
+            start,
+            end,
+            race_name,
+        )
+        self.order_lte = order_lte
+
+    def match(self, ctx: Context, race: Race) -> bool:
+        if not super().match(ctx, race):
+            return False
+        for r in race_result.iterate():
+            if (
+                r.race.name == race.name
+                and r.order <= self.order_lte
+                and self.start < r.time.astimezone(JST) <= self.end
+            ):
+                return False
+
+        return True
+
+
 _CAMPAIGNS: List[Campaign] = []
 
 
@@ -125,6 +155,35 @@ _add_compagin(
 )
 
 
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2021, 12, 13, 5, 0, tzinfo=JST),
+        datetime.datetime(2021, 12, 20, 4, 59, tzinfo=JST),
+        "朝日杯フューチュリティステークス",
+        order_lte=1,
+    ),
+)
+
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2021, 12, 20, 5, 0, tzinfo=JST),
+        datetime.datetime(2021, 12, 27, 4, 59, tzinfo=JST),
+        "有馬記念",
+        order_lte=1,
+    ),
+)
+
+
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2021, 12, 27, 5, 0, tzinfo=JST),
+        datetime.datetime(2021, 12, 29, 4, 59, tzinfo=JST),
+        "ホープフルステークス",
+        order_lte=1,
+    ),
+)
+
+
 class Plugin(auto_derby.Plugin):
     """Pick race by compagin."""
 
@@ -140,7 +199,7 @@ class Plugin(auto_derby.Plugin):
             def score(self, ctx: single_mode.Context) -> float:
                 ret = super().score(ctx)
                 if ret < 0:
-                    return ret 
+                    return ret
                 if any(i.match(ctx, self) for i in _CAMPAIGNS):
                     ret += 100
                 return ret
