@@ -30,9 +30,9 @@ class RaceResult:
     def to_dict(self) -> Dict[Text, Any]:
         return {
             "time": self.time.isoformat(),
+            "order": self.order,
             "race": self.race.to_dict(),
             "ctx": self.ctx.to_dict(),
-            "order": self.order,
             "is_failed": self.is_failed,
         }
 
