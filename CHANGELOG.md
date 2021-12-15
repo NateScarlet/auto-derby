@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/NateScarlet/auto-derby/compare/v1.12.2...v1.13.0) (2021-12-15)
+
+### Features
+
+- add `single_mode_race_result_max_bytes` config ([0bad198](https://github.com/NateScarlet/auto-derby/commit/0bad19868cc437dfe815d086953027acb43973e3))
+- **plugin:** add `race_campaign` plugin ([7200e55](https://github.com/NateScarlet/auto-derby/commit/7200e55027df4ceb450526ca4bd76c16ae4b1177))
+- **plugin:** race_campaign: ignore race if can not win ([520a09a](https://github.com/NateScarlet/auto-derby/commit/520a09a6d6a302511302699669cca3dd28e5e6da))
+- **plugin:** race_campaign: skip by race result ([72be305](https://github.com/NateScarlet/auto-derby/commit/72be305f41365b14f1140a88d918ae2da9760057))
+- **single-mode:** record race result ([64595ee](https://github.com/NateScarlet/auto-derby/commit/64595ee77457cb9f3cf910f312717887faa13d9a))
+
+### Bug Fixes
+
+- **adb:** increase wait time after tap/swipe ([0c208c3](https://github.com/NateScarlet/auto-derby/commit/0c208c3105f47f7d63ca6b93dfe0777b8558bc36)), closes [#219](https://github.com/NateScarlet/auto-derby/issues/219)
+- **plugin:** race_campaign: update data ([c1ca2aa](https://github.com/NateScarlet/auto-derby/commit/c1ca2aa90df759848808d1c1ce807a6c7687f6e3))
+- **single-mode:** should update mood on race continue ([bb266ef](https://github.com/NateScarlet/auto-derby/commit/bb266ef1071a7c7a2869538fe2398cf6cc8bfc05))
+
 ## [1.12.2](https://github.com/NateScarlet/auto-derby/compare/v1.12.1...v1.12.2) (2021-12-12)
 
 ### Bug Fixes
