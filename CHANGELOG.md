@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.1](https://github.com/NateScarlet/auto-derby/compare/v1.13.0...v1.13.1) (2021-12-15)
+
+### Bug Fixes
+
+- should use plural file name for race results ([9c712ff](https://github.com/NateScarlet/auto-derby/commit/9c712ffd9c14d9305496e0ec7695eca0f53f67a6))
+
 ## [1.13.0](https://github.com/NateScarlet/auto-derby/compare/v1.12.2...v1.13.0) (2021-12-15)
 
 ### Features

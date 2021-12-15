@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.13.0"
-RELEASE_DATE = datetime.fromtimestamp(1639590442)
-LAST_GIT_COMMIT_DESCRIBE = "v1.12.2-10-g0c208c3"
-LAST_GIT_COMMIT_HASH = "0c208c3105f47f7d63ca6b93dfe0777b8558bc36"
+VERSION = "1.13.1"
+RELEASE_DATE = datetime.fromtimestamp(1639591259)
+LAST_GIT_COMMIT_DESCRIBE = "v1.13.0-2-g9c712ff"
+LAST_GIT_COMMIT_HASH = "9c712ffd9c14d9305496e0ec7695eca0f53f67a6"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1639589836)
-LAST_GIT_COMMIT_SUBJECT = "fix(adb): increase wait time after tap/swipe"
-LAST_GIT_COMMIT_BODY = "fix #219"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1639591246)
+LAST_GIT_COMMIT_SUBJECT = "fix: should use plural file name for race results"
+LAST_GIT_COMMIT_BODY = ""
