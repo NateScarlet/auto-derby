@@ -62,7 +62,7 @@ class config:
     )
     single_mode_race_result_path = os.getenv(
         "AUTO_DERBY_SINGLE_MODE_RACE_RESULT_PATH",
-        "data/single_mode_race_result.jsonl",
+        "data/single_mode_race_results.jsonl",
     )
     single_mode_race_result_max_bytes = _getenv_int(
         "AUTO_DERBY_SINGLE_MODE_RACE_RESULT_MAX_BYTES",
