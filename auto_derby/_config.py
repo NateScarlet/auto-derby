@@ -105,6 +105,7 @@ class config:
         os.getenv("AUTO_DERBY_OCR_PROMPT_DISABLED", "").lower() == "true"
     )
     adb_key_path = os.getenv("AUTO_DERBY_ADB_KEY_PATH", ADBClient.key_path)
+    adb_action_wait = _getenv_int("AUTO_DERBY_ADB_ACTION_WAIT", ADBClient.action_wait)
 
     on_limited_sale = lambda: terminal.pause(
         "Please handle limited shop manually before confirm in terminal.\n"
@@ -129,6 +130,7 @@ class config:
     @classmethod
     def apply(cls) -> None:
         ADBClient.key_path = cls.adb_key_path
+        ADBClient.action_wait = cls.adb_action_wait
         ocr.g.data_path = cls.ocr_data_path
         ocr.g.image_path = cls.ocr_image_path
         ocr.g.prompt_disabled = cls.ocr_prompt_disabled

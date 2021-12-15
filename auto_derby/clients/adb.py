@@ -22,6 +22,7 @@ LOGGER = logging.getLogger(__name__)
 
 class ADBClient(Client):
     key_path: Text = "adb.local.key"
+    action_wait = 1
 
     def __init__(self, address: Text):
         hostname, port = address.split(":", 2)
@@ -54,7 +55,7 @@ class ADBClient(Client):
         LOGGER.debug("tap: %s", command)
         res = self.device.shell(command)
         assert not res, res
-        time.sleep(0.5)
+        time.sleep(self.action_wait)
 
     def start_game(self):
         self.device.shell(
@@ -156,4 +157,4 @@ class ADBClient(Client):
             read_timeout_s=10 + duration,
         )
         assert not res, res
-        time.sleep(0.5)
+        time.sleep(self.action_wait)
