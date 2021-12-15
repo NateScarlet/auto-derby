@@ -58,7 +58,7 @@ class RaceResult:
                 pass
             if size > g.result_max_bytes:
                 _LOGGER.info(
-                    "data file large than %dMiB, remove records that older than 90 days",
+                    "data file large than %.2fMiB, remove records that older than 90 days",
                     g.result_max_bytes / (1 << 20),
                 )
                 prune(datetime.datetime.now() - datetime.timedelta(days=-90))
