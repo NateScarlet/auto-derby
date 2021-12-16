@@ -117,6 +117,32 @@ def _add_compagin(
     _CAMPAIGNS.append(c)
 
 
+class Plugin(auto_derby.Plugin):
+    """Pick race by compagin."""
+
+    def install(self) -> None:
+        if not _CAMPAIGNS:
+            _LOGGER.info("no race campaign today")
+            return
+
+        for i in _CAMPAIGNS:
+            _LOGGER.info("race campaign: %s~%s %s", i.start, i.end, i.race_name)
+
+        class Race(auto_derby.config.single_mode_race_class):
+            def score(self, ctx: single_mode.Context) -> float:
+                ret = super().score(ctx)
+                if ret < 0:
+                    return ret
+                if any(i.match(ctx, self) for i in _CAMPAIGNS):
+                    ret += 100
+                return ret
+
+        auto_derby.config.single_mode_race_class = Race
+
+
+auto_derby.plugin.register(__name__, Plugin())
+
+
 # https://dmg.umamusume.jp/news/detail/?id=470
 _add_compagin(
     OncePerDayCampaign(
@@ -182,29 +208,3 @@ _add_compagin(
         order_lte=1,
     ),
 )
-
-
-class Plugin(auto_derby.Plugin):
-    """Pick race by compagin."""
-
-    def install(self) -> None:
-        if not _CAMPAIGNS:
-            _LOGGER.info("no race campaign today")
-            return
-
-        for i in _CAMPAIGNS:
-            _LOGGER.info("race campaign: %s~%s %s", i.start, i.end, i.race_name)
-
-        class Race(auto_derby.config.single_mode_race_class):
-            def score(self, ctx: single_mode.Context) -> float:
-                ret = super().score(ctx)
-                if ret < 0:
-                    return ret
-                if any(i.match(ctx, self) for i in _CAMPAIGNS):
-                    ret += 100
-                return ret
-
-        auto_derby.config.single_mode_race_class = Race
-
-
-auto_derby.plugin.register(__name__, Plugin())
