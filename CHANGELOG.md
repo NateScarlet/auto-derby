@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.3](https://github.com/NateScarlet/auto-derby/compare/v1.13.2...v1.13.3) (2021-12-17)
+
+### Bug Fixes
+
+- **single-mode:** should run winnable race when fan not enough ([f31478f](https://github.com/NateScarlet/auto-derby/commit/f31478fba48bfe10829ee8ff97e930732ec9de26))
+
 ## [1.13.2](https://github.com/NateScarlet/auto-derby/compare/v1.13.1...v1.13.2) (2021-12-17)
 
 ### Bug Fixes
