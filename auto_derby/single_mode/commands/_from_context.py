@@ -25,6 +25,14 @@ def from_context(ctx: Context) -> Iterator[Command]:
         scene = RaceMenuScene.enter(ctx)
         yield RaceCommand(scene.first_race(ctx), selected=True)
         return
+
+    has_winnable_race = False
+    for i in race.find(ctx):
+        has_winnable_race = has_winnable_race or i.estimate_order(ctx) <= 3
+        yield RaceCommand(i)
+    if ctx.target_fan_count > ctx.fan_count and has_winnable_race:
+        return
+
     if scene.has_health_care:
         yield HealthCareCommand()
     if ctx.is_summer_camp:
@@ -38,8 +46,7 @@ def from_context(ctx: Context) -> Iterator[Command]:
                 yield GoOutCommand(i)
         else:
             yield GoOutCommand()
-    for i in race.find(ctx):
-        yield RaceCommand(i)
+
     if not g.ignore_training_commands(ctx):
         scene = TrainingScene.enter(ctx)
         scene.recognize_v2(ctx)

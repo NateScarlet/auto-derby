@@ -8,7 +8,7 @@ import time
 
 from ... import action
 from ...scenes.single_mode import TrainingScene
-from .. import Context, Training, race
+from .. import Context, Training
 from .command import Command
 from .globals import g
 
@@ -35,10 +35,6 @@ class TrainingCommand(Command):
 
 def default_ignore_training_commands(ctx: Context) -> bool:
     if ctx.vitality < 0.2:
-        return True
-    if ctx.target_fan_count > ctx.fan_count and any(
-        i for i in race.find(ctx) if i.estimate_order(ctx) <= 3
-    ):
         return True
     return False
 
