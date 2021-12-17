@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.13.1"
-RELEASE_DATE = datetime.fromtimestamp(1639591259)
-LAST_GIT_COMMIT_DESCRIBE = "v1.13.0-2-g9c712ff"
-LAST_GIT_COMMIT_HASH = "9c712ffd9c14d9305496e0ec7695eca0f53f67a6"
+VERSION = "1.13.2"
+RELEASE_DATE = datetime.fromtimestamp(1639740984)
+LAST_GIT_COMMIT_DESCRIBE = "v1.13.1-2-gaedc0ae"
+LAST_GIT_COMMIT_HASH = "aedc0ae32dde4523233c871c54f182f1b2bf7c8f"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1639591246)
-LAST_GIT_COMMIT_SUBJECT = "fix: should use plural file name for race results"
-LAST_GIT_COMMIT_BODY = ""
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1639740752)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): should create race result dir"
+LAST_GIT_COMMIT_BODY = "fix #223"

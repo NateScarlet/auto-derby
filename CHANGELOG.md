@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.2](https://github.com/NateScarlet/auto-derby/compare/v1.13.1...v1.13.2) (2021-12-17)
+
+### Bug Fixes
+
+- **single-mode:** should create race result dir ([aedc0ae](https://github.com/NateScarlet/auto-derby/commit/aedc0ae32dde4523233c871c54f182f1b2bf7c8f)), closes [#223](https://github.com/NateScarlet/auto-derby/issues/223)
+
 ## [1.13.1](https://github.com/NateScarlet/auto-derby/compare/v1.13.0...v1.13.1) (2021-12-15)
 
 ### Bug Fixes
