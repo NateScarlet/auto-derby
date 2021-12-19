@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.4](https://github.com/NateScarlet/auto-derby/compare/v1.13.3...v1.13.4) (2021-12-19)
+
+### Bug Fixes
+
+- **single-mode:** should not run low score race ([cdee372](https://github.com/NateScarlet/auto-derby/commit/cdee3722c4a70f72b5f5549890b5563d78096147))
+
 ## [1.13.3](https://github.com/NateScarlet/auto-derby/compare/v1.13.2...v1.13.3) (2021-12-17)
 
 ### Bug Fixes

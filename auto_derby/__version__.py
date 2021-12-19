@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.13.3"
-RELEASE_DATE = datetime.fromtimestamp(1639768262)
-LAST_GIT_COMMIT_DESCRIBE = "v1.13.2-1-gf31478f"
-LAST_GIT_COMMIT_HASH = "f31478fba48bfe10829ee8ff97e930732ec9de26"
+VERSION = "1.13.4"
+RELEASE_DATE = datetime.fromtimestamp(1639939128)
+LAST_GIT_COMMIT_DESCRIBE = "v1.13.3-1-gcdee372"
+LAST_GIT_COMMIT_HASH = "cdee3722c4a70f72b5f5549890b5563d78096147"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1639768064)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): should run winnable race when fan not enough"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1639939050)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): should not run low score race"
 LAST_GIT_COMMIT_BODY = ""
