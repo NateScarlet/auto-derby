@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.5](https://github.com/NateScarlet/auto-derby/compare/v1.13.4...v1.13.5) (2021-12-20)
+
+### Bug Fixes
+
+- **check-update:** handle cdn request failure ([20c850e](https://github.com/NateScarlet/auto-derby/commit/20c850e57d4f32346e3eba5ccae31239a9498961)), closes [#226](https://github.com/NateScarlet/auto-derby/issues/226)
+
 ## [1.13.4](https://github.com/NateScarlet/auto-derby/compare/v1.13.3...v1.13.4) (2021-12-19)
 
 ### Bug Fixes
