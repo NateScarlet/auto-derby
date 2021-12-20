@@ -9,3 +9,7 @@ def test_parse():
     assert version.parse("v0.1.2") == (0, 1, 2, "")
     assert version.parse("0.1.2-rc.1") == (0, 1, 2, "rc.1")
     assert version.parse("0.1.2-rc.1-build1") == (0, 1, 2, "rc.1-build1")
+
+
+def test_latest():
+    assert version.latest()

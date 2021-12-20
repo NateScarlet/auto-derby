@@ -14,18 +14,51 @@ import win32con
 
 from . import window
 from .__version__ import VERSION
+from concurrent import futures
+import logging
 
-_VERSION_URL = "https://cdn.jsdelivr.net/gh/NateScarlet/auto-derby@master/version"
+_LOGGER = logging.getLogger(__name__)
+
+
+_VERSION_URLS = (
+    "https://cdn.jsdelivr.net/gh/NateScarlet/auto-derby@master/version",
+    "https://github.com/NateScarlet/auto-derby/raw/master/version",
+    "https://natescarlet.coding.net/p/github/d/auto-derby/git/raw/master/version",
+)
 _CHANGELOG_URL = "https://github.com/NateScarlet/auto-derby/blob/master/CHANGELOG.md"
 
 
-def latest() -> Text:
+def _http_get(url: Text) -> Text:
     # Use `requests` if we have more http related feature
     resp = cast.instance(
-        urllib.request.urlopen(_VERSION_URL),
+        urllib.request.urlopen(url),
         http.client.HTTPResponse,
     )
+    if resp.status != 200:
+        raise RuntimeError("response status %d: %s", resp.status, url)
     return cast.text(resp.read())
+
+
+def latest() -> Text:
+    pool = futures.ThreadPoolExecutor()
+
+    def _do(url: Text):
+        return url, _http_get(url)
+
+    jobs = [pool.submit(_do, url) for url in _VERSION_URLS]
+    try:
+        while jobs:
+            try:
+                done, jobs = futures.wait(jobs, return_when=futures.FIRST_COMPLETED)
+                url, ret = done.pop().result()
+                _LOGGER.info("lastest: %s from %s", ret, url)
+                return ret
+            except:
+                pass
+    finally:
+        pool.shutdown(False)
+    _LOGGER.warning("latest: all request failed, use current version")
+    return VERSION
 
 
 def parse(v: Text) -> Tuple[int, int, int, Text]:
