@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.6](https://github.com/NateScarlet/auto-derby/compare/v1.13.5...v1.13.6) (2021-12-22)
+
+### Bug Fixes
+
+- **single-mode:** error in recognizing '右·外 → 内' race ([30b2e75](https://github.com/NateScarlet/auto-derby/commit/30b2e7547497f8077f362d8cb37fb774e685c3a5))
+
 ## [1.13.5](https://github.com/NateScarlet/auto-derby/compare/v1.13.4...v1.13.5) (2021-12-20)
 
 ### Bug Fixes

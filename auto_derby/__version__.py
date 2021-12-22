@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.13.5"
-RELEASE_DATE = datetime.fromtimestamp(1640013104)
-LAST_GIT_COMMIT_DESCRIBE = "v1.13.4-1-g20c850e"
-LAST_GIT_COMMIT_HASH = "20c850e57d4f32346e3eba5ccae31239a9498961"
+VERSION = "1.13.6"
+RELEASE_DATE = datetime.fromtimestamp(1640189401)
+LAST_GIT_COMMIT_DESCRIBE = "v1.13.5-1-g30b2e75"
+LAST_GIT_COMMIT_HASH = "30b2e7547497f8077f362d8cb37fb774e685c3a5"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1640012752)
-LAST_GIT_COMMIT_SUBJECT = "fix(check-update): handle cdn request failure"
-LAST_GIT_COMMIT_BODY = "fix #226"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1640189030)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error in recognizing \'右·外→内\' race"
+LAST_GIT_COMMIT_BODY = ""
