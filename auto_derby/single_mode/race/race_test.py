@@ -275,6 +275,14 @@ def test_find_by_race_menu_image_6():
     assert race3.characters == set(), race3.characters
 
 
+def test_find_by_race_menu_image_7():
+    ctx = Context.new()
+    ctx.date = (3, 4, 2)
+    img, _ = _test.use_screenshot("single_mode/race_menu_7.png")
+    res = sorted(race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1])
+    _test.snapshot_match(res)
+
+
 def test_find_by_race_menu_image_issue112():
     ctx = Context.new()
     ctx.date = (1, 12, 1)

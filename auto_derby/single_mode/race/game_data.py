@@ -17,7 +17,7 @@ import numpy as np
 import PIL.Image
 import PIL.ImageOps
 
-from ... import imagetools, mathtools, ocr, template, templates
+from ... import imagetools, mathtools, ocr, template, templates, texttools
 from .globals import g
 from .race import Race
 
@@ -102,6 +102,18 @@ def _recognize_fan_count(img: PIL.Image.Image) -> int:
     return int(text.rstrip("人").replace(",", ""))
 
 
+_TURN_TRACK_SPEC = {
+    "左·内": (Race.TURN_LEFT, Race.TRACK_IN),
+    "右·内": (Race.TURN_RIGHT, Race.TRACK_IN),
+    "左": (Race.TURN_LEFT, Race.TRACK_MIDDLE),
+    "右": (Race.TURN_RIGHT, Race.TRACK_MIDDLE),
+    "左·外": (Race.TURN_LEFT, Race.TRACK_OUT),
+    "右·外": (Race.TURN_RIGHT, Race.TRACK_OUT),
+    "直線": (Race.TURN_NONE, Race.TRACK_MIDDLE),
+    "右·外→内": (Race.TURN_RIGHT, Race.TRACK_OUT_TO_IN),
+}
+
+
 def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
     cv_img = imagetools.cv_image(imagetools.resize(img.convert("L"), height=32))
     cv_img = imagetools.level(
@@ -126,16 +138,7 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
 
     distance, text = int(text[:4]), text[10:]
 
-    turn, track = {
-        "左·内": (Race.TURN_LEFT, Race.TRACK_IN),
-        "右·内": (Race.TURN_RIGHT, Race.TRACK_IN),
-        "左": (Race.TURN_LEFT, Race.TRACK_MIDDLE),
-        "右": (Race.TURN_RIGHT, Race.TRACK_MIDDLE),
-        "左·外": (Race.TURN_LEFT, Race.TRACK_OUT),
-        "右·外": (Race.TURN_RIGHT, Race.TRACK_OUT),
-        "直線": (Race.TURN_NONE, Race.TRACK_MIDDLE),
-        "右·外→内": (Race.TURN_RIGHT, Race.TRACK_OUT_TO_IN),
-    }[text]
+    turn, track = _TURN_TRACK_SPEC[texttools.choose(text, _TURN_TRACK_SPEC.keys())]
 
     return stadium, ground, distance, turn, track
 
@@ -227,7 +230,7 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
 
 def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Iterator[Race]:
     rp = mathtools.ResizeProxy(img.width)
-    spec_bbox = rp.vector4((221, 12, 478, 32), 492)
+    spec_bbox = rp.vector4((221, 12, 488, 30), 492)
     no1_fan_count_bbox = rp.vector4((207, 54, 360, 72), 492)
     grade_color_pos = rp.vector2((198, 29), 540)
 

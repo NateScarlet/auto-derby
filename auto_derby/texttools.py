@@ -5,6 +5,10 @@ from __future__ import annotations
 
 import itertools
 from typing import Dict, Iterable, Iterator, Text, Tuple
+import logging
+
+_LOGGER = logging.getLogger(__name__)
+
 
 _SIMILARITIES: Dict[Tuple[Text, Text], float] = dict()
 
@@ -58,6 +62,7 @@ _SIMILARITIES[_similarity_key("ョ", "ヨ")] = 0.95
 _SIMILARITIES[_similarity_key("ヮ", "ワ")] = 0.95
 _SIMILARITIES[_similarity_key("ヮ", "ヷ")] = 0.8
 _SIMILARITIES[_similarity_key("ワ", "ヷ")] = 0.8
+_SIMILARITIES[_similarity_key("→", "ー")] = 0.8
 
 
 def _compare_char(a: Text, b: Text) -> float:
@@ -130,8 +135,16 @@ def choose(v: Text, options: Iterable[Text], threshold: float = 0.5) -> Text:
         reverse=True,
     )
     if not option_with_similarites:
+        _LOGGER.warn("choose: empty options")
         return v
     res, similarity = option_with_similarites[0]
+    _LOGGER.debug(
+        "choose: text='%s' match='%s' similarity=%.3f threshold=%.3f",
+        v,
+        res,
+        similarity,
+        threshold,
+    )
     if similarity < threshold:
         return v
     return res
