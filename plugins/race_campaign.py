@@ -143,68 +143,69 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# https://dmg.umamusume.jp/news/detail/?id=470
+# https://dmg.umamusume.jp/news/detail?id=550
+# story event: 瑞花繚乱！新春かるた合戦
 _add_compagin(
-    OncePerDayCampaign(
-        datetime.datetime(2021, 12, 11, 5, 0, tzinfo=JST),
-        datetime.datetime(2021, 12, 13, 4, 59, tzinfo=JST),
-        "阪神ジュベナイルフィリーズ",
-        order_lte=1,
-    )
-)
-
-_add_compagin(
-    OncePerDayCampaign(
-        datetime.datetime(2021, 12, 18, 5, 0, tzinfo=JST),
-        datetime.datetime(2021, 12, 20, 4, 59, tzinfo=JST),
-        "朝日杯フューチュリティステークス",
-        order_lte=1,
+    OneTimeCampaign(
+        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
+        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
+        "宝塚記念",
+        order_lte=3,
     ),
 )
 
 _add_compagin(
-    OncePerDayCampaign(
-        datetime.datetime(2021, 12, 25, 5, 0, tzinfo=JST),
-        datetime.datetime(2021, 12, 27, 4, 59, tzinfo=JST),
+    OneTimeCampaign(
+        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
+        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
+        "天皇賞（春）",
+        order_lte=3,
+    ),
+)
+
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
+        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
+        "ジャパンカップ",
+        order_lte=3,
+    ),
+)
+
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
+        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
         "有馬記念",
-        order_lte=1,
-    )
-)
-
-_add_compagin(
-    OncePerDayCampaign(
-        datetime.datetime(2021, 12, 27, 5, 0, tzinfo=JST),
-        datetime.datetime(2021, 12, 29, 4, 59, tzinfo=JST),
-        "ホープフルステークス",
-        order_lte=1,
+        order_lte=3,
     ),
 )
 
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2021, 12, 13, 5, 0, tzinfo=JST),
-        datetime.datetime(2021, 12, 20, 4, 59, tzinfo=JST),
-        "朝日杯フューチュリティステークス",
-        order_lte=1,
-    ),
-)
-
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2021, 12, 20, 5, 0, tzinfo=JST),
-        datetime.datetime(2021, 12, 27, 4, 59, tzinfo=JST),
-        "有馬記念",
-        order_lte=1,
+        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
+        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
+        "フェブラリーステークス",
+        order_lte=3,
     ),
 )
 
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2021, 12, 27, 5, 0, tzinfo=JST),
-        datetime.datetime(2021, 12, 29, 4, 59, tzinfo=JST),
-        "ホープフルステークス",
-        order_lte=1,
+        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
+        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
+        "エルムステークス",
+        order_lte=3,
+    ),
+)
+
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
+        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
+        "JBCスプリント",
+        order_lte=3,
     ),
 )
