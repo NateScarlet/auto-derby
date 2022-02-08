@@ -73,13 +73,7 @@ def find(ctx: Context) -> Iterator[Race]:
     if ctx.date[1:] == (0, 0):
         return
     for i in find_by_date(ctx.date):
-        if i.grade == Race.GRADE_NOT_WINNING and (
-            ctx.is_after_winning or ctx.fan_count == 1
-        ):
-            continue
-        if i.grade < Race.GRADE_NOT_WINNING and not ctx.is_after_winning:
-            continue
-        if ctx.fan_count < i.min_fan_count:
+        if i.is_avaliable(ctx) == False:
             continue
         # target race should be excluded when finding available race
         if i.is_target_race(ctx):

@@ -228,6 +228,22 @@ class Race:
         if len(self.characters) < 10:
             return True
 
+    def is_avaliable(self, ctx: Context) -> Optional[bool]:
+        """return None when result is unknown."""
+
+        if ctx.date == (1, 0, 0) and self.grade != self.GRADE_DEBUT:
+            return False
+        if ctx.date[1:] not in ((self.month, self.half), (0, 0)):
+            return False
+        if ctx.date[0] not in self.years:
+            return False
+        if self.grade == Race.GRADE_NOT_WINNING:
+            return not ctx.is_after_winning or ctx.fan_count == 1
+        if self.grade < Race.GRADE_NOT_WINNING and not ctx.is_after_winning:
+            return False
+        if ctx.fan_count < self.min_fan_count:
+            return False
+
 
 g.race_class = Race
 
