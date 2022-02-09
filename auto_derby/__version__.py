@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.14.0"
-RELEASE_DATE = datetime.fromtimestamp(1644408669)
-LAST_GIT_COMMIT_DESCRIBE = "v1.13.7-2-gfe4e12b"
-LAST_GIT_COMMIT_HASH = "fe4e12bab52ae0e5d7eb9294ab4522385fd93219"
+VERSION = "1.14.1"
+RELEASE_DATE = datetime.fromtimestamp(1644408913)
+LAST_GIT_COMMIT_DESCRIBE = "v1.14.0-1-g383f926"
+LAST_GIT_COMMIT_HASH = "383f926abd47d170b46073835ae20ba85c3a27cb"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1644360135)
-LAST_GIT_COMMIT_SUBJECT = "feat(plugin): add `example_tamamo_cross` plugin"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1644408895)
+LAST_GIT_COMMIT_SUBJECT = "fix: wrong return value of RaceResult.is_current"
 LAST_GIT_COMMIT_BODY = ""

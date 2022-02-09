@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.1](https://github.com/NateScarlet/auto-derby/compare/v1.14.0...v1.14.1) (2022-02-09)
+
+### Bug Fixes
+
+- wrong return value of RaceResult.is_current ([383f926](https://github.com/NateScarlet/auto-derby/commit/383f926abd47d170b46073835ae20ba85c3a27cb))
+
 ## [1.14.0](https://github.com/NateScarlet/auto-derby/compare/v1.13.7...v1.14.0) (2022-02-09)
 
 ### Features
