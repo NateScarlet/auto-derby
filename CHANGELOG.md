@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/NateScarlet/auto-derby/compare/v1.13.7...v1.14.0) (2022-02-09)
+
+### Features
+
+- **plugin:** add `example_tamamo_cross` plugin ([fe4e12b](https://github.com/NateScarlet/auto-derby/commit/fe4e12bab52ae0e5d7eb9294ab4522385fd93219))
+
 ## [1.13.7](https://github.com/NateScarlet/auto-derby/compare/v1.13.6...v1.13.7) (2022-01-07)
 
 ### Bug Fixes
