@@ -88,11 +88,11 @@ class RaceResult:
             and ctx.scenario != Context.SCENARIO_UNKNOWN
             and self.ctx.scenario != ctx.scenario
         ):
-            return
+            return False
 
         # fan count never reduce
         if self.ctx.fan_count > ctx.fan_count:
-            return
+            return False
 
         # distance status never reduce
         if (
