@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/NateScarlet/auto-derby/compare/v1.14.1...v1.15.0) (2022-02-11)
+
+### Features
+
+- **team-race:** use short version ([226905b](https://github.com/NateScarlet/auto-derby/commit/226905b4a1026d75d52fff79688e916ed64e5587))
+
 ## [1.14.1](https://github.com/NateScarlet/auto-derby/compare/v1.14.0...v1.14.1) (2022-02-09)
 
 ### Bug Fixes
