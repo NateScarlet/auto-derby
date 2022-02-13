@@ -1,1 +1,0 @@
-Context<scenario=アオハル杯～輝け、チームの絆～,turn=72,mood=(1.0, 1.0),vit=0.533,spd=818,sta=676,pow=632,gut=300,wis=340,fan=0,ground=,distance=,style=,condition=0>

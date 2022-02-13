@@ -1,0 +1,31 @@
+{
+  "date": [
+    0,
+    0,
+    0
+  ],
+  "mood": [
+    1.0,
+    1.0
+  ],
+  "scenario": "",
+  "vitality": 0.0,
+  "maxVitality": 100,
+  "speed": 0,
+  "stamina": 0,
+  "power": 0,
+  "guts": 0,
+  "wisdom": 0,
+  "fanCount": 1129,
+  "turf": "",
+  "dart": "",
+  "sprint": "",
+  "mile": "",
+  "intermediate": "",
+  "long": "",
+  "last": "",
+  "middle": "",
+  "head": "",
+  "lead": "",
+  "condition": 0
+}

@@ -1,0 +1,31 @@
+{
+  "date": [
+    3,
+    11,
+    1
+  ],
+  "mood": [
+    1.2,
+    1.1
+  ],
+  "scenario": "新設！　URAファイナルズ！！",
+  "vitality": 0.8357487922705313,
+  "maxVitality": 100,
+  "speed": 1200,
+  "stamina": 753,
+  "power": 616,
+  "guts": 364,
+  "wisdom": 326,
+  "fanCount": 0,
+  "turf": "",
+  "dart": "",
+  "sprint": "",
+  "mile": "",
+  "intermediate": "",
+  "long": "",
+  "last": "",
+  "middle": "",
+  "head": "",
+  "lead": "",
+  "condition": 0
+}

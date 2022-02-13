@@ -1,1 +1,0 @@
-Context<scenario=,turn=-27,mood=(1.0, 1.0),vit=0.000,spd=0,sta=0,pow=0,gut=0,wis=0,fan=1129,ground=,distance=,style=,condition=0>

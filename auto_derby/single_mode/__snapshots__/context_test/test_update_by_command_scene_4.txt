@@ -1,1 +1,0 @@
-Context<scenario=新設！　URAファイナルズ！！,turn=30,mood=(1.2, 1.1),vit=0.952,spd=357,sta=279,pow=275,gut=216,wis=250,fan=0,ground=,distance=,style=,condition=0>
