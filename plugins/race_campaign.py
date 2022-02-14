@@ -143,69 +143,31 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# https://dmg.umamusume.jp/news/detail?id=550
-# story event: 瑞花繚乱！新春かるた合戦
+# https://dmg.umamusume.jp/news/detail/?id=616
+# GIキャンペーン
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
-        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
-        "宝塚記念",
-        order_lte=3,
+        datetime.datetime(2022, 2, 14, 11, 0, tzinfo=JST),
+        datetime.datetime(2022, 2, 21, 3, 59, tzinfo=JST),
+        "東海ステークス",
+        order_lte=1,
     ),
 )
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
-        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
-        "天皇賞（春）",
-        order_lte=3,
+        datetime.datetime(2022, 2, 14, 11, 0, tzinfo=JST),
+        datetime.datetime(2022, 2, 21, 3, 59, tzinfo=JST),
+        "根岸ステークス",
+        order_lte=1,
     ),
 )
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
-        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
-        "ジャパンカップ",
-        order_lte=3,
-    ),
-)
-
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
-        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
-        "有馬記念",
-        order_lte=3,
-    ),
-)
-
-
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
-        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
+        datetime.datetime(2022, 2, 14, 11, 0, tzinfo=JST),
+        datetime.datetime(2022, 2, 21, 3, 59, tzinfo=JST),
         "フェブラリーステークス",
-        order_lte=3,
-    ),
-)
-
-
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
-        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
-        "エルムステークス",
-        order_lte=3,
-    ),
-)
-
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2021, 12, 31, 12, 0, tzinfo=JST),
-        datetime.datetime(2022, 1, 11, 11, 59, tzinfo=JST),
-        "JBCスプリント",
-        order_lte=3,
+        order_lte=1,
     ),
 )
