@@ -13,7 +13,7 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import open as open_image
 
-from . import clients, imagetools, mathtools
+from . import clients, imagetools, mathtools, filetools
 
 LOGGER = logging.getLogger(__name__)
 
@@ -40,7 +40,10 @@ def screenshot(*, max_age: float = 1) -> Image:
         g.screenshot_width = new_img.width
         new_img = new_img.convert("RGB")
         if g.last_screenshot_save_path:
-            new_img.save(g.last_screenshot_save_path)
+            with filetools.atomic_save_path(
+                g.last_screenshot_save_path,
+            ) as p:
+                new_img.save(p, format="PNG")
         LOGGER.debug("screenshot")
         _g.cached_screenshot = (dt.datetime.now(), new_img)
     return _g.cached_screenshot[1]

@@ -12,6 +12,7 @@ from typing import Any, Dict, Iterator, List, Optional, Text
 from ..context import Context
 from .globals import g
 from .race import Race
+from ... import filetools
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -129,20 +130,15 @@ def iterate() -> Iterator[RaceResult]:
 
 
 def prune(time_lt: datetime.datetime) -> None:
-    p = g.result_path
-    tmp_path = p + ".tmp"
-    with open(tmp_path, "w", encoding="utf-8") as f:
+    with filetools.atomic_save_path(
+        g.result_path,
+        backup_suffix="~",
+    ) as p, open(p, "w", encoding="utf-8") as f:
         for res in iterate():
             if res.time < time_lt:
                 continue
             json.dump(res.to_dict(), f, ensure_ascii=False)
             f.write("\n")
-    try:
-        os.unlink(p + "~")
-    except FileNotFoundError:
-        pass
-    os.rename(p, p + "~")
-    os.rename(tmp_path, p)
 
 
 def iterate_current(ctx: Context) -> Iterator[RaceResult]:
