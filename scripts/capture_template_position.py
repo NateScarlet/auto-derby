@@ -36,7 +36,9 @@ def _latest_file():
     )
 
 
-def create_pos_mask(name: Text, game_img: PIL.Image.Image, threshold: float):
+def create_pos_mask(
+    name: Text, game_img: PIL.Image.Image, threshold: float, padding: int
+):
     template.g.screenshot_width = game_img.width
     pos_name = template.add_middle_ext(name, "pos")
     pos_img = template.try_load(pos_name)
@@ -46,7 +48,6 @@ def create_pos_mask(name: Text, game_img: PIL.Image.Image, threshold: float):
     else:
         out_img = np.zeros((960, 540), dtype=np.uint8)
 
-    padding = 2
     for _, pos in template.match(
         game_img, template.Specification(name, templates.ANY_POS, threshold=threshold)
     ):
@@ -71,19 +72,21 @@ def main():
         "--game-image", "-g", dest="game_image", default="debug/last_screenshot.png"
     )
     parser.add_argument("--threshold", "-t", dest="threshold", type=float, default=0.9)
+    parser.add_argument("--padding", "-p", dest="padding", type=int, default=2)
     parser.add_argument("--debug", "-d", action="store_true")
     args = parser.parse_args()
     name = args.name
     if args.debug:
         template._DEBUG_TMPL = name  # type: ignore
     threshold = args.threshold
+    padding = args.padding
     game_image_path = args.game_image
     if not name:
         name = _latest_file()
     game_image = imagetools.resize(
         PIL.Image.open(game_image_path), width=template.TARGET_WIDTH
     )
-    create_pos_mask(name, game_image, threshold)
+    create_pos_mask(name, game_image, threshold, padding)
 
 
 if __name__ == "__main__":
