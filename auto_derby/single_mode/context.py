@@ -220,6 +220,7 @@ class Context:
     SCENARIO_UNKNOWN = ""
     SCENARIO_URA = "新設！　URAファイナルズ！！"
     SCENARIO_AOHARU = "アオハル杯～輝け、チームの絆～"
+    SCENARIO_MANT = "Make a new track!!  ～クライマックス開幕～"
 
     @staticmethod
     def new() -> Context:
