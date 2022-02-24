@@ -237,13 +237,8 @@ def test_find_by_race_menu_image_5():
     ctx = Context.new()
     ctx.date = (4, 0, 0)
     img, _ = _test.use_screenshot("single_mode/race_menu_5.png")
-    (res1,) = race.find_by_race_menu_image(ctx, img)
-    race1, pos1 = res1
-
-    assert pos1 == (203, 586), pos1
-    assert race1.name == "URAファイナルズ予選", race1.name
-    assert race1.stadium == "中山", race1.stadium
-    assert race1.characters == set(), race1.characters
+    res = sorted(race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1])
+    _test.snapshot_match(res)
 
 
 def test_find_by_race_menu_image_6():

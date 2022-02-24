@@ -1,17 +1,17 @@
 [
   [
     {
-      "stadium": "東京",
+      "stadium": "中山",
       "name": "URAファイナルズ予選",
       "grade": 100,
       "ground": 1,
-      "distance": 1600,
+      "distance": 2200,
       "permission": 5,
       "month": 1,
       "half": 2,
       "entryCount": 18,
-      "track": 1,
-      "turn": 2,
+      "track": 3,
+      "turn": 1,
       "targetStatuses": [
         2,
         4
@@ -40,23 +40,23 @@
       "characters": []
     },
     [
-      406,
-      1172
+      203,
+      586
     ]
   ],
   [
     {
-      "stadium": "東京",
+      "stadium": "中山",
       "name": "トゥインクルスタークライマックス 第1戦",
       "grade": 100,
       "ground": 1,
-      "distance": 1600,
+      "distance": 2200,
       "permission": 5,
       "month": 1,
       "half": 2,
       "entryCount": 18,
-      "track": 1,
-      "turn": 2,
+      "track": 3,
+      "turn": 1,
       "targetStatuses": [
         2,
         4
@@ -85,8 +85,8 @@
       "characters": []
     },
     [
-      406,
-      1172
+      203,
+      586
     ]
   ]
 ]
