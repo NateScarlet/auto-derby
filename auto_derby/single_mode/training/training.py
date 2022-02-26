@@ -50,17 +50,15 @@ def _ocr_training_effect(img: Image) -> int:
         sharpened_img,
         (255, 255, 255),
         (234, 245, 240),
+        (208, 200, 234),
     )
-    white_outline_img = cv2.dilate(
+    white_outline_img = cv2.morphologyEx(
         white_outline_img,
-        cv2.getStructuringElement(
-            cv2.MORPH_DILATE,
-            (2, 2),
-        ),
+        cv2.MORPH_CLOSE,
+        np.ones((3, 3)),
     )
 
     bg_mask_img = imagetools.bg_mask_by_outline(white_outline_img)
-
     masked_img = cv2.copyTo(cv_img, 255 - bg_mask_img)
 
     brown_outline_img = imagetools.constant_color_key(
