@@ -7,8 +7,8 @@
 
 自动化养马
 
-| :exclamation:  脚本违反用户协议 请勿公开宣传 <br> The script violates the user agreement, please do not publicize |
-|-----------------------------------------|
+| :exclamation: 脚本违反用户协议 请勿公开宣传 <br> The script violates the user agreement, please do not publicize |
+| ---------------------------------------------------------------------------------------------------------------- |
 
 [FAQ](https://github.com/NateScarlet/auto-derby/wiki/FAQ)
 
@@ -34,7 +34,7 @@
   - 剧本适配
     - [x] 新設！　 URA ファイナルズ！！
     - [x] アオハル杯～輝け、チームの絆～
-    - [ ] Make a new track!!  ～クライマックス開幕～
+    - [ ] Make a new track!! ～クライマックス開幕～
   - [x] 自动选择训练
     - [x] 基于当前属性
     - [x] 基于训练效果
@@ -102,3 +102,13 @@ py -3.8 -m auto_derby 工作名称
 ### debug
 
 调试数据，`.1` `.2` `.3` 后缀的文件夹为之前调试数据的备份
+
+last_screenshot.png 为脚本最后看到的游戏画面。
+
+single_mode_training_images 为异步截取的训练画面，训练相关问题需要其中的最近 5 张。
+
+获取最近 5 张训练画面的 powershell 命令：
+
+```powershell
+Get-ChildItem -File -Recurse .\debug\single_mode_training_images | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 5
+```
