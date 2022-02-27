@@ -119,3 +119,6 @@ class CommandScene(Scene):
             self.recognize_status(ctx)
         if not ctx.go_out_options:
             self.recognize_go_out_options(ctx)
+        if self.has_shop:
+            # TODO: recognize shop coin count
+            pass
