@@ -28,11 +28,17 @@ class CommandScene(Scene):
         if ctx.scene.name() == "single-mode-training":
             action.tap_image(templates.RETURN_BUTTON)
 
-        action.wait_image(
-            templates.SINGLE_MODE_COMMAND_TRAINING,
-            templates.SINGLE_MODE_FORMAL_RACE_BANNER,
-            templates.SINGLE_MODE_URA_FINALS,
-        )
+        while True:
+            tmpl, pos = action.wait_image(
+                templates.SINGLE_MODE_COMMAND_TRAINING,
+                templates.SINGLE_MODE_FORMAL_RACE_BANNER,
+                templates.SINGLE_MODE_URA_FINALS,
+                templates.CANCEL_BUTTON,
+            )
+            if tmpl.name == templates.CANCEL_BUTTON:
+                action.tap(pos)
+            else:
+                break
 
         return cls()
 
