@@ -222,11 +222,29 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
     raise ValueError("find_by_race_details_image: no race match spec: %s", full_spec)
 
 
+def _spec_bbox(ctx: Context, rp: mathtools.ResizeProxy):
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        return rp.vector4((221, 21, 477, 41), 492)
+    return rp.vector4((221, 12, 488, 30), 492)
+
+
+def _no1_fan_count_bbox(ctx: Context, rp: mathtools.ResizeProxy):
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        return rp.vector4((208, 78, 361, 95), 492)
+    return rp.vector4((207, 54, 360, 72), 492)
+
+
+def _grade_color_pos(ctx: Context, rp: mathtools.ResizeProxy):
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        return rp.vector2((198, 39), 540)
+    return rp.vector2((198, 29), 540)
+
+
 def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Iterator[Race]:
     rp = mathtools.ResizeProxy(img.width)
-    spec_bbox = rp.vector4((221, 12, 488, 30), 492)
-    no1_fan_count_bbox = rp.vector4((207, 54, 360, 72), 492)
-    grade_color_pos = rp.vector2((198, 29), 540)
+    spec_bbox = _spec_bbox(ctx, rp)
+    no1_fan_count_bbox = _no1_fan_count_bbox(ctx, rp)
+    grade_color_pos = _grade_color_pos(ctx, rp)
 
     stadium, ground, distance, turn, track = _recognize_spec(img.crop(spec_bbox))
     no1_fan_count = _recognize_fan_count(img.crop(no1_fan_count_bbox))
@@ -250,17 +268,32 @@ def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Iterator[Race
         raise ValueError("_find_by_race_menu_item: no race match spec: %s", full_spec)
 
 
+def _menu_item_bbox(
+    ctx: Context, fan_icon_pos: Tuple[int, int], rp: mathtools.ResizeProxy
+):
+    _, y = fan_icon_pos
+
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        return (
+            rp.vector(23, 540),
+            y - rp.vector(75, 540),
+            rp.vector(515, 540),
+            y + rp.vector(33, 540),
+        )
+
+    return (
+        rp.vector(23, 540),
+        y - rp.vector(51, 540),
+        rp.vector(515, 540),
+        y + rp.vector(46, 540),
+    )
+
+
 def find_by_race_menu_image(
     ctx: Context, screenshot: PIL.Image.Image
 ) -> Iterator[Tuple[Race, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(screenshot.width)
     for _, pos in template.match(screenshot, templates.SINGLE_MODE_RACE_MENU_FAN_ICON):
-        _, y = pos
-        bbox = (
-            rp.vector(23, 540),
-            y - rp.vector(51, 540),
-            rp.vector(515, 540),
-            y + rp.vector(46, 540),
-        )
+        bbox = _menu_item_bbox(ctx, pos, rp)
         for i in _find_by_race_menu_item(ctx, screenshot.crop(bbox)):
             yield i, pos
