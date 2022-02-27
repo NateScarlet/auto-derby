@@ -126,8 +126,8 @@ SINGLE_MODE_CLIMAX_CLASS_DETAIL_BUTTON = "single_mode_climax_class_detail_button
 SINGLE_MODE_CLIMAX_CLASS_DETAIL_BUTTON_POS = (
     "single_mode_climax_class_detail_button.pos.png"
 )
-SINGLE_MODE_CLIMAX_GO_OUT_BUTTON = "single_mode_climax_go_out_button.png"
-SINGLE_MODE_CLIMAX_GO_OUT_BUTTON_POS = "single_mode_climax_go_out_button.pos.png"
+SINGLE_MODE_CLIMAX_COMMAND_GO_OUT = "single_mode_climax_command_go_out.png"
+SINGLE_MODE_CLIMAX_COMMAND_GO_OUT_POS = "single_mode_climax_command_go_out.pos.png"
 SINGLE_MODE_COMMAND_GO_OUT = "single_mode_command_go_out.png"
 SINGLE_MODE_COMMAND_GO_OUT_POS = "single_mode_command_go_out.pos.png"
 SINGLE_MODE_COMMAND_HEALTH_CARE = "single_mode_command_health_care.png"

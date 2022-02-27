@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import os
-from typing import Iterator, Set, Text, Type
+from typing import Iterator, Set, Text, Type, Union
 
 import cv2
 from PIL.Image import Image
@@ -32,6 +32,12 @@ def _ocr_name(img: Image) -> Text:
 
     text = ocr.text(imagetools.pil_image(binary_img))
     return texttools.choose(text, g.names)
+
+
+def command_template(ctx: Context) -> Union[Text, template.Specification]:
+    return {
+        ctx.SCENARIO_CLIMAX: templates.SINGLE_MODE_CLIMAX_COMMAND_GO_OUT,
+    }.get(ctx.scenario, templates.SINGLE_MODE_COMMAND_GO_OUT)
 
 
 class Option:

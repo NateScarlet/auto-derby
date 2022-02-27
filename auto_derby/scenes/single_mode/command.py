@@ -79,7 +79,7 @@ class CommandScene(Scene):
         if not self.can_go_out_with_friend:
             return
 
-        action.wait_tap_image(templates.SINGLE_MODE_COMMAND_GO_OUT)
+        action.wait_tap_image(single_mode.go_out.command_template(ctx))
         time.sleep(0.5)
         if action.count_image(templates.SINGLE_MODE_GO_OUT_MENU_TITLE):
             ctx.go_out_options = tuple(
