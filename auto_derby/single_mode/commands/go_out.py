@@ -27,7 +27,7 @@ class GoOutCommand(Command):
     def name(self) -> Text:
         o = self.option
         if o.type == o.TYPE_MAIN:
-            return "GoOut<main>"
+            return f"GoOut<main:{o.position}>"
         if o.type == o.TYPE_SUPPORT:
             return f"GoOut<support:{o.name or o.position}:{o.current_event_count}/{o.total_event_count}>"
         return f"GoOut<{o}>"
