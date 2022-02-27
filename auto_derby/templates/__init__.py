@@ -122,6 +122,10 @@ SINGLE_MODE_CLASS_DETAIL_BUTTON = "single_mode_class_detail_button.png"
 SINGLE_MODE_CLASS_DETAIL_BUTTON_POS = "single_mode_class_detail_button.pos.png"
 SINGLE_MODE_CLASS_DETAIL_TITLE = "single_mode_class_detail_title.png"
 SINGLE_MODE_CLASS_DETAIL_TITLE_POS = "single_mode_class_detail_title.pos.png"
+SINGLE_MODE_CLIMAX_CLASS_DETAIL_BUTTON = "single_mode_climax_class_detail_button.png"
+SINGLE_MODE_CLIMAX_CLASS_DETAIL_BUTTON_POS = (
+    "single_mode_climax_class_detail_button.pos.png"
+)
 SINGLE_MODE_CLIMAX_GO_OUT_BUTTON = "single_mode_climax_go_out_button.png"
 SINGLE_MODE_CLIMAX_GO_OUT_BUTTON_POS = "single_mode_climax_go_out_button.pos.png"
 SINGLE_MODE_COMMAND_GO_OUT = "single_mode_command_go_out.png"

@@ -46,6 +46,7 @@ class CommandScene(Scene):
         action.wait_tap_image(
             {
                 ctx.SCENARIO_AOHARU: templates.SINGLE_MODE_AOHARU_CLASS_DETAIL_BUTTON,
+                ctx.SCENARIO_CLIMAX: templates.SINGLE_MODE_CLIMAX_CLASS_DETAIL_BUTTON,
             }.get(
                 ctx.scenario,
                 templates.SINGLE_MODE_CLASS_DETAIL_BUTTON,
