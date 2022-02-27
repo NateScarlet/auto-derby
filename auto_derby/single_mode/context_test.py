@@ -127,21 +127,6 @@ def test_update_by_command_scene_7():
     assert ctx.mood == ctx.MOOD_VERY_GOOD, ctx.mood
 
 
-def test_update_by_command_scene_issue7():
-    img, _ = _test.use_screenshot("single_mode/command_scene_issue7.png")
-    ctx = Context.new()
-    ctx.update_by_command_scene(img)
-    _test.snapshot_match(ctx)
-    assert ctx.date == (1, 0, 0)
-    assert round(ctx.vitality, 2) == 1
-    assert ctx.speed == 158
-    assert ctx.stamina == 190
-    assert ctx.power == 67
-    assert ctx.guts == 95
-    assert ctx.wisdom == 90
-    assert ctx.mood == ctx.MOOD_NORMAL
-
-
 def test_update_by_command_scene_issue12():
     img, _ = _test.use_screenshot("single_mode/command_scene_issue12.png")
     ctx = Context.new()

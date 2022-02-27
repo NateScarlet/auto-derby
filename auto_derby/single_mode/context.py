@@ -32,18 +32,32 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
     img = imagetools.resize(img, height=32)
     cv_img = np.asarray(img.convert("L"))
     cv_img = imagetools.level(
-        cv_img,
-        np.array(10),
-        np.array(240),
+        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
     )
     sharpened_img = imagetools.sharpen(cv_img)
-    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
-    _, binary_img = cv2.threshold(sharpened_img, 120, 255, cv2.THRESH_BINARY_INV)
-    imagetools.fill_area(binary_img, (0,), size_lt=4)
+    white_outline_img = imagetools.constant_color_key(
+        sharpened_img,
+        (255,),
+        threshold=0.85,
+    )
+    white_outline_img = cv2.morphologyEx(
+        white_outline_img,
+        cv2.MORPH_CLOSE,
+        np.ones((4, 4)),
+    )
+    bg_mask_img = imagetools.bg_mask_by_outline(white_outline_img)
+    masked_img = cv2.copyTo(
+        255 - imagetools.mix(cv_img, sharpened_img, 0.5), 255 - bg_mask_img
+    )
+    _, binary_img = cv2.threshold(masked_img, 200, 255, cv2.THRESH_BINARY)
+    imagetools.fill_area(binary_img, (0,), size_lt=2)
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("sharpened_img", sharpened_img)
+        cv2.imshow("white_outline_img", white_outline_img)
+        cv2.imshow("bg_mask_img", bg_mask_img)
+        cv2.imshow("masked_img", masked_img)
         cv2.imshow("binary_img", binary_img)
         cv2.waitKey()
         cv2.destroyAllWindows()
@@ -158,7 +172,7 @@ def _recognize_property(img: Image) -> int:
     cv_img = np.asarray(img.convert("L"))
     _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
     imagetools.fill_area(binary_img, (0,), size_lt=3)
-    if os.getenv("DEBUG") == __name__:
+    if os.getenv("DEBUG") == __name__ + "[property]":
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("binary_img", binary_img)
         cv2.waitKey()
@@ -183,6 +197,14 @@ def _recognize_scenario(rp: mathtools.ResizeProxy, img: Image) -> Text:
             pass
     _LOGGER.debug("_recognize_scenario: %s", ret)
     return ret
+
+
+def _date_bbox(ctx: Context, rp: mathtools.ResizeProxy):
+    if ctx.scenario == ctx.SCENARIO_AOHARU:
+        return rp.vector4((125, 32, 278, 48), 540)
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        return rp.vector4((11, 32, 163, 48), 540)
+    return rp.vector4((23, 66, 328, 98), 1080)
 
 
 class Context:
@@ -298,11 +320,7 @@ class Context:
             self.scenario = _recognize_scenario(rp, screenshot)
         if not self.scenario:
             raise ValueError("unknown scenario")
-        date_bbox = {
-            Context.SCENARIO_URA: rp.vector4((10, 27, 140, 43), 466),
-            Context.SCENARIO_AOHARU: rp.vector4((125, 32, 278, 48), 540),
-            Context.SCENARIO_CLIMAX: rp.vector4((10, 27, 140, 43), 466),
-        }[self.scenario]
+        date_bbox = _date_bbox(self, rp)
         vitality_bbox = rp.vector4((148, 106, 327, 108), 466)
 
         _, detail_button_pos = next(
