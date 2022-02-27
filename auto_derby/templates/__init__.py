@@ -173,6 +173,7 @@ SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON = "single_mode_go_to_scheduled_race_butt
 SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON_POS = (
     "single_mode_go_to_scheduled_race_button.pos.png"
 )
+SINGLE_MODE_GO_TO_SHOP_BUTTON = "single_mode_go_to_shop_button.png"
 SINGLE_MODE_GOOD_RACE_ADAPTABILITY_STAR = "single_mode_good_race_adaptability_star.png"
 SINGLE_MODE_LIVE_BUTTON = "single_mode_live_button.png"
 SINGLE_MODE_OPTION1 = "single_mode_option1.png"

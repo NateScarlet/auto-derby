@@ -206,6 +206,8 @@ def _template_actions(ctx: Context) -> Iterator[Tuple[_Template, _Handler]]:
         yield templates.SINGLE_MODE_AOHARU_FORMAL_RACE_BANNER, _set_scenario(
             ctx.SCENARIO_AOHARU, _handle_aoharu_team_race
         )
+    if ctx.scenario in (ctx.SCENARIO_CLIMAX, ctx.SCENARIO_UNKNOWN):
+        yield templates.SINGLE_MODE_GO_TO_SHOP_BUTTON, _cancel
 
 
 def _spec_key(tmpl: _Template) -> Text:
