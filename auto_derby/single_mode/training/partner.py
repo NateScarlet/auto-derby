@@ -377,7 +377,7 @@ class Partner:
             ),
             ctx.SCENARIO_CLIMAX: (
                 rp.vector4((448, 147, 516, 220), 540),
-                rp.vector(86, 540),
+                rp.vector(90, 540),
             ),
         }[ctx.scenario]
         icons_bottom = rp.vector(578, 540)
