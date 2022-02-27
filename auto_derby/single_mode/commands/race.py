@@ -49,6 +49,8 @@ def _handle_race_result(ctx: Context, race: Race):
     res.order = _RACE_ORDER_TEMPLATES[tmpl.name]
     action.tap(pos)
 
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        action.wait_tap_image(templates.CANCEL_BUTTON)
     tmpl, pos = action.wait_image(
         templates.GREEN_NEXT_BUTTON,
         templates.SINGLE_MODE_CONTINUE,
