@@ -208,6 +208,7 @@ def _template_actions(ctx: Context) -> Iterator[Tuple[_Template, _Handler]]:
         )
     if ctx.scenario in (ctx.SCENARIO_CLIMAX, ctx.SCENARIO_UNKNOWN):
         yield templates.SINGLE_MODE_GO_TO_SHOP_BUTTON, _cancel
+        yield templates.SINGLE_MODE_TARGET_RACE_POINT_NOT_ENOUGH, _cancel
 
 
 def _spec_key(tmpl: _Template) -> Text:

@@ -215,6 +215,12 @@ SINGLE_MODE_TARGET_RACE_NO_PERMISSION = "single_mode_target_race_no_permission.p
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION_POS = (
     "single_mode_target_race_no_permission.pos.png"
 )
+SINGLE_MODE_TARGET_RACE_POINT_NOT_ENOUGH = (
+    "single_mode_target_race_point_not_enough.png"
+)
+SINGLE_MODE_TARGET_RACE_POINT_NOT_ENOUGH_POS = (
+    "single_mode_target_race_point_not_enough.pos.png"
+)
 SINGLE_MODE_TARGET_UNFINISHED = "single_mode_target_unfinished.png"
 SINGLE_MODE_TARGET_UNFINISHED_POS = "single_mode_target_unfinished.pos.png"
 SINGLE_MODE_TRAINING_CONFIRM = "single_mode_training_confirm.png"
