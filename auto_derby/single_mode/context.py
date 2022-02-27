@@ -169,6 +169,7 @@ def _recognize_property(img: Image) -> int:
 
 def _recognize_scenario(rp: mathtools.ResizeProxy, img: Image) -> Text:
     spec = (
+        (templates.SINGLE_MODE_CLIMAX_GO_OUT_BUTTON, Context.SCENARIO_CLIMAX),
         (templates.SINGLE_MODE_AOHARU_CLASS_DETAIL_BUTTON, Context.SCENARIO_AOHARU),
         (templates.SINGLE_MODE_CLASS_DETAIL_BUTTON, Context.SCENARIO_URA),
     )
@@ -220,7 +221,7 @@ class Context:
     SCENARIO_UNKNOWN = ""
     SCENARIO_URA = "新設！　URAファイナルズ！！"
     SCENARIO_AOHARU = "アオハル杯～輝け、チームの絆～"
-    SCENARIO_MANT = "Make a new track!!  ～クライマックス開幕～"
+    SCENARIO_CLIMAX = "Make a new track!!  ～クライマックス開幕～"
 
     @staticmethod
     def new() -> Context:
@@ -300,6 +301,7 @@ class Context:
         date_bbox = {
             Context.SCENARIO_URA: rp.vector4((10, 27, 140, 43), 466),
             Context.SCENARIO_AOHARU: rp.vector4((125, 32, 278, 48), 540),
+            Context.SCENARIO_CLIMAX: rp.vector4((10, 27, 140, 43), 466),
         }[self.scenario]
         vitality_bbox = rp.vector4((148, 106, 327, 108), 466)
 
