@@ -21,6 +21,8 @@ def test_from_training_scene(name: Text):
     ctx.scenario = ctx.SCENARIO_URA
     if "+aoharu+" in name:
         ctx.scenario = ctx.SCENARIO_AOHARU
+    if "+climax+" in name:
+        ctx.scenario = ctx.SCENARIO_CLIMAX
     training = Training.from_training_scene_v2(ctx, img)
     _test.snapshot_match(training, name=name)
 
