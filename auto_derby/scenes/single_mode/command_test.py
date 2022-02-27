@@ -13,9 +13,10 @@ import pytest
     ),
 )
 def test_recognize_commands(name: Text):
-    _test.use_screenshot(f"single_mode/{name}.png")
+    img, _ = _test.use_screenshot(f"single_mode/{name}.png")
     scene = CommandScene()
     ctx = Context.new()
+    ctx.update_by_command_scene(img)
     scene.recognize_commands(ctx)
     _test.snapshot_match(
         scene,

@@ -1,5 +1,6 @@
 {
   "hasHealthCare": false,
   "hasScheduledRace": false,
-  "canGoOutWithFriend": false
+  "canGoOutWithFriend": false,
+  "hasShop": false
 }

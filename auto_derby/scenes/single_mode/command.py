@@ -17,6 +17,7 @@ class CommandScene(Scene):
         self.has_health_care = False
         self.has_scheduled_race = False
         self.can_go_out_with_friend = False
+        self.has_shop = False
 
     @classmethod
     def name(cls):
@@ -40,6 +41,7 @@ class CommandScene(Scene):
             "hasHealthCare": self.has_health_care,
             "hasScheduledRace": self.has_scheduled_race,
             "canGoOutWithFriend": self.can_go_out_with_friend,
+            "hasShop": self.has_shop,
         }
 
     def recognize_class(self, ctx: single_mode.Context):
@@ -74,6 +76,8 @@ class CommandScene(Scene):
         self.can_go_out_with_friend = (
             action.count_image(templates.SINGLE_MODE_GO_OUT_FRIEND_ICON) > 0
         )
+        if ctx.scenario == ctx.SCENARIO_CLIMAX:
+            self.has_shop = action.count_image(templates.SINGLE_MODE_COMMAND_SHOP) > 0
 
     def recognize_go_out_options(self, ctx: single_mode.Context) -> None:
         if not self.can_go_out_with_friend:
