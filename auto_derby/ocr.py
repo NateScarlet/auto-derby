@@ -132,6 +132,9 @@ def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
         )
         return value
 
+    if terminal.g.prompt_disabled:
+        # avoid show image during loop
+        raise terminal.PromptDisabled
     ret = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     try:
