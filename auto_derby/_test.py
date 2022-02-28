@@ -31,9 +31,11 @@ class ImageClient(clients.Client):
         super().__init__()
         self.image = img
 
+    @property
     def width(self) -> int:
         return self.image.width
 
+    @property
     def height(self) -> int:
         return self.image.height
 

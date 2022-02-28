@@ -27,5 +27,7 @@
   "middle": "",
   "head": "",
   "lead": "",
-  "condition": 0
+  "condition": 0,
+  "gradePoint": 0,
+  "shopCoin": 0
 }

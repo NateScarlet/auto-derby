@@ -300,6 +300,9 @@ class Context:
         self.go_out_options: Tuple[go_out.Option, ...] = ()
         self.scenario = Context.SCENARIO_UNKNOWN
 
+        self.grade_point = 0
+        self.shop_coin = 0
+
     def next_turn(self) -> None:
         if self.date in ((1, 0, 0), (4, 0, 0)):
             self._extra_turn_count += 1
@@ -517,7 +520,7 @@ class Context:
         return expected_score
 
     def to_dict(self) -> Dict[Text, Any]:
-        return {
+        d = {
             "date": self.date,
             "mood": self.mood,
             "scenario": self.scenario,
@@ -541,6 +544,10 @@ class Context:
             "lead": self.lead[1],
             "condition": self.condition,
         }
+        if self.scenario == self.SCENARIO_CLIMAX:
+            d["gradePoint"] = self.grade_point
+            d["shopCoin"] = self.shop_coin
+        return d
 
     @classmethod
     def status_by_name(cls, name: Text) -> Tuple[int, Text]:
@@ -575,6 +582,8 @@ class Context:
         ret.middle = cls.status_by_name(data["middle"])
         ret.last = cls.status_by_name(data["last"])
         ret.scenario = data["scenario"]
+        ret.grade_point = data.get("gradePoint", 0)
+        ret.shop_coin = data.get("shopCoin", 0)
 
         return ret
 
