@@ -39,10 +39,9 @@ _RACE_ORDER_TEMPLATES = {
 
 
 def _retry_method(ctx: Context) -> Optional[Callable[[], None]]:
-    if ctx.scenario == ctx.SCENARIO_CLIMAX:
-
+    if action.count_image(templates.SINGLE_MODE_CLIMAX_CONTINUE_BUTTON):
         def _retry():
-            raise NotImplementedError()
+            action.tap_image(templates.SINGLE_MODE_CLIMAX_CONTINUE_BUTTON)
 
         return _retry
 

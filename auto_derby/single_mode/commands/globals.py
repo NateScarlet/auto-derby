@@ -26,7 +26,7 @@ def _default_on_race_result(ctx: Context, result: RaceResult) -> None:
 
 
 def _default_should_retry_race(ctx: Context, result: RaceResult) -> bool:
-    return True
+    return result.order > result.race.estimate_order(ctx)
 
 
 class g:
