@@ -76,6 +76,8 @@ class Race:
         self.grade_points: Tuple[int, ...] = ()
         self.shop_coins: Tuple[int, ...] = ()
 
+        self._cached_estimate_order = ("", 0)
+
     def to_dict(self) -> Dict[Text, Any]:
         return {
             "stadium": self.stadium,
@@ -198,7 +200,7 @@ class Race:
         yield RuningStyle.HEAD, head
         yield RuningStyle.LAST, last
 
-    def estimate_order(self, ctx: Context) -> int:
+    def _raw_estimate_order(self, ctx: Context) -> int:
         style_scores = self.style_scores(ctx)
         best_style_score = sorted(style_scores, reverse=True)[0]
         estimate_order = math.ceil(
@@ -222,6 +224,12 @@ class Race:
             " ".join(f"{i:.2f}" for i in style_scores),
         )
         return estimate_order
+
+    def estimate_order(self, ctx: Context) -> int:
+        key = str(ctx)
+        if self._cached_estimate_order[0] != key:
+            self._cached_estimate_order = (key, self._raw_estimate_order(ctx))
+        return self._cached_estimate_order[1]
 
     def score(self, ctx: Context) -> float:
         return race_score.compute(ctx, self)
