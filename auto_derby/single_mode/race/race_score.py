@@ -97,12 +97,11 @@ def compute(ctx: Context, race: Race) -> float:
     if ctx.scenario == ctx.SCENARIO_CLIMAX:
         grade_point = race.grade_points[estimate_order - 1]
         if ctx.grade_point < ctx.target_grade_point():
-            remains_turn_count = 24 - ctx.turn_count() % 24
             scenario_score += grade_point * mathtools.interpolate(
-                remains_turn_count,
+                ctx.turn_count() % 24,
                 (
-                    (1, 1),
-                    (24, 0.2),
+                    (1, 0.1),
+                    (24, 0.4),
                 ),
             )
 
