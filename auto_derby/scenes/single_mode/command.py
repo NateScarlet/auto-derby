@@ -45,7 +45,7 @@ def _recognize_climax_grade_point(ctx: Context):
         cv2.waitKey()
         cv2.destroyAllWindows()
     text = ocr.text(imagetools.pil_image(binary_img))
-    ctx.grade_point = int(text.rstrip("pt"))
+    ctx.grade_point = int(text.rstrip("pt").replace(",", ""))
 
 
 def _recognize_shop_coin(ctx: Context):
@@ -61,7 +61,7 @@ def _recognize_shop_coin(ctx: Context):
         cv2.waitKey()
         cv2.destroyAllWindows()
     text = ocr.text(imagetools.pil_image(binary_img))
-    ctx.shop_coin = int(text)
+    ctx.shop_coin = int(text.replace(",", ""))
 
 
 class CommandScene(Scene):
