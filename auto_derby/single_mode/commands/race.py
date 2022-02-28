@@ -40,6 +40,7 @@ _RACE_ORDER_TEMPLATES = {
 
 def _retry_method(ctx: Context) -> Optional[Callable[[], None]]:
     if action.count_image(templates.SINGLE_MODE_CLIMAX_CONTINUE_BUTTON):
+
         def _retry():
             action.tap_image(templates.SINGLE_MODE_CLIMAX_CONTINUE_BUTTON)
 
@@ -58,7 +59,13 @@ def _handle_race_result(ctx: Context, race: Race):
     action.tap(pos)
 
     if ctx.scenario == ctx.SCENARIO_CLIMAX:
-        action.wait_tap_image(templates.CLOSE_BUTTON)
+        tmpl, pos = action.wait_image(
+            templates.CLOSE_BUTTON,
+            templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW,
+        )
+        action.tap(pos)
+        if tmpl.name == templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW:
+            action.wait_tap_image(templates.CLOSE_BUTTON)
 
     tmpl, pos = action.wait_image(
         templates.GREEN_NEXT_BUTTON,
