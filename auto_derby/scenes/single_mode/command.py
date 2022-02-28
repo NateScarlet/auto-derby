@@ -20,15 +20,18 @@ def _recognize_climax_grade_point(ctx: Context):
     rp = action.resize_proxy()
     bbox = rp.vector4((10, 185, 111, 218), 540)
     img = template.screenshot().crop(bbox)
-    x, _ = next(template.match(img, templates.SINGLE_MODE_CLIMAX_GRADE_POINT_PT_TEXT))[
-        1
-    ]
+    x, _ = next(
+        template.match(
+            img,
+            template.Specification(
+                templates.SINGLE_MODE_CLIMAX_GRADE_POINT_PT_TEXT,
+                threshold=0.8,
+            ),
+        )
+    )[1]
     img = img.crop((0, 0, x, img.height))
     img = imagetools.resize(img, height=32)
     cv_img = imagetools.cv_image(img.convert("L"))
-    # cv_img = imagetools.level(
-    #     cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
-    # )
     _, binary_img = cv2.threshold(
         255 - cv_img,
         0,
