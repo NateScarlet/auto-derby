@@ -128,6 +128,8 @@ SINGLE_MODE_CLIMAX_CLASS_DETAIL_BUTTON_POS = (
 )
 SINGLE_MODE_CLIMAX_COMMAND_GO_OUT = "single_mode_climax_command_go_out.png"
 SINGLE_MODE_CLIMAX_COMMAND_GO_OUT_POS = "single_mode_climax_command_go_out.pos.png"
+SINGLE_MODE_CLIMAX_GRADE_POINT_ICON = "single_mode_climax_grade_point_icon.png"
+SINGLE_MODE_CLIMAX_GRADE_POINT_ICON_POS = "single_mode_climax_grade_point_icon.pos.png"
 SINGLE_MODE_CLIMAX_GRADE_POINT_PT_TEXT = "single_mode_climax_grade_point_pt_text.png"
 SINGLE_MODE_CLIMAX_GREEN_CONTINUE_BUTTON = (
     "single_mode_climax_green_continue_button.png"
@@ -135,8 +137,8 @@ SINGLE_MODE_CLIMAX_GREEN_CONTINUE_BUTTON = (
 SINGLE_MODE_CLIMAX_GREEN_CONTINUE_BUTTON_POS = (
     "single_mode_climax_green_continue_button.pos.png"
 )
-SINGLE_MODE_CLIMAX_POINT_ICON = "single_mode_climax_point_icon.png"
-SINGLE_MODE_CLIMAX_POINT_ICON_POS = "single_mode_climax_point_icon.pos.png"
+SINGLE_MODE_CLIMAX_RANK_POINT_ICON = "single_mode_climax_rank_point_icon.png"
+SINGLE_MODE_CLIMAX_RANK_POINT_ICON_POS = "single_mode_climax_rank_point_icon.pos.png"
 SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW = "single_mode_climax_rival_race_draw.png"
 SINGLE_MODE_CLIMAX_RIVAL_RACE_WIN = "single_mode_climax_rival_race_win.png"
 SINGLE_MODE_CLIMAX_WHITE_CONTINUE_BUTTON = (

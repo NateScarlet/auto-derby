@@ -17,6 +17,10 @@ from ..scene import Scene, SceneHolder
 
 
 def _recognize_climax_grade_point(ctx: Context):
+    if ctx.date[0] == 4:
+        # in year 4, grade points are replaced by rank points
+        ctx.grade_point = 0
+        return
     rp = action.resize_proxy()
     bbox = rp.vector4((10, 185, 111, 218), 540)
     img = template.screenshot().crop(bbox)
