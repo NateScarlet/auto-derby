@@ -303,6 +303,11 @@ class Context:
         self.grade_point = 0
         self.shop_coin = 0
 
+    def target_grade_point(self) -> int:
+        if self.date[1:] == (0, 0):
+            return 0
+        return (60, 300, 300, 0)[self.date[0]]
+
     def next_turn(self) -> None:
         if self.date in ((1, 0, 0), (4, 0, 0)):
             self._extra_turn_count += 1
