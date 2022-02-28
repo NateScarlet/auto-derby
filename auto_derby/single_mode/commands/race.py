@@ -82,6 +82,7 @@ def _handle_race_result(ctx: Context, race: Race):
         retry = _retry_method(ctx)
         if retry and g.should_retry_race(ctx, res):
             retry()
+            _handle_race_result(ctx, race)
             return
 
     action.tap(pos)
