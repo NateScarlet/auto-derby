@@ -92,6 +92,23 @@ def compute(ctx: Context, race: Race) -> float:
 
     not_winning_score = 0 if ctx.is_after_winning else 1.5 * ctx.turn_count()
 
+    scenario_score = 0
+
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        grade_point = race.grade_points[estimate_order - 1]
+        if ctx.grade_point < ctx.target_grade_point():
+            remains_turn_count = 24 - ctx.turn_count() % 24
+            scenario_score += grade_point * mathtools.interpolate(
+                remains_turn_count,
+                (
+                    (1, 1),
+                    (24, 0.2),
+                ),
+            )
+
+        shop_coin = race.shop_coins[estimate_order - 1]
+        scenario_score += shop_coin * 0.1
+
     continuous_race_penalty = mathtools.interpolate(
         ctx.continuous_race_count(),
         (
@@ -115,12 +132,12 @@ def compute(ctx: Context, race: Race) -> float:
         status_penality += 10
     if race.ground_status(ctx) < ctx.STATUS_B:
         status_penality += 10
-
     return (
         fan_score
         + prop
         + skill * 0.5
         + not_winning_score
+        + scenario_score
         - continuous_race_penalty
         - fail_penalty
         - status_penality
