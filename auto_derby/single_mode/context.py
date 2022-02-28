@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict
+from typing import TYPE_CHECKING, Any, Dict, Iterator
 
 if TYPE_CHECKING:
     from . import go_out
@@ -28,7 +28,14 @@ class g:
     context_class: Type[Context]
 
 
-def _ocr_date(img: Image) -> Tuple[int, int, int]:
+def _year4_date_text(ctx: Context) -> Iterator[Text]:
+    if ctx.scenario in (ctx.SCENARIO_URA, ctx.SCENARIO_AOHARU, ctx.SCENARIO_UNKNOWN):
+        yield "ファイナルズ開催中"
+    if ctx.scenario in (ctx.SCENARIO_CLIMAX, ctx.SCENARIO_UNKNOWN):
+        yield "クライマックス開催中"
+
+
+def _ocr_date(ctx: Context, img: Image) -> Tuple[int, int, int]:
     img = imagetools.resize(img, height=32)
     cv_img = np.asarray(img.convert("L"))
     cv_img = imagetools.level(
@@ -66,8 +73,9 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
 
     if texttools.compare(text, "ジュニア級デビュー前") > 0.8:
         return (1, 0, 0)
-    if texttools.compare(text, "ファイナルズ開催中") > 0.8:
-        return (4, 0, 0)
+    for i in _year4_date_text(ctx):
+        if texttools.compare(text, i) > 0.8:
+            return (4, 0, 0)
     year_end = text.index("級") + 1
     month_end = year_end + text[year_end:].index("月") + 1
     year_text = text[:year_end]
@@ -342,7 +350,7 @@ class Context:
         guts_bbox = (rp.vector(264, 466), t, rp.vector(308, 466), b)
         wisdom_bbox = (rp.vector(337, 466), t, rp.vector(381, 466), b)
 
-        self.date = _ocr_date(screenshot.crop(date_bbox))
+        self.date = _ocr_date(self, screenshot.crop(date_bbox))
 
         self.vitality = _recognize_vitality(screenshot.crop(vitality_bbox))
 
