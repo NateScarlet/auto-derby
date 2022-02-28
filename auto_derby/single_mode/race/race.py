@@ -73,6 +73,8 @@ class Race:
         self.target_statuses: Tuple[int, ...] = ()
         self.fan_counts: Tuple[int, ...] = ()
         self.characters: Set[Text] = set()
+        self.grade_points: Tuple[int, ...] = ()
+        self.shop_coins: Tuple[int, ...] = ()
 
     def to_dict(self) -> Dict[Text, Any]:
         return {
@@ -90,6 +92,8 @@ class Race:
             "targetStatuses": self.target_statuses,
             "minFanCount": self.min_fan_count,
             "fanCounts": self.fan_counts,
+            "gradePoints": self.grade_points,
+            "shopCoins": self.shop_coins,
             "characters": sorted(self.characters),
         }
 
@@ -110,6 +114,8 @@ class Race:
         self.target_statuses = tuple(data["targetStatuses"])
         self.min_fan_count = data["minFanCount"]
         self.fan_counts = tuple(data["fanCounts"])
+        self.shop_coins = tuple(data.get("shopCoins", []))
+        self.grade_points = tuple(data.get("gradePoints", []))
         self.characters = set(data.get("characters", []))
         return self
 

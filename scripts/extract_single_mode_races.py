@@ -10,7 +10,7 @@ if True:
 
     sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from typing import Iterator, Set, Text, Tuple
+from typing import Dict, Iterator, Set, Text, Tuple
 import sqlite3
 import argparse
 import os
@@ -54,6 +54,57 @@ SELECT t2.text
         return set(i[0] for i in cur.fetchall())
 
 
+def _race_grade_points(db: sqlite3.Connection, group: int, grade: int) -> Tuple[int]:
+    d: Dict[int, int] = {}
+
+    with contextlib.closing(
+        db.execute(
+            """
+SELECT 
+  t1.order_min,
+  t1.order_max,
+  t1.point_num
+  FROM single_mode_free_win_point as t1
+  WHERE race_group_id = ? AND grade = ?
+;
+""",
+            (group, 0 if group else grade),
+        )
+    ) as cur:
+        for start, end, value in cur:
+            for order in range(start, end + 1):
+                d[order] = value
+
+    if not d:
+        return _race_grade_points(db, 0, grade)
+
+    return tuple(v for _, v in sorted(d.items()))
+
+
+def _race_shop_coins(db: sqlite3.Connection, grade: int) -> Tuple[int]:
+    d: Dict[int, int] = {}
+
+    with contextlib.closing(
+        db.execute(
+            """
+SELECT 
+  t1.order_min,
+  t1.order_max,
+  t1.coin_num
+  FROM single_mode_free_coin_race as t1
+  WHERE grade = ?
+;
+""",
+            (grade,),
+        )
+    ) as cur:
+        for start, end, value in cur:
+            for order in range(start, end + 1):
+                d[order] = value
+
+    return tuple(v for _, v in sorted(d.items()))
+
+
 def _read_master_mdb(path: Text) -> Iterator[Race]:
 
     db = sqlite3.connect(path)
@@ -74,6 +125,7 @@ SELECT
   t5.inout,
   t5.turn,
   t1.program_group,
+  COALESCE(t8.race_group_id, 0),
   t6.target_status_1,
   t6.target_status_2
   FROM single_mode_program AS t1
@@ -83,6 +135,7 @@ SELECT
   LEFT JOIN race_course_set AS t5 ON t5.id = t3.course_set
   LEFT JOIN race_course_set_status AS t6 ON t6.course_set_status_id = t5.course_set_status_id
   LEFT JOIN text_data AS t7 ON t7.category = 35 AND t7."index" = t5.race_track_id
+  LEFT JOIN single_mode_race_group AS t8 ON t8.race_program_id = t1.program_group
   ORDER BY t1.race_permission, t1.month, t1.half, t3.grade DESC
 ;
     """
@@ -90,7 +143,7 @@ SELECT
 
     with contextlib.closing(cur):
         for i in cur:
-            assert len(i) == 16, i
+            assert len(i) == 17, i
             v = Race()
             (
                 v.name,
@@ -107,11 +160,14 @@ SELECT
                 v.track,
                 v.turn,
                 program_group,
+                race_group,
             ) = i[:-2]
             v.target_statuses = tuple(j for j in i[-2:] if j)
             v.fan_counts = _get_fan_set(db, fan_set_id)
             if program_group:
                 v.characters = _program_group_characters(db, program_group)
+            v.grade_points = _race_grade_points(db, race_group, v.grade)
+            v.shop_coins = _race_shop_coins(db, v.grade)
             yield v
 
 
