@@ -276,7 +276,7 @@ def _menu_item_bbox(
     if ctx.scenario == ctx.SCENARIO_CLIMAX:
         return (
             rp.vector(23, 540),
-            y - rp.vector(75, 540),
+            y - rp.vector(72, 540),
             rp.vector(515, 540),
             y + rp.vector(33, 540),
         )
