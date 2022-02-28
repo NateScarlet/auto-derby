@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Text
+from typing import Callable, Optional, Text
 
 from ... import action, templates, terminal
 from ...scenes import PaddockScene
@@ -38,6 +38,15 @@ _RACE_ORDER_TEMPLATES = {
 }
 
 
+def _retry_method(ctx: Context) -> Optional[Callable[[], None]]:
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+
+        def _retry():
+            raise NotImplementedError()
+
+        return _retry
+
+
 def _handle_race_result(ctx: Context, race: Race):
     action.wait_tap_image(templates.RACE_RESULT_BUTTON)
 
@@ -51,14 +60,23 @@ def _handle_race_result(ctx: Context, race: Race):
 
     if ctx.scenario == ctx.SCENARIO_CLIMAX:
         action.wait_tap_image(templates.CLOSE_BUTTON)
+
     tmpl, pos = action.wait_image(
         templates.GREEN_NEXT_BUTTON,
         templates.SINGLE_MODE_CONTINUE,
     )
+
     res.is_failed = tmpl.name == templates.SINGLE_MODE_CONTINUE
     _LOGGER.info("race result: %s", res)
     g.on_race_result(ctx, res)
     res.write()
+
+    if res.order > 1:
+        retry = _retry_method(ctx)
+        if retry and g.should_retry_race(ctx, res):
+            retry()
+            return
+
     action.tap(pos)
     if res.is_failed:
         ctx.mood = {
