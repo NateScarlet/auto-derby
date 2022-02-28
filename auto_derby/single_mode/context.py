@@ -306,7 +306,7 @@ class Context:
     def target_grade_point(self) -> int:
         if self.date[1:] == (0, 0):
             return 0
-        return (60, 300, 300, 0)[self.date[0] - 1]
+        return (60, 200, 300, 0)[self.date[0] - 1]
 
     def next_turn(self) -> None:
         if self.date in ((1, 0, 0), (4, 0, 0)):
