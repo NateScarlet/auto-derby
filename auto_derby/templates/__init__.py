@@ -138,6 +138,7 @@ SINGLE_MODE_CLIMAX_GREEN_CONTINUE_BUTTON_POS = (
 SINGLE_MODE_CLIMAX_POINT_ICON = "single_mode_climax_point_icon.png"
 SINGLE_MODE_CLIMAX_POINT_ICON_POS = "single_mode_climax_point_icon.pos.png"
 SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW = "single_mode_climax_rival_race_draw.png"
+SINGLE_MODE_CLIMAX_RIVAL_RACE_WIN = "single_mode_climax_rival_race_win.png"
 SINGLE_MODE_CLIMAX_WHITE_CONTINUE_BUTTON = (
     "single_mode_climax_white_continue_button.png"
 )

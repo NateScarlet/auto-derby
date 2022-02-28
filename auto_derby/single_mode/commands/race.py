@@ -62,10 +62,11 @@ def _handle_race_result(ctx: Context, race: Race):
     if ctx.scenario == ctx.SCENARIO_CLIMAX:
         tmpl, pos = action.wait_image(
             templates.CLOSE_BUTTON,
+            templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_WIN,
             templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW,
         )
         action.tap(pos)
-        if tmpl.name == templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW:
+        if tmpl.name != templates.CLOSE_BUTTON:
             action.wait_tap_image(templates.CLOSE_BUTTON)
 
     tmpl, pos = action.wait_image(
