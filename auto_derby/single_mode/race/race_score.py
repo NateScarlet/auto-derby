@@ -107,7 +107,7 @@ def compute(ctx: Context, race: Race) -> float:
             )
 
         shop_coin = race.shop_coins[estimate_order - 1]
-        scenario_score += shop_coin * 0.1
+        scenario_score += shop_coin * 0.02
 
     continuous_race_penalty = mathtools.interpolate(
         ctx.continuous_race_count(),
