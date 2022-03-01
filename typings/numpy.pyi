@@ -30522,7 +30522,9 @@ def source(output=...):
     """
     ...
 
-def split(ary, indices_or_sections, axis=0):
+def split(
+    ary: ndarray, indices_or_sections: Union[int, Tuple[int, ...]], axis: int = 0
+) -> List[ndarray]:
     """
     Split an array into multiple sub-arrays as views into `ary`.
 

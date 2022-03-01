@@ -38,9 +38,37 @@ def md5(
 _HASH_ALGORITHM = cv2.img_hash.BlockMeanHash_create()
 
 
-def image_hash(img: Image, *, save_path: Optional[Text] = None) -> Text:
+def _image_hash(
+    cv_img: np.ndarray,
+    *,
+    divide_x: int = 1,
+    divide_y: int = 1,
+) -> Text:
+    if divide_x > 1:
+        h = ""
+        for part in np.split(cv_img, divide_x, axis=1):
+            h += _image_hash(part, divide_y=divide_y)
+        return h
+
+    if divide_y > 1:
+        h = ""
+        for part in np.split(cv_img, divide_y, axis=0):
+            h += _image_hash(part)
+        return h
+
+    return _HASH_ALGORITHM.compute(cv_img).tobytes().hex()
+
+
+def image_hash(
+    img: Image,
+    *,
+    save_path: Optional[Text] = None,
+    divide_x: int = 1,
+    divide_y: int = 1,
+) -> Text:
     cv_img = np.asarray(img.convert("L"))
-    h = _HASH_ALGORITHM.compute(cv_img).tobytes().hex()
+
+    h = _image_hash(cv_img, divide_x=divide_x, divide_y=divide_y)
 
     if save_path:
         md5_hash = hashlib.md5(img.tobytes()).hexdigest()
