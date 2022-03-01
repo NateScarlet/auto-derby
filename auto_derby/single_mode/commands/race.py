@@ -64,6 +64,7 @@ def _handle_race_result(ctx: Context, race: Race):
             templates.CLOSE_BUTTON,
             templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_WIN,
             templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW,
+            templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_LOSE,
         )
         action.tap(pos)
         if tmpl.name != templates.CLOSE_BUTTON:
