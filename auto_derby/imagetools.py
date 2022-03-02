@@ -2,16 +2,35 @@
 # pyright: strict
 """tools for image processing.  """
 
+import csv
 import hashlib
+import os
 import threading
 from pathlib import Path
-from typing import Any, Callable, Literal, Optional, Text, Tuple, Union
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Generic,
+    Literal,
+    Optional,
+    Sequence,
+    Set,
+    Text,
+    Tuple,
+    Type,
+    TypeVar,
+    Union,
+    cast as cast_type,
+)
 
 import cast_unknown as cast
 import cv2
 import cv2.img_hash
 import numpy as np
 from PIL.Image import BICUBIC, Image, fromarray
+
+from .vptree import VPTree
 
 
 class _g:
@@ -87,6 +106,10 @@ def compare_hash(a: Text, b: Text) -> float:
     cv_b = np.array(list(bytes.fromhex(b)), np.uint8)
     res = _HASH_ALGORITHM.compare(cv_a, cv_b)
     return 1 - (res / (len(a) * 2))
+
+
+def _hash_distance(a: Text, b: Text) -> float:
+    return 1 - compare_hash(a, b)
 
 
 def _cast_float(v: Any) -> float:
@@ -313,3 +336,114 @@ def show(img: Image, title: Text = "") -> Callable[[], None]:
         t.join()
 
     return _close
+
+
+T = TypeVar("T")
+
+
+class ImageHashMapQueryResult(Generic[T]):
+    def __init__(self, hash: Text, value: T, similarity: float) -> None:
+        self.hash = hash
+        self.value = value
+        self.similarity = similarity
+
+
+class ImageHashMap(Generic[T]):
+    def __init__(self) -> None:
+        self._labels: Dict[Text, T] = {}
+        self._tree = VPTree[Text](_hash_distance)
+        self._tree_key = 0
+
+    def _prepare_tree(self) -> VPTree[Text]:
+        if self._tree_key != len(self._labels):
+            self._tree.set_data(tuple(self._labels.keys()))
+            self._tree_key = len(self._labels)
+        return self._tree
+
+    def query(self, h: Text) -> ImageHashMapQueryResult[T]:
+        if not self._labels:
+            raise ValueError("no data")
+        # TODO: use vp-tree
+        tree = self._prepare_tree()
+        nearest, _ = tree.nearest(h)
+        return ImageHashMapQueryResult(
+            nearest, self._labels[nearest], compare_hash(h, nearest)
+        )
+        # match, value, similarity = sorted(
+        #     ((k, v, compare_hash(h, k)) for k, v in self._labels.items()),
+        #     key=lambda x: x[2],
+        #     reverse=True,
+        # )[0]
+        # return ImageHashMapQueryResult(
+        #     match,
+        #     value,
+        #     similarity,
+        # )
+
+    def label(self, h: Text, value: T) -> None:
+        self._labels[h] = value
+
+    def clear(self) -> None:
+        self._labels.clear()
+
+
+class CSVImageHashMap(ImageHashMap[T]):
+    def __init__(
+        self,
+        type: Type[T],
+    ):
+        super().__init__()
+        self.type = type
+        self.lazy_load_paths: Sequence[Text] = ()
+        self.save_path = ""
+
+        self._loaded_paths: Set[Text] = set()
+
+    def _value_from_text(self, v: Text) -> T:
+        if self.type is str:
+            return cast_type(T, v)
+        if self.type is int:
+            return cast_type(T, int(v))
+        raise NotImplementedError("not supported type", self.type)
+
+    def _value_to_text(self, v: T) -> Text:
+        return str(v)
+
+    def load(self, path: Text) -> None:
+        with open(path, "r", encoding="utf-8") as f:
+            for k, v in csv.reader(f):
+                self._labels[k] = self._value_from_text(v)
+        self._loaded_paths.add(path)
+
+    def load_once(self, path: Text) -> None:
+        if path in self._loaded_paths:
+            return
+        self.load(path)
+
+    def query(self, h: Text) -> ImageHashMapQueryResult[T]:
+        for i in self.lazy_load_paths:
+            try:
+                self.load_once(i)
+            except FileNotFoundError:
+                pass
+        return super().query(h)
+
+    def label(self, h: Text, value: T) -> None:
+        super().label(h, value)
+        path = self.save_path
+        if not path:
+            return
+
+        def _do():
+            with open(path, "a", encoding="utf-8", newline="") as f:
+                csv.writer(f).writerow((h, self._value_to_text(value)))
+
+        try:
+            _do()
+        except FileNotFoundError:
+            os.makedirs(os.path.dirname(path))
+            _do()
+
+    def clear(self) -> None:
+        super().clear()
+        self._loaded_paths.clear()
