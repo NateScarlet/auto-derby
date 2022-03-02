@@ -27,4 +27,4 @@ def test_vptree():
 
         assert tree.nearest(i) in expected
 
-    assert _local.call_count < test_count * size * 0.6
+    assert _local.call_count < test_count * size * 0.08
