@@ -14,7 +14,6 @@ from typing import (
     Generic,
     Literal,
     Optional,
-    Sequence,
     Set,
     Text,
     Tuple,
@@ -394,7 +393,6 @@ class CSVImageHashMap(ImageHashMap[T]):
     ):
         super().__init__()
         self.type = type
-        self.lazy_load_paths: Sequence[Text] = ()
         self.save_path = ""
 
         self._loaded_paths: Set[Text] = set()
@@ -419,14 +417,6 @@ class CSVImageHashMap(ImageHashMap[T]):
         if path in self._loaded_paths:
             return
         self.load(path)
-
-    def query(self, h: Text) -> ImageHashMapQueryResult[T]:
-        for i in self.lazy_load_paths:
-            try:
-                self.load_once(i)
-            except FileNotFoundError:
-                pass
-        return super().query(h)
 
     def label(self, h: Text, value: T) -> None:
         super().label(h, value)

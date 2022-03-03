@@ -109,10 +109,9 @@ def _iter(p: Text):
 
 def reload():
     g.items = {i.id: i for i in _iter(g.data_path)}
-    _g.labels.lazy_load_paths = (
-        data.path("single_mode_item_labels.csv"),
-        g.label_path,
-    )
+    _g.labels.clear()
+    _g.labels.load_once(data.path("single_mode_item_labels.csv"))
+    _g.labels.load_once(g.label_path)
     _g.labels.save_path = g.label_path
     return
 
@@ -153,7 +152,7 @@ def _prompt(img: Image, h: Text, value: Optional[Item], similarity: float) -> It
                 _cast_int(
                     terminal.prompt(
                         "Item id for current displaying image\n"
-                        "(see \"auto_derby/data/single_mode_items.jsonl\"):"
+                        '(see "auto_derby/data/single_mode_items.jsonl"):'
                     ),
                     0,
                 )
