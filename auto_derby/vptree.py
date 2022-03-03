@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import bisect
 import random
 from typing import Callable, Generic, List, Optional, Sequence, Tuple, TypeVar
 
@@ -53,14 +54,14 @@ class VPTree(Generic[T]):
     def has_leaf(self) -> bool:
         return not (self.left is None and self.right is None)
 
-    def k_nearest_neighbor(self, point: T, k: int) -> Sequence[Tuple[T, float]]:
+    def k_nearest_neighbor(self, point: T, k: int) -> Sequence[Tuple[float, T]]:
         # algorithm from: https://github.com/RickardSjogren/vptree/blob/0621f2b76c34f0cd4869b45158b583ca1364cd5a/vptree.py#L91-L140
-        Item = Tuple[T, float]
+        Item = Tuple[float, T]
         buf: List[Item] = []
 
         def _add(item: Item):
-            buf.append(item)
-            buf.sort(key=lambda x: x[1])
+            index = bisect.bisect(buf, item)
+            buf.insert(index, item)
             while len(buf) > k:
                 buf.pop()
 
@@ -77,7 +78,7 @@ class VPTree(Generic[T]):
                 continue
 
             d = self.distance(point, node.vp)
-            _add((node.vp, d))
+            _add((d, node.vp))
             if d < r and len(buf) == k:
                 r = d
 
@@ -110,7 +111,7 @@ class VPTree(Generic[T]):
 
         return buf
 
-    def nearest_neighbor(self, point: T) -> Tuple[T, float]:
+    def nearest_neighbor(self, point: T) -> Tuple[float, T]:
         if self.vp is None:
             raise ValueError("tree is empty")
         return self.k_nearest_neighbor(point, 1)[0]

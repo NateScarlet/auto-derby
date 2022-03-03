@@ -365,7 +365,7 @@ class ImageHashMap(Generic[T]):
             raise ValueError("no data")
         # TODO: use vp-tree
         tree = self._prepare_tree()
-        nearest, _ = tree.nearest_neighbor(h)
+        _, nearest = tree.nearest_neighbor(h)
         return ImageHashMapQueryResult(
             nearest, self._labels[nearest], compare_hash(h, nearest)
         )
