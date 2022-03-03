@@ -42,14 +42,14 @@ class VPTree(Generic[T]):
         if len(points) == 1:
             return
         assert self.distance(vp, vp) == 0
-        pd = sorted(((p, self.distance(vp, p)) for p in points), key=lambda x: x[1])[1:]
+        pd = sorted(((self.distance(vp, p), p) for p in points))[1:]
         i_median = len(pd) // 2
-        _, self.left_inner_radius = pd[0]
-        _, self.left_outer_radius = pd[max(0, i_median - 1)]
-        _, self.right_inner_radius = pd[i_median]
-        _, self.right_outer_radius = pd[-1]
-        self.left = self._leaf_for(tuple(p for p, _ in pd[:i_median]))
-        self.right = self._leaf_for(tuple(p for p, _ in pd[i_median:]))
+        self.left_inner_radius, _ = pd[0]
+        self.left_outer_radius, _ = pd[max(0, i_median - 1)]
+        self.right_inner_radius, _ = pd[i_median]
+        self.right_outer_radius, _ = pd[-1]
+        self.left = self._leaf_for(tuple(p for _, p in pd[:i_median]))
+        self.right = self._leaf_for(tuple(p for _, p in pd[i_median:]))
 
     def has_leaf(self) -> bool:
         return not (self.left is None and self.right is None)
