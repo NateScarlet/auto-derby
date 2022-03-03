@@ -84,8 +84,8 @@ class VPTree(Generic[T]):
 
             d = self.distance(point, node._vp)
             _add((d, node._vp))
-            if d < r and len(buf) == k:
-                r = d
+            if len(buf) == k:
+                r = buf[-1][0]
 
             if not node.has_leaf():
                 continue
