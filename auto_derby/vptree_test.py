@@ -1,8 +1,8 @@
 from .vptree import VPTree
 import time
-import bisect
 
-def test_vptree():
+
+def test_nearest_neighbor():
     class _local:
         call_count = 0
 
@@ -29,5 +29,10 @@ def test_vptree():
 
         assert tree.nearest_neighbor(i) in expected
     elapsed = time.perf_counter() - start_time
-    print(f"finished {size * step} query in {elapsed} s ")
     assert _local.call_count < test_count * size * 0.08
+    print(
+        f"\n\n"
+        f"test_nearest_neighbor: finished {size * step} query in {elapsed:.5f}s\n"
+        f"    `distance` called {_local.call_count} times "
+        f"({_local.call_count / (size * test_count) * 100:.5f}% of brute force method)\n"
+    )
