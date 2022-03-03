@@ -14,14 +14,17 @@ class VPTree(Generic[T]):
     def __init__(
         self, distance: Callable[[T, T], float], points: Sequence[T] = ()
     ) -> None:
-        self.vp: Optional[T] = None
-        self.left: Optional[VPTree[T]] = None
-        self.right: Optional[VPTree[T]] = None
+        self._vp: Optional[T] = None
+        self._left: Optional[VPTree[T]] = None
+        self._right: Optional[VPTree[T]] = None
+
+        # single `r` means `radius`
+        self._r_left_inner = 0
+        self._r_left_outer = 0
+        self._r_right_inner = 0
+        self._r_right_outer = 0
+
         self.distance = distance
-        self.left_inner_radius = 0
-        self.left_outer_radius = 0
-        self.right_inner_radius = 0
-        self.right_outer_radius = 0
 
         self.set_data(points)
 
@@ -32,27 +35,27 @@ class VPTree(Generic[T]):
         return v
 
     def set_data(self, points: Sequence[T]):
-        self.vp = None
-        self.left = None
-        self.right = None
+        self._vp = None
+        self._left = None
+        self._right = None
         if len(points) == 0:
             return
-        self.vp = random.choice(points)
-        vp = self.vp
+        self._vp = random.choice(points)
+        vp = self._vp
         if len(points) == 1:
             return
         assert self.distance(vp, vp) == 0
         pd = sorted(((self.distance(vp, p), p) for p in points))[1:]
         i_median = len(pd) // 2
-        self.left_inner_radius, _ = pd[0]
-        self.left_outer_radius, _ = pd[max(0, i_median - 1)]
-        self.right_inner_radius, _ = pd[i_median]
-        self.right_outer_radius, _ = pd[-1]
-        self.left = self._leaf_for(tuple(p for _, p in pd[:i_median]))
-        self.right = self._leaf_for(tuple(p for _, p in pd[i_median:]))
+        self._r_left_inner, _ = pd[0]
+        self._r_left_outer, _ = pd[max(0, i_median - 1)]
+        self._r_right_inner, _ = pd[i_median]
+        self._r_right_outer, _ = pd[-1]
+        self._left = self._leaf_for(tuple(p for _, p in pd[:i_median]))
+        self._right = self._leaf_for(tuple(p for _, p in pd[i_median:]))
 
     def has_leaf(self) -> bool:
-        return not (self.left is None and self.right is None)
+        return not (self._left is None and self._right is None)
 
     def k_nearest_neighbor(self, point: T, k: int) -> Sequence[Tuple[float, T]]:
         # algorithm from: https://github.com/RickardSjogren/vptree/blob/0621f2b76c34f0cd4869b45158b583ca1364cd5a/vptree.py#L91-L140
@@ -72,46 +75,46 @@ class VPTree(Generic[T]):
 
         while jobs:
             node, d_best = jobs.pop(0)
-            if node is None or node.vp is None:
+            if node is None or node._vp is None:
                 continue
             if r < d_best:
                 continue
 
-            d = self.distance(point, node.vp)
-            _add((d, node.vp))
+            d = self.distance(point, node._vp)
+            _add((d, node._vp))
             if d < r and len(buf) == k:
                 r = d
 
             if not node.has_leaf():
                 continue
 
-            if node.left_inner_radius <= d <= node.left_outer_radius:
-                jobs.insert(0, (node.left, 0))
-            elif node.left_inner_radius - r <= d <= node.left_outer_radius + r:
+            if node._r_left_inner <= d <= node._r_left_outer:
+                jobs.insert(0, (node._left, 0))
+            elif node._r_left_inner - r <= d <= node._r_left_outer + r:
                 jobs.append(
                     (
-                        node.left,
-                        node.left_inner_radius - d
-                        if d < node.left_inner_radius
-                        else d - node.left_outer_radius,
+                        node._left,
+                        node._r_left_inner - d
+                        if d < node._r_left_inner
+                        else d - node._r_left_outer,
                     )
                 )
 
-            if node.right_inner_radius <= d <= node.right_outer_radius:
-                jobs.insert(0, (node.right, 0))
-            elif node.right_inner_radius - r <= d <= node.right_outer_radius + r:
+            if node._r_right_inner <= d <= node._r_right_outer:
+                jobs.insert(0, (node._right, 0))
+            elif node._r_right_inner - r <= d <= node._r_right_outer + r:
                 jobs.append(
                     (
-                        node.right,
-                        node.right_inner_radius - d
-                        if d < node.right_inner_radius
-                        else d - node.right_outer_radius,
+                        node._right,
+                        node._r_right_inner - d
+                        if d < node._r_right_inner
+                        else d - node._r_right_outer,
                     )
                 )
 
         return buf
 
     def nearest_neighbor(self, point: T) -> Tuple[float, T]:
-        if self.vp is None:
+        if self._vp is None:
             raise ValueError("tree is empty")
         return self.k_nearest_neighbor(point, 1)[0]
