@@ -17,7 +17,7 @@ def test_nearest_neighbor():
     tree.set_data(data)
     _local.call_count = 0
     test_count = 0
-    start_time = time.perf_counter()
+    elapsed = 0
     for i in range(0, size * step):
         test_count += 1
         brute_forced = sorted(((abs(j - i), j) for j in data))
@@ -27,12 +27,14 @@ def test_nearest_neighbor():
                 break
             expected.append((d, p))
 
+        start_time = time.perf_counter()
         assert tree.nearest_neighbor(i) in expected
-    elapsed = time.perf_counter() - start_time
-    assert _local.call_count < test_count * size * 0.08
+        elapsed += time.perf_counter() - start_time
+    brute_force_call_count = test_count * size
+    assert _local.call_count < brute_force_call_count * 0.08
     print(
         f"\n\n"
-        f"test_nearest_neighbor: finished {size * step} query in {elapsed:.5f}s\n"
+        f"test_nearest_neighbor: finished {test_count} query in {elapsed:.5f}s\n"
         f"    `distance` called {_local.call_count} times "
-        f"({_local.call_count / (size * test_count) * 100:.5f}% of brute force method)\n"
+        f"({_local.call_count / brute_force_call_count * 100:.5f}% of brute force method)\n"
     )
