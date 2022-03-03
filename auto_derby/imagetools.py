@@ -355,30 +355,22 @@ class ImageHashMap(Generic[T]):
         self._tree_key = 0
 
     def _prepare_tree(self) -> VPTree[Text]:
-        if self._tree_key != len(self._labels):
+        key = len(self._labels)
+        if self._tree_key != key:
             self._tree.set_data(tuple(self._labels.keys()))
-            self._tree_key = len(self._labels)
+            self._tree_key = key
         return self._tree
 
     def query(self, h: Text) -> ImageHashMapQueryResult[T]:
         if not self._labels:
             raise ValueError("no data")
-        # TODO: use vp-tree
         tree = self._prepare_tree()
-        _, nearest = tree.nearest_neighbor(h)
+        distance, hash = tree.nearest_neighbor(h)
         return ImageHashMapQueryResult(
-            nearest, self._labels[nearest], compare_hash(h, nearest)
+            hash,
+            self._labels[hash],
+            1 - distance,
         )
-        # match, value, similarity = sorted(
-        #     ((k, v, compare_hash(h, k)) for k, v in self._labels.items()),
-        #     key=lambda x: x[2],
-        #     reverse=True,
-        # )[0]
-        # return ImageHashMapQueryResult(
-        #     match,
-        #     value,
-        #     similarity,
-        # )
 
     def label(self, h: Text, value: T) -> None:
         self._labels[h] = value
