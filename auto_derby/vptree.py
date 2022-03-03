@@ -31,8 +31,7 @@ class VPTree(Generic[T]):
     def _leaf_for(self, points: Sequence[T]) -> Optional[VPTree[T]]:
         if not points:
             return None
-        v = VPTree[T](self.distance, points)
-        return v
+        return VPTree[T](self.distance, points)
 
     def set_data(self, points: Sequence[T]):
         self._vp = None
@@ -42,9 +41,9 @@ class VPTree(Generic[T]):
             return
         self._vp = random.choice(points)
         vp = self._vp
+        assert self.distance(vp, vp) == 0
         if len(points) == 1:
             return
-        assert self.distance(vp, vp) == 0
         pd = sorted(((self.distance(vp, p), p) for p in points))[1:]
         i_median = len(pd) // 2
         self._r_left_inner, _ = pd[0]
@@ -54,8 +53,11 @@ class VPTree(Generic[T]):
         self._left = self._leaf_for(tuple(p for _, p in pd[:i_median]))
         self._right = self._leaf_for(tuple(p for _, p in pd[i_median:]))
 
+    def is_empty(self) -> bool:
+        return self._vp is None
+
     def has_leaf(self) -> bool:
-        return not (self._left is None and self._right is None)
+        return self._left is not None or self._right is not None
 
     def k_nearest_neighbor(self, point: T, k: int) -> Sequence[Tuple[float, T]]:
         # algorithm from: https://github.com/RickardSjogren/vptree/blob/0621f2b76c34f0cd4869b45158b583ca1364cd5a/vptree.py#L91-L140
@@ -115,6 +117,6 @@ class VPTree(Generic[T]):
         return buf
 
     def nearest_neighbor(self, point: T) -> Tuple[float, T]:
-        if self._vp is None:
+        if self.is_empty():
             raise ValueError("tree is empty")
         return self.k_nearest_neighbor(point, 1)[0]
