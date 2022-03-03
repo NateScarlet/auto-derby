@@ -122,6 +122,8 @@ def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
 def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     hash_img = cv2.GaussianBlur(img, (7, 7), 1, borderType=cv2.BORDER_CONSTANT)
     h = imagetools.image_hash(fromarray(hash_img), save_path=g.image_path)
+    if _g.labels.is_empty():
+        return _prompt(img, h, "", 0)
     res = _g.labels.query(h)
     match, value, similarity = res.hash, res.value, res.similarity
     LOGGER.debug(

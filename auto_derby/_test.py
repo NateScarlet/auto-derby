@@ -20,6 +20,7 @@ from . import clients, mathtools, template, config, data
 
 def ignore_user_data():
     config.ocr_data_path = data.path("ocr_labels.csv")
+    config.single_mode_item_label_path = data.path("single_mode_item_labels.csv")
     config.apply()
 
 

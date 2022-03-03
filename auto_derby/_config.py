@@ -96,6 +96,9 @@ class config:
     single_mode_summer_rest_score = sc.g.summer_rest_score
     single_mode_ignore_training_commands = sc.g.ignore_training_commands
     single_mode_should_retry_race = sc.g.should_retry_race
+    single_mode_item_label_path = os.getenv(
+        "AUTO_DERBY_SINGLE_MODE_ITEM_LABEL_PATH", "data/single_mode_item_labels.csv"
+    )
     single_mode_target_training_levels = _parse_training_levels(
         os.getenv("AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS", "")
     )
@@ -150,6 +153,7 @@ class config:
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels
         single_mode.training.g.training_class = cls.single_mode_training_class
         single_mode.training.g.partner_class = cls.single_mode_training_partner_class
+        single_mode.item.g.label_path = cls.single_mode_item_label_path
         sc.g.rest_score = cls.single_mode_rest_score
         sc.g.summer_rest_score = cls.single_mode_summer_rest_score
         sc.g.health_care_score = cls.single_mode_health_care_score

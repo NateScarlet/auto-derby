@@ -14295,7 +14295,11 @@ def array_repr(arr, max_line_width=None, precision=None, suppress_small=None):
     """
     ...
 
-def array_split(ary, indices_or_sections, axis=0):
+def array_split(
+    ary: ndarray,
+    indices_or_sections: Union[int, Tuple[int, ...]],
+    axis: int = 0,
+) -> List[ndarray]:
     """
     Split an array into multiple sub-arrays.
 

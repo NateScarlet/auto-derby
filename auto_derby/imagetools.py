@@ -65,13 +65,13 @@ def _image_hash(
 ) -> Text:
     if divide_x > 1:
         h = ""
-        for part in np.split(cv_img, divide_x, axis=1):
+        for part in np.array_split(cv_img, divide_x, axis=1):
             h += _image_hash(part, divide_y=divide_y)
         return h
 
     if divide_y > 1:
         h = ""
-        for part in np.split(cv_img, divide_y, axis=0):
+        for part in np.array_split(cv_img, divide_y, axis=0):
             h += _image_hash(part)
         return h
 
@@ -347,6 +347,11 @@ class ImageHashMapQueryResult(Generic[T]):
         self.value = value
         self.similarity = similarity
 
+    def __str__(self):
+        return (
+            f"ImageHashMapQueryResult<{self.hash}:{self.value}:{self.similarity:.3f}>"
+        )
+
 
 class ImageHashMap(Generic[T]):
     def __init__(self) -> None:
@@ -360,6 +365,9 @@ class ImageHashMap(Generic[T]):
             self._tree.set_data(tuple(self._labels.keys()))
             self._tree_key = key
         return self._tree
+
+    def is_empty(self) -> bool:
+        return not self._labels
 
     def query(self, h: Text) -> ImageHashMapQueryResult[T]:
         if not self._labels:
@@ -439,3 +447,18 @@ class CSVImageHashMap(ImageHashMap[T]):
     def clear(self) -> None:
         super().clear()
         self._loaded_paths.clear()
+
+
+def bbox_from_rect(rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
+    x, y, w, h = rect
+    l, t, r, b = x, y, x + w, y + h
+    return l, t, r, b
+
+
+def auto_crop(cv_img: np.ndarray) -> np.ndarray:
+    l, t, r, b = bbox_from_rect(
+        cv2.boundingRect(
+            cv2.findNonZero(cv_img),
+        )
+    )
+    return cv_img[t:b, l:r]
