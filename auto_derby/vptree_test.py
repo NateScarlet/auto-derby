@@ -20,10 +20,10 @@ def test_nearest_neighbor():
     start_time = time.perf_counter()
     for i in range(0, size * step):
         test_count += 1
-        brute_forced = sorted(((j, abs(j - i)) for j in data), key=lambda x: x[1])
+        brute_forced = sorted(((abs(j - i), j) for j in data))
         expected = []
-        for p, d in brute_forced:
-            if d != brute_forced[0][1]:
+        for d, p in brute_forced:
+            if d != brute_forced[0][0]:
                 break
             expected.append((d, p))
 
