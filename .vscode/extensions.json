@@ -2,6 +2,9 @@
     "recommendations": [
         "ms-python.vscode-pylance",
         "ms-python.python",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "johnsoncodehk.volar",
+        "bradlc.vscode-tailwindcss",
+        "VisualStudioExptTeam.vscodeintellicode"
     ]
 }

@@ -1,6 +1,4 @@
 {
-    "reportMissingModuleSource": "none",
-    "exclude": [
-        "*_images.local",
-    ]
+  "reportMissingModuleSource": "none",
+  "exclude": [".git", "**/node_modules", "**/__pycache__", "*_images.local"]
 }
