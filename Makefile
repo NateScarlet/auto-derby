@@ -11,3 +11,6 @@ lint:
 
 format:
 	py -3.8 -m black -t py38 . 
+
+web:
+	cd auto_derby/web/; pnpm run build

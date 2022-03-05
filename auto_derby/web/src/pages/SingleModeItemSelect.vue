@@ -47,7 +47,7 @@
           <li
             v-for="{ key, value, attrs } in searchShortcuts"
             :key="key"
-            class="cursor-pointer inline-block text-white rounded px-1"
+            class="cursor-pointer inline-block rounded px-1"
             v-bind="attrs"
           >
             {{ value }}
@@ -70,7 +70,7 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue';
-import { computed, reactive } from 'vue';
+import { watchEffect, computed, reactive } from 'vue';
 import type { PageDataSingleModeItemSelect, SingleModeItem } from '@/page-data';
 import pageData from '@/page-data';
 import { singleModeItemSearchShortcuts } from '@/settings';
@@ -137,12 +137,12 @@ const searchShortcuts = computed(() =>
           class: [
             (() => {
               if (matchCount === 0) {
-                return 'bg-gray-400';
+                return 'bg-gray-400 text-white';
               }
               if (matchCount === 1) {
-                return 'bg-theme-text';
+                return 'bg-theme-green text-white';
               }
-              return 'bg-theme-green';
+              return 'bg-white text-theme-text';
             })(),
           ],
           onClick: () => {
@@ -165,4 +165,10 @@ const currentOption = computed(
       description: 'unknown',
     }
 );
+
+watchEffect(() => {
+  if (listData.value.length === 1) {
+    inputData.id = listData.value[0].value.id;
+  }
+});
 </script>
