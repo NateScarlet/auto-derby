@@ -90,6 +90,7 @@ class Route(Middleware):
 
 class Debug(Middleware):
     def handle(self, ctx: Context, next: Handler) -> None:
+        print(ctx.method, ctx.path)
         try:
             next(ctx)
         except:

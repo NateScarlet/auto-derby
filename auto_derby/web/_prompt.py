@@ -4,17 +4,19 @@
 
 from __future__ import annotations
 
-import http.server
 import http
-from typing import Any, Callable, Dict, Text
-import webbrowser
-
+import http.server
 import logging
+import webbrowser
+from typing import Any, Dict, Optional, Protocol, Text
 
-_LOGGER = logging.getLogger(__name__)
+import win32api
+import win32con
 
 from . import handler
 from .context import Context
+
+_LOGGER = logging.getLogger(__name__)
 
 
 class _PromptMiddleware(handler.Middleware):
@@ -27,7 +29,6 @@ class _PromptMiddleware(handler.Middleware):
             ctx.send_html(http.HTTPStatus.OK, self.html)
         elif ctx.method == "POST":
             self.data = ctx.form_data()
-            # maybe send Ctrl+W to current active window to close tab.
             ctx.send_html(
                 http.HTTPStatus.OK,
                 """\
@@ -40,8 +41,40 @@ class _PromptMiddleware(handler.Middleware):
             next(ctx)
 
 
-def _default_open_url(url: Text):
-    webbrowser.open(url)
+class Webview(Protocol):
+    def open(self, url: Text) -> None:
+        ...
+
+    def shutdown(self) -> None:
+        ...
+
+
+class _DefaultWebview(Webview):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def open(self, url: Text):
+        webbrowser.open(url)
+
+    def shutdown(self) -> None:
+        # press Ctrl+W
+        VK_W = int.from_bytes(b'W', 'big')
+        win32api.keybd_event(win32con.VK_CONTROL, 0, 0, 0)
+        win32api.keybd_event(VK_W, 0, 0, 0)
+        win32api.keybd_event(win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
+        win32api.keybd_event(VK_W, 0, win32con.KEYEVENTF_KEYUP, 0)
+
+
+class NoOpWebview(Webview):
+    def open(self, url: Text) -> None:
+        pass
+
+    def shutdown(self) -> None:
+        pass
+
+
+class g:
+    default_webview = _DefaultWebview()
 
 
 def prompt(
@@ -49,17 +82,19 @@ def prompt(
     *middlewares: handler.Middleware,
     host: str = "127.0.0.1",
     port: int = 0,
-    open_url: Callable[[Text], None] = _default_open_url,
+    webview: Optional[Webview] = None,
 ) -> Dict[Any, Any]:
+    webview = webview or g.default_webview
     pm = _PromptMiddleware(html)
     h = handler.from_middlewares((pm,) + middlewares)
-    with http.server.HTTPServer(
+    with http.server.ThreadingHTTPServer(
         (host, port), handler.to_http_handler_class(h)
     ) as httpd:
         host, port = httpd.server_address
         url = f"http://{host}:{port}"
+        webview.open(url)
         _LOGGER.info(f"temporary server at: {url}")
-        open_url(url)
         httpd.serve_forever()
+    webview.shutdown()
     _LOGGER.info("form data: %s", pm.data)
     return pm.data
