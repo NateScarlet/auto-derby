@@ -15,6 +15,7 @@ from ..scenes.single_mode import (
     CommandScene,
     RaceMenuScene,
     RaceTurnsIncorrect,
+    ShopScene,
 )
 from ..single_mode import Context, commands, event
 
@@ -36,15 +37,26 @@ def _handle_option():
     action.tap_image(ALL_OPTIONS[ans - 1])
 
 
+def _handle_shop(ctx: Context):
+    scene = ShopScene.enter(ctx)
+    scene.recognize(ctx)
+    CommandScene.enter(ctx)
+    # TODO: exchange items
+    # TODO: use items
+
+
 def _handle_turn(ctx: Context):
     scene = CommandScene.enter(ctx)
     scene.recognize(ctx)
+    if scene.has_shop:
+        _handle_shop(ctx)
     ctx.next_turn()
     command_with_scores = sorted(
         ((i, i.score(ctx)) for i in commands.from_context(ctx)),
         key=lambda x: x[1],
         reverse=True,
     )
+    # TODO: use items
     LOGGER.info("context: %s", ctx)
     for c, s in command_with_scores:
         LOGGER.info("score:\t%2.2f:\t%s", s, c.name())
@@ -207,8 +219,12 @@ def _template_actions(ctx: Context) -> Iterator[Tuple[_Template, _Handler]]:
             ctx.SCENARIO_AOHARU, _handle_aoharu_team_race
         )
     if ctx.scenario in (ctx.SCENARIO_CLIMAX, ctx.SCENARIO_UNKNOWN):
-        yield templates.SINGLE_MODE_GO_TO_SHOP_BUTTON, _cancel
-        yield templates.SINGLE_MODE_TARGET_RACE_POINT_NOT_ENOUGH, _cancel
+        yield templates.SINGLE_MODE_GO_TO_SHOP_BUTTON, _set_scenario(
+            ctx.SCENARIO_CLIMAX, _cancel
+        )
+        yield templates.SINGLE_MODE_TARGET_RACE_POINT_NOT_ENOUGH, _set_scenario(
+            ctx.scenario, _cancel
+        )
 
 
 def _spec_key(tmpl: _Template) -> Text:

@@ -11,6 +11,7 @@ from typing import Any, Dict, Optional, Text, Tuple
 from PIL.Image import Image
 
 from .. import data, imagetools, web
+from .context import Context
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -56,6 +57,9 @@ class ItemEffect:
 
         return v
 
+    def score(self, ctx: Context) -> float:
+        return 0
+
 
 class Item:
     def __init__(self) -> None:
@@ -100,6 +104,9 @@ class Item:
         v.effect_priority = d["effectPriority"]
         v.effects = tuple(ItemEffect.from_dict(i) for i in d["effects"])
         return v
+
+    def score(self, ctx: Context) -> float:
+        return 0
 
 
 def _iter(p: Text):
