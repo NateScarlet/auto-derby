@@ -2,7 +2,9 @@
   <div class="text-left">
     <p class="border-b border-gray-200">
       <span class="font-bold">{{ value.name }} </span>
-      <span class="text-sm float-right"> {{ value.id }} </span>
+      <span v-show="!idHidden" class="text-sm float-right">
+        {{ value.id }}
+      </span>
     </p>
     <p class="text-sm">
       <span class="bg-gray-200 rounded-lg px-1 mr-2">効果</span>
@@ -21,6 +23,9 @@ const props = defineProps({
   value: {
     type: Object as PropType<SingleModeItem>,
     required: true,
+  },
+  idHidden: {
+    type: Boolean,
   },
 });
 const _ = props;

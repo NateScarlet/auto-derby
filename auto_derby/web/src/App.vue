@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-200 text-theme-text">
+  <div class="bg-gray-200 text-theme-text min-h-screen">
     <component :is="page.component" :page-data="pageData"></component>
   </div>
 </template>
