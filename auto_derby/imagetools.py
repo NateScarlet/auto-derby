@@ -407,16 +407,20 @@ class CSVImageHashMap(ImageHashMap[T]):
     def _value_to_text(self, v: T) -> Text:
         return str(v)
 
-    def load(self, path: Text) -> None:
-        with open(path, "r", encoding="utf-8") as f:
-            for k, v in csv.reader(f):
-                self._labels[k] = self._value_from_text(v)
+    def load(self, path: Text) -> bool:
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                for k, v in csv.reader(f):
+                    self._labels[k] = self._value_from_text(v)
+        except FileNotFoundError:
+            return False
         self._loaded_paths.add(path)
+        return True
 
-    def load_once(self, path: Text) -> None:
+    def load_once(self, path: Text) -> bool:
         if path in self._loaded_paths:
-            return
-        self.load(path)
+            return False
+        return self.load(path)
 
     def label(self, h: Text, value: T) -> None:
         super().label(h, value)
