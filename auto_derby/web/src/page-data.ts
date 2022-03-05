@@ -7,7 +7,7 @@ export enum PageType {
 }
 
 export interface SingleModeItem {
-  id: string;
+  id: number;
   name: string;
   description: string;
 }

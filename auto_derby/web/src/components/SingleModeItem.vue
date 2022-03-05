@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-left">
     <p class="border-b border-gray-200">
       <span class="font-bold">{{ value.name }} </span>
       <span class="text-sm float-right"> {{ value.id }} </span>
