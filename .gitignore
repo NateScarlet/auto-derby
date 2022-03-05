@@ -21,3 +21,5 @@ single_mode_choices.csv
 .env
 
 /data
+
+node_modules
