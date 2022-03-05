@@ -15,12 +15,12 @@ import sqlite3
 import argparse
 import os
 import contextlib
-from auto_derby.single_mode.item import Item, ItemEffect, g
+from auto_derby.single_mode.item import Item, Effect, g
 import json
 import pathlib
 
 
-def _get_effects(db: sqlite3.Connection, group: int) -> Iterator[ItemEffect]:
+def _get_effects(db: sqlite3.Connection, group: int) -> Iterator[Effect]:
 
     with contextlib.closing(
         db.execute(
@@ -42,7 +42,7 @@ SELECT
     ) as cur:
         for i in cur:
             assert len(i) == 8, i
-            e = ItemEffect()
+            e = Effect()
             (
                 e.id,
                 e.group,
