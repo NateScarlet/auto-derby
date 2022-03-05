@@ -6,14 +6,16 @@ from __future__ import annotations
 import io
 import json
 import logging
-from typing import Any, Callable, Dict, List, Optional, Text, Tuple
+from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional, Text, Tuple
 
 from PIL.Image import Image
 
 from .. import data, imagetools, web
-from .commands import Command
-from .context import Context
 from ..constants import TrainingType
+from .context import Context
+
+if TYPE_CHECKING:
+    from .commands import Command
 
 _LOGGER = logging.getLogger(__name__)
 
