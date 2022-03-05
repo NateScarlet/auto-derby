@@ -3,13 +3,14 @@
 
 from __future__ import annotations
 
+import io
 import json
 import logging
 from typing import Any, Dict, Optional, Text, Tuple
 
 from PIL.Image import Image
 
-from .. import data, imagetools, terminal
+from .. import data, imagetools, web
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -126,41 +127,27 @@ def get(id: int) -> Optional[Item]:
     return g.items.get(id)
 
 
-def _cast_int(v: Text, d: int) -> int:
-    try:
-        return int(v)
-    except ValueError:
-        return d
+def _prompt(img: Image, h: Text, defaultValue: int) -> Item:
+    reload_on_demand()
+    img_data = io.BytesIO()
+    img.save(img_data, "PNG")
 
-
-def _prompt(img: Image, h: Text, value: Optional[Item], similarity: float) -> Item:
-    if terminal.g.prompt_disabled:
-        # avoid show image during loop
-        raise terminal.PromptDisabled
-    close_img = imagetools.show(img, h)
-    try:
-        ans = ""
-        while value and ans not in ("Y", "N"):
-            ans = terminal.prompt(
-                f"Matching current displaying image: value={value}, similarity={similarity:0.3f}.\n"
-                "Is this correct? (Y/N)"
-            ).upper()
-        if ans == "Y":
-            ret = value
-        else:
-            ret = get(
-                _cast_int(
-                    terminal.prompt(
-                        "Item id for current displaying image\n"
-                        '(see "auto_derby/data/single_mode_items.jsonl"):'
-                    ),
-                    0,
-                )
-            )
-    finally:
-        close_img()
+    form_data = web.prompt(
+        web.page.render(
+            {
+                "type": "SINGLE_MODE_ITEM_SELECT",
+                "imageURL": "/img.png",
+                "defaultValue": defaultValue,
+                "options": [i.to_dict() for i in g.items.values()],
+            }
+        ),
+        web.page.ASSETS,
+        web.Route("/img.png", web.Blob(img_data.getvalue(), "image/png")),
+    )
+    form_id = int(form_data["id"][0])
+    ret = get(form_id)
     if not ret:
-        return _prompt(img, h, value, similarity)
+        raise ValueError("invalid item id: %s" % form_id)
     _g.labels.label(h, ret.id)
     _LOGGER.info("labeled: hash=%s, value=%s", h, ret)
     return ret
@@ -170,7 +157,7 @@ def from_title_image(img: Image, threshold: float = 0.8) -> Item:
     reload_on_demand()
     h = imagetools.image_hash(img, divide_x=4)
     if _g.labels.is_empty():
-        return _prompt(img, h, None, 0)
+        return _prompt(img, h, 0)
     res = _g.labels.query(h)
     _LOGGER.debug(
         "match label: search=%s, result=%s",
@@ -180,4 +167,4 @@ def from_title_image(img: Image, threshold: float = 0.8) -> Item:
     item = get(res.value)
     if item and res.similarity > threshold:
         return item
-    return _prompt(img, h, item, res.similarity)
+    return _prompt(img, h, item.id if item else 0)

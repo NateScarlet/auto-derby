@@ -60,4 +60,5 @@ def prompt(
         _LOGGER.info(f"temporary server at: {url}")
         open_url(url)
         httpd.serve_forever()
+    _LOGGER.info("form data: %s", pm.data)
     return pm.data

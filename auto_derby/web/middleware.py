@@ -9,7 +9,7 @@ import traceback
 from http import HTTPStatus
 from typing import Sequence, Text
 
-from . import utils
+import email.utils
 from .context import Context
 from .handler import Handler, Middleware
 
@@ -42,9 +42,11 @@ class File(Middleware):
             stat = os.stat(self.path)
             if ctx.is_not_modified(stat.st_mtime):
                 ctx.status_code = HTTPStatus.NOT_MODIFIED
-                return 
+                return
             ctx.set_header("Content-Length", str(stat.st_size))
-            ctx.set_header("Last-Modified", utils.format_timestamp(stat.st_mtime))
+            ctx.set_header(
+                "Last-Modified", email.utils.formatdate(stat.st_mtime, usegmt=True)
+            )
         except FileNotFoundError:
             ctx.send_text(HTTPStatus.NOT_FOUND, "file not found")
             return

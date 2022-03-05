@@ -63,7 +63,7 @@ class Context:
             o = json.loads(data)
             ret.update(o)
         elif ct in ("application/x-www-form-urlencoded",):
-            o = urllib.parse.parse_qs(data, strict_parsing=True)
+            o = urllib.parse.parse_qs(data.decode("utf-8"), strict_parsing=True)
             ret.update(o)
         else:
             raise NotImplementedError("request Content-Type not supported: %s" % ct)
