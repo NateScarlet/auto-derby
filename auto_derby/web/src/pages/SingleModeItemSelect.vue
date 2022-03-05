@@ -31,17 +31,29 @@
           </button>
         </form>
       </div>
-      <label class="w-full flex items-center">
-        <svg class="inline align-top fill-current h-8" viewBox="0 0 24 24">
-          <path :d="mdiMagnify"></path>
-        </svg>
-        <input
-          v-model="inputData.q"
-          class="flex-auto"
-          type="search"
-          placeholder="search"
-        />
-      </label>
+      <div class="space-y-1">
+        <label class="w-full flex items-center">
+          <svg class="inline align-top fill-current h-8" viewBox="0 0 24 24">
+            <path :d="mdiMagnify"></path>
+          </svg>
+          <input
+            v-model="inputData.q"
+            class="flex-auto"
+            type="search"
+            placeholder="search"
+          />
+        </label>
+        <ol class="flex gap-1 flex-wrap">
+          <li
+            v-for="{ key, value, attrs } in searchShortcuts"
+            :key="key"
+            class="cursor-pointer inline-block text-white rounded px-1"
+            v-bind="attrs"
+          >
+            {{ value }}
+          </li>
+        </ol>
+      </div>
     </div>
     <ul class="space-y-2">
       <li
@@ -61,6 +73,8 @@ import type { PropType } from 'vue';
 import { computed, reactive } from 'vue';
 import type { PageDataSingleModeItemSelect, SingleModeItem } from '@/page-data';
 import pageData from '@/page-data';
+import { singleModeItemSearchShortcuts } from '@/settings';
+import compare from '@/utils/compare';
 import SingleModeItemVue from '@/components/SingleModeItem.vue';
 
 import { mdiMagnify } from '@mdi/js';
@@ -81,9 +95,16 @@ function itemSearchKeys(i: SingleModeItem): string[] {
   return [i.name, i.description];
 }
 
+function matchItem(i: SingleModeItem, query: string): boolean {
+  const searchKeys = itemSearchKeys(i);
+  return query
+    .split(' ')
+    .every((keyword) => searchKeys.some((key) => key.includes(keyword)));
+}
+
 const listData = computed(() =>
   pageData.options
-    .filter((i) => itemSearchKeys(i).some((j) => j.includes(inputData.q)))
+    .filter((i) => matchItem(i, inputData.q))
     .map((i) => {
       const isSelected = i.id === inputData.id;
       return {
@@ -100,6 +121,40 @@ const listData = computed(() =>
         },
       };
     })
+);
+
+const searchShortcuts = computed(() =>
+  singleModeItemSearchShortcuts
+    .map((i) => {
+      const matchCount = listData.value.filter((j) =>
+        matchItem(j.value, i)
+      ).length;
+      return {
+        key: i,
+        value: i,
+        matchCount,
+        attrs: {
+          class: [
+            (() => {
+              if (matchCount === 0) {
+                return 'bg-gray-400';
+              }
+              if (matchCount === 1) {
+                return 'bg-theme-text';
+              }
+              return 'bg-theme-green';
+            })(),
+          ],
+          onClick: () => {
+            if (listData.value.length === matchCount) {
+              return;
+            }
+            inputData.q = matchCount ? `${inputData.q} ${i}`.trim() : i;
+          },
+        },
+      };
+    })
+    .sort((a, b) => -compare(a.matchCount, b.matchCount))
 );
 
 const currentOption = computed(

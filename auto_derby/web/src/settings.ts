@@ -1,2 +1,30 @@
-// eslint-disable-next-line import/prefer-default-export
 export const isDevelopmentMode = import.meta.env.DEV;
+
+export const singleModeItemSearchShortcuts = [
+  'スピード',
+  'スタミナ',
+  'パワー',
+  '根性',
+  '賢さ',
+  'メモ帳',
+  '戦術書',
+  'の',
+  '秘伝書',
+  'バイタル',
+  'ジュース',
+  'ドリンク',
+  'ケーキ',
+  '絆ゲージ',
+  'やる気',
+  '体力',
+  'になる',
+  '解消',
+  'トレーニング',
+  '再配置',
+  'メガホン',
+  'ターン',
+  'ウェイト',
+  '蹄鉄',
+  '・',
+  'レース',
+];
