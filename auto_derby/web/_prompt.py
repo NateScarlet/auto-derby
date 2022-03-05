@@ -57,7 +57,7 @@ def prompt(
     ) as httpd:
         host, port = httpd.server_address
         url = f"http://{host}:{port}"
-        _LOGGER.info(f"temporary http server at: {url}")
+        _LOGGER.info(f"temporary server at: {url}")
         open_url(url)
         httpd.serve_forever()
     return pm.data
