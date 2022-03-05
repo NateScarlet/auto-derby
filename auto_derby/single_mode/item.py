@@ -6,12 +6,14 @@ from __future__ import annotations
 import io
 import json
 import logging
-from typing import Any, Dict, Optional, Text, Tuple
+from typing import Any, Callable, Dict, List, Optional, Text, Tuple
 
 from PIL.Image import Image
 
 from .. import data, imagetools, web
+from .commands import Command
 from .context import Context
+from ..constants import TrainingType
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -28,7 +30,38 @@ class _g:
     labels = imagetools.CSVImageHashMap(int)
 
 
-class ItemEffect:
+class Effect:
+    TYPE_PROPERTY = 1
+    TYPE_TRAINING_LEVEL = 2
+    TYPE_FRIENDSHIP = 3
+    TYPE_CONDITION = 6
+    TYPE_RESET_PARTER = 10
+    TYPE_TRAINING_BUFF = 11
+    TYPE_TRAINING_VITALITY_DEBUFF = 12
+    TYPE_TRAINING_NO_FAILURE = 10
+    TYPE_RACE_BUFF = 14
+
+    PROPERTY_SPEED = 1
+    PROPERTY_STAMINA = 2
+    PROPERTY_POWER = 3
+    PROPERTY_GUTS = 4
+    PROPERTY_WISDOM = 5
+    PROPERTY_VITALITY = 10
+    PROPERTY_MAX_VITALITY = 11
+    PROPERTY_MOOD = 20
+
+    TRAINING_LEVEL_SPEED = 101
+    TRAINING_LEVEL_STAMINA = 105
+    TRAINING_LEVEL_POWER = 102
+    TRAINING_LEVEL_GUTS = 103
+    TRAINING_LEVEL_WISDOM = 106
+
+    CONDITION_ADD = 1
+    CONDITION_REMOVE = 2
+
+    RACE_BUFF_REWARD = 6
+    RACE_BUFF_FAN = 40
+
     def __init__(self) -> None:
         self.id = 0
         self.group = 0
@@ -47,7 +80,7 @@ class ItemEffect:
         return d
 
     @classmethod
-    def from_dict(cls, d: Dict[Text, Any]) -> ItemEffect:
+    def from_dict(cls, d: Dict[Text, Any]) -> Effect:
         v = cls()
         v.id = d["id"]
         v.group = d["group"]
@@ -57,8 +90,64 @@ class ItemEffect:
 
         return v
 
-    def score(self, ctx: Context) -> float:
-        return 0
+
+_effect_transforms: List[_EffectTransform] = []
+
+
+class EffectSummary:
+    def __init__(self) -> None:
+        self.speed = 0
+        self.statmia = 0
+        self.power = 0
+        self.guts = 0
+        self.wisdom = 0
+        self.vitality = 0
+        self.max_vitality = 0
+        self.mood = 0
+        self.add_conditions: Tuple[int, ...] = ()
+        self.remove_conditions: Tuple[int, ...] = ()
+        self.training_level: Dict[TrainingType, float] = {}
+        self.training_buff: Dict[TrainingType, float] = {}
+        self.training_vitality_debuff: Dict[TrainingType, float] = {}
+        self.reset_parters = False
+        self.no_training_failure = False
+        self.race_fan_buff = 0
+        self.race_reward_buff = 0
+
+        self.unknown_effects: Tuple[Effect, ...] = ()
+
+    def add(self, effect: Effect):
+        for i in _effect_transforms:
+            if i(effect, self):
+                break
+        else:
+            self.unknown_effects += (effect,)
+
+
+_EffectTransform = Callable[[Effect, EffectSummary], bool]
+
+
+def _only_effect_type(effect_type: int):
+    def _wrapper(fn: _EffectTransform) -> _EffectTransform:
+        def _func(effect: Effect, summary: EffectSummary) -> bool:
+            if effect.type != effect_type:
+                return False
+            return fn(effect, summary)
+
+        return _func
+
+    return _wrapper
+
+
+def _register_transform(fn: _EffectTransform):
+    _effect_transforms.append(fn)
+    return fn
+
+
+@_register_transform
+@_only_effect_type(Effect.TYPE_PROPERTY)
+def _(effect: Effect, summary: EffectSummary):
+    return False
 
 
 class Item:
@@ -69,7 +158,7 @@ class Item:
         self.original_price = 0
         self.max_quantity = 0
         self.effect_priority = 0
-        self.effects: Tuple[ItemEffect, ...] = ()
+        self.effects: Tuple[Effect, ...] = ()
 
         # dynamic data
         self.price = 0
@@ -102,11 +191,22 @@ class Item:
         v.original_price = d["originalPrice"]
         v.max_quantity = d["maxQuantity"]
         v.effect_priority = d["effectPriority"]
-        v.effects = tuple(ItemEffect.from_dict(i) for i in d["effects"])
+        v.effects = tuple(Effect.from_dict(i) for i in d["effects"])
         return v
 
-    def score(self, ctx: Context) -> float:
+    def exchange_score(self, ctx: Context) -> float:
+        """
+        Item will be exchanged if score greater than 0.
+        """
         return 0
+
+    def effect_score(self, ctx: Context, command: Command) -> float:
+        """Item will be used before command if score greater than 0."""
+        return 0
+
+    def should_use_directly(self, ctx: Context) -> bool:
+        """whether use after exchange."""
+        return False
 
 
 def _iter(p: Text):

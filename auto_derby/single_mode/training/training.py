@@ -17,6 +17,7 @@ from ..context import Context
 from . import training_score
 from .globals import g
 from .partner import Partner
+from ...constants import TrainingType
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -301,11 +302,11 @@ def _estimate_vitality(ctx: Context, trn: Training) -> float:
 
 
 class Training:
-    TYPE_SPEED: int = 1
-    TYPE_STAMINA: int = 2
-    TYPE_POWER: int = 3
-    TYPE_GUTS: int = 4
-    TYPE_WISDOM: int = 5
+    TYPE_SPEED = TrainingType.SPEED
+    TYPE_STAMINA = TrainingType.STAMINA
+    TYPE_POWER = TrainingType.POWER
+    TYPE_GUTS = TrainingType.GUTS
+    TYPE_WISDOM = TrainingType.WISDOM
 
     ALL_TYPES = (
         TYPE_SPEED,
@@ -321,7 +322,7 @@ class Training:
 
     def __init__(self):
         self.level = 0
-        self.type = 0
+        self.type = TrainingType.UNKNOWN
 
         self.speed: int = 0
         self.stamina: int = 0

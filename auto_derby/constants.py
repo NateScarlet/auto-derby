@@ -52,3 +52,12 @@ class RacePrediction(enum.Enum):
     TAIKOU = 2
     TANNANA = 3
     RENNSHITA = 4
+
+
+class TrainingType(enum.Enum):
+    UNKNOWN = 0
+    SPEED = 1
+    STAMINA = 2
+    POWER = 3
+    GUTS = 4
+    WISDOM = 5
