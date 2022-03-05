@@ -27,6 +27,7 @@ class _PromptMiddleware(handler.Middleware):
             ctx.send_html(http.HTTPStatus.OK, self.html)
         elif ctx.method == "POST":
             self.data = ctx.form_data()
+            # maybe send Ctrl+W to current active window to close tab.
             ctx.send_html(
                 http.HTTPStatus.OK,
                 """\
