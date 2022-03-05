@@ -74,7 +74,6 @@ import { watchEffect, computed, reactive } from 'vue';
 import type { PageDataSingleModeItemSelect, SingleModeItem } from '@/page-data';
 import pageData from '@/page-data';
 import { singleModeItemSearchShortcuts } from '@/settings';
-import compare from '@/utils/compare';
 import SingleModeItemVue from '@/components/SingleModeItem.vue';
 
 import { mdiMagnify } from '@mdi/js';
@@ -124,37 +123,35 @@ const listData = computed(() =>
 );
 
 const searchShortcuts = computed(() =>
-  singleModeItemSearchShortcuts
-    .map((i) => {
-      const matchCount = listData.value.filter((j) =>
-        matchItem(j.value, i)
-      ).length;
-      return {
-        key: i,
-        value: i,
-        matchCount,
-        attrs: {
-          class: [
-            (() => {
-              if (matchCount === 0) {
-                return 'bg-gray-400 text-white';
-              }
-              if (matchCount === 1) {
-                return 'bg-theme-green text-white';
-              }
-              return 'bg-white text-theme-text';
-            })(),
-          ],
-          onClick: () => {
-            if (listData.value.length === matchCount) {
-              return;
+  singleModeItemSearchShortcuts.map((i) => {
+    const matchCount = listData.value.filter((j) =>
+      matchItem(j.value, i)
+    ).length;
+    return {
+      key: i,
+      value: i,
+      matchCount,
+      attrs: {
+        class: [
+          (() => {
+            if (matchCount === 0) {
+              return 'bg-gray-400 text-white';
             }
-            inputData.q = matchCount ? `${inputData.q} ${i}`.trim() : i;
-          },
+            if (matchCount === 1) {
+              return 'bg-theme-green text-white';
+            }
+            return 'bg-white text-theme-text';
+          })(),
+        ],
+        onClick: () => {
+          if (listData.value.length === matchCount) {
+            return;
+          }
+          inputData.q = matchCount ? `${inputData.q} ${i}`.trim() : i;
         },
-      };
-    })
-    .sort((a, b) => -compare(a.matchCount, b.matchCount))
+      },
+    };
+  })
 );
 
 const currentOption = computed(
