@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import http.server
 import http
-from typing import Any, Dict, Text
+from typing import Any, Callable, Dict, Text
 import webbrowser
 
 import logging
@@ -39,15 +39,25 @@ class _PromptMiddleware(handler.Middleware):
             next(ctx)
 
 
-def prompt(html: Text, *middlewares: handler.Middleware) -> Dict[Any, Any]:
+def _default_open_url(url: Text):
+    webbrowser.open(url)
+
+
+def prompt(
+    html: Text,
+    *middlewares: handler.Middleware,
+    host: str = "127.0.0.1",
+    port: int = 0,
+    open_url: Callable[[Text], None] = _default_open_url,
+) -> Dict[Any, Any]:
     pm = _PromptMiddleware(html)
     h = handler.from_middlewares((pm,) + middlewares)
     with http.server.HTTPServer(
-        ("127.0.0.1", 0), handler.to_http_handler_class(h)
+        (host, port), handler.to_http_handler_class(h)
     ) as httpd:
         host, port = httpd.server_address
         url = f"http://{host}:{port}"
         _LOGGER.info(f"temporary http server at: {url}")
-        webbrowser.open(url)
+        open_url(url)
         httpd.serve_forever()
     return pm.data

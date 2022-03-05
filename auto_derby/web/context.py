@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import email.utils
 import io
 import json
 import shutil
@@ -92,7 +93,11 @@ class Context:
         self.write_bytes(data.encode(self.encoding, "surrogateescape"))
 
     def write_file(self, f: BinaryIO):
-        shutil.copyfileobj(f, self._res_body)
+        w = self._req_body
+        if self._res_headers["Content-Length"]:
+            self.end_headers()
+            w = self._req.wfile
+        shutil.copyfileobj(f, w)
 
     def end_write(self):
         if self._write_ended:
@@ -103,6 +108,11 @@ class Context:
         w = self._req.wfile
         w.write(data)
         self._write_ended = True
+
+    def send_blob(self, status_code: int, data: bytes):
+        self.status_code = status_code
+        self.write_bytes(data)
+        self.end_write()
 
     def send_text(self, status_code: int, data: Text):
         self.status_code = status_code
@@ -127,3 +137,14 @@ class Context:
         threading.Thread(
             target=self._req.server.shutdown,
         ).start()
+
+    def is_not_modified(self, mtime: float) -> bool:
+        try:
+            ts = email.utils.parsedate_to_datetime(
+                self.request_headers["If-Modified-Since"]
+            ).timestamp()
+            return int(mtime) <= ts
+        except (TypeError, IndexError, OverflowError, ValueError):
+            pass
+
+        return False

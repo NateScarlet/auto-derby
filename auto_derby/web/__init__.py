@@ -1,3 +1,3 @@
 from ._prompt import prompt
-from .middleware import StaticFile, Route
+from .middleware import File, Route, Dir, Blob
 from . import middleware
