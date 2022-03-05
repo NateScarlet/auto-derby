@@ -15,9 +15,9 @@ export interface SingleModeItem {
 export interface PageDataSingleModeItemSelect {
   type: PageType.SINGLE_MODE_ITEM_SELECT;
   imageURL: string;
-  submitURL: string;
-  defaultValue: number;
   options: SingleModeItem[];
+  submitURL?: string;
+  defaultValue?: number;
 }
 
 export type PageData = PageDataSingleModeItemSelect;

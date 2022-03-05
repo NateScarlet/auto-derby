@@ -9,11 +9,12 @@
     "lint": "eslint . --ext js,ts,vue"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "@mdi/js": "^6.5.95"
   },
   "devDependencies": {
-    "@mdi/js": "^6.5.95",
     "@tailwindcss/forms": "^0.5.0",
+    "@types/node": "14",
     "@typescript-eslint/eslint-plugin": "5.13.0",
     "@typescript-eslint/parser": "5.13.0",
     "@vitejs/plugin-vue": "^2.2.0",

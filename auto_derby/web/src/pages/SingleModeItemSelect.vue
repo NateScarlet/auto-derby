@@ -73,7 +73,7 @@ const props = defineProps({
 });
 const _ = props;
 const inputData = reactive({
-  id: pageData.defaultValue,
+  id: pageData.defaultValue ?? 0,
   q: '',
 });
 

@@ -110,8 +110,14 @@ def _iter(p: Text):
 def reload():
     g.items = {i.id: i for i in _iter(g.data_path)}
     _g.labels.clear()
-    _g.labels.load_once(data.path("single_mode_item_labels.csv"))
-    _g.labels.load_once(g.label_path)
+    try:
+        _g.labels.load_once(data.path("single_mode_item_labels.csv"))
+    except FileNotFoundError:
+        pass
+    try:
+        _g.labels.load_once(g.label_path)
+    except FileNotFoundError:
+        pass
     _g.labels.save_path = g.label_path
     return
 
