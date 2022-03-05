@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,ts,vue"
   },
   "dependencies": {
     "vue": "^3.2.25"
@@ -14,6 +15,19 @@
     "@vitejs/plugin-vue": "^2.2.0",
     "typescript": "^4.5.4",
     "vite": "^2.8.0",
-    "vue-tsc": "^0.29.8"
-  }
+    "vue-tsc": "^0.29.8",
+    "@typescript-eslint/eslint-plugin": "5.13.0",
+    "@typescript-eslint/parser": "5.13.0",
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-vue": "8.0.3",
+    "prettier": "2.4.1"
+  },
+  "bundledDependencies": [
+    "auto-derby"
+  ]
 }

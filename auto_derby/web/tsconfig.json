@@ -1,20 +1,13 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "esnext",
+    "module": "CommonJS",
+    "target": "ES2019",
     "moduleResolution": "node",
-    "strict": true,
-    "jsx": "preserve",
-    "sourceMap": true,
-    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "paths": {
-      "@/*": ["./src/*"],
-      "data/*": ["../data/*"]
-    }
+    "types": ["node"],
+    "allowJs": true,
+    "noEmit": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["*.ts", "scripts/*.ts"]
 }
