@@ -68,7 +68,8 @@ def _handle_turn(ctx: Context):
 
     # see training before shop
     turn_commands = tuple(commands.from_context(ctx))
-    if scene.has_shop:
+    # TODO: recognize inventory items.
+    if scene.has_shop and ctx.shop_coin:
         _handle_shop(ctx)
         scene.enter(ctx)
         scene.recognize(ctx)  # item may change context
