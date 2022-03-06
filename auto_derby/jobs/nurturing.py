@@ -70,7 +70,7 @@ def _handle_turn(ctx: Context):
     turn_commands = tuple(commands.from_context(ctx))
     if scene.has_shop:
         _handle_shop(ctx)
-        scene = CommandScene.enter(ctx)
+        scene.enter(ctx)
         scene.recognize(ctx)  # item may change context
     ctx.next_turn()
     # TODO: compute with item effect
