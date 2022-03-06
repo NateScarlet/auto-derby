@@ -51,7 +51,9 @@ def _handle_shop(ctx: Context):
     cart_items: List[item.Item] = []
     total_price = 0
     for s, i in scores_of_items:
-        should_exchange = total_price + i.price < ctx.shop_coin
+        if s <= 0:
+            break
+        should_exchange = total_price + i.price <= ctx.shop_coin
         if should_exchange:
             cart_items.append(i)
             total_price += i.price
@@ -69,7 +71,7 @@ def _handle_turn(ctx: Context):
     if scene.has_shop:
         _handle_shop(ctx)
         scene = CommandScene.enter(ctx)
-        scene.recognize(ctx) # item may change context
+        scene.recognize(ctx)  # item may change context
     ctx.next_turn()
     # TODO: compute with item effect
     command_with_scores = sorted(
