@@ -126,7 +126,7 @@ class ShopScene(Scene):
             for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
-                remains.remove(match)
+                _LOGGER.info("exchange: %s", match)
                 action.tap(pos)
                 action.wait_image(templates.SINGLE_MODE_SHOP_EXCHANGE_DONE_TITLE)
                 if match.should_use_directly(ctx):
@@ -134,6 +134,7 @@ class ShopScene(Scene):
                     action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                 else:
                     action.wait_tap_image(templates.CLOSE_BUTTON)
+                remains.remove(match)
                 ctx.items += (match,)
                 ctx.shop_coin -= match.price
             self._scroll_page()
