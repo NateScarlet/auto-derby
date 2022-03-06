@@ -90,7 +90,7 @@ class EffectSummary:
         return trn
 
     def apply_to_race(self, race: Race) -> Race:
-        r = Race.new()
+        r = Race.from_dict(race.to_dict())
         r.fan_counts = tuple(round(i * (1 + self.race_fan_buff)) for i in r.fan_counts)
         return r
 
