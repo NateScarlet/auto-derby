@@ -82,6 +82,7 @@ def _pad_img(img: np.ndarray, padding: int = _PREVIEW_PADDING) -> np.ndarray:
 
 
 def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
+    # TODO: use web prompt
     if g.prompt_disabled:
         LOGGER.warning(
             "using low similarity label: hash=%s, value=%s, similarity=%s",
