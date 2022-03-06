@@ -83,9 +83,9 @@ class CommandScene(Scene):
     @classmethod
     def _enter(cls, ctx: SceneHolder) -> Scene:
         if ctx.scene.name() == "single-mode-training":
-            action.tap_image(templates.RETURN_BUTTON)
+            action.wait_tap_image(templates.RETURN_BUTTON)
         if ctx.scene.name() == "single-mode-shop":
-            action.tap_image(templates.RETURN_BUTTON)
+            action.wait_tap_image(templates.RETURN_BUTTON)
 
         while True:
             tmpl, pos = action.wait_image(

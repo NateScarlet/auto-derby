@@ -109,6 +109,8 @@ class ShopScene(Scene):
             if static:
                 break
             self._scroll_page()
+        if not self.items:
+            _LOGGER.warn("not found items")
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
