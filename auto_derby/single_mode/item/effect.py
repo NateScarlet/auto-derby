@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Text
+from typing import Any, Dict, Text, Tuple
 
 
 class Effect:
@@ -42,7 +42,7 @@ class Effect:
         self.id = 0
         self.group = 0
         self.type = 0
-        self.values = (0, 0, 0, 0)
+        self.values: Tuple[int, int, int, int] = (0, 0, 0, 0)
         self.turn_count = 0
 
     def to_dict(self) -> Dict[Text, Any]:
