@@ -59,10 +59,6 @@ def _handle_shop(ctx: Context):
         LOGGER.info("score:\t%2.2f:\t%s\t%s", s, i, status)
     scene.exchange_items(ctx, cart_items)
 
-    CommandScene.enter(ctx)
-    # TODO: exchange items
-    # TODO: use items
-
 
 def _handle_turn(ctx: Context):
     scene = CommandScene.enter(ctx)
@@ -72,6 +68,8 @@ def _handle_turn(ctx: Context):
     turn_commands = tuple(commands.from_context(ctx))
     if scene.has_shop:
         _handle_shop(ctx)
+        scene = CommandScene.enter(ctx)
+        scene.recognize(ctx) # item may change context
     ctx.next_turn()
     # TODO: compute with item effect
     command_with_scores = sorted(
