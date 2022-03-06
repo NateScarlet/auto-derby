@@ -10,8 +10,6 @@ import logging
 import webbrowser
 from typing import Any, Dict, Optional, Protocol, Text
 
-import win32api
-import win32con
 
 from . import handler
 from .context import Context
@@ -52,13 +50,26 @@ class Webview(Protocol):
 class _DefaultWebview(Webview):
     def __init__(self) -> None:
         super().__init__()
+        self.url = ""
 
     def open(self, url: Text):
+        self.url = url
         webbrowser.open(url)
 
     def shutdown(self) -> None:
+        if not self.url.startswith("http://127.0.0.1:"):
+            return
+
         # press Ctrl+W
-        VK_W = int.from_bytes(b'W', 'big')
+        try:
+            import win32api
+            import win32con
+        except ImportError:
+            _LOGGER.info(
+                "`win32api`/`win32con` module not found, browser tab need to be closed manually"
+            )
+            return
+        VK_W = int.from_bytes(b"W", "big")
         win32api.keybd_event(win32con.VK_CONTROL, 0, 0, 0)
         win32api.keybd_event(VK_W, 0, 0, 0)
         win32api.keybd_event(win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
