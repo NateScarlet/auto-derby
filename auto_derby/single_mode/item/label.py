@@ -40,6 +40,7 @@ def reload_on_demand() -> None:
 
 
 def _prompt(img: Image, h: Text, defaultValue: int) -> Item:
+    # TODO: allow disable
     img_data = io.BytesIO()
     img.save(img_data, "PNG")
 

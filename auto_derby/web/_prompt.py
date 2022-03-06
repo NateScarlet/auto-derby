@@ -7,9 +7,9 @@ from __future__ import annotations
 import http
 import http.server
 import logging
+import os
 import webbrowser
 from typing import Any, Dict, Optional, Protocol, Text
-
 
 from . import handler
 from .context import Context
@@ -86,6 +86,7 @@ class NoOpWebview(Webview):
 
 class g:
     default_webview = _DefaultWebview()
+    disabled = bool(os.getenv("CI"))
 
 
 def prompt(
@@ -95,6 +96,8 @@ def prompt(
     port: int = 0,
     webview: Optional[Webview] = None,
 ) -> Dict[Any, Any]:
+    if g.disabled:
+        return {}
     webview = webview or g.default_webview
     pm = _PromptMiddleware(html)
     h = handler.from_middlewares((pm,) + middlewares)
