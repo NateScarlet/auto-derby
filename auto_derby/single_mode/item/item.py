@@ -7,6 +7,9 @@ from typing import TYPE_CHECKING, Any, Dict, Text, Tuple
 
 from ..context import Context
 from .effect import Effect
+from .effect_summary import EffectSummary
+from ..training import Training
+from .. import race
 
 if TYPE_CHECKING:
     from ..commands import Command
@@ -56,16 +59,90 @@ class Item:
         v.effects = tuple(Effect.from_dict(i) for i in d["effects"])
         return v
 
+    def effect_summary(self) -> EffectSummary:
+        es = EffectSummary()
+        for i in self.effects:
+            es.add(i)
+        return es
+
+    def effect_score(self, ctx: Context, command: Command) -> float:
+        """Item will be used before command if score greater than 0."""
+
+        es = self.effect_summary()
+
+        from ..commands import TrainingCommand, RaceCommand
+
+        if isinstance(command, TrainingCommand):
+            trn = es.apply_to_training(command.training)
+            delta = trn.score(ctx) - command.training.score(ctx)
+
+            if delta < self.price / 3:
+                return -1
+            return delta
+
+        if isinstance(command, RaceCommand):
+            r = es.apply_to_race(command.race)
+            delta = r.score(ctx) - command.race.score(ctx)
+            # TODO: race reward effect
+            if delta < self.price / 2:
+                return -1
+            return delta
+
+        return 0
+
     def exchange_score(self, ctx: Context) -> float:
         """
         Item will be exchanged if score greater than 0.
         """
-        return 0
 
-    def effect_score(self, ctx: Context, command: Command) -> float:
-        """Item will be used before command if score greater than 0."""
-        return 0
+        es = self.effect_summary()
+        ret = 0
+
+        from ..commands import TrainingCommand, RaceCommand
+
+        sample_trainings = (
+            Training.new(),
+            *(
+                trn
+                for turn_count, trn in ctx.training_history
+                if turn_count > ctx.turn_count() - 12
+            ),
+            *ctx.trainings,
+        )
+        ret += max(self.effect_score(ctx, TrainingCommand(i)) for i in sample_trainings)
+
+        sample_races = tuple(race for _, race in ctx.race_history)
+        if not sample_races:
+            sample_races = tuple(i.race for i in race.race_result.iterate_current(ctx))
+        if sample_races:
+            ret += max(self.effect_score(ctx, RaceCommand(i)) for i in sample_races)
+
+        if es.no_training_failure:
+            ret += 10
+
+        # TODO: calculate other effect
+        return ret
 
     def should_use_directly(self, ctx: Context) -> bool:
-        """whether use after exchange."""
-        return False
+        """whether use for any command."""
+        es = self.effect_summary()
+        if es.unknown_effects:
+            return False
+        if es.remove_conditions:
+            return False
+        if es.no_training_failure:
+            return False
+        if es.race_fan_buff or es.race_reward_buff:
+            return False
+        if es.training_effect_buff:
+            return False
+        max_mood = {
+            ctx.MOOD_VERY_GOOD: 0,
+            ctx.MOOD_GOOD: 1,
+            ctx.MOOD_NORMAL: 2,
+            ctx.MOOD_BAD: 3,
+            ctx.MOOD_VERY_BAD: 4,
+        }[ctx.mood]
+        if es.mood > 0 and es.mood > max_mood:
+            return False
+        return True

@@ -7,6 +7,8 @@ from typing import Callable, Dict, List, Tuple
 
 from ...constants import TrainingType
 from .effect import Effect
+from ..training import Training
+from ..race import Race
 
 _effect_transforms: List[_EffectTransform] = []
 
@@ -46,6 +48,51 @@ class EffectSummary:
                 break
         else:
             self.unknown_effects += (effect,)
+
+    def apply_to_training(self, training: Training) -> Training:
+        """
+        return a copy of given training with effect applied.
+        """
+        trn = Training.new()
+        trn.__dict__.update(training.__dict__)
+
+        # effect buff
+        effect_rate = 1
+        for buff in self.training_effect_buff:
+            if buff.type != trn.type:
+                continue
+            effect_rate += buff.rate
+        trn.speed = round(trn.speed * effect_rate)
+        trn.stamina = round(trn.stamina * effect_rate)
+        trn.power = round(trn.power * effect_rate)
+        trn.guts = round(trn.guts * effect_rate)
+        trn.wisdom = round(trn.guts * effect_rate)
+
+        # vitality debuff
+        vitality_rate = 1
+        for debuff in self.training_vitality_debuff:
+            if debuff.type != trn.type:
+                continue
+            vitality_rate += debuff.rate
+        if trn.vitality < 0:
+            trn.vitality *= vitality_rate
+
+        # property gain
+        trn.speed += self.speed
+        trn.stamina += self.statmia
+        trn.power += self.power
+        trn.guts += self.guts
+        trn.wisdom += self.wisdom
+        trn.vitality += self.vitality
+
+        if self.no_training_failure:
+            trn.failure_rate = 0
+        return trn
+
+    def apply_to_race(self, race: Race) -> Race:
+        r = Race.new()
+        r.fan_counts = tuple(round(i * (1 + self.race_fan_buff)) for i in r.fan_counts)
+        return r
 
 
 _EffectTransform = Callable[[Effect, EffectSummary], bool]

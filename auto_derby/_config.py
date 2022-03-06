@@ -6,14 +6,16 @@ import os
 import warnings
 from typing import Callable, Dict, Text
 
+from auto_derby.constants import TrainingType
+
 from . import ocr, plugin, single_mode, template, terminal, window, data
 from .clients import ADBClient
 from .single_mode import commands as sc
 from .single_mode.training import Training
 
 
-def _parse_training_levels(spec: Text) -> Dict[int, int]:
-    ret: Dict[int, int] = {}
+def _parse_training_levels(spec: Text) -> Dict[TrainingType, int]:
+    ret: Dict[TrainingType, int] = {}
     for k, v in zip(
         (
             Training.TYPE_SPEED,

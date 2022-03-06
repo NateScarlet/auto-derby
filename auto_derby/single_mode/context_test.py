@@ -434,3 +434,10 @@ def test_update_by_character_detail_issue39():
     assert ctx.head == ctx.STATUS_A, ctx.head
     assert ctx.middle == ctx.STATUS_A, ctx.middle
     assert ctx.last == ctx.STATUS_F, ctx.last
+
+
+def test_date_from_turn_count():
+    for i in range(1, 76):
+        ctx = Context.new()
+        ctx.date =  ctx.date_from_turn_count(i)
+        assert ctx.turn_count() == i, ctx.date

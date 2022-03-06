@@ -6,7 +6,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, Dict, Iterator
 
 if TYPE_CHECKING:
-    from . import go_out
+    from . import go_out, training, race
 
 import functools
 import logging
@@ -312,6 +312,10 @@ class Context:
         self.grade_point = 0
         self.shop_coin = 0
 
+        self.training_history: Tuple[Tuple[int, training.Training], ...] = ()
+        self.trainings: Tuple[training.Training, ...] = ()
+        self.race_history: Tuple[Tuple[int, race.Race], ...] = ()
+
     def target_grade_point(self) -> int:
         if self.date[1:] == (0, 0):
             return 0
@@ -474,10 +478,20 @@ class Context:
             return self._extra_turn_count
         if self.date == (4, 0, 0):
             return self._extra_turn_count + 24 * 3
-        return (self.date[0] - 1) * 24 + (self.date[1] - 1) * 2 + (self.date[2] - 1)
+        return (self.date[0] - 1) * 24 + (self.date[1] - 1) * 2 + self.date[2]
 
     def total_turn_count(self) -> int:
         return 24 * 3 + 6
+
+    @staticmethod
+    def date_from_turn_count(turn_count: int) -> Tuple[int, int, int]:
+        c = turn_count - 1
+        year = c // 24 + 1
+        c %= 24
+        month = c // 2 + 1
+        c %= 2
+        half = c + 1
+        return (year, month, half)
 
     def continuous_race_count(self) -> int:
         ret = 1

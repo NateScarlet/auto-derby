@@ -72,3 +72,4 @@ class TrainingScene(Scene):
                     for j in _iter_training_images()
                 ]
             )
+        ctx.trainings = self.trainings

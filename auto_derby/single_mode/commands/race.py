@@ -131,6 +131,7 @@ class RaceCommand(Command):
                 break
             action.tap(pos)
         ctx.race_turns.add(ctx.turn_count())
+        ctx.race_history += ((ctx.turn_count(), self.race),)
 
         _choose_running_style(ctx, race1)
 

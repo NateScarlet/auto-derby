@@ -28,6 +28,7 @@ class TrainingCommand(Command):
             action.tap((x, y))
             time.sleep(0.1)
         action.tap((x, y))
+        ctx.training_history += ((ctx.turn_count(), self.training),)
 
     def score(self, ctx: Context) -> float:
         return self.training.score(ctx)
