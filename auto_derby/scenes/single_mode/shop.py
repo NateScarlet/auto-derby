@@ -76,6 +76,7 @@ class ShopScene(Scene):
         action.wait_tap_image(
             templates.SINGLE_MODE_COMMAND_SHOP,
         )
+        action.wait_image(templates.RETURN_BUTTON)
         return cls()
 
     def _scroll_page(self, direction: int = 0):
