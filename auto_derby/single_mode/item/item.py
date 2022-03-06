@@ -117,7 +117,7 @@ class Item:
         if sample_races:
             ret += max(self.effect_score(ctx, RaceCommand(i)) for i in sample_races)
 
-        if es.no_training_failure:
+        if es.training_no_failure:
             ret += 10
 
         # TODO: calculate other effect
@@ -128,13 +128,15 @@ class Item:
         es = self.effect_summary()
         if es.unknown_effects:
             return False
-        if es.remove_conditions:
+        if es.condition_remove:
             return False
-        if es.no_training_failure:
+        if es.training_no_failure:
             return False
         if es.race_fan_buff or es.race_reward_buff:
             return False
         if es.training_effect_buff:
+            return False
+        if es.training_partner_reassign:
             return False
         max_mood = {
             ctx.MOOD_VERY_GOOD: 0,

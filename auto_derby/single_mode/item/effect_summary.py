@@ -30,13 +30,13 @@ class EffectSummary:
         self.vitality = 0
         self.max_vitality = 0
         self.mood = 0
-        self.add_conditions: Tuple[int, ...] = ()
-        self.remove_conditions: Tuple[int, ...] = ()
+        self.condition_add: Tuple[int, ...] = ()
+        self.condition_remove: Tuple[int, ...] = ()
         self.training_level: Dict[TrainingType, int] = {}
         self.training_effect_buff: Tuple[TrainingBuff, ...] = ()
         self.training_vitality_debuff: Tuple[TrainingBuff, ...] = ()
-        self.reset_parters = False
-        self.no_training_failure = False
+        self.training_partner_reassign = False
+        self.training_no_failure = False
         self.race_fan_buff = 0.0
         self.race_reward_buff = 0.0
 
@@ -85,7 +85,7 @@ class EffectSummary:
         trn.wisdom += self.wisdom
         trn.vitality += self.vitality
 
-        if self.no_training_failure:
+        if self.training_no_failure:
             trn.failure_rate = 0
         return trn
 
@@ -180,19 +180,19 @@ def _(effect: Effect, summary: EffectSummary):
 def _(effect: Effect, summary: EffectSummary):
     action, value, _, _ = effect.values
     if action == Effect.CONDITION_ADD:
-        summary.add_conditions += (value,)
+        summary.condition_add += (value,)
         return True
     if action == Effect.CONDITION_REMOVE:
-        summary.remove_conditions += (value,)
+        summary.condition_remove += (value,)
         return True
     return False
 
 
 @_register_transform
-@_only_effect_type(Effect.TYPE_RESET_PARTER)
+@_only_effect_type(Effect.TYPE_TRAINING_PARTNER_REASSIGN)
 def _(effect: Effect, summary: EffectSummary):
     if effect.values == (0, 0, 0, 0):
-        summary.reset_parters = True
+        summary.training_partner_reassign = True
         return True
     return False
 
@@ -264,7 +264,7 @@ def _(effect: Effect, summary: EffectSummary):
 @_only_effect_type(Effect.TYPE_TRAINING_NO_FAILURE)
 def _(effect: Effect, summary: EffectSummary):
     if effect.values == (0, 0, 0, 0):
-        summary.no_training_failure = True
+        summary.training_no_failure = True
         return True
     return False
 
