@@ -43,6 +43,7 @@ def _handle_shop(ctx: Context):
 
     scores_of_items = sorted(
         ((i.exchange_score(ctx), i) for i in scene.items),
+        key=lambda x: x[0],
         reverse=True,
     )
 
@@ -66,12 +67,15 @@ def _handle_shop(ctx: Context):
 def _handle_turn(ctx: Context):
     scene = CommandScene.enter(ctx)
     scene.recognize(ctx)
+
+    # see training before shop
+    turn_commands = tuple(commands.from_context(ctx))
     if scene.has_shop:
         _handle_shop(ctx)
     ctx.next_turn()
     # TODO: compute with item effect
     command_with_scores = sorted(
-        ((i, i.score(ctx)) for i in commands.from_context(ctx)),
+        ((i, i.score(ctx)) for i in turn_commands),
         key=lambda x: x[1],
         reverse=True,
     )
