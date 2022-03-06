@@ -6,8 +6,10 @@ from typing import Text
 
 import time
 
+
 from ... import action
 from ...scenes.single_mode import TrainingScene
+from ...scenes import UnknownScene
 from .. import Context, Training
 from .command import Command
 from .globals import g
@@ -29,6 +31,7 @@ class TrainingCommand(Command):
             time.sleep(0.1)
         action.tap((x, y))
         ctx.training_history += ((ctx.turn_count(), self.training),)
+        UnknownScene.enter(ctx)
 
     def score(self, ctx: Context) -> float:
         return self.training.score(ctx)
