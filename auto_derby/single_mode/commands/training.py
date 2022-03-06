@@ -22,9 +22,9 @@ class TrainingCommand(Command):
 
     def execute(self, ctx: Context) -> None:
         g.on_command(ctx, self)
-        scene = TrainingScene.enter(ctx)
+        TrainingScene.enter(ctx)
         x, y = self.training.confirm_position
-        if scene.trainings[-1] != self.training:
+        if ctx.trainings[-1] != self.training:
             action.tap((x, y))
             time.sleep(0.1)
         action.tap((x, y))
