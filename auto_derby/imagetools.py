@@ -426,7 +426,7 @@ class CSVImageHashMap(ImageHashMap[T]):
         super().label(h, value)
         path = self.save_path
         if not path:
-            return
+            raise ValueError("label save path is empty")
 
         def _do():
             with open(path, "a", encoding="utf-8", newline="") as f:
