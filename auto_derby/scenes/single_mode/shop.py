@@ -3,8 +3,9 @@
 
 from __future__ import annotations
 
+import logging
 import os
-from typing import Any, Dict, Iterator, Text, Tuple
+from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 
 import cv2
 from PIL.Image import Image
@@ -14,6 +15,8 @@ from ...single_mode import Context, item
 from ...single_mode.item import Item
 from ..scene import Scene, SceneHolder
 from .command import CommandScene
+
+_LOGGER = logging.getLogger(__name__)
 
 
 def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
@@ -110,13 +113,20 @@ class ShopScene(Scene):
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
 
-    def exchange_item(self, item: Item) -> None:
-        while True:
+    def exchange_items(self, ctx: Context, items: Sequence[Item]) -> None:
+        remains = list(items)
+        while remains:
             for match, pos in _recognize_menu(template.screenshot()):
-                if item == match:
-                    action.tap(pos)
-                    raise NotImplementedError()
+                if match not in remains:
+                    continue
+                remains.remove(match)
+                action.tap(pos)
+                raise NotImplementedError()
+                ctx.items += (match,)
+                ctx.shop_coin -= match.price
             self._scroll_page()
+        for i in remains:
+            _LOGGER.info("failed to exchange item: %s", i)
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {

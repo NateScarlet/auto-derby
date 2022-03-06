@@ -1,13 +1,13 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
-from auto_derby.constants import RacePrediction
 
 import logging
 import time
-from typing import Callable, Iterator, Text, Tuple, Union
+from typing import Callable, Iterator, List, Text, Tuple, Union
 
 from .. import action, config, template, templates
+from ..constants import RacePrediction
 from ..scenes.single_mode import (
     AoharuBattleConfirmScene,
     AoharuCompetitorScene,
@@ -17,7 +17,7 @@ from ..scenes.single_mode import (
     RaceTurnsIncorrect,
     ShopScene,
 )
-from ..single_mode import Context, commands, event
+from ..single_mode import Context, commands, event, item
 
 LOGGER = logging.getLogger(__name__)
 
@@ -40,6 +40,24 @@ def _handle_option():
 def _handle_shop(ctx: Context):
     scene = ShopScene.enter(ctx)
     scene.recognize(ctx)
+
+    scores_of_items = sorted(
+        ((i.exchange_score(ctx), i) for i in scene.items),
+        reverse=True,
+    )
+
+    LOGGER.info("shop items")
+    cart_items: List[item.Item] = []
+    total_price = 0
+    for s, i in scores_of_items:
+        should_exchange = total_price + i.price < ctx.shop_coin
+        if should_exchange:
+            cart_items.append(i)
+            total_price += i.price
+        status = "<in cart>" if should_exchange else ""
+        LOGGER.info("score:\t%2.2f:\t%s\t%s", s, i, status)
+    scene.exchange_items(ctx, cart_items)
+
     CommandScene.enter(ctx)
     # TODO: exchange items
     # TODO: use items
@@ -51,6 +69,7 @@ def _handle_turn(ctx: Context):
     if scene.has_shop:
         _handle_shop(ctx)
     ctx.next_turn()
+    # compute with item effect
     command_with_scores = sorted(
         ((i, i.score(ctx)) for i in commands.from_context(ctx)),
         key=lambda x: x[1],
