@@ -69,7 +69,7 @@ def _handle_turn(ctx: Context):
     if scene.has_shop:
         _handle_shop(ctx)
     ctx.next_turn()
-    # compute with item effect
+    # TODO: compute with item effect
     command_with_scores = sorted(
         ((i, i.score(ctx)) for i in commands.from_context(ctx)),
         key=lambda x: x[1],
