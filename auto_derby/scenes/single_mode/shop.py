@@ -128,7 +128,12 @@ class ShopScene(Scene):
                     continue
                 remains.remove(match)
                 action.tap(pos)
-                raise NotImplementedError()
+                action.wait_image(templates.SINGLE_MODE_SHOP_EXCHANGE_DONE_TITLE)
+                if match.should_use_directly(ctx):
+                    action.wait_tap_image(templates.SINGEL_MODE_ITEM_USE_CONFIRM_BUTTON)
+                    action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
+                else:
+                    action.wait_tap_image(templates.CLOSE_BUTTON)
                 ctx.items += (match,)
                 ctx.shop_coin -= match.price
             self._scroll_page()
