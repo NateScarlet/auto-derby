@@ -10,7 +10,7 @@ from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 import cv2
 from PIL.Image import Image
 
-from ... import action, imagetools, mathtools, template, templates
+from ... import action, imagetools, mathtools, template, templates, ocr
 from ...single_mode import Context, item
 from ...single_mode.item import Item
 from ..scene import Scene, SceneHolder
@@ -33,11 +33,24 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
     return imagetools.pil_image(binary_img)
 
 
+def _recognize_price(rp: mathtools.ResizeProxy, item_img: Image) -> int:
+    bbox = rp.vector4((185, 41, 389, 64), 540)
+    cv_img = imagetools.cv_image(item_img.crop(bbox))
+    binary_img = imagetools.constant_color_key(cv_img, (22, 64, 121), threshold=0.8)
+    if os.getenv("DEBUG") == __name__:
+        cv2.imshow("item_img", imagetools.cv_image(item_img))
+        cv2.imshow("cv_img", cv_img)
+        cv2.imshow("binary_img", binary_img)
+        cv2.waitKey()
+        cv2.destroyAllWindows()
+    text = ocr.text(imagetools.pil_image(binary_img))
+    # TODO: handle discount
+    return int(text)
+
+
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     v = item.from_title_image(_title_image(rp, img))
-
-    # TODO: recognize current price
-    v.price = v.original_price
+    v.price = _recognize_price(rp, img)
     return v
 
 
