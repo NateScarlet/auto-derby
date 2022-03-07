@@ -28,7 +28,9 @@ if __name__ == "__main__":
                     "type": "SINGLE_MODE_ITEM_SELECT",
                     "imageURL": "/img.png",
                     "defaultValue": 1,
-                    "options": [i.to_dict() for i in single_mode.item.game_data.iterate()],
+                    "options": [
+                        i.to_dict() for i in single_mode.item.game_data.iterate()
+                    ],
                 }
             ),
             web.page.ASSETS,

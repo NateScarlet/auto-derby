@@ -439,5 +439,5 @@ def test_update_by_character_detail_issue39():
 def test_date_from_turn_count():
     for i in range(0, 76):
         ctx = Context.new()
-        ctx.date =  ctx.date_from_turn_count(i)
+        ctx.date = ctx.date_from_turn_count(i)
         assert ctx.turn_count() == i, ctx.date
