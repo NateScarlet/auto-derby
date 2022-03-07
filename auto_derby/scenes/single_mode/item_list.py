@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import Any, Dict, Iterator, Text, Tuple
+from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 
 import cv2
 from PIL.Image import Image
@@ -71,7 +71,7 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
         template.match(img, templates.SINGLE_MODE_ITEM_LIST_CURRENT_QUANTITY),
         key=lambda x: x[1][1],
     ):
-        _, y = pos
+        x, y = pos
         if y < min_y:
             # ignore partial visible
             continue
@@ -81,7 +81,7 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
             rp.vector(518, 540),
             y + rp.vector(48, 540),
         )
-        yield _recognize_item(rp, img.crop(bbox)), pos
+        yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(303, 540), y)
 
 
 class ItemListScene(Scene):
@@ -154,3 +154,19 @@ class ItemListScene(Scene):
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
+        ctx.items = self.items
+
+    def use_items(self, ctx: Context, items: Sequence[Item]) -> None:
+        remains = list(items)
+        while remains:
+            for match, pos in _recognize_menu(template.screenshot()):
+                if match not in remains:
+                    continue
+                _LOGGER.info("use: %s", match)
+                action.tap(pos)
+                raise NotImplementedError()
+                remains.remove(match)
+                match.quantity -= 1
+            self._scroll_page()
+        for i in remains:
+            _LOGGER.info("failed to exchange item: %s", i)
