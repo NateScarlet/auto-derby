@@ -42,6 +42,5 @@ if __name__ == "__main__":
             ),
             web.Route("/dir/", web.Dir(os.path.dirname(__file__))),
             web.middleware.Debug(),
-            port=5000,
         )
     )

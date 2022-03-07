@@ -8,6 +8,7 @@ import http
 import http.server
 import logging
 import os
+from uuid import uuid4
 import webbrowser
 from typing import Any, Dict, Optional, Protocol, Text
 
@@ -21,8 +22,11 @@ class _PromptMiddleware(handler.Middleware):
     def __init__(self, html: Text):
         self.html = html
         self.data: Dict[Any, Any] = {}
+        self.path = "/" + uuid4().hex
 
     def handle(self, ctx: Context, next: handler.Handler) -> None:
+        if ctx.path != self.path:
+            return ctx.send_text(http.HTTPStatus.NOT_FOUND, "page not found")
         if ctx.method == "GET":
             ctx.send_html(http.HTTPStatus.OK, self.html)
         elif ctx.method == "POST":
@@ -87,6 +91,7 @@ class NoOpWebview(Webview):
 class g:
     default_webview = _DefaultWebview()
     disabled = bool(os.getenv("CI"))
+    default_port = 8300
 
 
 def prompt(
@@ -94,18 +99,33 @@ def prompt(
     *middlewares: handler.Middleware,
     host: str = "127.0.0.1",
     port: int = 0,
+    max_port: int = 65535,
     webview: Optional[Webview] = None,
 ) -> Dict[Any, Any]:
     if g.disabled:
         return {}
+    port = port or g.default_port
     webview = webview or g.default_webview
     pm = _PromptMiddleware(html)
     h = handler.from_middlewares((pm,) + middlewares)
     with http.server.ThreadingHTTPServer(
-        (host, port), handler.to_http_handler_class(h)
+        (host, port),
+        handler.to_http_handler_class(h),
+        bind_and_activate=False,
     ) as httpd:
+        httpd.allow_reuse_address = False
+        while True:
+            try:
+                httpd.server_bind()
+                break
+            except OSError:
+                if port >= max_port:
+                    raise
+                port += 1
+                httpd.server_address = (httpd.server_address[0], port)
+        httpd.server_activate()
         host, port = httpd.server_address
-        url = f"http://{host}:{port}"
+        url = f"http://{host}:{port}" + pm.path
         webview.open(url)
         _LOGGER.info(f"temporary server at: {url}")
         httpd.serve_forever()

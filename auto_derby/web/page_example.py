@@ -20,7 +20,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     img_data = io.BytesIO()
     Image.new("RGB", (200, 200), (255, 0, 0)).save(img_data, "PNG"),
-    single_mode.item.reload()
 
     print(
         web.prompt(
@@ -29,7 +28,7 @@ if __name__ == "__main__":
                     "type": "SINGLE_MODE_ITEM_SELECT",
                     "imageURL": "/img.png",
                     "defaultValue": 1,
-                    "options": [i.to_dict() for i in single_mode.item.g.items.values()],
+                    "options": [i.to_dict() for i in single_mode.item.game_data.iterate()],
                 }
             ),
             web.page.ASSETS,
@@ -41,6 +40,5 @@ if __name__ == "__main__":
                 ),
             ),
             web.middleware.Debug(),
-            port=5000,
         )
     )
