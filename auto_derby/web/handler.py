@@ -28,9 +28,7 @@ def _apply_middleware(h: Handler, m: Middleware) -> Handler:
 def _default_handler(ctx: Context):
     if ctx.status_code:
         return
-    ctx.send_text(
-        HTTPStatus.NOT_FOUND, "%s %s\n page not found" % (ctx.method, ctx.path)
-    )
+    ctx.send_text(HTTPStatus.NOT_FOUND, "404 page not found")
 
 
 def from_middlewares(middlewares: Sequence[Middleware]) -> Handler:

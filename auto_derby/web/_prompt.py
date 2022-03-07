@@ -22,11 +22,12 @@ class _PromptMiddleware(handler.Middleware):
     def __init__(self, html: Text):
         self.html = html
         self.data: Dict[Any, Any] = {}
+        # unique path to avoid repeat submit from previous call
         self.path = "/" + uuid4().hex
 
     def handle(self, ctx: Context, next: handler.Handler) -> None:
         if ctx.path != self.path:
-            return ctx.send_text(http.HTTPStatus.NOT_FOUND, "page not found")
+            return next(ctx)
         if ctx.method == "GET":
             ctx.send_html(http.HTTPStatus.OK, self.html)
         elif ctx.method == "POST":
