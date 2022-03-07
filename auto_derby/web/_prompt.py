@@ -127,7 +127,7 @@ def prompt(
         host, port = httpd.server_address
         url = f"http://{host}:{port}" + pm.path
         webview.open(url)
-        _LOGGER.info(f"temporary server at: {url}")
+        _LOGGER.info(f"prompt at: {url}")
         httpd.serve_forever()
     webview.shutdown()
     _LOGGER.info("form data: %s", pm.data)
