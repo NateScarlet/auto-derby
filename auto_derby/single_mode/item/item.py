@@ -5,6 +5,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Dict, Text, Tuple
 
+import numpy as np
+
 from ..context import Context
 from .effect import Effect
 from .effect_summary import EffectSummary
@@ -109,13 +111,25 @@ class Item:
             ),
             *ctx.trainings,
         )
-        ret += max(self.effect_score(ctx, TrainingCommand(i)) for i in sample_trainings)
+        ret += float(
+            np.percentile(
+                tuple(
+                    self.effect_score(ctx, TrainingCommand(i)) for i in sample_trainings
+                ),
+                90,
+            )
+        )
 
         sample_races = tuple(race for _, race in ctx.race_history)
         if not sample_races:
             sample_races = tuple(i.race for i in race.race_result.iterate_current(ctx))
         if sample_races:
-            ret += max(self.effect_score(ctx, RaceCommand(i)) for i in sample_races)
+            ret += float(
+                np.percentile(
+                    tuple(self.effect_score(ctx, RaceCommand(i)) for i in sample_races),
+                    90,
+                )
+            )
 
         if es.training_no_failure:
             ret += 10

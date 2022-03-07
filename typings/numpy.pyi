@@ -26584,10 +26584,10 @@ def partition(a, kth, axis=-1, kind="introselect", order=None):
     ...
 
 def percentile(
-    a: ndarray,
+    a: ArrayLike,
     q: int,
-    axis: Union[int, Tuple[int, ...]] = None,
-    out: ndarray = None,
+    axis: Union[int, Tuple[int, ...], None] = None,
+    out: Optional[ndarray] = None,
     overwrite_input: bool = False,
     interpolation: Text = "linear",
     keepdims: bool = False,

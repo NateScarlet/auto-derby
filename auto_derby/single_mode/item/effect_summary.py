@@ -83,7 +83,8 @@ class EffectSummary:
         trn.power += self.power
         trn.guts += self.guts
         trn.wisdom += self.wisdom
-        trn.vitality += self.vitality
+        # XXX: vitality convertion is not accure
+        trn.vitality += self.vitality / 100
 
         if self.training_no_failure:
             trn.failure_rate = 0
