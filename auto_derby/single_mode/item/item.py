@@ -115,25 +115,20 @@ class Item:
             ),
             *ctx.trainings,
         )
-        ret += float(
-            np.percentile(
-                tuple(
-                    self.effect_score(ctx, TrainingCommand(i)) for i in sample_trainings
-                ),
-                90,
-            )
+        training_scores = (
+            self.effect_score(ctx, TrainingCommand(i)) for i in sample_trainings
         )
+        training_scores = tuple(i for i in training_scores if i > 0)
+        if training_scores:
+            ret += float(np.percentile(training_scores, 90))
 
         sample_races = tuple(race for _, race in ctx.race_history)
         if not sample_races:
             sample_races = tuple(i.race for i in race.race_result.iterate_current(ctx))
-        if sample_races:
-            ret += float(
-                np.percentile(
-                    tuple(self.effect_score(ctx, RaceCommand(i)) for i in sample_races),
-                    90,
-                )
-            )
+        race_scores = (self.effect_score(ctx, RaceCommand(i)) for i in sample_races)
+        race_scores = tuple(i for i in race_scores if i > 0)
+        if race_scores:
+            ret += float(np.percentile(race_scores, 90))
 
         if es.training_no_failure:
             ret += 10
