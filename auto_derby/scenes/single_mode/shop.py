@@ -21,8 +21,9 @@ _LOGGER = logging.getLogger(__name__)
 
 def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
     bbox = rp.vector4((100, 10, 375, 32), 540)
-    cv_img = imagetools.cv_image(item_img.crop(bbox))
-    binary_img = imagetools.constant_color_key(cv_img, (22, 64, 121))
+    cv_img = imagetools.cv_image(item_img.crop(bbox).convert("L"))
+    _, binary_img = cv2.threshold(cv_img, 100, 255, cv2.THRESH_BINARY_INV)
+    imagetools.fill_area(binary_img, (0,), size_lt=3)
     binary_img = imagetools.auto_crop(binary_img)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
@@ -35,12 +36,10 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
 
 def _recognize_price(rp: mathtools.ResizeProxy, item_img: Image) -> int:
     bbox = rp.vector4((185, 41, 389, 64), 540)
-    value_img = imagetools.resize(item_img.crop(bbox).convert("L"), height=32)
-    cv_img = imagetools.cv_image(value_img)
+    cv_img = imagetools.cv_image(imagetools.resize(item_img.crop(bbox).convert("L"), height=32))
     _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
-        cv2.imshow("value_img", imagetools.cv_image(value_img))
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("binary_img", binary_img)
         cv2.waitKey()
