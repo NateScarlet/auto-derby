@@ -10,7 +10,7 @@ from .effect import Effect
 from ..training import Training
 from ..race import Race
 
-_effect_transforms: List[_EffectTransform] = []
+_effect_reducers: List[_EffectReducer] = []
 
 
 class TrainingBuff:
@@ -43,7 +43,7 @@ class EffectSummary:
         self.unknown_effects: Tuple[Effect, ...] = ()
 
     def add(self, effect: Effect):
-        for i in _effect_transforms:
+        for i in _effect_reducers:
             if i(effect, self):
                 break
         else:
@@ -96,11 +96,11 @@ class EffectSummary:
         return r
 
 
-_EffectTransform = Callable[[Effect, EffectSummary], bool]
+_EffectReducer = Callable[[Effect, EffectSummary], bool]
 
 
 def _only_effect_type(effect_type: int):
-    def _wrapper(fn: _EffectTransform) -> _EffectTransform:
+    def _wrapper(fn: _EffectReducer) -> _EffectReducer:
         def _func(effect: Effect, summary: EffectSummary) -> bool:
             if effect.type != effect_type:
                 return False
@@ -111,12 +111,12 @@ def _only_effect_type(effect_type: int):
     return _wrapper
 
 
-def _register_transform(fn: _EffectTransform):
-    _effect_transforms.append(fn)
+def _register_reducer(fn: _EffectReducer):
+    _effect_reducers.append(fn)
     return fn
 
 
-@_register_transform
+@_register_reducer
 @_only_effect_type(Effect.TYPE_PROPERTY)
 def _(effect: Effect, summary: EffectSummary):
     prop, value, _, _ = effect.values
@@ -150,7 +150,7 @@ def _(effect: Effect, summary: EffectSummary):
     return False
 
 
-@_register_transform
+@_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_LEVEL)
 def _(effect: Effect, summary: EffectSummary):
     lv, value, _, _ = effect.values
@@ -176,7 +176,7 @@ def _(effect: Effect, summary: EffectSummary):
     return False
 
 
-@_register_transform
+@_register_reducer
 @_only_effect_type(Effect.TYPE_CONDITION)
 def _(effect: Effect, summary: EffectSummary):
     action, value, _, _ = effect.values
@@ -189,7 +189,7 @@ def _(effect: Effect, summary: EffectSummary):
     return False
 
 
-@_register_transform
+@_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_PARTNER_REASSIGN)
 def _(effect: Effect, summary: EffectSummary):
     if effect.values == (0, 0, 0, 0):
@@ -198,7 +198,7 @@ def _(effect: Effect, summary: EffectSummary):
     return False
 
 
-@_register_transform
+@_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_BUFF)
 def _(effect: Effect, summary: EffectSummary):
     tp, value, _, _ = effect.values
@@ -234,7 +234,7 @@ def _(effect: Effect, summary: EffectSummary):
     return False
 
 
-@_register_transform
+@_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_VITALITY_DEBUFF)
 def _(effect: Effect, summary: EffectSummary):
     tp, value, _, _ = effect.values
@@ -261,7 +261,7 @@ def _(effect: Effect, summary: EffectSummary):
     return False
 
 
-@_register_transform
+@_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_NO_FAILURE)
 def _(effect: Effect, summary: EffectSummary):
     if effect.values == (0, 0, 0, 0):
@@ -270,7 +270,7 @@ def _(effect: Effect, summary: EffectSummary):
     return False
 
 
-@_register_transform
+@_register_reducer
 @_only_effect_type(Effect.TYPE_RACE_BUFF)
 def _(effect: Effect, summary: EffectSummary):
     tp, value, _, _ = effect.values
