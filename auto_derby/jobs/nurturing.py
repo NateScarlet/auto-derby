@@ -6,9 +6,7 @@ import logging
 import time
 from typing import Callable, Iterator, List, Text, Tuple, Union
 
-from auto_derby.scenes.single_mode.item_list import ItemListScene
-
-from .. import action, config, template, templates
+from .. import action, config, mathtools, template, templates
 from ..constants import RacePrediction
 from ..scenes.single_mode import (
     AoharuBattleConfirmScene,
@@ -19,6 +17,7 @@ from ..scenes.single_mode import (
     RaceTurnsIncorrect,
     ShopScene,
 )
+from ..scenes.single_mode.item_list import ItemListScene
 from ..single_mode import Context, commands, event, item
 
 LOGGER = logging.getLogger(__name__)
@@ -54,10 +53,17 @@ def _handle_shop(ctx: Context, cs: CommandScene) -> CommandScene:
     LOGGER.info("shop items")
     cart_items: List[item.Item] = []
     total_price = 0
+    min_score = mathtools.interpolate(
+        ctx.turn_count(),
+        (
+            (0, 1.0),
+            (24, 0.3),
+            (48, 0.1),
+            (72, 0),
+        ),
+    )
     for s, i in scores_of_items:
-        if s <= 0:
-            break
-        should_exchange = total_price + i.price <= ctx.shop_coin
+        should_exchange = s > min_score and total_price + i.price <= ctx.shop_coin
         if should_exchange:
             cart_items.append(i)
             total_price += i.price

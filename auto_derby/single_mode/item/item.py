@@ -36,7 +36,10 @@ class Item:
         return isinstance(other, Item) and self.id == other.id
 
     def __str__(self):
-        return f"Item<{self.id}:{self.name}>"
+        msg = ""
+        if self.price:
+            msg += f"@{self.price}"
+        return f"Item<{self.name}#{self.id}{msg}>"
 
     def to_dict(self) -> Dict[Text, Any]:
         d = {
@@ -136,7 +139,7 @@ class Item:
             ret += 10
 
         # TODO: calculate other effect
-        return ret
+        return ret / self.price
 
     def should_use_directly(self, ctx: Context) -> bool:
         """whether use for any command."""
