@@ -53,7 +53,6 @@ class Webview(Protocol):
 
 class _DefaultWebview(Webview):
     def __init__(self) -> None:
-        super().__init__()
         self.url = ""
 
     def open(self, url: Text):
