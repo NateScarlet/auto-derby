@@ -72,4 +72,5 @@ class TrainingScene(Scene):
                     for j in _iter_training_images()
                 ]
             )
+        assert len(set(i.type for i in self.trainings)) == 5, "duplicated trainings"
         ctx.trainings = self.trainings
