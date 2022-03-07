@@ -12,11 +12,12 @@ from .effect import Effect
 from .effect_summary import EffectSummary
 from ..training import Training
 from .. import race
+from ... import mathtools
 
 if TYPE_CHECKING:
     from ..commands import Command
 
-
+# TODO: allow plugin override class
 class Item:
     def __init__(self) -> None:
         self.id = 0
@@ -72,33 +73,31 @@ class Item:
         return es
 
     def effect_score(self, ctx: Context, command: Command) -> float:
-        """Item will be used before command if score greater than 0."""
+        """Item will be used before command if score not less than expected effect score."""
 
         es = self.effect_summary()
 
         from ..commands import TrainingCommand, RaceCommand
 
+        ret = 0
         if isinstance(command, TrainingCommand):
             trn = es.apply_to_training(command.training)
-            delta = trn.score(ctx) - command.training.score(ctx)
-
-            if delta < self.price / 3:
-                return -1
-            return delta
+            ret += trn.score(ctx) - command.training.score(ctx)
 
         if isinstance(command, RaceCommand):
             r = es.apply_to_race(command.race)
-            delta = r.score(ctx) - command.race.score(ctx)
+            ret += r.score(ctx) - command.race.score(ctx)
             # TODO: race reward effect
-            if delta < self.price / 2:
-                return -1
-            return delta
 
+        return ret
+
+    def expected_effect_score(self, ctx: Context, command: Command) -> float:
+        # TODO:
         return 0
 
     def exchange_score(self, ctx: Context) -> float:
         """
-        Item will be exchanged if score greater than 0.
+        Item will be exchanged if score not less than expected exchange score.
         """
 
         es = self.effect_summary()
@@ -133,8 +132,31 @@ class Item:
         if es.training_no_failure:
             ret += 10
 
+        quantity = sum(i.quantity for i in ctx.items if i.id == self.id)
+        quantity_penality = mathtools.interpolate(
+            quantity,
+            (
+                (0, 1.0),
+                (1, 0.8),
+                (2, 0.3),
+                (3, 0.1),
+                (5, 0.0),
+            ),
+        )
+
         # TODO: calculate other effect
-        return ret / self.price
+        return ret / self.price * quantity_penality * 100
+
+    def expected_exchange_score(self, ctx: Context) -> float:
+        return self.price * mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 5),
+                (24, 2),
+                (48, 1),
+                (72, 0),
+            ),
+        )
 
     def should_use_directly(self, ctx: Context) -> bool:
         """whether use for any command."""

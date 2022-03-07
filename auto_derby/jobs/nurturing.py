@@ -6,7 +6,7 @@ import logging
 import time
 from typing import Callable, Iterator, List, Text, Tuple, Union
 
-from .. import action, config, mathtools, template, templates
+from .. import action, config, template, templates
 from ..constants import RacePrediction
 from ..scenes.single_mode import (
     AoharuBattleConfirmScene,
@@ -38,64 +38,61 @@ def _handle_option():
     action.tap_image(ALL_OPTIONS[ans - 1])
 
 
-def _handle_shop(ctx: Context, cs: CommandScene) -> CommandScene:
+def _handle_shop(ctx: Context, cs: CommandScene):
     if not (cs.has_shop and ctx.shop_coin):
-        return cs
+        return
     scene = ShopScene.enter(ctx)
     scene.recognize(ctx)
 
     scores_of_items = sorted(
-        ((i.exchange_score(ctx), i) for i in scene.items),
-        key=lambda x: x[0],
+        (
+            (i.exchange_score(ctx), i.expected_exchange_score(ctx), i)
+            for i in scene.items
+        ),
+        key=lambda x: x[0] / x[1],
         reverse=True,
     )
 
     LOGGER.info("shop items")
     cart_items: List[item.Item] = []
     total_price = 0
-    min_score = mathtools.interpolate(
-        ctx.turn_count(),
-        (
-            (0, 1.0),
-            (24, 0.3),
-            (48, 0.1),
-            (72, 0),
-        ),
-    )
-    for s, i in scores_of_items:
-        should_exchange = s > min_score and total_price + i.price <= ctx.shop_coin
-        if should_exchange:
+
+    for s, es, i in scores_of_items:
+        can_exchange = total_price + i.price <= ctx.shop_coin
+        should_exchange = s > es
+        if can_exchange and should_exchange:
             cart_items.append(i)
             total_price += i.price
-        status = "<in cart>" if should_exchange else ""
-        LOGGER.info("score:\t%2.2f:\t%s\t%s", s, i, status)
+        status = ""
+        if should_exchange:
+            status = "<in cart>" if can_exchange else "<coin not enough>"
+        LOGGER.info("score:\t%2.2f/%2.2f:\t%s\t%s", s, es, i, status)
     scene.exchange_items(ctx, cart_items)
 
-    scene = CommandScene.enter(ctx)
+    cs.enter(ctx)
     if any(i.should_use_directly(ctx) for i in cart_items):
-        scene.recognize(ctx)
-    return scene
+        cs.recognize(ctx)
+    return
 
 
-def _handle_item_list(ctx: Context, cs: CommandScene) -> CommandScene:
+def _handle_item_list(ctx: Context, cs: CommandScene):
     if ctx.scenario not in (ctx.SCENARIO_CLIMAX, ctx.SCENARIO_UNKNOWN):
-        return cs
+        return
     if ctx.items_last_updated_turn != 0:
-        return cs
+        return
     scene = ItemListScene.enter(ctx)
     scene.recognize(ctx)
-    scene = CommandScene.enter(ctx)
-    return scene
+    cs.enter(ctx)
+    return
 
 
 def _handle_turn(ctx: Context):
     scene = CommandScene.enter(ctx)
     scene.recognize(ctx)
-
+    _handle_item_list(ctx, scene)
     # see training before shop
     turn_commands = tuple(commands.from_context(ctx))
-    scene = _handle_shop(ctx, scene)
-    scene = _handle_item_list(ctx, scene)
+    _handle_shop(ctx, scene)
     ctx.next_turn()
     # TODO: compute with item effect
     command_with_scores = sorted(

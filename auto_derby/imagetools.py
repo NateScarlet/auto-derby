@@ -347,6 +347,7 @@ class ImageHashMapQueryResult(Generic[T]):
         self.similarity = similarity
 
     def __str__(self):
+        # TODO: handle long hash
         return (
             f"ImageHashMapQueryResult<{self.hash}:{self.value}:{self.similarity:.3f}>"
         )
