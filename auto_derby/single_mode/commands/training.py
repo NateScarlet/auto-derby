@@ -2,14 +2,13 @@
 # pyright: strict
 
 from __future__ import annotations
-from typing import Text
 
 import time
+from typing import Text
 
-
-from ... import action
-from ...scenes.single_mode import TrainingScene
+from ... import action, template
 from ...scenes import UnknownScene
+from ...scenes.single_mode import TrainingScene
 from .. import Context, Training
 from .command import Command
 from .globals import g
@@ -26,7 +25,8 @@ class TrainingCommand(Command):
         g.on_command(ctx, self)
         TrainingScene.enter(ctx)
         x, y = self.training.confirm_position
-        if ctx.trainings[-1] != self.training:
+        current_training = Training.from_training_scene_v2(ctx, template.screenshot())
+        if current_training.type != self.training.type:
             action.tap((x, y))
             time.sleep(0.1)
         action.tap((x, y))
