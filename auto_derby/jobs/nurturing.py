@@ -6,6 +6,8 @@ import logging
 import time
 from typing import Callable, Iterator, List, Text, Tuple, Union
 
+from auto_derby.scenes.single_mode.item_list import ItemListScene
+
 from .. import action, config, template, templates
 from ..constants import RacePrediction
 from ..scenes.single_mode import (
@@ -37,7 +39,9 @@ def _handle_option():
     action.tap_image(ALL_OPTIONS[ans - 1])
 
 
-def _handle_shop(ctx: Context):
+def _handle_shop(ctx: Context, cs: CommandScene) -> CommandScene:
+    if not (cs.has_shop and ctx.shop_coin):
+        return cs
     scene = ShopScene.enter(ctx)
     scene.recognize(ctx)
 
@@ -61,6 +65,22 @@ def _handle_shop(ctx: Context):
         LOGGER.info("score:\t%2.2f:\t%s\t%s", s, i, status)
     scene.exchange_items(ctx, cart_items)
 
+    scene = CommandScene.enter(ctx)
+    if any(i.should_use_directly(ctx) for i in cart_items):
+        scene.recognize(ctx)
+    return scene
+
+
+def _handle_item_list(ctx: Context, cs: CommandScene) -> CommandScene:
+    if ctx.scenario not in (ctx.SCENARIO_CLIMAX, ctx.SCENARIO_UNKNOWN):
+        return cs
+    if ctx.items_last_updated_turn != 0:
+        return cs
+    scene = ItemListScene.enter(ctx)
+    scene.recognize(ctx)
+    scene = CommandScene.enter(ctx)
+    return scene
+
 
 def _handle_turn(ctx: Context):
     scene = CommandScene.enter(ctx)
@@ -68,11 +88,8 @@ def _handle_turn(ctx: Context):
 
     # see training before shop
     turn_commands = tuple(commands.from_context(ctx))
-    # TODO: recognize inventory items.
-    if scene.has_shop and ctx.shop_coin:
-        _handle_shop(ctx)
-        scene.enter(ctx)
-        scene.recognize(ctx)  # item may change context
+    scene = _handle_shop(ctx, scene)
+    scene = _handle_item_list(ctx, scene)
     ctx.next_turn()
     # TODO: compute with item effect
     command_with_scores = sorted(

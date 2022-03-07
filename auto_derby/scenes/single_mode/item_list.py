@@ -56,7 +56,6 @@ def _recognize_disabled(rp: mathtools.ResizeProxy, item_img: Image) -> bool:
 
 
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
-    print(imagetools.image_hash(img, save_path="item.local"))
     v = item.from_title_image(_title_image(rp, img))
     v.quantity = _recognize_quantity(rp, img)
     v.disabled = _recognize_disabled(rp, img)
@@ -99,9 +98,9 @@ class ItemListScene(Scene):
     def _enter(cls, ctx: SceneHolder) -> Scene:
         CommandScene.enter(ctx)
         action.wait_tap_image(
-            templates.SINGLE_MODE_COMMAND_SHOP,
+            templates.SINGLE_MODE_ITEM_LIST_BUTTON,
         )
-        action.wait_image(templates.RETURN_BUTTON)
+        action.wait_image(templates.CLOSE_BUTTON)
         return cls()
 
     def _scroll_page(self, direction: int = 0):
@@ -155,6 +154,7 @@ class ItemListScene(Scene):
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
         ctx.items = self.items
+        ctx.items_last_updated_turn = ctx.turn_count()
 
     def use_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
