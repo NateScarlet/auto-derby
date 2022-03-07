@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import Any, Dict, Iterator, Sequence, Text, Tuple
+from typing import Any, Dict, Iterator, Text, Tuple
 
 import cv2
 from PIL.Image import Image
@@ -20,7 +20,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
-    bbox = rp.vector4((100, 10, 375, 32), 540)
+    bbox = rp.vector4((100, 10, 407, 32), 540)
     cv_img = imagetools.cv_image(item_img.crop(bbox))
     binary_img = imagetools.constant_color_key(cv_img, (22, 64, 121))
     binary_img = imagetools.auto_crop(binary_img)
@@ -36,17 +36,17 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     v = item.from_title_image(_title_image(rp, img))
 
-    # TODO: recognize current price
-    v.price = v.original_price
+    # TODO: recognize quantity
+    # TODO: recognize disabled
     return v
 
 
 def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
-    min_y = rp.vector(350, 540)
+    min_y = rp.vector(130, 540)
     for _, pos in sorted(
-        template.match(img, templates.EXCHANGE_BUTTON),
+        template.match(img, templates.SINGLE_MODE_ITEM_LIST_CURRENT_QUANTITY),
         key=lambda x: x[1][1],
     ):
         _, y = pos
@@ -54,25 +54,24 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
             # ignore partial visible
             continue
         bbox = (
-            rp.vector(19, 540),
-            y - rp.vector(34, 540),
-            rp.vector(521, 540),
-            y + rp.vector(68, 540),
+            rp.vector(22, 540),
+            y - rp.vector(52, 540),
+            rp.vector(518, 540),
+            y + rp.vector(48, 540),
         )
         yield _recognize_item(rp, img.crop(bbox)), pos
 
 
-class ShopScene(Scene):
+class ItemListScene(Scene):
     def __init__(self) -> None:
         super().__init__()
-        self.items: Tuple[Item, ...] = ()
-
+        self.items: Tuple[item.Item, ...] = ()
         # top = 0, bottom = 1
         self._menu_position = 0
 
     @classmethod
     def name(cls):
-        return "single-mode-shop"
+        return "single-mode-item-list"
 
     @classmethod
     def _enter(cls, ctx: SceneHolder) -> Scene:
@@ -99,6 +98,20 @@ class ShopScene(Scene):
     def _on_scroll_to_end(self):
         self._menu_position = 1 - self._menu_position
 
+    def to_dict(self) -> Dict[Text, Any]:
+        d: Dict[Text, Any] = {
+            "items": [
+                {
+                    "id": i.id,
+                    "name": i.name,
+                    "quantity": i.quantity,
+                    "disabled": i.disabled,
+                }
+                for i in self.items
+            ]
+        }
+        return d
+
     def _recognize_items(self, static: bool = False) -> None:
         self.items = ()
         while True:
@@ -119,30 +132,3 @@ class ShopScene(Scene):
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
-
-    def exchange_items(self, ctx: Context, items: Sequence[Item]) -> None:
-        remains = list(items)
-        while remains:
-            for match, pos in _recognize_menu(template.screenshot()):
-                if match not in remains:
-                    continue
-                _LOGGER.info("exchange: %s", match)
-                action.tap(pos)
-                action.wait_image(templates.SINGLE_MODE_SHOP_EXCHANGE_DONE_TITLE)
-                if match.should_use_directly(ctx):
-                    action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
-                    action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_BUTTON)
-                else:
-                    action.wait_tap_image(templates.CLOSE_BUTTON)
-                remains.remove(match)
-                ctx.items += (match,)
-                ctx.shop_coin -= match.price
-            self._scroll_page()
-        for i in remains:
-            _LOGGER.info("failed to exchange item: %s", i)
-
-    def to_dict(self) -> Dict[Text, Any]:
-        d: Dict[Text, Any] = {
-            "items": [{"id": i.id, "name": i.name} for i in self.items]
-        }
-        return d

@@ -82,7 +82,6 @@ ROULETTE_DERBY_TAP_BUTTON_DISABLED_POS = "roulette_derby_tap_button_disabled.pos
 RP_NOT_ENOUGH = "rp_not_enough.png"
 SCROLL_TO_END = "scroll_to_end.png"
 SCROLL_TO_END_POS = "scroll_to_end.pos.png"
-SINGEL_MODE_ITEM_USE_CONFIRM_BUTTON = "singel_mode_item_use_confirm_button.png"
 SINGLE_MODE_AOHARU_AUTO_FORMATION_TITLE = "single_mode_aoharu_auto_formation_title.png"
 SINGLE_MODE_AOHARU_AUTO_FORMATION_TITLE_POS = (
     "single_mode_aoharu_auto_formation_title.pos.png"
@@ -197,7 +196,8 @@ SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON_POS = (
 SINGLE_MODE_GO_TO_SHOP_BUTTON = "single_mode_go_to_shop_button.png"
 SINGLE_MODE_GO_TO_SHOP_BUTTON_POS = "single_mode_go_to_shop_button.pos.png"
 SINGLE_MODE_GOOD_RACE_ADAPTABILITY_STAR = "single_mode_good_race_adaptability_star.png"
-SINGLE_MODE_ITEM_USE_BUTTON = "single_mode_item_use_button.png"
+SINGLE_MODE_ITEM_LIST_CURRENT_QUANTITY = "single_mode_item_list_current_quantity.png"
+SINGLE_MODE_ITEM_LIST_USE_BUTTON = "single_mode_item_list_use_button.png"
 SINGLE_MODE_LIVE_BUTTON = "single_mode_live_button.png"
 SINGLE_MODE_OPTION1 = "single_mode_option1.png"
 SINGLE_MODE_OPTION1_POS = "single_mode_option1.pos.png"
@@ -232,6 +232,8 @@ SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = (
     "single_mode_scheduled_race_opening_banner.pos.png"
 )
 SINGLE_MODE_SHOP_EXCHANGE_DONE_TITLE = "single_mode_shop_exchange_done_title.png"
+SINGLE_MODE_SHOP_USE_BUTTON = "single_mode_shop_use_button.png"
+SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON = "single_mode_shop_use_confirm_button.png"
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION = "single_mode_target_race_no_permission.png"
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION_POS = (
     "single_mode_target_race_no_permission.pos.png"

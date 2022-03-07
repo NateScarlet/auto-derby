@@ -30,6 +30,7 @@ class Item:
         # dynamic data
         self.price = 0
         self.quantity = 0
+        self.disabled = False
 
     def __eq__(self, other: object) -> bool:
         return isinstance(other, Item) and self.id == other.id
