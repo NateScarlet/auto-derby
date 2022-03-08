@@ -76,7 +76,7 @@ def _handle_shop(ctx: Context, cs: CommandScene):
 
 
 def _handle_item_list(ctx: Context, cs: CommandScene):
-    if ctx.scenario not in (ctx.SCENARIO_CLIMAX, ctx.SCENARIO_UNKNOWN):
+    if not cs.has_shop:
         return
     if ctx.items_last_updated_turn != 0:
         return
