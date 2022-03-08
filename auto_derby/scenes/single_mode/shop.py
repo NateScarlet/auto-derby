@@ -145,14 +145,18 @@ class ShopScene(Scene):
                 _LOGGER.info("exchange: %s", match)
                 action.tap(pos)
                 action.wait_image(templates.SINGLE_MODE_SHOP_EXCHANGE_DONE_TITLE)
+                ctx.shop_coin -= match.price
+                remains.remove(match)
                 if match.should_use_directly(ctx):
+                    _LOGGER.info("use: %s", match)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_BUTTON)
+                    # match item moved to bottom
+                    template.invalidate_screeshot()
+                    break
                 else:
                     action.wait_tap_image(templates.CLOSE_BUTTON)
-                remains.remove(match)
-                ctx.items.put(match.id, 1)
-                ctx.shop_coin -= match.price
+                    ctx.items.put(match.id, 1)
             self._scroll_page()
         for i in remains:
             _LOGGER.info("failed to exchange item: %s", i)
