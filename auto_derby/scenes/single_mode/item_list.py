@@ -114,8 +114,8 @@ class ItemListScene(Scene):
 
         rp = action.resize_proxy()
         action.swipe(
-            rp.vector2((100, 600), 466),
-            dy=rp.vector(-50 * direction, 466),
+            rp.vector2((17, 720), 540),
+            dy=rp.vector(-230 * direction, 540),
             duration=0.2,
         )
         # prevent inertial scrolling
