@@ -89,6 +89,7 @@ class Item:
 
         from ..commands import TrainingCommand, RaceCommand
 
+
         ret = 0
         if isinstance(command, TrainingCommand):
             trn = es.apply_to_training(command.training)
@@ -109,12 +110,13 @@ class Item:
         """
         Item will be exchanged if score not less than expected exchange score.
         """
+    
+        # FIXME: unexpected score for not supported effects
 
         es = self.effect_summary()
         ret = 0
 
         from ..commands import TrainingCommand, RaceCommand
-
         sample_trainings = (
             Training.new(),
             *(
