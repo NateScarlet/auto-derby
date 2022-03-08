@@ -59,13 +59,14 @@ def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
 def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
-    min_y = rp.vector(350, 540)
+    y_min = rp.vector(350, 540)
+    y_max = rp.vector(800, 540)
     for _, pos in sorted(
         template.match(img, templates.EXCHANGE_BUTTON),
         key=lambda x: x[1][1],
     ):
         _, y = pos
-        if y < min_y:
+        if not (y_min < y < y_max):
             # ignore partial visible
             continue
         bbox = (
