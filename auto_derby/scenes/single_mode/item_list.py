@@ -10,6 +10,9 @@ from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 import cv2
 from PIL.Image import Image
 
+from auto_derby.single_mode.item.item_list import ItemList
+
+
 from ... import action, imagetools, mathtools, template, templates, ocr
 from ...single_mode import Context, item
 from ...single_mode.item import Item
@@ -36,7 +39,9 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
 
 def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image) -> int:
     bbox = rp.vector4((179, 43, 382, 64), 540)
-    cv_img = imagetools.cv_image(imagetools.resize(item_img.crop(bbox).convert("L"), height=32))
+    cv_img = imagetools.cv_image(
+        imagetools.resize(item_img.crop(bbox).convert("L"), height=32)
+    )
     _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
@@ -87,7 +92,7 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
 class ItemListScene(Scene):
     def __init__(self) -> None:
         super().__init__()
-        self.items: Tuple[item.Item, ...] = ()
+        self.items = item.ItemList()
         # top = 0, bottom = 1
         self._menu_position = 0
 
@@ -135,7 +140,7 @@ class ItemListScene(Scene):
         return d
 
     def _recognize_items(self, static: bool = False) -> None:
-        self.items = ()
+        self.items = ItemList()
         while True:
             new_items = tuple(
                 i
@@ -145,7 +150,7 @@ class ItemListScene(Scene):
             if not new_items:
                 self._on_scroll_to_end()
                 return
-            self.items += new_items
+            self.items.update(*new_items)
             if static:
                 break
             self._scroll_page()

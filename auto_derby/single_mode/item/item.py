@@ -13,12 +13,17 @@ from .effect_summary import EffectSummary
 from ..training import Training
 from .. import race
 from ... import mathtools
+from .globals import g
 
 if TYPE_CHECKING:
     from ..commands import Command
 
 # TODO: allow plugin override class
 class Item:
+    @staticmethod
+    def new() -> Item:
+        return g.item_class()
+
     def __init__(self) -> None:
         self.id = 0
         self.name = ""
@@ -40,7 +45,12 @@ class Item:
         msg = ""
         if self.price:
             msg += f"@{self.price}"
+        if self.quantity:
+            msg += f"x{self.quantity}"
         return f"Item<{self.name}#{self.id}{msg}>"
+
+    def __bool__(self) -> bool:
+        return self.name != ""
 
     def to_dict(self) -> Dict[Text, Any]:
         d = {
@@ -56,7 +66,7 @@ class Item:
 
     @classmethod
     def from_dict(cls, d: Dict[Text, Any]) -> Item:
-        v = cls()
+        v = cls.new()
         v.id = d["id"]
         v.name = d["name"]
         v.description = d["description"]
@@ -132,9 +142,8 @@ class Item:
         if es.training_no_failure:
             ret += 10
 
-        quantity = sum(i.quantity for i in ctx.items if i.id == self.id)
         quantity_penality = mathtools.interpolate(
-            quantity,
+            ctx.items.get(self.id).quantity,
             (
                 (0, 1.0),
                 (1, 0.8),
@@ -183,3 +192,6 @@ class Item:
         if es.mood > 0 and es.mood > max_mood:
             return False
         return True
+
+
+g.item_class = Item

@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import json
-from typing import Any, Dict, Iterator, Optional, Text
+from typing import Any, Dict, Iterator, Text
 
 from .globals import g
 from .item import Item
@@ -12,7 +12,7 @@ from .item import Item
 
 class _g:
     load_key: Any = None
-    items: Dict[int, Item] = {}
+    item_data: Dict[int, Dict[Text, Any]] = {}
 
 
 def _load_key():
@@ -22,11 +22,11 @@ def _load_key():
 def _iter(p: Text):
     with open(p, "r", encoding="utf-8") as f:
         for i in f:
-            yield Item.from_dict(json.loads(i))
+            yield json.loads(i)
 
 
 def reload():
-    _g.items = {i.id: i for i in _iter(g.data_path)}
+    _g.item_data = {i["id"]: i for i in _iter(g.data_path)}
     _g.load_key = _load_key()
 
 
@@ -35,12 +35,17 @@ def reload_on_demand() -> None:
         reload()
 
 
-def get(id: int) -> Optional[Item]:
+def get(id: int) -> Item:
     reload_on_demand()
-    return _g.items.get(id)
+    v = _g.item_data.get(id)
+    if v is None:
+        v = Item.new()
+        v.id = id
+        return v
+    return Item.from_dict(v)
 
 
 def iterate() -> Iterator[Item]:
     reload_on_demand()
-    for i in _g.items.values():
-        yield i
+    for i in _g.item_data.values():
+        yield Item.from_dict(i)

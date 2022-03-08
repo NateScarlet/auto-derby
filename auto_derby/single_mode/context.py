@@ -6,7 +6,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, Dict, Iterator
 
 if TYPE_CHECKING:
-    from . import go_out, training, race, item
+    from . import go_out, training, race
 
 import functools
 import logging
@@ -315,7 +315,8 @@ class Context:
         self.training_history: Tuple[Tuple[int, training.Training], ...] = ()
         self.trainings: Tuple[training.Training, ...] = ()
         self.race_history: Tuple[Tuple[int, race.Race], ...] = ()
-        self.items: Tuple[item.Item, ...] = ()
+        from .item import ItemList
+        self.items = ItemList()
         self.items_last_updated_turn = 0
 
     def target_grade_point(self) -> int:

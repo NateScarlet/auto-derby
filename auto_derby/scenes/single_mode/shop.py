@@ -36,7 +36,9 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
 
 def _recognize_price(rp: mathtools.ResizeProxy, item_img: Image) -> int:
     bbox = rp.vector4((185, 41, 389, 64), 540)
-    cv_img = imagetools.cv_image(imagetools.resize(item_img.crop(bbox).convert("L"), height=32))
+    cv_img = imagetools.cv_image(
+        imagetools.resize(item_img.crop(bbox).convert("L"), height=32)
+    )
     _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
@@ -149,7 +151,7 @@ class ShopScene(Scene):
                 else:
                     action.wait_tap_image(templates.CLOSE_BUTTON)
                 remains.remove(match)
-                ctx.items += (match,)
+                ctx.items.put(match.id, 1)
                 ctx.shop_coin -= match.price
             self._scroll_page()
         for i in remains:
