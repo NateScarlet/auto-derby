@@ -164,7 +164,14 @@ class ShopScene(Scene):
                     templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
                     templates.CLOSE_BUTTON,
                 )
-                if match.should_use_directly(ctx):
+                tmpl, _ = action.wait_image(
+                    templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
+                    templates.CLOSE_BUTTON,
+                )
+                if (
+                    tmpl.name == templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON
+                    and match.should_use_directly(ctx)
+                ):
                     _LOGGER.info("use: %s", match)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_BUTTON)
