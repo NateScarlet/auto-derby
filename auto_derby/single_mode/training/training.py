@@ -66,7 +66,8 @@ class Training:
         return (
             "Training<"
             f"lv={self.level} "
-            + (f"fail={int(self.failure_rate*100)}% ")
+            + (f"vit={self.vitality*100:.2f}% ")
+            + (f"fail={self.failure_rate*100:.0f}% ")
             + " ".join(
                 (
                     f"{name}={value}"
