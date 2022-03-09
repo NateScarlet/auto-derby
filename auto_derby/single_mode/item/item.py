@@ -89,19 +89,31 @@ class Item:
         """Item will be used before command if score not less than expected effect score."""
 
         es = self.effect_summary()
+        explain = ""
 
         from ..commands import TrainingCommand, RaceCommand
 
         ret = 0
         if isinstance(command, TrainingCommand):
             trn = es.apply_to_training(command.training)
-            ret += trn.score(ctx) - command.training.score(ctx)
+            s_after = trn.score(ctx)
+            s_before = command.training.score(ctx)
+            s = s_after - s_before
+            ret += s
+            explain += (
+                f"{s:.2f} by training score delta ({s_before:.2f} -> {s_after:.2f});"
+            )
 
         if isinstance(command, RaceCommand):
             r = es.apply_to_race(command.race)
-            ret += r.score(ctx) - command.race.score(ctx)
+            s_after = r.score(ctx)
+            s_before = command.race.score(ctx)
+            s = s_after - s_before
+            ret += s
+            explain += f"{s:.2f} by race score delta ({s_before:.2f} -> {s_after:.2f});"
             # TODO: race reward effect
 
+        _LOGGER.debug("effect score:\t%.2f\t%s for %s\t%s", ret, self, command, explain)
         return ret
 
     def expected_effect_score(self, ctx: Context, command: Command) -> float:
@@ -167,9 +179,7 @@ class Item:
         explain += f"x{f:.2f} training penality;"
         ret *= f
 
-        _LOGGER.debug(
-            "exchange score: %.2f %s: %s", ret, self, explain or "nothing to explain"
-        )
+        _LOGGER.debug("exchange score:\t%.2f\t%s\t%s", ret, self, explain)
         # TODO: calculate other effect
         return ret
 
