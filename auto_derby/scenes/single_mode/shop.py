@@ -162,8 +162,6 @@ class ShopScene(Scene):
                     action.wait_tap_image(templates.CLOSE_BUTTON)
                     ctx.items.put(match.id, 1)
             self._scroll_page()
-        for i in remains:
-            _LOGGER.info("failed to exchange item: %s", i)
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {

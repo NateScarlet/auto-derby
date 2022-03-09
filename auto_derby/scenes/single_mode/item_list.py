@@ -173,5 +173,3 @@ class ItemListScene(Scene):
                 remains.remove(match)
                 match.quantity -= 1
             self._scroll_page()
-        for i in remains:
-            _LOGGER.info("failed to exchange item: %s", i)
