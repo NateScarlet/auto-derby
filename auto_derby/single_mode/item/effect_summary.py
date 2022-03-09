@@ -10,6 +10,11 @@ from .effect import Effect
 from ..training import Training
 from ..race import Race
 
+import logging
+
+_LOGGER = logging.getLogger(__name__)
+
+
 _effect_reducers: List[_EffectReducer] = []
 
 
@@ -55,39 +60,56 @@ class EffectSummary:
         """
         trn = Training.new()
         trn.__dict__.update(training.__dict__)
+        explain = ""
 
         # effect buff
-        effect_rate = 1
+        rate = 1
         for buff in self.training_effect_buff:
             if buff.type != trn.type:
                 continue
-            effect_rate += buff.rate
-        trn.speed = round(trn.speed * effect_rate)
-        trn.stamina = round(trn.stamina * effect_rate)
-        trn.power = round(trn.power * effect_rate)
-        trn.guts = round(trn.guts * effect_rate)
-        trn.wisdom = round(trn.guts * effect_rate)
+            rate += buff.rate
+        trn.speed = round(trn.speed * rate)
+        trn.stamina = round(trn.stamina * rate)
+        trn.power = round(trn.power * rate)
+        trn.guts = round(trn.guts * rate)
+        trn.wisdom = round(trn.guts * rate)
+        explain += f"x{rate:.2f}training effect;"
 
         # vitality debuff
-        vitality_rate = 1
-        for debuff in self.training_vitality_debuff:
-            if debuff.type != trn.type:
-                continue
-            vitality_rate += debuff.rate
         if trn.vitality < 0:
-            trn.vitality *= vitality_rate
+            rate = 1
+            for debuff in self.training_vitality_debuff:
+                if debuff.type != trn.type:
+                    continue
+                rate += debuff.rate
+                trn.vitality *= rate
+            explain += f"x{rate:.2f} vitality;"
 
         # property gain
-        trn.speed += self.speed
-        trn.stamina += self.statmia
-        trn.power += self.power
-        trn.guts += self.guts
-        trn.wisdom += self.wisdom
-        # XXX: vitality convertion is not accure
-        trn.vitality += self.vitality / 100
+        if self.speed:
+            trn.speed += self.speed
+            explain += f"{self.speed} speed;"
+        if self.statmia:
+            trn.stamina += self.statmia
+            explain += f"{self.statmia} stamina;"
+        if self.power:
+            trn.power += self.power
+            explain += f"{self.power} power;"
+        if self.guts:
+            trn.guts += self.guts
+            explain += f"{self.guts} guts;"
+        if self.wisdom:
+            trn.wisdom += self.wisdom
+            explain += f"{self.wisdom} wisdom;"
+        if self.vitality:
+            # XXX: vitality convertion is not accure
+            trn.vitality += self.vitality / 100
+            explain += f"{self.vitality} vitality;"
 
         if self.training_no_failure:
             trn.failure_rate = 0
+            explain += f"no failure;"
+        _LOGGER.debug("apply to training: %s->\t%s\t%s", trn, training, explain)
         return trn
 
     def apply_to_race(self, race: Race) -> Race:
