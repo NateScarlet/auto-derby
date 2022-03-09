@@ -68,12 +68,13 @@ class EffectSummary:
             if buff.type != trn.type:
                 continue
             rate += buff.rate
-        trn.speed = round(trn.speed * rate)
-        trn.stamina = round(trn.stamina * rate)
-        trn.power = round(trn.power * rate)
-        trn.guts = round(trn.guts * rate)
-        trn.wisdom = round(trn.guts * rate)
-        explain += f"x{rate:.2f}training effect;"
+        if rate != 1:
+            trn.speed = round(trn.speed * rate)
+            trn.stamina = round(trn.stamina * rate)
+            trn.power = round(trn.power * rate)
+            trn.guts = round(trn.guts * rate)
+            trn.wisdom = round(trn.guts * rate)
+            explain += f"x{rate:.2f}training effect;"
 
         # vitality debuff
         if trn.vitality < 0:
@@ -109,7 +110,7 @@ class EffectSummary:
         if self.training_no_failure:
             trn.failure_rate = 0
             explain += f"no failure;"
-        _LOGGER.debug("apply to training: %s->\t%s\t%s", trn, training, explain)
+        _LOGGER.debug("apply to training: %s->%s\t%s", training, trn, explain)
         return trn
 
     def apply_to_race(self, race: Race) -> Race:
