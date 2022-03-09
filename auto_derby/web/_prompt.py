@@ -58,6 +58,12 @@ class _DefaultWebview(Webview):
 
     def open(self, url: Text):
         self.url = url
+        try:
+            import win32gui
+
+            self.h_wnd = win32gui.GetForegroundWindow()
+        except ImportError:
+            self.h_wnd = 0
         webbrowser.open(url)
 
     def shutdown(self) -> None:
@@ -78,6 +84,14 @@ class _DefaultWebview(Webview):
         win32api.keybd_event(VK_W, 0, 0, 0)
         win32api.keybd_event(win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
         win32api.keybd_event(VK_W, 0, win32con.KEYEVENTF_KEYUP, 0)
+
+        try:
+            import win32gui
+
+            if self.h_wnd:
+                win32gui.SetForegroundWindow(self.h_wnd)
+        except Exception:
+            pass
 
 
 class NoOpWebview(Webview):
