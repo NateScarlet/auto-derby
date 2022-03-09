@@ -14,6 +14,7 @@ __dirname__ = os.path.dirname(os.path.abspath(__file__))
 
 # TODO: add image debug page
 
+
 def render(
     data: Dict[Text, Any],
 ) -> Text:

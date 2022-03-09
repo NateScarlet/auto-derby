@@ -116,8 +116,7 @@ class Partner:
             "use TrainingScene.recognize instead",
             DeprecationWarning,
         )
-        from ...scenes.single_mode.training import \
-            _recognize_partners  # type: ignore
+        from ...scenes.single_mode.training import _recognize_partners  # type: ignore
 
         yield from _recognize_partners(ctx, img)
 

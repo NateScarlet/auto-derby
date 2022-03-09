@@ -112,8 +112,7 @@ class Training:
             "use TrainingScene.recognize instead",
             DeprecationWarning,
         )
-        from ...scenes.single_mode.training import \
-            _recognize_training  # type: ignore
+        from ...scenes.single_mode.training import _recognize_training  # type: ignore
 
         return _recognize_training(ctx, img)
 
