@@ -466,7 +466,9 @@ class Training:
             self.skill += _ocr_red_training_effect(img.crop(extra_bbox_group[5]))
 
         # TODO: recognize vitality
+        # plugin hook
         self._use_estimate_vitality = True
+        self.vitality = _estimate_vitality(ctx, self)
         self.failure_rate = _recognize_failure_rate(rp, self, img)
         self.partners = tuple(Partner.from_training_scene_v2(ctx, img))
 
@@ -503,8 +505,6 @@ class Training:
         )
 
     def score(self, ctx: Context) -> float:
-        if self._use_estimate_vitality:
-            self.vitality = _estimate_vitality(ctx, self)
         return training_score.compute(ctx, self)
 
 
