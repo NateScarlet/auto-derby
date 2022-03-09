@@ -155,7 +155,7 @@ class Item:
         if not sample_races:
             sample_races = tuple(i.race for i in race.race_result.iterate_current(ctx))
             explain += f"no history race, use saved race result; "
-        race_scores = (self.effect_score(ctx, RaceCommand(i)) for i in sample_races)
+        race_scores = tuple(self.effect_score(ctx, RaceCommand(i)) for i in sample_races)
         if race_scores:
             s = float(np.percentile(race_scores, 90))
             explain += f"{s:.2f} from {len(sample_races)} sample trainings;"
