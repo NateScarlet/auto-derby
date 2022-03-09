@@ -159,11 +159,6 @@ class ShopScene(Scene):
                 action.tap(pos)
                 ctx.shop_coin -= match.price
                 remains.remove(match)
-                action.wait_image(
-                    templates.SINGLE_MODE_SHOP_EXCHANGE_DONE_TITLE,
-                    templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
-                    templates.CLOSE_BUTTON,
-                )
                 tmpl, _ = action.wait_image(
                     templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
                     templates.CLOSE_BUTTON,

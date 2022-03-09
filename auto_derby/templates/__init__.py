@@ -233,7 +233,6 @@ SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER = (
 SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = (
     "single_mode_scheduled_race_opening_banner.pos.png"
 )
-SINGLE_MODE_SHOP_EXCHANGE_DONE_TITLE = "single_mode_shop_exchange_done_title.png"
 SINGLE_MODE_SHOP_USE_BUTTON = "single_mode_shop_use_button.png"
 SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON = "single_mode_shop_use_confirm_button.png"
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION = "single_mode_target_race_no_permission.png"
