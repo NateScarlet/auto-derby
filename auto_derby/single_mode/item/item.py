@@ -113,9 +113,7 @@ class Item:
             explain += f"{s:.2f} by race score delta ({s_before:.2f} -> {s_after:.2f});"
             # TODO: race reward effect
 
-        _LOGGER.debug(
-            "%s: effect score:\t%.2f\tfor %s\t%s", self, ret, command, explain
-        )
+        _LOGGER.debug("%s:\teffect score: %.2f for %s %s", self, ret, command, explain)
         return ret
 
     def expected_effect_score(self, ctx: Context, command: Command) -> float:
@@ -183,7 +181,7 @@ class Item:
         explain += f"x{f:.2f} quantity penality;"
         ret *= f
 
-        _LOGGER.debug("%s: exchange score:\t%.2f\t%s", self, ret, explain)
+        _LOGGER.debug("%s:\texchange score: %.2f %s", self, ret, explain)
         # TODO: calculate other effect
         return ret
 

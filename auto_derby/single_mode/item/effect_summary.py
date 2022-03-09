@@ -110,7 +110,7 @@ class EffectSummary:
         if self.training_no_failure:
             trn.failure_rate = 0
             explain += f"no failure;"
-        _LOGGER.debug("apply to training: %s->%s\t%s", training, trn, explain)
+        _LOGGER.debug("apply to training: %s->%s %s", training, trn, explain)
         return trn
 
     def apply_to_race(self, race: Race) -> Race:
