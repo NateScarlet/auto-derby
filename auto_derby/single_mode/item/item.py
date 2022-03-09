@@ -122,8 +122,10 @@ class Item:
         return ret
 
     def expected_effect_score(self, ctx: Context, command: Command) -> float:
+        ret = 0
         # TODO:
-        return 0
+        assert ret > 0, ret
+        return ret
 
     def exchange_score(self, ctx: Context) -> float:
         """
@@ -230,7 +232,7 @@ class Item:
 
         if explain:
             _LOGGER.debug("%s expected exchange score: %.2f: %s", self, ret, explain)
-
+        assert ret >= 0, ret
         return ret
 
     def should_use_directly(self, ctx: Context) -> bool:
