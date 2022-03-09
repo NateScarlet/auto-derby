@@ -49,7 +49,7 @@ def _handle_shop(ctx: Context, cs: CommandScene):
             (i.exchange_score(ctx), i.expected_exchange_score(ctx), i)
             for i in scene.items
         ),
-        key=lambda x: x[0] / x[1],
+        key=lambda x: x[0] - x[1],
         reverse=True,
     )
 
