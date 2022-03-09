@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import Tuple
+from typing import Tuple, TYPE_CHECKING
 
 import cast_unknown as cast
 import cv2
@@ -18,6 +18,10 @@ from . import training_score
 from .globals import g
 from .partner import Partner
 from ...constants import TrainingType
+
+if TYPE_CHECKING:
+    from .. import item
+
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -334,7 +338,8 @@ class Training:
         self._use_estimate_vitality = False
         self.failure_rate: float = 0.0
         self.confirm_position: Tuple[int, int] = (0, 0)
-        self.partners: Tuple[Partner, ...] = tuple()
+        self.partners: Tuple[Partner, ...] = ()
+        self.item_effects: Tuple[item.Effect, ...] = ()
 
     @classmethod
     def from_training_scene(
@@ -464,6 +469,9 @@ class Training:
         self._use_estimate_vitality = True
         self.failure_rate = _recognize_failure_rate(rp, self, img)
         self.partners = tuple(Partner.from_training_scene_v2(ctx, img))
+
+        # TODO: recognize effects
+        self.item_effects = ()
         return self
 
     def __str__(self):
