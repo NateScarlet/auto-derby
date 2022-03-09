@@ -198,15 +198,42 @@ class Item:
         return ret
 
     def expected_exchange_score(self, ctx: Context) -> float:
-        return self.price * mathtools.interpolate(
-            ctx.turn_count(),
+        ret = 0
+        explain = ""
+        s = self.price * 0.8
+        if s:
+            explain += f"{s} by price;"
+            ret += s
+
+        s = mathtools.interpolate(
+            ctx.shop_coin,
             (
-                (0, 5),
-                (24, 2),
-                (48, 1),
-                (72, 0),
+                (0, 0),
+                (200, -10),
+                (1000, -100),
             ),
         )
+        if s:
+            explain += f"{s} by shop coin;"
+            ret += s
+
+        r = mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 0),
+                (24, -0.3),
+                (48, -0.7),
+                (72, -1.0),
+            ),
+        )
+        if r:
+            explain += f"{r*100:+.0f}% by turns;"
+            ret *= 1 + r
+
+        if explain:
+            _LOGGER.debug("%s expected exchange score: %.2f: %s", self, ret, explain)
+
+        return ret
 
     def should_use_directly(self, ctx: Context) -> bool:
         """whether use for any command."""
