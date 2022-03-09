@@ -14,8 +14,22 @@ import math
 from ... import mathtools
 from . import race_score, runing_style_score
 from .globals import g
+import hashlib
+import json
 
 _LOGGER = logging.getLogger(__name__)
+
+
+class _g:
+    estimate_order_cache: Dict[Any, int] = {}
+    cache_size = 64
+
+
+def _estimate_order_cache_key(ctx: Context, race: Race):
+    h = hashlib.md5()
+    h.update(json.dumps(ctx.to_dict()).encode("utf-8"))
+    h.update(json.dumps(race.to_dict()).encode("utf-8"))
+    return h.digest()
 
 
 class Race:
@@ -75,8 +89,6 @@ class Race:
         self.characters: Set[Text] = set()
         self.grade_points: Tuple[int, ...] = ()
         self.shop_coins: Tuple[int, ...] = ()
-
-        self._cached_estimate_order = ("", 0)
 
     def to_dict(self) -> Dict[Text, Any]:
         return {
@@ -226,10 +238,12 @@ class Race:
         return estimate_order
 
     def estimate_order(self, ctx: Context) -> int:
-        key = str(ctx)
-        if self._cached_estimate_order[0] != key:
-            self._cached_estimate_order = (key, self._raw_estimate_order(ctx))
-        return self._cached_estimate_order[1]
+        key = _estimate_order_cache_key(ctx, self)
+        if key not in _g.estimate_order_cache:
+            if len(_g.estimate_order_cache) >= _g.cache_size:
+                _g.estimate_order_cache.clear()
+            _g.estimate_order_cache[key] = self._raw_estimate_order(ctx)
+        return _g.estimate_order_cache[key]
 
     def score(self, ctx: Context) -> float:
         return race_score.compute(ctx, self)
