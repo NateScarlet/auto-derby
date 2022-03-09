@@ -83,8 +83,9 @@ class EffectSummary:
                 if debuff.type != trn.type:
                     continue
                 rate += debuff.rate
-            trn.vitality *= rate
-            explain += f"x{rate:.2f} vitality;"
+            if rate != 1:
+                trn.vitality *= rate
+                explain += f"x{rate:.2f} vitality;"
 
         # property gain
         if self.speed:
@@ -110,7 +111,8 @@ class EffectSummary:
         if self.training_no_failure:
             trn.failure_rate = 0
             explain += f"no failure;"
-        _LOGGER.debug("apply to training: %s->%s %s", training, trn, explain)
+        if explain:
+            _LOGGER.debug("apply to training: %s->%s %s", training, trn, explain)
         return trn
 
     def apply_to_race(self, race: Race) -> Race:

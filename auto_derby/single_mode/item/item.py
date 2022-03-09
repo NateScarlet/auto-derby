@@ -152,15 +152,16 @@ class Item:
             ret += s
 
         sample_races = tuple(race for _, race in ctx.race_history)
+        sample_source = "history"
         if not sample_races:
             sample_races = tuple(i.race for i in race.race_result.iterate_current(ctx))
-            explain += f"no history race, use saved race result;"
+            sample_source = "saved race result"
         race_scores = tuple(
             self.effect_score(ctx, RaceCommand(i)) for i in sample_races
         )
         if race_scores:
             s = float(np.percentile(race_scores, 90))
-            explain += f"{s:.2f} from {len(sample_races)} sample races;"
+            explain += f"{s:.2f} from {len(sample_races)} sample races from {sample_source};"
             ret += s
 
         if es.training_no_failure:
@@ -168,20 +169,22 @@ class Item:
             explain += f"{s:.2f} from training no fail effect;"
             ret += s
 
-        f = mathtools.interpolate(
-            ctx.items.get(self.id).quantity,
-            (
-                (0, 1.0),
-                (1, 0.8),
-                (2, 0.3),
-                (3, 0.1),
-                (5, 0.0),
-            ),
-        )
-        explain += f"x{f:.2f} quantity penality;"
-        ret *= f
+        if ret:
+            f = mathtools.interpolate(
+                ctx.items.get(self.id).quantity,
+                (
+                    (0, 1.0),
+                    (1, 0.8),
+                    (2, 0.3),
+                    (3, 0.1),
+                    (5, 0.0),
+                ),
+            )
+            explain += f"x{f:.2f} quantity penality;"
+            ret *= f
 
-        _LOGGER.debug("%s:\texchange score: %.2f %s", self, ret, explain)
+        if explain:
+            _LOGGER.debug("%s:\texchange score: %.2f %s", self, ret, explain)
         # TODO: calculate other effect
         return ret
 
