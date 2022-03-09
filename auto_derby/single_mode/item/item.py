@@ -180,7 +180,7 @@ class Item:
                 (5, 0.0),
             ),
         )
-        explain += f"x{f:.2f} training penality;"
+        explain += f"x{f:.2f} quantity penality;"
         ret *= f
 
         _LOGGER.debug("%s: exchange score:\t%.2f\t%s", self, ret, explain)
