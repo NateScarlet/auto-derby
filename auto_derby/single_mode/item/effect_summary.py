@@ -73,7 +73,7 @@ class EffectSummary:
             trn.stamina = round(trn.stamina * rate)
             trn.power = round(trn.power * rate)
             trn.guts = round(trn.guts * rate)
-            trn.wisdom = round(trn.guts * rate)
+            trn.wisdom = round(trn.wisdom * rate)
             explain += f"x{rate:.2f}training effect;"
 
         # vitality debuff
@@ -83,7 +83,7 @@ class EffectSummary:
                 if debuff.type != trn.type:
                     continue
                 rate += debuff.rate
-                trn.vitality *= rate
+            trn.vitality *= rate
             explain += f"x{rate:.2f} vitality;"
 
         # property gain
