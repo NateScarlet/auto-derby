@@ -200,12 +200,15 @@ class Item:
             explain += f"{s} by price;"
             ret += s
 
-        s = mathtools.interpolate(
-            ctx.shop_coin,
-            (
-                (0, 0),
-                (200, -10),
-                (1000, -100),
+        s = min(
+            self.price - 5,
+            mathtools.interpolate(
+                ctx.shop_coin,
+                (
+                    (0, 0),
+                    (200, -10),
+                    (1000, -100),
+                ),
             ),
         )
         if s:
