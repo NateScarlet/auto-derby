@@ -201,7 +201,7 @@ class Item:
             ret += s
 
         s = max(
-            -ret + 5,
+            min(-ret + 5, 0),
             mathtools.interpolate(
                 ctx.shop_coin,
                 (
