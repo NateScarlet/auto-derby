@@ -3,14 +3,14 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Callable, Dict, List, Tuple
 
 from ...constants import TrainingType
-from .effect import Effect
-from ..training import Training
+from ..context import Context
 from ..race import Race
-
-import logging
+from ..training import Training
+from .effect import Effect
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -54,7 +54,7 @@ class EffectSummary:
         else:
             self.unknown_effects += (effect,)
 
-    def apply_to_training(self, training: Training) -> Training:
+    def apply_to_training(self, ctx: Context, training: Training) -> Training:
         """
         return a copy of given training with effect applied.
         """
@@ -73,8 +73,11 @@ class EffectSummary:
             trn.wisdom = round(trn.wisdom * (1 + r))
 
         # vitality debuff
-        r = sum(i.rate for i in self.training_vitality_debuff if i.type == trn.type)
-        if self.vitality < 0 and r:
+        r = min(
+            ctx.vitality - trn.vitality,
+            sum(i.rate for i in self.training_vitality_debuff if i.type == trn.type),
+        )
+        if r:
             explain += f"{r*100:+.0f}% vitality;"
             trn.vitality *= 1 + r
 
@@ -106,7 +109,7 @@ class EffectSummary:
             _LOGGER.debug("apply to training: %s->%s: %s", training, trn, explain)
         return trn
 
-    def apply_to_race(self, race: Race) -> Race:
+    def apply_to_race(self, ctx: Context, race: Race) -> Race:
         r = Race.from_dict(race.to_dict())
         explain = ""
         if self.race_fan_buff:

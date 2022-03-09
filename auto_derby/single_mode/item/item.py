@@ -95,7 +95,7 @@ class Item:
 
         ret = 0
         if isinstance(command, TrainingCommand):
-            trn = es.apply_to_training(command.training)
+            trn = es.apply_to_training(ctx, command.training)
             s_after = trn.score(ctx)
             s_before = command.training.score(ctx)
             s = s_after - s_before
@@ -104,7 +104,7 @@ class Item:
                 ret += s
 
         if isinstance(command, RaceCommand):
-            r = es.apply_to_race(command.race)
+            r = es.apply_to_race(ctx, command.race)
             s_after = r.score(ctx)
             s_before = command.race.score(ctx)
             s = s_after - s_before
@@ -130,9 +130,6 @@ class Item:
         Item will be exchanged if score not less than expected exchange score.
         """
 
-        # FIXME: unexpected score for not supported effects
-
-        es = self.effect_summary()
         ret = 0
         explain = ""
 
@@ -154,7 +151,7 @@ class Item:
         training_scores = tuple(i for i in training_scores if i > 0)
         s = float(np.percentile(training_scores, 90)) if training_scores else 0
         if s:
-            explain += f"{s:.2f} by {len(sample_trainings)} sample trainings;"
+            explain += f"{s:.2f} by {len(training_scores)} sample trainings;"
             ret += s
 
         # by race
@@ -169,15 +166,13 @@ class Item:
         s = float(np.percentile(race_scores, 90)) if race_scores else 0
         if s:
             explain += (
-                f"{s:.2f} by {len(sample_races)} sample races from {sample_source};"
+                f"{s:.2f} by {len(race_scores)} sample races from {sample_source};"
             )
             ret += s
 
-        if es.training_no_failure:
-            s = 10
-            explain += f"{s:.2f} from training no fail effect;"
-            ret += s
+        # TODO: by condition
 
+        # by quantity
         r = mathtools.interpolate(
             ctx.items.get(self.id).quantity,
             (
@@ -185,11 +180,11 @@ class Item:
                 (1, -0.2),
                 (2, -0.7),
                 (3, -0.9),
-                (5, -1.0),
+                (self.max_quantity, -1.0),
             ),
         )
         if r:
-            explain += f"{r*100:+.0f}% quantity penality;"
+            explain += f"{r*100:+.0f}% by quantity;"
             ret *= 1 + r
 
         if explain:
