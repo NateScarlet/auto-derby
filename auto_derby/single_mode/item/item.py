@@ -113,7 +113,9 @@ class Item:
             explain += f"{s:.2f} by race score delta ({s_before:.2f} -> {s_after:.2f});"
             # TODO: race reward effect
 
-        _LOGGER.debug("effect score:\t%.2f\t%s for %s\t%s", ret, self, command, explain)
+        _LOGGER.debug(
+            "%s: effect score:\t%.2f\tfor %s\t%s", self, ret, command, explain
+        )
         return ret
 
     def expected_effect_score(self, ctx: Context, command: Command) -> float:
@@ -154,11 +156,13 @@ class Item:
         sample_races = tuple(race for _, race in ctx.race_history)
         if not sample_races:
             sample_races = tuple(i.race for i in race.race_result.iterate_current(ctx))
-            explain += f"no history race, use saved race result; "
-        race_scores = tuple(self.effect_score(ctx, RaceCommand(i)) for i in sample_races)
+            explain += f"no history race, use saved race result;"
+        race_scores = tuple(
+            self.effect_score(ctx, RaceCommand(i)) for i in sample_races
+        )
         if race_scores:
             s = float(np.percentile(race_scores, 90))
-            explain += f"{s:.2f} from {len(sample_races)} sample trainings;"
+            explain += f"{s:.2f} from {len(sample_races)} sample races;"
             ret += s
 
         if es.training_no_failure:
@@ -179,7 +183,7 @@ class Item:
         explain += f"x{f:.2f} training penality;"
         ret *= f
 
-        _LOGGER.debug("exchange score:\t%.2f\t%s\t%s", ret, self, explain)
+        _LOGGER.debug("%s: exchange score:\t%.2f\t%s", self, ret, explain)
         # TODO: calculate other effect
         return ret
 

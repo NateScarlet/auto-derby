@@ -18,6 +18,9 @@ class TrainingCommand(Command):
     def __init__(self, training: Training):
         self.training = training
 
+    def __str__(self) -> str:
+        return f"Command<{self.training}>"
+
     def name(self) -> Text:
         return str(self.training)
 
