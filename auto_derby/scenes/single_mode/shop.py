@@ -144,9 +144,13 @@ class ShopScene(Scene):
                     continue
                 _LOGGER.info("exchange: %s", match)
                 action.tap(pos)
-                action.wait_image(templates.SINGLE_MODE_SHOP_EXCHANGE_DONE_TITLE)
                 ctx.shop_coin -= match.price
                 remains.remove(match)
+                action.wait_image(
+                    templates.SINGLE_MODE_SHOP_EXCHANGE_DONE_TITLE,
+                    templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
+                    templates.CLOSE_BUTTON,
+                )
                 if match.should_use_directly(ctx):
                     _LOGGER.info("use: %s", match)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
