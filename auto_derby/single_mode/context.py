@@ -437,7 +437,7 @@ class Context:
     def __str__(self):
         msg = ""
         if self.scenario == Context.SCENARIO_CLIMAX:
-            msg += f",pt={self.grade_point},coin={self.shop_coin}"
+            msg += f",pt={self.grade_point},coin={self.shop_coin},items={self.items.quantity()}"
         if self.go_out_options:
             msg += ",go_out="
             msg += " ".join(

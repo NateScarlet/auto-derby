@@ -15,6 +15,15 @@ class ItemList:
     def __contains__(self, value: Item) -> bool:
         return self.get(value.id).quantity > 0
 
+    def __bool__(self) -> bool:
+        return bool(self._m)
+
+    def quantity(self) -> int:
+        return sum(i.quantity for i in self)
+
+    def item_type_count(self) -> int:
+        return sum(1 for _ in self)
+
     def __iter__(self) -> Iterator[Item]:
         yield from sorted(
             (i for i in self._m.values() if i.quantity > 0), key=lambda x: x.id
