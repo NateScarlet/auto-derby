@@ -63,61 +63,59 @@ class EffectSummary:
         explain = ""
 
         # effect buff
-        rate = 1
-        for buff in self.training_effect_buff:
-            if buff.type != trn.type:
-                continue
-            rate += buff.rate
-        if rate != 1:
-            trn.speed = round(trn.speed * rate)
-            trn.stamina = round(trn.stamina * rate)
-            trn.power = round(trn.power * rate)
-            trn.guts = round(trn.guts * rate)
-            trn.wisdom = round(trn.wisdom * rate)
-            explain += f"x{rate:.2f}training effect;"
+        r = sum(i.rate for i in self.training_effect_buff if i.type == trn.type)
+        if r:
+            explain += f"{r*100:+.0f}% effect;"
+            trn.speed = round(trn.speed * (1 + r))
+            trn.stamina = round(trn.stamina * (1 + r))
+            trn.power = round(trn.power * (1 + r))
+            trn.guts = round(trn.guts * (1 + r))
+            trn.wisdom = round(trn.wisdom * (1 + r))
 
         # vitality debuff
-        if trn.vitality < 0:
-            rate = 1
-            for debuff in self.training_vitality_debuff:
-                if debuff.type != trn.type:
-                    continue
-                rate += debuff.rate
-            if rate != 1:
-                trn.vitality *= rate
-                explain += f"x{rate:.2f} vitality;"
+        r = sum(i.rate for i in self.training_vitality_debuff if i.type == trn.type)
+        if self.vitality < 0 and r:
+            explain += f"{r*100:+.0f}% vitality;"
+            trn.vitality *= 1 + r
 
         # property gain
         if self.speed:
-            trn.speed += self.speed
             explain += f"{self.speed} speed;"
+            trn.speed += self.speed
         if self.statmia:
-            trn.stamina += self.statmia
             explain += f"{self.statmia} stamina;"
+            trn.stamina += self.statmia
         if self.power:
-            trn.power += self.power
             explain += f"{self.power} power;"
+            trn.power += self.power
         if self.guts:
-            trn.guts += self.guts
             explain += f"{self.guts} guts;"
+            trn.guts += self.guts
         if self.wisdom:
-            trn.wisdom += self.wisdom
             explain += f"{self.wisdom} wisdom;"
+            trn.wisdom += self.wisdom
         if self.vitality:
+            explain += f"{self.vitality} vitality;"
             # XXX: vitality convertion is not accure
             trn.vitality += self.vitality / 100
-            explain += f"{self.vitality} vitality;"
 
         if self.training_no_failure:
-            trn.failure_rate = 0
             explain += f"no failure;"
+            trn.failure_rate = 0
         if explain:
-            _LOGGER.debug("apply to training: %s->%s %s", training, trn, explain)
+            _LOGGER.debug("apply to training: %s->%s: %s", training, trn, explain)
         return trn
 
     def apply_to_race(self, race: Race) -> Race:
         r = Race.from_dict(race.to_dict())
-        r.fan_counts = tuple(round(i * (1 + self.race_fan_buff)) for i in r.fan_counts)
+        explain = ""
+        if self.race_fan_buff:
+            explain = f"{self.race_fan_buff*100:+.0f}% fans"
+            r.fan_counts = tuple(
+                round(i * (1 + self.race_fan_buff)) for i in r.fan_counts
+            )
+        if explain:
+            _LOGGER.debug("apply to race: %s: %s", race, explain)
         return r
 
 

@@ -99,21 +99,26 @@ class Item:
             s_after = trn.score(ctx)
             s_before = command.training.score(ctx)
             s = s_after - s_before
-            ret += s
-            explain += (
-                f"{s:.2f} by training score delta ({s_before:.2f} -> {s_after:.2f});"
-            )
+            if s:
+                explain += f"{s:.2f} by training score delta ({s_before:.2f} -> {s_after:.2f});"
+                ret += s
 
         if isinstance(command, RaceCommand):
             r = es.apply_to_race(command.race)
             s_after = r.score(ctx)
             s_before = command.race.score(ctx)
             s = s_after - s_before
-            ret += s
-            explain += f"{s:.2f} by race score delta ({s_before:.2f} -> {s_after:.2f});"
+            if s:
+                explain += (
+                    f"{s:.2f} by race score delta ({s_before:.2f} -> {s_after:.2f});"
+                )
+                ret += s
             # TODO: race reward effect
 
-        _LOGGER.debug("%s:\teffect score: %.2f for %s %s", self, ret, command, explain)
+        if explain:
+            _LOGGER.debug(
+                "%s effect score: %.2f for %s: %s", self, ret, command, explain
+            )
         return ret
 
     def expected_effect_score(self, ctx: Context, command: Command) -> float:
@@ -133,6 +138,7 @@ class Item:
 
         from ..commands import TrainingCommand, RaceCommand
 
+        # by training
         sample_trainings = (
             Training.new(),
             *(
@@ -146,11 +152,12 @@ class Item:
             self.effect_score(ctx, TrainingCommand(i)) for i in sample_trainings
         )
         training_scores = tuple(i for i in training_scores if i > 0)
-        if training_scores:
-            s = float(np.percentile(training_scores, 90))
-            explain += f"{s:.2f} from {len(sample_trainings)} sample trainings;"
+        s = float(np.percentile(training_scores, 90)) if training_scores else 0
+        if s:
+            explain += f"{s:.2f} by {len(sample_trainings)} sample trainings;"
             ret += s
 
+        # by race
         sample_races = tuple(race for _, race in ctx.race_history)
         sample_source = "history"
         if not sample_races:
@@ -159,9 +166,11 @@ class Item:
         race_scores = tuple(
             self.effect_score(ctx, RaceCommand(i)) for i in sample_races
         )
-        if race_scores:
-            s = float(np.percentile(race_scores, 90))
-            explain += f"{s:.2f} from {len(sample_races)} sample races from {sample_source};"
+        s = float(np.percentile(race_scores, 90)) if race_scores else 0
+        if s:
+            explain += (
+                f"{s:.2f} by {len(sample_races)} sample races from {sample_source};"
+            )
             ret += s
 
         if es.training_no_failure:
@@ -169,22 +178,22 @@ class Item:
             explain += f"{s:.2f} from training no fail effect;"
             ret += s
 
-        if ret:
-            f = mathtools.interpolate(
-                ctx.items.get(self.id).quantity,
-                (
-                    (0, 1.0),
-                    (1, 0.8),
-                    (2, 0.3),
-                    (3, 0.1),
-                    (5, 0.0),
-                ),
-            )
-            explain += f"x{f:.2f} quantity penality;"
-            ret *= f
+        r = mathtools.interpolate(
+            ctx.items.get(self.id).quantity,
+            (
+                (0, 0),
+                (1, -0.2),
+                (2, -0.7),
+                (3, -0.9),
+                (5, -1.0),
+            ),
+        )
+        if r:
+            explain += f"{r*100:+.0f}% quantity penality;"
+            ret *= 1 + r
 
         if explain:
-            _LOGGER.debug("%s:\texchange score: %.2f %s", self, ret, explain)
+            _LOGGER.debug("%s exchange score: %.2f: %s", self, ret, explain)
         # TODO: calculate other effect
         return ret
 
