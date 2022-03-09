@@ -35,13 +35,26 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
 
 def _recognize_price(rp: mathtools.ResizeProxy, item_img: Image) -> int:
     bbox = rp.vector4((185, 41, 389, 64), 540)
-    cv_img = imagetools.cv_image(
-        imagetools.resize(item_img.crop(bbox).convert("L"), height=32)
+    price_img = imagetools.resize(item_img.crop(bbox), height=32)
+    pink_mask = imagetools.constant_color_key(
+        imagetools.cv_image(price_img),
+        (118, 51, 255),
     )
-    _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
+    pink_x, _, pink_w, _ = cv2.boundingRect(cv2.findNonZero(pink_mask))
+    has_discount = pink_w > 80
+    if has_discount:
+        price_img = price_img.crop(
+            (pink_x + int(pink_w * 0.58), 0, pink_x + pink_w + 4, price_img.height)
+        )
+        threshold = 160
+    else:
+        threshold = 160
+    cv_img = imagetools.cv_image(price_img.convert("L"))
+    _, binary_img = cv2.threshold(cv_img, threshold, 255, cv2.THRESH_BINARY_INV)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
         cv2.imshow("cv_img", cv_img)
+        cv2.imshow("pink_mask", pink_mask)
         cv2.imshow("binary_img", binary_img)
         cv2.waitKey()
         cv2.destroyAllWindows()
@@ -165,6 +178,8 @@ class ShopScene(Scene):
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {
-            "items": [{"id": i.id, "name": i.name} for i in self.items]
+            "items": [
+                {"id": i.id, "name": i.name, "price": i.price} for i in self.items
+            ]
         }
         return d

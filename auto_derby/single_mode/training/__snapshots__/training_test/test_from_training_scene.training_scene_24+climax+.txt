@@ -1,1 +1,1 @@
-Training<lv=1 fail=0% pow=7 sta=5 ski=2 ptn=pow>
+Training<lv=1 vit=-20.00% fail=0% pow=7 sta=5 ski=2 ptn=pow>

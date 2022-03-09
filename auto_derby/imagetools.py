@@ -450,6 +450,12 @@ def bbox_from_rect(rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]
     return l, t, r, b
 
 
+def rect_from_bbox(bbox: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
+    l, t, r, b = bbox
+    x, y, w, h = l, b, r - l, b - t
+    return x, y, w, h
+
+
 def auto_crop(cv_img: np.ndarray) -> np.ndarray:
     l, t, r, b = bbox_from_rect(
         cv2.boundingRect(

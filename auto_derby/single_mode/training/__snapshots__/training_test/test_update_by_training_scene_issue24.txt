@@ -1,1 +1,1 @@
-Training<lv=1 fail=0% sta=9 gut=4 ski=2>
+Training<lv=1 vit=-19.00% fail=0% sta=9 gut=4 ski=2>
