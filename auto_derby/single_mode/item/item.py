@@ -200,8 +200,8 @@ class Item:
             explain += f"{s} by price;"
             ret += s
 
-        s = min(
-            self.price - 5,
+        s = max(
+            -ret + 5,
             mathtools.interpolate(
                 ctx.shop_coin,
                 (
