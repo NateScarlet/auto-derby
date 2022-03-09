@@ -14,6 +14,9 @@ from ..training import Training
 from .. import race
 from ... import mathtools
 from .globals import g
+import logging
+
+_LOGGER = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from ..commands import Command
@@ -89,7 +92,6 @@ class Item:
 
         from ..commands import TrainingCommand, RaceCommand
 
-
         ret = 0
         if isinstance(command, TrainingCommand):
             trn = es.apply_to_training(command.training)
@@ -110,13 +112,15 @@ class Item:
         """
         Item will be exchanged if score not less than expected exchange score.
         """
-    
+
         # FIXME: unexpected score for not supported effects
 
         es = self.effect_summary()
         ret = 0
+        explain = ""
 
         from ..commands import TrainingCommand, RaceCommand
+
         sample_trainings = (
             Training.new(),
             *(
@@ -131,20 +135,26 @@ class Item:
         )
         training_scores = tuple(i for i in training_scores if i > 0)
         if training_scores:
-            ret += float(np.percentile(training_scores, 90))
+            s = float(np.percentile(training_scores, 90))
+            explain += f"{s:.2f} from {len(sample_trainings)} sample trainings;"
+            ret += s
 
         sample_races = tuple(race for _, race in ctx.race_history)
         if not sample_races:
             sample_races = tuple(i.race for i in race.race_result.iterate_current(ctx))
+            explain += f"no history race, use saved race result; "
         race_scores = (self.effect_score(ctx, RaceCommand(i)) for i in sample_races)
-        race_scores = tuple(i for i in race_scores if i > 0)
         if race_scores:
-            ret += float(np.percentile(race_scores, 90))
+            s = float(np.percentile(race_scores, 90))
+            explain += f"{s:.2f} from {len(sample_races)} sample trainings;"
+            ret += s
 
         if es.training_no_failure:
-            ret += 10
+            s = 10
+            explain += f"{s:.2f} from training no fail effect;"
+            ret += s
 
-        quantity_penality = mathtools.interpolate(
+        f = mathtools.interpolate(
             ctx.items.get(self.id).quantity,
             (
                 (0, 1.0),
@@ -154,9 +164,14 @@ class Item:
                 (5, 0.0),
             ),
         )
+        explain += f"x{f:.2f} training penality;"
+        ret *= f
 
+        _LOGGER.debug(
+            "exchange score: %.2f %s: %s", ret, self, explain or "nothing to explain"
+        )
         # TODO: calculate other effect
-        return ret / self.price * quantity_penality * 100
+        return ret
 
     def expected_exchange_score(self, ctx: Context) -> float:
         return self.price * mathtools.interpolate(
