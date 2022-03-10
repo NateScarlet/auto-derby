@@ -94,6 +94,8 @@ class ShopScene(Scene):
 
         # top = 0, bottom = 1
         self._menu_position = 0
+        self._same_direction_scroll_count = 0
+        self._max_same_direction_scroll_count = 5
 
     @classmethod
     def name(cls):
@@ -121,9 +123,14 @@ class ShopScene(Scene):
         # prevent inertial scrolling
         action.tap(rp.vector2((15, 600), 540))
         time.sleep(0.2)  # wait animation
+        self._same_direction_scroll_count += 1
+        if self._same_direction_scroll_count >= self._max_same_direction_scroll_count:
+            self._on_scroll_to_end()
 
     def _on_scroll_to_end(self):
         self._menu_position = 1 - self._menu_position
+        self._max_same_direction_scroll_count = self._same_direction_scroll_count + 1
+        self._same_direction_scroll_count = 0
 
     def _recognize_items(self, static: bool = False) -> None:
         self.items = ()
@@ -149,6 +156,8 @@ class ShopScene(Scene):
     def exchange_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
         while remains:
+            for i in remains:
+                _LOGGER.debug("exchange remain: %s", i)
             for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
