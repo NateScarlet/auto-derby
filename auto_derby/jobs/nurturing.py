@@ -83,6 +83,7 @@ def _handle_item_list(ctx: Context, cs: CommandScene):
     scene = ItemListScene.enter(ctx)
     scene.recognize(ctx)
     cs.enter(ctx)
+    # TODO: use item directly
     return
 
 
