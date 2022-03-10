@@ -44,5 +44,5 @@ class ItemList:
         for i in items:
             self._m[i.id] = i
 
-    def remove(self, id: int, quantity: int = 1):
+    def remove(self, id: int, quantity: int):
         self.put(id, -quantity)

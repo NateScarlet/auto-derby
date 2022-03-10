@@ -9,12 +9,11 @@ import time
 from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 
 import cv2
-from auto_derby.single_mode.item.item_list import ItemList
 from PIL.Image import Image
 
 from ... import action, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
-from ...single_mode.item import Item
+from ...single_mode.item import Item, ItemList
 from ..scene import Scene, SceneHolder
 from .command import CommandScene
 
@@ -171,5 +170,9 @@ class ItemListScene(Scene):
                 action.tap(pos)
                 action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                 remains.remove(match)
-                match.quantity -= 1
+                ctx.items.remove(match.id, 1)
+
+                # wait animation
+                time.sleep(2)
+                action.wait_image(templates.CLOSE_BUTTON)
             self._scroll_page()
