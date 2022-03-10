@@ -54,6 +54,11 @@ class EffectSummary:
         else:
             self.unknown_effects += (effect,)
 
+    def clone(self) -> EffectSummary:
+        c = self.__class__()
+        c.__dict__.update(self.__dict__)
+        return c
+
     def apply_to_training(self, ctx: Context, training: Training) -> Training:
         """
         return a copy of given training with effect applied.
@@ -188,16 +193,16 @@ def _(effect: Effect, summary: EffectSummary):
         _add_value(TrainingType.SPEED)
         return True
     if lv == Effect.TRAINING_LEVEL_STAMINA:
-        _add_value(TrainingType.SPEED)
+        _add_value(TrainingType.STAMINA)
         return True
     if lv == Effect.TRAINING_LEVEL_GUTS:
-        _add_value(TrainingType.SPEED)
+        _add_value(TrainingType.GUTS)
         return True
     if lv == Effect.TRAINING_LEVEL_POWER:
-        _add_value(TrainingType.SPEED)
+        _add_value(TrainingType.POWER)
         return True
     if lv == Effect.TRAINING_LEVEL_WISDOM:
-        _add_value(TrainingType.SPEED)
+        _add_value(TrainingType.WISDOM)
         return True
     return False
 
@@ -205,6 +210,7 @@ def _(effect: Effect, summary: EffectSummary):
 @_register_reducer
 @_only_effect_type(Effect.TYPE_CONDITION)
 def _(effect: Effect, summary: EffectSummary):
+    # TODO: handle duplicated effect
     action, value, _, _ = effect.values
     if action == Effect.CONDITION_ADD:
         summary.condition_add += (value,)
@@ -227,6 +233,7 @@ def _(effect: Effect, summary: EffectSummary):
 @_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_BUFF)
 def _(effect: Effect, summary: EffectSummary):
+    # TODO: handle duplicated buff
     tp, value, _, _ = effect.values
     if tp == 0:
         summary.training_effect_buff += (
@@ -299,6 +306,7 @@ def _(effect: Effect, summary: EffectSummary):
 @_register_reducer
 @_only_effect_type(Effect.TYPE_RACE_BUFF)
 def _(effect: Effect, summary: EffectSummary):
+    # TODO: handle duplicated buff
     tp, value, _, _ = effect.values
     if tp == Effect.RACE_BUFF_REWARD:
         summary.race_reward_buff = value / 100

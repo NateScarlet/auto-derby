@@ -86,6 +86,29 @@ def _handle_item_list(ctx: Context, cs: CommandScene):
     return
 
 
+class _CommandPlan:
+    def __init__(
+        self,
+        ctx: Context,
+        command: commands.Command,
+    ) -> None:
+        self.command = command
+        self.command_score = command.score(ctx)
+        self.item_score, self.items = item.plan.compute(ctx, command)
+        self.score = self.command_score + self.item_score
+
+    def execute(self, ctx: Context):
+        scene = ItemListScene.enter(ctx)
+        scene.use_items(ctx, self.items)
+        self.command.execute(ctx)
+
+    def explain(self) -> Text:
+        msg = f"{self.command_score:2.2f} by {self.command};"
+        if self.items:
+            msg += f"{self.item_score} by {self.items};"
+        return msg
+
+
 def _handle_turn(ctx: Context):
     scene = CommandScene.enter(ctx)
     scene.recognize(ctx)
@@ -94,18 +117,16 @@ def _handle_turn(ctx: Context):
     turn_commands = tuple(commands.from_context(ctx))
     _handle_shop(ctx, scene)
     ctx.next_turn()
-    # TODO: compute with item effect
-    command_with_scores = sorted(
-        ((i, i.score(ctx)) for i in turn_commands),
-        key=lambda x: x[1],
+    command_plans = sorted(
+        (_CommandPlan(ctx, i) for i in turn_commands),
+        key=lambda x: x.score,
         reverse=True,
     )
-    # TODO: use items
     LOGGER.info("context: %s", ctx)
-    for c, s in command_with_scores:
-        LOGGER.info("score:\t%2.2f:\t%s", s, c.name())
+    for cp in command_plans:
+        LOGGER.info("score:\t%2.2f:\t%s", cp.score, cp.explain())
     try:
-        command_with_scores[0][0].execute(ctx)
+        command_plans[0].execute(ctx)
     except RaceTurnsIncorrect:
         _handle_turn(ctx)
 

@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Text, Tuple
+from typing import TYPE_CHECKING, Any, Dict, Sequence, Text, Tuple
 
 import numpy as np
 
@@ -85,28 +85,38 @@ class Item:
             es.add(i)
         return es
 
-    def effect_score(self, ctx: Context, command: Command) -> float:
+    def effect_score(
+        self, ctx: Context, command: Command, picked_items: Sequence[Item] = ()
+    ) -> float:
         """Item will be used before command if score not less than expected effect score."""
 
-        es = self.effect_summary()
+        es_before = EffectSummary()
+        for i in picked_items:
+            for e in i.effects:
+                es_before.add(e)
+        es_after = es_before.clone()
+        for i in self.effects:
+            es_after.add(i)
         explain = ""
 
         from ..commands import TrainingCommand, RaceCommand
 
         ret = 0
         if isinstance(command, TrainingCommand):
-            trn = es.apply_to_training(ctx, command.training)
-            s_after = trn.score(ctx)
-            s_before = command.training.score(ctx)
+            t_before = es_before.apply_to_training(ctx, command.training)
+            t_after = es_after.apply_to_training(ctx, command.training)
+            s_before = t_before.score(ctx)
+            s_after = t_after.score(ctx)
             s = s_after - s_before
             if s:
                 explain += f"{s:.2f} by training score delta ({s_before:.2f} -> {s_after:.2f});"
                 ret += s
 
         if isinstance(command, RaceCommand):
-            r = es.apply_to_race(ctx, command.race)
-            s_after = r.score(ctx)
-            s_before = command.race.score(ctx)
+            r_before = es_before.apply_to_race(ctx, command.race)
+            r_after = es_after.apply_to_race(ctx, command.race)
+            s_before = r_before.score(ctx)
+            s_after = r_after.score(ctx)
             s = s_after - s_before
             if s:
                 explain += (
