@@ -98,12 +98,13 @@ class _CommandPlan:
         self.score = self.command_score + self.item_score
 
     def execute(self, ctx: Context):
-        scene = ItemListScene.enter(ctx)
-        scene.use_items(ctx, self.items)
+        if self.items:
+            scene = ItemListScene.enter(ctx)
+            scene.use_items(ctx, self.items)
         self.command.execute(ctx)
 
     def explain(self) -> Text:
-        msg = f"{self.command_score:2.2f} by {self.command};"
+        msg = f"{self.command_score:2.2f} by command;"
         if self.items:
             msg += f"{self.item_score} by {self.items};"
         return msg
@@ -124,7 +125,7 @@ def _handle_turn(ctx: Context):
     )
     LOGGER.info("context: %s", ctx)
     for cp in command_plans:
-        LOGGER.info("score:\t%2.2f:\t%s", cp.score, cp.explain())
+        LOGGER.info("score:\t%2.2f:\t%s: %s", cp.score, cp.command.name(), cp.explain())
     try:
         command_plans[0].execute(ctx)
     except RaceTurnsIncorrect:
