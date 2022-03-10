@@ -169,7 +169,7 @@ class ItemListScene(Scene):
                     continue
                 _LOGGER.info("use: %s", match)
                 action.tap(pos)
-                raise NotImplementedError()
+                action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                 remains.remove(match)
                 match.quantity -= 1
             self._scroll_page()

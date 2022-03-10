@@ -166,7 +166,7 @@ class ShopScene(Scene):
                 ):
                     _LOGGER.info("use: %s", match)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
-                    action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_BUTTON)
+                    action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                     time.sleep(2)  # wait animation
                     # match item moved to bottom
                     template.invalidate_screeshot()

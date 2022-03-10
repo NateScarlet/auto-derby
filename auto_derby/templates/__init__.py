@@ -200,6 +200,7 @@ SINGLE_MODE_ITEM_LIST_BUTTON = "single_mode_item_list_button.png"
 SINGLE_MODE_ITEM_LIST_BUTTON_POS = "single_mode_item_list_button.pos.png"
 SINGLE_MODE_ITEM_LIST_CURRENT_QUANTITY = "single_mode_item_list_current_quantity.png"
 SINGLE_MODE_ITEM_LIST_USE_BUTTON = "single_mode_item_list_use_button.png"
+SINGLE_MODE_ITEM_USE_BUTTON = "single_mode_item_use_button.png"
 SINGLE_MODE_LIVE_BUTTON = "single_mode_live_button.png"
 SINGLE_MODE_OPTION1 = "single_mode_option1.png"
 SINGLE_MODE_OPTION1_POS = "single_mode_option1.pos.png"
@@ -233,7 +234,6 @@ SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER = (
 SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = (
     "single_mode_scheduled_race_opening_banner.pos.png"
 )
-SINGLE_MODE_SHOP_USE_BUTTON = "single_mode_shop_use_button.png"
 SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON = "single_mode_shop_use_confirm_button.png"
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION = "single_mode_target_race_no_permission.png"
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION_POS = (
