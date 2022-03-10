@@ -44,17 +44,12 @@ def _recognize_price(rp: mathtools.ResizeProxy, item_img: Image) -> int:
     pink_x, _, pink_w, _ = cv2.boundingRect(cv2.findNonZero(pink_mask))
     has_discount = pink_w > 80
     if has_discount:
-        price_img = price_img.crop(
-            (pink_x + int(pink_w * 0.58), 0, pink_x + pink_w + 4, price_img.height)
-        )
-        threshold = 160
+        binary_img = pink_mask[:, round(pink_x + pink_w * 0.6) :]
     else:
-        threshold = 160
-    cv_img = imagetools.cv_image(price_img.convert("L"))
-    _, binary_img = cv2.threshold(cv_img, threshold, 255, cv2.THRESH_BINARY_INV)
+        cv_img = 255 - imagetools.cv_image(price_img.convert("L"))
+        _, binary_img = cv2.threshold(cv_img, 120, 255, cv2.THRESH_BINARY)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
-        cv2.imshow("cv_img", cv_img)
         cv2.imshow("pink_mask", pink_mask)
         cv2.imshow("binary_img", binary_img)
         cv2.waitKey()
