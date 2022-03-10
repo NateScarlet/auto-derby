@@ -124,17 +124,10 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     if _g.labels.is_empty():
         return _prompt(img, h, "", 0)
     res = _g.labels.query(h)
-    match, value, similarity = res.hash, res.value, res.similarity
-    LOGGER.debug(
-        "match label: value=%s, current=%s, match=%s, similarity=%0.3f",
-        value,
-        h,
-        match,
-        similarity,
-    )
-    if similarity > threshold:
-        return value
-    return _prompt(img, h, value, similarity)
+    LOGGER.debug("query label: %s by %s", res, h)
+    if res.similarity > threshold:
+        return res.value
+    return _prompt(img, h, res.value, res.similarity)
 
 
 def _union_bbox(

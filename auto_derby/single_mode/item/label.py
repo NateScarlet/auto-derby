@@ -71,11 +71,7 @@ def from_title_image(img: Image, threshold: float = 0.8) -> Item:
     if _g.labels.is_empty():
         return _prompt(img, h, 0)
     res = _g.labels.query(h)
-    _LOGGER.debug(
-        "match label: search=%s, result=%s",
-        h,
-        res,
-    )
+    _LOGGER.debug("query label: %s by %s", res, h)
     item = game_data.get(res.value)
     if item and res.similarity > threshold:
         return item

@@ -347,7 +347,7 @@ class ImageHashMapQueryResult(Generic[T]):
         self.similarity = similarity
 
     def __str__(self):
-        return f"IHMQueryResult<{self.similarity*100:.1f},{self.value},{self.hash[:8]}>"
+        return f"IHMQueryResult<{self.similarity*100:.1f}%,{self.value},{self.hash[:8]}>"
 
 
 class ImageHashMap(Generic[T]):
