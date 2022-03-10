@@ -65,19 +65,21 @@ class Training:
         partner_text = ",".join(i.to_short_text() for i in self.partners)
         return (
             "Training<"
-            f"lv={self.level} "
-            + (f"vit={self.vitality*100:.2f}% ")
-            + (f"fail={self.failure_rate*100:.0f}% ")
-            + " ".join(
-                (
-                    f"{name}={value}"
-                    for name, value in sorted(
-                        named_data, key=lambda x: x[1], reverse=True
+            + (
+                "".join(
+                    (
+                        f"{name}={value} "
+                        for name, value in sorted(
+                            named_data, key=lambda x: x[1], reverse=True
+                        )
+                        if value
                     )
-                    if value
                 )
-            )
-            + (f" ptn={partner_text}" if partner_text else "")
+                + (f"vit={self.vitality*100:.1f}% ")
+                + (f"fail={self.failure_rate*100:.0f}% ")
+                + f"lv={self.level} "
+                + (f"ptn={partner_text} " if partner_text else "")
+            ).strip()
             + ">"
         )
 
