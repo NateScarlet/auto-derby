@@ -31,7 +31,9 @@ def iterate(
                 command,
                 (*items[:index], *items[index + 1 :]),
                 (*picked_items, *(item,)),
-            )
+            ),
+            key=lambda x: (x[0], -sum(i.original_price for i in x[1])),
+            reverse=True,
         )
         if sub_plans:
             s_sub, items_s = sub_plans[0]
@@ -46,6 +48,10 @@ def compute(
     ctx: Context,
     command: Command,
 ) -> Plan:
-    for i in sorted(iterate(ctx, command, tuple(ctx.items)), key=lambda x: x[0]):
+    for i in sorted(
+        iterate(ctx, command, tuple(ctx.items)),
+        key=lambda x: (x[0], -sum(i.original_price for i in x[1])),
+        reverse=True,
+    ):
         return i
     return 0, ()
