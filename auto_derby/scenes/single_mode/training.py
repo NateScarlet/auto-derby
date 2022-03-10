@@ -51,13 +51,14 @@ def _ocr_training_effect(img: Image) -> int:
             )
         ),
     )
-    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
+    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.7)
 
     white_outline_img = imagetools.constant_color_key(
         sharpened_img,
         (255, 255, 255),
         (234, 245, 240),
         (208, 200, 234),
+        threshold=0.9
     )
     white_outline_img = cv2.morphologyEx(
         white_outline_img,
