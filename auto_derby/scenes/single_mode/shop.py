@@ -5,12 +5,13 @@ from __future__ import annotations
 
 import logging
 import os
+import time
 from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 
 import cv2
 from PIL.Image import Image
 
-from ... import action, imagetools, mathtools, template, templates, ocr
+from ... import action, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
 from ...single_mode.item import Item
 from ..scene import Scene, SceneHolder
@@ -122,6 +123,7 @@ class ShopScene(Scene):
             dy=rp.vector(-230 * direction, 540),
             duration=0.2,
         )
+        time.sleep(0.2)  # wait animation
         # prevent inertial scrolling
         action.tap(rp.vector2((15, 600), 540))
 
