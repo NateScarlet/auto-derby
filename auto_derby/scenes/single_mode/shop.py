@@ -118,9 +118,9 @@ class ShopScene(Scene):
             dy=rp.vector(-230 * direction, 540),
             duration=0.2,
         )
-        time.sleep(0.2)  # wait animation
         # prevent inertial scrolling
         action.tap(rp.vector2((15, 600), 540))
+        time.sleep(0.2)  # wait animation
 
     def _on_scroll_to_end(self):
         self._menu_position = 1 - self._menu_position
@@ -167,6 +167,7 @@ class ShopScene(Scene):
                     _LOGGER.info("use: %s", match)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_BUTTON)
+                    time.sleep(2)  # wait animation
                     # match item moved to bottom
                     template.invalidate_screeshot()
                     break

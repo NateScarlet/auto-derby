@@ -117,9 +117,9 @@ class ItemListScene(Scene):
             dy=rp.vector(-230 * direction, 540),
             duration=0.2,
         )
-        time.sleep(0.2)  # wait animation
         # prevent inertial scrolling
         action.tap(rp.vector2((15, 600), 540))
+        time.sleep(0.2)  # wait animation
 
     def _on_scroll_to_end(self):
         self._menu_position = 1 - self._menu_position
