@@ -106,7 +106,7 @@ class _CommandPlan:
     def explain(self) -> Text:
         msg = ""
         if self.items:
-            msg += f"{self.item_score} by {self.items};"
+            msg += f"{self.item_score:.2f} by {','.join(str(i) for i in self.items)};"
         return msg
 
 
