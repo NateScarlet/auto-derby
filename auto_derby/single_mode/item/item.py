@@ -133,7 +133,40 @@ class Item:
 
     def expected_effect_score(self, ctx: Context, command: Command) -> float:
         ret = 0
-        # TODO:
+        explain = ""
+        s = self.original_price * 0.8
+        if s:
+            explain += f"{s} by price;"
+            ret += s
+        r = mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 0),
+                (24, -0.3),
+                (48, -0.7),
+                (72, -1.0),
+            ),
+        )
+        if r:
+            explain += f"{r*100:+.0f}% by turns;"
+            ret *= 1 + r
+
+        r = mathtools.interpolate(
+            ctx.items.get(self.id).quantity,
+            (
+                (0, 0),
+                (1, -0.1),
+                (2, -0.3),
+                (3, -0.5),
+                (self.max_quantity, -0.8),
+            ),
+        )
+        if r:
+            explain += f"{r*100:+.0f}% by quantity;"
+            ret *= 1 + r
+
+        if explain:
+            _LOGGER.debug("%s expected effect score: %.2f: %s", self, ret, explain)
         assert ret > 0, ret
         return ret
 
