@@ -13,6 +13,9 @@ class Command(ABC):
     def execute(self, ctx: Context) -> None:
         ...
 
+    def __str__(self) -> str:
+        return self.name()
+
     def name(self) -> Text:
         ret = self.__class__.__name__
         if ret.endswith("Command"):

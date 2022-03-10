@@ -104,9 +104,6 @@ class RaceCommand(Command):
         self.race = race
         self.selected = selected
 
-    def __str__(self) -> str:
-        return f"Command<{self.race}>"
-
     def name(self) -> Text:
         return str(self.race)
 
