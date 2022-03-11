@@ -89,7 +89,7 @@ class Item:
     ) -> float:
         """Item will be used before command if score not less than expected effect score."""
 
-        es_before = EffectSummary()
+        es_before = ctx.item_history.effect_summary(ctx)
         for i in picked_items:
             es_before.add(i)
         es_after = es_before.clone()

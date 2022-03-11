@@ -63,15 +63,20 @@ class EffectSummary:
         self.race_fan_buff = 0.0
         self.race_reward_buff = 0.0
 
-        self.unknown_effects: Tuple[Effect, ...] = ()
+        self.unknown_effects: Sequence[Effect] = ()
 
-    def add(self, item: Item):
+    def add(self, item: Item, age: int = 0):
         for effect in item.effects:
+            if effect.turn_count < age:
+                continue
             for i in _effect_reducers:
                 if i(item, effect, self):
                     break
             else:
-                self.unknown_effects += (effect,)
+                self.unknown_effects = (
+                    *self.unknown_effects,
+                    effect,
+                )
 
     def clone(self) -> EffectSummary:
         c = self.__class__()
@@ -253,7 +258,6 @@ def _(item: Item, effect: Effect, summary: EffectSummary):
 @_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_BUFF)
 def _(item: Item, effect: Effect, summary: EffectSummary):
-    # TODO: handle duplicated buff
     tp, value, _, _ = effect.values
 
     def add(t: TrainingType):

@@ -2,11 +2,13 @@
 # pyright: strict
 
 from __future__ import annotations
+
 from typing import List, Tuple
 
+from ..context import Context
 from .item import Item
 
-from ..context import Context
+from .effect_summary import EffectSummary
 
 
 class History:
@@ -20,3 +22,10 @@ class History:
                 item,
             )
         )
+
+    def effect_summary(self, ctx: Context) -> EffectSummary:
+        es = EffectSummary()
+        t_now = ctx.turn_count()
+        for t_start, item in self._l:
+            es.add(item, t_now - t_start)
+        return es
