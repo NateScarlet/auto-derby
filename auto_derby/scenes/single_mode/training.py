@@ -45,9 +45,9 @@ def _ocr_training_effect(img: Image) -> int:
         8,
         np.array(
             (
-                (0, -1, 0),
-                (-1, 5, -1),
-                (0, -1, 0),
+                (1, -2, 1),
+                (-2, 5, -2),
+                (1, -2, 1),
             )
         ),
     )
@@ -57,8 +57,7 @@ def _ocr_training_effect(img: Image) -> int:
         sharpened_img,
         (255, 255, 255),
         (234, 245, 240),
-        (208, 200, 234),
-        threshold=0.9
+        (208, 200, 234)
     )
     white_outline_img = cv2.morphologyEx(
         white_outline_img,
@@ -688,12 +687,12 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
             rp.vector4((448, 597, 521, 625), 540),
         ),
         ctx.SCENARIO_CLIMAX: (
-            rp.vector4((18, 597, 104, 625), 540),
-            rp.vector4((104, 597, 190, 625), 540),
-            rp.vector4((190, 597, 273, 625), 540),
-            rp.vector4((273, 597, 358, 625), 540),
-            rp.vector4((358, 597, 441, 625), 540),
-            rp.vector4((448, 597, 521, 625), 540),
+            rp.vector4((18, 595, 104, 623), 540),
+            rp.vector4((104, 595, 190, 623), 540),
+            rp.vector4((190, 595, 273, 623), 540),
+            rp.vector4((273, 595, 358, 623), 540),
+            rp.vector4((358, 595, 441, 623), 540),
+            rp.vector4((448, 595, 521, 623), 540),
         ),
     }[ctx.scenario]
 
@@ -714,12 +713,12 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
             rp.vector4((448, 570, 521, 595), 540),
         ),
         ctx.SCENARIO_CLIMAX: (
-            rp.vector4((18, 570, 104, 595), 540),
-            rp.vector4((104, 570, 190, 595), 540),
-            rp.vector4((190, 570, 273, 595), 540),
-            rp.vector4((273, 570, 358, 595), 540),
-            rp.vector4((358, 570, 441, 595), 540),
-            rp.vector4((448, 570, 521, 595), 540),
+            rp.vector4((18, 568, 104, 593), 540),
+            rp.vector4((104, 568, 190, 593), 540),
+            rp.vector4((190, 568, 273, 593), 540),
+            rp.vector4((273, 568, 358, 593), 540),
+            rp.vector4((358, 568, 441, 593), 540),
+            rp.vector4((448, 568, 521, 593), 540),
         ),
     }.get(ctx.scenario)
     if extra_bbox_group:
