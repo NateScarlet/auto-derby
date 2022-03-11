@@ -297,7 +297,7 @@ class Item:
             ctx.MOOD_BAD: 3,
             ctx.MOOD_VERY_BAD: 4,
         }[ctx.mood]
-        if es.mood > 0 and es.mood > max_mood:
+        if es.mood > max_mood:
             return False
         return True
 
