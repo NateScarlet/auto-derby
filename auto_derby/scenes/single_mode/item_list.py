@@ -166,6 +166,10 @@ class ItemListScene(Scene):
             for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
+                if match.disabled:
+                    _LOGGER.warn("skip disabled item: %s", match)
+                    remains.remove(match)
+                    continue
                 _LOGGER.info("use: %s", match)
                 action.tap(pos)
                 action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
