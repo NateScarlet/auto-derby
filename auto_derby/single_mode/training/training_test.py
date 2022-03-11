@@ -8,6 +8,7 @@ from ... import _test
 from . import Partner, Training
 import pytest
 
+# TODO: move to scenes/single_mode/
 
 @pytest.mark.parametrize(
     "name",
