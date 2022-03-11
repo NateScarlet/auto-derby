@@ -164,7 +164,7 @@ class Item:
 
         if explain:
             _LOGGER.debug("%s expected effect score: %.2f: %s", self, ret, explain)
-        assert ret > 0, ret
+        assert ret >= 0, ret
         return ret
 
     def exchange_score(self, ctx: Context) -> float:
