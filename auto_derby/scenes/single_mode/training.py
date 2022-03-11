@@ -45,16 +45,16 @@ def _recognize_base_effect(img: Image) -> int:
         8,
         np.array(
             (
-                (0, -1, 0),
-                (-1, 5, -1),
-                (0, -1, 0),
+                (1, -2, 1),
+                (-2, 5, -2),
+                (1, -2, 1),
             )
         ),
     )
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.7)
 
     white_outline_img = imagetools.constant_color_key(
-        sharpened_img, (255, 255, 255), (234, 245, 240), (208, 200, 234), threshold=0.9
+        sharpened_img, (255, 255, 255), (234, 245, 240), (208, 200, 234)
     )
     white_outline_img = cv2.morphologyEx(
         white_outline_img,
@@ -641,7 +641,7 @@ def _effect_recognitions(
         yield _bbox_groups(597, 625), _recognize_base_effect
         yield _bbox_groups(570, 595), _recognize_red_effect
     elif ctx.scenario == ctx.SCENARIO_CLIMAX:
-        yield _bbox_groups(597, 625), _recognize_base_effect
+        yield _bbox_groups(595, 623), _recognize_base_effect
         yield _bbox_groups(568, 593), _recognize_red_effect
     else:
         raise NotImplementedError(ctx.scenario)
