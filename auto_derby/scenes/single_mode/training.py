@@ -116,7 +116,7 @@ def _recognize_base_effect(img: Image) -> int:
         cv2.destroyAllWindows()
 
     # +100 has different color
-    hash100 = "0000000000006066607770ff70df60df00000000000000000000000000000000"
+    hash100 = "000000000000006660ee64ff64ff4eff42060000000000000000000000000000"
     if (
         imagetools.compare_hash(
             imagetools.image_hash(imagetools.pil_image(text_img)),
@@ -131,7 +131,7 @@ def _recognize_base_effect(img: Image) -> int:
     return int(text.lstrip("+"))
 
 
-def _recognize_red_training_effect(img: Image) -> int:
+def _recognize_red_effect(img: Image) -> int:
     cv_img = imagetools.cv_image(
         imagetools.resize(
             imagetools.resize(img, height=24),
@@ -224,16 +224,6 @@ def _recognize_red_training_effect(img: Image) -> int:
         cv2.waitKey()
         cv2.destroyAllWindows()
 
-    # +100 has different color
-    hash100 = "0000000000006066607770ff70df60df00000000000000000000000000000000"
-    if (
-        imagetools.compare_hash(
-            imagetools.image_hash(imagetools.pil_image(text_img)),
-            hash100,
-        )
-        > 0.9
-    ):
-        return 100
     text = ocr.text(image_from_array(text_img))
     if not text:
         return 0
@@ -635,43 +625,26 @@ def _effect_recognitions(
         Callable[[Image], int],
     ]
 ]:
+    def _bbox_groups(t: int, b: int):
+        return (
+            rp.vector4((18, t, 104, b), 540),
+            rp.vector4((104, t, 190, b), 540),
+            rp.vector4((190, t, 273, b), 540),
+            rp.vector4((273, t, 358, b), 540),
+            rp.vector4((358, t, 441, b), 540),
+            rp.vector4((448, t, 521, b), 540),
+        )
+
     if ctx.scenario == ctx.SCENARIO_URA:
-        yield (
-            rp.vector4((18, 503, 91, 532), 466),
-            rp.vector4((91, 503, 163, 532), 466),
-            rp.vector4((163, 503, 237, 532), 466),
-            rp.vector4((237, 503, 309, 532), 466),
-            rp.vector4((309, 503, 382, 532), 466),
-            rp.vector4((387, 503, 450, 532), 466),
-        ), _recognize_base_effect
-    elif ctx.scenario in (ctx.SCENARIO_AOHARU, ctx.SCENARIO_CLIMAX):
-        yield (
-            rp.vector4((18, 597, 104, 625), 540),
-            rp.vector4((104, 597, 190, 625), 540),
-            rp.vector4((190, 597, 273, 625), 540),
-            rp.vector4((273, 597, 358, 625), 540),
-            rp.vector4((358, 597, 441, 625), 540),
-            rp.vector4((448, 597, 521, 625), 540),
-        ), _recognize_base_effect
+        yield _bbox_groups(582, 616), _recognize_base_effect
+    elif ctx.scenario == ctx.SCENARIO_AOHARU:
+        yield _bbox_groups(597, 625), _recognize_base_effect
+        yield _bbox_groups(570, 595), _recognize_red_effect
+    elif ctx.scenario == ctx.SCENARIO_CLIMAX:
+        yield _bbox_groups(597, 625), _recognize_base_effect
+        yield _bbox_groups(568, 593), _recognize_red_effect
     else:
         raise NotImplementedError(ctx.scenario)
-
-    if ctx.scenario == ctx.SCENARIO_AOHARU:
-        t = 570
-        b = 595
-    elif ctx.scenario == ctx.SCENARIO_CLIMAX:
-        t = 568
-        b = 593
-    else:
-        return
-    yield (
-        rp.vector4((18, t, 104, b), 540),
-        rp.vector4((102, t, 190, b), 540),
-        rp.vector4((190, t, 273, b), 540),
-        rp.vector4((273, t, 358, b), 540),
-        rp.vector4((358, t, 441, b), 540),
-        rp.vector4((448, t, 521, b), 540),
-    ), _recognize_red_training_effect
 
 
 def _recognize_training(ctx: Context, img: Image) -> Training:
