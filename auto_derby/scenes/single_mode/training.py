@@ -54,11 +54,7 @@ def _ocr_training_effect(img: Image) -> int:
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.7)
 
     white_outline_img = imagetools.constant_color_key(
-        sharpened_img,
-        (255, 255, 255),
-        (234, 245, 240),
-        (208, 200, 234),
-        threshold=0.9
+        sharpened_img, (255, 255, 255), (234, 245, 240), (208, 200, 234), threshold=0.9
     )
     white_outline_img = cv2.morphologyEx(
         white_outline_img,
@@ -135,7 +131,7 @@ def _ocr_training_effect(img: Image) -> int:
     return int(text.lstrip("+"))
 
 
-def _ocr_red_training_effect(img: Image) -> int:
+def _recognize_red_training_effect(img: Image) -> int:
     cv_img = imagetools.cv_image(
         imagetools.resize(
             imagetools.resize(img, height=24),
@@ -628,6 +624,28 @@ def _recognize_partners(ctx: Context, img: Image) -> Iterator[training.Partner]:
         )
 
 
+def _extra_effect_jobs(ctx: Context, rp: mathtools.ResizeProxy):
+    if ctx.scenario == ctx.SCENARIO_AOHARU:
+        t = 570
+        b = 595
+    elif ctx.scenario == ctx.SCENARIO_CLIMAX:
+        t = 568
+        b = 593
+    else:
+        return
+    yield (
+        (
+            rp.vector4((18, t, 104, b), 540),
+            rp.vector4((102, t, 190, b), 540),
+            rp.vector4((190, t, 273, b), 540),
+            rp.vector4((273, t, 358, b), 540),
+            rp.vector4((358, t, 441, b), 540),
+            rp.vector4((448, t, 521, b), 540),
+        ),
+        _recognize_red_training_effect,
+    )
+
+
 def _recognize_training(ctx: Context, img: Image) -> Training:
     if training.g.image_path:
         image_id = imagetools.md5(
@@ -670,6 +688,7 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
         tuple(cast.list_(img.getpixel(rp.vector2((10, 200), 540)), int))
     )
 
+    # TODO: simplify code
     bbox_group = {
         ctx.SCENARIO_URA: (
             rp.vector4((18, 503, 91, 532), 466),
@@ -704,31 +723,13 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
     self.wisdom = _ocr_training_effect(img.crop(bbox_group[4]))
     self.skill = _ocr_training_effect(img.crop(bbox_group[5]))
 
-    extra_bbox_group = {
-        ctx.SCENARIO_AOHARU: (
-            rp.vector4((18, 570, 104, 595), 540),
-            rp.vector4((104, 570, 190, 595), 540),
-            rp.vector4((190, 570, 273, 595), 540),
-            rp.vector4((273, 570, 358, 595), 540),
-            rp.vector4((358, 570, 441, 595), 540),
-            rp.vector4((448, 570, 521, 595), 540),
-        ),
-        ctx.SCENARIO_CLIMAX: (
-            rp.vector4((18, 570, 104, 595), 540),
-            rp.vector4((104, 570, 190, 595), 540),
-            rp.vector4((190, 570, 273, 595), 540),
-            rp.vector4((273, 570, 358, 595), 540),
-            rp.vector4((358, 570, 441, 595), 540),
-            rp.vector4((448, 570, 521, 595), 540),
-        ),
-    }.get(ctx.scenario)
-    if extra_bbox_group:
-        self.speed += _ocr_red_training_effect(img.crop(extra_bbox_group[0]))
-        self.stamina += _ocr_red_training_effect(img.crop(extra_bbox_group[1]))
-        self.power += _ocr_red_training_effect(img.crop(extra_bbox_group[2]))
-        self.guts += _ocr_red_training_effect(img.crop(extra_bbox_group[3]))
-        self.wisdom += _ocr_red_training_effect(img.crop(extra_bbox_group[4]))
-        self.skill += _ocr_red_training_effect(img.crop(extra_bbox_group[5]))
+    for bbox_group, recognize in _extra_effect_jobs(ctx, rp):
+        self.speed += recognize(img.crop(bbox_group[0]))
+        self.stamina += recognize(img.crop(bbox_group[1]))
+        self.power += recognize(img.crop(bbox_group[2]))
+        self.guts += recognize(img.crop(bbox_group[3]))
+        self.wisdom += recognize(img.crop(bbox_group[4]))
+        self.skill += recognize(img.crop(bbox_group[5]))
 
     # TODO: recognize vitality
     # plugin hook
