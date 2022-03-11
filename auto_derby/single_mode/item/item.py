@@ -133,7 +133,7 @@ class Item:
         explain = ""
         s = self.original_price * 0.8
         if s:
-            explain += f"{s} by price;"
+            explain += f"{s:.2f} by price;"
             ret += s
         r = mathtools.interpolate(
             ctx.turn_count(),
@@ -239,7 +239,7 @@ class Item:
         explain = ""
         s = self.price * 0.8
         if s:
-            explain += f"{s} by price;"
+            explain += f"{s:.2f} by price;"
             ret += s
 
         s = max(
@@ -254,7 +254,7 @@ class Item:
             ),
         )
         if s:
-            explain += f"{s} by shop coin;"
+            explain += f"{s:.2f} by shop coin;"
             ret += s
 
         r = mathtools.interpolate(
