@@ -81,8 +81,7 @@ class Item:
 
     def effect_summary(self) -> EffectSummary:
         es = EffectSummary()
-        for i in self.effects:
-            es.add(i)
+        es.add(self)
         return es
 
     def effect_score(
@@ -92,11 +91,9 @@ class Item:
 
         es_before = EffectSummary()
         for i in picked_items:
-            for e in i.effects:
-                es_before.add(e)
+            es_before.add(i)
         es_after = es_before.clone()
-        for i in self.effects:
-            es_after.add(i)
+        es_after.add(self)
         explain = ""
 
         from ..commands import TrainingCommand, RaceCommand

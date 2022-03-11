@@ -4,13 +4,17 @@
 from __future__ import annotations
 
 import logging
-from typing import Callable, Dict, List, Tuple
+from typing import TYPE_CHECKING, Callable, Dict, List, Tuple
 
 from ...constants import TrainingType
 from ..context import Context
 from ..race import Race
 from ..training import Training
 from .effect import Effect
+
+if TYPE_CHECKING:
+    from .item import Item
+
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -19,10 +23,19 @@ _effect_reducers: List[_EffectReducer] = []
 
 
 class TrainingBuff:
-    def __init__(self, type: TrainingType, rate: float, turn_count: int) -> None:
+    def __init__(
+        self,
+        type: TrainingType,
+        rate: float,
+        turn_count: int,
+        priority: int,
+        group: int,
+    ) -> None:
         self.type = type
         self.rate = rate
         self.turn_count = turn_count
+        self.priority = priority
+        self.group = group
 
 
 class EffectSummary:
@@ -47,12 +60,13 @@ class EffectSummary:
 
         self.unknown_effects: Tuple[Effect, ...] = ()
 
-    def add(self, effect: Effect):
-        for i in _effect_reducers:
-            if i(effect, self):
-                break
-        else:
-            self.unknown_effects += (effect,)
+    def add(self, item: Item):
+        for effect in item.effects:
+            for i in _effect_reducers:
+                if i(item, effect, self):
+                    break
+            else:
+                self.unknown_effects += (effect,)
 
     def clone(self) -> EffectSummary:
         c = self.__class__()
@@ -127,15 +141,15 @@ class EffectSummary:
         return r
 
 
-_EffectReducer = Callable[[Effect, EffectSummary], bool]
+_EffectReducer = Callable[[Item, Effect, EffectSummary], bool]
 
 
 def _only_effect_type(effect_type: int):
     def _wrapper(fn: _EffectReducer) -> _EffectReducer:
-        def _func(effect: Effect, summary: EffectSummary) -> bool:
+        def _func(item: Item, effect: Effect, summary: EffectSummary) -> bool:
             if effect.type != effect_type:
                 return False
-            return fn(effect, summary)
+            return fn(item, effect, summary)
 
         return _func
 
@@ -149,7 +163,7 @@ def _register_reducer(fn: _EffectReducer):
 
 @_register_reducer
 @_only_effect_type(Effect.TYPE_PROPERTY)
-def _(effect: Effect, summary: EffectSummary):
+def _(item: Item, effect: Effect, summary: EffectSummary):
     prop, value, _, _ = effect.values
     if prop == Effect.PROPERTY_SPEED:
         summary.speed += value
@@ -183,7 +197,7 @@ def _(effect: Effect, summary: EffectSummary):
 
 @_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_LEVEL)
-def _(effect: Effect, summary: EffectSummary):
+def _(item: Item, effect: Effect, summary: EffectSummary):
     lv, value, _, _ = effect.values
 
     def _add_value(t: TrainingType):
@@ -209,7 +223,7 @@ def _(effect: Effect, summary: EffectSummary):
 
 @_register_reducer
 @_only_effect_type(Effect.TYPE_CONDITION)
-def _(effect: Effect, summary: EffectSummary):
+def _(item: Item, effect: Effect, summary: EffectSummary):
     # TODO: handle duplicated effect
     action, value, _, _ = effect.values
     if action == Effect.CONDITION_ADD:
@@ -223,7 +237,7 @@ def _(effect: Effect, summary: EffectSummary):
 
 @_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_PARTNER_REASSIGN)
-def _(effect: Effect, summary: EffectSummary):
+def _(item: Item, effect: Effect, summary: EffectSummary):
     if effect.values == (0, 0, 0, 0):
         summary.training_partner_reassign = True
         return True
@@ -232,71 +246,65 @@ def _(effect: Effect, summary: EffectSummary):
 
 @_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_BUFF)
-def _(effect: Effect, summary: EffectSummary):
+def _(item: Item, effect: Effect, summary: EffectSummary):
     # TODO: handle duplicated buff
     tp, value, _, _ = effect.values
-    if tp == 0:
+
+    def add(t: TrainingType):
         summary.training_effect_buff += (
-            TrainingBuff(TrainingType.SPEED, value / 100, effect.turn_count),
-            TrainingBuff(TrainingType.STAMINA, value / 100, effect.turn_count),
-            TrainingBuff(TrainingType.POWER, value / 100, effect.turn_count),
-            TrainingBuff(TrainingType.GUTS, value / 100, effect.turn_count),
-            TrainingBuff(TrainingType.WISDOM, value / 100, effect.turn_count),
+            TrainingBuff(t, value / 100, effect.turn_count, item.effect_priority, tp),
         )
+
+    if tp == 0:
+        add(TrainingType.SPEED)
+        add(TrainingType.STAMINA)
+        add(TrainingType.POWER)
+        add(TrainingType.GUTS)
+        add(TrainingType.WISDOM)
         return True
     if tp == Effect.TRAINING_LEVEL_SPEED:
-        summary.training_effect_buff += (
-            TrainingBuff(TrainingType.SPEED, value / 100, effect.turn_count),
-        )
+        add(TrainingType.SPEED)
         return True
     if tp == Effect.TRAINING_LEVEL_STAMINA:
-        summary.training_effect_buff += (
-            TrainingBuff(TrainingType.STAMINA, value / 100, effect.turn_count),
-        )
+        add(TrainingType.STAMINA)
         return True
     if tp == Effect.TRAINING_LEVEL_POWER:
-        summary.training_effect_buff += (
-            TrainingBuff(TrainingType.POWER, value / 100, effect.turn_count),
-        )
+        add(TrainingType.POWER)
         return True
     if tp == Effect.TRAINING_LEVEL_GUTS:
-        summary.training_effect_buff += (
-            TrainingBuff(TrainingType.GUTS, value / 100, effect.turn_count),
-        )
+        add(TrainingType.GUTS)
         return True
     return False
 
 
 @_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_VITALITY_DEBUFF)
-def _(effect: Effect, summary: EffectSummary):
+def _(item: Item, effect: Effect, summary: EffectSummary):
     tp, value, _, _ = effect.values
-    if tp == Effect.TRAINING_LEVEL_SPEED:
+
+    def add(t: TrainingType):
         summary.training_vitality_debuff += (
-            TrainingBuff(TrainingType.SPEED, value / 100, effect.turn_count),
+            TrainingBuff(t, value / 100, effect.turn_count, item.effect_priority, tp),
         )
+
+    if tp == Effect.TRAINING_LEVEL_SPEED:
+        add(TrainingType.SPEED)
         return True
     if tp == Effect.TRAINING_LEVEL_STAMINA:
-        summary.training_vitality_debuff += (
-            TrainingBuff(TrainingType.STAMINA, value / 100, effect.turn_count),
-        )
+        add(TrainingType.STAMINA)
         return True
     if tp == Effect.TRAINING_LEVEL_POWER:
-        summary.training_vitality_debuff += (
-            TrainingBuff(TrainingType.POWER, value / 100, effect.turn_count),
-        )
+        add(TrainingType.POWER)
         return True
     if tp == Effect.TRAINING_LEVEL_GUTS:
-        summary.training_vitality_debuff += (
-            TrainingBuff(TrainingType.GUTS, value / 100, effect.turn_count),
-        )
+        add(TrainingType.GUTS)
         return True
     return False
 
 
 @_register_reducer
 @_only_effect_type(Effect.TYPE_TRAINING_NO_FAILURE)
-def _(effect: Effect, summary: EffectSummary):
+def _(item: Item, effect: Effect, summary: EffectSummary):
     if effect.values == (0, 0, 0, 0):
         summary.training_no_failure = True
         return True
@@ -305,7 +313,7 @@ def _(effect: Effect, summary: EffectSummary):
 
 @_register_reducer
 @_only_effect_type(Effect.TYPE_RACE_BUFF)
-def _(effect: Effect, summary: EffectSummary):
+def _(item: Item, effect: Effect, summary: EffectSummary):
     # TODO: handle duplicated buff
     tp, value, _, _ = effect.values
     if tp == Effect.RACE_BUFF_REWARD:
