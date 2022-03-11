@@ -60,7 +60,7 @@ def _handle_race_result(ctx: Context, race: Race):
     action.tap(pos)
 
     if ctx.scenario == ctx.SCENARIO_CLIMAX and ctx.date[0] < 4:
-        tmpl, pos = action.wait_image(
+        tmpl, pos = action.wait_image_stable(
             templates.CLOSE_BUTTON,
             templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_WIN,
             templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW,
