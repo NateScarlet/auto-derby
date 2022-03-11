@@ -22,6 +22,8 @@ def iterate(
 ) -> Iterator[Plan]:
     for index, item in enumerate(items):
         s = item.effect_score(ctx, command, picked_items)
+        if s <= 0:
+            continue
         s_e = item.expected_effect_score(ctx, command)
         if s < s_e:
             continue
