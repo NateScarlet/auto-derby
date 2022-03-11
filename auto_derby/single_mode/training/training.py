@@ -2,7 +2,7 @@
 # pyright: strict
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Tuple
+from typing import Tuple
 
 from PIL.Image import Image
 
@@ -11,9 +11,6 @@ from ..context import Context
 from . import training_score
 from .globals import g
 from .partner import Partner
-
-if TYPE_CHECKING:
-    from .. import item
 
 
 class Training:
@@ -50,7 +47,6 @@ class Training:
         self.failure_rate: float = 0.0
         self.confirm_position: Tuple[int, int] = (0, 0)
         self.partners: Tuple[Partner, ...] = ()
-        self.item_effects: Tuple[item.Effect, ...] = ()
 
     def __str__(self):
 

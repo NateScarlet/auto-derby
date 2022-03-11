@@ -704,8 +704,6 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
     self.failure_rate = _recognize_failure_rate(rp, self, img)
     self.partners = tuple(_recognize_partners(ctx, img))
 
-    # TODO: recognize effects
-    self.item_effects = ()
     return self
 
 

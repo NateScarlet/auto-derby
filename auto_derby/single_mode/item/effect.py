@@ -45,9 +45,6 @@ class Effect:
         self.values: Tuple[int, int, int, int] = (0, 0, 0, 0)
         self.turn_count = 0
 
-        self.priority = 0
-        self.start_turn = 0
-
     def to_dict(self) -> Dict[Text, Any]:
         d = {
             "id": self.id,

@@ -315,8 +315,9 @@ class Context:
         self.training_history: Tuple[Tuple[int, training.Training], ...] = ()
         self.trainings: Tuple[training.Training, ...] = ()
         self.race_history: Tuple[Tuple[int, race.Race], ...] = ()
-    
+
         from . import item
+
         self.items = item.ItemList()
         self.items_last_updated_turn = 0
         self.item_history = item.History()
