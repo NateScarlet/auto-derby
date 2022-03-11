@@ -6,7 +6,7 @@ from __future__ import annotations
 import logging
 import os
 from concurrent import futures
-from typing import Iterator, Optional, Tuple
+from typing import Callable, Iterator, Optional, Tuple
 
 import cast_unknown as cast
 import cv2
@@ -38,7 +38,7 @@ def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarra
     return ret
 
 
-def _ocr_training_effect(img: Image) -> int:
+def _recognize_base_effect(img: Image) -> int:
     cv_img = imagetools.cv_image(imagetools.resize(img, height=32))
     sharpened_img = cv2.filter2D(
         cv_img,
@@ -624,7 +624,38 @@ def _recognize_partners(ctx: Context, img: Image) -> Iterator[training.Partner]:
         )
 
 
-def _extra_effect_jobs(ctx: Context, rp: mathtools.ResizeProxy):
+_Vector4 = Tuple[int, int, int, int]
+
+
+def _effect_recognitions(
+    ctx: Context, rp: mathtools.ResizeProxy
+) -> Iterator[
+    Tuple[
+        Tuple[_Vector4, _Vector4, _Vector4, _Vector4, _Vector4, _Vector4],
+        Callable[[Image], int],
+    ]
+]:
+    if ctx.scenario == ctx.SCENARIO_URA:
+        yield (
+            rp.vector4((18, 503, 91, 532), 466),
+            rp.vector4((91, 503, 163, 532), 466),
+            rp.vector4((163, 503, 237, 532), 466),
+            rp.vector4((237, 503, 309, 532), 466),
+            rp.vector4((309, 503, 382, 532), 466),
+            rp.vector4((387, 503, 450, 532), 466),
+        ), _recognize_base_effect
+    elif ctx.scenario in (ctx.SCENARIO_AOHARU, ctx.SCENARIO_CLIMAX):
+        yield (
+            rp.vector4((18, 597, 104, 625), 540),
+            rp.vector4((104, 597, 190, 625), 540),
+            rp.vector4((190, 597, 273, 625), 540),
+            rp.vector4((273, 597, 358, 625), 540),
+            rp.vector4((358, 597, 441, 625), 540),
+            rp.vector4((448, 597, 521, 625), 540),
+        ), _recognize_base_effect
+    else:
+        raise NotImplementedError(ctx.scenario)
+
     if ctx.scenario == ctx.SCENARIO_AOHARU:
         t = 570
         b = 595
@@ -634,16 +665,13 @@ def _extra_effect_jobs(ctx: Context, rp: mathtools.ResizeProxy):
     else:
         return
     yield (
-        (
-            rp.vector4((18, t, 104, b), 540),
-            rp.vector4((102, t, 190, b), 540),
-            rp.vector4((190, t, 273, b), 540),
-            rp.vector4((273, t, 358, b), 540),
-            rp.vector4((358, t, 441, b), 540),
-            rp.vector4((448, t, 521, b), 540),
-        ),
-        _recognize_red_training_effect,
-    )
+        rp.vector4((18, t, 104, b), 540),
+        rp.vector4((102, t, 190, b), 540),
+        rp.vector4((190, t, 273, b), 540),
+        rp.vector4((273, t, 358, b), 540),
+        rp.vector4((358, t, 441, b), 540),
+        rp.vector4((448, t, 521, b), 540),
+    ), _recognize_red_training_effect
 
 
 def _recognize_training(ctx: Context, img: Image) -> Training:
@@ -688,42 +716,7 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
         tuple(cast.list_(img.getpixel(rp.vector2((10, 200), 540)), int))
     )
 
-    # TODO: simplify code
-    bbox_group = {
-        ctx.SCENARIO_URA: (
-            rp.vector4((18, 503, 91, 532), 466),
-            rp.vector4((91, 503, 163, 532), 466),
-            rp.vector4((163, 503, 237, 532), 466),
-            rp.vector4((237, 503, 309, 532), 466),
-            rp.vector4((309, 503, 382, 532), 466),
-            rp.vector4((387, 503, 450, 532), 466),
-        ),
-        ctx.SCENARIO_AOHARU: (
-            rp.vector4((18, 597, 104, 625), 540),
-            rp.vector4((104, 597, 190, 625), 540),
-            rp.vector4((190, 597, 273, 625), 540),
-            rp.vector4((273, 597, 358, 625), 540),
-            rp.vector4((358, 597, 441, 625), 540),
-            rp.vector4((448, 597, 521, 625), 540),
-        ),
-        ctx.SCENARIO_CLIMAX: (
-            rp.vector4((18, 597, 104, 625), 540),
-            rp.vector4((104, 597, 190, 625), 540),
-            rp.vector4((190, 597, 273, 625), 540),
-            rp.vector4((273, 597, 358, 625), 540),
-            rp.vector4((358, 597, 441, 625), 540),
-            rp.vector4((448, 597, 521, 625), 540),
-        ),
-    }[ctx.scenario]
-
-    self.speed = _ocr_training_effect(img.crop(bbox_group[0]))
-    self.stamina = _ocr_training_effect(img.crop(bbox_group[1]))
-    self.power = _ocr_training_effect(img.crop(bbox_group[2]))
-    self.guts = _ocr_training_effect(img.crop(bbox_group[3]))
-    self.wisdom = _ocr_training_effect(img.crop(bbox_group[4]))
-    self.skill = _ocr_training_effect(img.crop(bbox_group[5]))
-
-    for bbox_group, recognize in _extra_effect_jobs(ctx, rp):
+    for bbox_group, recognize in _effect_recognitions(ctx, rp):
         self.speed += recognize(img.crop(bbox_group[0]))
         self.stamina += recognize(img.crop(bbox_group[1]))
         self.power += recognize(img.crop(bbox_group[2]))
