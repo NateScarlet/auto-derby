@@ -117,12 +117,11 @@ class ShopScene(Scene):
         rp = action.resize_proxy()
         action.swipe(
             rp.vector2((17, 720), 540),
-            dy=rp.vector(-230 * direction, 540),
+            dy=rp.vector(-150 * direction, 540),
             duration=0.2,
         )
         # prevent inertial scrolling
         action.tap(rp.vector2((15, 600), 540))
-        time.sleep(0.2)  # wait animation
         self._same_direction_scroll_count += 1
         if self._same_direction_scroll_count >= self._max_same_direction_scroll_count:
             self._on_scroll_to_end()

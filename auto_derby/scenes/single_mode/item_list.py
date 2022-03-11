@@ -113,12 +113,11 @@ class ItemListScene(Scene):
         rp = action.resize_proxy()
         action.swipe(
             rp.vector2((17, 720), 540),
-            dy=rp.vector(-230 * direction, 540),
+            dy=rp.vector(-150 * direction, 540),
             duration=0.2,
         )
         # prevent inertial scrolling
         action.tap(rp.vector2((15, 600), 540))
-        time.sleep(0.2)  # wait animation
 
     def _on_scroll_to_end(self):
         self._menu_position = 1 - self._menu_position
