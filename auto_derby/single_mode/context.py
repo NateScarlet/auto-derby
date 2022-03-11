@@ -312,8 +312,10 @@ class Context:
         self.grade_point = 0
         self.shop_coin = 0
 
+        # TODO: use custom class
         self.training_history: Tuple[Tuple[int, training.Training], ...] = ()
         self.trainings: Tuple[training.Training, ...] = ()
+        # TODO: use custom class
         self.race_history: Tuple[Tuple[int, race.Race], ...] = ()
 
         from . import item
