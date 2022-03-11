@@ -177,6 +177,7 @@ class ShopScene(Scene):
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
                     action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                     time.sleep(2)  # wait animation
+                    ctx.item_history.append(ctx, match)
                     # match item moved to bottom
                     template.invalidate_screeshot()
                     break

@@ -5,13 +5,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Iterator, Sequence, Tuple
 
-from ..context import Context
-from .item import Item
 
 if TYPE_CHECKING:
     from ..commands import Command
+    from ..context import Context
+    from .item import Item
 
-Plan = Tuple[float, Tuple[Item, ...]]
+    Plan = Tuple[float, Tuple[Item, ...]]
 
 
 def iterate(

@@ -1,5 +1,6 @@
 from . import game_data, label, plan
 from .effect import Effect
+from .history import History
 from .game_data import get
 from .globals import g
 from .item import Item

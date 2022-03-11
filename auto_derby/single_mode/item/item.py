@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING, Any, Dict, Sequence, Text, Tuple
 
 import numpy as np
 
-from ..context import Context
 from .effect import Effect
 from .effect_summary import EffectSummary
 from ..training import Training
@@ -20,6 +19,7 @@ _LOGGER = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from ..commands import Command
+    from ..context import Context
 
 # TODO: allow plugin override class
 class Item:

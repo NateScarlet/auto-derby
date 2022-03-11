@@ -175,6 +175,7 @@ class ItemListScene(Scene):
                 action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                 remains.remove(match)
                 ctx.items.remove(match.id, 1)
+                ctx.item_history.append(ctx, match)
 
                 # wait animation
                 time.sleep(2)
