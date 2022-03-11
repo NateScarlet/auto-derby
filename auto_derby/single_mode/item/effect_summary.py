@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Callable, Dict, List, Tuple
+from typing import TYPE_CHECKING, Callable, Dict, List, Sequence, Tuple
 
 from ...constants import TrainingType
 from ..context import Context
@@ -37,6 +37,11 @@ class TrainingBuff:
         self.priority = priority
         self.group = group
 
+    def apply_to(self, s: Sequence[TrainingBuff]) -> Sequence[TrainingBuff]:
+        if any(i for i in s if i.group == self.group and i.priority > self.priority):
+            return s
+        return (*(i for i in s if i.group != self.group), self)
+
 
 class EffectSummary:
     def __init__(self) -> None:
@@ -51,8 +56,8 @@ class EffectSummary:
         self.condition_add: Tuple[int, ...] = ()
         self.condition_remove: Tuple[int, ...] = ()
         self.training_level: Dict[TrainingType, int] = {}
-        self.training_effect_buff: Tuple[TrainingBuff, ...] = ()
-        self.training_vitality_debuff: Tuple[TrainingBuff, ...] = ()
+        self.training_effect_buff: Sequence[TrainingBuff] = ()
+        self.training_vitality_debuff: Sequence[TrainingBuff] = ()
         self.training_partner_reassign = False
         self.training_no_failure = False
         self.race_fan_buff = 0.0
@@ -141,7 +146,8 @@ class EffectSummary:
         return r
 
 
-_EffectReducer = Callable[[Item, Effect, EffectSummary], bool]
+if TYPE_CHECKING:
+    _EffectReducer = Callable[[Item, Effect, EffectSummary], bool]
 
 
 def _only_effect_type(effect_type: int):
@@ -251,9 +257,9 @@ def _(item: Item, effect: Effect, summary: EffectSummary):
     tp, value, _, _ = effect.values
 
     def add(t: TrainingType):
-        summary.training_effect_buff += (
-            TrainingBuff(t, value / 100, effect.turn_count, item.effect_priority, tp),
-        )
+        summary.training_effect_buff = TrainingBuff(
+            t, value / 100, effect.turn_count, item.effect_priority, tp
+        ).apply_to(summary.training_effect_buff)
 
     if tp == 0:
         add(TrainingType.SPEED)
@@ -283,9 +289,9 @@ def _(item: Item, effect: Effect, summary: EffectSummary):
     tp, value, _, _ = effect.values
 
     def add(t: TrainingType):
-        summary.training_vitality_debuff += (
-            TrainingBuff(t, value / 100, effect.turn_count, item.effect_priority, tp),
-        )
+        summary.training_vitality_debuff = TrainingBuff(
+            t, value / 100, effect.turn_count, item.effect_priority, tp
+        ).apply_to(summary.training_vitality_debuff)
 
     if tp == Effect.TRAINING_LEVEL_SPEED:
         add(TrainingType.SPEED)
@@ -314,7 +320,6 @@ def _(item: Item, effect: Effect, summary: EffectSummary):
 @_register_reducer
 @_only_effect_type(Effect.TYPE_RACE_BUFF)
 def _(item: Item, effect: Effect, summary: EffectSummary):
-    # TODO: handle duplicated buff
     tp, value, _, _ = effect.values
     if tp == Effect.RACE_BUFF_REWARD:
         summary.race_reward_buff = value / 100
