@@ -71,7 +71,7 @@ def _default_name_label_similarity_threshold(item: Item) -> float:
         match = next(
             i
             for i in game_data.iterate()
-            if 0.8 < texttools.compare(i.name, item.name) < 1
+            if 0.7 < texttools.compare(i.name, item.name) < 1
         )
         _LOGGER.debug(
             "use higher name label similarity threshold for %s due to similar item name: %s",
