@@ -75,7 +75,17 @@ def _handle_shop(ctx: Context, cs: CommandScene):
     return
 
 
+def _use_items_directly(ctx: Context, cs: CommandScene):
+    items = tuple(i for i in ctx.items if i.should_use_directly(ctx))
+    if not items:
+        return
+    scene = ItemListScene.enter(ctx)
+    scene.use_items(ctx, items)
+    cs.enter(ctx)
+
+
 def _handle_item_list(ctx: Context, cs: CommandScene):
+    _use_items_directly(ctx, cs)
     if not cs.has_shop:
         return
     if ctx.items_last_updated_turn != 0:
@@ -83,7 +93,6 @@ def _handle_item_list(ctx: Context, cs: CommandScene):
     scene = ItemListScene.enter(ctx)
     scene.recognize(ctx)
     cs.enter(ctx)
-    # TODO: use item directly
     return
 
 
