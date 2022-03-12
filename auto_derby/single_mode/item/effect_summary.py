@@ -38,10 +38,17 @@ class TrainingBuff:
         self.priority = priority
         self.group = group
 
+    def _unique_key(self):
+        return (self.type, self.group)
+
     def apply_to(self, s: Sequence[TrainingBuff]) -> Sequence[TrainingBuff]:
-        if any(i for i in s if i.group == self.group and i.priority > self.priority):
+        if any(
+            i
+            for i in s
+            if i._unique_key() == self._unique_key() and i.priority > self.priority
+        ):
             return s
-        return (*(i for i in s if i.group != self.group), self)
+        return (*(i for i in s if i._unique_key() != self._unique_key()), self)
 
 
 def _estimate_failure_rate(ctx: Context, trn: Training) -> float:
