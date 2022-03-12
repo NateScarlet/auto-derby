@@ -119,18 +119,18 @@ class EffectSummary:
         explain = ""
         ctx_after = self.apply_to_context(ctx)
 
-        effect_rate = 0
+        effect_rate = 1
         # mood
         r = ctx_after.mood[0] - ctx.mood[0]
         if r:
             explain += f"{r*100:+.0f}% by mood;"
-            effect_rate += r
+            effect_rate *= 1 + r
 
         # buff
         r = sum(i.rate for i in self.training_effect_buff if i.type == t_after.type)
         if r:
             explain += f"{r*100:+.0f}% by buff;"
-            effect_rate += r
+            effect_rate *= 1 + r
 
         r = effect_rate
         if r:
