@@ -86,14 +86,14 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
         )
         yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(303, 540), y)
 
-
+# TODO: rename to ItemMenuScene
 class ItemListScene(Scene):
     def __init__(self) -> None:
         super().__init__()
         self.items = item.ItemList()
         rp = action.resize_proxy()
         self._scroll = VerticalScroll(
-            origin=rp.vector2((17, 720), 540),
+            origin=rp.vector2((17, 540), 540),
             page_size=150,
             max_page=5,
         )

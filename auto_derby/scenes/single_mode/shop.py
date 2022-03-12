@@ -95,7 +95,7 @@ class ShopScene(Scene):
 
         rp = action.resize_proxy()
         self._scroll = VerticalScroll(
-            origin=rp.vector2((17, 720), 540),
+            origin=rp.vector2((17, 540), 540),
             page_size=150,
             max_page=10,
         )
