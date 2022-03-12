@@ -65,10 +65,9 @@ class RaceMenuScene(Scene):
 
     def choose_race(self, ctx: single_mode.Context, race: Race) -> None:
         time.sleep(0.2)  # wait animation
-        while self._scroll.has_more():
+        while self._scroll.next():
             for race2, pos in find_by_race_menu_image(ctx, template.screenshot()):
                 if race2 == race:
                     action.tap(pos)
                     return
-            self._scroll.next_page()
         raise ValueError("not found: %s" % race)

@@ -115,19 +115,19 @@ class ShopScene(Scene):
 
     def _recognize_items(self, static: bool = False) -> None:
         self.items = ()
-        while self._scroll.has_more():
+        while self._scroll.next():
             new_items = tuple(
                 i
                 for i, _ in _recognize_menu(template.screenshot())
                 if i not in self.items
             )
             if not new_items:
+                self._scroll.on_end()
                 self._scroll.complete()
                 return
             self.items += new_items
             if static:
                 break
-            self._scroll.next_page()
         if not self.items:
             _LOGGER.warn("not found items")
 
@@ -136,7 +136,7 @@ class ShopScene(Scene):
 
     def exchange_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
-        while remains and self._scroll.has_more():
+        while self._scroll.next():
             for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
@@ -163,7 +163,8 @@ class ShopScene(Scene):
                 else:
                     action.wait_tap_image(templates.CLOSE_BUTTON)
                     ctx.items.put(match.id, 1)
-            self._scroll.next_page()
+            if not remains:
+                break
         self._scroll.complete()
         for i in remains:
             _LOGGER.warn("exchange remain: %s", i)

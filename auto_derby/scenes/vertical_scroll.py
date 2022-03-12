@@ -9,6 +9,11 @@ from .. import action
 
 
 class VerticalScroll:
+    """
+    scroll direction is changed after each `complete`.
+    `complete` should be called when continuous scroll complete.
+    """
+
     def __init__(
         self,
         *,
@@ -25,9 +30,26 @@ class VerticalScroll:
         self._direction_change_count = 0
         self._last_direction = 0
 
-    def next_page(self, direction: int = 0) -> None:
-        if direction == 0:
-            direction = 1 if self._position < 0.5 else -1
+    def on_end(self):
+        """this should be called when reached top/bottom."""
+        self._position = 1 - self._position
+        self._max_same_direction_count = self._same_direction_count + 1
+        self._same_direction_count = 0
+        self._direction_change_count += 1
+
+    def complete(self):
+        """prepare next continuous scroll."""
+        self._direction_change_count = 0
+
+    def next(self) -> bool:
+        if self._direction_change_count > 6:
+            self.complete()
+            return False
+        if self._same_direction_count == 0:
+            # keep first page
+            self._same_direction_count += 1
+            return True
+        direction = 1 if self._position < 0.5 else -1
 
         action.swipe(
             self._origin,
@@ -38,21 +60,10 @@ class VerticalScroll:
         action.tap(self._origin)
         if self._last_direction == direction:
             self._same_direction_count += 1
+        else:
+            self._same_direction_count = 1
         self._last_direction = direction
         if self._same_direction_count >= self._max_same_direction_count:
-            self._change_direction()
+            self.on_end()
 
-    def _change_direction(self):
-        self._position = 1 - self._position
-        self._max_same_direction_count = self._same_direction_count + 1
-        self._same_direction_count = 0
-        self._direction_change_count += 1
-
-    def complete(self):
-        self._direction_change_count = 0
-
-    def has_more(self) -> bool:
-        ok = self._direction_change_count < 7
-        if not ok:
-            self.complete()
-        return ok
+        return True
