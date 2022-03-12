@@ -156,11 +156,11 @@ class ShopScene(Scene):
                     _LOGGER.info("use: %s", match)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
                     action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
-                    time.sleep(2)  # wait animation
                     ctx.item_history.append(ctx, match)
                 else:
                     action.wait_tap_image(templates.CLOSE_BUTTON)
                     ctx.items.put(match.id, 1)
+                time.sleep(2)  # wait click animation
                 # match item moved to bottom
                 template.invalidate_screeshot()
                 return _exchange_visible_items()
