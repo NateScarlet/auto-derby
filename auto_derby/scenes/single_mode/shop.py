@@ -16,6 +16,7 @@ from ...single_mode import Context, item
 from ...single_mode.item import Item
 from ..scene import Scene, SceneHolder
 from .command import CommandScene
+from ..menu_scroll import MenuScroll
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -92,10 +93,8 @@ class ShopScene(Scene):
         super().__init__()
         self.items: Tuple[Item, ...] = ()
 
-        # top = 0, bottom = 1
-        self._menu_position = 0
-        self._same_direction_scroll_count = 0
-        self._max_same_direction_scroll_count = 5
+        rp = action.resize_proxy()
+        self._scroll = MenuScroll(rp.vector2((17, 270), 540), 150)
 
     @classmethod
     def name(cls):
@@ -110,27 +109,6 @@ class ShopScene(Scene):
         action.wait_image(templates.RETURN_BUTTON)
         return cls()
 
-    def _scroll_page(self, direction: int = 0):
-        if direction == 0:
-            direction = 1 if self._menu_position < 0.5 else -1
-
-        rp = action.resize_proxy()
-        action.swipe(
-            rp.vector2((17, 720), 540),
-            dy=rp.vector(-150 * direction, 540),
-            duration=0.2,
-        )
-        # prevent inertial scrolling
-        action.tap(rp.vector2((15, 600), 540))
-        self._same_direction_scroll_count += 1
-        if self._same_direction_scroll_count >= self._max_same_direction_scroll_count:
-            self._on_scroll_to_end()
-
-    def _on_scroll_to_end(self):
-        self._menu_position = 1 - self._menu_position
-        self._max_same_direction_scroll_count = self._same_direction_scroll_count + 1
-        self._same_direction_scroll_count = 0
-
     def _recognize_items(self, static: bool = False) -> None:
         self.items = ()
         while True:
@@ -140,12 +118,12 @@ class ShopScene(Scene):
                 if i not in self.items
             )
             if not new_items:
-                self._on_scroll_to_end()
+                self._scroll.change_direction()
                 return
             self.items += new_items
             if static:
                 break
-            self._scroll_page()
+            self._scroll.next_page()
         if not self.items:
             _LOGGER.warn("not found items")
 
@@ -183,7 +161,7 @@ class ShopScene(Scene):
                 else:
                     action.wait_tap_image(templates.CLOSE_BUTTON)
                     ctx.items.put(match.id, 1)
-            self._scroll_page()
+            self._scroll.next_page()
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {

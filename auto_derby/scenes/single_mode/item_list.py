@@ -14,6 +14,7 @@ from PIL.Image import Image
 from ... import action, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
 from ...single_mode.item import Item, ItemList
+from ..menu_scroll import MenuScroll
 from ..scene import Scene, SceneHolder
 from .command import CommandScene
 
@@ -90,8 +91,11 @@ class ItemListScene(Scene):
     def __init__(self) -> None:
         super().__init__()
         self.items = item.ItemList()
-        # top = 0, bottom = 1
-        self._menu_position = 0
+        rp = action.resize_proxy()
+        self._scroll = MenuScroll(
+            rp.vector2((17, 720), 540),
+            150,
+        )
 
     @classmethod
     def name(cls):
@@ -105,22 +109,6 @@ class ItemListScene(Scene):
         )
         action.wait_image(templates.CLOSE_BUTTON)
         return cls()
-
-    def _scroll_page(self, direction: int = 0):
-        if direction == 0:
-            direction = 1 if self._menu_position < 0.5 else -1
-
-        rp = action.resize_proxy()
-        action.swipe(
-            rp.vector2((17, 720), 540),
-            dy=rp.vector(-150 * direction, 540),
-            duration=0.2,
-        )
-        # prevent inertial scrolling
-        action.tap(rp.vector2((15, 600), 540))
-
-    def _on_scroll_to_end(self):
-        self._menu_position = 1 - self._menu_position
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {
@@ -145,12 +133,12 @@ class ItemListScene(Scene):
                 if i not in self.items
             )
             if not new_items:
-                self._on_scroll_to_end()
+                self._scroll.change_direction()
                 return
             self.items.update(*new_items)
             if static:
                 break
-            self._scroll_page()
+            self._scroll.next_page()
         if not self.items:
             _LOGGER.warn("not found items")
 
@@ -179,4 +167,4 @@ class ItemListScene(Scene):
                 # wait animation
                 time.sleep(2)
                 action.wait_image(templates.CLOSE_BUTTON)
-            self._scroll_page()
+            self._scroll.next_page()
