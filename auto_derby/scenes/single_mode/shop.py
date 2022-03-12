@@ -60,7 +60,7 @@ def _recognize_price(rp: mathtools.ResizeProxy, item_img: Image) -> int:
 
 
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
-    v = item.from_title_image(_title_image(rp, img))
+    v = item.from_name_image(_title_image(rp, img))
     v.price = _recognize_price(rp, img)
     return v
 

@@ -5,4 +5,4 @@ from .game_data import get
 from .globals import g
 from .item import Item
 from .item_list import ItemList
-from .label import from_title_image
+from .label import from_name_image

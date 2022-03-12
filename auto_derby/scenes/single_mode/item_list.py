@@ -59,7 +59,7 @@ def _recognize_disabled(rp: mathtools.ResizeProxy, item_img: Image) -> bool:
 
 
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
-    v = item.from_title_image(_title_image(rp, img))
+    v = item.from_name_image(_title_image(rp, img))
     v.quantity = _recognize_quantity(rp, img)
     v.disabled = _recognize_disabled(rp, img)
     return v

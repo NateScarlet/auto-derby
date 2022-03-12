@@ -9,7 +9,8 @@ from typing import Any, Text
 
 from PIL.Image import Image
 
-from ... import data, imagetools, web
+
+from ... import data, imagetools, web, texttools
 from . import game_data
 from .globals import g
 from .item import Item
@@ -65,7 +66,32 @@ def _prompt(img: Image, h: Text, defaultValue: int) -> Item:
     return ret
 
 
-def from_title_image(img: Image, threshold: float = 0.8) -> Item:
+def _default_name_label_similarity_threshold(item: Item) -> float:
+    try:
+        match = next(
+            i
+            for i in game_data.iterate()
+            if 0.8 < texttools.compare(i.name, item.name) < 1
+        )
+        _LOGGER.debug(
+            "use higher name label similarity threshold for %s due to similar item name: %s",
+            item.name,
+            match.name,
+        )
+        return 0.9
+    except StopIteration:
+        return 0.8
+
+
+def _name_label_similarity_threshold(item: Item) -> float:
+    if item.id not in g.name_label_similarity_threshold:
+        g.name_label_similarity_threshold[
+            item.id
+        ] = _default_name_label_similarity_threshold(item)
+    return g.name_label_similarity_threshold[item.id]
+
+
+def from_name_image(img: Image) -> Item:
     reload_on_demand()
     h = imagetools.image_hash(img, divide_x=4)
     if _g.labels.is_empty():
@@ -73,6 +99,6 @@ def from_title_image(img: Image, threshold: float = 0.8) -> Item:
     res = _g.labels.query(h)
     _LOGGER.debug("query label: %s by %s", res, h)
     item = game_data.get(res.value)
-    if item and res.similarity > threshold:
+    if item and res.similarity > _name_label_similarity_threshold(item):
         return item
     return _prompt(img, h, item.id if item else 0)

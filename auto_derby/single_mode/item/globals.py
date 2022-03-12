@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Text, Type
+from typing import TYPE_CHECKING, Dict, Text, Type
 
 from ... import data
 
@@ -16,3 +16,4 @@ class g:
     data_path: Text = data.path("single_mode_items.jsonl")
     label_path: Text = ""
     item_class: Type[Item]
+    name_label_similarity_threshold: Dict[int, float] = {}
