@@ -150,7 +150,8 @@ class ItemMenuScene(Scene):
 
     def use_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
-        while self._scroll.next():
+
+        def _use_visible_items() -> None:
             for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
@@ -168,6 +169,10 @@ class ItemMenuScene(Scene):
                 # wait animation
                 time.sleep(2)
                 action.wait_image(templates.CLOSE_BUTTON)
+                return _use_visible_items()
+
+        while self._scroll.next():
+            _use_visible_items()
             if not remains:
                 break
         self._scroll.complete()
