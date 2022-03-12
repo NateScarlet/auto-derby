@@ -57,6 +57,7 @@ def _handle_shop(ctx: Context, cs: CommandScene):
     cart_items: List[item.Item] = []
     total_price = 0
     # TODO: handle max_quantity
+    # TODO: use item for final race
     for s, es, i in scores_of_items:
         can_exchange = total_price + i.price <= ctx.shop_coin
         should_exchange = s > es
