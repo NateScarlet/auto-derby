@@ -147,13 +147,16 @@ class EffectSummary:
             explain += f"{self.wisdom} wisdom;"
             trn.wisdom += self.wisdom
         if self.vitality:
-            f_before = _estimate_failure_rate(ctx, training)
-            f_after = _estimate_failure_rate(ctx, trn)
-            f = f_after - f_before
-            explain += f"{self.vitality} vitality, {f*100:+.0f}% failure;"
             # XXX: vitality convertion is not accure
+            explain += f"{self.vitality} vitality"
             trn.vitality += self.vitality / 100
-            trn.failure_rate = mathtools.clamp(trn.failure_rate + f, 0.0, 1.0)
+
+        f_before = _estimate_failure_rate(ctx, training)
+        f_after = _estimate_failure_rate(ctx, trn)
+        f = mathtools.clamp(f_after - f_before, -trn.failure_rate, 1 - trn.failure_rate)
+        if f:
+            explain += f"{f*100:+.0f}% failure;"
+            trn.failure_rate = f
 
         if self.training_no_failure:
             explain += f"no failure;"
