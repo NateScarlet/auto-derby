@@ -29,7 +29,7 @@ def test_effect_score():
         )
         == 0
     )
-    assert power_memo.effect_score(ctx, TrainingCommand(training.Training.new())) > 0
+    assert power_memo.effect_score(ctx, TrainingCommand(training.Training.new())) == 0
     assert power_memo.exchange_score(ctx) > 0
 
     hammer_1 = game_data.get(51)

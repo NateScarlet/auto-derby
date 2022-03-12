@@ -4,10 +4,7 @@
     0,
     0
   ],
-  "mood": [
-    1.2,
-    1.1
-  ],
+  "mood": "VERY_GOOD",
   "scenario": "アオハル杯～輝け、チームの絆～",
   "vitality": 0.43961352657004826,
   "maxVitality": 100,

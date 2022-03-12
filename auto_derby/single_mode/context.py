@@ -19,8 +19,7 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import (imagetools, mathtools, ocr, scenes, template, templates,
-                texttools)
+from .. import imagetools, mathtools, ocr, scenes, template, templates, texttools
 from ..constants import Mood
 
 _LOGGER = logging.getLogger(__name__)
@@ -563,7 +562,7 @@ class Context:
     def to_dict(self) -> Dict[Text, Any]:
         d = {
             "date": self.date,
-            "mood": self.mood,
+            "mood": self.mood.name,
             "scenario": self.scenario,
             "vitality": self.vitality,
             "maxVitality": self.max_vitality,
@@ -609,7 +608,13 @@ class Context:
         ret.date = tuple(data["date"])
         ret.vitality = data["vitality"]
         ret.max_vitality = data["maxVitality"]
-        ret.mood = tuple(data["mood"])
+        mood_data = data["mood"]
+        if isinstance(mood_data, list):
+            ret.mood = next(
+                i for i in Mood if [i.training_rate, i.race_rate] == data["mood"]
+            )
+        else:
+            ret.mood = Mood[mood_data]
         ret.condition = data["condition"]
         ret.fan_count = data["fanCount"]
         ret.turf = cls.status_by_name(data["turf"])

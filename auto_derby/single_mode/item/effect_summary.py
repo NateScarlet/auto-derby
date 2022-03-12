@@ -210,7 +210,7 @@ class EffectSummary:
             ctx_after.vitality += self.vitality / ctx.max_vitality
 
         if explain:
-            _LOGGER.debug("apply to context: %s", ctx, explain)
+            _LOGGER.debug("apply to context: %s", explain)
         return ctx_after
 
 

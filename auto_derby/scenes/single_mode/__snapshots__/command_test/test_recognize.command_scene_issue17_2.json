@@ -5,10 +5,7 @@
       11,
       2
     ],
-    "mood": [
-      1.2,
-      1.1
-    ],
+    "mood": "VERY_GOOD",
     "scenario": "新設！　URAファイナルズ！！",
     "vitality": 1.0,
     "maxVitality": 100,

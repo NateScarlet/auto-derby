@@ -4,10 +4,7 @@
     0,
     0
   ],
-  "mood": [
-    1.2,
-    1.1
-  ],
+  "mood": "VERY_GOOD",
   "scenario": "Make a new track!!  ～クライマックス開幕～",
   "vitality": 1.0,
   "maxVitality": 100,
