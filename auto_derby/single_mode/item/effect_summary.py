@@ -189,19 +189,19 @@ class EffectSummary:
 
         if self.speed:
             explain += f"{self.speed} speed;"
-            ctx.speed += self.speed
+            ctx_after.speed += self.speed
         if self.statmia:
             explain += f"{self.statmia} stamina;"
-            ctx.stamina += self.statmia
+            ctx_after.stamina += self.statmia
         if self.power:
             explain += f"{self.power} power;"
-            ctx.power += self.power
+            ctx_after.power += self.power
         if self.guts:
             explain += f"{self.guts} guts;"
-            ctx.guts += self.guts
+            ctx_after.guts += self.guts
         if self.wisdom:
             explain += f"{self.wisdom} wisdom;"
-            ctx.wisdom += self.wisdom
+            ctx_after.wisdom += self.wisdom
         if self.max_vitality:
             explain += f"{self.max_vitality} max vitality;"
             ctx_after.max_vitality += self.max_vitality

@@ -210,7 +210,7 @@ class Item:
         if s:
             explain += f"{s:.2f} by property"
             ret += s
-        s = ctx_after.max_vitality - ctx.max_vitality * mathtools.interpolate(
+        s = (ctx_after.max_vitality - ctx.max_vitality) * mathtools.interpolate(
             ctx.turn_count(),
             (
                 (0, 4),
