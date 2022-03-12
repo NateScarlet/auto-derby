@@ -141,39 +141,13 @@ class EffectSummary:
             t_after.wisdom = round(t_after.wisdom * (1 + r))
 
         # vitality debuff
-        r = min(
-            ctx.vitality - t_after.vitality,
-            sum(
-                i.rate for i in self.training_vitality_debuff if i.type == t_after.type
-            ),
-        )
+        r = sum(i.rate for i in self.training_vitality_debuff if i.type == t_after.type)
         if r:
             explain += f"{r*100:+.0f}% vitality;"
             t_after.vitality *= 1 + r
 
-        # property gain
-        if self.speed:
-            explain += f"{self.speed} speed;"
-            t_after.speed += self.speed
-        if self.statmia:
-            explain += f"{self.statmia} stamina;"
-            t_after.stamina += self.statmia
-        if self.power:
-            explain += f"{self.power} power;"
-            t_after.power += self.power
-        if self.guts:
-            explain += f"{self.guts} guts;"
-            t_after.guts += self.guts
-        if self.wisdom:
-            explain += f"{self.wisdom} wisdom;"
-            t_after.wisdom += self.wisdom
-        if self.vitality:
-            # XXX: vitality convertion is not accure
-            explain += f"{self.vitality} vitality;"
-            t_after.vitality += self.vitality / 100
-
         f_before = _estimate_failure_rate(ctx, training)
-        f_after = _estimate_failure_rate(ctx, t_after)
+        f_after = _estimate_failure_rate(ctx_after, t_after)
         f = mathtools.clamp(
             f_after - f_before, -t_after.failure_rate, 1 - t_after.failure_rate
         )
@@ -210,13 +184,29 @@ class EffectSummary:
         i_after = mathtools.clamp(0, i_before + self.mood, len(Context.ALL_MOODS) - 1)
         if i_before != i_after:
             ctx_after.mood = Context.ALL_MOODS[i_after]
-            explain += f"mood change {ctx.mood} -> {ctx_after.mood}"
+            explain += f"mood {ctx.mood} -> {ctx_after.mood};"
 
-        # max vitality
-        v = self.max_vitality
-        if v:
-            explain += f"{v:+d} max vitality"
-            ctx_after.max_vitality += v
+        if self.speed:
+            explain += f"{self.speed} speed;"
+            ctx.speed += self.speed
+        if self.statmia:
+            explain += f"{self.statmia} stamina;"
+            ctx.stamina += self.statmia
+        if self.power:
+            explain += f"{self.power} power;"
+            ctx.power += self.power
+        if self.guts:
+            explain += f"{self.guts} guts;"
+            ctx.guts += self.guts
+        if self.wisdom:
+            explain += f"{self.wisdom} wisdom;"
+            ctx.wisdom += self.wisdom
+        if self.max_vitality:
+            explain += f"{self.max_vitality} max vitality;"
+            ctx_after.max_vitality += self.max_vitality
+        if self.vitality:
+            explain += f"{self.vitality} vitality;"
+            ctx_after.vitality += self.vitality / ctx.max_vitality
 
         if explain:
             _LOGGER.debug("apply to context: %s", ctx, explain)

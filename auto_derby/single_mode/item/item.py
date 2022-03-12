@@ -196,6 +196,33 @@ class Item:
 
         from ..commands import TrainingCommand, RaceCommand
 
+        # by context
+        es = self.effect_summary()
+        ctx_after = es.apply_to_context(ctx)
+        t = Training.new()
+        t.speed = ctx_after.speed - ctx.speed
+        t.stamina = ctx_after.stamina - ctx.stamina
+        t.power = ctx_after.power - ctx.power
+        t.guts = ctx_after.guts - ctx.guts
+        t.wisdom = ctx_after.wisdom - ctx.wisdom
+        t.vitality = ctx_after.vitality - ctx.vitality
+        s = t.score(ctx)
+        if s:
+            explain += f"{s:.2f} by property"
+            ret += s
+        s = ctx_after.max_vitality - ctx.max_vitality * mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 4),
+                (24, 2),
+                (48, 1),
+                (72, 0.1),
+            ),
+        )
+        if s:
+            explain += f"{s:.2f} by max vitality"
+            ret += s
+
         # by training
         sample_trainings = (
             Training.new(),
