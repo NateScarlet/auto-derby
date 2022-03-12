@@ -115,14 +115,14 @@ class ShopScene(Scene):
 
     def _recognize_items(self, static: bool = False) -> None:
         self.items = ()
-        while True:
+        while self._scroll.has_more():
             new_items = tuple(
                 i
                 for i, _ in _recognize_menu(template.screenshot())
                 if i not in self.items
             )
             if not new_items:
-                self._scroll.change_direction()
+                self._scroll.complete()
                 return
             self.items += new_items
             if static:
@@ -136,9 +136,7 @@ class ShopScene(Scene):
 
     def exchange_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
-        while remains:
-            for i in remains:
-                _LOGGER.debug("exchange remain: %s", i)
+        while remains and self._scroll.has_more():
             for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
@@ -166,6 +164,9 @@ class ShopScene(Scene):
                     action.wait_tap_image(templates.CLOSE_BUTTON)
                     ctx.items.put(match.id, 1)
             self._scroll.next_page()
+        self._scroll.complete()
+        for i in remains:
+            _LOGGER.warn("exchange remain: %s", i)
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {

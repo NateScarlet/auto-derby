@@ -22,6 +22,8 @@ class VerticalScroll:
         self._max_same_direction_count = max_page
         self._origin = origin
         self._page_size = page_size
+        self._direction_change_count = 0
+        self._last_direction = 0
 
     def next_page(self, direction: int = 0) -> None:
         if direction == 0:
@@ -34,11 +36,23 @@ class VerticalScroll:
         )
         # prevent inertial scrolling
         action.tap(self._origin)
-        self._same_direction_count += 1
+        if self._last_direction == direction:
+            self._same_direction_count += 1
+        self._last_direction = direction
         if self._same_direction_count >= self._max_same_direction_count:
-            self.change_direction()
+            self._change_direction()
 
-    def change_direction(self):
+    def _change_direction(self):
         self._position = 1 - self._position
         self._max_same_direction_count = self._same_direction_count + 1
         self._same_direction_count = 0
+        self._direction_change_count += 1
+
+    def complete(self):
+        self._direction_change_count = 0
+
+    def has_more(self) -> bool:
+        ok = self._direction_change_count < 7
+        if not ok:
+            self.complete()
+        return ok
