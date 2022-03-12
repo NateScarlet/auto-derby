@@ -4,8 +4,8 @@
 from __future__ import annotations
 
 import itertools
-from typing import Dict, Iterable, Iterator, Text, Tuple
 import logging
+from typing import Dict, Iterable, Iterator, Text, Tuple
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -14,6 +14,8 @@ _SIMILARITIES: Dict[Tuple[Text, Text], float] = dict()
 
 
 def _similarity_key(a: Text, b: Text):
+    if a == b:
+        raise ValueError("should not set similarity for same text: %s" % a)
     if b < a:
         return (b, a)
     return (a, b)
@@ -64,6 +66,8 @@ _SIMILARITIES[_similarity_key("ヮ", "ヷ")] = 0.8
 _SIMILARITIES[_similarity_key("ワ", "ヷ")] = 0.8
 _SIMILARITIES[_similarity_key("→", "ー")] = 0.8
 for a, b in itertools.product(range(0, 10), range(0, 10)):
+    if a == b:
+        continue
     _SIMILARITIES[_similarity_key(str(a), str(b))] = 0.5
 
 
