@@ -155,7 +155,7 @@ class EffectSummary:
             trn.wisdom += self.wisdom
         if self.vitality:
             # XXX: vitality convertion is not accure
-            explain += f"{self.vitality} vitality"
+            explain += f"{self.vitality} vitality;"
             trn.vitality += self.vitality / 100
 
         f_before = _estimate_failure_rate(ctx, training)
@@ -163,13 +163,14 @@ class EffectSummary:
         f = mathtools.clamp(f_after - f_before, -trn.failure_rate, 1 - trn.failure_rate)
         if f:
             explain += f"{f*100:+.0f}% failure;"
-            trn.failure_rate = f
+            trn.failure_rate += f
 
         if self.training_no_failure:
             explain += f"no failure;"
             trn.failure_rate = 0
         if explain:
             _LOGGER.debug("apply to training: %s->%s: %s", training, trn, explain)
+        assert 0.0 <= trn.failure_rate <= 1.0, trn.failure_rate
         return trn
 
     def apply_to_race(self, ctx: Context, race: Race) -> Race:
