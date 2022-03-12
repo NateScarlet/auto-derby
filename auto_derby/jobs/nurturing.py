@@ -17,7 +17,7 @@ from ..scenes.single_mode import (
     RaceTurnsIncorrect,
     ShopScene,
 )
-from ..scenes.single_mode.item_list import ItemListScene
+from ..scenes.single_mode.item_menu import ItemMenuScene
 from ..single_mode import Context, commands, event, item
 
 LOGGER = logging.getLogger(__name__)
@@ -79,7 +79,7 @@ def _use_items_directly(ctx: Context, cs: CommandScene):
     items = tuple(i for i in ctx.items if i.should_use_directly(ctx))
     if not items:
         return
-    scene = ItemListScene.enter(ctx)
+    scene = ItemMenuScene.enter(ctx)
     scene.use_items(ctx, items)
     cs.enter(ctx)
 
@@ -90,7 +90,7 @@ def _handle_item_list(ctx: Context, cs: CommandScene):
         return
     if ctx.items_last_updated_turn != 0:
         return
-    scene = ItemListScene.enter(ctx)
+    scene = ItemMenuScene.enter(ctx)
     scene.recognize(ctx)
     cs.enter(ctx)
     return
@@ -109,7 +109,7 @@ class _CommandPlan:
 
     def execute(self, ctx: Context):
         if self.items:
-            scene = ItemListScene.enter(ctx)
+            scene = ItemMenuScene.enter(ctx)
             scene.use_items(ctx, self.items)
         self.command.execute(ctx)
 

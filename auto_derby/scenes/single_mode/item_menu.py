@@ -53,7 +53,7 @@ def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image) -> int:
 
 def _recognize_disabled(rp: mathtools.ResizeProxy, item_img: Image) -> bool:
     try:
-        next(template.match(item_img, templates.SINGLE_MODE_ITEM_LIST_USE_BUTTON))
+        next(template.match(item_img, templates.SINGLE_MODE_ITEM_MENU_USE_BUTTON))
         return False
     except StopIteration:
         return True
@@ -71,7 +71,7 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
 
     min_y = rp.vector(130, 540)
     for _, pos in sorted(
-        template.match(img, templates.SINGLE_MODE_ITEM_LIST_CURRENT_QUANTITY),
+        template.match(img, templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY),
         key=lambda x: x[1][1],
     ):
         x, y = pos
@@ -86,8 +86,8 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
         )
         yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(303, 540), y)
 
-# TODO: rename to ItemMenuScene
-class ItemListScene(Scene):
+
+class ItemMenuScene(Scene):
     def __init__(self) -> None:
         super().__init__()
         self.items = item.ItemList()
@@ -100,13 +100,13 @@ class ItemListScene(Scene):
 
     @classmethod
     def name(cls):
-        return "single-mode-item-list"
+        return "single-mode-item-menu"
 
     @classmethod
     def _enter(cls, ctx: SceneHolder) -> Scene:
         CommandScene.enter(ctx)
         action.wait_tap_image(
-            templates.SINGLE_MODE_ITEM_LIST_BUTTON,
+            templates.SINGLE_MODE_ITEM_MENU_BUTTON,
         )
         action.wait_image_stable(templates.CLOSE_BUTTON)
         return cls()

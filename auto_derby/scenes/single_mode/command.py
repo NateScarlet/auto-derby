@@ -87,7 +87,7 @@ class CommandScene(Scene):
             action.wait_tap_image(templates.RETURN_BUTTON)
         if name == "single-mode-shop":
             action.wait_tap_image(templates.RETURN_BUTTON)
-        if name == "single-mode-item-list":
+        if name == "single-mode-item-menu":
             action.wait_tap_image(templates.CLOSE_BUTTON)
 
         while True:

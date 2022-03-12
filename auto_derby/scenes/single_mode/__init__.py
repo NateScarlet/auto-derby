@@ -5,4 +5,4 @@ from .aoharu_battle_confirm import AoharuBattleConfirmScene
 from .aoharu_competitor import AoharuCompetitorScene
 from .aoharu_main import AoharuMainScene
 from .shop import ShopScene
-from .item_list import ItemListScene
+from .item_menu import ItemMenuScene
