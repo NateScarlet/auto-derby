@@ -46,7 +46,7 @@ class Item:
         return isinstance(other, Item) and self._equal_key() == other._equal_key()
 
     def _equal_key(self):
-        return (self.id, self.price, self.quantity, self.disabled)
+        return (self.id, self.price)
 
     def __str__(self):
         msg = ""
