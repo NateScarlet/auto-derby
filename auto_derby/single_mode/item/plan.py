@@ -23,7 +23,7 @@ def iterate(
     picked_items: Sequence[Item] = (),
 ) -> Iterator[Plan]:
     def _with_log(p: Plan):
-        _LOGGER.debug("plan score: %s: %s", p[0], ",".join(i.name for i in p[1]))
+        _LOGGER.debug("score: %s: %s", p[0], ",".join(i.name for i in p[1]))
         return p
 
     for index, item in enumerate(items):
