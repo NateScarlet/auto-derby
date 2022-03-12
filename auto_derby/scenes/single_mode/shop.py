@@ -136,7 +136,8 @@ class ShopScene(Scene):
 
     def exchange_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
-        while self._scroll.next():
+
+        def _exchange_visible_items() -> None:
             for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
@@ -162,7 +163,10 @@ class ShopScene(Scene):
                     ctx.items.put(match.id, 1)
                 # match item moved to bottom
                 template.invalidate_screeshot()
-                break
+                return _exchange_visible_items()
+
+        while self._scroll.next():
+            _exchange_visible_items()
             if not remains:
                 break
         self._scroll.complete()
