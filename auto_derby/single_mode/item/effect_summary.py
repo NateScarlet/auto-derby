@@ -205,11 +205,18 @@ class EffectSummary:
         ctx_after = ctx.from_dict(ctx.to_dict())
         explain = ""
 
+        # mood
         i_before = Context.ALL_MOODS.index(ctx.mood)
         i_after = mathtools.clamp(0, i_before + self.mood, len(Context.ALL_MOODS) - 1)
         if i_before != i_after:
             ctx_after.mood = Context.ALL_MOODS[i_after]
             explain += f"mood change {ctx.mood} -> {ctx_after.mood}"
+
+        # max vitality
+        v = self.max_vitality
+        if v:
+            explain += f"{v:+d} max vitality"
+            ctx_after.max_vitality += v
 
         if explain:
             _LOGGER.debug("apply to context: %s", ctx, explain)

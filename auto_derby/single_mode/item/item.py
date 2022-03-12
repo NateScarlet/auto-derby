@@ -129,6 +129,18 @@ class Item:
                 ret += s
             # TODO: race reward effect
 
+        s = (ctx_after.max_vitality - ctx_before.max_vitality) * mathtools.interpolate(
+            ctx.turn_count(),
+            (
+                (0, 3),
+                (24, 2),
+                (48, 1),
+                (72, 0.1),
+            ),
+        )
+        if s:
+            explain = "{s:.2f} by max vitality"
+
         if explain:
             _LOGGER.debug(
                 "%s effect score: %.2f for %s: %s", self, ret, command, explain
