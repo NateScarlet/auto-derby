@@ -7,8 +7,8 @@ import time
 
 from ... import action, single_mode, template, templates
 from ...single_mode.race import Race, find_by_race_menu_image
-from ..menu_scroll import MenuScroll
 from ..scene import Scene, SceneHolder
+from ..vertical_scroll import VerticalScroll
 from .command import CommandScene
 
 
@@ -21,7 +21,7 @@ class RaceMenuScene(Scene):
     def __init__(self) -> None:
         super().__init__()
         rp = action.resize_proxy()
-        self._scroll = MenuScroll(
+        self._scroll = VerticalScroll(
             rp.vector2((15, 600), 540),
             50,
         )

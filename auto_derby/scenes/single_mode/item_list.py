@@ -14,8 +14,8 @@ from PIL.Image import Image
 from ... import action, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
 from ...single_mode.item import Item, ItemList
-from ..menu_scroll import MenuScroll
 from ..scene import Scene, SceneHolder
+from ..vertical_scroll import VerticalScroll
 from .command import CommandScene
 
 _LOGGER = logging.getLogger(__name__)
@@ -92,7 +92,7 @@ class ItemListScene(Scene):
         super().__init__()
         self.items = item.ItemList()
         rp = action.resize_proxy()
-        self._scroll = MenuScroll(
+        self._scroll = VerticalScroll(
             rp.vector2((17, 720), 540),
             150,
         )

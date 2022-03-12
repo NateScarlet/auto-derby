@@ -8,7 +8,7 @@ from typing import Tuple
 from .. import action
 
 
-class MenuScroll:
+class VerticalScroll:
     def __init__(self, origin: Tuple[int, int], page_size: int) -> None:
         # top = 0, bottom = 1
         self._position = 0

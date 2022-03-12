@@ -15,8 +15,8 @@ from ... import action, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
 from ...single_mode.item import Item
 from ..scene import Scene, SceneHolder
+from ..vertical_scroll import VerticalScroll
 from .command import CommandScene
-from ..menu_scroll import MenuScroll
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -94,7 +94,7 @@ class ShopScene(Scene):
         self.items: Tuple[Item, ...] = ()
 
         rp = action.resize_proxy()
-        self._scroll = MenuScroll(rp.vector2((17, 270), 540), 150)
+        self._scroll = VerticalScroll(rp.vector2((17, 270), 540), 150)
 
     @classmethod
     def name(cls):
