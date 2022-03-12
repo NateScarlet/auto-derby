@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import logging
 import os
-import time
 from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 
 import cv2
@@ -165,9 +164,8 @@ class ShopScene(Scene):
                 else:
                     action.wait_tap_image(templates.CLOSE_BUTTON)
                     ctx.items.put(match.id, 1)
-                time.sleep(2)  # wait click animation
-                # match item moved to bottom
-                template.invalidate_screeshot()
+                # wait animation
+                action.wait_image_stable(templates.RETURN_BUTTON)
                 return _exchange_visible_items()
 
         while self._scroll.next():
