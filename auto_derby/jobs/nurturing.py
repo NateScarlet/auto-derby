@@ -56,17 +56,20 @@ def _handle_shop(ctx: Context, cs: CommandScene):
     LOGGER.info("shop items")
     cart_items: List[item.Item] = []
     total_price = 0
-    # TODO: handle max_quantity
     # TODO: use item for final race
     for s, es, i in scores_of_items:
-        can_exchange = total_price + i.price <= ctx.shop_coin
-        should_exchange = s > es
-        if can_exchange and should_exchange:
+        status = ""
+        if (
+            sum(1 for j in cart_items if j.id == i.id) + ctx.items.get(i.id).quantity
+            >= i.max_quantity
+        ):
+            status = "<max quantity>"
+        elif total_price + i.price > ctx.shop_coin:
+            status = "<coin not enough>"
+        elif s > es:
+            status = "<in cart>"
             cart_items.append(i)
             total_price += i.price
-        status = ""
-        if should_exchange:
-            status = "<in cart>" if can_exchange else "<coin not enough>"
         LOGGER.info("score:\t%2.2f/%2.2f:\t%s\t%s", s, es, i, status)
     scene.exchange_items(ctx, cart_items)
 

@@ -141,6 +141,11 @@ class ShopScene(Scene):
             for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
+                if ctx.items.get(match.id).quantity >= match.max_quantity:
+                    remains.remove(match)
+                    _LOGGER.warning("skip due to max quantity: %s", match)
+                    continue
+
                 _LOGGER.info("exchange: %s", match)
                 action.tap(pos)
                 ctx.shop_coin -= match.price
