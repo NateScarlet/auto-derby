@@ -84,7 +84,12 @@ class config:
         "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH", "data/single_mode_choices.csv"
     )
     single_mode_event_prompt_disabled = (
-        os.getenv("AUTO_DERBY_EVENT_PROMPT_DISABLED", "").lower() == "true"
+        os.getenv("AUTO_DERBY_SINGLE_MODE_EVENT_PROMPT_DISABLED", "").lower() == "true"
+        or os.getenv("AUTO_DERBY_EVENT_PROMPT_DISABLED", "").lower()
+        == "true"  # deprecated
+    )
+    single_mode_item_prompt_disabled = (
+        os.getenv("AUTO_DERBY_SINGLE_MODE_ITEM_PROMPT_DISABLED", "").lower() == "true"
     )
     plugin_path = os.getenv("AUTO_DERBY_PLUGIN_PATH", "plugins")
     single_mode_race_class = single_mode.Race
@@ -156,6 +161,7 @@ class config:
         single_mode.training.g.training_class = cls.single_mode_training_class
         single_mode.training.g.partner_class = cls.single_mode_training_partner_class
         single_mode.item.g.label_path = cls.single_mode_item_label_path
+        single_mode.item.g.prompt_disabled = cls.single_mode_item_prompt_disabled
         sc.g.rest_score = cls.single_mode_rest_score
         sc.g.summer_rest_score = cls.single_mode_summer_rest_score
         sc.g.health_care_score = cls.single_mode_health_care_score
