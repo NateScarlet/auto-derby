@@ -10,6 +10,7 @@ from ...constants import TrainingType
 from ..race import Race
 from ..training import Training
 from .effect import Effect
+from ... import mathtools
 
 if TYPE_CHECKING:
     from .item import Item
@@ -41,6 +42,25 @@ class TrainingBuff:
         if any(i for i in s if i.group == self.group and i.priority > self.priority):
             return s
         return (*(i for i in s if i.group != self.group), self)
+
+
+def _estimate_failure_rate(ctx: Context, trn: Training) -> float:
+    return mathtools.interpolate(
+        int(ctx.vitality * 10000),
+        (
+            (0, 0.85),
+            (1500, 0.7),
+            (4000, 0.0),
+        )
+        if trn.wisdom > 0
+        else (
+            (0, 0.99),
+            (1500, 0.8),
+            (3000, 0.5),
+            (5000, 0.15),
+            (7000, 0.0),
+        ),
+    )
 
 
 class EffectSummary:
@@ -127,9 +147,13 @@ class EffectSummary:
             explain += f"{self.wisdom} wisdom;"
             trn.wisdom += self.wisdom
         if self.vitality:
-            explain += f"{self.vitality} vitality;"
+            f_before = _estimate_failure_rate(ctx, training)
+            f_after = _estimate_failure_rate(ctx, trn)
+            f = f_after - f_before
+            explain += f"{self.vitality} vitality, {f*100:+.0f}% failure;"
             # XXX: vitality convertion is not accure
             trn.vitality += self.vitality / 100
+            trn.failure_rate = mathtools.clamp(trn.failure_rate + f, 0.0, 1.0)
 
         if self.training_no_failure:
             explain += f"no failure;"

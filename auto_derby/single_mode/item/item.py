@@ -21,6 +21,7 @@ if TYPE_CHECKING:
     from ..commands import Command
     from ..context import Context
 
+
 # TODO: allow plugin override class
 class Item:
     @staticmethod
@@ -292,6 +293,8 @@ class Item:
         if es.training_effect_buff:
             return False
         if es.training_partner_reassign:
+            return False
+        if es.vitality > 0:
             return False
         max_mood = {
             ctx.MOOD_VERY_GOOD: 0,

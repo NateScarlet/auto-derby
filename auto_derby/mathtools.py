@@ -1,8 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-
-from typing import Tuple
+from typing import Tuple, TypeVar, Union
 
 import cast_unknown as cast
 import numpy as np
@@ -67,3 +66,14 @@ def distance(a: Tuple[int, ...], b: Tuple[int, ...]) -> float:
     return cast.instance(
         np.sqrt(np.sum((np.array(a) - np.array(b)) ** 2, axis=0)), float
     )
+
+
+T = TypeVar("T", bound=Union[int, float])
+
+
+def clamp(v: T, min: T, max: T) -> T:
+    if v < min:
+        return min
+    if max < v:
+        return max
+    return v
