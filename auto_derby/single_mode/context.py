@@ -223,6 +223,14 @@ class Context:
     MOOD_GOOD = (1.1, 1.05)
     MOOD_VERY_GOOD = (1.2, 1.1)
 
+    ALL_MOODS = (
+        MOOD_VERY_BAD,
+        MOOD_BAD,
+        MOOD_NORMAL,
+        MOOD_GOOD,
+        MOOD_VERY_GOOD,
+    )
+
     CONDITION_HEADACHE = 1 << 0
     CONDITION_OVERWEIGHT = 1 << 1
 

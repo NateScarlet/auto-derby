@@ -114,76 +114,106 @@ class EffectSummary:
         """
         return a copy of given training with effect applied.
         """
-        trn = Training.new()
-        trn.__dict__.update(training.__dict__)
+        t_after = Training.new()
+        t_after.__dict__.update(training.__dict__)
         explain = ""
+        ctx_after = self.apply_to_context(ctx)
 
-        # effect buff
-        r = sum(i.rate for i in self.training_effect_buff if i.type == trn.type)
+        effect_rate = 0
+        # mood
+        r = ctx_after.mood[0] - ctx.mood[0]
         if r:
-            explain += f"{r*100:+.0f}% effect;"
-            trn.speed = round(trn.speed * (1 + r))
-            trn.stamina = round(trn.stamina * (1 + r))
-            trn.power = round(trn.power * (1 + r))
-            trn.guts = round(trn.guts * (1 + r))
-            trn.wisdom = round(trn.wisdom * (1 + r))
+            explain += f"{r*100:+.0f}% by mood;"
+            effect_rate += r
+
+        # buff
+        r = sum(i.rate for i in self.training_effect_buff if i.type == t_after.type)
+        if r:
+            explain += f"{r*100:+.0f}% by buff;"
+            effect_rate += r
+
+        r = effect_rate
+        if r:
+            t_after.speed = round(t_after.speed * (1 + r))
+            t_after.stamina = round(t_after.stamina * (1 + r))
+            t_after.power = round(t_after.power * (1 + r))
+            t_after.guts = round(t_after.guts * (1 + r))
+            t_after.wisdom = round(t_after.wisdom * (1 + r))
 
         # vitality debuff
         r = min(
-            ctx.vitality - trn.vitality,
-            sum(i.rate for i in self.training_vitality_debuff if i.type == trn.type),
+            ctx.vitality - t_after.vitality,
+            sum(
+                i.rate for i in self.training_vitality_debuff if i.type == t_after.type
+            ),
         )
         if r:
             explain += f"{r*100:+.0f}% vitality;"
-            trn.vitality *= 1 + r
+            t_after.vitality *= 1 + r
 
         # property gain
         if self.speed:
             explain += f"{self.speed} speed;"
-            trn.speed += self.speed
+            t_after.speed += self.speed
         if self.statmia:
             explain += f"{self.statmia} stamina;"
-            trn.stamina += self.statmia
+            t_after.stamina += self.statmia
         if self.power:
             explain += f"{self.power} power;"
-            trn.power += self.power
+            t_after.power += self.power
         if self.guts:
             explain += f"{self.guts} guts;"
-            trn.guts += self.guts
+            t_after.guts += self.guts
         if self.wisdom:
             explain += f"{self.wisdom} wisdom;"
-            trn.wisdom += self.wisdom
+            t_after.wisdom += self.wisdom
         if self.vitality:
             # XXX: vitality convertion is not accure
             explain += f"{self.vitality} vitality;"
-            trn.vitality += self.vitality / 100
+            t_after.vitality += self.vitality / 100
 
         f_before = _estimate_failure_rate(ctx, training)
-        f_after = _estimate_failure_rate(ctx, trn)
-        f = mathtools.clamp(f_after - f_before, -trn.failure_rate, 1 - trn.failure_rate)
+        f_after = _estimate_failure_rate(ctx, t_after)
+        f = mathtools.clamp(
+            f_after - f_before, -t_after.failure_rate, 1 - t_after.failure_rate
+        )
         if f:
             explain += f"{f*100:+.0f}% failure;"
-            trn.failure_rate += f
+            t_after.failure_rate += f
 
         if self.training_no_failure:
             explain += f"no failure;"
-            trn.failure_rate = 0
+            t_after.failure_rate = 0
         if explain:
-            _LOGGER.debug("apply to training: %s->%s: %s", training, trn, explain)
-        assert 0.0 <= trn.failure_rate <= 1.0, trn.failure_rate
-        return trn
+            _LOGGER.debug("apply to training: %s->%s: %s", training, t_after, explain)
+        assert 0.0 <= t_after.failure_rate <= 1.0, t_after.failure_rate
+        return t_after
 
     def apply_to_race(self, ctx: Context, race: Race) -> Race:
-        r = Race.from_dict(race.to_dict())
+        r_after = Race.from_dict(race.to_dict())
         explain = ""
         if self.race_fan_buff:
             explain = f"{self.race_fan_buff*100:+.0f}% fans"
-            r.fan_counts = tuple(
-                round(i * (1 + self.race_fan_buff)) for i in r.fan_counts
+            r_after.fan_counts = tuple(
+                round(i * (1 + self.race_fan_buff)) for i in r_after.fan_counts
             )
         if explain:
             _LOGGER.debug("apply to race: %s: %s", race, explain)
-        return r
+        return r_after
+
+    def apply_to_context(self, ctx: Context) -> Context:
+        ctx_after = ctx.from_dict(ctx.to_dict())
+        explain = ""
+
+        i_before = Context.ALL_MOODS.index(ctx.mood)
+        i_after = mathtools.clamp(0, i_before + self.mood, len(Context.ALL_MOODS) - 1)
+        if i_before != i_after:
+            ctx_after.mood = Context.ALL_MOODS[i_after]
+            explain += f"mood change {ctx.mood} -> {ctx_after.mood}"
+
+        if explain:
+            _LOGGER.debug("apply to context: %s", ctx, explain)
+        return ctx_after
 
 
 if TYPE_CHECKING:

@@ -98,6 +98,9 @@ class Item:
             es_before.add(i)
         es_after = es_before.clone()
         es_after.add(self)
+
+        ctx_before = es_before.apply_to_context(ctx)
+        ctx_after = es_after.apply_to_context(ctx)
         explain = ""
 
         from ..commands import TrainingCommand, RaceCommand
@@ -106,8 +109,8 @@ class Item:
         if isinstance(command, TrainingCommand):
             t_before = es_before.apply_to_training(ctx, command.training)
             t_after = es_after.apply_to_training(ctx, command.training)
-            s_before = t_before.score(ctx)
-            s_after = t_after.score(ctx)
+            s_before = t_before.score(ctx_before)
+            s_after = t_after.score(ctx_after)
             s = s_after - s_before
             if s:
                 explain += f"{s:.2f} by training score delta ({s_before:.2f} -> {s_after:.2f});"
@@ -116,8 +119,8 @@ class Item:
         if isinstance(command, RaceCommand):
             r_before = es_before.apply_to_race(ctx, command.race)
             r_after = es_after.apply_to_race(ctx, command.race)
-            s_before = r_before.score(ctx)
-            s_after = r_after.score(ctx)
+            s_before = r_before.score(ctx_before)
+            s_after = r_after.score(ctx_after)
             s = s_after - s_before
             if s:
                 explain += (
@@ -296,14 +299,8 @@ class Item:
             return False
         if es.vitality > 0:
             return False
-        max_mood = {
-            ctx.MOOD_VERY_GOOD: 0,
-            ctx.MOOD_GOOD: 1,
-            ctx.MOOD_NORMAL: 2,
-            ctx.MOOD_BAD: 3,
-            ctx.MOOD_VERY_BAD: 4,
-        }[ctx.mood]
-        if es.mood > max_mood:
+        ctx_after = es.apply_to_context(ctx)
+        if es.mood and ctx_after.mood <= ctx.mood:
             return False
         return True
 
