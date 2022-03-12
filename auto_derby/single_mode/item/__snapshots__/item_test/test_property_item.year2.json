@@ -1,0 +1,117 @@
+{
+  "スピードのメモ帳": {
+    "exchange": 2.8969444444444488,
+    "expectedExchange": 5.466666666666667,
+    "shouldUseDirectly": true
+  },
+  "スタミナのメモ帳": {
+    "exchange": 2.996,
+    "expectedExchange": 5.466666666666667,
+    "shouldUseDirectly": true
+  },
+  "パワーのメモ帳": {
+    "exchange": 2.596777777777778,
+    "expectedExchange": 5.466666666666667,
+    "shouldUseDirectly": true
+  },
+  "根性のメモ帳": {
+    "exchange": 2.985,
+    "expectedExchange": 5.466666666666667,
+    "shouldUseDirectly": true
+  },
+  "賢さのメモ帳": {
+    "exchange": 3.588,
+    "expectedExchange": 5.466666666666667,
+    "shouldUseDirectly": true
+  },
+  "スピード戦術書": {
+    "exchange": 6.750203703703709,
+    "expectedExchange": 8.2,
+    "shouldUseDirectly": true
+  },
+  "スタミナ戦術書": {
+    "exchange": 6.9719999999999995,
+    "expectedExchange": 8.2,
+    "shouldUseDirectly": true
+  },
+  "パワー戦術書": {
+    "exchange": 6.044111111111111,
+    "expectedExchange": 8.2,
+    "shouldUseDirectly": true
+  },
+  "根性戦術書": {
+    "exchange": 6.894999999999999,
+    "expectedExchange": 8.2,
+    "shouldUseDirectly": true
+  },
+  "賢さ戦術書": {
+    "exchange": 8.316,
+    "expectedExchange": 8.2,
+    "shouldUseDirectly": true
+  },
+  "スピード秘伝書": {
+    "exchange": 14.424722222222226,
+    "expectedExchange": 16.4,
+    "shouldUseDirectly": true
+  },
+  "スタミナ秘伝書": {
+    "exchange": 14.86,
+    "expectedExchange": 16.4,
+    "shouldUseDirectly": true
+  },
+  "パワー秘伝書": {
+    "exchange": 12.88722222222222,
+    "expectedExchange": 16.4,
+    "shouldUseDirectly": true
+  },
+  "根性秘伝書": {
+    "exchange": 14.474999999999998,
+    "expectedExchange": 16.4,
+    "shouldUseDirectly": true
+  },
+  "賢さ秘伝書": {
+    "exchange": 17.580000000000005,
+    "expectedExchange": 16.4,
+    "shouldUseDirectly": true
+  },
+  "バイタル20": {
+    "exchange": 11.999999999999998,
+    "expectedExchange": 19.133333333333333,
+    "shouldUseDirectly": false
+  },
+  "バイタル40": {
+    "exchange": 18.0,
+    "expectedExchange": 30.066666666666666,
+    "shouldUseDirectly": false
+  },
+  "バイタル65": {
+    "exchange": 18.0,
+    "expectedExchange": 41.0,
+    "shouldUseDirectly": false
+  },
+  "ロイヤルビタージュース": {
+    "exchange": 18.0,
+    "expectedExchange": 38.266666666666666,
+    "shouldUseDirectly": false
+  },
+  "エネドリンクMAX": {
+    "exchange": 11.073333333333334,
+    "expectedExchange": 16.4,
+    "shouldUseDirectly": false
+  },
+  "ロングエネドリンクMAX": {
+    "exchange": 16.14666666666667,
+    "expectedExchange": 27.333333333333336,
+    "shouldUseDirectly": true
+  },
+  "プレーンカップケーキ": {
+    "exchange": 1.0613333333333337,
+    "expectedExchange": 16.4,
+    "shouldUseDirectly": true
+  },
+  "スイートカップケーキ": {
+    "exchange": 2.119733333333334,
+    "expectedExchange": 30.066666666666666,
+    "shouldUseDirectly": true
+  }
+}

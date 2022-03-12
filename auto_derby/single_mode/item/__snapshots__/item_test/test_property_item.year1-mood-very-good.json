@@ -1,0 +1,117 @@
+{
+  "スピードのメモ帳": {
+    "exchange": 4.043166666666668,
+    "expectedExchange": 6.7,
+    "shouldUseDirectly": true
+  },
+  "スタミナのメモ帳": {
+    "exchange": 3.99,
+    "expectedExchange": 6.7,
+    "shouldUseDirectly": true
+  },
+  "パワーのメモ帳": {
+    "exchange": 2.2953333333333332,
+    "expectedExchange": 6.7,
+    "shouldUseDirectly": true
+  },
+  "根性のメモ帳": {
+    "exchange": 3.7350000000000003,
+    "expectedExchange": 6.7,
+    "shouldUseDirectly": true
+  },
+  "賢さのメモ帳": {
+    "exchange": 4.188,
+    "expectedExchange": 6.7,
+    "shouldUseDirectly": true
+  },
+  "スピード戦術書": {
+    "exchange": 9.387388888888887,
+    "expectedExchange": 10.05,
+    "shouldUseDirectly": true
+  },
+  "スタミナ戦術書": {
+    "exchange": 9.263333333333332,
+    "expectedExchange": 10.05,
+    "shouldUseDirectly": true
+  },
+  "パワー戦術書": {
+    "exchange": 5.334,
+    "expectedExchange": 10.05,
+    "shouldUseDirectly": true
+  },
+  "根性戦術書": {
+    "exchange": 8.645000000000001,
+    "expectedExchange": 10.05,
+    "shouldUseDirectly": true
+  },
+  "賢さ戦術書": {
+    "exchange": 9.716,
+    "expectedExchange": 10.05,
+    "shouldUseDirectly": true
+  },
+  "スピード秘伝書": {
+    "exchange": 19.91583333333333,
+    "expectedExchange": 20.1,
+    "shouldUseDirectly": true
+  },
+  "スタミナ秘伝書": {
+    "exchange": 19.65,
+    "expectedExchange": 20.1,
+    "shouldUseDirectly": true
+  },
+  "パワー秘伝書": {
+    "exchange": 11.336666666666666,
+    "expectedExchange": 20.1,
+    "shouldUseDirectly": true
+  },
+  "根性秘伝書": {
+    "exchange": 18.224999999999998,
+    "expectedExchange": 20.1,
+    "shouldUseDirectly": true
+  },
+  "賢さ秘伝書": {
+    "exchange": 20.580000000000002,
+    "expectedExchange": 20.1,
+    "shouldUseDirectly": true
+  },
+  "バイタル20": {
+    "exchange": 17.999999999999996,
+    "expectedExchange": 23.45,
+    "shouldUseDirectly": false
+  },
+  "バイタル40": {
+    "exchange": 27.0,
+    "expectedExchange": 36.85,
+    "shouldUseDirectly": false
+  },
+  "バイタル65": {
+    "exchange": 27.0,
+    "expectedExchange": 50.25,
+    "shouldUseDirectly": false
+  },
+  "ロイヤルビタージュース": {
+    "exchange": 27.0,
+    "expectedExchange": 46.9,
+    "shouldUseDirectly": false
+  },
+  "エネドリンクMAX": {
+    "exchange": 16.52666666666667,
+    "expectedExchange": 20.1,
+    "shouldUseDirectly": false
+  },
+  "ロングエネドリンクMAX": {
+    "exchange": 24.053333333333335,
+    "expectedExchange": 33.5,
+    "shouldUseDirectly": true
+  },
+  "プレーンカップケーキ": {
+    "exchange": 0,
+    "expectedExchange": 20.1,
+    "shouldUseDirectly": false
+  },
+  "スイートカップケーキ": {
+    "exchange": 0,
+    "expectedExchange": 36.85,
+    "shouldUseDirectly": false
+  }
+}

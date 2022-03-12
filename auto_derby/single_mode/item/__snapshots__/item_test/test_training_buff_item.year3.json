@@ -1,0 +1,198 @@
+{
+  "チアメガホン": {
+    "exchange": 1.8007333333333335,
+    "expectedExchange": 9.200000000000003,
+    "shouldUseDirectly": false,
+    "training": {
+      "speed-10": {
+        "effect": 1.359,
+        "expectedEffect": 9.200000000000003
+      },
+      "stamina-10": {
+        "effect": 1.1590000000000007,
+        "expectedEffect": 9.200000000000003
+      },
+      "power-10": {
+        "effect": 2.0952222222222225,
+        "expectedEffect": 9.200000000000003
+      },
+      "guts-10": {
+        "effect": 0.5590000000000002,
+        "expectedEffect": 9.200000000000003
+      },
+      "wisdom-10": {
+        "effect": 0.20000000000000107,
+        "expectedEffect": 9.200000000000003
+      }
+    },
+    "maxRaceEffect": 0
+  },
+  "スパルタメガホン": {
+    "exchange": 3.5937333333333337,
+    "expectedExchange": 12.650000000000004,
+    "shouldUseDirectly": false,
+    "training": {
+      "speed-10": {
+        "effect": 2.7139999999999986,
+        "expectedEffect": 12.650000000000004
+      },
+      "stamina-10": {
+        "effect": 2.314,
+        "expectedEffect": 12.650000000000004
+      },
+      "power-10": {
+        "effect": 4.180222222222223,
+        "expectedEffect": 12.650000000000004
+      },
+      "guts-10": {
+        "effect": 1.1139999999999999,
+        "expectedEffect": 12.650000000000004
+      },
+      "wisdom-10": {
+        "effect": 0.40000000000000036,
+        "expectedEffect": 12.650000000000004
+      }
+    },
+    "maxRaceEffect": 0
+  },
+  "ブートキャンプメガホン": {
+    "exchange": 5.3790000000000004,
+    "expectedExchange": 16.100000000000005,
+    "shouldUseDirectly": false,
+    "training": {
+      "speed-10": {
+        "effect": 4.064999999999998,
+        "expectedEffect": 16.100000000000005
+      },
+      "stamina-10": {
+        "effect": 3.465,
+        "expectedEffect": 16.100000000000005
+      },
+      "power-10": {
+        "effect": 6.255000000000003,
+        "expectedEffect": 16.100000000000005
+      },
+      "guts-10": {
+        "effect": 1.665,
+        "expectedEffect": 16.100000000000005
+      },
+      "wisdom-10": {
+        "effect": 0.6000000000000014,
+        "expectedEffect": 16.100000000000005
+      }
+    },
+    "maxRaceEffect": 0
+  },
+  "スピードアンクルウェイト": {
+    "exchange": 3.389999999999997,
+    "expectedExchange": 11.500000000000004,
+    "shouldUseDirectly": false,
+    "training": {
+      "speed-10": {
+        "effect": 3.389999999999997,
+        "expectedEffect": 11.500000000000004
+      },
+      "stamina-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "power-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "guts-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "wisdom-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      }
+    },
+    "maxRaceEffect": 0
+  },
+  "スタミナアンクルウェイト": {
+    "exchange": 2.8900000000000006,
+    "expectedExchange": 11.500000000000004,
+    "shouldUseDirectly": false,
+    "training": {
+      "speed-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "stamina-10": {
+        "effect": 2.8900000000000006,
+        "expectedEffect": 11.500000000000004
+      },
+      "power-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "guts-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "wisdom-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      }
+    },
+    "maxRaceEffect": 0
+  },
+  "パワーアンクルウェイト": {
+    "exchange": 5.218888888888891,
+    "expectedExchange": 11.500000000000004,
+    "shouldUseDirectly": false,
+    "training": {
+      "speed-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "stamina-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "power-10": {
+        "effect": 5.218888888888891,
+        "expectedEffect": 11.500000000000004
+      },
+      "guts-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "wisdom-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      }
+    },
+    "maxRaceEffect": 0
+  },
+  "根性アンクルウェイト": {
+    "exchange": 1.3899999999999997,
+    "expectedExchange": 11.500000000000004,
+    "shouldUseDirectly": false,
+    "training": {
+      "speed-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "stamina-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "power-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      },
+      "guts-10": {
+        "effect": 1.3899999999999997,
+        "expectedEffect": 11.500000000000004
+      },
+      "wisdom-10": {
+        "effect": 0,
+        "expectedEffect": 11.500000000000004
+      }
+    },
+    "maxRaceEffect": 0
+  }
+}

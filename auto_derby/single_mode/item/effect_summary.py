@@ -182,7 +182,7 @@ class EffectSummary:
         # mood
         all_moods = list(Mood)
         i_before = all_moods.index(ctx.mood)
-        i_after = mathtools.clamp(0, i_before + self.mood, len(all_moods) - 1)
+        i_after = mathtools.clamp(i_before + self.mood, 0, len(all_moods) - 1)
         if i_before != i_after:
             ctx_after.mood = all_moods[i_after]
             explain += f"mood {ctx.mood} -> {ctx_after.mood};"
