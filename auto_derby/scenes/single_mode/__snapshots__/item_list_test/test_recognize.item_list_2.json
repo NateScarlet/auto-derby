@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": 16,
+      "name": "バイタル20",
+      "quantity": 2,
+      "disabled": false
+    },
+    {
+      "id": 43,
+      "name": "チアメガホン",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 44,
+      "name": "スパルタメガホン",
+      "quantity": 4,
+      "disabled": false
+    },
+    {
+      "id": 47,
+      "name": "スタミナアンクルウェイト",
+      "quantity": 2,
+      "disabled": false
+    },
+    {
+      "id": 48,
+      "name": "パワーアンクルウェイト",
+      "quantity": 3,
+      "disabled": false
+    },
+    {
+      "id": 49,
+      "name": "根性アンクルウェイト",
+      "quantity": 3,
+      "disabled": false
+    }
+  ]
+}
