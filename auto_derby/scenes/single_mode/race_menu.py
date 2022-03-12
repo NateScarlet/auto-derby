@@ -22,8 +22,9 @@ class RaceMenuScene(Scene):
         super().__init__()
         rp = action.resize_proxy()
         self._scroll = VerticalScroll(
-            rp.vector2((15, 600), 540),
-            50,
+            origin=rp.vector2((15, 600), 540),
+            page_size=50,
+            max_page=10,
         )
 
     @classmethod

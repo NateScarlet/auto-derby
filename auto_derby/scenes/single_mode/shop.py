@@ -94,7 +94,11 @@ class ShopScene(Scene):
         self.items: Tuple[Item, ...] = ()
 
         rp = action.resize_proxy()
-        self._scroll = VerticalScroll(rp.vector2((17, 720), 540), 150)
+        self._scroll = VerticalScroll(
+            origin=rp.vector2((17, 720), 540),
+            page_size=150,
+            max_page=10,
+        )
 
     @classmethod
     def name(cls):

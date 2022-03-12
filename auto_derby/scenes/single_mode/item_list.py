@@ -93,8 +93,9 @@ class ItemListScene(Scene):
         self.items = item.ItemList()
         rp = action.resize_proxy()
         self._scroll = VerticalScroll(
-            rp.vector2((17, 720), 540),
-            150,
+            origin=rp.vector2((17, 720), 540),
+            page_size=150,
+            max_page=5,
         )
 
     @classmethod

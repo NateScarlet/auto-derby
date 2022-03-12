@@ -9,11 +9,17 @@ from .. import action
 
 
 class VerticalScroll:
-    def __init__(self, origin: Tuple[int, int], page_size: int) -> None:
+    def __init__(
+        self,
+        *,
+        origin: Tuple[int, int],
+        page_size: int,
+        max_page: int,
+    ) -> None:
         # top = 0, bottom = 1
         self._position = 0
         self._same_direction_count = 0
-        self._max_same_direction_count = 5
+        self._max_same_direction_count = max_page
         self._origin = origin
         self._page_size = page_size
 
