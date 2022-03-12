@@ -172,4 +172,4 @@ class ItemListScene(Scene):
                 break
         self._scroll.complete()
         for i in remains:
-            _LOGGER.debug("exchange remain: %s", i)
+            _LOGGER.debug("use remain: %s", i)

@@ -157,12 +157,12 @@ class ShopScene(Scene):
                     action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                     time.sleep(2)  # wait animation
                     ctx.item_history.append(ctx, match)
-                    # match item moved to bottom
-                    template.invalidate_screeshot()
-                    break
                 else:
                     action.wait_tap_image(templates.CLOSE_BUTTON)
                     ctx.items.put(match.id, 1)
+                # match item moved to bottom
+                template.invalidate_screeshot()
+                break
             if not remains:
                 break
         self._scroll.complete()
