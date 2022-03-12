@@ -78,7 +78,7 @@ def _default_name_label_similarity_threshold(item: Item) -> float:
             item.name,
             match.name,
         )
-        return 0.9
+        return 0.95
     except StopIteration:
         return 0.8
 
