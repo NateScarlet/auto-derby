@@ -6,15 +6,15 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING, Callable, Dict, List, Sequence, Tuple
 
+from ... import mathtools
 from ...constants import TrainingType
+from ..context import Context
 from ..race import Race
 from ..training import Training
 from .effect import Effect
-from ... import mathtools
 
 if TYPE_CHECKING:
     from .item import Item
-    from ..context import Context
 
 
 _LOGGER = logging.getLogger(__name__)
