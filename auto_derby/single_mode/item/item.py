@@ -42,7 +42,10 @@ class Item:
         self.disabled = False
 
     def __eq__(self, other: object) -> bool:
-        return isinstance(other, Item) and self.id == other.id
+        return isinstance(other, Item) and self._equal_key() == other._equal_key()
+
+    def _equal_key(self):
+        return (self.id, self.price, self.quantity, self.disabled)
 
     def __str__(self):
         msg = ""

@@ -56,7 +56,7 @@ def _handle_shop(ctx: Context, cs: CommandScene):
     LOGGER.info("shop items")
     cart_items: List[item.Item] = []
     total_price = 0
-    # TODO: handle multiple same item with different price.
+    # TODO: handle max_quantity
     for s, es, i in scores_of_items:
         can_exchange = total_price + i.price <= ctx.shop_coin
         should_exchange = s > es
