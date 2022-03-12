@@ -315,6 +315,7 @@ class Context:
         # TODO: use custom class
         self.training_history: Tuple[Tuple[int, training.Training], ...] = ()
         self.trainings: Tuple[training.Training, ...] = ()
+        # TODO: record training levels
         # TODO: use custom class
         self.race_history: Tuple[Tuple[int, race.Race], ...] = ()
 
