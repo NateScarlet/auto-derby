@@ -455,7 +455,7 @@ class Context:
         return (
             "Context<"
             f"scenario={self.scenario},"
-            f"turn={self.turn_count()},"
+            f"turn={self.turn_count_v2()},"
             f"mood={self.mood},"
             f"vit={self.vitality:.3f},"
             f"spd={self.speed},"
@@ -484,6 +484,19 @@ class Context:
                 self.conditions.add(i)
 
     def turn_count(self) -> int:
+        import warnings
+
+        warnings.warn(
+            "use turn_count_v2 instead, turn (2,1,1) should be turn 25, not 24.",
+            DeprecationWarning,
+        )
+        if self.date == (1, 0, 0):
+            return self._extra_turn_count
+        if self.date == (4, 0, 0):
+            return self._extra_turn_count + 24 * 3
+        return (self.date[0] - 1) * 24 + (self.date[1] - 1) * 2 + (self.date[2] - 1)
+
+    def turn_count_v2(self) -> int:
         if self.date == (1, 0, 0):
             return self._extra_turn_count
         if self.date == (4, 0, 0):
@@ -494,7 +507,7 @@ class Context:
         return 24 * 3 + 6
 
     @staticmethod
-    def date_from_turn_count(turn_count: int) -> Tuple[int, int, int]:
+    def date_from_turn_count_v2(turn_count: int) -> Tuple[int, int, int]:
         c = turn_count - 1
         year = c // 24 + 1
         c %= 24

@@ -436,8 +436,14 @@ def test_update_by_character_detail_issue39():
     assert ctx.last == ctx.STATUS_F, ctx.last
 
 
-def test_date_from_turn_count():
+def test_date_from_turn_count_v2():
     for i in range(0, 76):
         ctx = Context.new()
-        ctx.date = ctx.date_from_turn_count(i)
-        assert ctx.turn_count() == i, ctx.date
+        ctx.date = ctx.date_from_turn_count_v2(i)
+        assert ctx.turn_count_v2() == i, ctx.date
+    _test.snapshot_match(
+        tuple(
+            f"{i},{Context.date_from_turn_count_v2(i)}"
+            for i in range(1, Context().total_turn_count() + 1)
+        )
+    )
