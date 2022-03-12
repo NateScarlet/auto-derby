@@ -7,7 +7,7 @@ import logging
 from typing import TYPE_CHECKING, Callable, Dict, List, Sequence, Tuple
 
 from ... import mathtools
-from ...constants import TrainingType
+from ...constants import TrainingType, Mood
 from ..context import Context
 from ..race import Race
 from ..training import Training
@@ -121,7 +121,7 @@ class EffectSummary:
 
         effect_rate = 1
         # mood
-        r = ctx_after.mood[0] - ctx.mood[0]
+        r = ctx_after.mood.training_rate - ctx.mood.training_rate
         if r:
             explain += f"{r*100:+.0f}% by mood;"
             effect_rate *= 1 + r
@@ -180,10 +180,11 @@ class EffectSummary:
         explain = ""
 
         # mood
-        i_before = Context.ALL_MOODS.index(ctx.mood)
-        i_after = mathtools.clamp(0, i_before + self.mood, len(Context.ALL_MOODS) - 1)
+        all_moods = list(Mood)
+        i_before = all_moods.index(ctx.mood)
+        i_after = mathtools.clamp(0, i_before + self.mood, len(all_moods) - 1)
         if i_before != i_after:
-            ctx_after.mood = Context.ALL_MOODS[i_after]
+            ctx_after.mood = all_moods[i_after]
             explain += f"mood {ctx.mood} -> {ctx_after.mood};"
 
         if self.speed:

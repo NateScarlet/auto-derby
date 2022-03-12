@@ -19,7 +19,9 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import imagetools, mathtools, ocr, scenes, template, templates, texttools
+from .. import (imagetools, mathtools, ocr, scenes, template, templates,
+                texttools)
+from ..constants import Mood
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -102,7 +104,7 @@ def _recognize_vitality(img: Image) -> float:
     return 1 - np.average(np.apply_along_axis(_is_empty, 1, cv_img[0, :]))
 
 
-def _recognize_mood(rgb_color: Tuple[int, int, int]) -> Tuple[float, float]:
+def _recognize_mood(rgb_color: Tuple[int, int, int]) -> Mood:
     if imagetools.compare_color((250, 68, 126), rgb_color) > 0.9:
         return Context.MOOD_VERY_GOOD
     if imagetools.compare_color((255, 124, 57), rgb_color) > 0.9:
@@ -217,19 +219,11 @@ def _date_bbox(ctx: Context, rp: mathtools.ResizeProxy):
 
 
 class Context:
-    MOOD_VERY_BAD = (0.8, 0.95)
-    MOOD_BAD = (0.9, 0.98)
-    MOOD_NORMAL = (1.0, 1.0)
-    MOOD_GOOD = (1.1, 1.05)
-    MOOD_VERY_GOOD = (1.2, 1.1)
-
-    ALL_MOODS = (
-        MOOD_VERY_BAD,
-        MOOD_BAD,
-        MOOD_NORMAL,
-        MOOD_GOOD,
-        MOOD_VERY_GOOD,
-    )
+    MOOD_VERY_BAD = Mood.VERY_BAD
+    MOOD_BAD = Mood.BAD
+    MOOD_NORMAL = Mood.NORMAL
+    MOOD_GOOD = Mood.GOOD
+    MOOD_VERY_GOOD = Mood.VERY_GOOD
 
     CONDITION_HEADACHE = 1 << 0
     CONDITION_OVERWEIGHT = 1 << 1
