@@ -3,8 +3,10 @@
 
 from __future__ import annotations
 
+import logging
 from typing import TYPE_CHECKING, Iterator, Sequence, Tuple
 
+_LOGGER = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from ..commands import Command
@@ -20,6 +22,10 @@ def iterate(
     items: Sequence[Item],
     picked_items: Sequence[Item] = (),
 ) -> Iterator[Plan]:
+    def _with_log(p: Plan):
+        _LOGGER.debug("plan score: %s: %s", p[0], ",".join(i.name for i in p[1]))
+        return p
+
     for index, item in enumerate(items):
         s = item.effect_score(ctx, command, picked_items)
         if s <= 0:
@@ -39,9 +45,9 @@ def iterate(
         )
         if sub_plans:
             s_sub, items_s = sub_plans[0]
-            yield s + s_sub, (item, *items_s)
+            yield _with_log((s + s_sub, (item, *items_s)))
         else:
-            yield s, (item,)
+            yield _with_log((s, (item,)))
 
     return
 
