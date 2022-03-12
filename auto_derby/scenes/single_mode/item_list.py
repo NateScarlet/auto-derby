@@ -108,7 +108,7 @@ class ItemListScene(Scene):
         action.wait_tap_image(
             templates.SINGLE_MODE_ITEM_LIST_BUTTON,
         )
-        action.wait_image(templates.CLOSE_BUTTON)
+        action.wait_image_stable(templates.CLOSE_BUTTON)
         return cls()
 
     def to_dict(self) -> Dict[Text, Any]:
