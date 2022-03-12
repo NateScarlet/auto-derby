@@ -50,7 +50,7 @@ def _ocr_date(ctx: Context, img: Image) -> Tuple[int, int, int]:
     white_outline_img = cv2.morphologyEx(
         white_outline_img,
         cv2.MORPH_CLOSE,
-        np.ones((4, 4)),
+        np.ones((3, 3)),
     )
     bg_mask_img = imagetools.bg_mask_by_outline(white_outline_img)
     masked_img = cv2.copyTo(
