@@ -311,6 +311,9 @@ class Item:
                     explain += f"{s:.2f} by remove {c.name}"
                     ret += s
 
+        # TODO: by friend ship
+        # TODO: by race reward
+
         # by quantity
         r = mathtools.interpolate(
             ctx.items.get(self.id).quantity,
@@ -328,7 +331,6 @@ class Item:
 
         if explain:
             _LOGGER.debug("%s exchange score: %.2f: %s", self, ret, explain)
-        # TODO: calculate other effect
         return ret
 
     def expected_exchange_score(self, ctx: Context) -> float:
