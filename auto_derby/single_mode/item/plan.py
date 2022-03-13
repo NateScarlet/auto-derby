@@ -6,13 +6,14 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING, Iterator, Sequence, Tuple
 
+from .effect_summary import EffectSummary
+
 _LOGGER = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from ..commands import Command
     from ..context import Context
     from .item import Item
-    from .effect_summary import EffectSummary
 
     Plan = Tuple[float, Tuple[Item, ...]]
 
