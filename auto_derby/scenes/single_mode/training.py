@@ -40,21 +40,15 @@ def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarra
 
 def _recognize_base_effect(img: Image) -> int:
     cv_img = imagetools.cv_image(imagetools.resize(img, height=32))
-    sharpened_img = cv2.filter2D(
-        cv_img,
-        8,
-        np.array(
-            (
-                (1, -2, 1),
-                (-2, 5, -2),
-                (1, -2, 1),
-            )
-        ),
-    )
-    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.7)
+    sharpened_img = imagetools.sharpen(cv_img)
+    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
 
     white_outline_img = imagetools.constant_color_key(
-        sharpened_img, (255, 255, 255), (234, 245, 240), (208, 200, 234)
+        sharpened_img,
+        (255, 255, 255),
+        (234, 245, 240),
+        (244, 235, 237),
+        threshold=0.85,
     )
     white_outline_img = cv2.morphologyEx(
         white_outline_img,
@@ -66,13 +60,20 @@ def _recognize_base_effect(img: Image) -> int:
     masked_img = cv2.copyTo(cv_img, 255 - bg_mask_img)
 
     brown_outline_img = imagetools.constant_color_key(
-        masked_img,
+        cv_img,
         (29, 62, 194),
         (24, 113, 218),
         (30, 109, 216),
         (69, 104, 197),
         (119, 139, 224),
         (103, 147, 223),
+        (59, 142, 226),
+        threshold=0.85,
+    )
+    brown_outline_img = cv2.morphologyEx(
+        brown_outline_img,
+        cv2.MORPH_CLOSE,
+        np.ones((3, 3)),
     )
 
     bg_mask_img = imagetools.bg_mask_by_outline(brown_outline_img)
@@ -94,14 +95,12 @@ def _recognize_base_effect(img: Image) -> int:
     assert fill_img.shape == cv_img.shape
 
     text_img = imagetools.color_key(masked_img, fill_img)
-    imagetools.fill_area(text_img, (0,), size_lt=8)
 
     text_img_extra = imagetools.constant_color_key(
         masked_img, (175, 214, 255), threshold=0.95
     )
     text_img = np.array(np.maximum(text_img, text_img_extra))
-    h = cv_img.shape[0]
-    imagetools.fill_area(text_img, (0,), size_lt=round(h * 0.2 ** 2))
+    imagetools.fill_area(text_img, (0,), size_lt=16)
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
@@ -379,7 +378,7 @@ def _recognize_has_soul_burst(
         threshold=0.9,
     )
 
-    if os.getenv("DEBUG") == __name__:
+    if os.getenv("DEBUG") == __name__ + "[partner]":
         cv2.imshow("soul_burst_mark", mark_img)
         cv2.imshow("soul_burst_mark_mask", mask)
         cv2.waitKey()
@@ -513,7 +512,7 @@ def _recognize_soul(
     imagetools.fill_area(fg_mask2, (0,), size_lt=100)
     fg_img = cv2.copyTo(masked_img, fg_mask2)
     empty_mask = imagetools.constant_color_key(fg_img, (126, 121, 121))
-    if os.getenv("DEBUG") == __name__:
+    if os.getenv("DEBUG") == __name__ + "[partner]":
         _LOGGER.debug(
             "soul: img=%s",
             imagetools.image_hash(img, save_path=training.g.image_path),
@@ -542,7 +541,7 @@ def _recognize_partner_icon(
 ) -> Optional[training.Partner]:
     rp = mathtools.ResizeProxy(img.width)
     icon_img = img.crop(bbox)
-    if os.getenv("DEBUG") == __name__:
+    if os.getenv("DEBUG") == __name__ + "[partner]":
         _LOGGER.debug(
             "icon: img=%s",
             imagetools.image_hash(icon_img, save_path=training.g.image_path),
