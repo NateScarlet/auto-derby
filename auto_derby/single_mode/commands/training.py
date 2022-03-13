@@ -30,7 +30,7 @@ class TrainingCommand(Command):
             action.tap((x, y))
             time.sleep(0.1)
         action.tap((x, y))
-        ctx.training_history += ((ctx.turn_count_v2(), self.training),)
+        ctx.training_history.append(ctx, current_training)
         UnknownScene.enter(ctx)
 
     def score(self, ctx: Context) -> float:

@@ -6,7 +6,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, Dict, Iterator
 
 if TYPE_CHECKING:
-    from . import go_out, training, race
+    from . import go_out, race
 
 import functools
 import logging
@@ -313,8 +313,9 @@ class Context:
         self.grade_point = 0
         self.shop_coin = 0
 
-        # TODO: use custom class
-        self.training_history: Tuple[Tuple[int, training.Training], ...] = ()
+        from . import training
+
+        self.training_history = training.History()
         self.trainings: Tuple[training.Training, ...] = ()
         # TODO: record training levels
         # TODO: use custom class

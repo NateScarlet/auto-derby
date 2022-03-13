@@ -226,8 +226,7 @@ class Item:
             (Training.new(), EffectSummary()),
             *(
                 (trn, ctx.item_history.effect_summary_at(turn_count))
-                for turn_count, trn in ctx.training_history
-                if turn_count > ctx.turn_count_v2() - 12
+                for turn_count, trn in ctx.training_history.iterate(last=12)
             ),
             *((t, ctx.item_history.effect_summary(ctx)) for t in ctx.trainings),
         )
