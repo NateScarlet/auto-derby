@@ -1,7 +1,7 @@
 {
   "チアメガホン": {
     "exchange": 2.593600000000001,
-    "expectedExchange": 26.8,
+    "expectedExchange": 27.2,
     "shouldUseDirectly": false,
     "training": {
       "speed-10": {
@@ -29,7 +29,7 @@
   },
   "スパルタメガホン": {
     "exchange": 5.172266666666667,
-    "expectedExchange": 36.85,
+    "expectedExchange": 37.4,
     "shouldUseDirectly": false,
     "training": {
       "speed-10": {
@@ -57,7 +57,7 @@
   },
   "ブートキャンプメガホン": {
     "exchange": 7.735999999999999,
-    "expectedExchange": 46.9,
+    "expectedExchange": 47.6,
     "shouldUseDirectly": false,
     "training": {
       "speed-10": {
@@ -85,7 +85,7 @@
   },
   "スピードアンクルウェイト": {
     "exchange": 6.299999999999997,
-    "expectedExchange": 33.5,
+    "expectedExchange": 34.0,
     "shouldUseDirectly": false,
     "training": {
       "speed-10": {
@@ -113,7 +113,7 @@
   },
   "スタミナアンクルウェイト": {
     "exchange": 6.299999999999997,
-    "expectedExchange": 33.5,
+    "expectedExchange": 34.0,
     "shouldUseDirectly": false,
     "training": {
       "speed-10": {
@@ -141,7 +141,7 @@
   },
   "パワーアンクルウェイト": {
     "exchange": 3.662222222222219,
-    "expectedExchange": 33.5,
+    "expectedExchange": 34.0,
     "shouldUseDirectly": false,
     "training": {
       "speed-10": {
@@ -169,7 +169,7 @@
   },
   "根性アンクルウェイト": {
     "exchange": 5.699999999999999,
-    "expectedExchange": 33.5,
+    "expectedExchange": 34.0,
     "shouldUseDirectly": false,
     "training": {
       "speed-10": {

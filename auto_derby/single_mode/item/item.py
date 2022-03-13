@@ -128,12 +128,12 @@ class Item:
             # TODO: race reward effect
 
         s = (ctx_after.max_vitality - ctx_before.max_vitality) * mathtools.interpolate(
-            ctx.turn_count(),
+            ctx.turn_count_v2(),
             (
-                (0, 3),
-                (24, 2),
-                (48, 1),
-                (72, 0.1),
+                (1, 3),
+                (25, 2),
+                (49, 1),
+                (73, 0.1),
             ),
         )
         if s:
@@ -153,7 +153,7 @@ class Item:
             explain += f"{s:.2f} by price;"
             ret += s
         r = mathtools.interpolate(
-            ctx.turn_count(),
+            ctx.turn_count_v2(),
             (
                 (0, 0),
                 (24, -0.3),
@@ -209,12 +209,12 @@ class Item:
             explain += f"{s:.2f} by property"
             ret += s
         s = (ctx_after.max_vitality - ctx.max_vitality) * mathtools.interpolate(
-            ctx.turn_count(),
+            ctx.turn_count_v2(),
             (
-                (0, 4),
-                (24, 2),
-                (48, 1),
-                (72, 0.1),
+                (1, 4),
+                (25, 2),
+                (49, 1),
+                (73, 0.1),
             ),
         )
         if s:
@@ -227,7 +227,7 @@ class Item:
             *(
                 (trn, ctx.item_history.effect_summary_at(turn_count))
                 for turn_count, trn in ctx.training_history
-                if turn_count > ctx.turn_count() - 12
+                if turn_count > ctx.turn_count_v2() - 12
             ),
             *((t, ctx.item_history.effect_summary(ctx)) for t in ctx.trainings),
         )
@@ -303,12 +303,12 @@ class Item:
             ret += s
 
         r = mathtools.interpolate(
-            ctx.turn_count(),
+            ctx.turn_count_v2(),
             (
-                (0, 0),
-                (24, -0.3),
-                (48, -0.7),
-                (72, -1.0),
+                (1, 0),
+                (25, -0.3),
+                (49, -0.7),
+                (73, -1.0),
             ),
         )
         if r:

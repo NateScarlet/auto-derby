@@ -18,7 +18,7 @@ class History:
     def append(self, ctx: Context, item: Item):
         self._l.append(
             (
-                ctx.turn_count(),
+                ctx.turn_count_v2(),
                 item,
             )
         )
@@ -33,4 +33,4 @@ class History:
         return es
 
     def effect_summary(self, ctx: Context) -> EffectSummary:
-        return self.effect_summary_at(ctx.turn_count())
+        return self.effect_summary_at(ctx.turn_count_v2())
