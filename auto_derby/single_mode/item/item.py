@@ -72,7 +72,7 @@ class Item:
         return d
 
     @classmethod
-    def from_dict(cls, d: Dict[Text, Any]) -> Item:
+    def from_dict(cls, d: Dict[Text, Any]):
         v = cls.new()
         v.id = d["id"]
         v.name = d["name"]
@@ -82,6 +82,11 @@ class Item:
         v.effect_priority = d["effectPriority"]
         v.effects = tuple(Effect.from_dict(i) for i in d["effects"])
         return v
+
+    def clone(self):
+        i = self.__class__()
+        i.__dict__.update(self.__dict__)
+        return i
 
     def effect_summary(self) -> EffectSummary:
         es = EffectSummary()

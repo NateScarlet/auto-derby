@@ -18,12 +18,6 @@ class ItemList:
     def __bool__(self) -> bool:
         return bool(self._m)
 
-    def quantity(self) -> int:
-        return sum(i.quantity for i in self)
-
-    def item_type_count(self) -> int:
-        return sum(1 for _ in self)
-
     def __iter__(self) -> Iterator[Item]:
         yield from sorted(
             (i for i in self._m.values() if i.quantity > 0), key=lambda x: x.id
@@ -32,17 +26,27 @@ class ItemList:
     def __str__(self) -> str:
         return "[" + ",".join((str(i) for i in self)) + "]"
 
+    def quantity(self) -> int:
+        return sum(i.quantity for i in self)
+
+    def iterate_flat(self) -> Iterator[Item]:
+        for i in self:
+            for _ in range(0, i.quantity):
+                v = i.clone()
+                i.quantity = 0
+                yield v
+
     def get(self, id: int) -> Item:
         return self._m.get(id) or game_data.get(id)
+
+    def update(self, *items: Item):
+        for i in items:
+            self._m[i.id] = i
 
     def put(self, id: int, quantity: int):
         v = self.get(id)
         v.quantity += quantity
         self._m[v.id] = v
-
-    def update(self, *items: Item):
-        for i in items:
-            self._m[i.id] = i
 
     def remove(self, id: int, quantity: int):
         self.put(id, -quantity)
