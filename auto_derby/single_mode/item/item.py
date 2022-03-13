@@ -10,7 +10,7 @@ import numpy as np
 from .effect import Effect
 from .effect_summary import EffectSummary
 from ..training import Training
-from .. import race
+from .. import race, condition
 from ... import mathtools
 from .globals import g
 import logging
@@ -22,7 +22,6 @@ if TYPE_CHECKING:
     from ..context import Context
 
 
-# TODO: allow plugin override class
 class Item:
     @staticmethod
     def new() -> Item:
@@ -196,6 +195,7 @@ class Item:
 
         ret = 0
         explain = ""
+        t_now = ctx.turn_count_v2()
 
         from ..commands import TrainingCommand, RaceCommand
 
@@ -214,7 +214,7 @@ class Item:
             explain += f"{s:.2f} by property"
             ret += s
         s = (ctx_after.max_vitality - ctx.max_vitality) * mathtools.interpolate(
-            ctx.turn_count_v2(),
+            t_now,
             (
                 (1, 4),
                 (25, 2),
@@ -261,7 +261,55 @@ class Item:
             )
             ret += s
 
-        # TODO: by condition
+        # by condition
+        # not exchange if already have
+        if self not in ctx.items:
+            scores = {
+                "切れ者": mathtools.interpolate(
+                    t_now, ((1, 8), (25, 4), (49, 2), (73, 0))
+                ),
+                "愛嬌○": mathtools.interpolate(t_now, ((1, 15), (25, 4), (49, 0))),
+                "注目株": mathtools.interpolate(t_now, ((1, 10), (25, 3), (49, 0))),
+                "練習上手○": mathtools.interpolate(
+                    t_now, ((1, 8), (25, 8), (49, 3), (73, 0))
+                ),
+                "練習上手◎": mathtools.interpolate(
+                    t_now, ((1, 10), (25, 10), (49, 5), (73, 0))
+                ),
+            }
+            for i in es.condition_add:
+                c = condition.get(i)
+                s = scores.get(c.name, 0)
+                if s:
+                    explain += f"{s:.2f} by add {c.name}"
+                    ret += s
+
+            scores = {
+                "夜ふかし気味": mathtools.interpolate(
+                    t_now, ((1, 3), (25, 3), (49, 3), (73, 0.02))
+                ),
+                "なまけ癖": mathtools.interpolate(
+                    t_now, ((1, 3), (25, 3), (49, 2), (73, 0.1))
+                ),
+                "肌あれ": mathtools.interpolate(
+                    t_now, ((1, 5), (25, 2), (49, 1), (73, 0.1))
+                ),
+                "太り気味": mathtools.interpolate(
+                    t_now, ((1, 5), (25, 3), (49, 3), (73, 0.1))
+                ),
+                "片頭痛": mathtools.interpolate(
+                    t_now, ((1, 4), (25, 4), (49, 3), (73, 1))
+                ),
+                "練習ベタ": mathtools.interpolate(
+                    t_now, ((1, 6), (25, 5), (49, 3), (73, 0.1))
+                ),
+            }
+            for i in es.condition_remove:
+                c = condition.get(i)
+                s = scores.get(c.name, 0)
+                if s:
+                    explain += f"{s:.2f} by remove {c.name}"
+                    ret += s
 
         # by quantity
         r = mathtools.interpolate(
@@ -329,8 +377,6 @@ class Item:
         es = self.effect_summary()
         if es.unknown_effects:
             return False
-        if es.condition_remove:
-            return False
         if es.training_no_failure:
             return False
         if es.race_fan_buff or es.race_reward_buff:
@@ -342,7 +388,7 @@ class Item:
         if es.vitality > 0:
             return False
         ctx_after = es.apply_to_context(ctx)
-        if es.mood and ctx_after.mood <= ctx.mood:
+        if es.mood > 0 and ctx_after.mood <= ctx.mood:
             return False
         return True
 

@@ -4,12 +4,13 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Callable, Dict, List, Sequence, Tuple
+from typing import TYPE_CHECKING, Callable, Dict, List, Sequence, Set, Tuple
 
 from ... import mathtools
 from ...constants import TrainingType, Mood
 from ..context import Context
 from ..race import Race
+from .. import condition
 from ..training import Training
 from .effect import Effect
 
@@ -80,8 +81,8 @@ class EffectSummary:
         self.vitality = 0
         self.max_vitality = 0
         self.mood = 0
-        self.condition_add: Tuple[int, ...] = ()
-        self.condition_remove: Tuple[int, ...] = ()
+        self.condition_add: Set[int] = set()
+        self.condition_remove: Set[int] = set()
         self.training_level: Dict[TrainingType, int] = {}
         self.training_effect_buff: Sequence[TrainingBuff] = ()
         self.training_vitality_debuff: Sequence[TrainingBuff] = ()
@@ -255,6 +256,15 @@ class EffectSummary:
             explain += f"{self.vitality} vitality;"
             ctx_after.vitality += self.vitality / ctx.max_vitality
 
+        c = self.condition_add.difference(ctx.conditions)
+        if c:
+            explain += f"add condition {','.join(condition.get(i).name for i in c)};"
+            ctx.conditions.update(self.condition_add)
+
+        c = self.condition_remove.intersection(ctx.conditions)
+        if c:
+            explain += f"remove condition {','.join(condition.get(i).name for i in c)};"
+            ctx.conditions.difference_update(c)
         if explain:
             _LOGGER.debug("apply to context: %s", explain)
         return ctx_after
@@ -344,13 +354,12 @@ def _(item: Item, effect: Effect, summary: EffectSummary):
 @_register_reducer
 @_only_effect_type(Effect.TYPE_CONDITION)
 def _(item: Item, effect: Effect, summary: EffectSummary):
-    # TODO: handle duplicated effect
     action, value, _, _ = effect.values
     if action == Effect.CONDITION_ADD:
-        summary.condition_add += (value,)
+        summary.condition_add.add(value)
         return True
     if action == Effect.CONDITION_REMOVE:
-        summary.condition_remove += (value,)
+        summary.condition_remove.add(value)
         return True
     return False
 

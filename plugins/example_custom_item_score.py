@@ -1,7 +1,7 @@
 import auto_derby
 from auto_derby.constants import TrainingType
 from auto_derby.single_mode.commands import Command, TrainingCommand, RaceCommand
-from auto_derby.single_mode import Context
+from auto_derby.single_mode import Context, condition
 from auto_derby.single_mode.item import EffectSummary
 
 
@@ -11,8 +11,13 @@ class Plugin(auto_derby.Plugin):
             # high exchange score means high exchange priority
             def exchange_score(self, ctx: Context) -> float:
                 ret = super().exchange_score(ctx)
+                es = self.effect_summary()
                 # increase for "プリティーミラー"
                 if self.name == "プリティーミラー":
+                    ret += 10
+
+                # increse for item can add condition "愛嬌○"
+                if any(condition.get(i).name == "愛嬌○" for i in es.condition_add):
                     ret += 10
                 return ret
 

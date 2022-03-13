@@ -224,8 +224,8 @@ class Context:
     MOOD_GOOD = Mood.GOOD
     MOOD_VERY_GOOD = Mood.VERY_GOOD
 
-    CONDITION_HEADACHE = 1 << 0
-    CONDITION_OVERWEIGHT = 1 << 1
+    CONDITION_HEADACHE = 5
+    CONDITION_OVERWEIGHT = 4
 
     STATUS_S = (8, "S")
     STATUS_A = (7, "A")
