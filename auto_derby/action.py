@@ -44,18 +44,23 @@ def match_image_until_disappear(
 
 
 def wait_image(
-    *tmpl: Union[Text, template.Specification]
+    *tmpl: Union[Text, template.Specification],
+    timeout: float = 0.0,
 ) -> Tuple[template.Specification, Tuple[int, int]]:
+    start_time = time.time()
     while True:
         try:
             return next(template.match(template.screenshot(max_age=0), *tmpl))
         except StopIteration:
+            if timeout > 0 and start_time + timeout < time.time():
+                raise TimeoutError()
             time.sleep(0.01)
 
 
 def wait_image_stable(
     *tmpl: Union[Text, template.Specification],
     duration: float = 1.0,
+    timeout: float = 0.0,
 ) -> Tuple[template.Specification, Tuple[int, int]]:
     t, last_pos = wait_image(*tmpl)
     start_time = time.time()
@@ -66,6 +71,8 @@ def wait_image_stable(
             start_time = time.time()
         if time.time() - start_time > duration:
             break
+        if timeout > 0 and start_time + timeout < time.time():
+            raise TimeoutError()
         last_pos = pos
     return t, last_pos
 

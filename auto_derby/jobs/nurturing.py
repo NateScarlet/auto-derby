@@ -125,7 +125,11 @@ class _CommandPlan:
 
 
 def _handle_turn(ctx: Context):
-    scene = CommandScene.enter(ctx)
+    try:
+        scene = CommandScene.enter(ctx)
+    except TimeoutError:
+        LOGGER.warning("command scene enter timeout, return to main loop")
+        return
     scene.recognize(ctx)
     _handle_item_list(ctx, scene)
     # see training before shop

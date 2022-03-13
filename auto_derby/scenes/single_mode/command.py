@@ -90,17 +90,12 @@ class CommandScene(Scene):
         if name == "single-mode-item-menu":
             action.wait_tap_image(templates.CLOSE_BUTTON)
 
-        while True:
-            tmpl, pos = action.wait_image(
-                templates.SINGLE_MODE_COMMAND_TRAINING,
-                templates.SINGLE_MODE_FORMAL_RACE_BANNER,
-                templates.SINGLE_MODE_URA_FINALS,
-                templates.CANCEL_BUTTON,
-            )
-            if tmpl.name == templates.CANCEL_BUTTON:
-                action.tap(pos)
-            else:
-                break
+        action.wait_image_stable(
+            templates.SINGLE_MODE_COMMAND_TRAINING,
+            templates.SINGLE_MODE_FORMAL_RACE_BANNER,
+            templates.SINGLE_MODE_URA_FINALS,
+            timeout=5,
+        )
 
         return cls()
 
