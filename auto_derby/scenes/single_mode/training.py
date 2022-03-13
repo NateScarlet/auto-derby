@@ -41,19 +41,16 @@ def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarra
 def _recognize_base_effect(img: Image) -> int:
     cv_img = imagetools.cv_image(imagetools.resize(img, height=32))
     sharpened_img = imagetools.sharpen(cv_img)
-    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
+    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.65)
 
     white_outline_img = imagetools.constant_color_key(
         sharpened_img,
         (255, 255, 255),
-        (234, 245, 240),
-        (244, 235, 237),
-        threshold=0.85,
     )
     white_outline_img = cv2.morphologyEx(
         white_outline_img,
-        cv2.MORPH_CLOSE,
-        np.ones((3, 3)),
+        cv2.MORPH_DILATE,
+        cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3)),
     )
 
     bg_mask_img = imagetools.bg_mask_by_outline(white_outline_img)
@@ -72,8 +69,8 @@ def _recognize_base_effect(img: Image) -> int:
     )
     brown_outline_img = cv2.morphologyEx(
         brown_outline_img,
-        cv2.MORPH_CLOSE,
-        np.ones((3, 3)),
+        cv2.MORPH_DILATE,
+        cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3)),
     )
 
     bg_mask_img = imagetools.bg_mask_by_outline(brown_outline_img)
@@ -100,7 +97,7 @@ def _recognize_base_effect(img: Image) -> int:
         masked_img, (175, 214, 255), threshold=0.95
     )
     text_img = np.array(np.maximum(text_img, text_img_extra))
-    imagetools.fill_area(text_img, (0,), size_lt=16)
+    imagetools.fill_area(text_img, (0,), size_lt=48)
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
@@ -115,7 +112,7 @@ def _recognize_base_effect(img: Image) -> int:
         cv2.destroyAllWindows()
 
     # +100 has different color
-    hash100 = "000000000000006660ee64ff64ff4eff42060000000000000000000000000000"
+    hash100 = "000000000000006600ee00ff00ff00ff004e0000000000000000000000000000"
     if (
         imagetools.compare_hash(
             imagetools.image_hash(imagetools.pil_image(text_img)),

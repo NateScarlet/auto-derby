@@ -26363,7 +26363,7 @@ def correctMatches(
     """
     ...
 
-def countNonZero(src) -> retval:
+def countNonZero(src: ArrayLike) -> int:
     """
     .   @brief Counts non-zero array elements.
     .

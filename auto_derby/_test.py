@@ -118,7 +118,7 @@ def snapshot_match(
             json_b = json.loads(b)
             assert json_a == json_b, (json_a, json_b)
         else:
-            assert a == b, (a, b)
+            assert b == a, (a, b)
 
     _, filename, _, func_name, _, _ = inspect.stack()[skip + 1]
     data_dir = os.path.join(os.path.dirname(filename), "__snapshots__")
