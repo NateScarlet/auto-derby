@@ -303,7 +303,7 @@ def _template_actions(ctx: Context) -> Iterator[Tuple[_Template, _Handler]]:
             ctx.SCENARIO_CLIMAX, _cancel
         )
         yield templates.SINGLE_MODE_TARGET_RACE_POINT_NOT_ENOUGH, _set_scenario(
-            ctx.scenario, _cancel
+            ctx.SCENARIO_CLIMAX, _cancel
         )
 
 
