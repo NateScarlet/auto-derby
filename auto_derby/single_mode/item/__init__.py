@@ -6,3 +6,4 @@ from .globals import g
 from .item import Item
 from .item_list import ItemList
 from .label import from_name_image
+from .effect_summary import EffectSummary
