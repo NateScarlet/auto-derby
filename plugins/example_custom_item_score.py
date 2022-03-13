@@ -16,7 +16,7 @@ class Plugin(auto_derby.Plugin):
                     ret += 10
                 return ret
 
-            # item will not be exchanged from shop if 
+            # item will not be exchanged from shop if
             # exchange score less than expected exchange score
             def expected_exchange_score(self, ctx: Context) -> float:
                 ret = super().expected_exchange_score(ctx)
