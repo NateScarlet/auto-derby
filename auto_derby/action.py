@@ -64,12 +64,13 @@ def wait_image_stable(
 ) -> Tuple[template.Specification, Tuple[int, int]]:
     t, last_pos = wait_image(*tmpl)
     start_time = time.time()
+    last_changed_time = start_time
     while True:
         time.sleep(0.01)
         _, pos = wait_image(t)
         if pos != last_pos:
-            start_time = time.time()
-        if time.time() - start_time > duration:
+            last_changed_time = time.time()
+        if time.time() - last_changed_time > duration:
             break
         if timeout > 0 and start_time + timeout < time.time():
             raise TimeoutError()
