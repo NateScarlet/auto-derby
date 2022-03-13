@@ -114,8 +114,7 @@ class EffectSummary:
         """
         return a copy of given training with effect applied.
         """
-        t_after = Training.new()
-        t_after.__dict__.update(training.__dict__)
+        t_after = training.clone()
         explain = ""
         ctx_after = self.apply_to_context(ctx)
 
@@ -133,12 +132,12 @@ class EffectSummary:
             effect_rate *= 1 + r
 
         r = effect_rate
-        if r:
-            t_after.speed = round(t_after.speed * (1 + r))
-            t_after.stamina = round(t_after.stamina * (1 + r))
-            t_after.power = round(t_after.power * (1 + r))
-            t_after.guts = round(t_after.guts * (1 + r))
-            t_after.wisdom = round(t_after.wisdom * (1 + r))
+        if r != 1:
+            t_after.speed = round(t_after.speed * r)
+            t_after.stamina = round(t_after.stamina * r)
+            t_after.power = round(t_after.power * r)
+            t_after.guts = round(t_after.guts * r)
+            t_after.wisdom = round(t_after.wisdom * r)
 
         # vitality debuff
         r = sum(i.rate for i in self.training_vitality_debuff if i.type == t_after.type)
@@ -162,6 +161,53 @@ class EffectSummary:
             _LOGGER.debug("apply to training: %s->%s: %s", training, t_after, explain)
         assert 0.0 <= t_after.failure_rate <= 1.0, t_after.failure_rate
         return t_after
+
+    def reduce_on_training(self, training: Training) -> Tuple[Training, EffectSummary]:
+        """Reduce effect for item score sample (remove buff so we can apply other conflicted buff)."""
+
+        es_remains = self.clone()
+        t_before = training.clone()
+        explain = ""
+
+        effect_rate = 1
+
+        # buff
+        r = sum(
+            i.rate for i in es_remains.training_effect_buff if i.type == t_before.type
+        )
+        es_remains.training_effect_buff = tuple(
+            i for i in es_remains.training_effect_buff if i.type != t_before.type
+        )
+        if r:
+            explain += f"{r*100:+.0f}% by buff;"
+            effect_rate *= 1 + r
+
+        r = effect_rate
+        if r != 1:
+            t_before.speed = round(t_before.speed / r)
+            t_before.stamina = round(t_before.stamina / r)
+            t_before.power = round(t_before.power / r)
+            t_before.guts = round(t_before.guts / r)
+            t_before.wisdom = round(t_before.wisdom / r)
+
+        # vitality debuff
+        r = sum(
+            i.rate
+            for i in es_remains.training_vitality_debuff
+            if i.type == t_before.type
+        )
+        es_remains.training_vitality_debuff = tuple(
+            i for i in es_remains.training_vitality_debuff if i.type != t_before.type
+        )
+        if r:
+            explain += f"{r*100:+.0f}% vitality;"
+            t_before.vitality /= 1 + r
+
+        if explain:
+            _LOGGER.debug(
+                "revert from training: %s->%s: %s", training, t_before, explain
+            )
+        return t_before, es_remains
 
     def apply_to_race(self, ctx: Context, race: Race) -> Race:
         r_after = Race.from_dict(race.to_dict())

@@ -79,6 +79,11 @@ class Training:
             + ">"
         )
 
+    def clone(self):
+        t = self.__class__()
+        t.__dict__.update(self.__dict__)
+        return t
+
     def score(self, ctx: Context) -> float:
         return training_score.compute(ctx, self)
 

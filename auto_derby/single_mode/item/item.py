@@ -225,7 +225,7 @@ class Item:
         sample_trainings = (
             (Training.new(), EffectSummary()),
             *(
-                (trn, ctx.item_history.effect_summary_at(turn_count))
+                ctx.item_history.effect_summary_at(turn_count).reduce_on_training(trn)
                 for turn_count, trn in ctx.training_history.iterate(last=12)
             ),
             *((t, ctx.item_history.effect_summary(ctx)) for t in ctx.trainings),

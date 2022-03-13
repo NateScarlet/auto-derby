@@ -1,6 +1,6 @@
 {
   "スピードのメモ帳": {
-    "exchange": 8.780316666666671,
+    "exchange": 6.310074999999999,
     "expectedExchange": 6.8,
     "shouldUseDirectly": true
   },
@@ -25,7 +25,7 @@
     "shouldUseDirectly": true
   },
   "スピード戦術書": {
-    "exchange": 14.06073888888889,
+    "exchange": 11.586841666666665,
     "expectedExchange": 10.2,
     "shouldUseDirectly": true
   },
@@ -50,7 +50,7 @@
     "shouldUseDirectly": true
   },
   "スピード秘伝書": {
-    "exchange": 24.461583333333337,
+    "exchange": 21.980375,
     "expectedExchange": 20.4,
     "shouldUseDirectly": true
   },

@@ -1,6 +1,6 @@
 {
   "スピードのメモ帳": {
-    "exchange": 9.092894444444443,
+    "exchange": 5.870475,
     "expectedExchange": 5.6,
     "shouldUseDirectly": true
   },
@@ -25,7 +25,7 @@
     "shouldUseDirectly": true
   },
   "スピード戦術書": {
-    "exchange": 12.827420370370369,
+    "exchange": 9.598441666666666,
     "expectedExchange": 8.399999999999999,
     "shouldUseDirectly": true
   },
@@ -50,7 +50,7 @@
     "shouldUseDirectly": true
   },
   "スピード秘伝書": {
-    "exchange": 20.26447222222222,
+    "exchange": 17.022375,
     "expectedExchange": 16.799999999999997,
     "shouldUseDirectly": true
   },
@@ -95,22 +95,22 @@
     "shouldUseDirectly": false
   },
   "エネドリンクMAX": {
-    "exchange": 11.240000000000002,
+    "exchange": 11.240000000000006,
     "expectedExchange": 16.799999999999997,
     "shouldUseDirectly": false
   },
   "ロングエネドリンクMAX": {
-    "exchange": 16.48,
+    "exchange": 16.480000000000004,
     "expectedExchange": 28.0,
     "shouldUseDirectly": true
   },
   "プレーンカップケーキ": {
-    "exchange": 1.0613333333333337,
+    "exchange": 1.0906666666666687,
     "expectedExchange": 16.799999999999997,
     "shouldUseDirectly": true
   },
   "スイートカップケーキ": {
-    "exchange": 2.119733333333334,
+    "exchange": 2.1784000000000012,
     "expectedExchange": 30.799999999999997,
     "shouldUseDirectly": true
   }
