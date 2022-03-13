@@ -233,6 +233,7 @@ class Item:
             ),
             *ctx.trainings,
         )
+        # TODO: handle history items
         training_scores = (
             self.effect_score(ctx, TrainingCommand(i)) for i in sample_trainings
         )
