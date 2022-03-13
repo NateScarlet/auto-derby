@@ -127,7 +127,7 @@ class ShopScene(Scene):
             if static:
                 break
         if not self.items:
-            _LOGGER.warn("not found items")
+            _LOGGER.warning("not found any items")
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
@@ -168,12 +168,14 @@ class ShopScene(Scene):
                 return _exchange_visible_items()
 
         while self._scroll.next():
+            for i in remains:
+                _LOGGER.debug("exchange remain: %s", i)
             _exchange_visible_items()
             if not remains:
                 break
         self._scroll.complete()
         for i in remains:
-            _LOGGER.warn("exchange remain: %s", i)
+            _LOGGER.warning("exchange remain: %s", i)
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {

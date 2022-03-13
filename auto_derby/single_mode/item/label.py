@@ -43,7 +43,7 @@ def reload_on_demand() -> None:
 def _prompt(img: Image, h: Text, defaultValue: int) -> Item:
     if g.prompt_disabled:
         ret = game_data.get(defaultValue)
-        _LOGGER.warn("using low similarity item: %s", ret)
+        _LOGGER.warning("using low similarity item: %s", ret)
         return ret
     img_data = io.BytesIO()
     img.save(img_data, "PNG")
