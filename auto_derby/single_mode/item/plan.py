@@ -61,6 +61,7 @@ def compute(
     ctx: Context,
     command: Command,
 ) -> Plan:
+    # TODO: use same item multiple times
     for i in sorted(
         iterate(ctx, command, tuple(ctx.items), EffectSummary()),
         key=lambda x: (x[0], -sum(i.original_price for i in x[1])),
