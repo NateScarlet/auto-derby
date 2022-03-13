@@ -55,7 +55,6 @@ def _recognize_price(rp: mathtools.ResizeProxy, item_img: Image) -> int:
         cv2.waitKey()
         cv2.destroyAllWindows()
     text = ocr.text(imagetools.pil_image(binary_img))
-    # TODO: handle discount
     return int(text)
 
 
