@@ -125,6 +125,7 @@ class _CommandPlan:
 
 
 def _handle_turn(ctx: Context):
+    time.sleep(0.2)  # wait animation
     try:
         scene = CommandScene.enter(ctx)
     except TimeoutError:
