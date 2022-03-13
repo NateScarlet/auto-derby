@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict, Sequence, Text, Tuple
+from typing import TYPE_CHECKING, Any, Dict, Text, Tuple
 
 import numpy as np
 
@@ -89,13 +89,11 @@ class Item:
         return es
 
     def effect_score(
-        self, ctx: Context, command: Command, picked_items: Sequence[Item] = ()
+        self, ctx: Context, command: Command, summary: EffectSummary
     ) -> float:
         """Item will be used before command if score not less than expected effect score."""
 
-        es_before = ctx.item_history.effect_summary(ctx)
-        for i in picked_items:
-            es_before.add(i)
+        es_before = summary
         es_after = es_before.clone()
         es_after.add(self)
 
@@ -225,17 +223,16 @@ class Item:
 
         # by training
         sample_trainings = (
-            Training.new(),
+            (Training.new(), EffectSummary()),
             *(
-                trn
+                (trn, ctx.item_history.effect_summary_at(turn_count))
                 for turn_count, trn in ctx.training_history
                 if turn_count > ctx.turn_count() - 12
             ),
-            *ctx.trainings,
+            *((t, ctx.item_history.effect_summary(ctx)) for t in ctx.trainings),
         )
-        # TODO: handle history items
         training_scores = (
-            self.effect_score(ctx, TrainingCommand(i)) for i in sample_trainings
+            self.effect_score(ctx, TrainingCommand(t), es) for t, es in sample_trainings
         )
         training_scores = tuple(i for i in training_scores if i > 0)
         s = float(np.percentile(training_scores, 90)) if training_scores else 0
@@ -250,7 +247,8 @@ class Item:
             sample_races = tuple(i.race for i in race.race_result.iterate_current(ctx))
             sample_source = "saved race result"
         race_scores = tuple(
-            self.effect_score(ctx, RaceCommand(i)) for i in sample_races
+            self.effect_score(ctx, RaceCommand(i), EffectSummary())
+            for i in sample_races
         )
         s = float(np.percentile(race_scores, 90)) if race_scores else 0
         if s:

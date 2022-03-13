@@ -1,3 +1,4 @@
+from auto_derby.single_mode.item.effect_summary import EffectSummary
 from ... import _test
 from ...constants import Mood, TrainingType
 from .. import race, training
@@ -163,7 +164,9 @@ def test_training_buff_item():
                     "shouldUseDirectly": i.should_use_directly(ctx),
                     "training": {
                         t_name: {
-                            "effect": i.effect_score(ctx, TrainingCommand(t)),
+                            "effect": i.effect_score(
+                                ctx, TrainingCommand(t), EffectSummary()
+                            ),
                             "expectedEffect": i.expected_effect_score(
                                 ctx, TrainingCommand(t)
                             ),
@@ -171,7 +174,10 @@ def test_training_buff_item():
                         for t_name, t in _sample_trainings()
                     },
                     "maxRaceEffect": max(
-                        (i.effect_score(ctx, RaceCommand(r)) for r in _sample_races())
+                        (
+                            i.effect_score(ctx, RaceCommand(r), EffectSummary())
+                            for r in _sample_races()
+                        )
                     ),
                 }
                 for i in _iterate_item()
@@ -186,5 +192,10 @@ def test_race_reward_item():
     hammer_1.price = hammer_1.original_price
     # assert hammer_1.effect_score(ctx, RaceCommand(next(race.game_data.find_by_date((4,0,0))))) >0
     for name, ctx in _sample_context():
-        assert hammer_1.effect_score(ctx, TrainingCommand(training.Training.new())) == 0
+        assert (
+            hammer_1.effect_score(
+                ctx, TrainingCommand(training.Training.new()), EffectSummary()
+            )
+            == 0
+        )
     # assert hammer_1.exchange_score(ctx) > 0

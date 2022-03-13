@@ -23,9 +23,14 @@ class History:
             )
         )
 
-    def effect_summary(self, ctx: Context) -> EffectSummary:
+    def effect_summary_at(self, turn_count: int) -> EffectSummary:
         es = EffectSummary()
-        t_now = ctx.turn_count()
+        t_now = turn_count
         for t_start, item in self._l:
+            if t_start > t_now:
+                break
             es.add(item, t_now - t_start)
         return es
+
+    def effect_summary(self, ctx: Context) -> EffectSummary:
+        return self.effect_summary_at(ctx.turn_count())
