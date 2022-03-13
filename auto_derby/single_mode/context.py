@@ -6,7 +6,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, Dict, Iterator
 
 if TYPE_CHECKING:
-    from . import go_out, race
+    from . import go_out
 
 import functools
 import logging
@@ -276,7 +276,6 @@ class Context:
 
         self._extra_turn_count = 0
         self.target_fan_count = 0
-        self.race_turns: Set[int] = set()
 
         self.turf = Context.STATUS_NONE
         self.dart = Context.STATUS_NONE
@@ -318,8 +317,11 @@ class Context:
         self.training_history = training.History()
         self.trainings: Tuple[training.Training, ...] = ()
         # TODO: record training levels
-        # TODO: use custom class
-        self.race_history: Tuple[Tuple[int, race.Race], ...] = ()
+
+        from . import race
+
+        self.race_turns: Set[int] = set()
+        self.race_history = race.History()
 
         from . import item
 

@@ -11,6 +11,7 @@ from .game_data import (
 from .globals import g
 from .race import Race
 from .race_result import RaceResult
+from .history import History
 
 # Deprecated: remove at next major version
 LOGGER = logging.getLogger(__name__)

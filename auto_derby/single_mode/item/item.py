@@ -240,7 +240,7 @@ class Item:
             ret += s
 
         # by race
-        sample_races = tuple(race for _, race in ctx.race_history)
+        sample_races = tuple(race for _, race in ctx.race_history.iterate())
         sample_source = "history"
         if not sample_races:
             sample_races = tuple(i.race for i in race.race_result.iterate_current(ctx))
