@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "id": 16,
+      "name": "バイタル20",
+      "quantity": 2,
+      "disabled": false
+    },
+    {
+      "id": 17,
+      "name": "バイタル40",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 18,
+      "name": "バイタル65",
+      "quantity": 3,
+      "disabled": false
+    },
+    {
+      "id": 19,
+      "name": "ロイヤルビタージュース",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 20,
+      "name": "エネドリンクMAX",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 30,
+      "name": "すやすや安眠枕",
+      "quantity": 1,
+      "disabled": true
+    },
+    {
+      "id": 31,
+      "name": "ポケットスケジュール帳",
+      "quantity": 1,
+      "disabled": true
+    }
+  ]
+}
