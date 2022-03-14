@@ -674,6 +674,7 @@ class Context:
 
 g.context_class = Context
 
+# TODO: use label match
 _CONDITION_TEMPLATES = {
     templates.SINGLE_MODE_CONDITION_HEADACHE: Context.CONDITION_HEADACHE,
     templates.SINGLE_MODE_CONDITION_OVERWEIGHT: Context.CONDITION_OVERWEIGHT,
