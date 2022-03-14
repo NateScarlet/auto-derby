@@ -137,12 +137,12 @@ class ItemMenuScene(Scene):
                 self._scroll.complete()
                 return
             for i in new_items:
-                _LOGGER.debug("found item: %s", i)
+                _LOGGER.debug("found: %s", i)
             self.items.update(*new_items)
             if static:
                 break
         if not self.items:
-            _LOGGER.warning("not found any items")
+            _LOGGER.warning("not found any item")
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
@@ -157,7 +157,7 @@ class ItemMenuScene(Scene):
                 if match not in remains:
                     continue
                 if match.disabled:
-                    _LOGGER.warning("skip disabled item: %s", match)
+                    _LOGGER.warning("skip disabled: %s", match)
                     remains.remove(match)
                     continue
                 _LOGGER.info("use: %s", match)
@@ -172,7 +172,7 @@ class ItemMenuScene(Scene):
 
         while self._scroll.next():
             for i in remains:
-                _LOGGER.debug("exchange remain: %s", i)
+                _LOGGER.debug("use remain: %s", i)
             _use_visible_items()
             if not remains:
                 break
