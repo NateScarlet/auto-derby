@@ -136,11 +136,13 @@ class ItemMenuScene(Scene):
                 self._scroll.on_end()
                 self._scroll.complete()
                 return
+            for i in new_items:
+                _LOGGER.debug("found item: %s", i)
             self.items.update(*new_items)
             if static:
                 break
         if not self.items:
-            _LOGGER.warning("not found items")
+            _LOGGER.warning("not found any items")
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
