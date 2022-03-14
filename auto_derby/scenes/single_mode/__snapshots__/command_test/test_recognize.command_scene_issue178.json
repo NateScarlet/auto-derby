@@ -25,7 +25,7 @@
     "middle": "",
     "head": "",
     "lead": "",
-    "condition": 0
+    "conditions": []
   },
   "scene": {
     "hasHealthCare": false,

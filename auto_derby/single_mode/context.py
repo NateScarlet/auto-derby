@@ -618,7 +618,7 @@ class Context:
             "middle": self.middle[1],
             "head": self.head[1],
             "lead": self.lead[1],
-            "conditions": self.conditions,
+            "conditions": list(self.conditions),
         }
         if self.scenario == self.SCENARIO_CLIMAX:
             d["gradePoint"] = self.grade_point
