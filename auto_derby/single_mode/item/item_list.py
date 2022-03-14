@@ -32,9 +32,7 @@ class ItemList:
     def iterate_flat(self) -> Iterator[Item]:
         for i in self:
             for _ in range(0, i.quantity):
-                v = i.clone()
-                i.quantity = 0
-                yield v
+                yield i
 
     def get(self, id: int) -> Item:
         return self._m.get(id) or game_data.get(id)
