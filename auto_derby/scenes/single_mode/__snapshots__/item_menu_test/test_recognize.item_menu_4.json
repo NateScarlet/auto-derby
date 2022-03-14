@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "id": 36,
+      "name": "ナンデモナオール",
+      "quantity": 1,
+      "disabled": true
+    },
+    {
+      "id": 43,
+      "name": "チアメガホン",
+      "quantity": 2,
+      "disabled": false
+    },
+    {
+      "id": 44,
+      "name": "スパルタメガホン",
+      "quantity": 3,
+      "disabled": false
+    },
+    {
+      "id": 45,
+      "name": "ブートキャンプメガホン",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 46,
+      "name": "スピードアンクルウェイト",
+      "quantity": 3,
+      "disabled": false
+    },
+    {
+      "id": 47,
+      "name": "スタミナアンクルウェイト",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 48,
+      "name": "パワーアンクルウェイト",
+      "quantity": 1,
+      "disabled": false
+    }
+  ]
+}
