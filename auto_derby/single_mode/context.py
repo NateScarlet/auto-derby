@@ -510,7 +510,7 @@ class Context:
         import warnings
 
         warnings.warn(
-            "use turn_count_v2 instead, turn (2,1,1) should be turn 25, not 24.",
+            "use turn_count_v2 instead, date (2,1,1) should be turn 25, not 24.",
             DeprecationWarning,
         )
         if self.date == (1, 0, 0):
