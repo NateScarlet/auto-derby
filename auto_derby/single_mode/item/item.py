@@ -129,7 +129,6 @@ class Item:
                     f"{s:.2f} by race score delta ({s_before:.2f} -> {s_after:.2f});"
                 )
                 ret += s
-            # TODO: race reward effect
 
         s = (ctx_after.max_vitality - ctx_before.max_vitality) * mathtools.interpolate(
             ctx.turn_count_v2(),

@@ -90,6 +90,14 @@ class Race:
         self.grade_points: Tuple[int, ...] = ()
         self.shop_coins: Tuple[int, ...] = ()
 
+        self.raward_buff = 0.0
+
+    def clone(self):
+        c = self.__class__()
+        c.__dict__.update(self.__dict__)
+        c.characters = set(c.characters)
+        return c
+
     def to_dict(self) -> Dict[Text, Any]:
         return {
             "stadium": self.stadium,

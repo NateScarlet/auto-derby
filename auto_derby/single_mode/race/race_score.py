@@ -45,6 +45,11 @@ def compute(ctx: Context, race: Race) -> float:
             race.GRADE_DEBUT: (0, 0),
         }[race.grade]
 
+        # TODO: add year4 data
+
+        prop *= 1 + race.raward_buff
+        skill *= 1 + race.raward_buff
+
     fan_count = race.fan_counts[estimate_order - 1]
 
     expected_fan_count = max(

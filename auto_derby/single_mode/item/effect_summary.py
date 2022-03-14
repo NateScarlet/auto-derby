@@ -216,13 +216,16 @@ class EffectSummary:
         return t_before, es_remains
 
     def apply_to_race(self, ctx: Context, race: Race) -> Race:
-        r_after = Race.from_dict(race.to_dict())
+        r_after = race.clone()
         explain = ""
-        if self.race_fan_buff:
-            explain = f"{self.race_fan_buff*100:+.0f}% fans"
-            r_after.fan_counts = tuple(
-                round(i * (1 + self.race_fan_buff)) for i in r_after.fan_counts
-            )
+        r = self.race_fan_buff
+        if r:
+            explain = f"{r*100:+.0f}% fans;"
+            r_after.fan_counts = tuple(round(i * (1 + r)) for i in r_after.fan_counts)
+        r = self.race_reward_buff
+        if r:
+            explain = f"{r*100:+.0f}% reward;"
+            r_after.raward_buff += r
         if explain and g.explain_effect_summary:
             _LOGGER.debug("apply to race: %s: %s", race, explain)
         return r_after
