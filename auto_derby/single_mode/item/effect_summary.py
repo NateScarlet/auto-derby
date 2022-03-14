@@ -7,12 +7,13 @@ import logging
 from typing import TYPE_CHECKING, Callable, Dict, List, Sequence, Set, Tuple
 
 from ... import mathtools
-from ...constants import TrainingType, Mood
+from ...constants import Mood, TrainingType
+from .. import condition
 from ..context import Context
 from ..race import Race
-from .. import condition
 from ..training import Training
 from .effect import Effect
+from .globals import g
 
 if TYPE_CHECKING:
     from .item import Item
@@ -158,7 +159,7 @@ class EffectSummary:
         if self.training_no_failure:
             explain += f"no failure;"
             t_after.failure_rate = 0
-        if explain:
+        if explain and g.explain_effect_summary:
             _LOGGER.debug("apply to training: %s->%s: %s", training, t_after, explain)
         assert 0.0 <= t_after.failure_rate <= 1.0, t_after.failure_rate
         return t_after
@@ -204,7 +205,7 @@ class EffectSummary:
             explain += f"{r*100:+.0f}% vitality;"
             t_before.vitality /= 1 + r
 
-        if explain:
+        if explain and g.explain_effect_summary:
             _LOGGER.debug(
                 "revert from training: %s->%s: %s", training, t_before, explain
             )
@@ -218,7 +219,7 @@ class EffectSummary:
             r_after.fan_counts = tuple(
                 round(i * (1 + self.race_fan_buff)) for i in r_after.fan_counts
             )
-        if explain:
+        if explain and g.explain_effect_summary:
             _LOGGER.debug("apply to race: %s: %s", race, explain)
         return r_after
 
@@ -265,7 +266,7 @@ class EffectSummary:
         if c:
             explain += f"remove condition {','.join(condition.get(i).name for i in c)};"
             ctx.conditions.difference_update(c)
-        if explain:
+        if explain and g.explain_effect_summary:
             _LOGGER.debug("apply to context: %s", explain)
         return ctx_after
 
