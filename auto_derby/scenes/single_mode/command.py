@@ -54,7 +54,10 @@ def _recognize_climax_grade_point(ctx: Context):
 
 def _recognize_shop_coin(ctx: Context):
     rp = action.resize_proxy()
-    bbox = rp.vector4((305, 881, 371, 896), 540)
+    if ctx.is_summer_camp:
+        bbox = rp.vector4((243, 881, 309, 896), 540)
+    else:
+        bbox = rp.vector4((305, 881, 371, 896), 540)
     img = template.screenshot().crop(bbox)
     img = imagetools.resize(img, height=32)
     cv_img = np.asarray(img.convert("L"))
