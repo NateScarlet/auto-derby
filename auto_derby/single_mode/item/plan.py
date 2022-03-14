@@ -29,15 +29,24 @@ def iterate(
         return p
 
     for index, item in enumerate(items):
-        s = item.effect_score(ctx, command, summary)
-        if s <= 0:
-            continue
-        s_e = item.expected_effect_score(ctx, command)
-        if s < s_e:
+        s_current = 0
+        items_current: Sequence[Item] = ()
+        es_after = summary.clone()
+        for index in range(item.quantity):
+            i = item.clone()
+            i.quantity -= index
+            s = i.effect_score(ctx, command, summary)
+            if s <= 0:
+                break
+            s_e = i.expected_effect_score(ctx, command)
+            if s < s_e:
+                break
+            es_after.add(item)
+            s_current += s
+            items_current += (i,)
+        if not items_current:
             continue
 
-        es_after = summary.clone()
-        es_after.add(item)
         sub_plans = sorted(
             iterate(
                 ctx,
@@ -50,9 +59,9 @@ def iterate(
         )
         if sub_plans:
             s_sub, items_s = sub_plans[0]
-            yield _with_log((s + s_sub, (item, *items_s)))
+            yield _with_log((s_current + s_sub, (*items_current, *items_s)))
         else:
-            yield _with_log((s, (item,)))
+            yield _with_log((s_current, items_current))
 
     return
 
@@ -62,7 +71,7 @@ def compute(
     command: Command,
 ) -> Plan:
     for i in sorted(
-        iterate(ctx, command, tuple(ctx.items.iterate_flat()), EffectSummary()),
+        iterate(ctx, command, tuple(ctx.items), EffectSummary()),
         key=lambda x: (x[0], -sum(i.original_price for i in x[1])),
         reverse=True,
     ):
