@@ -209,6 +209,7 @@ def _handle_fan_not_enough(ac: _ActionContext):
 
 
 def _handle_target_race(ac: _ActionContext):
+    # TODO: use race items
     ctx = ac.ctx
     CommandScene().recognize(ctx)
     ctx.next_turn()

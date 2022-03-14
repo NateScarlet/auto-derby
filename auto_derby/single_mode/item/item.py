@@ -209,6 +209,7 @@ class Item:
         t.guts = ctx_after.guts - ctx.guts
         t.wisdom = ctx_after.wisdom - ctx.wisdom
         t.vitality = ctx_after.vitality - ctx.vitality
+        # TODO: by training level
         s = t.score(ctx)
         if s:
             explain += f"{s:.2f} by property"
@@ -312,7 +313,6 @@ class Item:
                     ret += s
 
         # TODO: by friend ship
-        # TODO: by race reward
 
         # by quantity
         r = mathtools.interpolate(
