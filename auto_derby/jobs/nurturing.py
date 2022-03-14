@@ -138,8 +138,8 @@ def _handle_turn(ctx: Context):
     _handle_shop(ctx, scene)
     ctx.next_turn()
     LOGGER.info("context: %s", ctx)
-    for index, i in enumerate(ctx.items):
-        LOGGER.info("item:\t%s\t%s\tx%s", index, i.id, i.name, i.quantity)
+    for i in ctx.items:
+        LOGGER.info("item:\t#%s\tx%s\t%s", i.id, i.quantity, i.name)
     command_plans = sorted(
         (_CommandPlan(ctx, i) for i in turn_commands),
         key=lambda x: x.score,
