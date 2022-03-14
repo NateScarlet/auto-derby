@@ -38,6 +38,9 @@ class Effect:
     RACE_BUFF_REWARD = 6
     RACE_BUFF_FAN = 40
 
+    FRIENDSHIP_SUPPORT = 1
+    FRIENDSHIP_CHARACTER = 2
+
     def __init__(self) -> None:
         self.id = 0
         self.group = 0

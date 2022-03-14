@@ -188,17 +188,17 @@ class Option:
         ):
             x, y = pos
             bbox = (x, y, x + rp.vector(500, 540), y + rp.vector(100, 540))
-            friend_ship_gauge_pos = (rp.vector(348, 540), y + rp.vector(23, 540))
-            has_friend_ship_gauge = (
+            friendship_gauge_pos = (rp.vector(348, 540), y + rp.vector(23, 540))
+            has_friendship_gauge = (
                 imagetools.compare_color(
-                    img.getpixel(friend_ship_gauge_pos), (236, 231, 228)
+                    img.getpixel(friendship_gauge_pos), (236, 231, 228)
                 )
                 > 0.9
             )
             option = cls.new()
             option.position = (x + rp.vector(100, 540), y + rp.vector(46, 540))
             option.bbox = bbox
-            if has_friend_ship_gauge:
+            if has_friendship_gauge:
                 option.type = cls.TYPE_SUPPORT
             else:
                 option.type = cls.TYPE_MAIN

@@ -91,6 +91,10 @@ class EffectSummary:
         self.training_no_failure = False
         self.race_fan_buff = 0.0
         self.race_reward_buff = 0.0
+        self.support_friendship = 0
+        # SELECT t1."index", t1.text, t2.text from text_data as t1 LEFT JOIN text_data as t2 WHERE t1.category == 6 AND t2."index" == t1."index" AND t2.category = 170;
+        # 9002 = 秋川理事長
+        self.character_friendship: Dict[int, int] = {}
 
         self.unknown_effects: Sequence[Effect] = ()
 
@@ -449,5 +453,19 @@ def _(item: Item, effect: Effect, summary: EffectSummary):
         return True
     if tp == Effect.RACE_BUFF_FAN:
         summary.race_fan_buff = value / 100
+        return True
+    return False
+
+
+@_register_reducer
+@_only_effect_type(Effect.TYPE_FRIENDSHIP)
+def _(item: Item, effect: Effect, summary: EffectSummary):
+    tp, c, value, _ = effect.values
+    if tp == Effect.FRIENDSHIP_SUPPORT:
+        assert c == 0, 0
+        summary.support_friendship += value
+        return True
+    if tp == Effect.FRIENDSHIP_CHARACTER:
+        summary.character_friendship[c] = summary.character_friendship.get(c, 0) + value
         return True
     return False

@@ -312,7 +312,31 @@ class Item:
                     explain += f"{s:.2f} by remove {c.name}"
                     ret += s
 
-        # TODO: by friend ship
+        # by friendship
+        s = es.support_friendship * mathtools.interpolate(
+            t_now,
+            (
+                (1, 1),
+                (24, 0.4),
+                (49, 0.02),
+                (55, 0),
+            ),
+        )
+        if s:
+            explain += f"{s:.2f} by support friendship;"
+            ret += s
+        s = sum(es.character_friendship.values()) * mathtools.interpolate(
+            t_now,
+            (
+                (1, 0.5),
+                (24, 0.2),
+                (49, 0.02),
+                (55, 0),
+            ),
+        )
+        if s:
+            explain += f"{s:.2f} by character friendship;"
+            ret += s
 
         # by quantity
         r = mathtools.interpolate(
