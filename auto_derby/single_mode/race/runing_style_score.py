@@ -36,11 +36,11 @@ def compute(
     gut = ctx.guts
     wis = ctx.wisdom
 
-    spd *= ctx.mood[1]
-    sta *= ctx.mood[1]
-    pow_ *= ctx.mood[1]
-    gut *= ctx.mood[1]
-    wis *= ctx.mood[1]
+    spd *= ctx.mood.race_rate
+    sta *= ctx.mood.race_rate
+    pow_ *= ctx.mood.race_rate
+    gut *= ctx.mood.race_rate
+    wis *= ctx.mood.race_rate
 
     base_speed_coefficient = 1
     for i in race.target_statuses:
