@@ -18,8 +18,7 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import (imagetools, mathtools, ocr, scenes, template, templates,
-                texttools)
+from .. import imagetools, mathtools, ocr, scenes, template, templates, texttools
 from ..constants import Mood
 from . import condition
 
@@ -456,6 +455,9 @@ class Context:
                     for i in self.go_out_options
                 )
             )
+        if self.conditions:
+            msg += ",cond="
+            msg += " ".join((condition.get(i).name for i in self.conditions))
         return (
             "Context<"
             f"scenario={self.scenario},"
@@ -470,8 +472,7 @@ class Context:
             f"fan={self.fan_count},"
             f"ground={''.join(i[1] for i in (self.turf, self.dart))},"
             f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"
-            f"style={''.join(i[1] for i in (self.last, self.middle, self.head, self.lead))},"
-            f"condition={[condition.get(i).name for i in self.conditions]}"
+            f"style={''.join(i[1] for i in (self.last, self.middle, self.head, self.lead))}"
             f"{msg}"
             ">"
         )
