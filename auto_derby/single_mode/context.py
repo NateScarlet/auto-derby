@@ -8,7 +8,6 @@ from typing import TYPE_CHECKING, Any, Dict, Iterator
 if TYPE_CHECKING:
     from . import go_out
 
-import functools
 import logging
 import os
 from typing import Callable, List, Set, Text, Tuple, Type
@@ -19,8 +18,10 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import imagetools, mathtools, ocr, scenes, template, templates, texttools
+from .. import (imagetools, mathtools, ocr, scenes, template, templates,
+                texttools)
 from ..constants import Mood
+from . import condition
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -470,21 +471,39 @@ class Context:
             f"ground={''.join(i[1] for i in (self.turf, self.dart))},"
             f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"
             f"style={''.join(i[1] for i in (self.last, self.middle, self.head, self.lead))},"
-            f"condition={self.condition}"
+            f"condition={[condition.get(i).name for i in self.conditions]}"
             f"{msg}"
             ">"
         )
 
     @property
     def condition(self) -> int:
-        return functools.reduce(lambda a, b: a | b, self.conditions, 0)
+        import warnings
+
+        warnings.warn(
+            "Context.condition is Depreacted, use conditions (with `s`) instead.",
+            DeprecationWarning,
+        )
+        ret = 0
+        if self.CONDITION_HEADACHE in self.conditions:
+            ret |= 1 << 0
+        if self.CONDITION_OVERWEIGHT in self.conditions:
+            ret |= 1 << 1
+        return ret
 
     @condition.setter
     def condition(self, v: int):
+        import warnings
+
+        warnings.warn(
+            "Context.condition is Depreacted, use conditions (with `s`) instead.",
+            DeprecationWarning,
+        )
         self.conditions.clear()
-        for i in (self.CONDITION_HEADACHE, self.CONDITION_OVERWEIGHT):
-            if i & v:
-                self.conditions.add(i)
+        if 1 << 0 & v:
+            self.conditions.add(self.CONDITION_HEADACHE)
+        if 1 << 1 & v:
+            self.conditions.add(self.CONDITION_OVERWEIGHT)
 
     def turn_count(self) -> int:
         import warnings
@@ -598,7 +617,7 @@ class Context:
             "middle": self.middle[1],
             "head": self.head[1],
             "lead": self.lead[1],
-            "condition": self.condition,
+            "conditions": self.conditions,
         }
         if self.scenario == self.SCENARIO_CLIMAX:
             d["gradePoint"] = self.grade_point
@@ -631,7 +650,10 @@ class Context:
             )
         else:
             ret.mood = Mood[mood_data]
-        ret.condition = data["condition"]
+        if "condition" in data:
+            ret.condition = data["condition"]
+        else:
+            ret.conditions = set(data["conditions"])
         ret.fan_count = data["fanCount"]
         ret.turf = cls.status_by_name(data["turf"])
         ret.dart = cls.status_by_name(data["dart"])
