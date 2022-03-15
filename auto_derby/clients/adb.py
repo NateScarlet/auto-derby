@@ -74,10 +74,21 @@ class ADBClient(Client):
             display_string,
             re.MULTILINE,
         )
-        display_id = [item for item in display_data if item[0] == "virtual" and item[1] == "jp.co.cygames.umamusume"]
+        display_id = [
+            item
+            for item in display_data
+            if item[0] == "virtual" and item[1] == "jp.co.cygames.umamusume"
+        ]
         if len(display_id) == 0:
-            display_id = [item for item in display_data if item[0] == "local" and item[1] == ""]
-        LOGGER.debug("screen display: UniqueId=%s:%s:%s", display_id[0][0], display_id[0][1], display_id[0][2])
+            display_id = [
+                item for item in display_data if item[0] == "local" and item[1] == ""
+            ]
+        LOGGER.debug(
+            "screen display: UniqueId=%s:%s:%s",
+            display_id[0][0],
+            display_id[0][1],
+            display_id[0][2],
+        )
         self.display_id = display_id[0][2]
         res = self.device.shell(f"wm size -d {self.display_id}")
         match = re.match(r"Physical size: (\d+)x(\d+)", res)
@@ -90,9 +101,14 @@ class ADBClient(Client):
         LOGGER.debug("screen size: width=%d height=%d", self._width, self._height)
         self.resize = None
         # workaround for WSA not perfectly 16:9
-        if display_id[0][0] == "virtual" and self._width / self._height - 0.5625 < 0.005:
+        if (
+            display_id[0][0] == "virtual"
+            and self._width / self._height - 0.5625 < 0.005
+        ):
             self.resize = (floor(self._height / 16 * 9), self._height)
-            LOGGER.debug("screen resize: width=%d height=%d", self.resize[0], self.resize[1])
+            LOGGER.debug(
+                "screen resize: width=%d height=%d", self.resize[0], self.resize[1]
+            )
 
     def _screenshot_init(self) -> PIL.Image.Image:
         screenshot_perf: List[Tuple[Callable[[], PIL.Image.Image], int]] = []
