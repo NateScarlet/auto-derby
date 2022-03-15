@@ -125,12 +125,7 @@ class _CommandPlan:
 
 
 def _handle_turn(ctx: Context):
-    time.sleep(0.2)  # wait animation
-    try:
-        scene = CommandScene.enter(ctx)
-    except TimeoutError:
-        LOGGER.warning("command scene enter timeout, return to main loop")
-        return
+    scene = CommandScene.enter(ctx)
     scene.recognize(ctx)
     _handle_item_list(ctx, scene)
     # see training before shop
@@ -184,6 +179,11 @@ def _close(ac: _ActionContext):
 
 
 def _ac_handle_turn(ac: _ActionContext):
+    try:
+        action.wait_image_stable(ac.tmpl, timeout=3)
+    except TimeoutError:
+        LOGGER.warning("command scene enter timeout, return to main loop")
+        return
     _handle_turn(ac.ctx)
 
 
