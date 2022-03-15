@@ -235,15 +235,15 @@ SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = (
     "single_mode_scheduled_race_opening_banner.pos.png"
 )
 SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON = "single_mode_shop_use_confirm_button.png"
+SINGLE_MODE_TARGET_GRADE_POINT_NOT_ENOUGH = (
+    "single_mode_target_grade_point_not_enough.png"
+)
+SINGLE_MODE_TARGET_GRADE_POINT_NOT_ENOUGH_POS = (
+    "single_mode_target_grade_point_not_enough.pos.png"
+)
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION = "single_mode_target_race_no_permission.png"
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION_POS = (
     "single_mode_target_race_no_permission.pos.png"
-)
-SINGLE_MODE_TARGET_RACE_POINT_NOT_ENOUGH = (
-    "single_mode_target_race_point_not_enough.png"
-)
-SINGLE_MODE_TARGET_RACE_POINT_NOT_ENOUGH_POS = (
-    "single_mode_target_race_point_not_enough.pos.png"
 )
 SINGLE_MODE_TARGET_UNFINISHED = "single_mode_target_unfinished.png"
 SINGLE_MODE_TARGET_UNFINISHED_POS = "single_mode_target_unfinished.pos.png"
