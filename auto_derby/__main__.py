@@ -48,8 +48,35 @@ def main():
     )
     args = parser.parse_args()
     job = avaliable_jobs.get(args.job)
-    adb_address = args.adb
+    config.ADB_ADDRESS = args.adb
+
+    def _client() -> clients.Client:
+        if config.ADB_ADDRESS:
+            return clients.ADBClient(config.ADB_ADDRESS)
+        else:
+            c = clients.DMMClient.find()
+            if not c:
+                if (
+                    win32gui.MessageBox(
+                        0,
+                        "Launch DMM umamusume?",
+                        "Can not found window",
+                        win32con.MB_YESNO,
+                    )
+                    == 6
+                ):
+                    webbrowser.open("dmmgameplayer://umamusume/cl/general/umamusume")
+                    while not c:
+                        time.sleep(1)
+                        LOGGER.info("waiting game launch")
+                        c = clients.DMMClient.find()
+                    LOGGER.info("game window: %s", c.h_wnd)
+                else:
+                    exit(1)
+            return c
+    
     plugin.reload()
+    config.client = _client
     plugins = args.plugin
     for i in plugins:
         plugin.install(i)
@@ -63,28 +90,7 @@ def main():
         )
         exit(1)
 
-    if adb_address:
-        c = clients.ADBClient(adb_address)
-    else:
-        c = clients.DMMClient.find()
-        if not c:
-            if (
-                win32gui.MessageBox(
-                    0,
-                    "Launch DMM umamusume?",
-                    "Can not found window",
-                    win32con.MB_YESNO,
-                )
-                == 6
-            ):
-                webbrowser.open("dmmgameplayer://umamusume/cl/general/umamusume")
-                while not c:
-                    time.sleep(1)
-                    LOGGER.info("waiting game launch")
-                    c = clients.DMMClient.find()
-                LOGGER.info("game window: %s", c.h_wnd)
-            else:
-                exit(1)
+    c = config.client()
     c.setup()
     clients.set_current(c)
     job()

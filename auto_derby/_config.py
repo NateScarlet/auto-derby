@@ -7,7 +7,7 @@ import warnings
 from typing import Callable, Dict, Text
 
 from . import ocr, plugin, single_mode, template, terminal, window, data
-from .clients import ADBClient
+from .clients import ADBClient, Client
 from .single_mode import commands as sc
 from .single_mode.training import Training
 
@@ -50,12 +50,17 @@ def _getenv_int(key: Text, d: int) -> int:
         return d
 
 
+def _default_client() -> Client:
+    raise NotImplementedError()
+
+
 class config:
     LOG_PATH = os.getenv("AUTO_DERBY_LOG_PATH", "auto_derby.log")
     PLUGINS = tuple(i for i in os.getenv("AUTO_DERBY_PLUGINS", "").split(",") if i)
     ADB_ADDRESS = os.getenv("AUTO_DERBY_ADB_ADDRESS", "")
     CHECK_UPDATE = os.getenv("AUTO_DERBY_CHECK_UPDATE", "").lower() == "true"
 
+    client = _default_client
     single_mode_race_data_path = os.getenv(
         "AUTO_DERBY_SINGLE_MODE_RACE_DATA_PATH",
         data.path("single_mode_races.jsonl"),
