@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import io
 import logging
-from math import floor
 import re
 import time
 from pathlib import Path
@@ -98,17 +97,15 @@ class ADBClient(Client):
         if self._width > self._height:
             # handle orientation
             self._height, self._width = self._width, self._height
-        LOGGER.debug("screen size: width=%d height=%d", self._width, self._height)
-        self.resize = None
-        # workaround for WSA not perfectly 16:9
+        self._wsa = None
+        # WORKAROUND: near 16:9 screen size in WSA
         if (
             display_id[0][0] == "virtual"
-            and self._width / self._height - 0.5625 < 0.005
+            and abs(self._width / self._height - 0.5625) < 0.005
         ):
-            self.resize = (floor(self._height / 16 * 9), self._height)
-            LOGGER.debug(
-                "screen resize: width=%d height=%d", self.resize[0], self.resize[1]
-            )
+            self._wsa = True
+            self._width = int(self._height / 16 * 9)
+        LOGGER.debug("screen size: width=%d height=%d", self.width, self.height)
 
     def _screenshot_init(self) -> PIL.Image.Image:
         screenshot_perf: List[Tuple[Callable[[], PIL.Image.Image], int]] = []
@@ -178,9 +175,23 @@ class ADBClient(Client):
         self.start_game()
 
     def screenshot(self) -> PIL.Image.Image:
-        if self.resize == None:
+        if self._wsa == None:
             return self._screenshot()
-        return self._screenshot().resize(self.resize)
+        # WORKAROUND: strange bugged screenshot from WSA
+        while True:
+            img = self._screenshot()
+            output = io.BytesIO()
+            img.save(output, 'PNG') #a format needs to be provided
+            contents = output.getvalue()
+            output.close()
+            size = len(contents)
+            if size > 100000:
+                break
+            LOGGER.debug(
+                "screenshot seems failed: filesize=%d",
+                size
+            )
+        return img.resize((self.width, self.height))
 
     def swipe(
         self, point: Tuple[int, int], *, dx: int, dy: int, duration: float
