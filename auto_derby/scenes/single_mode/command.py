@@ -22,7 +22,7 @@ def _recognize_climax_grade_point(ctx: Context):
         ctx.grade_point = 0
         return
     rp = action.resize_proxy()
-    bbox = rp.vector4((10, 185, 119, 218), 540)
+    bbox = rp.vector4((10, 185, 119, 215), 540)
     img = template.screenshot().crop(bbox)
     x, _ = next(
         template.match(
@@ -34,7 +34,8 @@ def _recognize_climax_grade_point(ctx: Context):
         )
     )[1]
     img = img.crop((0, 0, x, img.height))
-    img = imagetools.resize(img, height=32)
+    if img.height <= 36:
+        img = imagetools.resize(img, height=36)
     cv_img = imagetools.cv_image(img.convert("L"))
     _, binary_img = cv2.threshold(
         255 - cv_img,

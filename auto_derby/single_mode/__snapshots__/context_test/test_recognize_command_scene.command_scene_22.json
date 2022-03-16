@@ -1,0 +1,30 @@
+{
+  "date": [
+    2,
+    3,
+    2
+  ],
+  "mood": "VERY_GOOD",
+  "scenario": "Make a new track!!  ～クライマックス開幕～",
+  "vitality": 1.0,
+  "maxVitality": 100,
+  "speed": 509,
+  "stamina": 356,
+  "power": 209,
+  "guts": 297,
+  "wisdom": 244,
+  "fanCount": 0,
+  "turf": "",
+  "dart": "",
+  "sprint": "",
+  "mile": "",
+  "intermediate": "",
+  "long": "",
+  "last": "",
+  "middle": "",
+  "head": "",
+  "lead": "",
+  "conditions": [],
+  "gradePoint": 0,
+  "shopCoin": 0
+}

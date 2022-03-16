@@ -147,9 +147,12 @@ def _recognize_red_effect(img: Image) -> int:
     )
     sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
 
+    imagetools.pil_image(sharpened_img).save(".\\debug.wsa\\sharpened_img.png")
+
     white_outline_img = imagetools.constant_color_key(
         sharpened_img,
         (255, 255, 255),
+        (201, 196, 251),
         (222, 220, 237),
         (252, 254, 202),
         (236, 249, 105),
