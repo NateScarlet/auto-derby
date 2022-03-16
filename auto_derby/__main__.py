@@ -74,7 +74,7 @@ def main():
                 else:
                     exit(1)
             return c
-    
+
     plugin.reload()
     config.client = _client
     plugins = args.plugin
