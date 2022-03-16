@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import io
 import logging
-from math import floor
 import re
 import time
 from pathlib import Path
@@ -52,7 +51,7 @@ class ADBClient(Client):
 
     def tap(self, point: Tuple[int, int]) -> None:
         x, y = point
-        command = f"input -d {self.display_id} tap {x} {y}"
+        command = f"input {self.display_param} tap {x} {y}"
         LOGGER.debug("tap: %s", command)
         res = self.device.shell(command)
         assert not res, res
@@ -80,17 +79,16 @@ class ADBClient(Client):
             if item[0] == "virtual" and item[1] == "jp.co.cygames.umamusume"
         ]
         if len(display_id) == 0:
-            display_id = [
-                item for item in display_data if item[0] == "local" and item[1] == ""
-            ]
-        LOGGER.debug(
-            "screen display: UniqueId=%s:%s:%s",
-            display_id[0][0],
-            display_id[0][1],
-            display_id[0][2],
-        )
-        self.display_id = display_id[0][2]
-        res = self.device.shell(f"wm size -d {self.display_id}")
+            self.display_param = ""
+        else:
+            LOGGER.debug(
+                "screen display: UniqueId=%s:%s:%s",
+                display_id[0][0],
+                display_id[0][1],
+                display_id[0][2],
+            )
+            self.display_param = f"-d {display_id[0][2]}"
+        res = self.device.shell(f"wm size {self.display_param}")
         match = re.match(r"Physical size: (\d+)x(\d+)", res)
         assert match, "unexpected command result: %s" % res
         self._width = int(match.group(2))
@@ -98,17 +96,7 @@ class ADBClient(Client):
         if self._width > self._height:
             # handle orientation
             self._height, self._width = self._width, self._height
-        LOGGER.debug("screen size: width=%d height=%d", self._width, self._height)
-        self.resize = None
-        # workaround for WSA not perfectly 16:9
-        if (
-            display_id[0][0] == "virtual"
-            and self._width / self._height - 0.5625 < 0.005
-        ):
-            self.resize = (floor(self._height / 16 * 9), self._height)
-            LOGGER.debug(
-                "screen resize: width=%d height=%d", self.resize[0], self.resize[1]
-            )
+        LOGGER.debug("screen size: width=%d height=%d", self.width, self.height)
 
     def _screenshot_init(self) -> PIL.Image.Image:
         screenshot_perf: List[Tuple[Callable[[], PIL.Image.Image], int]] = []
@@ -148,7 +136,7 @@ class ADBClient(Client):
 
     def _screenshot_png(self) -> PIL.Image.Image:
         img_data = self.device.shell(
-            f"screencap -d {self.display_id} -p",
+            f"screencap {self.display_param} -p",
             decode=False,
             transport_timeout_s=None,
         )
@@ -158,7 +146,7 @@ class ADBClient(Client):
     def _screenshot_raw(self) -> PIL.Image.Image:
         # https://stackoverflow.com/a/59470924
         img_data = self.device.shell(
-            f"screencap -d {self.display_id}",
+            f"screencap {self.display_param}",
             decode=False,
             transport_timeout_s=None,
         )
@@ -178,9 +166,7 @@ class ADBClient(Client):
         self.start_game()
 
     def screenshot(self) -> PIL.Image.Image:
-        if self.resize == None:
-            return self._screenshot()
-        return self._screenshot().resize(self.resize)
+        return self._screenshot()
 
     def swipe(
         self, point: Tuple[int, int], *, dx: int, dy: int, duration: float
@@ -189,7 +175,7 @@ class ADBClient(Client):
         x2, y2 = x1 + dx, y1 + dy
         duration_ms = int(duration * 1e3)
         duration_ms = max(200, duration_ms)  # not work if too fast
-        command = f"input -d {self.display_id} swipe {x1} {y1} {x2} {y2} {duration_ms}"
+        command = f"input {self.display_param} swipe {x1} {y1} {x2} {y2} {duration_ms}"
         LOGGER.debug("swipe: %s", command)
         res = self.device.shell(
             command,
