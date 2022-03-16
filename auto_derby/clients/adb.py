@@ -181,16 +181,13 @@ class ADBClient(Client):
         while True:
             img = self._screenshot()
             output = io.BytesIO()
-            img.save(output, 'PNG') #a format needs to be provided
+            img.save(output, "PNG")  # a format needs to be provided
             contents = output.getvalue()
             output.close()
             size = len(contents)
             if size > 100000:
                 break
-            LOGGER.debug(
-                "screenshot seems failed: filesize=%d",
-                size
-            )
+            LOGGER.debug("screenshot seems failed: filesize=%d", size)
         return img.resize((self.width, self.height))
 
     def swipe(
