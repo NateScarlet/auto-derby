@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/NateScarlet/auto-derby/compare/v1.15.4...v1.16.0) (2022-03-19)
+
+### Features
+
+- **plugin:** support custom client ([b5e130b](https://github.com/NateScarlet/auto-derby/commit/b5e130bac0ea286f69be4e9dc49069e3f009dab4)), closes [#262](https://github.com/NateScarlet/auto-derby/issues/262)
+- **single-mode:** support scenario "Make a new track!! ～クライマックス開幕～" ([bba8874](https://github.com/NateScarlet/auto-derby/commit/bba88748bdf75f5f93c9af91f0f1bef3c3c6da9b)), closes [#247](https://github.com/NateScarlet/auto-derby/issues/247)
+
+### Bug Fixes
+
+- **single-mode:** error while recognizing aoharu training ([09d933d](https://github.com/NateScarlet/auto-derby/commit/09d933d6a05241a4f28b56f2988395ed7c242d78)), closes [#244](https://github.com/NateScarlet/auto-derby/issues/244)
+- **single-mode:** update race data ([ef90d85](https://github.com/NateScarlet/auto-derby/commit/ef90d8557893f760dcc4c8aaa32ed36e8e300e33))
+- **single-mode:** update template ([#242](https://github.com/NateScarlet/auto-derby/issues/242)) ([781e860](https://github.com/NateScarlet/auto-derby/commit/781e860b06b9686e56feab115d2212251cd99d10))
+
 ## [1.15.4](https://github.com/NateScarlet/auto-derby/compare/v1.15.3...v1.15.4) (2022-02-18)
 
 ### Bug Fixes

@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.15.4"
-RELEASE_DATE = datetime.fromtimestamp(1645197684)
-LAST_GIT_COMMIT_DESCRIBE = "v1.15.3-2-ged22a30"
-LAST_GIT_COMMIT_HASH = "ed22a30e1102cac79e6bda8e0db97130288fc7f3"
+VERSION = "1.16.0"
+RELEASE_DATE = datetime.fromtimestamp(1647717922)
+LAST_GIT_COMMIT_DESCRIBE = "v1.15.4-11-g63c849b"
+LAST_GIT_COMMIT_HASH = "63c849b2512e3637e9e478289b8ed02bd068ddb9"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1645190566)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): update templates"
-LAST_GIT_COMMIT_BODY = "fix #232\nfix #233\nfix #234"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1647716546)
+LAST_GIT_COMMIT_SUBJECT = "refactor: remove unused code"
+LAST_GIT_COMMIT_BODY = ""
