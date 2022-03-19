@@ -1,1 +1,1 @@
-Training<lv=1 fail=0% sta=13 gut=4 ski=4 ptn=spd@1(0%),sta@2^(0%)>
+Training<sta=13 gut=4 ski=4 vit=-19.0% fail=0% lv=1 ptn=spd@1(0%),sta@2^(0%)>

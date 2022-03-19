@@ -122,12 +122,40 @@ SINGLE_MODE_CLASS_DETAIL_BUTTON = "single_mode_class_detail_button.png"
 SINGLE_MODE_CLASS_DETAIL_BUTTON_POS = "single_mode_class_detail_button.pos.png"
 SINGLE_MODE_CLASS_DETAIL_TITLE = "single_mode_class_detail_title.png"
 SINGLE_MODE_CLASS_DETAIL_TITLE_POS = "single_mode_class_detail_title.pos.png"
+SINGLE_MODE_CLIMAX_CLASS_DETAIL_BUTTON = "single_mode_climax_class_detail_button.png"
+SINGLE_MODE_CLIMAX_CLASS_DETAIL_BUTTON_POS = (
+    "single_mode_climax_class_detail_button.pos.png"
+)
+SINGLE_MODE_CLIMAX_COMMAND_GO_OUT = "single_mode_climax_command_go_out.png"
+SINGLE_MODE_CLIMAX_COMMAND_GO_OUT_POS = "single_mode_climax_command_go_out.pos.png"
+SINGLE_MODE_CLIMAX_GRADE_POINT_ICON = "single_mode_climax_grade_point_icon.png"
+SINGLE_MODE_CLIMAX_GRADE_POINT_ICON_POS = "single_mode_climax_grade_point_icon.pos.png"
+SINGLE_MODE_CLIMAX_GRADE_POINT_PT_TEXT = "single_mode_climax_grade_point_pt_text.png"
+SINGLE_MODE_CLIMAX_GREEN_CONTINUE_BUTTON = (
+    "single_mode_climax_green_continue_button.png"
+)
+SINGLE_MODE_CLIMAX_GREEN_CONTINUE_BUTTON_POS = (
+    "single_mode_climax_green_continue_button.pos.png"
+)
+SINGLE_MODE_CLIMAX_RANK_POINT_ICON = "single_mode_climax_rank_point_icon.png"
+SINGLE_MODE_CLIMAX_RANK_POINT_ICON_POS = "single_mode_climax_rank_point_icon.pos.png"
+SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW = "single_mode_climax_rival_race_draw.png"
+SINGLE_MODE_CLIMAX_RIVAL_RACE_LOSE = "single_mode_climax_rival_race_lose.png"
+SINGLE_MODE_CLIMAX_RIVAL_RACE_WIN = "single_mode_climax_rival_race_win.png"
+SINGLE_MODE_CLIMAX_WHITE_CONTINUE_BUTTON = (
+    "single_mode_climax_white_continue_button.png"
+)
+SINGLE_MODE_CLIMAX_WHITE_CONTINUE_BUTTON_POS = (
+    "single_mode_climax_white_continue_button.pos.png"
+)
 SINGLE_MODE_COMMAND_GO_OUT = "single_mode_command_go_out.png"
 SINGLE_MODE_COMMAND_GO_OUT_POS = "single_mode_command_go_out.pos.png"
 SINGLE_MODE_COMMAND_HEALTH_CARE = "single_mode_command_health_care.png"
 SINGLE_MODE_COMMAND_HEALTH_CARE_POS = "single_mode_command_health_care.pos.png"
 SINGLE_MODE_COMMAND_RACE = "single_mode_command_race.png"
 SINGLE_MODE_COMMAND_RACE_POS = "single_mode_command_race.pos.png"
+SINGLE_MODE_COMMAND_SHOP = "single_mode_command_shop.png"
+SINGLE_MODE_COMMAND_SHOP_POS = "single_mode_command_shop.pos.png"
 SINGLE_MODE_COMMAND_SUMMER_REST = "single_mode_command_summer_rest.png"
 SINGLE_MODE_COMMAND_SUMMER_REST_POS = "single_mode_command_summer_rest.pos.png"
 SINGLE_MODE_COMMAND_TRAINING = "single_mode_command_training.png"
@@ -160,12 +188,19 @@ SINGLE_MODE_GO_OUT_FRIEND_ICON = "single_mode_go_out_friend_icon.png"
 SINGLE_MODE_GO_OUT_FRIEND_ICON_POS = "single_mode_go_out_friend_icon.pos.png"
 SINGLE_MODE_GO_OUT_MENU_TITLE = "single_mode_go_out_menu_title.png"
 SINGLE_MODE_GO_OUT_MENU_TITLE_POS = "single_mode_go_out_menu_title.pos.png"
-SINGLE_MODE_GO_OUT_OPTION_LEFT_BORDER = "single_mode_go_out_option_left_border.png"
+SINGLE_MODE_GO_OUT_OPTION_LEFT_TOP = "single_mode_go_out_option_left_top.png"
 SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON = "single_mode_go_to_scheduled_race_button.png"
 SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON_POS = (
     "single_mode_go_to_scheduled_race_button.pos.png"
 )
+SINGLE_MODE_GO_TO_SHOP_BUTTON = "single_mode_go_to_shop_button.png"
+SINGLE_MODE_GO_TO_SHOP_BUTTON_POS = "single_mode_go_to_shop_button.pos.png"
 SINGLE_MODE_GOOD_RACE_ADAPTABILITY_STAR = "single_mode_good_race_adaptability_star.png"
+SINGLE_MODE_ITEM_MENU_BUTTON = "single_mode_item_menu_button.png"
+SINGLE_MODE_ITEM_MENU_BUTTON_POS = "single_mode_item_menu_button.pos.png"
+SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY = "single_mode_item_menu_current_quantity.png"
+SINGLE_MODE_ITEM_MENU_USE_BUTTON = "single_mode_item_menu_use_button.png"
+SINGLE_MODE_ITEM_USE_BUTTON = "single_mode_item_use_button.png"
 SINGLE_MODE_LIVE_BUTTON = "single_mode_live_button.png"
 SINGLE_MODE_OPTION1 = "single_mode_option1.png"
 SINGLE_MODE_OPTION1_POS = "single_mode_option1.pos.png"
@@ -198,6 +233,14 @@ SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER = (
 )
 SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = (
     "single_mode_scheduled_race_opening_banner.pos.png"
+)
+SINGLE_MODE_SHOP_ITEM_PRICE = "single_mode_shop_item_price.png"
+SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON = "single_mode_shop_use_confirm_button.png"
+SINGLE_MODE_TARGET_GRADE_POINT_NOT_ENOUGH = (
+    "single_mode_target_grade_point_not_enough.png"
+)
+SINGLE_MODE_TARGET_GRADE_POINT_NOT_ENOUGH_POS = (
+    "single_mode_target_grade_point_not_enough.pos.png"
 )
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION = "single_mode_target_race_no_permission.png"
 SINGLE_MODE_TARGET_RACE_NO_PERMISSION_POS = (

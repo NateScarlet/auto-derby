@@ -35,9 +35,7 @@ class GoOutCommand(Command):
     def execute(self, ctx: Context) -> None:
         g.on_command(ctx, self)
         CommandScene.enter(ctx)
-        action.tap_image(
-            templates.SINGLE_MODE_COMMAND_GO_OUT,
-        )
+        action.tap_image(go_out.command_template(ctx))
         time.sleep(0.5)
         if action.count_image(templates.SINGLE_MODE_GO_OUT_MENU_TITLE):
             if (

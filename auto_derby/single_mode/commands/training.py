@@ -2,11 +2,12 @@
 # pyright: strict
 
 from __future__ import annotations
-from typing import Text
 
 import time
+from typing import Text
 
-from ... import action
+from ... import action, template
+from ...scenes import UnknownScene
 from ...scenes.single_mode import TrainingScene
 from .. import Context, Training
 from .command import Command
@@ -22,12 +23,15 @@ class TrainingCommand(Command):
 
     def execute(self, ctx: Context) -> None:
         g.on_command(ctx, self)
-        scene = TrainingScene.enter(ctx)
+        TrainingScene.enter(ctx)
         x, y = self.training.confirm_position
-        if scene.trainings[-1] != self.training:
+        current_training = Training.from_training_scene_v2(ctx, template.screenshot())
+        if current_training.type != self.training.type:
             action.tap((x, y))
             time.sleep(0.1)
         action.tap((x, y))
+        ctx.training_history.append(ctx, current_training)
+        UnknownScene.enter(ctx)
 
     def score(self, ctx: Context) -> float:
         return self.training.score(ctx)

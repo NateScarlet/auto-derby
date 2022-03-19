@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Text
+from typing import Callable, Optional, Text
 
 from ... import action, templates, terminal
 from ...scenes import PaddockScene
@@ -38,25 +38,55 @@ _RACE_ORDER_TEMPLATES = {
 }
 
 
+def _retry_method(ctx: Context) -> Optional[Callable[[], None]]:
+    if action.count_image(templates.SINGLE_MODE_CLIMAX_WHITE_CONTINUE_BUTTON):
+
+        def _retry():
+            action.tap_image(templates.SINGLE_MODE_CLIMAX_WHITE_CONTINUE_BUTTON)
+            action.wait_tap_image(templates.SINGLE_MODE_CLIMAX_GREEN_CONTINUE_BUTTON)
+
+        return _retry
+
+
 def _handle_race_result(ctx: Context, race: Race):
     action.wait_tap_image(templates.RACE_RESULT_BUTTON)
 
     res = RaceResult()
-    res.ctx = Context.from_dict(ctx.to_dict())
+    res.ctx = ctx.clone()
     res.race = race
 
     tmpl, pos = action.wait_image(*_RACE_ORDER_TEMPLATES.keys())
     res.order = _RACE_ORDER_TEMPLATES[tmpl.name]
     action.tap(pos)
 
-    tmpl, pos = action.wait_image(
+    if ctx.scenario == ctx.SCENARIO_CLIMAX and ctx.date[0] < 4:
+        tmpl, pos = action.wait_image_stable(
+            templates.CLOSE_BUTTON,
+            templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_WIN,
+            templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW,
+            templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_LOSE,
+        )
+        action.tap(pos)
+        if tmpl.name != templates.CLOSE_BUTTON:
+            action.wait_tap_image(templates.CLOSE_BUTTON)
+
+    tmpl, pos = action.wait_image_stable(
         templates.GREEN_NEXT_BUTTON,
         templates.SINGLE_MODE_CONTINUE,
     )
+
     res.is_failed = tmpl.name == templates.SINGLE_MODE_CONTINUE
     _LOGGER.info("race result: %s", res)
     g.on_race_result(ctx, res)
     res.write()
+
+    if res.order > 1:
+        retry = _retry_method(ctx)
+        if retry and g.should_retry_race(ctx, res):
+            retry()
+            _handle_race_result(ctx, race)
+            return
+
     action.tap(pos)
     if res.is_failed:
         ctx.mood = {
@@ -101,6 +131,7 @@ class RaceCommand(Command):
                 break
             action.tap(pos)
         ctx.race_turns.add(ctx.turn_count())
+        ctx.race_history.append(ctx, self.race)
 
         _choose_running_style(ctx, race1)
 

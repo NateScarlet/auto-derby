@@ -5,6 +5,7 @@
         "asarray",
         "astype",
         "cygames",
+        "DEBUFF",
         "dmmgameplayer",
         "ENOENT",
         "errno",

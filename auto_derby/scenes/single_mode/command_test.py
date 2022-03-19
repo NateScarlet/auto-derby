@@ -1,9 +1,10 @@
-import os
 from typing import Text
-from ... import _test
-from .command import CommandScene
-from ...single_mode import Context
+
 import pytest
+
+from ... import _test
+from ...single_mode import Context
+from .command import CommandScene
 
 
 @pytest.mark.parametrize(
@@ -12,12 +13,12 @@ import pytest
         i.stem for i in ((_test.DATA_PATH / "single_mode").glob("command_scene_*.png"))
     ),
 )
-def test_recognize_commands(name: Text):
+def test_recognize(name: Text):
     _test.use_screenshot(f"single_mode/{name}.png")
     scene = CommandScene()
     ctx = Context.new()
-    scene.recognize_commands(ctx)
+    scene.recognize(ctx, static=True)
     _test.snapshot_match(
-        scene,
+        dict(ctx=ctx, scene=scene),
         name=name,
     )

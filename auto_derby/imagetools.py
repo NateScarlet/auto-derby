@@ -2,16 +2,34 @@
 # pyright: strict
 """tools for image processing.  """
 
+import csv
 import hashlib
+import os
 import threading
 from pathlib import Path
-from typing import Any, Callable, Literal, Optional, Text, Tuple, Union
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    Generic,
+    Literal,
+    Optional,
+    Set,
+    Text,
+    Tuple,
+    Type,
+    TypeVar,
+    Union,
+    cast as cast_type,
+)
 
 import cast_unknown as cast
 import cv2
 import cv2.img_hash
 import numpy as np
 from PIL.Image import BICUBIC, Image, fromarray
+
+from .vptree import VPTree
 
 
 class _g:
@@ -38,9 +56,37 @@ def md5(
 _HASH_ALGORITHM = cv2.img_hash.BlockMeanHash_create()
 
 
-def image_hash(img: Image, *, save_path: Optional[Text] = None) -> Text:
+def _image_hash(
+    cv_img: np.ndarray,
+    *,
+    divide_x: int = 1,
+    divide_y: int = 1,
+) -> Text:
+    if divide_x > 1:
+        h = ""
+        for part in np.array_split(cv_img, divide_x, axis=1):
+            h += _image_hash(part, divide_y=divide_y)
+        return h
+
+    if divide_y > 1:
+        h = ""
+        for part in np.array_split(cv_img, divide_y, axis=0):
+            h += _image_hash(part)
+        return h
+
+    return _HASH_ALGORITHM.compute(cv_img).tobytes().hex()
+
+
+def image_hash(
+    img: Image,
+    *,
+    save_path: Optional[Text] = None,
+    divide_x: int = 1,
+    divide_y: int = 1,
+) -> Text:
     cv_img = np.asarray(img.convert("L"))
-    h = _HASH_ALGORITHM.compute(cv_img).tobytes().hex()
+
+    h = _image_hash(cv_img, divide_x=divide_x, divide_y=divide_y)
 
     if save_path:
         md5_hash = hashlib.md5(img.tobytes()).hexdigest()
@@ -59,6 +105,10 @@ def compare_hash(a: Text, b: Text) -> float:
     cv_b = np.array(list(bytes.fromhex(b)), np.uint8)
     res = _HASH_ALGORITHM.compare(cv_a, cv_b)
     return 1 - (res / (len(a) * 2))
+
+
+def _hash_distance(a: Text, b: Text) -> float:
+    return 1 - compare_hash(a, b)
 
 
 def _cast_float(v: Any) -> float:
@@ -285,3 +335,130 @@ def show(img: Image, title: Text = "") -> Callable[[], None]:
         t.join()
 
     return _close
+
+
+T = TypeVar("T")
+
+
+class ImageHashMapQueryResult(Generic[T]):
+    def __init__(self, hash: Text, value: T, similarity: float) -> None:
+        self.hash = hash
+        self.value = value
+        self.similarity = similarity
+
+    def __str__(self):
+        return (
+            f"IHMQueryResult<{self.similarity*100:.1f}%,{self.value},{self.hash[:8]}>"
+        )
+
+
+class ImageHashMap(Generic[T]):
+    def __init__(self) -> None:
+        self._labels: Dict[Text, T] = {}
+        self._tree = VPTree[Text](_hash_distance)
+        self._tree_key = 0
+
+    def _prepare_tree(self) -> VPTree[Text]:
+        key = len(self._labels)
+        if self._tree_key != key:
+            self._tree.set_data(tuple(self._labels.keys()))
+            self._tree_key = key
+        return self._tree
+
+    def is_empty(self) -> bool:
+        return not self._labels
+
+    def query(self, h: Text) -> ImageHashMapQueryResult[T]:
+        if not self._labels:
+            raise ValueError("no data")
+        tree = self._prepare_tree()
+        distance, hash = tree.nearest_neighbor(h)
+        return ImageHashMapQueryResult(
+            hash,
+            self._labels[hash],
+            1 - distance,
+        )
+
+    def label(self, h: Text, value: T) -> None:
+        self._labels[h] = value
+
+    def clear(self) -> None:
+        self._labels.clear()
+
+
+class CSVImageHashMap(ImageHashMap[T]):
+    def __init__(
+        self,
+        type: Type[T],
+    ):
+        super().__init__()
+        self.type = type
+        self.save_path = ""
+
+        self._loaded_paths: Set[Text] = set()
+
+    def _value_from_text(self, v: Text) -> T:
+        if self.type is str:
+            return cast_type(T, v)
+        if self.type is int:
+            return cast_type(T, int(v))
+        raise NotImplementedError("not supported type", self.type)
+
+    def _value_to_text(self, v: T) -> Text:
+        return str(v)
+
+    def load(self, path: Text) -> bool:
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                for k, v in csv.reader(f):
+                    self._labels[k] = self._value_from_text(v)
+        except FileNotFoundError:
+            return False
+        self._loaded_paths.add(path)
+        return True
+
+    def load_once(self, path: Text) -> bool:
+        if path in self._loaded_paths:
+            return False
+        return self.load(path)
+
+    def label(self, h: Text, value: T) -> None:
+        super().label(h, value)
+        path = self.save_path
+        if not path:
+            raise ValueError("label save path is empty")
+
+        def _do():
+            with open(path, "a", encoding="utf-8", newline="") as f:
+                csv.writer(f).writerow((h, self._value_to_text(value)))
+
+        try:
+            _do()
+        except FileNotFoundError:
+            os.makedirs(os.path.dirname(path))
+            _do()
+
+    def clear(self) -> None:
+        super().clear()
+        self._loaded_paths.clear()
+
+
+def bbox_from_rect(rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
+    x, y, w, h = rect
+    l, t, r, b = x, y, x + w, y + h
+    return l, t, r, b
+
+
+def rect_from_bbox(bbox: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
+    l, t, r, b = bbox
+    x, y, w, h = l, b, r - l, b - t
+    return x, y, w, h
+
+
+def auto_crop(cv_img: np.ndarray) -> np.ndarray:
+    l, t, r, b = bbox_from_rect(
+        cv2.boundingRect(
+            cv2.findNonZero(cv_img),
+        )
+    )
+    return cv_img[t:b, l:r]

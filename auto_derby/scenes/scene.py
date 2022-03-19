@@ -38,7 +38,7 @@ class Scene(AbstractScene):
         if ctx.scene.name() == name:
             _LOGGER.debug("already in: %s", name)
         else:
-            _LOGGER.info("enter: %s", name)
+            _LOGGER.info("enter: %s -> %s", ctx.scene.name(), name)
             ctx.scene = cls._enter(ctx)
             _LOGGER.info("entered: %s", name)
         return cast.instance(ctx.scene, cls)

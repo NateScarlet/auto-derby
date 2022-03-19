@@ -5,11 +5,10 @@ from __future__ import annotations
 
 import time
 
-import cast_unknown as cast
-
-from ... import action, imagetools, single_mode, template, templates
+from ... import action, single_mode, template, templates
 from ...single_mode.race import Race, find_by_race_menu_image
 from ..scene import Scene, SceneHolder
+from ..vertical_scroll import VerticalScroll
 from .command import CommandScene
 
 
@@ -18,20 +17,16 @@ class RaceTurnsIncorrect(ValueError):
         super().__init__("race turns incorrect")
 
 
-def _is_race_list_scroll_to_top() -> bool:
-    rp = action.resize_proxy()
-    color = template.screenshot(max_age=0).getpixel(rp.vector2((525, 525), 540))
-    return (
-        imagetools.compare_color((123, 121, 140), tuple(cast.list_(color, int))) > 0.9
-    )
-
-
-def _stop_race_menu_scroll():
-    rp = action.resize_proxy()
-    action.tap(rp.vector2((15, 600), 540))
-
-
 class RaceMenuScene(Scene):
+    def __init__(self) -> None:
+        super().__init__()
+        rp = action.resize_proxy()
+        self._scroll = VerticalScroll(
+            origin=rp.vector2((15, 600), 540),
+            page_size=50,
+            max_page=10,
+        )
+
     @classmethod
     def name(cls):
         return "single-mode-race-menu"
@@ -69,23 +64,10 @@ class RaceMenuScene(Scene):
         return next(find_by_race_menu_image(ctx, template.screenshot()))[0]
 
     def choose_race(self, ctx: single_mode.Context, race: Race) -> None:
-        rp = action.resize_proxy()
-
         time.sleep(0.2)  # wait animation
-        while not _is_race_list_scroll_to_top():
-            action.swipe(
-                rp.vector2((100, 500), 466), dy=rp.vector(100, 466), duration=0.2
-            )
-            _stop_race_menu_scroll()
-
-        while True:
+        while self._scroll.next():
             for race2, pos in find_by_race_menu_image(ctx, template.screenshot()):
                 if race2 == race:
                     action.tap(pos)
                     return
-            action.swipe(
-                rp.vector2((100, 600), 466),
-                dy=rp.vector(-50, 466),
-                duration=0.2,
-            )
-            _stop_race_menu_scroll()
+        raise ValueError("not found: %s" % race)

@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": 22,
+      "name": "プレーンカップケーキ",
+      "quantity": 1,
+      "disabled": true
+    },
+    {
+      "id": 43,
+      "name": "チアメガホン",
+      "quantity": 2,
+      "disabled": false
+    },
+    {
+      "id": 44,
+      "name": "スパルタメガホン",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 51,
+      "name": "蹄鉄ハンマー・匠",
+      "quantity": 1,
+      "disabled": false
+    }
+  ]
+}

@@ -28,4 +28,7 @@ def test_compare():
     assert texttools.compare("ァ", "ア1") == 0.475
     assert texttools.compare("ア", "ァ") == 0.95
     assert texttools.compare("アフアイナルズ", "ァファイナルズ") == 0.9857142857142858
+    assert texttools.compare("バイタル20", "バイタル65") == 0.8333333333333334
+    assert texttools.compare("スピードアンクルウェイト", "スタミナアンクルウェイト") == 0.75
+    assert texttools.compare("蹄鉄ハンマー・匠", "蹄鉄ハンマー・極") == 0.875
     assert texttools.compare("", "123456", max_missing_chars=5) == -1

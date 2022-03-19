@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": 22,
+      "name": "プレーンカップケーキ",
+      "quantity": 1,
+      "disabled": true
+    },
+    {
+      "id": 51,
+      "name": "蹄鉄ハンマー・匠",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 52,
+      "name": "蹄鉄ハンマー・極",
+      "quantity": 1,
+      "disabled": false
+    }
+  ]
+}

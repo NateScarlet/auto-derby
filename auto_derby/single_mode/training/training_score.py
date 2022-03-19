@@ -62,6 +62,8 @@ def compute(ctx: Context, trn: Training) -> float:
         vit *= 1.2
     if ctx.date[1:] in ((6, 2), (7, 1), (7, 2), (8, 1)):
         vit *= 1.5
+    if ctx.date[0] == 4:
+        vit *= 0.3
 
     skill = trn.skill * 0.5
 

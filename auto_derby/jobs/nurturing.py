@@ -1,13 +1,13 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 from __future__ import annotations
-from auto_derby.constants import RacePrediction
 
 import logging
 import time
-from typing import Callable, Iterator, Text, Tuple, Union
+from typing import Callable, Iterator, List, Text, Tuple, Union
 
 from .. import action, config, template, templates
+from ..constants import RacePrediction
 from ..scenes.single_mode import (
     AoharuBattleConfirmScene,
     AoharuCompetitorScene,
@@ -15,8 +15,10 @@ from ..scenes.single_mode import (
     CommandScene,
     RaceMenuScene,
     RaceTurnsIncorrect,
+    ShopScene,
 )
-from ..single_mode import Context, commands, event
+from ..scenes.single_mode.item_menu import ItemMenuScene
+from ..single_mode import Context, commands, event, item
 
 LOGGER = logging.getLogger(__name__)
 
@@ -36,20 +38,104 @@ def _handle_option():
     action.tap_image(ALL_OPTIONS[ans - 1])
 
 
+def _handle_shop(ctx: Context, cs: CommandScene):
+    if not (cs.has_shop and ctx.shop_coin):
+        return
+    scene = ShopScene.enter(ctx)
+    scene.recognize(ctx)
+
+    scores_of_items = sorted(
+        (
+            (i.exchange_score(ctx), i.expected_exchange_score(ctx), i)
+            for i in scene.items
+        ),
+        key=lambda x: x[0] - x[1],
+        reverse=True,
+    )
+
+    LOGGER.info("shop items")
+    cart_items: List[item.Item] = []
+    total_price = 0
+    for s, es, i in scores_of_items:
+        status = ""
+        if (
+            sum(1 for j in cart_items if j.id == i.id) + ctx.items.get(i.id).quantity
+            >= i.max_quantity
+        ):
+            status = "<max quantity>"
+        elif total_price + i.price > ctx.shop_coin:
+            status = "<coin not enough>"
+        elif s > es:
+            status = "<in cart>"
+            cart_items.append(i)
+            total_price += i.price
+        LOGGER.info("score:\t%2.2f/%2.2f:\t%s\t%s", s, es, i, status)
+    scene.exchange_items(ctx, cart_items)
+
+    cs.enter(ctx)
+    if any(i.should_use_directly(ctx) for i in cart_items):
+        cs.recognize(ctx)
+    return
+
+
+def _handle_item_list(ctx: Context, cs: CommandScene):
+    if not cs.has_shop:
+        return
+    if ctx.items_last_updated_turn == 0:
+        scene = ItemMenuScene.enter(ctx)
+        scene.recognize(ctx)
+    items = tuple(i for i in ctx.items if i.should_use_directly(ctx))
+    if items:
+        scene = ItemMenuScene.enter(ctx)
+        scene.use_items(ctx, items)
+    cs.enter(ctx)
+    return
+
+
+class _CommandPlan:
+    def __init__(
+        self,
+        ctx: Context,
+        command: commands.Command,
+    ) -> None:
+        self.command = command
+        self.command_score = command.score(ctx)
+        self.item_score, self.items = item.plan.compute(ctx, command)
+        self.score = self.command_score + self.item_score
+
+    def execute(self, ctx: Context):
+        if self.items:
+            scene = ItemMenuScene.enter(ctx)
+            scene.use_items(ctx, self.items)
+        self.command.execute(ctx)
+
+    def explain(self) -> Text:
+        msg = ""
+        if self.items:
+            msg += f"{self.item_score:.2f} by {','.join(str(i) for i in self.items)};"
+        return msg
+
+
 def _handle_turn(ctx: Context):
     scene = CommandScene.enter(ctx)
     scene.recognize(ctx)
+    _handle_item_list(ctx, scene)
+    # see training before shop
+    turn_commands = tuple(commands.from_context(ctx))
+    _handle_shop(ctx, scene)
     ctx.next_turn()
-    command_with_scores = sorted(
-        ((i, i.score(ctx)) for i in commands.from_context(ctx)),
-        key=lambda x: x[1],
+    LOGGER.info("context: %s", ctx)
+    for i in ctx.items:
+        LOGGER.info("item:\t#%s\tx%s\t%s", i.id, i.quantity, i.name)
+    command_plans = sorted(
+        (_CommandPlan(ctx, i) for i in turn_commands),
+        key=lambda x: x.score,
         reverse=True,
     )
-    LOGGER.info("context: %s", ctx)
-    for c, s in command_with_scores:
-        LOGGER.info("score:\t%2.2f:\t%s", s, c.name())
+    for cp in command_plans:
+        LOGGER.info("score:\t%2.2f\t%s;%s", cp.score, cp.command.name(), cp.explain())
     try:
-        command_with_scores[0][0].execute(ctx)
+        command_plans[0].execute(ctx)
     except RaceTurnsIncorrect:
         _handle_turn(ctx)
 
@@ -85,6 +171,11 @@ def _close(ac: _ActionContext):
 
 
 def _ac_handle_turn(ac: _ActionContext):
+    try:
+        action.wait_image_stable(ac.tmpl, timeout=3)
+    except TimeoutError:
+        LOGGER.warning("command scene enter timeout, return to main loop")
+        return
     _handle_turn(ac.ctx)
 
 
@@ -111,13 +202,18 @@ def _handle_fan_not_enough(ac: _ActionContext):
 
 def _handle_target_race(ac: _ActionContext):
     ctx = ac.ctx
-    CommandScene().recognize(ctx)
+    scene = CommandScene.enter(ctx)
+    scene.recognize(ctx)
+    _handle_item_list(ctx, scene)
+    _handle_shop(ctx, scene)
     ctx.next_turn()
     try:
         scene = RaceMenuScene().enter(ctx)
     except RaceTurnsIncorrect:
         scene = RaceMenuScene().enter(ctx)
-    commands.RaceCommand(scene.first_race(ctx), selected=True).execute(ctx)
+    _CommandPlan(
+        ctx, commands.RaceCommand(scene.first_race(ctx), selected=True)
+    ).execute(ctx)
 
 
 def _ac_handle_option(ac: _ActionContext):
@@ -205,6 +301,13 @@ def _template_actions(ctx: Context) -> Iterator[Tuple[_Template, _Handler]]:
         )
         yield templates.SINGLE_MODE_AOHARU_FORMAL_RACE_BANNER, _set_scenario(
             ctx.SCENARIO_AOHARU, _handle_aoharu_team_race
+        )
+    if ctx.scenario in (ctx.SCENARIO_CLIMAX, ctx.SCENARIO_UNKNOWN):
+        yield templates.SINGLE_MODE_GO_TO_SHOP_BUTTON, _set_scenario(
+            ctx.SCENARIO_CLIMAX, _cancel
+        )
+        yield templates.SINGLE_MODE_TARGET_GRADE_POINT_NOT_ENOUGH, _set_scenario(
+            ctx.SCENARIO_CLIMAX, _cancel
         )
 
 

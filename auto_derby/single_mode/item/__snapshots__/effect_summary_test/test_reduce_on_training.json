@@ -1,0 +1,58 @@
+{
+  "チアメガホン": {
+    "speed-10": "Training<spd=8 vit=-30.0% fail=5% lv=0>",
+    "stamina-10": "Training<sta=8 vit=-30.0% fail=5% lv=0>",
+    "power-10": "Training<pow=8 vit=-30.0% fail=5% lv=0>",
+    "guts-10": "Training<gut=8 vit=-40.0% fail=5% lv=0>",
+    "wisdom-10": "Training<wis=8 vit=10.0% fail=2% lv=0>",
+    "speed-10-fail-40": "Training<spd=8 vit=-30.0% fail=40% lv=0>"
+  },
+  "スパルタメガホン": {
+    "speed-10": "Training<spd=7 vit=-30.0% fail=5% lv=0>",
+    "stamina-10": "Training<sta=7 vit=-30.0% fail=5% lv=0>",
+    "power-10": "Training<pow=7 vit=-30.0% fail=5% lv=0>",
+    "guts-10": "Training<gut=7 vit=-40.0% fail=5% lv=0>",
+    "wisdom-10": "Training<wis=7 vit=10.0% fail=2% lv=0>",
+    "speed-10-fail-40": "Training<spd=7 vit=-30.0% fail=40% lv=0>"
+  },
+  "ブートキャンプメガホン": {
+    "speed-10": "Training<spd=6 vit=-30.0% fail=5% lv=0>",
+    "stamina-10": "Training<sta=6 vit=-30.0% fail=5% lv=0>",
+    "power-10": "Training<pow=6 vit=-30.0% fail=5% lv=0>",
+    "guts-10": "Training<gut=6 vit=-40.0% fail=5% lv=0>",
+    "wisdom-10": "Training<wis=6 vit=10.0% fail=2% lv=0>",
+    "speed-10-fail-40": "Training<spd=6 vit=-30.0% fail=40% lv=0>"
+  },
+  "スピードアンクルウェイト": {
+    "speed-10": "Training<spd=7 vit=-25.0% fail=5% lv=0>",
+    "stamina-10": "Training<sta=10 vit=-30.0% fail=5% lv=0>",
+    "power-10": "Training<pow=10 vit=-30.0% fail=5% lv=0>",
+    "guts-10": "Training<gut=10 vit=-40.0% fail=5% lv=0>",
+    "wisdom-10": "Training<wis=10 vit=10.0% fail=2% lv=0>",
+    "speed-10-fail-40": "Training<spd=7 vit=-25.0% fail=40% lv=0>"
+  },
+  "スタミナアンクルウェイト": {
+    "speed-10": "Training<spd=10 vit=-30.0% fail=5% lv=0>",
+    "stamina-10": "Training<sta=7 vit=-25.0% fail=5% lv=0>",
+    "power-10": "Training<pow=10 vit=-30.0% fail=5% lv=0>",
+    "guts-10": "Training<gut=10 vit=-40.0% fail=5% lv=0>",
+    "wisdom-10": "Training<wis=10 vit=10.0% fail=2% lv=0>",
+    "speed-10-fail-40": "Training<spd=10 vit=-30.0% fail=40% lv=0>"
+  },
+  "パワーアンクルウェイト": {
+    "speed-10": "Training<spd=10 vit=-30.0% fail=5% lv=0>",
+    "stamina-10": "Training<sta=10 vit=-30.0% fail=5% lv=0>",
+    "power-10": "Training<pow=7 vit=-25.0% fail=5% lv=0>",
+    "guts-10": "Training<gut=10 vit=-40.0% fail=5% lv=0>",
+    "wisdom-10": "Training<wis=10 vit=10.0% fail=2% lv=0>",
+    "speed-10-fail-40": "Training<spd=10 vit=-30.0% fail=40% lv=0>"
+  },
+  "根性アンクルウェイト": {
+    "speed-10": "Training<spd=10 vit=-30.0% fail=5% lv=0>",
+    "stamina-10": "Training<sta=10 vit=-30.0% fail=5% lv=0>",
+    "power-10": "Training<pow=10 vit=-30.0% fail=5% lv=0>",
+    "guts-10": "Training<gut=7 vit=-33.3% fail=5% lv=0>",
+    "wisdom-10": "Training<wis=10 vit=10.0% fail=2% lv=0>",
+    "speed-10-fail-40": "Training<spd=10 vit=-30.0% fail=40% lv=0>"
+  }
+}

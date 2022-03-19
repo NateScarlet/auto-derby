@@ -1,1 +1,1 @@
-Training<lv=3 fail=0% wis=24 ski=8 spd=6 ptn=oth@4,spd@5,wis@5>
+Training<wis=24 ski=8 spd=6 vit=5.0% fail=0% lv=3 ptn=oth@4,spd@5,wis@5>

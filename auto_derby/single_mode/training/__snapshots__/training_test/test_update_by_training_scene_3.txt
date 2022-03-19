@@ -1,1 +1,1 @@
-Training<lv=5 fail=0% gut=17 spd=6 pow=6 ski=2 ptn=sta@5>
+Training<gut=17 spd=6 pow=6 ski=2 vit=-28.0% fail=0% lv=5 ptn=sta@5>

@@ -3,13 +3,12 @@
 
 
 import contextlib
-import csv
 import json
 import logging
 import os
 import warnings
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Text, Tuple
+from typing import List, Optional, Text, Tuple
 
 import cv2
 import numpy as np
@@ -20,16 +19,14 @@ from . import data, imagetools, terminal
 LOGGER = logging.getLogger(__name__)
 
 
+class _g:
+    labels = imagetools.CSVImageHashMap(str)
+
+
 class g:
     data_path: str = ""
     image_path: str = ""
     prompt_disabled = False
-
-    labels: Dict[Text, Text] = {}
-
-
-def _data_key():
-    return (len(g.labels), g.data_path)
 
 
 @contextlib.contextmanager
@@ -40,10 +37,6 @@ def prompt_disabled(v: bool):
         yield
     finally:
         g.prompt_disabled = original
-
-
-class _g:
-    loaded_data_key: Any = None
 
 
 def _migrate_json_to_csv() -> None:
@@ -60,46 +53,24 @@ def _migrate_json_to_csv() -> None:
             DeprecationWarning,
         )
         for k, v in labels.items():
-            _label(path, k, v)
+            _g.labels.label(k, v)
         os.rename(path, path + "~")
     except FileNotFoundError:
         pass
 
 
-def _load(path: Text):
-    with open(path, "r", encoding="utf-8") as f:
-        for k, v in csv.reader(f):
-            g.labels[k] = v
-
-
 def reload() -> None:
-    g.labels.clear()
-    _load(data.path("ocr_labels.csv"))
     _migrate_json_to_csv()
-    try:
-        _load(g.data_path)
-    except FileNotFoundError:
-        pass
-    _g.loaded_data_key = _data_key()
+    _g.labels.clear()
+    _g.labels.load_once(data.path("ocr_labels.csv"))
+    _g.labels.load_once(g.data_path)
+    _g.labels.save_path = g.data_path
 
 
 def reload_on_demand() -> None:
-    if _data_key() != _g.loaded_data_key:
-        reload()
-
-
-def _label(path: Text, image_hash: Text, value: Text) -> None:
-    g.labels[image_hash] = value
-
-    def _do():
-        with open(path, "a", encoding="utf-8", newline="") as f:
-            csv.writer(f).writerow((image_hash, value))
-
-    try:
-        _do()
-    except FileNotFoundError:
-        os.makedirs(os.path.dirname(path))
-        _do()
+    if _g.labels.save_path == g.data_path:
+        return
+    reload()
 
 
 _PREVIEW_PADDING = 4
@@ -110,19 +81,8 @@ def _pad_img(img: np.ndarray, padding: int = _PREVIEW_PADDING) -> np.ndarray:
     return cv2.copyMakeBorder(img, p, p, p, p, cv2.BORDER_CONSTANT)
 
 
-def _query(h: Text) -> Tuple[Text, Text, float]:
-    reload_on_demand()
-    # TODO: use a more efficient data structure, maybe vp-tree
-    if not g.labels:
-        return "", "", 0
-    return sorted(
-        ((k, v, imagetools.compare_hash(h, k)) for k, v in g.labels.items()),
-        key=lambda x: x[2],
-        reverse=True,
-    )[0]
-
-
 def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
+    # TODO: use web prompt
     if g.prompt_disabled:
         LOGGER.warning(
             "using low similarity label: hash=%s, value=%s, similarity=%s",
@@ -132,6 +92,9 @@ def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
         )
         return value
 
+    if terminal.g.prompt_disabled:
+        # avoid show image during loop
+        raise terminal.PromptDisabled
     ret = ""
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     try:
@@ -150,7 +113,7 @@ def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
                 )
     finally:
         close_img()
-    _label(g.data_path, h, ret)
+    _g.labels.label(h, ret)
     LOGGER.info("labeled: hash=%s, value=%s", h, ret)
     return ret
 
@@ -158,17 +121,13 @@ def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
 def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     hash_img = cv2.GaussianBlur(img, (7, 7), 1, borderType=cv2.BORDER_CONSTANT)
     h = imagetools.image_hash(fromarray(hash_img), save_path=g.image_path)
-    match, value, similarity = _query(h)
-    LOGGER.debug(
-        "match label: value=%s, current=%s, match=%s, similarity=%0.3f",
-        value,
-        h,
-        match,
-        similarity,
-    )
-    if similarity > threshold:
-        return value
-    return _prompt(img, h, value, similarity)
+    if _g.labels.is_empty():
+        return _prompt(img, h, "", 0)
+    res = _g.labels.query(h)
+    LOGGER.debug("query label: %s by %s", res, h)
+    if res.similarity > threshold:
+        return res.value
+    return _prompt(img, h, res.value, res.similarity)
 
 
 def _union_bbox(
@@ -223,6 +182,7 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
     Returns:
         Text: Text content
     """
+    reload_on_demand()
     ret = ""
 
     w, h = img.width, img.height
@@ -372,3 +332,7 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
     LOGGER.debug("ocr result: %s", ret)
 
     return ret
+
+
+# DEPRECATED
+g.labels = _g.labels._labels  # type: ignore

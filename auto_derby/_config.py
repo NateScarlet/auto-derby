@@ -6,14 +6,16 @@ import os
 import warnings
 from typing import Callable, Dict, Text
 
+from auto_derby.constants import TrainingType
+
 from . import ocr, plugin, single_mode, template, terminal, window, data
 from .clients import ADBClient, Client
 from .single_mode import commands as sc
 from .single_mode.training import Training
 
 
-def _parse_training_levels(spec: Text) -> Dict[int, int]:
-    ret: Dict[int, int] = {}
+def _parse_training_levels(spec: Text) -> Dict[TrainingType, int]:
+    ret: Dict[TrainingType, int] = {}
     for k, v in zip(
         (
             Training.TYPE_SPEED,
@@ -87,7 +89,12 @@ class config:
         "AUTO_DERBY_SINGLE_MODE_CHOICE_PATH", "data/single_mode_choices.csv"
     )
     single_mode_event_prompt_disabled = (
-        os.getenv("AUTO_DERBY_EVENT_PROMPT_DISABLED", "").lower() == "true"
+        os.getenv("AUTO_DERBY_SINGLE_MODE_EVENT_PROMPT_DISABLED", "").lower() == "true"
+        or os.getenv("AUTO_DERBY_EVENT_PROMPT_DISABLED", "").lower()
+        == "true"  # deprecated
+    )
+    single_mode_item_prompt_disabled = (
+        os.getenv("AUTO_DERBY_SINGLE_MODE_ITEM_PROMPT_DISABLED", "").lower() == "true"
     )
     plugin_path = os.getenv("AUTO_DERBY_PLUGIN_PATH", "plugins")
     single_mode_race_class = single_mode.Race
@@ -100,6 +107,11 @@ class config:
     single_mode_rest_score = sc.g.rest_score
     single_mode_summer_rest_score = sc.g.summer_rest_score
     single_mode_ignore_training_commands = sc.g.ignore_training_commands
+    single_mode_should_retry_race = sc.g.should_retry_race
+    single_mode_item_label_path = os.getenv(
+        "AUTO_DERBY_SINGLE_MODE_ITEM_LABEL_PATH", "data/single_mode_item_labels.csv"
+    )
+    single_mode_item_class = single_mode.item.g.item_class
     single_mode_target_training_levels = _parse_training_levels(
         os.getenv("AUTO_DERBY_SINGLE_MODE_TARGET_TRAINING_LEVELS", "")
     )
@@ -154,6 +166,9 @@ class config:
         single_mode.training.g.target_levels = cls.single_mode_target_training_levels
         single_mode.training.g.training_class = cls.single_mode_training_class
         single_mode.training.g.partner_class = cls.single_mode_training_partner_class
+        single_mode.item.g.label_path = cls.single_mode_item_label_path
+        single_mode.item.g.prompt_disabled = cls.single_mode_item_prompt_disabled
+        single_mode.item.g.item_class = cls.single_mode_item_class
         sc.g.rest_score = cls.single_mode_rest_score
         sc.g.summer_rest_score = cls.single_mode_summer_rest_score
         sc.g.health_care_score = cls.single_mode_health_care_score
@@ -162,6 +177,7 @@ class config:
         sc.g.on_winning_live = cls.on_single_mode_live
         sc.g.on_command = cls.on_single_mode_command
         sc.g.on_race_result = cls.on_single_mode_race_result
+        sc.g.should_retry_race = cls.single_mode_should_retry_race
         template.g.last_screenshot_save_path = cls.last_screenshot_save_path
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path
         terminal.g.prompt_sound_path = cls.terminal_prompt_sound_path

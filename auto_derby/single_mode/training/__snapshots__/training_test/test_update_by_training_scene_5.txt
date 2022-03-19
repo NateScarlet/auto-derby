@@ -1,1 +1,1 @@
-Training<lv=2 fail=0% wis=13 ski=4 spd=2>
+Training<wis=13 ski=4 spd=2 vit=5.0% fail=0% lv=2>

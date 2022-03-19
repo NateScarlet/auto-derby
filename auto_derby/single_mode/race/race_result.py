@@ -122,11 +122,14 @@ def iterate() -> Iterator[RaceResult]:
     p = g.result_path
     if not p:
         return
-    with open(p, "r", encoding="utf-8") as f:
-        for line in f:
-            if not line:
-                continue
-            yield RaceResult.from_dict(json.loads(line))
+    try:
+        with open(p, "r", encoding="utf-8") as f:
+            for line in f:
+                if not line:
+                    continue
+                yield RaceResult.from_dict(json.loads(line))
+    except FileNotFoundError:
+        return
 
 
 def prune(time_lt: datetime.datetime) -> None:

@@ -1,0 +1,36 @@
+{
+  "ctx": {
+    "date": [
+      1,
+      0,
+      0
+    ],
+    "mood": "NORMAL",
+    "scenario": "アオハル杯～輝け、チームの絆～",
+    "vitality": 0.6578313253012048,
+    "maxVitality": 100,
+    "speed": 194,
+    "stamina": 73,
+    "power": 132,
+    "guts": 101,
+    "wisdom": 94,
+    "fanCount": 0,
+    "turf": "",
+    "dart": "",
+    "sprint": "",
+    "mile": "",
+    "intermediate": "",
+    "long": "",
+    "last": "",
+    "middle": "",
+    "head": "",
+    "lead": "",
+    "conditions": []
+  },
+  "scene": {
+    "hasHealthCare": false,
+    "hasScheduledRace": false,
+    "canGoOutWithFriend": false,
+    "hasShop": false
+  }
+}

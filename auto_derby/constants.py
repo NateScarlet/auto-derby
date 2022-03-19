@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import enum
+import functools
 
 
 class RuningStyle(enum.Enum):
@@ -52,3 +53,45 @@ class RacePrediction(enum.Enum):
     TAIKOU = 2
     TANNANA = 3
     RENNSHITA = 4
+
+
+class TrainingType(enum.Enum):
+    UNKNOWN = 0
+    SPEED = 1
+    STAMINA = 2
+    POWER = 3
+    GUTS = 4
+    WISDOM = 5
+
+
+@functools.total_ordering
+class Mood(enum.Enum):
+    VERY_BAD = (0.8, 0.95)
+    BAD = (0.9, 0.98)
+    NORMAL = (1.0, 1.0)
+    GOOD = (1.1, 1.05)
+    VERY_GOOD = (1.2, 1.1)
+
+    def __getitem__(self, key: int) -> float:
+        import warnings
+
+        warnings.warn(
+            "Mood as a tuple is depreacted, use Mood.training_rate or Mood.race_rate instead",
+            DeprecationWarning,
+        )
+        if key == 0:
+            return self.value[0]
+        if key == 1:
+            return self.value[1]
+        raise KeyError(key)
+
+    def __lt__(self, other: Mood) -> bool:
+        return self.training_rate < other.training_rate
+
+    @property
+    def training_rate(self):
+        return self.value[0]
+
+    @property
+    def race_rate(self):
+        return self.value[1]

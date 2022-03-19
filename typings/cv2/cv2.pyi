@@ -14778,17 +14778,6 @@ def correctMatches(
     """
     ...
 
-def countNonZero(src) -> retval:
-    """
-    .   @brief Counts non-zero array elements.
-    .
-    .   The function returns the number of non-zero elements in src :
-    .   \f[\sum _{I: \; \texttt{src} (I) \ne0 } 1\f]
-    .   @param src single-channel array.
-    .   @sa  mean, meanStdDev, norm, minMaxLoc, calcCovarMatrix
-    """
-    ...
-
 def createAlignMTB(max_bits=..., exclude_range=..., cut=...) -> retval:
     """
     .   @brief Creates AlignMTB object

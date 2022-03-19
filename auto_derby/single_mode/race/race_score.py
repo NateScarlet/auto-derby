@@ -3,47 +3,40 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING, Tuple
+
 from ... import mathtools
 
-from typing import TYPE_CHECKING
-
 if TYPE_CHECKING:
-    from .race import Race
     from ..context import Context
+    from .race import Race
+
+
+def _race_reward(ctx: Context, race: Race, order: int) -> Tuple[int, int]:
+    if order == 1:
+        index = 0
+    elif 2 <= order <= 5:
+        index = 1
+    else:
+        index = 2
+
+    if ctx.date[0] == 4:
+        return ((30, 40), (20, 30), (10, 20))[index]
+    if race.grade == race.GRADE_G1:
+        return ((10, 45), (5, 40), (4, 25))[index]
+    if race.grade in (race.GRADE_G2, race.GRADE_G3):
+        return ((8, 35), (4, 30), (3, 20))[index]
+    if race.grade in (race.GRADE_OP, race.GRADE_PRE_OP):
+        return ((5, 35), (2, 20), (0, 10))[index]
+
+    return (0, 0)
 
 
 def compute(ctx: Context, race: Race) -> float:
     estimate_order = race.estimate_order(ctx)
-    if estimate_order == 1:
-        prop, skill = {
-            race.GRADE_G1: (10, 45),
-            race.GRADE_G2: (8, 35),
-            race.GRADE_G3: (8, 35),
-            race.GRADE_OP: (5, 35),
-            race.GRADE_PRE_OP: (5, 35),
-            race.GRADE_NOT_WINNING: (0, 0),
-            race.GRADE_DEBUT: (0, 0),
-        }[race.grade]
-    elif 2 <= estimate_order <= 5:
-        prop, skill = {
-            race.GRADE_G1: (5, 40),
-            race.GRADE_G2: (4, 30),
-            race.GRADE_G3: (4, 30),
-            race.GRADE_OP: (2, 20),
-            race.GRADE_PRE_OP: (2, 20),
-            race.GRADE_NOT_WINNING: (0, 0),
-            race.GRADE_DEBUT: (0, 0),
-        }[race.grade]
-    else:
-        prop, skill = {
-            race.GRADE_G1: (4, 25),
-            race.GRADE_G2: (3, 20),
-            race.GRADE_G3: (3, 20),
-            race.GRADE_OP: (0, 10),
-            race.GRADE_PRE_OP: (0, 10),
-            race.GRADE_NOT_WINNING: (0, 0),
-            race.GRADE_DEBUT: (0, 0),
-        }[race.grade]
+    prop, skill = _race_reward(ctx, race, estimate_order)
+    prop *= 1 + race.raward_buff
+    skill *= 1 + race.raward_buff
 
     fan_count = race.fan_counts[estimate_order - 1]
 
@@ -92,6 +85,22 @@ def compute(ctx: Context, race: Race) -> float:
 
     not_winning_score = 0 if ctx.is_after_winning else 1.5 * ctx.turn_count()
 
+    scenario_score = 0
+
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        grade_point = race.grade_points[estimate_order - 1]
+        if ctx.grade_point < ctx.target_grade_point():
+            scenario_score += grade_point * mathtools.interpolate(
+                ctx.turn_count() % 24,
+                (
+                    (1, 0.1),
+                    (24, 0.4),
+                ),
+            )
+
+        shop_coin = race.shop_coins[estimate_order - 1]
+        scenario_score += shop_coin * 0.02
+
     continuous_race_penalty = mathtools.interpolate(
         ctx.continuous_race_count(),
         (
@@ -115,12 +124,12 @@ def compute(ctx: Context, race: Race) -> float:
         status_penality += 10
     if race.ground_status(ctx) < ctx.STATUS_B:
         status_penality += 10
-
     return (
         fan_score
         + prop
         + skill * 0.5
         + not_winning_score
+        + scenario_score
         - continuous_race_penalty
         - fail_penalty
         - status_penality

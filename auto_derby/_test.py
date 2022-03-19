@@ -20,6 +20,7 @@ from . import clients, mathtools, template, config, data
 
 def ignore_user_data():
     config.ocr_data_path = data.path("ocr_labels.csv")
+    config.single_mode_item_label_path = data.path("single_mode_item_labels.csv")
     config.apply()
 
 
@@ -31,9 +32,11 @@ class ImageClient(clients.Client):
         super().__init__()
         self.image = img
 
+    @property
     def width(self) -> int:
         return self.image.width
 
+    @property
     def height(self) -> int:
         return self.image.height
 
@@ -115,7 +118,7 @@ def snapshot_match(
             json_b = json.loads(b)
             assert json_a == json_b, (json_a, json_b)
         else:
-            assert a == b, (a, b)
+            assert b == a, (a, b)
 
     _, filename, _, func_name, _, _ = inspect.stack()[skip + 1]
     data_dir = os.path.join(os.path.dirname(filename), "__snapshots__")

@@ -42,6 +42,7 @@ def main():
     scenario = {
         "ura": Context.SCENARIO_URA,
         "aoharu": Context.SCENARIO_AOHARU,
+        "climax": Context.SCENARIO_CLIMAX,
     }.get(args.scenario, args.scenario)
     image = PIL.Image.open(image_path)
     template.g.screenshot_width = image.width

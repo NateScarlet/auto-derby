@@ -1,1 +1,1 @@
-Training<lv=1 fail=0% pow=11 sta=7 ski=4 ptn=gut(18%),spd@2(0%)>
+Training<pow=11 sta=7 ski=4 vit=-20.0% fail=0% lv=1 ptn=gut(18%),spd@2(0%)>

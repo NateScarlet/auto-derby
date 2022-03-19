@@ -1,1 +1,1 @@
-Training<lv=1 fail=0% spd=21 pow=13 ski=4 ptn=frd@2,spd@4,sta@4>
+Training<spd=21 pow=13 ski=4 vit=-21.0% fail=0% lv=1 ptn=frd@2,spd@4,sta@4>

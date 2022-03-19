@@ -3,15 +3,17 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Type, Dict
+from typing import TYPE_CHECKING, Dict, Type
+
+from ...constants import TrainingType
 
 if TYPE_CHECKING:
-    from .training import Training
     from .partner import Partner
+    from .training import Training
 
 
 class g:
     training_class: Type[Training]
     partner_class: Type[Partner]
-    target_levels: Dict[int, int] = {}
+    target_levels: Dict[TrainingType, int] = {}
     image_path: str = ""

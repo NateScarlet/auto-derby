@@ -1,0 +1,1 @@
+Training<sta=7 gut=5 ski=2 vit=-19.0% fail=0% lv=1 ptn=sta@1>

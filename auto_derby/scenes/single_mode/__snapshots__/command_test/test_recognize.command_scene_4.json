@@ -1,0 +1,36 @@
+{
+  "ctx": {
+    "date": [
+      2,
+      4,
+      1
+    ],
+    "mood": "VERY_GOOD",
+    "scenario": "新設！　URAファイナルズ！！",
+    "vitality": 0.9516908212560387,
+    "maxVitality": 100,
+    "speed": 357,
+    "stamina": 279,
+    "power": 275,
+    "guts": 216,
+    "wisdom": 250,
+    "fanCount": 0,
+    "turf": "",
+    "dart": "",
+    "sprint": "",
+    "mile": "",
+    "intermediate": "",
+    "long": "",
+    "last": "",
+    "middle": "",
+    "head": "",
+    "lead": "",
+    "conditions": []
+  },
+  "scene": {
+    "hasHealthCare": false,
+    "hasScheduledRace": false,
+    "canGoOutWithFriend": false,
+    "hasShop": false
+  }
+}

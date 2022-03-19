@@ -7,9 +7,7 @@ import pytest
 
 @pytest.mark.parametrize(
     "name",
-    tuple(
-        i.stem for i in ((_test.DATA_PATH / "single_mode").glob("go_out_menu_*.png"))
-    ),
+    ("go_out_menu_1", "go_out_menu_2", "go_out_menu_3"),
 )
 def test_from_menu(name: Text):
     img, _ = _test.use_screenshot(f"single_mode/{name}.png")

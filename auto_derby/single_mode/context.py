@@ -3,12 +3,12 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Dict
+from copy import deepcopy
+from typing import TYPE_CHECKING, Any, Dict, Iterator
 
 if TYPE_CHECKING:
     from . import go_out
 
-import functools
 import logging
 import os
 from typing import Callable, List, Set, Text, Tuple, Type
@@ -20,6 +20,8 @@ from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
 from .. import imagetools, mathtools, ocr, scenes, template, templates, texttools
+from ..constants import Mood, TrainingType
+from . import condition
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -28,22 +30,43 @@ class g:
     context_class: Type[Context]
 
 
-def _ocr_date(img: Image) -> Tuple[int, int, int]:
+def _year4_date_text(ctx: Context) -> Iterator[Text]:
+    if ctx.scenario in (ctx.SCENARIO_URA, ctx.SCENARIO_AOHARU, ctx.SCENARIO_UNKNOWN):
+        yield "ファイナルズ開催中"
+    if ctx.scenario in (ctx.SCENARIO_CLIMAX, ctx.SCENARIO_UNKNOWN):
+        yield "クライマックス開催中"
+
+
+def _ocr_date(ctx: Context, img: Image) -> Tuple[int, int, int]:
     img = imagetools.resize(img, height=32)
     cv_img = np.asarray(img.convert("L"))
     cv_img = imagetools.level(
-        cv_img,
-        np.array(10),
-        np.array(240),
+        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
     )
     sharpened_img = imagetools.sharpen(cv_img)
-    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.5)
-    _, binary_img = cv2.threshold(sharpened_img, 120, 255, cv2.THRESH_BINARY_INV)
-    imagetools.fill_area(binary_img, (0,), size_lt=4)
+    white_outline_img = imagetools.constant_color_key(
+        sharpened_img,
+        (255,),
+        threshold=0.85,
+    )
+    white_outline_img = cv2.morphologyEx(
+        white_outline_img,
+        cv2.MORPH_CLOSE,
+        np.ones((3, 3)),
+    )
+    bg_mask_img = imagetools.bg_mask_by_outline(white_outline_img)
+    masked_img = cv2.copyTo(
+        255 - imagetools.mix(cv_img, sharpened_img, 0.5), 255 - bg_mask_img
+    )
+    _, binary_img = cv2.threshold(masked_img, 200, 255, cv2.THRESH_BINARY)
+    imagetools.fill_area(binary_img, (0,), size_lt=2)
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("sharpened_img", sharpened_img)
+        cv2.imshow("white_outline_img", white_outline_img)
+        cv2.imshow("bg_mask_img", bg_mask_img)
+        cv2.imshow("masked_img", masked_img)
         cv2.imshow("binary_img", binary_img)
         cv2.waitKey()
         cv2.destroyAllWindows()
@@ -52,8 +75,9 @@ def _ocr_date(img: Image) -> Tuple[int, int, int]:
 
     if texttools.compare(text, "ジュニア級デビュー前") > 0.8:
         return (1, 0, 0)
-    if texttools.compare(text, "ファイナルズ開催中") > 0.8:
-        return (4, 0, 0)
+    for i in _year4_date_text(ctx):
+        if texttools.compare(text, i) > 0.8:
+            return (4, 0, 0)
     year_end = text.index("級") + 1
     month_end = year_end + text[year_end:].index("月") + 1
     year_text = text[:year_end]
@@ -80,7 +104,7 @@ def _recognize_vitality(img: Image) -> float:
     return 1 - np.average(np.apply_along_axis(_is_empty, 1, cv_img[0, :]))
 
 
-def _recognize_mood(rgb_color: Tuple[int, int, int]) -> Tuple[float, float]:
+def _recognize_mood(rgb_color: Tuple[int, int, int]) -> Mood:
     if imagetools.compare_color((250, 68, 126), rgb_color) > 0.9:
         return Context.MOOD_VERY_GOOD
     if imagetools.compare_color((255, 124, 57), rgb_color) > 0.9:
@@ -158,7 +182,7 @@ def _recognize_property(img: Image) -> int:
     cv_img = np.asarray(img.convert("L"))
     _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
     imagetools.fill_area(binary_img, (0,), size_lt=3)
-    if os.getenv("DEBUG") == __name__:
+    if os.getenv("DEBUG") == __name__ + "[property]":
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("binary_img", binary_img)
         cv2.waitKey()
@@ -169,6 +193,8 @@ def _recognize_property(img: Image) -> int:
 
 def _recognize_scenario(rp: mathtools.ResizeProxy, img: Image) -> Text:
     spec = (
+        (templates.SINGLE_MODE_CLIMAX_GRADE_POINT_ICON, Context.SCENARIO_CLIMAX),
+        (templates.SINGLE_MODE_CLIMAX_RANK_POINT_ICON, Context.SCENARIO_CLIMAX),
         (templates.SINGLE_MODE_AOHARU_CLASS_DETAIL_BUTTON, Context.SCENARIO_AOHARU),
         (templates.SINGLE_MODE_CLASS_DETAIL_BUTTON, Context.SCENARIO_URA),
     )
@@ -184,15 +210,23 @@ def _recognize_scenario(rp: mathtools.ResizeProxy, img: Image) -> Text:
     return ret
 
 
-class Context:
-    MOOD_VERY_BAD = (0.8, 0.95)
-    MOOD_BAD = (0.9, 0.98)
-    MOOD_NORMAL = (1.0, 1.0)
-    MOOD_GOOD = (1.1, 1.05)
-    MOOD_VERY_GOOD = (1.2, 1.1)
+def _date_bbox(ctx: Context, rp: mathtools.ResizeProxy):
+    if ctx.scenario == ctx.SCENARIO_AOHARU:
+        return rp.vector4((125, 32, 278, 48), 540)
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        return rp.vector4((11, 32, 163, 48), 540)
+    return rp.vector4((23, 66, 328, 98), 1080)
 
-    CONDITION_HEADACHE = 1 << 0
-    CONDITION_OVERWEIGHT = 1 << 1
+
+class Context:
+    MOOD_VERY_BAD = Mood.VERY_BAD
+    MOOD_BAD = Mood.BAD
+    MOOD_NORMAL = Mood.NORMAL
+    MOOD_GOOD = Mood.GOOD
+    MOOD_VERY_GOOD = Mood.VERY_GOOD
+
+    CONDITION_HEADACHE = 5
+    CONDITION_OVERWEIGHT = 4
 
     STATUS_S = (8, "S")
     STATUS_A = (7, "A")
@@ -220,7 +254,7 @@ class Context:
     SCENARIO_UNKNOWN = ""
     SCENARIO_URA = "新設！　URAファイナルズ！！"
     SCENARIO_AOHARU = "アオハル杯～輝け、チームの絆～"
-    SCENARIO_MANT = "Make a new track!!  ～クライマックス開幕～"
+    SCENARIO_CLIMAX = "Make a new track!!  ～クライマックス開幕～"
 
     @staticmethod
     def new() -> Context:
@@ -243,7 +277,6 @@ class Context:
 
         self._extra_turn_count = 0
         self.target_fan_count = 0
-        self.race_turns: Set[int] = set()
 
         self.turf = Context.STATUS_NONE
         self.dart = Context.STATUS_NONE
@@ -277,6 +310,31 @@ class Context:
         self.go_out_options: Tuple[go_out.Option, ...] = ()
         self.scenario = Context.SCENARIO_UNKNOWN
 
+        self.grade_point = 0
+        self.shop_coin = 0
+
+        from . import training
+
+        self.training_history = training.History()
+        self.trainings: Tuple[training.Training, ...] = ()
+        self.training_levels: Dict[TrainingType, int] = {}
+
+        from . import race
+
+        self.race_turns: Set[int] = set()
+        self.race_history = race.History()
+
+        from . import item
+
+        self.items = item.ItemList()
+        self.items_last_updated_turn = 0
+        self.item_history = item.History()
+
+    def target_grade_point(self) -> int:
+        if self.date[1:] == (0, 0):
+            return 0
+        return (60, 200, 300, 0)[self.date[0] - 1]
+
     def next_turn(self) -> None:
         if self.date in ((1, 0, 0), (4, 0, 0)):
             self._extra_turn_count += 1
@@ -297,10 +355,7 @@ class Context:
             self.scenario = _recognize_scenario(rp, screenshot)
         if not self.scenario:
             raise ValueError("unknown scenario")
-        date_bbox = {
-            Context.SCENARIO_URA: rp.vector4((10, 27, 140, 43), 466),
-            Context.SCENARIO_AOHARU: rp.vector4((125, 32, 278, 48), 540),
-        }[self.scenario]
+        date_bbox = _date_bbox(self, rp)
         vitality_bbox = rp.vector4((148, 106, 327, 108), 466)
 
         _, detail_button_pos = next(
@@ -314,7 +369,7 @@ class Context:
         guts_bbox = (rp.vector(264, 466), t, rp.vector(308, 466), b)
         wisdom_bbox = (rp.vector(337, 466), t, rp.vector(381, 466), b)
 
-        self.date = _ocr_date(screenshot.crop(date_bbox))
+        self.date = _ocr_date(self, screenshot.crop(date_bbox))
 
         self.vitality = _recognize_vitality(screenshot.crop(vitality_bbox))
 
@@ -391,6 +446,8 @@ class Context:
 
     def __str__(self):
         msg = ""
+        if self.scenario == Context.SCENARIO_CLIMAX:
+            msg += f",pt={self.grade_point},coin={self.shop_coin},items={self.items.quantity()}"
         if self.go_out_options:
             msg += ",go_out="
             msg += " ".join(
@@ -399,10 +456,13 @@ class Context:
                     for i in self.go_out_options
                 )
             )
+        if self.conditions:
+            msg += ",cond="
+            msg += " ".join((condition.get(i).name for i in self.conditions))
         return (
             "Context<"
             f"scenario={self.scenario},"
-            f"turn={self.turn_count()},"
+            f"turn={self.turn_count_v2()},"
             f"mood={self.mood},"
             f"vit={self.vitality:.3f},"
             f"spd={self.speed},"
@@ -413,32 +473,72 @@ class Context:
             f"fan={self.fan_count},"
             f"ground={''.join(i[1] for i in (self.turf, self.dart))},"
             f"distance={''.join(i[1] for i in (self.sprint, self.mile, self.intermediate, self.long))},"
-            f"style={''.join(i[1] for i in (self.last, self.middle, self.head, self.lead))},"
-            f"condition={self.condition}"
+            f"style={''.join(i[1] for i in (self.last, self.middle, self.head, self.lead))}"
             f"{msg}"
             ">"
         )
 
     @property
     def condition(self) -> int:
-        return functools.reduce(lambda a, b: a | b, self.conditions, 0)
+        import warnings
+
+        warnings.warn(
+            "Context.condition is Depreacted, use conditions (with `s`) instead.",
+            DeprecationWarning,
+        )
+        ret = 0
+        if self.CONDITION_HEADACHE in self.conditions:
+            ret |= 1 << 0
+        if self.CONDITION_OVERWEIGHT in self.conditions:
+            ret |= 1 << 1
+        return ret
 
     @condition.setter
     def condition(self, v: int):
+        import warnings
+
+        warnings.warn(
+            "Context.condition is Depreacted, use conditions (with `s`) instead.",
+            DeprecationWarning,
+        )
         self.conditions.clear()
-        for i in (self.CONDITION_HEADACHE, self.CONDITION_OVERWEIGHT):
-            if i & v:
-                self.conditions.add(i)
+        if 1 << 0 & v:
+            self.conditions.add(self.CONDITION_HEADACHE)
+        if 1 << 1 & v:
+            self.conditions.add(self.CONDITION_OVERWEIGHT)
 
     def turn_count(self) -> int:
+        import warnings
+
+        warnings.warn(
+            "use turn_count_v2 instead, date (2,1,1) should be turn 25, not 24.",
+            DeprecationWarning,
+        )
         if self.date == (1, 0, 0):
             return self._extra_turn_count
         if self.date == (4, 0, 0):
             return self._extra_turn_count + 24 * 3
         return (self.date[0] - 1) * 24 + (self.date[1] - 1) * 2 + (self.date[2] - 1)
 
+    def turn_count_v2(self) -> int:
+        if self.date == (1, 0, 0):
+            return self._extra_turn_count
+        if self.date == (4, 0, 0):
+            return self._extra_turn_count + 24 * 3
+        return (self.date[0] - 1) * 24 + (self.date[1] - 1) * 2 + self.date[2]
+
     def total_turn_count(self) -> int:
         return 24 * 3 + 6
+
+    @staticmethod
+    def date_from_turn_count_v2(turn_count: int) -> Tuple[int, int, int]:
+        c = turn_count - 1
+        year = c // 24 + 1
+        c %= 24
+        month = c // 2 + 1
+        c %= 2
+        half = c + 1
+        return (year, month, half)
 
     def continuous_race_count(self) -> int:
         ret = 1
@@ -497,9 +597,9 @@ class Context:
         return expected_score
 
     def to_dict(self) -> Dict[Text, Any]:
-        return {
+        d = {
             "date": self.date,
-            "mood": self.mood,
+            "mood": self.mood.name,
             "scenario": self.scenario,
             "vitality": self.vitality,
             "maxVitality": self.max_vitality,
@@ -519,8 +619,15 @@ class Context:
             "middle": self.middle[1],
             "head": self.head[1],
             "lead": self.lead[1],
-            "condition": self.condition,
+            "conditions": list(self.conditions),
         }
+        if self.scenario == self.SCENARIO_CLIMAX:
+            d["gradePoint"] = self.grade_point
+            d["shopCoin"] = self.shop_coin
+        return d
+
+    def clone(self):
+        return deepcopy(self)
 
     @classmethod
     def status_by_name(cls, name: Text) -> Tuple[int, Text]:
@@ -541,8 +648,17 @@ class Context:
         ret.date = tuple(data["date"])
         ret.vitality = data["vitality"]
         ret.max_vitality = data["maxVitality"]
-        ret.mood = tuple(data["mood"])
-        ret.condition = data["condition"]
+        mood_data = data["mood"]
+        if isinstance(mood_data, list):
+            ret.mood = next(
+                i for i in Mood if [i.training_rate, i.race_rate] == data["mood"]
+            )
+        else:
+            ret.mood = Mood[mood_data]
+        if "condition" in data:
+            ret.condition = data["condition"]
+        else:
+            ret.conditions = set(data["conditions"])
         ret.fan_count = data["fanCount"]
         ret.turf = cls.status_by_name(data["turf"])
         ret.dart = cls.status_by_name(data["dart"])
@@ -555,12 +671,15 @@ class Context:
         ret.middle = cls.status_by_name(data["middle"])
         ret.last = cls.status_by_name(data["last"])
         ret.scenario = data["scenario"]
+        ret.grade_point = data.get("gradePoint", 0)
+        ret.shop_coin = data.get("shopCoin", 0)
 
         return ret
 
 
 g.context_class = Context
 
+# TODO: use label match
 _CONDITION_TEMPLATES = {
     templates.SINGLE_MODE_CONDITION_HEADACHE: Context.CONDITION_HEADACHE,
     templates.SINGLE_MODE_CONDITION_OVERWEIGHT: Context.CONDITION_OVERWEIGHT,

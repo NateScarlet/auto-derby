@@ -1,1 +1,1 @@
-Training<lv=1 fail=0% gut=13 spd=7 pow=7 ski=3 ptn=frd@2,pow@2(16%),sta@2(18%),tm^(50%),tm^(50%)>
+Training<gut=13 spd=7 pow=7 ski=3 vit=-22.0% fail=0% lv=1 ptn=frd@2,pow@2(16%),sta@2(18%),tm^(50%),tm^(50%)>

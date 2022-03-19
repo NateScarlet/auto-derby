@@ -1,0 +1,38 @@
+{
+  "name": "web",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,ts,vue"
+  },
+  "dependencies": {
+    "vue": "^3.2.25",
+    "@mdi/js": "^6.5.95"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.0",
+    "@types/node": "14",
+    "@typescript-eslint/eslint-plugin": "5.13.0",
+    "@typescript-eslint/parser": "5.13.0",
+    "@vitejs/plugin-vue": "^2.2.0",
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-vue": "8.0.3",
+    "prettier": "2.4.1",
+    "sass": "^1.49.9",
+    "tailwindcss": "^3.0.23",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0",
+    "vue-tsc": "^0.29.8"
+  },
+  "bundledDependencies": [
+    "auto-derby"
+  ]
+}

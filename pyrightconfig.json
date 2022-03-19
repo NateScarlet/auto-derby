@@ -1,6 +1,7 @@
 {
-    "reportMissingModuleSource": "none",
-    "exclude": [
-        "*_images.local",
-    ]
+  "reportMissingModuleSource": "none",
+  "pythonVersion": "3.8",
+  "pythonPlatform": "Windows",
+  "include": ["./auto_derby/"],
+  "exclude": [".git", "**/node_modules", "**/__pycache__", "*_images.local"]
 }

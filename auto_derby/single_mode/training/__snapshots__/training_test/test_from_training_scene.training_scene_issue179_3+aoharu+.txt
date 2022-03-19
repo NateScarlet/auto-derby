@@ -1,1 +1,1 @@
-Training<lv=1 fail=26% spd=13 pow=5 ski=2 ptn=sta@2(18%),sta@1^(18%),tm^(0%)>
+Training<spd=13 pow=5 ski=2 vit=-21.0% fail=26% lv=1 ptn=sta@2(18%),sta@1^(18%),tm^(0%)>
