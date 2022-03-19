@@ -313,7 +313,6 @@ def fill_area(
 def show(img: Image, title: Text = "") -> Callable[[], None]:
 
     stop_event = threading.Event()
-    stop_event.is_set()
     _g.window_id += 1
     title = f"{title} - {_g.window_id}"
 
