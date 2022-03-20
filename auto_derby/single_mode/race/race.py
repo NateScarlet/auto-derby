@@ -221,7 +221,7 @@ class Race:
         yield RuningStyle.LAST, last
 
     def _raw_estimate_order(self, ctx: Context) -> int:
-        style_scores = self.style_scores(ctx)
+        style_scores = tuple(i for _, i in self.style_scores_v2(ctx))
         best_style_score = sorted(style_scores, reverse=True)[0]
         estimate_order = math.ceil(
             mathtools.interpolate(
