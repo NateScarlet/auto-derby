@@ -141,7 +141,7 @@ def choose(v: Text, options: Iterable[Text], threshold: float = 0.5) -> Text:
         reverse=True,
     )
     if not option_with_similarites:
-        _LOGGER.warn("choose: empty options")
+        _LOGGER.warning("choose: empty options")
         return v
     res, similarity = option_with_similarites[0]
     _LOGGER.debug(

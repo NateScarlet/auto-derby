@@ -113,7 +113,7 @@ def set_foreground(h_wnd: int) -> None:
     try:
         win32gui.SetForegroundWindow(h_wnd)
     except Exception as ex:
-        LOGGER.warn(
+        LOGGER.warning(
             "set foreground window failed: h_wnd=%s error='%s'",
             h_wnd,
             ex,
