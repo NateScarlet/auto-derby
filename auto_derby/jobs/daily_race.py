@@ -3,7 +3,7 @@
 
 from typing import Text
 
-from .. import action, config, templates
+from .. import action, config, templates, template
 
 
 def daily_race(race_name: Text):
@@ -13,7 +13,7 @@ def daily_race(race_name: Text):
             templates.CONNECTING,
             templates.RETRY_BUTTON,
             templates.DAILY_RACE,
-            templates.DAILY_RACE_HARD,
+            templates.DAILY_RACE_REWARD_CLEAR,
             templates.RACE_START_BUTTON,
             templates.RACE_CONFIRM_BUTTON,
             templates.GREEN_NEXT_BUTTON,
@@ -38,5 +38,10 @@ def daily_race(race_name: Text):
             break
         elif name == templates.LIMITED_SALE_OPEN:
             config.on_limited_sale()
+        elif name == templates.DAILY_RACE_REWARD_CLEAR:
+            _, pos = sorted(
+                template.match(template.screenshot(), tmpl), key=lambda x: x[1]
+            )[0]
+            action.tap(pos)
         else:
             action.tap(pos)
