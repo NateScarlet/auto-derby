@@ -9,15 +9,20 @@
     "lint": "eslint . --ext js,ts,vue"
   },
   "dependencies": {
-    "vue": "^3.2.25",
-    "@mdi/js": "^6.5.95"
+    "@mdi/js": "^6.5.95",
+    "vue": "^3.2.25"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
     "@tailwindcss/forms": "^0.5.0",
+    "@types/babel__core": "^7.1.18",
     "@types/node": "14",
     "@typescript-eslint/eslint-plugin": "5.13.0",
     "@typescript-eslint/parser": "5.13.0",
     "@vitejs/plugin-vue": "^2.2.0",
+    "autoprefixer": "^10.4.4",
+    "cheerio": "^1.0.0-rc.10",
     "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.4.0",
@@ -25,6 +30,7 @@
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-vue": "8.0.3",
+    "postcss": "^8.4.12",
     "prettier": "2.4.1",
     "sass": "^1.49.9",
     "tailwindcss": "^3.0.23",

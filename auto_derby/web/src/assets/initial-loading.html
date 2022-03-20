@@ -1,0 +1,39 @@
+<div
+  style="
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  "
+>
+  <style>
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <svg
+    style="display: block; fill: currentColor; height: 4rem; color: #718096"
+    viewBox="0 0 24 24"
+  >
+    <path
+      style="
+        display: inline-block;
+        transform-origin: center;
+        animation: spin 1s linear infinite;
+      "
+      id="loading-icon-svg-path"
+      d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"
+    ></path>
+  </svg>
+  <p style="font-size: 1.25rem; font-weight: 700">Loading...</p>
+</div>
