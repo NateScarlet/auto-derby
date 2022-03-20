@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.0](https://github.com/NateScarlet/auto-derby/compare/v1.16.0...v1.17.0) (2022-03-20)
+
+### Features
+
+- **daily-race:** select topmost cleared race ([f88ba95](https://github.com/NateScarlet/auto-derby/commit/f88ba95c940be3396f0e49a7ba08b1a2acb4a039)), closes [#249](https://github.com/NateScarlet/auto-derby/issues/249) [#34](https://github.com/NateScarlet/auto-derby/issues/34)
+- **web:** add browser check ([2333f36](https://github.com/NateScarlet/auto-derby/commit/2333f364d926ac17177e9b7e0196b7d9bf12b4d4))
+
+### Bug Fixes
+
+- **limited-sale:** swipe may cause click on exchange button ([4e30647](https://github.com/NateScarlet/auto-derby/commit/4e306476e8fbfc7a42eeb4a2f216f3d0184ba3b1))
+- **single-mode:** error while recognizing go out menu ([57e7c4b](https://github.com/NateScarlet/auto-derby/commit/57e7c4bd00fd94b54c9bf251d93483bce3baa9ce))
+
 ## [1.16.0](https://github.com/NateScarlet/auto-derby/compare/v1.15.4...v1.16.0) (2022-03-19)
 
 ### Features
