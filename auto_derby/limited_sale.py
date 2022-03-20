@@ -24,7 +24,11 @@ def buy_first_n(n: int) -> None:
         item_count += 1
         if n > 0 and item_count >= n:
             break
-        action.swipe(pos, dy=rp.vector(-40, 540), duration=0.2)
+        action.swipe(
+            rp.vector2((17, 540), 540),
+            dy=rp.vector(-40, 540),
+            duration=0.2,
+        )
 
     action.wait_tap_image(templates.CLOSE_NOW_BUTTON)
     action.wait_tap_image(templates.GREEN_OK_BUTTON)
