@@ -46,16 +46,19 @@ def iterate(
             s_current += s
             items_current += (i,)
 
-            yield _with_log((s_current, items_current))
+            s_best, items_best = _with_log((s_current, items_current))
             for sub_plan in iterate(
                 ctx,
                 command,
                 (*items[:index], *items[index + 1 :]),
                 es_after,
             ):
-                s_sub, items_s = sub_plan
-                if items_s:
-                    yield _with_log((s_current + s_sub, (*items_current, *items_s)))
+                s_sub, items_sub = _with_log(
+                    (s_current + sub_plan[0], (*items_current, *sub_plan[1]))
+                )
+                if s_sub > s_best:
+                    s_best, items_best = s_sub, items_sub
+            yield s_best, items_best
 
     return
 
