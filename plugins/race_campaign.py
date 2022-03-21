@@ -143,31 +143,73 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# https://dmg.umamusume.jp/news/detail/?id=616
-# GIキャンペーン
+# https://dmg.umamusume.jp/news/detail?id=669
+# 春のGⅠキャンペーン第1弾
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 2, 14, 11, 0, tzinfo=JST),
-        datetime.datetime(2022, 2, 21, 3, 59, tzinfo=JST),
-        "東海ステークス",
+        datetime.datetime(2022, 3, 21, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 3, 28, 3, 59, tzinfo=JST),
+        "高松宮記念",
         order_lte=1,
     ),
 )
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 2, 14, 11, 0, tzinfo=JST),
-        datetime.datetime(2022, 2, 21, 3, 59, tzinfo=JST),
-        "根岸ステークス",
+        datetime.datetime(2022, 3, 21, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 3, 28, 3, 59, tzinfo=JST),
+        "オーシャンステークス",
+        order_lte=1,
+    ),
+)
+
+
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2022, 3, 21, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 3, 28, 3, 59, tzinfo=JST),
+        "阪急杯",
+        order_lte=1,
+    ),
+)
+
+
+# 「育成報酬」ピース追加キャンペーン
+
+_add_compagin(
+    OncePerDayCampaign(
+        datetime.datetime(2022, 3, 26, 5, 0, tzinfo=JST),
+        datetime.datetime(2022, 3, 28, 4, 59, tzinfo=JST),
+        "高松宮記念",
         order_lte=1,
     ),
 )
 
 _add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2022, 2, 14, 11, 0, tzinfo=JST),
-        datetime.datetime(2022, 2, 21, 3, 59, tzinfo=JST),
-        "フェブラリーステークス",
+    OncePerDayCampaign(
+        datetime.datetime(2022, 4, 2, 5, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 4, 4, 59, tzinfo=JST),
+        "大阪杯",
+        order_lte=1,
+    ),
+)
+
+
+_add_compagin(
+    OncePerDayCampaign(
+        datetime.datetime(2022, 4, 9, 5, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 11, 4, 59, tzinfo=JST),
+        "桜花賞",
+        order_lte=1,
+    ),
+)
+
+
+_add_compagin(
+    OncePerDayCampaign(
+        datetime.datetime(2022, 4, 16, 5, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 18, 4, 59, tzinfo=JST),
+        "皐月賞",
         order_lte=1,
     ),
 )
