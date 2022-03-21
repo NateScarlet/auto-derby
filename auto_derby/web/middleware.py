@@ -27,12 +27,24 @@ class Blob(Middleware):
 
 
 class File(Middleware):
+    if not mimetypes.inited:
+        mimetypes.init()  # try to read system mime.types
+    extensions_map = mimetypes.types_map.copy()
+    extensions_map.update(
+        {
+            "": "application/octet-stream",  # Default
+            ".js": "application/javascript",
+        }
+    )
+
     def __init__(self, path: Text, mimetype: Text = "") -> None:
         super().__init__()
         self.path = path
         mt = mimetype
         if not mt:
-            mt = mimetypes.types_map.get(os.path.splitext(path)[1]) or mt
+            mt = self.extensions_map.get(
+                os.path.splitext(path)[1].lower(), self.extensions_map[""]
+            )
         self.mimetype = mt
 
     def handle(self, ctx: Context, next: Handler) -> None:
