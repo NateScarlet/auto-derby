@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.17.0"
-RELEASE_DATE = datetime.fromtimestamp(1647789598)
-LAST_GIT_COMMIT_DESCRIBE = "v1.16.0-7-g57e7c4b"
-LAST_GIT_COMMIT_HASH = "57e7c4bd00fd94b54c9bf251d93483bce3baa9ce"
+VERSION = "1.17.1"
+RELEASE_DATE = datetime.fromtimestamp(1647874656)
+LAST_GIT_COMMIT_DESCRIBE = "v1.17.0-3-g6ed97bf"
+LAST_GIT_COMMIT_HASH = "6ed97bfdd69e037847fd8273a75f5891ccc41a91"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1647789375)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error while recognizing go out menu"
-LAST_GIT_COMMIT_BODY = ""
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1647874547)
+LAST_GIT_COMMIT_SUBJECT = "fix(web): should ignore system mimetype setting for javascript"
+LAST_GIT_COMMIT_BODY = "fix #265"

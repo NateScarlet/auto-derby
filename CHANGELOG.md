@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.1](https://github.com/NateScarlet/auto-derby/compare/v1.17.0...v1.17.1) (2022-03-21)
+
+### Bug Fixes
+
+- **plugin:** race_campaign: update data ([e3b8ab8](https://github.com/NateScarlet/auto-derby/commit/e3b8ab87768b6de20d6a3bd23954725ff8082851))
+- **web:** should ignore system mimetype setting for javascript ([6ed97bf](https://github.com/NateScarlet/auto-derby/commit/6ed97bfdd69e037847fd8273a75f5891ccc41a91)), closes [#265](https://github.com/NateScarlet/auto-derby/issues/265)
+
+### Performance
+
+- **single-mode:** improve item plan algorithm ([d9aaab5](https://github.com/NateScarlet/auto-derby/commit/d9aaab5a49520fc529d26d73f04ad2cc7007e0d3))
+
 ## [1.17.0](https://github.com/NateScarlet/auto-derby/compare/v1.16.0...v1.17.0) (2022-03-20)
 
 ### Features
