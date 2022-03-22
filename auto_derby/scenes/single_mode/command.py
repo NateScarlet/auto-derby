@@ -39,10 +39,10 @@ def _recognize_climax_grade_point(ctx: Context):
     img = imagetools.resize(img, height=32)
     cv_img = imagetools.cv_image(img.convert("L"))
     _, binary_img = cv2.threshold(
-        255 - cv_img,
-        0,
+        cv_img,
+        130,
         255,
-        type=cv2.THRESH_OTSU,
+        type=cv2.THRESH_BINARY_INV,
     )
 
     if os.getenv("DEBUG") == __name__ + "[grade_point]":

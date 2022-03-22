@@ -1,0 +1,38 @@
+{
+  "ctx": {
+    "date": [
+      2,
+      10,
+      2
+    ],
+    "mood": "BAD",
+    "scenario": "Make a new track!!  ～クライマックス開幕～",
+    "vitality": 0.09661835748792269,
+    "maxVitality": 100,
+    "speed": 616,
+    "stamina": 393,
+    "power": 524,
+    "guts": 268,
+    "wisdom": 325,
+    "fanCount": 0,
+    "turf": "",
+    "dart": "",
+    "sprint": "",
+    "mile": "",
+    "intermediate": "",
+    "long": "",
+    "last": "",
+    "middle": "",
+    "head": "",
+    "lead": "",
+    "conditions": [],
+    "gradePoint": 1104,
+    "shopCoin": 380
+  },
+  "scene": {
+    "hasHealthCare": false,
+    "hasScheduledRace": false,
+    "canGoOutWithFriend": true,
+    "hasShop": true
+  }
+}
