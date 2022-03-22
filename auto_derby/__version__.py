@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.17.1"
-RELEASE_DATE = datetime.fromtimestamp(1647874656)
-LAST_GIT_COMMIT_DESCRIBE = "v1.17.0-3-g6ed97bf"
-LAST_GIT_COMMIT_HASH = "6ed97bfdd69e037847fd8273a75f5891ccc41a91"
+VERSION = "1.17.2"
+RELEASE_DATE = datetime.fromtimestamp(1647956745)
+LAST_GIT_COMMIT_DESCRIBE = "v1.17.1-1-g671c68b"
+LAST_GIT_COMMIT_HASH = "671c68bb7e26a582b09afba961918cf62ecd9989"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1647874547)
-LAST_GIT_COMMIT_SUBJECT = "fix(web): should ignore system mimetype setting for javascript"
-LAST_GIT_COMMIT_BODY = "fix #265"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1647956347)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error while recognizing command scene"
+LAST_GIT_COMMIT_BODY = "fix #266"

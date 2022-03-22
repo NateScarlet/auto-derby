@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.2](https://github.com/NateScarlet/auto-derby/compare/v1.17.1...v1.17.2) (2022-03-22)
+
+### Bug Fixes
+
+- **single-mode:** error while recognizing command scene ([671c68b](https://github.com/NateScarlet/auto-derby/commit/671c68bb7e26a582b09afba961918cf62ecd9989)), closes [#266](https://github.com/NateScarlet/auto-derby/issues/266)
+
 ## [1.17.1](https://github.com/NateScarlet/auto-derby/compare/v1.17.0...v1.17.1) (2022-03-21)
 
 ### Bug Fixes
