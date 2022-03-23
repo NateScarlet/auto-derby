@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.17.2"
-RELEASE_DATE = datetime.fromtimestamp(1647956745)
-LAST_GIT_COMMIT_DESCRIBE = "v1.17.1-1-g671c68b"
-LAST_GIT_COMMIT_HASH = "671c68bb7e26a582b09afba961918cf62ecd9989"
+VERSION = "1.17.3"
+RELEASE_DATE = datetime.fromtimestamp(1648035747)
+LAST_GIT_COMMIT_DESCRIBE = "v1.17.2-1-g6cceec8"
+LAST_GIT_COMMIT_HASH = "6cceec8b749ecf1b7c68b6c2ddac0ab627ffcb14"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1647956347)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): error while recognizing command scene"
-LAST_GIT_COMMIT_BODY = "fix #266"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1648035401)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): wrong effect summary for "健康祈願のお守り""
+LAST_GIT_COMMIT_BODY = ""

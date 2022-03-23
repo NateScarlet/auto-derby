@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.3](https://github.com/NateScarlet/auto-derby/compare/v1.17.2...v1.17.3) (2022-03-23)
+
+### Bug Fixes
+
+- **single-mode:** wrong effect summary for "健康祈願のお守り" ([6cceec8](https://github.com/NateScarlet/auto-derby/commit/6cceec8b749ecf1b7c68b6c2ddac0ab627ffcb14))
+
 ## [1.17.2](https://github.com/NateScarlet/auto-derby/compare/v1.17.1...v1.17.2) (2022-03-22)
 
 ### Bug Fixes
