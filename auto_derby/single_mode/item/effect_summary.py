@@ -53,15 +53,6 @@ class Buff:
         self.priority = priority
         self.unique_key = unique_key
 
-    def apply_to(self: T, s: Sequence[T]) -> Sequence[T]:
-        if any(
-            i
-            for i in s
-            if i.unique_key == self.unique_key and i.priority > self.priority
-        ):
-            return s
-        return (*(i for i in s if i.unique_key != self.unique_key), self)
-
 
 class BuffList:
     def __init__(self, v: Iterable[Buff] = ()) -> None:
