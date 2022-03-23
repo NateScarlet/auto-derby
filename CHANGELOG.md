@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.4](https://github.com/NateScarlet/auto-derby/compare/v1.17.3...v1.17.4) (2022-03-23)
+
+### Bug Fixes
+
+- invalid syntax in **version**.py ([459a223](https://github.com/NateScarlet/auto-derby/commit/459a2231db8a02263cb5c942da8a14a74fb68b59))
+
 ## [1.17.3](https://github.com/NateScarlet/auto-derby/compare/v1.17.2...v1.17.3) (2022-03-23)
 
 ### Bug Fixes
