@@ -54,5 +54,13 @@
     "guts-10": "Training<gut=7 vit=-33.3% fail=5% lv=0>",
     "wisdom-10": "Training<wis=10 vit=10.0% fail=2% lv=0>",
     "speed-10-fail-40": "Training<spd=10 vit=-30.0% fail=40% lv=0>"
+  },
+  "健康祈願のお守り": {
+    "speed-10": "Training<spd=10 vit=-30.0% fail=5% lv=0>",
+    "stamina-10": "Training<sta=10 vit=-30.0% fail=5% lv=0>",
+    "power-10": "Training<pow=10 vit=-30.0% fail=5% lv=0>",
+    "guts-10": "Training<gut=10 vit=-40.0% fail=5% lv=0>",
+    "wisdom-10": "Training<wis=10 vit=10.0% fail=2% lv=0>",
+    "speed-10-fail-40": "Training<spd=10 vit=-30.0% fail=40% lv=0>"
   }
 }

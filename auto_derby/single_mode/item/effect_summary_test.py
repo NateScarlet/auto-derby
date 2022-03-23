@@ -27,7 +27,9 @@ def test_apply_to_training():
                     for t_name, t in test_sample.trainings()
                 }
                 for name, es in _iter_effect_summarys()
-                if es.training_effect_buff or es.training_vitality_debuff
+                if es.training_effect_buff
+                or es.training_vitality_debuff
+                or es.training_no_failure
             },
             name=name,
         )
@@ -41,7 +43,9 @@ def test_reduce_on_training():
                 for t_name, t in test_sample.trainings()
             }
             for name, es in _iter_effect_summarys()
-            if es.training_effect_buff or es.training_vitality_debuff
+            if es.training_effect_buff
+            or es.training_vitality_debuff
+            or es.training_no_failure
         },
     )
 
