@@ -744,7 +744,9 @@ class TrainingScene(Scene):
                     for j in _iter_training_images()
                 ]
             )
-        assert len(set(i.type for i in self.trainings)) == len(self.trainings), "duplicated trainings"
+        assert len(set(i.type for i in self.trainings)) == len(
+            self.trainings
+        ), "duplicated trainings"
         ctx.trainings = self.trainings
         if not ctx.is_summer_camp:
             ctx.training_levels = {i.type: i.level for i in self.trainings}
