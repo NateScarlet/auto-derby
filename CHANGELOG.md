@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.5](https://github.com/NateScarlet/auto-derby/compare/v1.17.4...v1.17.5) (2022-03-24)
+
+### Bug Fixes
+
+- **single-mode:** handle locked training ([5ed76e4](https://github.com/NateScarlet/auto-derby/commit/5ed76e4e19002ff70eb75180fe0e6a39009bf454))
+
 ## [1.17.4](https://github.com/NateScarlet/auto-derby/compare/v1.17.3...v1.17.4) (2022-03-23)
 
 ### Bug Fixes
