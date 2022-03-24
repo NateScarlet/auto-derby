@@ -295,6 +295,9 @@ def _iter_training_images():
     radius = rp.vector(30, 540)
     _, first_confirm_pos = action.wait_image(_TRAINING_CONFIRM)
     yield template.screenshot()
+    seen_confirm_pos = {
+        first_confirm_pos,
+    }
     for pos in (
         rp.vector2((78, 850), 540),
         rp.vector2((171, 850), 540),
@@ -305,8 +308,10 @@ def _iter_training_images():
         if mathtools.distance(first_confirm_pos, pos) < radius:
             continue
         action.tap(pos)
-        action.wait_image(_TRAINING_CONFIRM)
-        yield template.screenshot()
+        _, pos = action.wait_image(_TRAINING_CONFIRM)
+        if pos not in seen_confirm_pos:
+            yield template.screenshot()
+            seen_confirm_pos.add(pos)
 
 
 def _recognize_type_color(rp: mathtools.ResizeProxy, icon_img: Image) -> int:
