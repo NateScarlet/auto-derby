@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.17.5"
-RELEASE_DATE = datetime.fromtimestamp(1648134553)
-LAST_GIT_COMMIT_DESCRIBE = "v1.17.4-2-g5ed76e4"
-LAST_GIT_COMMIT_HASH = "5ed76e4e19002ff70eb75180fe0e6a39009bf454"
+VERSION = "1.17.6"
+RELEASE_DATE = datetime.fromtimestamp(1648134835)
+LAST_GIT_COMMIT_DESCRIBE = "v1.17.5-1-gba20354"
+LAST_GIT_COMMIT_HASH = "ba203545aac55064d16a166da8e924b26e850e97"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1648134448)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): handle locked training"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1648134806)
+LAST_GIT_COMMIT_SUBJECT = "fix: wrong training length assertion"
 LAST_GIT_COMMIT_BODY = ""

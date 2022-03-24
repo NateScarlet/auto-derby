@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.6](https://github.com/NateScarlet/auto-derby/compare/v1.17.5...v1.17.6) (2022-03-24)
+
+### Bug Fixes
+
+- wrong training length assertion ([ba20354](https://github.com/NateScarlet/auto-derby/commit/ba203545aac55064d16a166da8e924b26e850e97))
+
 ## [1.17.5](https://github.com/NateScarlet/auto-derby/compare/v1.17.4...v1.17.5) (2022-03-24)
 
 ### Bug Fixes
