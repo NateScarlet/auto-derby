@@ -49,7 +49,7 @@ def _recognize_base_effect(img: Image) -> int:
     )
     white_outline_img = cv2.morphologyEx(
         white_outline_img,
-        cv2.MORPH_DILATE,
+        cv2.MORPH_CLOSE,
         cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3)),
     )
 
