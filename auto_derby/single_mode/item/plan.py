@@ -24,11 +24,6 @@ def iterate(
     items: Sequence[Item],
     summary: EffectSummary,
 ) -> Iterator[Plan]:
-    def _with_log(p: Plan):
-        _LOGGER.debug("score: %.2f: %s", p[0], ",".join(i.name for i in p[1]))
-        return p
-
-    yield (0, ())
     for index, item in enumerate(items):
         s_current = 0
         items_current: Sequence[Item] = ()
@@ -46,28 +41,30 @@ def iterate(
             s_current += s
             items_current += (i,)
 
-            s_best, items_best = _with_log((s_current, items_current))
+            yield (s_current, items_current)
             for sub_plan in iterate(
                 ctx,
                 command,
                 (*items[:index], *items[index + 1 :]),
                 es_after,
             ):
-                s_sub, items_sub = _with_log(
-                    (s_current + sub_plan[0], (*items_current, *sub_plan[1]))
-                )
-                if s_sub > s_best:
-                    s_best, items_best = s_sub, items_sub
-            yield s_best, items_best
-
-    return
+                yield ((s_current + sub_plan[0], (*items_current, *sub_plan[1])))
 
 
 def compute(
     ctx: Context,
     command: Command,
 ) -> Plan:
-    return sorted(
-        iterate(ctx, command, tuple(ctx.items), EffectSummary()),
-        key=lambda x: (-x[0], sum(i.original_price for i in x[1])),
-    )[0]
+    _LOGGER.debug("start compute for: %s", command)
+    plan: Plan = (0, ())
+    for score, items in iterate(ctx, command, tuple(ctx.items), EffectSummary()):
+        if score < plan[0]:
+            continue
+        if score == plan[0] and sum(i.original_price for i in items) >= sum(
+            i.original_price for i in plan[1]
+        ):
+            continue
+
+        plan = (score, items)
+        _LOGGER.debug("score: %.2f: %s", score, ",".join(i.name for i in items))
+    return plan
