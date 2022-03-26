@@ -290,11 +290,13 @@ def _estimate_vitality(ctx: Context, trn: Training) -> float:
     return vit_data[trn.type][trn.level - 1] / ctx.max_vitality
 
 
-def _iter_training_images():
+def _iter_training_images(static: bool):
     rp = action.resize_proxy()
     radius = rp.vector(30, 540)
     _, first_confirm_pos = action.wait_image(_TRAINING_CONFIRM)
     yield template.screenshot()
+    if static:
+        return
     seen_confirm_pos = {
         first_confirm_pos,
     }
@@ -735,13 +737,13 @@ class TrainingScene(Scene):
         ctx.scenario = ctx.SCENARIO_URA
         return self.recognize_v2(ctx)
 
-    def recognize_v2(self, ctx: Context) -> None:
+    def recognize_v2(self, ctx: Context, static: bool = False) -> None:
         with futures.ThreadPoolExecutor() as pool:
             self.trainings = tuple(
                 i.result()
                 for i in [
                     pool.submit(_recognize_training, ctx, j)
-                    for j in _iter_training_images()
+                    for j in _iter_training_images(static)
                 ]
             )
         assert len(set(i.type for i in self.trainings)) == len(

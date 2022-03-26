@@ -1,1 +1,0 @@
-Training<spd=26 pow=14 ski=3 vit=-27.0% fail=0% lv=5 ptn=spd@4>
