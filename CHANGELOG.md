@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/NateScarlet/auto-derby/compare/v1.17.6...v1.18.0) (2022-03-26)
+
+### Features
+
+- **plugin:** add `no_race_retry` plugin ([25a520f](https://github.com/NateScarlet/auto-derby/commit/25a520f198d56733ebdbd2c55fb08a09f78fa24d)), closes [#269](https://github.com/NateScarlet/auto-derby/issues/269)
+- **single-mode:** not log item score by default ([e39ac0b](https://github.com/NateScarlet/auto-derby/commit/e39ac0b950cae1d10176fe76d3cbf7ba684e7b8c))
+- **single-mode:** predefine item use order ([8cfbedc](https://github.com/NateScarlet/auto-derby/commit/8cfbedc8086a6903ad80fc2e116f0cd25e555485)), closes [#272](https://github.com/NateScarlet/auto-derby/issues/272)
+
+### Bug Fixes
+
+- **single-mode:** error while recognizing training scene ([e99cd20](https://github.com/NateScarlet/auto-derby/commit/e99cd208630191b1c0e959779092fac0df41cffb)), closes [#271](https://github.com/NateScarlet/auto-derby/issues/271)
+
+### Performance
+
+- **single-mode:** reduce item plan log ([5ae2195](https://github.com/NateScarlet/auto-derby/commit/5ae21952fe2dd269c97ef8ec7a1d28481c839c30)), closes [#272](https://github.com/NateScarlet/auto-derby/issues/272)
+
 ## [1.17.6](https://github.com/NateScarlet/auto-derby/compare/v1.17.5...v1.17.6) (2022-03-24)
 
 ### Bug Fixes
