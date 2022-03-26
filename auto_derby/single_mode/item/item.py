@@ -141,7 +141,7 @@ class Item:
         if s:
             explain = "{s:.2f} by max vitality"
 
-        if explain:
+        if g.explain_score and explain:
             _LOGGER.debug(
                 "%s effect score: %.2f for %s: %s", self, ret, command, explain
             )
@@ -181,7 +181,7 @@ class Item:
             explain += f"{r*100:+.0f}% by quantity;"
             ret *= 1 + r
 
-        if explain:
+        if g.explain_score and explain:
             _LOGGER.debug("%s expected effect score: %.2f: %s", self, ret, explain)
         assert ret >= 0, ret
         return ret
@@ -380,7 +380,7 @@ class Item:
             explain += f"{r*100:+.0f}% by quantity;"
             ret *= 1 + r
 
-        if explain:
+        if g.explain_score and explain:
             _LOGGER.debug("%s exchange score: %.2f: %s", self, ret, explain)
         return ret
 
@@ -417,7 +417,7 @@ class Item:
             explain += f"{r*100:+.0f}% by turns;"
             ret *= 1 + r
 
-        if explain:
+        if g.explain_score and explain:
             _LOGGER.debug("%s expected exchange score: %.2f: %s", self, ret, explain)
         assert ret >= 0, ret
         return ret
