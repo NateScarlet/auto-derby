@@ -10,6 +10,7 @@ from ... import _test
 
 g.explain_score = True
 
+
 def test_duplicated_effect():
     ctx = test_sample.simple_context()
     ctx.date = (4, 0, 0)
