@@ -26,6 +26,16 @@ class _PromptMiddleware(handler.Middleware):
         if ctx.path != "/":
             return next(ctx)
         if ctx.method == "GET":
+            # XXX: chrome memory cache not respect Cache-Control
+            if "Chrome/" in ctx.request_headers.get(
+                "User-Agent"
+            ) and "memory_cache" not in ctx.params("prevent"):
+                ctx.set_header(
+                    "location",
+                    "/?" + (ctx.query + "&" if ctx.query else "") + "prevent=memory_cache",
+                )
+                ctx.send_text(http.HTTPStatus.TEMPORARY_REDIRECT, "redirect")
+                return
             ctx.set_header("Cache-Control", "no-store")
             ctx.send_html(http.HTTPStatus.OK, self.html)
         elif ctx.method == "POST":
