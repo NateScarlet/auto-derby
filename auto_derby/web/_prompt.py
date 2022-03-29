@@ -32,7 +32,9 @@ class _PromptMiddleware(handler.Middleware):
             ) and "memory_cache" not in ctx.params("prevent"):
                 ctx.set_header(
                     "location",
-                    "/?" + (ctx.query + "&" if ctx.query else "") + "prevent=memory_cache",
+                    "/?"
+                    + (ctx.query + "&" if ctx.query else "")
+                    + "prevent=memory_cache",
                 )
                 ctx.send_text(http.HTTPStatus.TEMPORARY_REDIRECT, "redirect")
                 return
