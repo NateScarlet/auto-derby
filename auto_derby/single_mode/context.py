@@ -151,7 +151,7 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
     text_img = cv2.medianBlur(text_img, 5)
     h = cv_img.shape[0]
     imagetools.fill_area(
-        text_img, (0,), mode=cv2.RETR_LIST, size_lt=round(h * 0.2 ** 2)
+        text_img, (0,), mode=cv2.RETR_LIST, size_lt=round(h * 0.2**2)
     )
 
     if os.getenv("DEBUG") == __name__:

@@ -205,7 +205,7 @@ def _recognize_red_effect(img: Image) -> int:
     )
     text_img = np.array(np.maximum(text_img_base, text_img_extra))
     h = cv_img.shape[0]
-    imagetools.fill_area(text_img, (0,), size_lt=round(h * 0.2 ** 2))
+    imagetools.fill_area(text_img, (0,), size_lt=round(h * 0.2**2))
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
