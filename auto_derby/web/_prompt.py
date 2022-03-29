@@ -10,7 +10,7 @@ import logging
 import os
 import webbrowser
 from typing import Any, Dict, Optional, Protocol, Text
-
+import time
 from . import handler
 from .context import Context
 
@@ -94,6 +94,8 @@ class _DefaultWebview(Webview):
         win32api.keybd_event(VK_W, 0, 0, 0)
         win32api.keybd_event(win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
         win32api.keybd_event(VK_W, 0, win32con.KEYEVENTF_KEYUP, 0)
+
+        time.sleep(0.1) # wait chrome response
 
         try:
             import win32gui
