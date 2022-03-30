@@ -143,37 +143,6 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# https://dmg.umamusume.jp/news/detail?id=669
-# 春のGⅠキャンペーン第1弾
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2022, 3, 21, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 3, 28, 3, 59, tzinfo=JST),
-        "高松宮記念",
-        order_lte=1,
-    ),
-)
-
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2022, 3, 21, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 3, 28, 3, 59, tzinfo=JST),
-        "オーシャンステークス",
-        order_lte=1,
-    ),
-)
-
-
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2022, 3, 21, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 3, 28, 3, 59, tzinfo=JST),
-        "阪急杯",
-        order_lte=1,
-    ),
-)
-
-
 # 「育成報酬」ピース追加キャンペーン
 
 _add_compagin(
@@ -210,6 +179,35 @@ _add_compagin(
         datetime.datetime(2022, 4, 16, 5, 0, tzinfo=JST),
         datetime.datetime(2022, 4, 18, 4, 59, tzinfo=JST),
         "皐月賞",
+        order_lte=1,
+    ),
+)
+
+# 春のGⅠ記念ミッション　第１弾 大阪杯
+
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2022, 3, 28, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 4, 3, 59, tzinfo=JST),
+        "中山記念",
+        order_lte=1,
+    ),
+)
+
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2022, 3, 28, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 4, 3, 59, tzinfo=JST),
+        "金鯱賞",
+        order_lte=1,
+    ),
+)
+
+_add_compagin(
+    OneTimeCampaign(
+        datetime.datetime(2022, 3, 28, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 4, 3, 59, tzinfo=JST),
+        "大阪杯",
         order_lte=1,
     ),
 )
