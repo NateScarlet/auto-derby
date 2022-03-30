@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.19.0](https://github.com/NateScarlet/auto-derby/compare/v1.18.0...v1.19.0) (2022-03-30)
+
+### Features
+
+- **single-mode:** error while recognizing training scene ([d8040f3](https://github.com/NateScarlet/auto-derby/commit/d8040f3554fc4b3d2707e64f4200b4f3a5058dd6)), closes [#277](https://github.com/NateScarlet/auto-derby/issues/277)
+- **single-mode:** not ignore training command when failure rate can be improved by item ([f2a8892](https://github.com/NateScarlet/auto-derby/commit/f2a889289f31251669e2bcb5a9b59cb94c987daf))
+
+### Bug Fixes
+
+- **plugin:** race_campaign: update data ([119f6e8](https://github.com/NateScarlet/auto-derby/commit/119f6e8737405c40efb37eb8a6ba9a7380e230ef))
+- **single-mode:** update template for race commnad ([b353102](https://github.com/NateScarlet/auto-derby/commit/b35310267b3f016388c4bb2722080f5c7b3547b0)), closes [#276](https://github.com/NateScarlet/auto-derby/issues/276)
+- **web:** chrome tab not closed after shutdown ([1f90ae8](https://github.com/NateScarlet/auto-derby/commit/1f90ae8bcb868eb00ffdb2cb929af75569439803))
+- **web:** prevent chrome memory cache ([d450646](https://github.com/NateScarlet/auto-derby/commit/d450646b10219374524738246869e8f9808c4db1))
+
 ## [1.18.0](https://github.com/NateScarlet/auto-derby/compare/v1.17.6...v1.18.0) (2022-03-26)
 
 ### Features
