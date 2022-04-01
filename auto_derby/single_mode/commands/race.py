@@ -68,7 +68,8 @@ def _handle_race_result(ctx: Context, race: Race):
         )
         action.tap(pos)
         if tmpl.name != templates.CLOSE_BUTTON:
-            action.wait_tap_image(templates.CLOSE_BUTTON)
+            _, pos = action.wait_image_stable(templates.CLOSE_BUTTON)
+            action.tap(pos)
 
     tmpl, pos = action.wait_image_stable(
         templates.GREEN_NEXT_BUTTON,
