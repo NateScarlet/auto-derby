@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/NateScarlet/auto-derby/compare/v1.19.0...v1.20.0) (2022-04-04)
+
+### Features
+
+- **single-mode:** adjust training score ([0a3e645](https://github.com/NateScarlet/auto-derby/commit/0a3e645922d8ec4e7635eab7cade3dd25f4cee0c))
+
+### Bug Fixes
+
+- **single-mode:** should wait close button animation after race ([6061217](https://github.com/NateScarlet/auto-derby/commit/60612175dc91eda023cd1a4ac41c97f5611bfae8)), closes [#279](https://github.com/NateScarlet/auto-derby/issues/279)
+
 ## [1.19.0](https://github.com/NateScarlet/auto-derby/compare/v1.18.0...v1.19.0) (2022-03-30)
 
 ### Features

@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.19.0"
-RELEASE_DATE = datetime.fromtimestamp(1648658289)
-LAST_GIT_COMMIT_DESCRIBE = "v1.18.0-9-gef064fe"
-LAST_GIT_COMMIT_HASH = "ef064fe867daa03075d764d1ae7bd4406e92d186"
+VERSION = "1.20.0"
+RELEASE_DATE = datetime.fromtimestamp(1649052169)
+LAST_GIT_COMMIT_DESCRIBE = "v1.19.0-3-g0a3e645"
+LAST_GIT_COMMIT_HASH = "0a3e645922d8ec4e7635eab7cade3dd25f4cee0c"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1648651427)
-LAST_GIT_COMMIT_SUBJECT = "style: format with black"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1648969977)
+LAST_GIT_COMMIT_SUBJECT = "feat(single-mode): adjust training score"
 LAST_GIT_COMMIT_BODY = ""
