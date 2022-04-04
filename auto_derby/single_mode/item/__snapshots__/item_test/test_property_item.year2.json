@@ -15,7 +15,7 @@
     "shouldUseDirectly": true
   },
   "根性のメモ帳": {
-    "exchange": 2.985,
+    "exchange": 3.99,
     "expectedExchange": 12.6,
     "shouldUseDirectly": true
   },
@@ -40,7 +40,7 @@
     "shouldUseDirectly": true
   },
   "根性戦術書": {
-    "exchange": 6.894999999999999,
+    "exchange": 9.263333333333332,
     "expectedExchange": 15.399999999999999,
     "shouldUseDirectly": true
   },
@@ -65,7 +65,7 @@
     "shouldUseDirectly": true
   },
   "根性秘伝書": {
-    "exchange": 14.474999999999998,
+    "exchange": 19.65,
     "expectedExchange": 23.799999999999997,
     "shouldUseDirectly": true
   },
@@ -105,12 +105,12 @@
     "shouldUseDirectly": true
   },
   "プレーンカップケーキ": {
-    "exchange": 1.0370666666666652,
+    "exchange": 1.1858999999999993,
     "expectedExchange": 23.799999999999997,
     "shouldUseDirectly": false
   },
   "スイートカップケーキ": {
-    "exchange": 2.071539999999998,
+    "exchange": 2.3682566666666656,
     "expectedExchange": 37.8,
     "shouldUseDirectly": false
   }

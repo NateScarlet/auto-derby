@@ -1,6 +1,6 @@
 {
   "チアメガホン": {
-    "exchange": 1.6745333333333332,
+    "exchange": 2.2571208333333326,
     "expectedExchange": 16.8,
     "shouldUseDirectly": false,
     "training": {
@@ -17,11 +17,11 @@
         "expectedEffect": 9.200000000000003
       },
       "guts-10": {
-        "effect": 0.5500500000000001,
+        "effect": 2.4752249999999982,
         "expectedEffect": 9.200000000000003
       },
       "wisdom-10": {
-        "effect": 0.19600000000000062,
+        "effect": 1.351420000000001,
         "expectedEffect": 9.200000000000003
       },
       "speed-10-fail-40": {
@@ -32,7 +32,7 @@
     "maxRaceEffect": 0
   },
   "スパルタメガホン": {
-    "exchange": 3.3423111111111115,
+    "exchange": 4.500836111111112,
     "expectedExchange": 21.6,
     "shouldUseDirectly": false,
     "training": {
@@ -49,11 +49,11 @@
         "expectedEffect": 12.650000000000004
       },
       "guts-10": {
-        "effect": 1.0963000000000003,
+        "effect": 4.933350000000001,
         "expectedEffect": 12.650000000000004
       },
       "wisdom-10": {
-        "effect": 0.39200000000000035,
+        "effect": 2.698920000000001,
         "expectedEffect": 12.650000000000004
       },
       "speed-10-fail-40": {
@@ -64,7 +64,7 @@
     "maxRaceEffect": 0
   },
   "ブートキャンプメガホン": {
-    "exchange": 5.003333333333334,
+    "exchange": 6.731145833333331,
     "expectedExchange": 26.400000000000002,
     "shouldUseDirectly": false,
     "training": {
@@ -81,11 +81,11 @@
         "expectedEffect": 16.100000000000005
       },
       "guts-10": {
-        "effect": 1.6387500000000004,
+        "effect": 7.374374999999995,
         "expectedEffect": 16.100000000000005
       },
       "wisdom-10": {
-        "effect": 0.588000000000001,
+        "effect": 4.042500000000002,
         "expectedEffect": 16.100000000000005
       },
       "speed-10-fail-40": {
@@ -192,7 +192,7 @@
     "maxRaceEffect": 0
   },
   "根性アンクルウェイト": {
-    "exchange": 1.3679999999999999,
+    "exchange": 6.156000000000001,
     "expectedExchange": 20.0,
     "shouldUseDirectly": false,
     "training": {
@@ -209,7 +209,7 @@
         "expectedEffect": 11.500000000000004
       },
       "guts-10": {
-        "effect": 1.3679999999999999,
+        "effect": 6.156000000000001,
         "expectedEffect": 11.500000000000004
       },
       "wisdom-10": {

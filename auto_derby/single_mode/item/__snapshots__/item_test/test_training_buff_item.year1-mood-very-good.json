@@ -45,7 +45,7 @@
         "expectedEffect": 36.85
       },
       "power-10": {
-        "effect": 2.845355555555555,
+        "effect": 2.845355555555554,
         "expectedEffect": 36.85
       },
       "guts-10": {
@@ -64,24 +64,24 @@
     "maxRaceEffect": 0
   },
   "ブートキャンプメガホン": {
-    "exchange": 7.650250000000001,
+    "exchange": 7.6502500000000015,
     "expectedExchange": 56.1,
     "shouldUseDirectly": false,
     "training": {
       "speed-10": {
-        "effect": 7.362499999999999,
+        "effect": 7.362500000000001,
         "expectedEffect": 46.9
       },
       "stamina-10": {
-        "effect": 7.362499999999999,
+        "effect": 7.362500000000001,
         "expectedEffect": 46.9
       },
       "power-10": {
-        "effect": 4.259166666666667,
+        "effect": 4.259166666666666,
         "expectedEffect": 46.9
       },
       "guts-10": {
-        "effect": 6.768749999999997,
+        "effect": 6.768749999999999,
         "expectedEffect": 46.9
       },
       "wisdom-10": {
@@ -96,12 +96,12 @@
     "maxRaceEffect": 0
   },
   "スピードアンクルウェイト": {
-    "exchange": 5.917,
+    "exchange": 5.917000000000001,
     "expectedExchange": 42.5,
     "shouldUseDirectly": false,
     "training": {
       "speed-10": {
-        "effect": 6.143333333333333,
+        "effect": 6.143333333333334,
         "expectedEffect": 33.5
       },
       "stamina-10": {
@@ -128,7 +128,7 @@
     "maxRaceEffect": 0
   },
   "スタミナアンクルウェイト": {
-    "exchange": 6.143333333333333,
+    "exchange": 6.143333333333334,
     "expectedExchange": 42.5,
     "shouldUseDirectly": false,
     "training": {
@@ -137,7 +137,7 @@
         "expectedEffect": 33.5
       },
       "stamina-10": {
-        "effect": 6.143333333333333,
+        "effect": 6.143333333333334,
         "expectedEffect": 33.5
       },
       "power-10": {
@@ -160,7 +160,7 @@
     "maxRaceEffect": 0
   },
   "パワーアンクルウェイト": {
-    "exchange": 3.553000000000001,
+    "exchange": 3.553,
     "expectedExchange": 42.5,
     "shouldUseDirectly": false,
     "training": {
@@ -173,7 +173,7 @@
         "expectedEffect": 33.5
       },
       "power-10": {
-        "effect": 3.553000000000001,
+        "effect": 3.553,
         "expectedEffect": 33.5
       },
       "guts-10": {

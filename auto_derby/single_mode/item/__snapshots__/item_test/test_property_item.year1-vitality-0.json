@@ -75,27 +75,27 @@
     "shouldUseDirectly": true
   },
   "バイタル20": {
-    "exchange": 24.391166666666667,
+    "exchange": 24.462,
     "expectedExchange": 32.3,
     "shouldUseDirectly": false
   },
   "バイタル40": {
-    "exchange": 43.24125000000001,
+    "exchange": 43.33500000000001,
     "expectedExchange": 45.9,
     "shouldUseDirectly": false
   },
   "バイタル65": {
-    "exchange": 63.49125000000001,
+    "exchange": 63.58500000000001,
     "expectedExchange": 59.5,
     "shouldUseDirectly": false
   },
   "ロイヤルビタージュース": {
-    "exchange": 92.33286666666666,
+    "exchange": 92.44120000000001,
     "expectedExchange": 56.1,
     "shouldUseDirectly": false
   },
   "エネドリンクMAX": {
-    "exchange": 18.78038888888889,
+    "exchange": 18.804000000000002,
     "expectedExchange": 28.9,
     "shouldUseDirectly": true
   },
