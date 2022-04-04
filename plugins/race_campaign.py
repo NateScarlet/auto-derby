@@ -183,31 +183,31 @@ _add_compagin(
     ),
 )
 
-# 春のGⅠ記念ミッション　第１弾 大阪杯
+# 春のGⅠ記念ミッション　第１弾 桜花賞
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 3, 28, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 4, 4, 3, 59, tzinfo=JST),
-        "中山記念",
+        datetime.datetime(2022, 4, 4, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 11, 3, 59, tzinfo=JST),
+        "桜花賞",
         order_lte=1,
     ),
 )
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 3, 28, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 4, 4, 3, 59, tzinfo=JST),
-        "金鯱賞",
+        datetime.datetime(2022, 4, 4, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 11, 3, 59, tzinfo=JST),
+        "フェブラリーステークス",
         order_lte=1,
     ),
 )
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 3, 28, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 4, 4, 3, 59, tzinfo=JST),
-        "大阪杯",
+        datetime.datetime(2022, 4, 4, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 11, 3, 59, tzinfo=JST),
+        "チューリップ賞",
         order_lte=1,
     ),
 )
