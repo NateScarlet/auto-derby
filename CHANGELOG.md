@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.2](https://github.com/NateScarlet/auto-derby/compare/v1.20.1...v1.20.2) (2022-04-05)
+
+### Bug Fixes
+
+- **single-mode:** can not go race during summer camp ([192f764](https://github.com/NateScarlet/auto-derby/commit/192f76405fb6a36f7f378d2682c6a16ceb363a2e)), closes [#284](https://github.com/NateScarlet/auto-derby/issues/284)
+
 ## [1.20.1](https://github.com/NateScarlet/auto-derby/compare/v1.20.0...v1.20.1) (2022-04-04)
 
 ### Bug Fixes
