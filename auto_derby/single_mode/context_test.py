@@ -201,6 +201,27 @@ def test_update_by_character_detail_6():
     assert ctx.conditions == set((ctx.CONDITION_OVERWEIGHT,)), ctx.conditions
 
 
+def test_update_by_character_detail_7():
+    img, _ = _test.use_screenshot("single_mode/character_detail_7.png")
+    ctx = Context.new()
+    ctx.update_by_character_detail(img)
+
+    assert ctx.turf == ctx.STATUS_A, ctx.turf
+    assert ctx.dart == ctx.STATUS_E, ctx.dart
+
+    assert ctx.sprint == ctx.STATUS_D, ctx.sprint
+    assert ctx.mile == ctx.STATUS_A, ctx.mile
+    assert ctx.intermediate == ctx.STATUS_A, ctx.intermediate
+    assert ctx.long == ctx.STATUS_A, ctx.long
+
+    assert ctx.lead == ctx.STATUS_A, ctx.lead
+    assert ctx.head == ctx.STATUS_A, ctx.head
+    assert ctx.middle == ctx.STATUS_B, ctx.middle
+    assert ctx.last == ctx.STATUS_B, ctx.last
+
+    assert ctx.conditions == set((ctx.CONDITION_CHARM,)), ctx.conditions
+
+
 def test_update_by_character_detail_issue39():
     img, _ = _test.use_screenshot("single_mode/character_detail_issue39.png")
     ctx = Context.new()
