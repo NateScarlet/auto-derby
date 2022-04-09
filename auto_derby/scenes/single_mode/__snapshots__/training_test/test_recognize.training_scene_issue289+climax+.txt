@@ -1,0 +1,1 @@
+Training<gut=8 spd=4 pow=4 ski=4 vit=-22.0% fail=0% lv=1 ptn=spd@1>
