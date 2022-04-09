@@ -193,8 +193,18 @@ def _recognize_property(img: Image) -> int:
 
 def _recognize_scenario(rp: mathtools.ResizeProxy, img: Image) -> Text:
     spec = (
-        (templates.SINGLE_MODE_CLIMAX_GRADE_POINT_ICON, Context.SCENARIO_CLIMAX),
-        (templates.SINGLE_MODE_CLIMAX_RANK_POINT_ICON, Context.SCENARIO_CLIMAX),
+        (
+            template.Specification(
+                templates.SINGLE_MODE_CLIMAX_GRADE_POINT_ICON, threshold=0.8
+            ),
+            Context.SCENARIO_CLIMAX,
+        ),
+        (
+            template.Specification(
+                templates.SINGLE_MODE_CLIMAX_RANK_POINT_ICON, threshold=0.8
+            ),
+            Context.SCENARIO_CLIMAX,
+        ),
         (templates.SINGLE_MODE_AOHARU_CLASS_DETAIL_BUTTON, Context.SCENARIO_AOHARU),
         (templates.SINGLE_MODE_CLASS_DETAIL_BUTTON, Context.SCENARIO_URA),
     )
