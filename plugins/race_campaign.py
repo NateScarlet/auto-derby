@@ -198,7 +198,7 @@ _add_compagin(
     OneTimeCampaign(
         datetime.datetime(2022, 4, 4, 4, 0, tzinfo=JST),
         datetime.datetime(2022, 4, 11, 3, 59, tzinfo=JST),
-        "フェブラリーステークス",
+        "フィリーズレビュー",
         order_lte=1,
     ),
 )
