@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.20.2"
-RELEASE_DATE = datetime.fromtimestamp(1649177766)
-LAST_GIT_COMMIT_DESCRIBE = "v1.20.1-1-g192f764"
-LAST_GIT_COMMIT_HASH = "192f76405fb6a36f7f378d2682c6a16ceb363a2e"
+VERSION = "1.21.0"
+RELEASE_DATE = datetime.fromtimestamp(1649493222)
+LAST_GIT_COMMIT_DESCRIBE = "v1.20.2-2-g39ce646"
+LAST_GIT_COMMIT_HASH = "39ce64699eb3bae2d9ebc1002a4c8f3b920945e4"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1649177243)
-LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): can not go race during summer camp"
-LAST_GIT_COMMIT_BODY = "fix #284"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1649486757)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): recognize scenario on adb device"
+LAST_GIT_COMMIT_BODY = "fix #288"
