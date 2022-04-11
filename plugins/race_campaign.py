@@ -183,31 +183,31 @@ _add_compagin(
     ),
 )
 
-# 春のGⅠ記念ミッション　第１弾 桜花賞
+# 春のGⅠ記念ミッション　第１弾 皐月賞
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 4, 4, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 4, 11, 3, 59, tzinfo=JST),
-        "桜花賞",
+        datetime.datetime(2022, 4, 11, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 18, 3, 59, tzinfo=JST),
+        "皐月賞",
         order_lte=1,
     ),
 )
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 4, 4, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 4, 11, 3, 59, tzinfo=JST),
-        "フィリーズレビュー",
+        datetime.datetime(2022, 4, 11, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 18, 3, 59, tzinfo=JST),
+        "スプリングステークス",
         order_lte=1,
     ),
 )
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 4, 4, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 4, 11, 3, 59, tzinfo=JST),
-        "チューリップ賞",
+        datetime.datetime(2022, 4, 11, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 4, 18, 3, 59, tzinfo=JST),
+        "弥生賞",
         order_lte=1,
     ),
 )
