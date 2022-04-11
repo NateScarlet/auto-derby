@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.2](https://github.com/NateScarlet/auto-derby/compare/v1.21.1...v1.21.2) (2022-04-11)
+
+### Bug Fixes
+
+- **single-mode:** race_campaign: update data ([37d273e](https://github.com/NateScarlet/auto-derby/commit/37d273ef8d3013d70b459eaa096ac7662809cb44))
+- **single-mode:** timeout while entering command scene ([7eeaf6f](https://github.com/NateScarlet/auto-derby/commit/7eeaf6fa49977d9e2f039ed84e42b531f6f726c7))
+
 ## [1.21.1](https://github.com/NateScarlet/auto-derby/compare/v1.21.0...v1.21.1) (2022-04-09)
 
 ### Bug Fixes
