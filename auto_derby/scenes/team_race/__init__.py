@@ -1,0 +1,1 @@
+from .competitor_menu import CompetitorMenuScene

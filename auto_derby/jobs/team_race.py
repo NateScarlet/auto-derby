@@ -1,10 +1,19 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from .. import action, config, imagetools, template, templates
+from .. import action, config, templates
+from ..scenes.scene import Scene
+from ..scenes.team_race import CompetitorMenuScene
+from ..scenes.unknown import UnknownScene
+
+
+class _Context:
+    def __init__(self):
+        self.scene: Scene = UnknownScene()
 
 
 def team_race():
+    ctx = _Context()
     while True:
         tmpl, pos = action.wait_image(
             templates.CONNECTING,
@@ -28,25 +37,15 @@ def team_race():
         )
         name = tmpl.name
         if name == templates.TEAM_RACE_CHOOSE_COMPETITOR:
-            rp = action.resize_proxy()
-            granted_reward_pos = rp.vector2((358, 300), 466)
-            granted_reward_pos_color = template.screenshot().getpixel(
-                granted_reward_pos
-            )
-
-            has_granted_reward = (
-                imagetools.compare_color((209, 43, 36), granted_reward_pos_color) > 0.99
-                or imagetools.compare_color((255, 255, 255), granted_reward_pos_color)
-                > 0.99
-            )
-            if has_granted_reward:
+            scene = CompetitorMenuScene.enter(ctx)
+            granted_reward_pos = scene.locate_granted_reward()
+            if granted_reward_pos:
                 action.tap(granted_reward_pos)
+                UnknownScene.enter(ctx)
                 action.wait_tap_image(templates.GREEN_NEXT_BUTTON)
                 action.wait_tap_image(templates.RACE_ITEM_PARFAIT)
             else:
-                x, y = pos
-                y += 300
-                action.tap((x, y))
+                scene.choose(ctx, 1)
         elif name == templates.TEAM_RACE_NEXT_BUTTON:
             action.tap(pos)
         elif name == templates.RP_NOT_ENOUGH:
