@@ -16,7 +16,7 @@ class Gender(enum.Enum):
 
 
 class Repository(Protocol):
-    def save(self, c: Character) -> None:
+    def replace_data(self, it: Iterator[Character], /) -> None:
         ...
 
     def find(self, *, name: Text = "", id: int = 0) -> Iterator[Character]:
@@ -94,16 +94,22 @@ class JSONLRepository(Repository):
             Gender[data["gender"]],
         )
 
-    def save(self, c: Character) -> None:
-        # rewrite whole file to save single item is expensive, but who cares?
-        data = sorted(
-            [*(i for i in self.find() if i.id != c.id), c],
-            key=lambda x: x.id,
-        )
+    def _iter(self):
+        try:
+            with open(self.path, "r", encoding="utf-8") as f:
+                for line in f:
+                    yield self._from_po(json.loads(line))
+        except FileNotFoundError:
+            return
+
+    def replace_data(
+        self,
+        it: Iterator[Character],
+    ) -> None:
         with filetools.atomic_save_path(self.path) as save_path, open(
             save_path, "w", encoding="utf-8"
         ) as f:
-            for i in data:
+            for i in it:
                 json.dump(self._to_po(i), f, ensure_ascii=False)
                 f.write("\n")
 

@@ -58,9 +58,7 @@ def main():
     )
     args = parser.parse_args()
     path: Text = args.path
-
-    for char in _read_master_mdb(path):
-        Character.repository.save(char)
+    Character.repository.replace_data(_read_master_mdb(path))
 
 
 if __name__ == "__main__":
