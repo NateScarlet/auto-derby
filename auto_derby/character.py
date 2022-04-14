@@ -71,6 +71,7 @@ Character.UNKNOWN = Character(0, "unknown", "?", "?", "?", (1970, 1, 1), Gender.
 class JSONLRepository(Repository):
     def __init__(self, path: Text) -> None:
         self.path = path
+        self._cache: Dict[int, Character] = {}
 
     def _to_po(self, c: Character) -> Dict[Text, Any]:
         return {
@@ -106,23 +107,37 @@ class JSONLRepository(Repository):
         self,
         it: Iterator[Character],
     ) -> None:
+        self._cache.clear()
         with filetools.atomic_save_path(self.path) as save_path, open(
             save_path, "w", encoding="utf-8"
         ) as f:
             for i in it:
+                self._cache[i.id] = i
                 json.dump(self._to_po(i), f, ensure_ascii=False)
                 f.write("\n")
 
     def find(self, *, name: Text = "", id: int = 0) -> Iterator[Character]:
+        if id in self._cache:
+            yield self._cache[id]
+            return
+        try:
+            if name:
+                yield next(i for i in self._cache.values() if i.name == name)
+                return
+        except StopIteration:
+            pass
         try:
             with open(self.path, "r", encoding="utf-8") as f:
                 for line in f:
                     c = self._from_po(json.loads(line))
-                    if name and c.name != name:
-                        continue
+                    self._cache[c.id] = c
                     if id and c.id != id:
                         continue
+                    if name and c.name != name:
+                        continue
                     yield c
+                    if name or id:
+                        return
         except FileNotFoundError:
             return
 
