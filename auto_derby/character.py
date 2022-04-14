@@ -39,6 +39,8 @@ class Repository(Protocol):
 
 
 class Character:
+    UNKNOWN: Character
+
     repository: Repository
 
     def __init__(
@@ -61,6 +63,9 @@ class Character:
 
     def __str__(self):
         return f"Character<{self.name}#{self.id}>"
+
+
+Character.UNKNOWN = Character(0, "unknown", "?", "?", "?", (1970, 1, 1), Gender.MARE)
 
 
 class JSONLRepository(Repository):

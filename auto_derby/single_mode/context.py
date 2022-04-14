@@ -6,6 +6,8 @@ from __future__ import annotations
 from copy import deepcopy
 from typing import TYPE_CHECKING, Any, Dict, Iterator
 
+from auto_derby.character import Character
+
 if TYPE_CHECKING:
     from . import go_out
 
@@ -273,6 +275,7 @@ class Context:
         return g.context_class()
 
     def __init__(self) -> None:
+        self.character = Character.UNKNOWN
         self.speed = 0
         self.stamina = 0
         self.power = 0
