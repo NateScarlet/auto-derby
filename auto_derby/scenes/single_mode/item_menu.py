@@ -53,14 +53,14 @@ def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image, thresh: floa
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     v = item.from_name_image(_title_image(rp, img))
     v.quantity = _recognize_quantity(rp, img, 160)
-    v.disabled = True
+    v.disabled = False
     return v
 
 
 def _recognize_disabled_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     v = item.from_name_image(_title_image(rp, img))
     v.quantity = _recognize_quantity(rp, img, 120)
-    v.disabled = False
+    v.disabled = True
     return v
 
 
