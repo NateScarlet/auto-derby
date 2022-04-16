@@ -50,25 +50,17 @@ def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image, thresh: floa
     return int(text)
 
 
-def _recognize_disabled(rp: mathtools.ResizeProxy, item_img: Image) -> bool:
-    try:
-        next(template.match(item_img, templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON))
-        return False
-    except StopIteration:
-        return True
-
-
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     v = item.from_name_image(_title_image(rp, img))
     v.quantity = _recognize_quantity(rp, img, 160)
-    v.disabled = _recognize_disabled(rp, img)
+    v.disabled = True
     return v
 
 
 def _recognize_disabled_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     v = item.from_name_image(_title_image(rp, img))
-    v.quantity = _recognize_quantity(rp, img, 140)
-    v.disabled = _recognize_disabled(rp, img)
+    v.quantity = _recognize_quantity(rp, img, 120)
+    v.disabled = False
     return v
 
 
@@ -94,15 +86,6 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
             rp.vector(518, 540),
             y + rp.vector(48, 540),
         )
-
-        if not os.path.exists("data/item"):
-            os.mkdir("data/item")
-
-        for i in range(1, 10000):
-            _path = f"data/item/item_{i}.png"
-            if not os.path.exists(_path):
-                img.crop(bbox).save(_path)
-                break
         if tmpl.name == templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY:
             yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(360, 540), y)
         else:
