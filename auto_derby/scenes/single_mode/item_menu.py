@@ -10,7 +10,7 @@ from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 import cv2
 from PIL.Image import Image
 
-from ... import action, imagetools, mathtools, ocr, template, templates, terminal
+from ... import action, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
 from ...single_mode.item import Item, ItemList
 from ..scene import Scene, SceneHolder
