@@ -188,6 +188,11 @@ class ItemMenuScene(Scene):
         self._scroll.complete()
         for i in remains:
             _LOGGER.warning("use remain: %s", i)
-        action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
-        action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
+        tmpl, _ = action.wait_image(
+            templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
+            templates.CLOSE_BUTTON,
+        )
+        if tmpl.name == templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON:
+            action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
+            action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
         action.wait_image_stable(templates.CLOSE_BUTTON)
