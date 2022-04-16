@@ -191,7 +191,7 @@ class ItemMenuScene(Scene):
                 ctx.items.remove(match.id, 1)
                 ctx.item_history.append(ctx, match)
                 # wait animation
-                action.wait_image_stable(templates.CLOSE_BUTTON)             
+                action.wait_image_stable(templates.CLOSE_BUTTON)
                 return _use_visible_items()
 
         while self._scroll.next():
