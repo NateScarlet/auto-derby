@@ -67,8 +67,8 @@ def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
 def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
-    y_min = rp.vector(365, 540)
-    y_max = rp.vector(815, 540)
+    y_min = rp.vector(390, 540)
+    y_max = rp.vector(720, 540)
     for _, pos in sorted(
         template.match(img, templates.SINGLE_MODE_SHOP_ITEM_PRICE),
         key=lambda x: x[1][1],
@@ -151,15 +151,17 @@ class ShopScene(Scene):
                 action.tap(pos)
                 ctx.shop_coin -= match.price
                 remains.remove(match)
+                action.wait_tap_image(templates.SINGLE_MODE_SHOP_ENTER_BUTTON)
                 tmpl, _ = action.wait_image(
-                    templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
+                    templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON,
                     templates.CLOSE_BUTTON,
                 )
                 if (
-                    tmpl.name == templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON
+                    tmpl.name == templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON
                     and match.should_use_directly(ctx)
                 ):
                     _LOGGER.info("use: %s", match)
+                    action.wait_tap_image(templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON)
                     action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
                     action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                     ctx.item_history.append(ctx, match)

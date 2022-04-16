@@ -35,7 +35,7 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
 
 
 def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image) -> int:
-    bbox = rp.vector4((179, 43, 382, 64), 540)
+    bbox = rp.vector4((179, 43, 194, 64), 540)
     cv_img = imagetools.cv_image(
         imagetools.resize(item_img.crop(bbox).convert("L"), height=32)
     )
@@ -52,7 +52,7 @@ def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image) -> int:
 
 def _recognize_disabled(rp: mathtools.ResizeProxy, item_img: Image) -> bool:
     try:
-        next(template.match(item_img, templates.SINGLE_MODE_ITEM_MENU_USE_BUTTON))
+        next(template.match(item_img, templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON))
         return False
     except StopIteration:
         return True
@@ -153,7 +153,7 @@ class ItemMenuScene(Scene):
         remains = list(items)
 
         def _use_visible_items() -> None:
-            for match, pos in _recognize_menu(template.screenshot()):
+            for match, _ in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
                 if match.disabled:
@@ -161,7 +161,8 @@ class ItemMenuScene(Scene):
                     remains.remove(match)
                     continue
                 _LOGGER.info("use: %s", match)
-                action.tap(pos)
+                action.wait_tap_image(templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON)
+                action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
                 action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                 remains.remove(match)
                 ctx.items.remove(match.id, 1)
