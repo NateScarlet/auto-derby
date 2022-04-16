@@ -34,12 +34,12 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
     return imagetools.pil_image(binary_img)
 
 
-def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image) -> int:
+def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image, thresh: float = 160) -> int:
     bbox = rp.vector4((179, 43, 194, 64), 540)
     cv_img = imagetools.cv_image(
         imagetools.resize(item_img.crop(bbox).convert("L"), height=32)
     )
-    _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
+    _, binary_img = cv2.threshold(cv_img, thresh, 255, cv2.THRESH_BINARY_INV)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
         cv2.imshow("cv_img", cv_img)
@@ -60,7 +60,14 @@ def _recognize_disabled(rp: mathtools.ResizeProxy, item_img: Image) -> bool:
 
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     v = item.from_name_image(_title_image(rp, img))
-    v.quantity = _recognize_quantity(rp, img)
+    v.quantity = _recognize_quantity(rp, img, 160)
+    v.disabled = _recognize_disabled(rp, img)
+    return v
+
+
+def _recognize_disabled_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
+    v = item.from_name_image(_title_image(rp, img))
+    v.quantity = _recognize_quantity(rp, img, 140)
     v.disabled = _recognize_disabled(rp, img)
     return v
 
@@ -69,8 +76,12 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
     min_y = rp.vector(130, 540)
-    for _, pos in sorted(
-        template.match(img, templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY),
+    for tmpl, pos in sorted(
+        template.match(
+            img, 
+            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY, 
+            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY_DISABLED
+        ),
         key=lambda x: x[1][1],
     ):
         x, y = pos
@@ -83,7 +94,19 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
             rp.vector(518, 540),
             y + rp.vector(48, 540),
         )
-        yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(360, 540), y)
+
+        if not os.path.exists("data/item"):
+            os.mkdir("data/item")
+
+        for i in range(1, 10000):
+            _path = f"data/item/item_{i}.png"
+            if not os.path.exists(_path):
+                img.crop(bbox).save(_path)
+                break
+        if tmpl.name == templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY:
+            yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(360, 540), y)
+        else:
+            yield _recognize_disabled_item(rp, img.crop(bbox)), (x + rp.vector(360, 540), y)
 
 
 class ItemMenuScene(Scene):
