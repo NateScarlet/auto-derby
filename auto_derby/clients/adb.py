@@ -144,12 +144,16 @@ class ADBClient(Client):
         return self._screenshot()
 
     def swipe(
-        self, point: Tuple[int, int], *, dx: int, dy: int, duration: float
+        self, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1
     ) -> None:
         x1, y1 = point
         x2, y2 = x1 + dx, y1 + dy
         duration_ms = int(duration * 1e3)
-        duration_ms = max(200, duration_ms)  # not work if too fast
+        if duration_ms < 400:
+            # not work if too fast
+            dx = int(dx * 400 / duration_ms)
+            dy = int(dy * 400 / duration_ms)
+            duration_ms = 400
         command = f"input swipe {x1} {y1} {x2} {y2} {duration_ms}"
         LOGGER.debug("swipe: %s", command)
         res = self.device.shell(
