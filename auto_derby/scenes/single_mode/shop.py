@@ -68,7 +68,7 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
     y_min = rp.vector(390, 540)
-    y_max = rp.vector(720, 540)
+    y_max = rp.vector(700, 540)
     for _, pos in sorted(
         template.match(img, templates.SINGLE_MODE_SHOP_ITEM_PRICE),
         key=lambda x: x[1][1],
@@ -154,6 +154,7 @@ class ShopScene(Scene):
                 action.wait_tap_image(templates.SINGLE_MODE_SHOP_ENTER_BUTTON)
                 tmpl, _ = action.wait_image(
                     templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON,
+                    templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON_DISABLED,
                     templates.CLOSE_BUTTON,
                 )
                 if (
