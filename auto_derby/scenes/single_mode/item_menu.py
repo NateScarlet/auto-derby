@@ -34,7 +34,9 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
     return imagetools.pil_image(binary_img)
 
 
-def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image, thresh: float = 160) -> int:
+def _recognize_quantity(
+    rp: mathtools.ResizeProxy, item_img: Image, thresh: float = 160
+) -> int:
     bbox = rp.vector4((179, 43, 194, 64), 540)
     cv_img = imagetools.cv_image(
         imagetools.resize(item_img.crop(bbox).convert("L"), height=32)
@@ -70,9 +72,9 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     min_y = rp.vector(130, 540)
     for tmpl, pos in sorted(
         template.match(
-            img, 
-            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY, 
-            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY_DISABLED
+            img,
+            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY,
+            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY_DISABLED,
         ),
         key=lambda x: x[1][1],
     ):
@@ -89,7 +91,10 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
         if tmpl.name == templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY:
             yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(360, 540), y)
         else:
-            yield _recognize_disabled_item(rp, img.crop(bbox)), (x + rp.vector(360, 540), y)
+            yield _recognize_disabled_item(rp, img.crop(bbox)), (
+                x + rp.vector(360, 540),
+                y,
+            )
 
 
 class ItemMenuScene(Scene):
@@ -168,13 +173,10 @@ class ItemMenuScene(Scene):
                     continue
                 _LOGGER.info("use: %s", match)
                 action.tap(pos)
-                action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
-                action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                 remains.remove(match)
                 ctx.items.remove(match.id, 1)
                 ctx.item_history.append(ctx, match)
                 # wait animation
-                action.wait_image_stable(templates.CLOSE_BUTTON)
                 return _use_visible_items()
 
         while self._scroll.next():
@@ -186,3 +188,6 @@ class ItemMenuScene(Scene):
         self._scroll.complete()
         for i in remains:
             _LOGGER.warning("use remain: %s", i)
+        action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
+        action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
+        action.wait_image_stable(templates.CLOSE_BUTTON)
