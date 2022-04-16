@@ -10,7 +10,7 @@ from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 import cv2
 from PIL.Image import Image
 
-from ... import action, imagetools, mathtools, ocr, template, templates
+from ... import action, imagetools, mathtools, ocr, template, templates, terminal
 from ...single_mode import Context, item
 from ...single_mode.item import Item, ItemList
 from ..scene import Scene, SceneHolder
@@ -83,7 +83,7 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
             rp.vector(518, 540),
             y + rp.vector(48, 540),
         )
-        yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(303, 540), y)
+        yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(360, 540), y)
 
 
 class ItemMenuScene(Scene):
@@ -153,7 +153,7 @@ class ItemMenuScene(Scene):
         remains = list(items)
 
         def _use_visible_items() -> None:
-            for match, _ in _recognize_menu(template.screenshot()):
+            for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
                 if match.disabled:
@@ -161,14 +161,14 @@ class ItemMenuScene(Scene):
                     remains.remove(match)
                     continue
                 _LOGGER.info("use: %s", match)
-                action.wait_tap_image(templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON)
+                action.tap(pos)
                 action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
                 action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                 remains.remove(match)
                 ctx.items.remove(match.id, 1)
                 ctx.item_history.append(ctx, match)
                 # wait animation
-                action.wait_image_stable(templates.CLOSE_BUTTON)
+                action.wait_image_stable(templates.CLOSE_BUTTON)             
                 return _use_visible_items()
 
         while self._scroll.next():
