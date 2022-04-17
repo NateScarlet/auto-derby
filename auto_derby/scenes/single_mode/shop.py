@@ -177,7 +177,7 @@ class ShopScene(Scene):
         if tmpl.name == templates.SINGLE_MODE_SHOP_ENTER_BUTTON:
             action.wait_tap_image(templates.SINGLE_MODE_SHOP_ENTER_BUTTON)
             # TODO: Use items directly after purchases
-            items = tuple(i for i in to_use)
+            items = tuple(to_use)
             _LOGGER.debug("to_use: %s, items: %s" % (to_use, items))
             if items:
                 scene = ItemMenuScene()
