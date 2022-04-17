@@ -176,13 +176,16 @@ class ShopScene(Scene):
         )
         if tmpl.name == templates.SINGLE_MODE_SHOP_ENTER_BUTTON:
             action.wait_tap_image(templates.SINGLE_MODE_SHOP_ENTER_BUTTON)
-            # TODO: Use items directly after purchases
             items = tuple(to_use)
             _LOGGER.debug("to_use: %s" % to_use)
             if items:
                 scene = ItemMenuScene()
                 scene.use_items(ctx, items)
-            else:
+            tmpl, _ = action.wait_image(
+                templates.CLOSE_BUTTON,
+                templates.RETURN_BUTTON,
+            )
+            if tmpl.name == templates.CLOSE_BUTTON:
                 action.wait_tap_image(templates.CLOSE_BUTTON)
 
     def to_dict(self) -> Dict[Text, Any]:
