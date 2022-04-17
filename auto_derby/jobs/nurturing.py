@@ -75,8 +75,8 @@ def _handle_shop(ctx: Context, cs: CommandScene):
     cs.enter(ctx)
     
     # TODO: Use items directly after purchases
-    _handle_item_list(ctx, scene)
-    
+    _handle_item_list(ctx, cs)
+
     if any(i.should_use_directly(ctx) for i in cart_items):
         cs.recognize(ctx)
     return

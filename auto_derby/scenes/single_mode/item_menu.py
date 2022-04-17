@@ -176,7 +176,6 @@ class ItemMenuScene(Scene):
                 remains.remove(match)
                 ctx.items.remove(match.id, 1)
                 ctx.item_history.append(ctx, match)
-                # wait animation
                 return _use_visible_items()
 
         while self._scroll.next():
