@@ -178,7 +178,7 @@ class ShopScene(Scene):
             action.wait_tap_image(templates.SINGLE_MODE_SHOP_ENTER_BUTTON)
             # TODO: Use items directly after purchases
             items = tuple(to_use)
-            _LOGGER.debug("to_use: %s, items: %s" % (to_use, items))
+            _LOGGER.debug("to_use: %s" % to_use)
             if items:
                 scene = ItemMenuScene()
                 scene.use_items(ctx, items)
