@@ -181,11 +181,13 @@ class ShopScene(Scene):
             if items:
                 scene = ItemMenuScene()
                 scene.use_items(ctx, items)
-            tmpl, _ = action.wait_image_stable(
-                templates.CLOSE_BUTTON,
-                templates.RETURN_BUTTON,
-            )
-            if tmpl.name == templates.CLOSE_BUTTON:
+                tmpl, _ = action.wait_image(
+                    templates.CLOSE_BUTTON,
+                    templates.RETURN_BUTTON,
+                )
+                if tmpl.name == templates.CLOSE_BUTTON:
+                    action.wait_tap_image(templates.CLOSE_BUTTON)
+            else:
                 action.wait_tap_image(templates.CLOSE_BUTTON)
 
     def to_dict(self) -> Dict[Text, Any]:
