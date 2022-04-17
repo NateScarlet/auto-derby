@@ -194,4 +194,5 @@ class ItemMenuScene(Scene):
         if tmpl.name == templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON:
             action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
             action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
-        action.wait_image_stable(templates.CLOSE_BUTTON)
+        if ctx.scene.name() != "single-mode-shop":
+            action.wait_image_stable(templates.CLOSE_BUTTON)

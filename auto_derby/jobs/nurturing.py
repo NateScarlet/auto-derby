@@ -73,10 +73,6 @@ def _handle_shop(ctx: Context, cs: CommandScene):
     scene.exchange_items(ctx, cart_items)
 
     cs.enter(ctx)
-    
-    # TODO: Use items directly after purchases
-    _handle_item_list(ctx, cs)
-
     if any(i.should_use_directly(ctx) for i in cart_items):
         cs.recognize(ctx)
     return

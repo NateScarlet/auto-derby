@@ -10,6 +10,9 @@ from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 import cv2
 from PIL.Image import Image
 
+from auto_derby.scenes.single_mode.item_menu import ItemMenuScene
+from auto_derby.single_mode.item.item_list import ItemList
+
 from ... import action, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
 from ...single_mode.item import Item
@@ -137,7 +140,7 @@ class ShopScene(Scene):
 
     def exchange_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
-        # to_use = list(items)
+        to_use = ItemList()
 
         def _select_visible_items() -> None:
             for match, pos in _recognize_menu(template.screenshot()):
@@ -154,8 +157,8 @@ class ShopScene(Scene):
                 remains.remove(match)
                 _LOGGER.info("to use: %s", match)
                 ctx.items.put(match.id, 1)
-                # if match.should_use_directly(ctx):
-                #     to_use.append(match)
+                if match.should_use_directly(ctx):
+                    to_use.put(match.id, 1)
                 return _select_visible_items()
 
         while self._scroll.next():
@@ -174,7 +177,13 @@ class ShopScene(Scene):
         if tmpl.name == templates.SINGLE_MODE_SHOP_ENTER_BUTTON:
             action.wait_tap_image(templates.SINGLE_MODE_SHOP_ENTER_BUTTON)
             # TODO: Use items directly after purchases
-            action.wait_tap_image(templates.CLOSE_BUTTON)
+            items = tuple(i for i in to_use)
+            _LOGGER.debug("to_use: %s, items: %s" % (to_use, items))
+            if items:
+                scene = ItemMenuScene()
+                scene.use_items(ctx, items)
+            else:
+                action.wait_tap_image(templates.CLOSE_BUTTON)
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {
