@@ -181,7 +181,7 @@ class ShopScene(Scene):
             if items:
                 scene = ItemMenuScene()
                 scene.use_items(ctx, items)
-            tmpl, _ = action.wait_image(
+            tmpl, _ = action.wait_image_stable(
                 templates.CLOSE_BUTTON,
                 templates.RETURN_BUTTON,
             )
