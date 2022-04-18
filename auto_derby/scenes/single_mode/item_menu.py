@@ -66,7 +66,9 @@ def _recognize_disabled_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     return v
 
 
-def _recognize_menu(img: Image, min_y: int = 130) -> Iterator[Tuple[Item, Tuple[int, int]]]:
+def _recognize_menu(
+    img: Image, min_y: int = 130
+) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
     min_y = rp.vector(min_y, 540)
@@ -165,7 +167,9 @@ class ItemMenuScene(Scene):
         in_shop = ctx.scene.name() == "single-mode-shop"
 
         def _use_visible_items() -> None:
-            for match, pos in _recognize_menu(template.screenshot(), 130 if not in_shop else 194):
+            for match, pos in _recognize_menu(
+                template.screenshot(), 130 if not in_shop else 194
+            ):
                 if match not in remains:
                     continue
                 if match.disabled:
