@@ -66,10 +66,10 @@ def _recognize_disabled_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     return v
 
 
-def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
+def _recognize_menu(img: Image, min_y: int = 130) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
-    min_y = rp.vector(130, 540)
+    min_y = rp.vector(min_y, 540)
     for tmpl, pos in sorted(
         template.match(
             img,
@@ -162,9 +162,10 @@ class ItemMenuScene(Scene):
 
     def use_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
+        in_shop = ctx.scene.name() == "single-mode-shop"
 
         def _use_visible_items() -> None:
-            for match, pos in _recognize_menu(template.screenshot()):
+            for match, pos in _recognize_menu(template.screenshot(), 130 if not in_shop else 194):
                 if match not in remains:
                     continue
                 if match.disabled:
@@ -194,5 +195,5 @@ class ItemMenuScene(Scene):
         if tmpl.name == templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON:
             action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
             action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
-        if ctx.scene.name() != "single-mode-shop":
+        if not in_shop:
             action.wait_image_stable(templates.CLOSE_BUTTON)
