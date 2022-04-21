@@ -176,10 +176,12 @@ class ItemMenuScene(Scene):
                     _LOGGER.warning("skip disabled: %s", match)
                     remains.remove(match)
                     continue
+                item = next(i for i in items if i == match)
                 _LOGGER.info("use: %s", match)
-                action.tap(pos)
                 remains.remove(match)
-                ctx.items.remove(match.id, 1)
+                for _ in range(item.quantity):
+                    action.tap(pos)
+                    ctx.items.remove(match.id, 1)
                 ctx.item_history.append(ctx, match)
                 return _use_visible_items()
 
