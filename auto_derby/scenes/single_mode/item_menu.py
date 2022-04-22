@@ -179,9 +179,35 @@ class ItemMenuScene(Scene):
                 item = next(i for i in items if i == match)
                 _LOGGER.info("use: %s", match)
                 remains.remove(match)
-                for _ in range(item.quantity):
+                
+                # FIXME: Need to refactor
+                if item.quantity > 1:
+                    for _ in range(item.quantity):
+                        action.tap(pos)
+                        ctx.items.remove(match.id, 1)
+
+                        # NOTE: recognize increment button is disabled
+                        img = template.screenshot()
+                        rp = mathtools.ResizeProxy(img.width)
+                        x, y = pos
+                        bbox = (
+                            rp.vector(x - 15, 540),
+                            y - rp.vector(21, 540),
+                            rp.vector(x + 17, 540),
+                            y + rp.vector(11, 540),
+                        )
+                        is_disabled = len(
+                            tuple(template.match(img.crop(bbox),
+                                                 templates.SINGLE_MODE_SHOP_INCREMENT_BUTTON_DISABLED))
+                        )
+                        _LOGGER.debug(
+                            "increment button is disabled?: %s", is_disabled)
+                        if is_disabled:
+                            break
+                else:
                     action.tap(pos)
                     ctx.items.remove(match.id, 1)
+
                 ctx.item_history.append(ctx, match)
                 return _use_visible_items()
 
