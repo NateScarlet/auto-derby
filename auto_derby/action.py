@@ -66,7 +66,9 @@ def wait_image_pos(
     x, y = pos
     max_width, max_height = (0, 0)
     for i in tmpl:
-        width, height = template.load(i.name if isinstance(i, template.Specification) else i).size
+        width, height = template.load(
+            i.name if isinstance(i, template.Specification) else i
+        ).size
         max_width = max(max_width, width)
         max_height = max(max_height, height)
 

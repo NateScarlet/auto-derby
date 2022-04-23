@@ -200,7 +200,9 @@ SINGLE_MODE_GOOD_RACE_ADAPTABILITY_STAR = "single_mode_good_race_adaptability_st
 SINGLE_MODE_ITEM_MENU_BUTTON = "single_mode_item_menu_button.png"
 SINGLE_MODE_ITEM_MENU_BUTTON_POS = "single_mode_item_menu_button.pos.png"
 SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY = "single_mode_item_menu_current_quantity.png"
-SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY_DISABLED = "single_mode_item_menu_current_quantity_disabled.png"
+SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY_DISABLED = (
+    "single_mode_item_menu_current_quantity_disabled.png"
+)
 SINGLE_MODE_ITEM_USE_BUTTON = "single_mode_item_use_button.png"
 SINGLE_MODE_LIVE_BUTTON = "single_mode_live_button.png"
 SINGLE_MODE_OPTION1 = "single_mode_option1.png"
@@ -237,7 +239,9 @@ SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = (
 )
 SINGLE_MODE_SHOP_ITEM_PRICE = "single_mode_shop_item_price.png"
 SINGLE_MODE_SHOP_ENTER_BUTTON = "single_mode_shop_enter_button.png"
-SINGLE_MODE_SHOP_INCREMENT_BUTTON_DISABLED = "single_mode_shop_increment_button_disabled.png"
+SINGLE_MODE_SHOP_INCREMENT_BUTTON_DISABLED = (
+    "single_mode_shop_increment_button_disabled.png"
+)
 SINGLE_MODE_SHOP_INCREMENT_BUTTON = "single_mode_shop_increment_button.png"
 SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON = "single_mode_shop_use_confirm_button.png"
 SINGLE_MODE_TARGET_GRADE_POINT_NOT_ENOUGH = (
