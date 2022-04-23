@@ -154,9 +154,9 @@ class ShopScene(Scene):
                 action.tap(pos)
                 ctx.shop_coin -= match.price
                 remains.remove(match)
-                _LOGGER.info("to use: %s", match)
                 ctx.items.put(match.id, 1)
                 if match.should_use_directly(ctx):
+                    _LOGGER.info("to use: %s", match)
                     to_use.append(ctx.items.get(match.id))
                 return _select_visible_items()
 
@@ -179,7 +179,7 @@ class ShopScene(Scene):
             if to_use:
                 action.wait_image(templates.CLOSE_BUTTON)
                 scene = ItemMenuScene()
-                scene.use_items(ctx, tuple(to_use))
+                scene.use_items(ctx, to_use)
                 tmpl, _ = action.wait_image(
                     templates.CLOSE_BUTTON,
                     templates.RETURN_BUTTON,
