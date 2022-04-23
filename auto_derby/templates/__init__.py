@@ -239,10 +239,6 @@ SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER_POS = (
 )
 SINGLE_MODE_SHOP_ITEM_PRICE = "single_mode_shop_item_price.png"
 SINGLE_MODE_SHOP_ENTER_BUTTON = "single_mode_shop_enter_button.png"
-SINGLE_MODE_SHOP_INCREMENT_BUTTON_DISABLED = (
-    "single_mode_shop_increment_button_disabled.png"
-)
-SINGLE_MODE_SHOP_INCREMENT_BUTTON = "single_mode_shop_increment_button.png"
 SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON = "single_mode_shop_use_confirm_button.png"
 SINGLE_MODE_TARGET_GRADE_POINT_NOT_ENOUGH = (
     "single_mode_target_grade_point_not_enough.png"
