@@ -176,31 +176,10 @@ class ItemMenuScene(Scene):
                     _LOGGER.warning("skip disabled: %s", match)
                     remains.remove(match)
                     continue
-                item = next(i for i in items if i == match)
                 _LOGGER.info("use: %s", match)
                 remains.remove(match)
-
-                for i in range(item.quantity):
-                    action.tap(pos)
-                    ctx.items.remove(match.id, 1)
-
-                    # NOTE: recognize increment button is disabled
-                    if item.quantity - i > 1:
-                        rp = action.resize_proxy()
-                        x, y = pos
-                        x -= rp.vector(360, 540)
-                        tmpl = action.wait_image_pos(
-                            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY,
-                            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY_DISABLED,
-                            pos=(x, y),
-                        )
-                        if (
-                            tmpl.name
-                            == templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY_DISABLED
-                        ):
-                            _LOGGER.warning("skip limited item: %s", match)
-                            break
-
+                action.tap(pos)
+                ctx.items.remove(match.id, 1)
                 ctx.item_history.append(ctx, match)
                 return _use_visible_items()
 
