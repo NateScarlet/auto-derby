@@ -179,6 +179,7 @@ class ShopScene(Scene):
             items = tuple(to_use)
             _LOGGER.debug("to_use: %s" % to_use)
             if items:
+                action.wait_image(templates.CLOSE_BUTTON)
                 scene = ItemMenuScene()
                 scene.use_items(ctx, items)
                 tmpl, _ = action.wait_image(
