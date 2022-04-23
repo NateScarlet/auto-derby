@@ -10,14 +10,13 @@ from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 import cv2
 from PIL.Image import Image
 
-from auto_derby.scenes.single_mode.item_menu import ItemMenuScene
-
 from ... import action, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
 from ...single_mode.item import Item
 from ..scene import Scene, SceneHolder
 from ..vertical_scroll import VerticalScroll
 from .command import CommandScene
+from .item_menu import ItemMenuScene
 
 _LOGGER = logging.getLogger(__name__)
 

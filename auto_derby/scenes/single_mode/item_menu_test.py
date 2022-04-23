@@ -1,6 +1,5 @@
 from typing import Text
 
-
 from ... import _test
 from .item_menu import ItemMenuScene
 from .shop import ShopScene
