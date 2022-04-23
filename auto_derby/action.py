@@ -57,39 +57,6 @@ def wait_image(
             time.sleep(0.01)
 
 
-def wait_image_pos(
-    *tmpl: Union[Text, template.Specification],
-    pos: Tuple[int, int],
-    timeout: float = float("inf"),
-) -> template.Specification:
-    deadline = time.time() + timeout
-    x, y = pos
-    max_width, max_height = (0, 0)
-    for i in tmpl:
-        width, height = template.load(
-            i.name if isinstance(i, template.Specification) else i
-        ).size
-        max_width = max(max_width, width)
-        max_height = max(max_height, height)
-
-    bbox = (
-        x,
-        y,
-        x + max_width,
-        y + max_height,
-    )
-    while True:
-        try:
-            t, _ = next(
-                template.match(template.screenshot(max_age=0).crop(bbox), *tmpl)
-            )
-            return t
-        except StopIteration:
-            if time.time() > deadline:
-                raise TimeoutError()
-            time.sleep(0.01)
-
-
 def wait_image_stable(
     *tmpl: Union[Text, template.Specification],
     duration: float = 1.0,
