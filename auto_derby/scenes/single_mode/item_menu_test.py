@@ -1,7 +1,9 @@
 from typing import Text
 
+
 from ... import _test
 from .item_menu import ItemMenuScene
+from .shop import ShopScene
 from ...single_mode import Context
 import pytest
 
@@ -14,6 +16,8 @@ def test_recognize(name: Text):
     _test.use_screenshot(f"single_mode/{name}.png")
     scene = ItemMenuScene()
     ctx = Context.new()
+    if "+shop+" in name:
+        ctx.scene = ShopScene()
     scene.recognize(ctx, static=True)
     _test.snapshot_match(
         scene,
