@@ -100,7 +100,7 @@ def _recognize_menu(
 
 
 def _in_shop(ctx: Context) -> bool:
-    ''' check if scene of context is in single mode shop '''
+    """check if scene of context is in single mode shop"""
     return ctx.scene.name() == "single-mode-shop"
 
 
