@@ -99,6 +99,11 @@ def _recognize_menu(
             )
 
 
+def _in_shop(ctx: Context) -> bool:
+    ''' check if scene of context is in single mode shop '''
+    return ctx.scene.name() == "single-mode-shop"
+
+
 class ItemMenuScene(Scene):
     def __init__(self) -> None:
         super().__init__()
@@ -137,12 +142,14 @@ class ItemMenuScene(Scene):
         }
         return d
 
-    def _recognize_items(self, static: bool = False) -> None:
+    def _recognize_items(self, static: bool = False, in_shop: bool = False) -> None:
         self.items = ItemList()
         while self._scroll.next():
             new_items = tuple(
                 i
-                for i, _ in _recognize_menu(template.screenshot())
+                for i, _ in _recognize_menu(
+                    template.screenshot(), 130 if not in_shop else 194
+                )
                 if i not in self.items
             )
             if not new_items:
@@ -158,13 +165,13 @@ class ItemMenuScene(Scene):
             _LOGGER.warning("not found any item")
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
-        self._recognize_items(static)
+        self._recognize_items(static, _in_shop(ctx))
         ctx.items = self.items
         ctx.items_last_updated_turn = ctx.turn_count()
 
     def use_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
-        in_shop = ctx.scene.name() == "single-mode-shop"
+        in_shop = _in_shop(ctx)
 
         def _use_visible_items() -> None:
             for match, pos in _recognize_menu(
