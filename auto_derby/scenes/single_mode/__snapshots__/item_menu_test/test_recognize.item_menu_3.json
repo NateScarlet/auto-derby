@@ -3,19 +3,31 @@
     {
       "id": 16,
       "name": "バイタル20",
+      "quantity": 2,
+      "disabled": false
+    },
+    {
+      "id": 19,
+      "name": "ロイヤルビタージュース",
       "quantity": 1,
       "disabled": false
     },
     {
-      "id": 44,
-      "name": "スパルタメガホン",
-      "quantity": 2,
+      "id": 35,
+      "name": "練習改善DVD",
+      "quantity": 1,
       "disabled": true
     },
     {
-      "id": 51,
-      "name": "蹄鉄ハンマー・匠",
+      "id": 46,
+      "name": "スピードアンクルウェイト",
       "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 50,
+      "name": "健康祈願のお守り",
+      "quantity": 2,
       "disabled": false
     }
   ]
