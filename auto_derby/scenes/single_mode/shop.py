@@ -16,7 +16,7 @@ from ...single_mode.item import Item
 from ..scene import Scene, SceneHolder
 from ..vertical_scroll import VerticalScroll
 from .command import CommandScene
-from .item_menu import ItemMenuScene
+from .shop_exchanged_item_menu import ShopExchangedItemMenuScene
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -108,10 +108,13 @@ class ShopScene(Scene):
 
     @classmethod
     def _enter(cls, ctx: SceneHolder) -> Scene:
-        CommandScene.enter(ctx)
-        action.wait_tap_image(
-            templates.SINGLE_MODE_COMMAND_SHOP,
-        )
+        if ctx.scene.name() == "single-mode-shop-exchanged-item-menu":
+            action.tap_image(templates.CLOSE_BUTTON)
+        else:
+            CommandScene.enter(ctx)
+            action.wait_tap_image(
+                templates.SINGLE_MODE_COMMAND_SHOP,
+            )
         action.wait_image(templates.RETURN_BUTTON)
         return cls()
 
@@ -138,7 +141,7 @@ class ShopScene(Scene):
 
     def exchange_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
-        to_use: Sequence[Item] = list()
+        selected: Sequence[Item] = list()
 
         def _select_visible_items() -> None:
             for match, pos in _recognize_menu(template.screenshot()):
@@ -153,10 +156,7 @@ class ShopScene(Scene):
                 action.tap(pos)
                 ctx.shop_coin -= match.price
                 remains.remove(match)
-                ctx.items.put(match.id, 1)
-                if match.should_use_directly(ctx):
-                    _LOGGER.info("to use: %s", match)
-                    to_use.append(ctx.items.get(match.id))
+                selected.append(match)
                 return _select_visible_items()
 
         while self._scroll.next():
@@ -168,25 +168,15 @@ class ShopScene(Scene):
         self._scroll.complete()
         for i in remains:
             _LOGGER.warning("exchange remain: %s", i)
-        tmpl, _ = action.wait_image(
-            templates.SINGLE_MODE_SHOP_ENTER_BUTTON,
-            templates.RETURN_BUTTON,
-        )
-        if tmpl.name == templates.SINGLE_MODE_SHOP_ENTER_BUTTON:
+
+        if selected:
             action.wait_tap_image(templates.SINGLE_MODE_SHOP_ENTER_BUTTON)
-            _LOGGER.debug("to_use: %s" % to_use)
-            if to_use:
-                action.wait_image(templates.CLOSE_BUTTON)
-                scene = ItemMenuScene()
-                scene.use_items(ctx, to_use)
-                tmpl, _ = action.wait_image(
-                    templates.CLOSE_BUTTON,
-                    templates.RETURN_BUTTON,
-                )
-                if tmpl.name == templates.CLOSE_BUTTON:
-                    action.wait_tap_image(templates.CLOSE_BUTTON)
-            else:
-                action.wait_tap_image(templates.CLOSE_BUTTON)
+            for i in selected:
+                ctx.items.put(i.id, 1)
+            scene = ShopExchangedItemMenuScene.enter(ctx)
+            would_use = [i for i in selected if i.should_use_directly(ctx)]
+            scene.use_items(ctx, would_use)
+            self.enter(ctx)
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {

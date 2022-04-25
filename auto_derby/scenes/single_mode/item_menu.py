@@ -5,7 +5,8 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import Any, Dict, Iterator, Sequence, Text, Tuple
+from collections import defaultdict
+from typing import Any, DefaultDict, Dict, Iterator, Sequence, Text, Tuple
 
 import cv2
 from PIL.Image import Image
@@ -66,9 +67,7 @@ def _recognize_disabled_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     return v
 
 
-def _recognize_menu(
-    img: Image, min_y: int = 130
-) -> Iterator[Tuple[Item, Tuple[int, int]]]:
+def _recognize_menu(img: Image, min_y: int) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
     min_y = rp.vector(min_y, 540)
@@ -99,12 +98,9 @@ def _recognize_menu(
             )
 
 
-def _in_shop(ctx: Context) -> bool:
-    """check if scene of context is in single mode shop"""
-    return ctx.scene.name() == "single-mode-shop"
-
-
 class ItemMenuScene(Scene):
+    _item_min_y = 130
+
     def __init__(self) -> None:
         super().__init__()
         self.items = item.ItemList()
@@ -116,7 +112,7 @@ class ItemMenuScene(Scene):
         )
 
     @classmethod
-    def name(cls):
+    def name(cls) -> Text:
         return "single-mode-item-menu"
 
     @classmethod
@@ -142,14 +138,12 @@ class ItemMenuScene(Scene):
         }
         return d
 
-    def _recognize_items(self, static: bool = False, in_shop: bool = False) -> None:
+    def _recognize_items(self, static: bool = False) -> None:
         self.items = ItemList()
         while self._scroll.next():
             new_items = tuple(
                 i
-                for i, _ in _recognize_menu(
-                    template.screenshot(), 130 if not in_shop else 194
-                )
+                for i, _ in _recognize_menu(template.screenshot(), self._item_min_y)
                 if i not in self.items
             )
             if not new_items:
@@ -165,46 +159,54 @@ class ItemMenuScene(Scene):
             _LOGGER.warning("not found any item")
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
-        self._recognize_items(static, _in_shop(ctx))
+        self._recognize_items(static)
         ctx.items = self.items
         ctx.items_last_updated_turn = ctx.turn_count()
 
-    def use_items(self, ctx: Context, items: Sequence[Item]) -> None:
-        remains = list(items)
-        in_shop = _in_shop(ctx)
+    def _after_use_confirm(self, ctx: Context):
+        # wait menu disappear animation
+        action.wait_image_stable(templates.CLOSE_BUTTON)
 
-        def _use_visible_items() -> None:
-            for match, pos in _recognize_menu(
-                template.screenshot(), 130 if not in_shop else 194
-            ):
-                if match not in remains:
+    def use_items(self, ctx: Context, items: Sequence[Item]) -> None:
+        if not items:
+            return
+
+        remains: DefaultDict[int, int] = defaultdict(lambda: 0)
+        for i in items:
+            remains[i.id] += i.quantity or 1
+        selected: Sequence[Item] = []
+
+        def _select_visible_items() -> None:
+            for match, pos in _recognize_menu(template.screenshot(), self._item_min_y):
+                if match.id not in remains:
                     continue
                 if match.disabled:
                     _LOGGER.warning("skip disabled: %s", match)
-                    remains.remove(match)
+                    del remains[match.id]
                     continue
-                _LOGGER.info("use: %s", match)
-                remains.remove(match)
-                action.tap(pos)
-                ctx.items.remove(match.id, 1)
-                ctx.item_history.append(ctx, match)
-                return _use_visible_items()
+                _LOGGER.info("select: %s", match)
+                while remains[match.id]:
+                    action.tap(pos)
+                    remains[match.id] -= 1
+                    selected.append(match)
+                del remains[match.id]
+                return _select_visible_items()
 
         while self._scroll.next():
-            for i in remains:
-                _LOGGER.debug("use remain: %s", i)
-            _use_visible_items()
+            for k, v in remains.items():
+                _LOGGER.debug("use remain: %s\tx%d", item.get(k).name, v)
+            _select_visible_items()
             if not remains:
                 break
         self._scroll.complete()
-        for i in remains:
-            _LOGGER.warning("use remain: %s", i)
-        tmpl, _ = action.wait_image(
-            templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
-            templates.CLOSE_BUTTON,
-        )
-        if tmpl.name == templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON:
+
+        if selected:
             action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
             action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
-        if not in_shop:
-            action.wait_image_stable(templates.CLOSE_BUTTON)
+            self._after_use_confirm(ctx)
+            for i in selected:
+                ctx.items.remove(i.id, 1)
+                ctx.item_history.append(ctx, i)
+
+        for i in remains:
+            _LOGGER.warning("use remain: %s", i)
