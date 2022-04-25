@@ -1,0 +1,1 @@
+Training<spd=20 pow=8 ski=2 vit=-27.0% fail=0% lv=5>

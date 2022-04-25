@@ -41,22 +41,29 @@ def _gradient(colors: Tuple[Tuple[Tuple[int, int, int], int], ...]) -> np.ndarra
 def _recognize_base_effect(img: Image) -> int:
     cv_img = imagetools.cv_image(imagetools.resize(img, height=32))
     sharpened_img = imagetools.sharpen(cv_img)
-    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.65)
+    sharpened_img = imagetools.mix(sharpened_img, cv_img, 0.4)
 
     white_outline_img = imagetools.constant_color_key(
         sharpened_img,
         (255, 255, 255),
     )
-    white_outline_img = cv2.morphologyEx(
+    white_outline_img_dilated = cv2.morphologyEx(
         white_outline_img,
-        cv2.MORPH_CLOSE,
+        cv2.MORPH_DILATE,
         cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)),
     )
+    white_outline_img_dilated = cv2.morphologyEx(
+        white_outline_img_dilated,
+        cv2.MORPH_CLOSE,
+        cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 7)),
+    )
 
-    bg_mask_img = imagetools.bg_mask_by_outline(white_outline_img)
+    bg_mask_img = (
+        imagetools.bg_mask_by_outline(white_outline_img_dilated) + white_outline_img
+    )
     masked_img = cv2.copyTo(cv_img, 255 - bg_mask_img)
 
-    brown_outline_img = imagetools.constant_color_key(
+    brown_img = imagetools.constant_color_key(
         cv_img,
         (29, 62, 194),
         (24, 113, 218),
@@ -67,6 +74,9 @@ def _recognize_base_effect(img: Image) -> int:
         (59, 142, 226),
         threshold=0.85,
     )
+    _, non_brown_img = cv2.threshold(brown_img, 120, 255, cv2.THRESH_BINARY)
+    border_brown_img = imagetools.border_flood_fill(255 - non_brown_img)
+    brown_outline_img = cv2.copyTo(brown_img, 255 - border_brown_img)
     brown_outline_img = cv2.morphologyEx(
         brown_outline_img,
         cv2.MORPH_DILATE,
@@ -94,18 +104,18 @@ def _recognize_base_effect(img: Image) -> int:
     text_img = imagetools.color_key(masked_img, fill_img)
 
     text_img_extra = imagetools.constant_color_key(
-        masked_img, (175, 214, 255), threshold=0.95
+        masked_img,
+        (175, 214, 255),
+        threshold=0.95,
     )
     text_img = np.array(np.maximum(text_img, text_img_extra))
     imagetools.fill_area(text_img, (0,), size_lt=48)
-    if cv2.countNonZero(text_img) < 100:
-        # ignore skin match result
-        return 0
 
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("cv_img", cv_img)
         cv2.imshow("sharpened_img", sharpened_img)
         cv2.imshow("white_outline_img", white_outline_img)
+        cv2.imshow("white_outline_img_dilated", white_outline_img_dilated)
         cv2.imshow("brown_outline_img", brown_outline_img)
         cv2.imshow("bg_mask_img", bg_mask_img)
         cv2.imshow("masked_img", masked_img)
@@ -113,6 +123,10 @@ def _recognize_base_effect(img: Image) -> int:
         cv2.imshow("text_img", text_img)
         cv2.waitKey()
         cv2.destroyAllWindows()
+
+    if cv2.countNonZero(text_img) < 100:
+        # ignore skin match result
+        return 0
 
     # +100 has different color
     hash100 = "000000000000006600ee00ff00ff00ff004e0000000000000000000000000000"
