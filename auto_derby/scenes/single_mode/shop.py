@@ -16,6 +16,7 @@ from ...single_mode.item import Item
 from ..scene import Scene, SceneHolder
 from ..vertical_scroll import VerticalScroll
 from .command import CommandScene
+from .item_menu import ItemMenuScene
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -67,8 +68,8 @@ def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
 def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
-    y_min = rp.vector(365, 540)
-    y_max = rp.vector(815, 540)
+    y_min = rp.vector(390, 540)
+    y_max = rp.vector(700, 540)
     for _, pos in sorted(
         template.match(img, templates.SINGLE_MODE_SHOP_ITEM_PRICE),
         key=lambda x: x[1][1],
@@ -137,8 +138,9 @@ class ShopScene(Scene):
 
     def exchange_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
+        to_use: Sequence[Item] = list()
 
-        def _exchange_visible_items() -> None:
+        def _select_visible_items() -> None:
             for match, pos in _recognize_menu(template.screenshot()):
                 if match not in remains:
                     continue
@@ -151,34 +153,40 @@ class ShopScene(Scene):
                 action.tap(pos)
                 ctx.shop_coin -= match.price
                 remains.remove(match)
-                tmpl, _ = action.wait_image(
-                    templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
-                    templates.CLOSE_BUTTON,
-                )
-                if (
-                    tmpl.name == templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON
-                    and match.should_use_directly(ctx)
-                ):
-                    _LOGGER.info("use: %s", match)
-                    action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
-                    action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
-                    ctx.item_history.append(ctx, match)
-                else:
-                    action.wait_tap_image(templates.CLOSE_BUTTON)
-                    ctx.items.put(match.id, 1)
-                # wait animation
-                action.wait_image_stable(templates.RETURN_BUTTON)
-                return _exchange_visible_items()
+                ctx.items.put(match.id, 1)
+                if match.should_use_directly(ctx):
+                    _LOGGER.info("to use: %s", match)
+                    to_use.append(ctx.items.get(match.id))
+                return _select_visible_items()
 
         while self._scroll.next():
             for i in remains:
                 _LOGGER.debug("exchange remain: %s", i)
-            _exchange_visible_items()
+            _select_visible_items()
             if not remains:
                 break
         self._scroll.complete()
         for i in remains:
             _LOGGER.warning("exchange remain: %s", i)
+        tmpl, _ = action.wait_image(
+            templates.SINGLE_MODE_SHOP_ENTER_BUTTON,
+            templates.RETURN_BUTTON,
+        )
+        if tmpl.name == templates.SINGLE_MODE_SHOP_ENTER_BUTTON:
+            action.wait_tap_image(templates.SINGLE_MODE_SHOP_ENTER_BUTTON)
+            _LOGGER.debug("to_use: %s" % to_use)
+            if to_use:
+                action.wait_image(templates.CLOSE_BUTTON)
+                scene = ItemMenuScene()
+                scene.use_items(ctx, to_use)
+                tmpl, _ = action.wait_image(
+                    templates.CLOSE_BUTTON,
+                    templates.RETURN_BUTTON,
+                )
+                if tmpl.name == templates.CLOSE_BUTTON:
+                    action.wait_tap_image(templates.CLOSE_BUTTON)
+            else:
+                action.wait_tap_image(templates.CLOSE_BUTTON)
 
     def to_dict(self) -> Dict[Text, Any]:
         d: Dict[Text, Any] = {

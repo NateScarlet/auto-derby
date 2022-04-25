@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": 7,
+      "name": "スタミナ戦術書",
+      "quantity": 2,
+      "disabled": true
+    },
+    {
+      "id": 8,
+      "name": "パワー戦術書",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 13,
+      "name": "パワー秘伝書",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 19,
+      "name": "ロイヤルビタージュース",
+      "quantity": 2,
+      "disabled": false
+    },
+    {
+      "id": 50,
+      "name": "健康祈願のお守り",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 52,
+      "name": "蹄鉄ハンマー・極",
+      "quantity": 1,
+      "disabled": false
+    }
+  ]
+}

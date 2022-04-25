@@ -34,12 +34,14 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
     return imagetools.pil_image(binary_img)
 
 
-def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image) -> int:
-    bbox = rp.vector4((179, 43, 382, 64), 540)
+def _recognize_quantity(
+    rp: mathtools.ResizeProxy, item_img: Image, thresh: float = 160
+) -> int:
+    bbox = rp.vector4((179, 43, 194, 64), 540)
     cv_img = imagetools.cv_image(
         imagetools.resize(item_img.crop(bbox).convert("L"), height=32)
     )
-    _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
+    _, binary_img = cv2.threshold(cv_img, thresh, 255, cv2.THRESH_BINARY_INV)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
         cv2.imshow("cv_img", cv_img)
@@ -50,27 +52,32 @@ def _recognize_quantity(rp: mathtools.ResizeProxy, item_img: Image) -> int:
     return int(text)
 
 
-def _recognize_disabled(rp: mathtools.ResizeProxy, item_img: Image) -> bool:
-    try:
-        next(template.match(item_img, templates.SINGLE_MODE_ITEM_MENU_USE_BUTTON))
-        return False
-    except StopIteration:
-        return True
-
-
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     v = item.from_name_image(_title_image(rp, img))
-    v.quantity = _recognize_quantity(rp, img)
-    v.disabled = _recognize_disabled(rp, img)
+    v.quantity = _recognize_quantity(rp, img, 160)
+    v.disabled = False
     return v
 
 
-def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
+def _recognize_disabled_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
+    v = item.from_name_image(_title_image(rp, img))
+    v.quantity = _recognize_quantity(rp, img, 120)
+    v.disabled = True
+    return v
+
+
+def _recognize_menu(
+    img: Image, min_y: int = 130
+) -> Iterator[Tuple[Item, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(img.width)
 
-    min_y = rp.vector(130, 540)
-    for _, pos in sorted(
-        template.match(img, templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY),
+    min_y = rp.vector(min_y, 540)
+    for tmpl, pos in sorted(
+        template.match(
+            img,
+            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY,
+            templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY_DISABLED,
+        ),
         key=lambda x: x[1][1],
     ):
         x, y = pos
@@ -83,7 +90,18 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
             rp.vector(518, 540),
             y + rp.vector(48, 540),
         )
-        yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(303, 540), y)
+        if tmpl.name == templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY:
+            yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(360, 540), y)
+        else:
+            yield _recognize_disabled_item(rp, img.crop(bbox)), (
+                x + rp.vector(360, 540),
+                y,
+            )
+
+
+def _in_shop(ctx: Context) -> bool:
+    """check if scene of context is in single mode shop"""
+    return ctx.scene.name() == "single-mode-shop"
 
 
 class ItemMenuScene(Scene):
@@ -124,12 +142,14 @@ class ItemMenuScene(Scene):
         }
         return d
 
-    def _recognize_items(self, static: bool = False) -> None:
+    def _recognize_items(self, static: bool = False, in_shop: bool = False) -> None:
         self.items = ItemList()
         while self._scroll.next():
             new_items = tuple(
                 i
-                for i, _ in _recognize_menu(template.screenshot())
+                for i, _ in _recognize_menu(
+                    template.screenshot(), 130 if not in_shop else 194
+                )
                 if i not in self.items
             )
             if not new_items:
@@ -145,15 +165,18 @@ class ItemMenuScene(Scene):
             _LOGGER.warning("not found any item")
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
-        self._recognize_items(static)
+        self._recognize_items(static, _in_shop(ctx))
         ctx.items = self.items
         ctx.items_last_updated_turn = ctx.turn_count()
 
     def use_items(self, ctx: Context, items: Sequence[Item]) -> None:
         remains = list(items)
+        in_shop = _in_shop(ctx)
 
         def _use_visible_items() -> None:
-            for match, pos in _recognize_menu(template.screenshot()):
+            for match, pos in _recognize_menu(
+                template.screenshot(), 130 if not in_shop else 194
+            ):
                 if match not in remains:
                     continue
                 if match.disabled:
@@ -161,13 +184,10 @@ class ItemMenuScene(Scene):
                     remains.remove(match)
                     continue
                 _LOGGER.info("use: %s", match)
-                action.tap(pos)
-                action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
                 remains.remove(match)
+                action.tap(pos)
                 ctx.items.remove(match.id, 1)
                 ctx.item_history.append(ctx, match)
-                # wait animation
-                action.wait_image_stable(templates.CLOSE_BUTTON)
                 return _use_visible_items()
 
         while self._scroll.next():
@@ -179,3 +199,12 @@ class ItemMenuScene(Scene):
         self._scroll.complete()
         for i in remains:
             _LOGGER.warning("use remain: %s", i)
+        tmpl, _ = action.wait_image(
+            templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON,
+            templates.CLOSE_BUTTON,
+        )
+        if tmpl.name == templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON:
+            action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
+            action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
+        if not in_shop:
+            action.wait_image_stable(templates.CLOSE_BUTTON)

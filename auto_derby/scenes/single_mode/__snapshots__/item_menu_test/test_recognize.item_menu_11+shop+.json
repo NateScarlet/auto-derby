@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": 9,
+      "name": "根性戦術書",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 10,
+      "name": "賢さ戦術書",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 14,
+      "name": "根性秘伝書",
+      "quantity": 1,
+      "disabled": false
+    },
+    {
+      "id": 16,
+      "name": "バイタル20",
+      "quantity": 3,
+      "disabled": false
+    },
+    {
+      "id": 19,
+      "name": "ロイヤルビタージュース",
+      "quantity": 3,
+      "disabled": false
+    },
+    {
+      "id": 22,
+      "name": "プレーンカップケーキ",
+      "quantity": 2,
+      "disabled": false
+    }
+  ]
+}
