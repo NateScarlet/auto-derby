@@ -170,7 +170,7 @@ class ShopScene(Scene):
             _LOGGER.warning("exchange remain: %s", i)
 
         if selected:
-            action.wait_tap_image(templates.SINGLE_MODE_SHOP_ENTER_BUTTON)
+            action.wait_tap_image(templates.SINGLE_MODE_SHOP_DECIDE_BUTTON)
             for i in selected:
                 ctx.items.put(i.id, 1)
             scene = ShopExchangedItemMenuScene.enter(ctx)
