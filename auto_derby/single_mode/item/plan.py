@@ -53,7 +53,8 @@ def iterate(
             s_e = i.expected_effect_score(ctx, command)
             if s < s_e:
                 break
-            es_after.add(item)
+            i.quantity = 0  # hide quantity from log
+            es_after.add(i)
             s_current += s
             items_current += (i,)
 
