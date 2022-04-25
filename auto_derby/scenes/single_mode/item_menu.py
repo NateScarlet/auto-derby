@@ -21,10 +21,15 @@ from .command import CommandScene
 _LOGGER = logging.getLogger(__name__)
 
 
-def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
+def _title_image(rp: mathtools.ResizeProxy, item_img: Image, disabled: bool) -> Image:
     bbox = rp.vector4((100, 10, 383, 32), 540)
     cv_img = imagetools.cv_image(item_img.crop(bbox).convert("L"))
-    _, binary_img = cv2.threshold(cv_img, 120, 255, cv2.THRESH_BINARY_INV)
+    _, binary_img = cv2.threshold(
+        cv_img,
+        90 if disabled else 120,
+        255,
+        cv2.THRESH_BINARY_INV,
+    )
     binary_img = imagetools.auto_crop(binary_img)
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
@@ -36,13 +41,15 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
 
 
 def _recognize_quantity(
-    rp: mathtools.ResizeProxy, item_img: Image, thresh: float = 160
+    rp: mathtools.ResizeProxy, item_img: Image, disabled: bool
 ) -> int:
     bbox = rp.vector4((179, 43, 194, 64), 540)
     cv_img = imagetools.cv_image(
         imagetools.resize(item_img.crop(bbox).convert("L"), height=32)
     )
-    _, binary_img = cv2.threshold(cv_img, thresh, 255, cv2.THRESH_BINARY_INV)
+    _, binary_img = cv2.threshold(
+        cv_img, 120 if disabled else 160, 255, cv2.THRESH_BINARY_INV
+    )
     if os.getenv("DEBUG") == __name__:
         cv2.imshow("item_img", imagetools.cv_image(item_img))
         cv2.imshow("cv_img", cv_img)
@@ -53,17 +60,10 @@ def _recognize_quantity(
     return int(text)
 
 
-def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
-    v = item.from_name_image(_title_image(rp, img))
-    v.quantity = _recognize_quantity(rp, img, 160)
-    v.disabled = False
-    return v
-
-
-def _recognize_disabled_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
-    v = item.from_name_image(_title_image(rp, img))
-    v.quantity = _recognize_quantity(rp, img, 120)
-    v.disabled = True
+def _recognize_item(rp: mathtools.ResizeProxy, img: Image, disabled: bool) -> Item:
+    v = item.from_name_image(_title_image(rp, img, disabled))
+    v.quantity = _recognize_quantity(rp, img, disabled)
+    v.disabled = disabled
     return v
 
 
@@ -89,13 +89,11 @@ def _recognize_menu(img: Image, min_y: int) -> Iterator[Tuple[Item, Tuple[int, i
             rp.vector(518, 540),
             y + rp.vector(48, 540),
         )
-        if tmpl.name == templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY:
-            yield _recognize_item(rp, img.crop(bbox)), (x + rp.vector(360, 540), y)
-        else:
-            yield _recognize_disabled_item(rp, img.crop(bbox)), (
-                x + rp.vector(360, 540),
-                y,
-            )
+        disabled = tmpl.name != templates.SINGLE_MODE_ITEM_MENU_CURRENT_QUANTITY
+        yield _recognize_item(rp, img.crop(bbox), disabled), (
+            x + rp.vector(360, 540),
+            y,
+        )
 
 
 class ItemMenuScene(Scene):
