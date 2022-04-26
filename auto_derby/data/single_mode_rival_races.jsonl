@@ -18,6 +18,7 @@
 {"turn": 0, "name": "", "characterNames": ["スペシャルウィーク", "サイレンススズカ", "ウオッカ", "ダイワスカーレット", "メジロマックイーン", "シンボリルドルフ", "エアグルーヴ", "サクラバクシンオー", "ナイスネイチャ", "イクノディクタス", "メジロパーマー", "ダイタクヘリオス", "ツインターボ", "キタサンブラック"], "characterIDs": [1001, 1002, 1008, 1009, 1013, 1017, 1018, 1041, 1060, 1063, 1064, 1065, 1066, 1068]}
 {"turn": 0, "name": "", "characterNames": ["シンボリルドルフ", "サクラチヨノオー"], "characterIDs": [1017, 1069]}
 {"turn": 0, "name": "", "characterNames": ["マルゼンスキー", "シンボリルドルフ", "メジロドーベル", "メジロアルダン", "メジロブライト"], "characterIDs": [1004, 1017, 1059, 1071, 1074]}
+{"turn": 0, "name": "", "characterNames": ["マルゼンスキー", "ヤエノムテキ"], "characterIDs": [1004, 1072]}
 {"turn": 0, "name": "", "characterNames": ["マルゼンスキー", "メジロマックイーン", "メジロライアン", "ライスシャワー", "アイネスフウジン", "ナイスネイチャ", "メジロパーマー", "メジロアルダン", "メジロブライト"], "characterIDs": [1004, 1013, 1027, 1030, 1031, 1060, 1064, 1071, 1074]}
 {"turn": 14, "name": "中京ジュニアステークス", "characterNames": ["ウオッカ", "ダイワスカーレット"], "characterIDs": [1008, 1009]}
 {"turn": 15, "name": "コスモス賞", "characterNames": ["タマモクロス", "ゴールドシチー"], "characterIDs": [1021, 1040]}
@@ -31,8 +32,10 @@
 {"turn": 18, "name": "芙蓉ステークス", "characterNames": ["ライスシャワー", "サクラバクシンオー"], "characterIDs": [1030, 1041]}
 {"turn": 18, "name": "芙蓉ステークス", "characterNames": ["ライスシャワー", "マチカネタンホイザ"], "characterIDs": [1030, 1062]}
 {"turn": 18, "name": "芙蓉ステークス", "characterNames": ["サクラチヨノオー", "メジロアルダン"], "characterIDs": [1069, 1071]}
+{"turn": 18, "name": "芙蓉ステークス", "characterNames": ["サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1069, 1072]}
 {"turn": 19, "name": "もみじステークス", "characterNames": ["ビワハヤヒデ", "ナリタタイシン"], "characterIDs": [1023, 1050]}
 {"turn": 19, "name": "サウジアラビアロイヤルカップ", "characterNames": ["サクラチヨノオー", "メジロアルダン"], "characterIDs": [1069, 1071]}
+{"turn": 19, "name": "サウジアラビアロイヤルカップ", "characterNames": ["サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1069, 1072]}
 {"turn": 19, "name": "サウジアラビアロイヤルカップ", "characterNames": ["メジロドーベル", "メジロブライト"], "characterIDs": [1059, 1074]}
 {"turn": 19, "name": "プラタナス賞", "characterNames": ["ヒシアマゾン", "ナリタブライアン"], "characterIDs": [1012, 1016]}
 {"turn": 20, "name": "アイビーステークス", "characterNames": ["スペシャルウィーク", "グラスワンダー"], "characterIDs": [1001, 1011]}
@@ -75,6 +78,7 @@
 {"turn": 23, "name": "朝日杯フューチュリティステークス", "characterNames": ["グラスワンダー", "キングヘイロー"], "characterIDs": [1011, 1061]}
 {"turn": 23, "name": "朝日杯フューチュリティステークス", "characterNames": ["ミホノブルボン", "マチカネタンホイザ"], "characterIDs": [1026, 1062]}
 {"turn": 23, "name": "朝日杯フューチュリティステークス", "characterNames": ["サクラチヨノオー", "メジロアルダン"], "characterIDs": [1069, 1071]}
+{"turn": 23, "name": "朝日杯フューチュリティステークス", "characterNames": ["サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1069, 1072]}
 {"turn": 23, "name": "阪神ジュベナイルフィリーズ", "characterNames": ["ウオッカ", "ダイワスカーレット"], "characterIDs": [1008, 1009]}
 {"turn": 23, "name": "阪神ジュベナイルフィリーズ", "characterNames": ["ヒシアマゾン", "ナリタブライアン"], "characterIDs": [1012, 1016]}
 {"turn": 23, "name": "阪神ジュベナイルフィリーズ", "characterNames": ["タマモクロス", "ゴールドシチー"], "characterIDs": [1021, 1040]}
@@ -110,6 +114,7 @@
 {"turn": 27, "name": "きさらぎ賞", "characterNames": ["スペシャルウィーク", "キングヘイロー"], "characterIDs": [1001, 1061]}
 {"turn": 27, "name": "きさらぎ賞", "characterNames": ["スーパークリーク", "サクラチヨノオー"], "characterIDs": [1045, 1069]}
 {"turn": 27, "name": "きさらぎ賞", "characterNames": ["スーパークリーク", "メジロアルダン"], "characterIDs": [1045, 1071]}
+{"turn": 27, "name": "きさらぎ賞", "characterNames": ["スーパークリーク", "ヤエノムテキ"], "characterIDs": [1045, 1072]}
 {"turn": 27, "name": "エルフィンステークス", "characterNames": ["ウオッカ", "ダイワスカーレット"], "characterIDs": [1008, 1009]}
 {"turn": 27, "name": "クイーンカップ", "characterNames": ["ヒシアマゾン", "ナリタブライアン"], "characterIDs": [1012, 1016]}
 {"turn": 27, "name": "共同通信杯", "characterNames": ["スペシャルウィーク", "エルコンドルパサー"], "characterIDs": [1001, 1014]}
@@ -123,9 +128,11 @@
 {"turn": 27, "name": "共同通信杯", "characterNames": ["メジロドーベル", "メジロブライト"], "characterIDs": [1059, 1074]}
 {"turn": 27, "name": "共同通信杯", "characterNames": ["エルコンドルパサー", "キングヘイロー"], "characterIDs": [1014, 1061]}
 {"turn": 27, "name": "共同通信杯", "characterNames": ["サクラチヨノオー", "メジロアルダン"], "characterIDs": [1069, 1071]}
+{"turn": 27, "name": "共同通信杯", "characterNames": ["サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1069, 1072]}
 {"turn": 28, "name": "すみれステークス", "characterNames": ["オグリキャップ", "スーパークリーク"], "characterIDs": [1006, 1045]}
 {"turn": 28, "name": "すみれステークス", "characterNames": ["スーパークリーク", "サクラチヨノオー"], "characterIDs": [1045, 1069]}
 {"turn": 28, "name": "すみれステークス", "characterNames": ["スーパークリーク", "メジロアルダン"], "characterIDs": [1045, 1071]}
+{"turn": 28, "name": "すみれステークス", "characterNames": ["スーパークリーク", "ヤエノムテキ"], "characterIDs": [1045, 1072]}
 {"turn": 29, "name": "チューリップ賞", "characterNames": ["ウオッカ", "ダイワスカーレット"], "characterIDs": [1008, 1009]}
 {"turn": 29, "name": "チューリップ賞", "characterNames": ["サクラバクシンオー", "ニシノフラワー"], "characterIDs": [1041, 1051]}
 {"turn": 29, "name": "チューリップ賞", "characterNames": ["ニシノフラワー", "マチカネタンホイザ"], "characterIDs": [1051, 1062]}
@@ -144,6 +151,7 @@
 {"turn": 29, "name": "弥生賞", "characterNames": ["アドマイヤベガ", "メイショウドトウ"], "characterIDs": [1033, 1058]}
 {"turn": 29, "name": "弥生賞", "characterNames": ["スペシャルウィーク", "セイウンスカイ", "キングヘイロー"], "characterIDs": [1001, 1020, 1061]}
 {"turn": 29, "name": "弥生賞", "characterNames": ["サクラチヨノオー", "メジロアルダン"], "characterIDs": [1069, 1071]}
+{"turn": 29, "name": "弥生賞", "characterNames": ["サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1069, 1072]}
 {"turn": 29, "name": "弥生賞", "characterNames": ["サイレンススズカ", "メジロブライト"], "characterIDs": [1002, 1074]}
 {"turn": 30, "name": "スプリングステークス", "characterNames": ["ヒシアマゾン", "ナリタブライアン"], "characterIDs": [1012, 1016]}
 {"turn": 30, "name": "スプリングステークス", "characterNames": ["タマモクロス", "ゴールドシチー"], "characterIDs": [1021, 1040]}
@@ -159,6 +167,7 @@
 {"turn": 30, "name": "毎日杯", "characterNames": ["オグリキャップ", "スーパークリーク"], "characterIDs": [1006, 1045]}
 {"turn": 30, "name": "毎日杯", "characterNames": ["オグリキャップ", "サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1006, 1069, 1072]}
 {"turn": 30, "name": "毎日杯", "characterNames": ["オグリキャップ", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1006, 1071, 1072]}
+{"turn": 30, "name": "毎日杯", "characterNames": ["オグリキャップ", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1006, 1069, 1071, 1072]}
 {"turn": 30, "name": "若葉ステークス", "characterNames": ["ビワハヤヒデ", "ウイニングチケット"], "characterIDs": [1023, 1035]}
 {"turn": 30, "name": "若葉ステークス", "characterNames": ["ビワハヤヒデ", "ナリタタイシン"], "characterIDs": [1023, 1050]}
 {"turn": 30, "name": "若葉ステークス", "characterNames": ["トウカイテイオー", "ナイスネイチャ"], "characterIDs": [1003, 1060]}
@@ -173,6 +182,7 @@
 {"turn": 31, "name": "ニュージーランドトロフィー", "characterNames": ["エルコンドルパサー", "キングヘイロー"], "characterIDs": [1014, 1061]}
 {"turn": 31, "name": "ニュージーランドトロフィー", "characterNames": ["オグリキャップ", "サクラチヨノオー"], "characterIDs": [1006, 1069]}
 {"turn": 31, "name": "ニュージーランドトロフィー", "characterNames": ["オグリキャップ", "メジロアルダン"], "characterIDs": [1006, 1071]}
+{"turn": 31, "name": "ニュージーランドトロフィー", "characterNames": ["オグリキャップ", "ヤエノムテキ"], "characterIDs": [1006, 1072]}
 {"turn": 31, "name": "ニュージーランドトロフィー", "characterNames": ["シーキングザパール", "メジロブライト"], "characterIDs": [1042, 1074]}
 {"turn": 31, "name": "桜花賞", "characterNames": ["ウオッカ", "ダイワスカーレット"], "characterIDs": [1008, 1009]}
 {"turn": 31, "name": "桜花賞", "characterNames": ["ヒシアマゾン", "ナリタブライアン"], "characterIDs": [1012, 1016]}
@@ -205,6 +215,7 @@
 {"turn": 31, "name": "皐月賞", "characterNames": ["スペシャルウィーク", "キタサンブラック"], "characterIDs": [0, 1068]}
 {"turn": 31, "name": "皐月賞", "characterNames": ["サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1069, 1071, 1072]}
 {"turn": 32, "name": "青葉賞", "characterNames": ["サクラチヨノオー", "メジロアルダン"], "characterIDs": [1069, 1071]}
+{"turn": 32, "name": "青葉賞", "characterNames": ["メジロアルダン", "ヤエノムテキ"], "characterIDs": [1071, 1072]}
 {"turn": 33, "name": "NHKマイルカップ", "characterNames": ["スペシャルウィーク", "エルコンドルパサー"], "characterIDs": [1001, 1014]}
 {"turn": 33, "name": "NHKマイルカップ", "characterNames": ["グラスワンダー", "エルコンドルパサー"], "characterIDs": [1011, 1014]}
 {"turn": 33, "name": "NHKマイルカップ", "characterNames": ["エルコンドルパサー", "セイウンスカイ"], "characterIDs": [1014, 1020]}
@@ -216,6 +227,7 @@
 {"turn": 33, "name": "プリンシパルステークス", "characterNames": ["サイレンススズカ", "マチカネフクキタル", "メジロドーベル", "メジロブライト"], "characterIDs": [1002, 1056, 1059, 1074]}
 {"turn": 33, "name": "プリンシパルステークス", "characterNames": ["マチカネフクキタル", "メジロドーベル"], "characterIDs": [1056, 1059]}
 {"turn": 33, "name": "プリンシパルステークス", "characterNames": ["サイレンススズカ", "マチカネフクキタル", "メジロブライト"], "characterIDs": [1002, 1056, 1074]}
+{"turn": 33, "name": "京都新聞杯", "characterNames": ["オグリキャップ", "ヤエノムテキ"], "characterIDs": [1006, 1072]}
 {"turn": 34, "name": "オークス", "characterNames": ["ヒシアマゾン", "ナリタブライアン"], "characterIDs": [1012, 1016]}
 {"turn": 34, "name": "オークス", "characterNames": ["ニシノフラワー", "マチカネタンホイザ"], "characterIDs": [1051, 1062]}
 {"turn": 34, "name": "オークス", "characterNames": ["メジロドーベル", "メジロブライト"], "characterIDs": [1059, 1074]}
@@ -272,6 +284,7 @@
 {"turn": 36, "name": "宝塚記念", "characterNames": ["ゴールドシップ", "サトノダイヤモンド", "キタサンブラック"], "characterIDs": [1007, 1067, 1068]}
 {"turn": 36, "name": "宝塚記念", "characterNames": ["タマモクロス", "サクラチヨノオー"], "characterIDs": [1021, 1069]}
 {"turn": 36, "name": "宝塚記念", "characterNames": ["タマモクロス", "メジロアルダン"], "characterIDs": [1021, 1071]}
+{"turn": 36, "name": "宝塚記念", "characterNames": ["タマモクロス", "ヤエノムテキ"], "characterIDs": [1021, 1072]}
 {"turn": 37, "name": "函館記念", "characterNames": ["ナリタブライアン", "ツインターボ"], "characterIDs": [1016, 1066]}
 {"turn": 37, "name": "函館記念", "characterNames": ["サクラチヨノオー", "シリウスシンボリ"], "characterIDs": [1069, 1070]}
 {"turn": 37, "name": "函館記念", "characterNames": ["シリウスシンボリ", "メジロアルダン"], "characterIDs": [1070, 1071]}
@@ -337,6 +350,7 @@
 {"turn": 42, "name": "神戸新聞杯", "characterNames": ["マチカネフクキタル", "メジロドーベル", "メジロブライト"], "characterIDs": [1056, 1059, 1074]}
 {"turn": 42, "name": "神戸新聞杯", "characterNames": ["スーパークリーク", "サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1045, 1069, 1072]}
 {"turn": 42, "name": "神戸新聞杯", "characterNames": ["スーパークリーク", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1045, 1071, 1072]}
+{"turn": 42, "name": "神戸新聞杯", "characterNames": ["スーパークリーク", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1045, 1069, 1071, 1072]}
 {"turn": 43, "name": "京都大賞典", "characterNames": ["スペシャルウィーク", "テイエムオペラオー", "セイウンスカイ", "アドマイヤベガ", "ハルウララ", "メイショウドトウ"], "characterIDs": [1001, 1015, 1020, 1033, 1052, 1058]}
 {"turn": 43, "name": "京都大賞典", "characterNames": ["フジキセキ", "ヒシアマゾン"], "characterIDs": [1005, 1012]}
 {"turn": 43, "name": "京都大賞典", "characterNames": ["グラスワンダー", "セイウンスカイ"], "characterIDs": [1011, 1020]}
@@ -368,6 +382,7 @@
 {"turn": 43, "name": "毎日王冠", "characterNames": ["ナリタブライアン", "ナイスネイチャ", "マチカネタンホイザ", "イクノディクタス", "ダイタクヘリオス"], "characterIDs": [1016, 1060, 1062, 1063, 1065]}
 {"turn": 43, "name": "毎日王冠", "characterNames": ["オグリキャップ", "サクラチヨノオー", "シリウスシンボリ"], "characterIDs": [1006, 1069, 1070]}
 {"turn": 43, "name": "毎日王冠", "characterNames": ["オグリキャップ", "シリウスシンボリ", "メジロアルダン"], "characterIDs": [1006, 1070, 1071]}
+{"turn": 43, "name": "毎日王冠", "characterNames": ["オグリキャップ", "ヤエノムテキ"], "characterIDs": [1006, 1072]}
 {"turn": 44, "name": "スワンステークス", "characterNames": ["フジキセキ", "ヒシアケボノ"], "characterIDs": [1005, 1028]}
 {"turn": 44, "name": "スワンステークス", "characterNames": ["ヒシアマゾン", "ビコーペガサス"], "characterIDs": [1012, 1054]}
 {"turn": 44, "name": "スワンステークス", "characterNames": ["アグネスデジタル", "キングヘイロー"], "characterIDs": [1019, 1061]}
@@ -393,6 +408,7 @@
 {"turn": 44, "name": "天皇賞（秋）", "characterNames": ["ナリタブライアン", "ナイスネイチャ", "マチカネタンホイザ", "イクノディクタス", "メジロパーマー", "ダイタクヘリオス"], "characterIDs": [1016, 1060, 1062, 1063, 1064, 1065]}
 {"turn": 44, "name": "天皇賞（秋）", "characterNames": ["オグリキャップ", "タマモクロス", "サクラチヨノオー", "シリウスシンボリ"], "characterIDs": [1006, 1021, 1069, 1070]}
 {"turn": 44, "name": "天皇賞（秋）", "characterNames": ["オグリキャップ", "タマモクロス", "シリウスシンボリ", "メジロアルダン"], "characterIDs": [1006, 1021, 1070, 1071]}
+{"turn": 44, "name": "天皇賞（秋）", "characterNames": ["オグリキャップ", "タマモクロス", "ヤエノムテキ"], "characterIDs": [1006, 1021, 1072]}
 {"turn": 44, "name": "天皇賞（秋）", "characterNames": ["サイレンススズカ", "エアグルーヴ", "メジロブライト"], "characterIDs": [1002, 1018, 1074]}
 {"turn": 44, "name": "秋華賞", "characterNames": ["ウオッカ", "ダイワスカーレット"], "characterIDs": [1008, 1009]}
 {"turn": 44, "name": "秋華賞", "characterNames": ["ヒシアマゾン", "ナリタブライアン"], "characterIDs": [1012, 1016]}
@@ -423,6 +439,7 @@
 {"turn": 44, "name": "菊花賞", "characterNames": ["ミホノブルボン", "ライスシャワー", "マチカネタンホイザ"], "characterIDs": [1026, 1030, 1062]}
 {"turn": 44, "name": "菊花賞", "characterNames": ["スーパークリーク", "サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1045, 1069, 1072]}
 {"turn": 44, "name": "菊花賞", "characterNames": ["スーパークリーク", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1045, 1071, 1072]}
+{"turn": 44, "name": "菊花賞", "characterNames": ["スーパークリーク", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1045, 1069, 1071, 1072]}
 {"turn": 45, "name": "アルゼンチン共和国杯", "characterNames": ["スペシャルウィーク", "グラスワンダー"], "characterIDs": [1001, 1011]}
 {"turn": 45, "name": "アルゼンチン共和国杯", "characterNames": ["グラスワンダー", "エルコンドルパサー"], "characterIDs": [1011, 1014]}
 {"turn": 45, "name": "アルゼンチン共和国杯", "characterNames": ["グラスワンダー", "セイウンスカイ"], "characterIDs": [1011, 1020]}
@@ -457,6 +474,7 @@
 {"turn": 46, "name": "ジャパンカップ", "characterNames": ["ゴールドシップ", "サトノダイヤモンド", "キタサンブラック"], "characterIDs": [1007, 1067, 1068]}
 {"turn": 46, "name": "ジャパンカップ", "characterNames": ["オグリキャップ", "タマモクロス", "ゴールドシチー", "サクラチヨノオー"], "characterIDs": [1006, 1021, 1040, 1069]}
 {"turn": 46, "name": "ジャパンカップ", "characterNames": ["オグリキャップ", "タマモクロス", "ゴールドシチー", "メジロアルダン"], "characterIDs": [1006, 1021, 1040, 1071]}
+{"turn": 46, "name": "ジャパンカップ", "characterNames": ["オグリキャップ", "タマモクロス", "ヤエノムテキ"], "characterIDs": [1006, 1021, 1072]}
 {"turn": 46, "name": "ジャパンカップ", "characterNames": ["エアグルーヴ", "メジロブライト"], "characterIDs": [1018, 1074]}
 {"turn": 46, "name": "マイルチャンピオンシップ", "characterNames": ["フジキセキ", "ヒシアケボノ", "ビコーペガサス"], "characterIDs": [1005, 1028, 1054]}
 {"turn": 46, "name": "マイルチャンピオンシップ", "characterNames": ["サイレンススズカ", "タイキシャトル", "メジロドーベル", "メジロブライト"], "characterIDs": [1002, 1010, 1059, 1074]}
@@ -479,7 +497,7 @@
 {"turn": 48, "name": "有馬記念", "characterNames": ["スペシャルウィーク", "グラスワンダー", "テイエムオペラオー", "セイウンスカイ", "アドマイヤベガ", "エイシンフラッシュ", "トーセンジョーダン", "ハルウララ", "メイショウドトウ", "キングヘイロー"], "characterIDs": [1001, 1011, 1015, 1020, 1033, 1037, 1048, 1052, 1058, 1061]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["サイレンススズカ", "エアグルーヴ"], "characterIDs": [1002, 1018]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["フジキセキ", "ヒシアマゾン", "ナリタブライアン", "マヤノトップガン", "エイシンフラッシュ", "トーセンジョーダン"], "characterIDs": [1005, 1012, 1016, 1024, 1037, 1048]}
-{"turn": 48, "name": "有馬記念", "characterNames": ["オグリキャップ", "メジロライアン", "スーパークリーク", "サクラチヨノオー", "メジロアルダン"], "characterIDs": [1006, 1027, 1045, 1069, 1071]}
+{"turn": 48, "name": "有馬記念", "characterNames": ["オグリキャップ", "メジロライアン", "スーパークリーク", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1006, 1027, 1045, 1069, 1071, 1072]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["ゴールドシップ", "エイシンフラッシュ", "キタサンブラック"], "characterIDs": [1007, 1037, 1068]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["ウオッカ", "ダイワスカーレット"], "characterIDs": [1008, 1009]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["スペシャルウィーク", "グラスワンダー", "エルコンドルパサー", "テイエムオペラオー", "セイウンスカイ", "アドマイヤベガ", "ハルウララ", "メイショウドトウ", "キングヘイロー"], "characterIDs": [1001, 1011, 1014, 1015, 1020, 1033, 1052, 1058, 1061]}
@@ -502,7 +520,7 @@
 {"turn": 48, "name": "有馬記念", "characterNames": ["カワカミプリンセス", "スイープトウショウ"], "characterIDs": [1039, 1044]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["タマモクロス", "ゴールドシチー"], "characterIDs": [1021, 1040]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["ライスシャワー", "サクラバクシンオー"], "characterIDs": [1030, 1041]}
-{"turn": 48, "name": "有馬記念", "characterNames": ["オグリキャップ", "タマモクロス", "スーパークリーク", "サクラチヨノオー", "メジロアルダン"], "characterIDs": [1006, 1021, 1045, 1069, 1071]}
+{"turn": 48, "name": "有馬記念", "characterNames": ["オグリキャップ", "タマモクロス", "スーパークリーク", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1006, 1021, 1045, 1069, 1071, 1072]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["スペシャルウィーク", "フジキセキ", "メジロマックイーン", "エアグルーヴ", "ゼンノロブロイ", "トーセンジョーダン"], "characterIDs": [1001, 1005, 1013, 1018, 1047, 1048]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["ニシノフラワー", "ナイスネイチャ", "イクノディクタス", "メジロパーマー", "ダイタクヘリオス"], "characterIDs": [1051, 1060, 1063, 1064, 1065]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["スペシャルウィーク", "グラスワンダー", "ハルウララ"], "characterIDs": [1001, 1011, 1052]}
@@ -515,9 +533,11 @@
 {"turn": 48, "name": "有馬記念", "characterNames": ["ゴールドシップ", "サトノダイヤモンド", "キタサンブラック"], "characterIDs": [1007, 1067, 1068]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["オグリキャップ", "タマモクロス", "スーパークリーク", "サクラチヨノオー"], "characterIDs": [1006, 1021, 1045, 1069]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["オグリキャップ", "タマモクロス", "スーパークリーク", "メジロアルダン"], "characterIDs": [1006, 1021, 1045, 1071]}
+{"turn": 48, "name": "有馬記念", "characterNames": ["オグリキャップ", "タマモクロス", "スーパークリーク", "ヤエノムテキ"], "characterIDs": [1006, 1021, 1045, 1072]}
 {"turn": 48, "name": "有馬記念", "characterNames": ["エアグルーヴ", "メジロブライト"], "characterIDs": [1018, 1074]}
 {"turn": 48, "name": "東京大賞典", "characterNames": ["イナリワン", "サクラチヨノオー"], "characterIDs": [1034, 1069]}
 {"turn": 48, "name": "東京大賞典", "characterNames": ["イナリワン", "メジロアルダン"], "characterIDs": [1034, 1071]}
+{"turn": 48, "name": "東京大賞典", "characterNames": ["イナリワン", "ヤエノムテキ"], "characterIDs": [1034, 1072]}
 {"turn": 49, "name": "中山金杯", "characterNames": ["マチカネタンホイザ", "ツインターボ"], "characterIDs": [1062, 1066]}
 {"turn": 49, "name": "京都金杯", "characterNames": ["オグリキャップ", "タマモクロス"], "characterIDs": [1006, 1021]}
 {"turn": 49, "name": "京都金杯", "characterNames": ["タマモクロス", "スーパークリーク"], "characterIDs": [1021, 1045]}
@@ -596,6 +616,7 @@
 {"turn": 54, "name": "大阪杯", "characterNames": ["サトノダイヤモンド", "キタサンブラック"], "characterIDs": [1067, 1068]}
 {"turn": 54, "name": "大阪杯", "characterNames": ["ゴールドシチー", "サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1040, 1069, 1072]}
 {"turn": 54, "name": "大阪杯", "characterNames": ["ゴールドシチー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1040, 1071, 1072]}
+{"turn": 54, "name": "大阪杯", "characterNames": ["ゴールドシチー", "スーパークリーク", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1040, 1045, 1069, 1071, 1072]}
 {"turn": 54, "name": "日経賞", "characterNames": ["スペシャルウィーク", "セイウンスカイ"], "characterIDs": [1001, 1020]}
 {"turn": 54, "name": "日経賞", "characterNames": ["グラスワンダー", "テイエムオペラオー", "セイウンスカイ", "メイショウドトウ"], "characterIDs": [1011, 1015, 1020, 1058]}
 {"turn": 54, "name": "日経賞", "characterNames": ["ヒシアマゾン", "ライスシャワー"], "characterIDs": [1012, 1030]}
@@ -634,6 +655,7 @@
 {"turn": 54, "name": "阪神大賞典", "characterNames": ["マチカネタンホイザ", "メジロパーマー"], "characterIDs": [1062, 1064]}
 {"turn": 54, "name": "阪神大賞典", "characterNames": ["イナリワン", "サクラチヨノオー"], "characterIDs": [1034, 1069]}
 {"turn": 54, "name": "阪神大賞典", "characterNames": ["イナリワン", "メジロアルダン"], "characterIDs": [1034, 1071]}
+{"turn": 54, "name": "阪神大賞典", "characterNames": ["イナリワン", "ヤエノムテキ"], "characterIDs": [1034, 1072]}
 {"turn": 54, "name": "高松宮記念", "characterNames": ["スペシャルウィーク", "キングヘイロー"], "characterIDs": [1001, 1061]}
 {"turn": 54, "name": "高松宮記念", "characterNames": ["フジキセキ", "ナリタブライアン", "ヒシアケボノ", "ビコーペガサス"], "characterIDs": [1005, 1016, 1028, 1054]}
 {"turn": 54, "name": "高松宮記念", "characterNames": ["セイウンスカイ", "キングヘイロー"], "characterIDs": [1020, 1061]}
@@ -677,7 +699,7 @@
 {"turn": 56, "name": "天皇賞（春）", "characterNames": ["テイエムオペラオー", "アドマイヤベガ", "ナリタトップロード"], "characterIDs": [1015, 1033, 1077]}
 {"turn": 56, "name": "天皇賞（春）", "characterNames": ["ビワハヤヒデ", "ウイニングチケット", "ナリタタイシン"], "characterIDs": [1023, 1035, 1050]}
 {"turn": 56, "name": "天皇賞（春）", "characterNames": ["ゴールドシップ", "マンハッタンカフェ", "エイシンフラッシュ", "ゼンノロブロイ"], "characterIDs": [1007, 1025, 1037, 1047]}
-{"turn": 56, "name": "天皇賞（春）", "characterNames": ["タマモクロス", "ゴールドシチー", "サクラチヨノオー", "メジロアルダン"], "characterIDs": [1021, 1040, 1069, 1071]}
+{"turn": 56, "name": "天皇賞（春）", "characterNames": ["タマモクロス", "ゴールドシチー", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1021, 1040, 1069, 1071, 1072]}
 {"turn": 56, "name": "天皇賞（春）", "characterNames": ["ライスシャワー", "サクラバクシンオー"], "characterIDs": [1030, 1041]}
 {"turn": 56, "name": "天皇賞（春）", "characterNames": ["タマモクロス", "イナリワン", "スーパークリーク"], "characterIDs": [1021, 1034, 1045]}
 {"turn": 56, "name": "天皇賞（春）", "characterNames": ["ゴールドシップ", "トーセンジョーダン"], "characterIDs": [1007, 1048]}
@@ -690,6 +712,7 @@
 {"turn": 56, "name": "天皇賞（春）", "characterNames": ["サトノダイヤモンド", "キタサンブラック"], "characterIDs": [1067, 1068]}
 {"turn": 56, "name": "天皇賞（春）", "characterNames": ["イナリワン", "ゴールドシチー", "サクラチヨノオー"], "characterIDs": [1034, 1040, 1069]}
 {"turn": 56, "name": "天皇賞（春）", "characterNames": ["イナリワン", "ゴールドシチー", "メジロアルダン"], "characterIDs": [1034, 1040, 1071]}
+{"turn": 56, "name": "天皇賞（春）", "characterNames": ["イナリワン", "ゴールドシチー", "ヤエノムテキ"], "characterIDs": [1034, 1040, 1072]}
 {"turn": 57, "name": "メトロポリタンステークス", "characterNames": ["テイエムオペラオー", "メイショウドトウ"], "characterIDs": [1015, 1058]}
 {"turn": 57, "name": "メトロポリタンステークス", "characterNames": ["アドマイヤベガ", "メイショウドトウ"], "characterIDs": [1033, 1058]}
 {"turn": 57, "name": "メトロポリタンステークス", "characterNames": ["トーセンジョーダン", "ナカヤマフェスタ"], "characterIDs": [1048, 1049]}
@@ -702,6 +725,7 @@
 {"turn": 57, "name": "京王杯スプリングカップ", "characterNames": ["グラスワンダー", "メイショウドトウ"], "characterIDs": [1011, 1058]}
 {"turn": 57, "name": "京王杯スプリングカップ", "characterNames": ["タイキシャトル", "メジロドーベル"], "characterIDs": [1010, 1059]}
 {"turn": 57, "name": "京王杯スプリングカップ", "characterNames": ["グラスワンダー", "キングヘイロー"], "characterIDs": [1011, 1061]}
+{"turn": 57, "name": "京王杯スプリングカップ", "characterNames": ["バンブーメモリー", "ヤエノムテキ"], "characterIDs": [1053, 1072]}
 {"turn": 57, "name": "京王杯スプリングカップ", "characterNames": ["タイキシャトル", "メジロブライト"], "characterIDs": [1010, 1074]}
 {"turn": 57, "name": "新潟大賞典", "characterNames": ["ナリタブライアン", "ツインターボ"], "characterIDs": [1016, 1066]}
 {"turn": 57, "name": "新潟大賞典", "characterNames": ["マチカネタンホイザ", "ツインターボ"], "characterIDs": [1062, 1066]}
@@ -724,6 +748,7 @@
 {"turn": 59, "name": "安田記念", "characterNames": ["タイキシャトル", "シーキングザパール", "メジロドーベル"], "characterIDs": [1010, 1042, 1059]}
 {"turn": 59, "name": "安田記念", "characterNames": ["ニシノフラワー", "マチカネタンホイザ", "イクノディクタス"], "characterIDs": [1051, 1062, 1063]}
 {"turn": 59, "name": "安田記念", "characterNames": ["バンブーメモリー", "サクラチヨノオー", "メジロアルダン"], "characterIDs": [1053, 1069, 1071]}
+{"turn": 59, "name": "安田記念", "characterNames": ["オグリキャップ", "バンブーメモリー", "ヤエノムテキ"], "characterIDs": [1006, 1053, 1072]}
 {"turn": 59, "name": "安田記念", "characterNames": ["タイキシャトル", "シーキングザパール", "メジロブライト"], "characterIDs": [1010, 1042, 1074]}
 {"turn": 59, "name": "鳴尾記念", "characterNames": ["サイレンススズカ", "エアグルーヴ", "マチカネフクキタル"], "characterIDs": [1002, 1018, 1056]}
 {"turn": 59, "name": "鳴尾記念", "characterNames": ["エアグルーヴ", "マチカネフクキタル", "メジロドーベル"], "characterIDs": [1018, 1056, 1059]}
@@ -747,7 +772,7 @@
 {"turn": 60, "name": "宝塚記念", "characterNames": ["ビワハヤヒデ", "ウイニングチケット"], "characterIDs": [1023, 1035]}
 {"turn": 60, "name": "宝塚記念", "characterNames": ["スペシャルウィーク", "エアグルーヴ", "エイシンフラッシュ"], "characterIDs": [1001, 1018, 1037]}
 {"turn": 60, "name": "宝塚記念", "characterNames": ["ウオッカ", "カワカミプリンセス", "キングヘイロー"], "characterIDs": [1008, 1039, 1061]}
-{"turn": 60, "name": "宝塚記念", "characterNames": ["タマモクロス", "ゴールドシチー", "サクラチヨノオー", "メジロアルダン"], "characterIDs": [1021, 1040, 1069, 1071]}
+{"turn": 60, "name": "宝塚記念", "characterNames": ["タマモクロス", "ゴールドシチー", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1021, 1040, 1069, 1071, 1072]}
 {"turn": 60, "name": "宝塚記念", "characterNames": ["ゴールドシップ", "トーセンジョーダン", "ナカヤマフェスタ"], "characterIDs": [1007, 1048, 1049]}
 {"turn": 60, "name": "宝塚記念", "characterNames": ["ビワハヤヒデ", "ナリタタイシン", "ナイスネイチャ"], "characterIDs": [1023, 1050, 1060]}
 {"turn": 60, "name": "宝塚記念", "characterNames": ["メジロマックイーン", "ニシノフラワー", "マチカネタンホイザ", "イクノディクタス", "メジロパーマー"], "characterIDs": [1013, 1051, 1062, 1063, 1064]}
@@ -761,6 +786,7 @@
 {"turn": 60, "name": "宝塚記念", "characterNames": ["イナリワン", "ゴールドシチー", "バンブーメモリー", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1034, 1040, 1053, 1069, 1071, 1072]}
 {"turn": 60, "name": "宝塚記念", "characterNames": ["サイレンススズカ", "エアグルーヴ", "マチカネフクキタル", "メジロドーベル", "メジロブライト"], "characterIDs": [1002, 1018, 1056, 1059, 1074]}
 {"turn": 60, "name": "帝王賞", "characterNames": ["ナリタブライアン", "ツインターボ"], "characterIDs": [1016, 1066]}
+{"turn": 61, "name": "CBC賞", "characterNames": ["バンブーメモリー", "ヤエノムテキ"], "characterIDs": [1053, 1072]}
 {"turn": 61, "name": "七夕賞", "characterNames": ["マチカネタンホイザ", "ツインターボ"], "characterIDs": [1062, 1066]}
 {"turn": 61, "name": "函館記念", "characterNames": ["ナリタブライアン", "マチカネタンホイザ"], "characterIDs": [1016, 1062]}
 {"turn": 64, "name": "札幌記念", "characterNames": ["スペシャルウィーク", "セイウンスカイ"], "characterIDs": [1001, 1020]}
@@ -787,6 +813,7 @@
 {"turn": 66, "name": "オールカマー", "characterNames": ["ライスシャワー", "マチカネタンホイザ", "イクノディクタス", "ツインターボ"], "characterIDs": [1030, 1062, 1063, 1066]}
 {"turn": 66, "name": "オールカマー", "characterNames": ["オグリキャップ", "サクラチヨノオー"], "characterIDs": [1006, 1069]}
 {"turn": 66, "name": "オールカマー", "characterNames": ["オグリキャップ", "メジロアルダン"], "characterIDs": [1006, 1071]}
+{"turn": 66, "name": "オールカマー", "characterNames": ["オグリキャップ", "ヤエノムテキ"], "characterIDs": [1006, 1072]}
 {"turn": 66, "name": "スプリンターズステークス", "characterNames": ["スペシャルウィーク", "キングヘイロー"], "characterIDs": [1001, 1061]}
 {"turn": 66, "name": "スプリンターズステークス", "characterNames": ["フジキセキ", "ヒシアケボノ", "ビコーペガサス"], "characterIDs": [1005, 1028, 1054]}
 {"turn": 66, "name": "スプリンターズステークス", "characterNames": ["ヒシアマゾン", "ビコーペガサス"], "characterIDs": [1012, 1054]}
@@ -798,6 +825,7 @@
 {"turn": 66, "name": "スプリンターズステークス", "characterNames": ["サクラバクシンオー", "ニシノフラワー", "マチカネタンホイザ", "ヤマニンゼファー"], "characterIDs": [1041, 1051, 1062, 1078]}
 {"turn": 66, "name": "スプリンターズステークス", "characterNames": ["タイキシャトル", "シーキングザパール", "メジロドーベル"], "characterIDs": [1010, 1042, 1059]}
 {"turn": 66, "name": "スプリンターズステークス", "characterNames": ["ニシノフラワー", "マチカネタンホイザ"], "characterIDs": [1051, 1062]}
+{"turn": 66, "name": "スプリンターズステークス", "characterNames": ["バンブーメモリー", "ヤエノムテキ"], "characterIDs": [1053, 1072]}
 {"turn": 66, "name": "スプリンターズステークス", "characterNames": ["タイキシャトル", "シーキングザパール", "メジロブライト"], "characterIDs": [1010, 1042, 1074]}
 {"turn": 67, "name": "京都大賞典", "characterNames": ["オグリキャップ", "スーパークリーク"], "characterIDs": [1006, 1045]}
 {"turn": 67, "name": "京都大賞典", "characterNames": ["スペシャルウィーク", "グラスワンダー"], "characterIDs": [1001, 1011]}
@@ -820,6 +848,7 @@
 {"turn": 67, "name": "京都大賞典", "characterNames": ["メジロマックイーン", "マチカネタンホイザ", "メジロパーマー"], "characterIDs": [1013, 1062, 1064]}
 {"turn": 67, "name": "京都大賞典", "characterNames": ["スーパークリーク", "サクラチヨノオー"], "characterIDs": [1045, 1069]}
 {"turn": 67, "name": "京都大賞典", "characterNames": ["スーパークリーク", "メジロアルダン"], "characterIDs": [1045, 1071]}
+{"turn": 67, "name": "京都大賞典", "characterNames": ["スーパークリーク", "ヤエノムテキ"], "characterIDs": [1045, 1072]}
 {"turn": 67, "name": "府中ウマ娘ステークス", "characterNames": ["メジロドーベル", "メジロブライト"], "characterIDs": [1059, 1074]}
 {"turn": 67, "name": "毎日王冠", "characterNames": ["スペシャルウィーク", "グラスワンダー"], "characterIDs": [1001, 1011]}
 {"turn": 67, "name": "毎日王冠", "characterNames": ["サイレンススズカ", "タイキシャトル", "グラスワンダー", "エルコンドルパサー", "エアグルーヴ", "マチカネフクキタル", "メジロドーベル", "メジロブライト"], "characterIDs": [1002, 1010, 1011, 1014, 1018, 1056, 1059, 1074]}
@@ -838,6 +867,8 @@
 {"turn": 67, "name": "毎日王冠", "characterNames": ["サイレンススズカ", "メジロドーベル"], "characterIDs": [1002, 1059]}
 {"turn": 67, "name": "毎日王冠", "characterNames": ["ナイスネイチャ", "マチカネタンホイザ", "イクノディクタス"], "characterIDs": [1060, 1062, 1063]}
 {"turn": 67, "name": "毎日王冠", "characterNames": ["オグリキャップ", "イナリワン", "サクラチヨノオー", "メジロアルダン"], "characterIDs": [1006, 1034, 1069, 1071]}
+{"turn": 67, "name": "毎日王冠", "characterNames": ["オグリキャップ", "イナリワン", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1006, 1034, 1069, 1071, 1072]}
+{"turn": 67, "name": "毎日王冠", "characterNames": ["オグリキャップ", "イナリワン", "バンブーメモリー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1006, 1034, 1053, 1071, 1072]}
 {"turn": 68, "name": "スワンステークス", "characterNames": ["フジキセキ", "ヒシアケボノ", "ビコーペガサス"], "characterIDs": [1005, 1028, 1054]}
 {"turn": 68, "name": "スワンステークス", "characterNames": ["フジキセキ", "ヒシアケボノ", "カレンチャン", "ビコーペガサス"], "characterIDs": [1005, 1028, 1038, 1054]}
 {"turn": 68, "name": "スワンステークス", "characterNames": ["タイキシャトル", "ヒシアケボノ", "カレンチャン", "ニシノフラワー", "ビコーペガサス"], "characterIDs": [1010, 1028, 1038, 1051, 1054]}
@@ -848,7 +879,7 @@
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["スペシャルウィーク", "マルゼンスキー", "グラスワンダー", "エルコンドルパサー", "セイウンスカイ", "トーセンジョーダン", "キングヘイロー"], "characterIDs": [1001, 1004, 1011, 1014, 1020, 1048, 1061]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["スペシャルウィーク", "マルゼンスキー"], "characterIDs": [1001, 1004]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["フジキセキ", "マヤノトップガン"], "characterIDs": [1005, 1024]}
-{"turn": 68, "name": "天皇賞（秋）", "characterNames": ["オグリキャップ", "タマモクロス", "イナリワン", "ゴールドシチー", "スーパークリーク", "サクラチヨノオー"], "characterIDs": [1006, 1021, 1034, 1040, 1045, 1069]}
+{"turn": 68, "name": "天皇賞（秋）", "characterNames": ["オグリキャップ", "タマモクロス", "イナリワン", "ゴールドシチー", "スーパークリーク", "サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1006, 1021, 1034, 1040, 1045, 1069, 1072]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["ゴールドシップ", "トーセンジョーダン"], "characterIDs": [1007, 1048]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["ウオッカ", "ダイワスカーレット"], "characterIDs": [1008, 1009]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["ウオッカ", "ダイワスカーレット", "スマートファルコン"], "characterIDs": [1008, 1009, 1046]}
@@ -870,7 +901,7 @@
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["テイエムオペラオー", "アドマイヤベガ", "メイショウドトウ", "ナリタトップロード"], "characterIDs": [1015, 1033, 1058, 1077]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["エアグルーヴ", "エイシンフラッシュ", "トーセンジョーダン"], "characterIDs": [1018, 1037, 1048]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["ライスシャワー", "サクラバクシンオー"], "characterIDs": [1030, 1041]}
-{"turn": 68, "name": "天皇賞（秋）", "characterNames": ["オグリキャップ", "イナリワン", "スーパークリーク", "サクラチヨノオー"], "characterIDs": [1006, 1034, 1045, 1069]}
+{"turn": 68, "name": "天皇賞（秋）", "characterNames": ["オグリキャップ", "イナリワン", "スーパークリーク", "サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1006, 1034, 1045, 1069, 1072]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["ダイワスカーレット", "スマートファルコン", "キタサンブラック"], "characterIDs": [1009, 1046, 1068]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["スペシャルウィーク", "ゴールドシップ", "グラスワンダー", "エイシンフラッシュ", "ゼンノロブロイ", "トーセンジョーダン"], "characterIDs": [1001, 1007, 1011, 1037, 1047, 1048]}
 {"turn": 68, "name": "天皇賞（秋）", "characterNames": ["ビワハヤヒデ", "ウイニングチケット", "ナリタタイシン", "ナイスネイチャ"], "characterIDs": [1023, 1035, 1050, 1060]}
@@ -928,6 +959,7 @@
 {"turn": 70, "name": "ジャパンカップ", "characterNames": ["トウカイテイオー", "サトノダイヤモンド", "キタサンブラック"], "characterIDs": [1003, 1067, 1068]}
 {"turn": 70, "name": "ジャパンカップ", "characterNames": ["マルゼンスキー", "イナリワン", "スーパークリーク", "サクラチヨノオー"], "characterIDs": [1004, 1034, 1045, 1069]}
 {"turn": 70, "name": "ジャパンカップ", "characterNames": ["オグリキャップ", "イナリワン", "スーパークリーク", "メジロアルダン"], "characterIDs": [1006, 1034, 1045, 1071]}
+{"turn": 70, "name": "ジャパンカップ", "characterNames": ["オグリキャップ", "ヤエノムテキ"], "characterIDs": [1006, 1072]}
 {"turn": 70, "name": "ジャパンカップ", "characterNames": ["スペシャルウィーク", "エルコンドルパサー", "エアグルーヴ", "メジロブライト"], "characterIDs": [1001, 1014, 1018, 1074]}
 {"turn": 70, "name": "マイルチャンピオンシップ", "characterNames": ["スペシャルウィーク", "キングヘイロー"], "characterIDs": [1001, 1061]}
 {"turn": 70, "name": "マイルチャンピオンシップ", "characterNames": ["フジキセキ", "ヒシアケボノ", "ビコーペガサス"], "characterIDs": [1005, 1028, 1054]}
@@ -944,6 +976,7 @@
 {"turn": 70, "name": "マイルチャンピオンシップ", "characterNames": ["ニシノフラワー", "マチカネタンホイザ"], "characterIDs": [1051, 1062]}
 {"turn": 70, "name": "マイルチャンピオンシップ", "characterNames": ["オグリキャップ", "バンブーメモリー", "サクラチヨノオー"], "characterIDs": [1006, 1053, 1069]}
 {"turn": 70, "name": "マイルチャンピオンシップ", "characterNames": ["バンブーメモリー", "メジロアルダン"], "characterIDs": [1053, 1071]}
+{"turn": 70, "name": "マイルチャンピオンシップ", "characterNames": ["バンブーメモリー", "ヤエノムテキ"], "characterIDs": [1053, 1072]}
 {"turn": 70, "name": "マイルチャンピオンシップ", "characterNames": ["タイキシャトル", "シーキングザパール", "メジロブライト"], "characterIDs": [1010, 1042, 1074]}
 {"turn": 70, "name": "有馬記念", "characterNames": ["ダイワスカーレット", "スマートファルコン"], "characterIDs": [1009, 1046]}
 {"turn": 71, "name": "ステイヤーズステークス", "characterNames": ["ナリタブライアン", "マチカネタンホイザ"], "characterIDs": [1016, 1062]}
@@ -953,7 +986,7 @@
 {"turn": 72, "name": "有馬記念", "characterNames": ["サイレンススズカ", "グラスワンダー", "エアグルーヴ", "マチカネフクキタル"], "characterIDs": [1002, 1011, 1018, 1056]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["トウカイテイオー", "シンボリルドルフ", "ミホノブルボン", "ウイニングチケット", "ナイスネイチャ", "マチカネタンホイザ", "サトノダイヤモンド", "キタサンブラック"], "characterIDs": [1003, 1017, 1026, 1035, 1060, 1062, 1067, 1068]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["フジキセキ", "ヒシアマゾン", "マヤノトップガン"], "characterIDs": [1005, 1012, 1024]}
-{"turn": 72, "name": "有馬記念", "characterNames": ["オグリキャップ", "タマモクロス", "メジロライアン", "イナリワン", "ゴールドシチー", "スーパークリーク", "サクラチヨノオー", "メジロアルダン"], "characterIDs": [1006, 1021, 1027, 1034, 1040, 1045, 1069, 1071]}
+{"turn": 72, "name": "有馬記念", "characterNames": ["オグリキャップ", "タマモクロス", "メジロライアン", "イナリワン", "ゴールドシチー", "スーパークリーク", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1006, 1021, 1027, 1034, 1040, 1045, 1069, 1071, 1072]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["ゴールドシップ", "エイシンフラッシュ", "トーセンジョーダン"], "characterIDs": [1007, 1037, 1048]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["ウオッカ", "ダイワスカーレット", "カワカミプリンセス"], "characterIDs": [1008, 1009, 1039]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["スペシャルウィーク", "サイレンススズカ", "グラスワンダー", "エルコンドルパサー", "テイエムオペラオー", "セイウンスカイ", "ハルウララ", "メイショウドトウ", "キングヘイロー"], "characterIDs": [1001, 1002, 1011, 1014, 1015, 1020, 1052, 1058, 1061]}
@@ -971,7 +1004,7 @@
 {"turn": 72, "name": "有馬記念", "characterNames": ["フジキセキ", "ヒシアマゾン", "ナリタブライアン", "マヤノトップガン", "ライスシャワー"], "characterIDs": [1005, 1012, 1016, 1024, 1030]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["マンハッタンカフェ", "アグネスタキオン"], "characterIDs": [1025, 1032]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["トウカイテイオー", "メジロマックイーン", "ミホノブルボン", "ライスシャワー", "ナイスネイチャ"], "characterIDs": [1003, 1013, 1026, 1030, 1060]}
-{"turn": 72, "name": "有馬記念", "characterNames": ["オグリキャップ", "メジロマックイーン", "メジロライアン", "ナイスネイチャ"], "characterIDs": [1006, 1013, 1027, 1060]}
+{"turn": 72, "name": "有馬記念", "characterNames": ["オグリキャップ", "メジロマックイーン", "メジロライアン", "ナイスネイチャ", "ヤエノムテキ"], "characterIDs": [1006, 1013, 1027, 1060, 1072]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["ヒシアマゾン", "メジロマックイーン", "マヤノトップガン", "ミホノブルボン", "ライスシャワー", "サクラバクシンオー", "ナリタタイシン", "マチカネタンホイザ"], "characterIDs": [1012, 1013, 1024, 1026, 1030, 1041, 1050, 1062]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["テイエムオペラオー", "アドマイヤベガ", "メイショウドトウ", "ナリタトップロード"], "characterIDs": [1015, 1033, 1058, 1077]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["トウカイテイオー", "ナリタブライアン", "ビワハヤヒデ", "ウイニングチケット", "ナリタタイシン", "ニシノフラワー", "マチカネタンホイザ"], "characterIDs": [1003, 1016, 1023, 1035, 1050, 1051, 1062]}
@@ -992,4 +1025,5 @@
 {"turn": 72, "name": "有馬記念", "characterNames": ["トウカイテイオー", "サトノダイヤモンド", "キタサンブラック"], "characterIDs": [1003, 1067, 1068]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["オグリキャップ", "イナリワン", "スーパークリーク", "ミスターシービー", "サクラチヨノオー", "ヤエノムテキ"], "characterIDs": [1006, 1034, 1045, 1057, 1069, 1072]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["オグリキャップ", "イナリワン", "スーパークリーク", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1006, 1034, 1045, 1071, 1072]}
+{"turn": 72, "name": "有馬記念", "characterNames": ["オグリキャップ", "メジロライアン", "サクラチヨノオー", "メジロアルダン", "ヤエノムテキ"], "characterIDs": [1006, 1027, 1069, 1071, 1072]}
 {"turn": 72, "name": "有馬記念", "characterNames": ["スペシャルウィーク", "グラスワンダー", "エルコンドルパサー", "エアグルーヴ", "セイウンスカイ", "マチカネフクキタル", "メジロドーベル", "キングヘイロー", "メジロブライト"], "characterIDs": [1001, 1011, 1014, 1018, 1020, 1056, 1059, 1061, 1074]}
