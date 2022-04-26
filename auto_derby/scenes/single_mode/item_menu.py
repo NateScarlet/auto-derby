@@ -26,7 +26,7 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image, disabled: bool) -> 
     cv_img = imagetools.cv_image(item_img.crop(bbox).convert("L"))
     _, binary_img = cv2.threshold(
         cv_img,
-        90 if disabled else 120,
+        80 if disabled else 120,
         255,
         cv2.THRESH_BINARY_INV,
     )
