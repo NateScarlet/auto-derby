@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/NateScarlet/auto-derby/compare/v1.21.2...v1.22.0) (2022-04-26)
+
+### Features
+
+- extract character data ([75c751c](https://github.com/NateScarlet/auto-derby/commit/75c751c1f0fb7084bd5568589ac81a3c4f149a20))
+- **plugin:** auto_crane: adjust press duration ([0e6a85a](https://github.com/NateScarlet/auto-derby/commit/0e6a85ada5912693f18b12ee38759822aae18c4f))
+- **single-mode:** extract rival race data ([f4197f4](https://github.com/NateScarlet/auto-derby/commit/f4197f48d21863ccbff102211a0beea51fcc5f51))
+- **single-mode:** recognize condition `切れ者` ([afcf874](https://github.com/NateScarlet/auto-derby/commit/afcf87465331b8b716c7fdff8b60c93356b345d1))
+
+### Bug Fixes
+
+- **adb:** swipe not work ([61affc1](https://github.com/NateScarlet/auto-derby/commit/61affc181dd8a20960a74a585561ee420398a013)), closes [#293](https://github.com/NateScarlet/auto-derby/issues/293)
+- **plugin:** race_campaign: update data ([47258c8](https://github.com/NateScarlet/auto-derby/commit/47258c806cbbc728a26cf90e5b4ceda2e654c5e6))
+- **single-mode:** error while recognizing training scene ([ed2bfe8](https://github.com/NateScarlet/auto-derby/commit/ed2bfe8137964740908853378f7da0a17e6ca196)), closes [#294](https://github.com/NateScarlet/auto-derby/issues/294)
+- **single-mode:** should not log item quantity in plan ([f8274a6](https://github.com/NateScarlet/auto-derby/commit/f8274a6c69ebd25a2a04a406d249bff0a19a7d07))
+- **single-mode:** support for new shop ui ([#299](https://github.com/NateScarlet/auto-derby/issues/299)) ([2851dec](https://github.com/NateScarlet/auto-derby/commit/2851decef36210af28977dbfee0dfc7dbdb73970)), closes [#291](https://github.com/NateScarlet/auto-derby/issues/291)
+- **team-race:** locate granted reward on second/third options ([e7622e4](https://github.com/NateScarlet/auto-derby/commit/e7622e414185778d093e1407cf70866019911b52)), closes [#230](https://github.com/NateScarlet/auto-derby/issues/230)
+
 ## [1.21.2](https://github.com/NateScarlet/auto-derby/compare/v1.21.1...v1.21.2) (2022-04-11)
 
 ### Bug Fixes
