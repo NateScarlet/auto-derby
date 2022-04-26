@@ -192,7 +192,9 @@ class ItemMenuScene(Scene):
 
         while self._scroll.next():
             for k, v in remains.items():
-                _LOGGER.debug("use remain: %s\tx%d", item.get(k).name, v)
+                i = item.get(k)
+                i.quantity = v
+                _LOGGER.debug("use remain: %s", i)
             _select_visible_items()
             if not remains:
                 break
