@@ -16,7 +16,7 @@ from . import handler
 from .context import Context
 from .handler import Handler, Middleware
 from .middleware import Middleware
-from .webview import DefaultWebview, Webview
+from .webview import NoOpWebview, Webview
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -141,7 +141,7 @@ class _Stream(Middleware):
 
 
 class g:
-    default_webview = DefaultWebview()
+    default_webview = NoOpWebview()
     disabled = bool(os.getenv("CI"))
     default_port = 8400
 
@@ -183,7 +183,7 @@ def stream(
             httpd.server_activate()
             host, port = httpd.server_address
             url = f"http://{host}:{port}"
-            # webview.open(url)
+            webview.open(url)
             _LOGGER.info(f"stream at: {url}")
             s.on_close = httpd.shutdown
             httpd.serve_forever()
