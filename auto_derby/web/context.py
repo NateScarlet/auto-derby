@@ -94,9 +94,6 @@ class Context:
         self.end_headers()
         self._is_stream = True
 
-    def is_stream(self):
-        return self._is_stream
-
     def _write_chunked(self, data: bytes):
         w = self._req.wfile
         w.write(b"%X\r\n" % len(data))
@@ -105,7 +102,7 @@ class Context:
         w.flush()
 
     def write_bytes(self, data: bytes):
-        if self.is_stream():
+        if self._is_stream:
             return self._write_chunked(data)
         self._res_body.write(data)
 
@@ -116,7 +113,7 @@ class Context:
         self.write_bytes(data.encode(self.encoding, "surrogateescape"))
 
     def write_file(self, f: BinaryIO):
-        if self.is_stream():
+        if self._is_stream:
             ctx = self
 
             class _Writer:
@@ -138,7 +135,7 @@ class Context:
         if self._req.wfile.closed:
             self._write_ended = True
             return
-        if self.is_stream():
+        if self._is_stream:
             self.write_bytes(b"")
         else:
             data = self._res_body.getvalue()
