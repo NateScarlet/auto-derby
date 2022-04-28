@@ -86,7 +86,9 @@ class ResponseStreamWriter(StreamWriter):
 
 class _Stream(Middleware):
     def __init__(
-        self, buffer_path: Text, mimetype: Text = "application/octet-stream"
+        self,
+        buffer_path: Text,
+        mimetype: Text,
     ) -> None:
         self._f = FileStreamWriter(buffer_path)
         self._lock = threading.Lock()
@@ -147,8 +149,9 @@ def stream(
     max_port: int = 65535,
     webview: Optional[Webview] = None,
     buffer_path: Text = "",
+    mimetype: Text = "application/octet-stream",
 ) -> StreamWriter:
-    s = _Stream(buffer_path)
+    s = _Stream(buffer_path, mimetype)
     host_arg = host
     port_arg = port or (_prompt.g.default_port - 1)
     webview = webview or _prompt.g.default_webview
