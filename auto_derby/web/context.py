@@ -115,24 +115,18 @@ class Context:
     def write_string(self, data: str):
         self.write_bytes(data.encode(self.encoding, "surrogateescape"))
 
-    def _write_file_chunked(
-        self,
-        f: BinaryIO,
-        size: int,
-    ):
-        w = self._req.wfile
-        w.write(b"%X\r\n" % size)
-        w.write(b"\r\n")
-        shutil.copyfileobj(f, w)
-        w.write(b"\r\n")
-
-    def write_file(self, f: BinaryIO, size: int = 0):
+    def write_file(self, f: BinaryIO):
         if self.is_stream():
-            return self._write_file_chunked(f, size)
+            ctx = self
+
+            class _Writer:
+                def write(self, data: bytes):
+                    ctx.write_bytes(data)
+
+            shutil.copyfileobj(f, _Writer())
+            return
 
         w = self._res_body
-        if size:
-            self.set_header("Content-Length", str(size))
         if "Content-Length" in self._res_headers:
             self.end_headers()
             w = self._req.wfile
