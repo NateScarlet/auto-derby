@@ -110,7 +110,7 @@ class Context:
         self._res_body.write(data)
 
     def writer_closed(self):
-        return self._write_ended
+        return self._req.wfile.closed
 
     def write_string(self, data: str):
         self.write_bytes(data.encode(self.encoding, "surrogateescape"))
