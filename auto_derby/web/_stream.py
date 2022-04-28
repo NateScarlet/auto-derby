@@ -1,21 +1,27 @@
+# -*- coding=UTF-8 -*-
+# pyright: strict
+
+from __future__ import annotations
+
 import contextlib
 import http.server
-import io
-from msilib.schema import Binary
+import logging
+import os
+import queue
 import shutil
 import threading
-from typing import BinaryIO, Callable, List, Optional, Protocol, Text
+from typing import Callable, List, Optional, Protocol, Text
 
-
-from .middleware import Middleware
+from . import handler
 from .context import Context
 from .handler import Handler, Middleware
-from . import handler
+from .middleware import Middleware
+from .webview import DefaultWebview, Webview
 
-import queue
+_LOGGER = logging.getLogger(__name__)
 
 
-class StreamWriter(Protocol):
+class Writer(Protocol):
     def write(self, data: bytes) -> None:
         ...
 
@@ -26,7 +32,7 @@ class StreamWriter(Protocol):
         ...
 
 
-class FileStreamWriter(StreamWriter):
+class FileWriter(Writer):
     def __init__(self, path: Text) -> None:
         self.path = path
         self._lock = threading.Lock()
@@ -44,7 +50,7 @@ class FileStreamWriter(StreamWriter):
     def closed(self) -> bool:
         return not self.path
 
-    def copy_to(self, w: StreamWriter):
+    def copy_to(self, w: Writer):
         if not self.path:
             return
         with self._lock:
@@ -52,7 +58,7 @@ class FileStreamWriter(StreamWriter):
                 shutil.copyfileobj(f, w)
 
 
-class QueueWriter(StreamWriter):
+class QueueWriter(Writer):
     def __init__(self) -> None:
         self._q: queue.Queue[bytes] = queue.Queue()
         self._closed = False
@@ -70,7 +76,7 @@ class QueueWriter(StreamWriter):
         return self._q.get()
 
 
-class ResponseStreamWriter(StreamWriter):
+class ResponseWriter(Writer):
     def __init__(self, ctx: Context) -> None:
         self._ctx = ctx
 
@@ -90,9 +96,9 @@ class _Stream(Middleware):
         buffer_path: Text,
         mimetype: Text,
     ) -> None:
-        self._f = FileStreamWriter(buffer_path)
+        self._f = FileWriter(buffer_path)
         self._lock = threading.Lock()
-        self._writers: List[StreamWriter] = [self._f]
+        self._writers: List[Writer] = [self._f]
         self._closed = False
         self._mimetype = mimetype
         self.on_close: Callable[[], None] = lambda: None
@@ -108,7 +114,7 @@ class _Stream(Middleware):
         with contextlib.closing(QueueWriter()) as w:
             with self._lock:
                 self._writers.append(w)
-            self._f.copy_to(ResponseStreamWriter(ctx))
+            self._f.copy_to(ResponseWriter(ctx))
             while not w.closed():
                 ctx.write_bytes(w.get())
 
@@ -134,11 +140,10 @@ class _Stream(Middleware):
                 self._writers = [i for i in self._writers if not i.closed()]
 
 
-from ._prompt import prompt, Webview
-from . import _prompt
-import logging
-
-_LOGGER = logging.getLogger(__name__)
+class g:
+    default_webview = DefaultWebview()
+    disabled = bool(os.getenv("CI"))
+    default_port = 8400
 
 
 def stream(
@@ -150,11 +155,11 @@ def stream(
     webview: Optional[Webview] = None,
     buffer_path: Text = "",
     mimetype: Text = "application/octet-stream",
-) -> StreamWriter:
+) -> Writer:
     s = _Stream(buffer_path, mimetype)
     host_arg = host
-    port_arg = port or (_prompt.g.default_port - 1)
-    webview = webview or _prompt.g.default_webview
+    port_arg = port or g.default_port
+    webview = webview or g.default_webview
 
     def _run():
         h = handler.from_middlewares((s,) + middlewares)
