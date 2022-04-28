@@ -68,17 +68,18 @@ class LogServiceHandler(logging.Handler):
 
     def emit(self, record: logging.LogRecord) -> None:
         if record.levelno == logging.DEBUG:
-            self._s.debug(record.message, self._record_data(record))
+            self._s.debug(record.getMessage(), self._record_data(record))
         if record.levelno == logging.INFO:
-            self._s.info(record.message, self._record_data(record))
+            self._s.info(record.getMessage(), self._record_data(record))
         if record.levelno == logging.WARNING:
-            self._s.warn(record.message, self._record_data(record))
+            self._s.warn(record.getMessage(), self._record_data(record))
         if record.levelno == logging.ERROR:
-            self._s.error(record.message, self._record_data(record))
+            self._s.error(record.getMessage(), self._record_data(record))
 
 
 class DynamicLogServiceHandler(LogServiceHandler):
     def __init__(self, service: Callable[[], LogService], /) -> None:
+        super(LogServiceHandler, self).__init__()
         self._s_getter = service
 
     @property
