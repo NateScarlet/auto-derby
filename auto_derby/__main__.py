@@ -14,7 +14,10 @@ import webbrowser
 import win32con
 import win32gui
 
+from auto_derby.log import DynamicLogServiceHandler
+
 from . import __version__, clients, config, jobs, plugin, templates, version
+import auto_derby
 
 LOGGER = logging.getLogger(__name__)
 
@@ -121,6 +124,9 @@ if __name__ == "__main__":
         logging.getLogger(i).setLevel(logging.DEBUG)
 
     warnings.filterwarnings("once", module="auto_derby(\\..*)?")
+    logging.getLogger("auto_derby").addHandler(
+        DynamicLogServiceHandler(lambda: auto_derby.log)
+    )
     try:
         main()
     except SystemExit:
