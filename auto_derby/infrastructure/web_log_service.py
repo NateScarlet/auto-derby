@@ -88,6 +88,9 @@ class WebLogService(LogService):
         _LOGGER.info("web log service start at:\t%s", url)
         webview.open(url)
 
+    def __del__(self):
+        self._s.close()
+
     def _line(self, fields: Dict[Text, Any]):
         data = json.dumps(
             {
