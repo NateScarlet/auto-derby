@@ -35,7 +35,7 @@ def _sample_image():
     return {
         "t": "IMAGE",
         "ts": datetime.datetime.now().isoformat(),
-        "url": "/img.png",
+        "url": "/files/img.png",
         "caption": "this is a image message",
     }
 
@@ -59,7 +59,7 @@ if __name__ == "__main__":
         _sample_image2,
     ]
     with web.Stream("", "text/plain") as stream, web.create_server(
-        ("127.0.0.1", 8400),
+        ("127.0.0.1", 8300),
         web.Blob(
             web.page.render(
                 {
@@ -72,7 +72,7 @@ if __name__ == "__main__":
         web.page.ASSETS,
         web.Path("/stream", stream),
         web.Path(
-            "/img.png",
+            "/files/img.png",
             web.Blob(
                 img_data.getvalue(),
                 "image/png",

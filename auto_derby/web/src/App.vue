@@ -9,7 +9,7 @@ import type { Component } from 'vue';
 import pageData, { PageType } from '@/page-data';
 import DefaultPageVue from '@/pages/DefaultPage.vue';
 import SingleModeItemSelectVue from '@/pages/SingleModeItemSelect.vue';
-import LogViewerVue from '@/pages/LogViewer.vue';
+import LogPageVue from '@/pages/LogPage.vue';
 
 interface Page {
   component: Component;
@@ -17,7 +17,7 @@ interface Page {
 
 const pages = new Map<PageType, Page>([
   [PageType.SINGLE_MODE_ITEM_SELECT, { component: SingleModeItemSelectVue }],
-  [PageType.LOG, { component: LogViewerVue }],
+  [PageType.LOG, { component: LogPageVue }],
 ]);
 
 const page: Page = pages.get(pageData.type) ?? {

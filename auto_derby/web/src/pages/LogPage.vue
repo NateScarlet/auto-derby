@@ -1,11 +1,7 @@
 <template>
   <div>
     loadingCount: {{ loadingCount }} errors: {{ errors }}
-    <ol ref="host">
-      <li v-for="(i, index) in records" :key="index">
-        {{ i }}
-      </li>
-    </ol>
+    <LogViewer :records="records"></LogViewer>
   </div>
 </template>
 
@@ -17,6 +13,7 @@ import readLineStream from '@/utils/readLineStream';
 import withLoading from '@/utils/withLoading';
 import type { PropType } from 'vue';
 import { watch, reactive, ref } from 'vue';
+import LogViewer from '@/components/LogViewer/LogViewer.vue';
 
 const props = defineProps({
   pageData: {
@@ -25,7 +22,6 @@ const props = defineProps({
   },
 });
 
-const host = ref<HTMLOListElement>();
 const records = reactive([] as LogRecord[]);
 
 const loadingCount = ref(0);
