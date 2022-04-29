@@ -4,21 +4,14 @@
 from __future__ import annotations
 
 import contextlib
-import http.server
-import logging
-import os
 import queue
 import shutil
 import threading
-from typing import Callable, List, Optional, Protocol, Text
+from typing import Callable, List, Protocol, Text
 
-from . import handler
 from .context import Context
 from .handler import Handler, Middleware
 from .middleware import Middleware
-from .webview import NoOpWebview, Webview
-
-_LOGGER = logging.getLogger(__name__)
 
 
 class Writer(Protocol):
@@ -90,7 +83,7 @@ class ResponseWriter(Writer):
         return self._ctx.writer_closed()
 
 
-class _Stream(Middleware):
+class Stream(Middleware):
     def __init__(
         self,
         buffer_path: Text,
@@ -139,55 +132,8 @@ class _Stream(Middleware):
             if has_closed_writer:
                 self._writers = [i for i in self._writers if not i.closed()]
 
+    def __enter__(self):
+        return self
 
-class g:
-    default_webview = NoOpWebview()
-    disabled = bool(os.getenv("CI"))
-    default_port = 8400
-
-
-def stream(
-    html: Text,
-    *middlewares: Middleware,
-    host: str = "127.0.0.1",
-    port: int = 0,
-    max_port: int = 65535,
-    webview: Optional[Webview] = None,
-    buffer_path: Text = "",
-    mimetype: Text = "application/octet-stream",
-) -> Writer:
-    s = _Stream(buffer_path, mimetype)
-    host_arg = host
-    port_arg = port or g.default_port
-    webview = webview or g.default_webview
-
-    def _run():
-        h = handler.from_middlewares((s,) + middlewares)
-        host = host_arg
-        port = port_arg
-        with http.server.ThreadingHTTPServer(
-            (host, port),
-            handler.to_http_handler_class(h),
-            bind_and_activate=False,
-        ) as httpd:
-            httpd.allow_reuse_address = False
-            while True:
-                try:
-                    httpd.server_bind()
-                    break
-                except OSError:
-                    if port >= max_port:
-                        raise
-                    port += 1
-                    httpd.server_address = (httpd.server_address[0], port)
-            httpd.server_activate()
-            host, port = httpd.server_address
-            url = f"http://{host}:{port}"
-            webview.open(url)
-            _LOGGER.info(f"stream at: {url}")
-            s.on_close = httpd.shutdown
-            httpd.serve_forever()
-
-    threading.Thread(target=_run, daemon=True).start()
-
-    return s
+    def __exit__(self, *_):
+        self.close()

@@ -121,12 +121,7 @@ def prompt(
     port = port or g.default_port
     webview = webview or g.default_webview
     pm = _PromptMiddleware(html)
-    with create_server(
-        *(pm, *middlewares),
-        host=host,
-        port=port,
-        max_port=max_port,
-    ) as httpd:
+    with create_server((host, port), *(pm, *middlewares), max_port=max_port) as httpd:
         host, port = httpd.server_address
         url = f"http://{host}:{port}"
         webview.open(url)
