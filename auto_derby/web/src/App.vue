@@ -1,6 +1,7 @@
 <template>
   <div class="bg-gray-200 text-theme-text min-h-screen">
     <component :is="page.component" :page-data="pageData"></component>
+    <MessageList class="messages z-20"></MessageList>
   </div>
 </template>
 
@@ -10,6 +11,7 @@ import pageData, { PageType } from '@/page-data';
 import DefaultPageVue from '@/pages/DefaultPage.vue';
 import SingleModeItemSelectVue from '@/pages/SingleModeItemSelect.vue';
 import LogPageVue from '@/pages/LogPage.vue';
+import { MessageList } from '@/infrastructure/vue-message-service';
 
 interface Page {
   component: Component;

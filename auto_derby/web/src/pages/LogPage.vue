@@ -1,7 +1,7 @@
 <template>
-  <div>
-    loadingCount: {{ loadingCount }} errors: {{ errors }}
+  <div class="container m-auto">
     <LogViewer :records="records"></LogViewer>
+    <div v-if="loadingCount === 0" class="text-center">log end</div>
   </div>
 </template>
 
@@ -14,6 +14,7 @@ import withLoading from '@/utils/withLoading';
 import type { PropType } from 'vue';
 import { watch, reactive, ref } from 'vue';
 import LogViewer from '@/components/LogViewer/LogViewer.vue';
+import app from '@/services';
 
 const props = defineProps({
   pageData: {
@@ -25,7 +26,6 @@ const props = defineProps({
 const records = reactive([] as LogRecord[]);
 
 const loadingCount = ref(0);
-const errors = reactive([] as string[]);
 const { addCleanup, cleanup } = useCleanup();
 
 watch(
@@ -46,12 +46,12 @@ watch(
           try {
             records.push(Object.freeze(JSON.parse(line)));
           } catch (err) {
-            errors.push(`line parsing failed: ${err}`);
+            app.message.error(`line parsing failed: ${err}`);
           }
         },
       });
     } catch (err) {
-      errors.push(`stream read failed: ${err}`);
+      app.message.error(`stream read failed: ${err}`);
     }
   }),
   { immediate: true }
