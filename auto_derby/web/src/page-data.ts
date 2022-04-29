@@ -51,7 +51,7 @@ function getPageData(): PageData {
       case PageType.LOG:
         return {
           type: PageType.LOG,
-          streamURL: 'http://localhost:8400',
+          streamURL: '/stream',
         };
       default:
         assertNever(tp);

@@ -87,6 +87,8 @@ if __name__ == "__main__":
         webbrowser.open(url)
         threading.Thread(target=httpd.serve_forever, daemon=True).start()
         while True:
+            if not random.randint(0, 20):
+                stream.write("bad value\n".encode("utf-8"))
             sample = json.dumps(random.choice(samples)())
             stream.write((sample + "\n").encode("utf-8"))
             time.sleep(0.5)

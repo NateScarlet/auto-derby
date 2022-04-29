@@ -1,6 +1,6 @@
 <template>
   <div>
-    loadingCount: {{ loadingCount }}
+    loadingCount: {{ loadingCount }} errors: {{ errors }}
     <ol ref="host">
       <li v-for="(i, index) in records" :key="index">
         {{ i }}
@@ -29,23 +29,34 @@ const host = ref<HTMLOListElement>();
 const records = reactive([] as LogRecord[]);
 
 const loadingCount = ref(0);
+const errors = reactive([] as string[]);
 const { addCleanup, cleanup } = useCleanup();
+
 watch(
   () => props.pageData.streamURL,
   withLoading(loadingCount, async (url) => {
     cleanup();
     const abort = new AbortController();
     addCleanup(() => abort.abort());
-    const { body } = await fetch(url, { signal: abort.signal });
-    if (!body) {
-      return;
+    try {
+      const { body } = await fetch(url, { signal: abort.signal });
+      if (!body) {
+        return;
+      }
+
+      await readLineStream({
+        stream: body,
+        onLine: (line) => {
+          try {
+            records.push(Object.freeze(JSON.parse(line)));
+          } catch (err) {
+            errors.push(`line parsing failed: ${err}`);
+          }
+        },
+      });
+    } catch (err) {
+      errors.push(`stream read failed: ${err}`);
     }
-    await readLineStream({
-      stream: body,
-      onLine: (line) => {
-        records.push(Object.freeze(JSON.parse(line)));
-      },
-    });
   }),
   { immediate: true }
 );
