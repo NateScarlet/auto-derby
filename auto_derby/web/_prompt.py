@@ -15,6 +15,7 @@ from typing import Any, Dict, Optional, Text
 from . import handler
 from .context import Context
 from .webview import Webview
+from ._create_server import create_server
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -120,23 +121,12 @@ def prompt(
     port = port or g.default_port
     webview = webview or g.default_webview
     pm = _PromptMiddleware(html)
-    h = handler.from_middlewares((pm,) + middlewares)
-    with http.server.ThreadingHTTPServer(
-        (host, port),
-        handler.to_http_handler_class(h),
-        bind_and_activate=False,
+    with create_server(
+        *(pm, *middlewares),
+        host=host,
+        port=port,
+        max_port=max_port,
     ) as httpd:
-        httpd.allow_reuse_address = False
-        while True:
-            try:
-                httpd.server_bind()
-                break
-            except OSError:
-                if port >= max_port:
-                    raise
-                port += 1
-                httpd.server_address = (httpd.server_address[0], port)
-        httpd.server_activate()
         host, port = httpd.server_address
         url = f"http://{host}:{port}"
         webview.open(url)
