@@ -20,6 +20,7 @@ from ...single_mode import Training, training
 from ...single_mode.training import Partner
 from ..scene import Scene, SceneHolder
 from .command import CommandScene
+import auto_derby
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -675,6 +676,7 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
             save_mode="RGB",
         )
         _LOGGER.debug("from_training_scene: image=%s", image_id)
+    auto_derby.log.image("recognize training", img)
     rp = mathtools.ResizeProxy(img.width)
 
     self = Training.new()

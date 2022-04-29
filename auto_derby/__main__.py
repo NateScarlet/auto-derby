@@ -14,7 +14,9 @@ import webbrowser
 import win32con
 import win32gui
 
-from auto_derby.log import DynamicLogServiceHandler
+from .infrastructure.logging_log_service import LoggingLogService
+from .infrastructure.multi_log_service import MultiLogService
+from .infrastructure.web_log_service import WebLogService
 
 from . import __version__, clients, config, jobs, plugin, templates, version
 import auto_derby
@@ -85,6 +87,12 @@ def main():
         plugin.install(i)
     config.apply()
 
+    if not config.web_log_disabled:
+        auto_derby.log = MultiLogService(
+            auto_derby.log,
+            WebLogService(),
+        )
+
     if not job:
         LOGGER.error(
             "unknown job: %s\navaliable jobs:\n  %s",
@@ -105,6 +113,8 @@ if __name__ == "__main__":
         level=logging.INFO,
         datefmt="%H:%M:%S",
     )
+    auto_derby.log = LoggingLogService(logging.Logger("auto_derby"))
+
     LOG_PATH = config.LOG_PATH
     if LOG_PATH and LOG_PATH != "-":
         handler = logging.handlers.RotatingFileHandler(
@@ -124,9 +134,6 @@ if __name__ == "__main__":
         logging.getLogger(i).setLevel(logging.DEBUG)
 
     warnings.filterwarnings("once", module="auto_derby(\\..*)?")
-    logging.getLogger("auto_derby").addHandler(
-        DynamicLogServiceHandler(lambda: auto_derby.log)
-    )
     try:
         main()
     except SystemExit:

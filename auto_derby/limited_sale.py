@@ -4,13 +4,15 @@
 from __future__ import annotations
 
 
-from . import action, templates
+from . import action, templates, template
+import auto_derby
 
 
 def buy_first_n(n: int) -> None:
     rp = action.resize_proxy()
     action.wait_tap_image(templates.GO_TO_LIMITED_SALE)
     action.wait_image(templates.CLOSE_NOW_BUTTON)
+    auto_derby.log.image("limited sale: buy first %d" % n, template.screenshot())
     item_count = 0
     for _, pos in action.match_image_until_disappear(
         templates.EXCHANGE_BUTTON, sort=lambda x: sorted(x, key=lambda i: i[1][1])
