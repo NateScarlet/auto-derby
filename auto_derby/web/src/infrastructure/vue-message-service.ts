@@ -21,7 +21,7 @@ export const MessageList = defineComponent<
     return h(
       TransitionGroup,
       {
-        class: 'fixed bottom-0 right-0 flex flex-col-reverse items-end',
+        class: 'fixed top-0 right-4 flex flex-col-reverse items-end',
         appear: true,
         tag: 'ol',
         moveClass: 'transition ease-in-out duration-200',

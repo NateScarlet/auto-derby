@@ -1,6 +1,7 @@
 <template>
-  <li>
-    <span>
+  <li class="group">
+    <span>{{ lineno }}</span>
+    <span class="invisible group-hover:visible">
       {{ value.ts }}
     </span>
     <Component :is="itemClass.component" :value="value"></Component>
@@ -29,6 +30,10 @@ const defaultItemClass: ItemClass = { component: ItemDefaultVue };
 const props = defineProps({
   value: {
     type: Object as PropType<LogRecord>,
+    required: true,
+  },
+  lineno: {
+    type: Number,
     required: true,
   },
 });
