@@ -1,4 +1,4 @@
-import type { MessageService } from '@/services/index';
+import type { MessageService } from '@/services';
 import type { VNode } from 'vue';
 import { TransitionGroup, defineComponent, h, reactive } from 'vue';
 
@@ -61,7 +61,7 @@ export function message(render: () => VNode): () => void {
   };
 }
 
-export class VueMessageService implements MessageService {
+export default class VueMessageService implements MessageService {
   info(text: string, duration = 3000 + 200 * text.length): void {
     const close = message(() =>
       h(

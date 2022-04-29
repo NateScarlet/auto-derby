@@ -1,5 +1,5 @@
-import { VueMessageService } from '@/infrastructure/vue-message-service';
-import type { MessageService } from '@/services/message';
+import VueMessageService from '@/infrastructure/vue-message-service';
+import type MessageService from '@/services/message';
 
 export { MessageService };
 export interface Application {
