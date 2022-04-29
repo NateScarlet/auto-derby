@@ -4,9 +4,9 @@ export enum RecordType {
 }
 
 export interface AbstractRecord {
-  t: RecordType;
   /** iso8601 timestamp */
   ts: string;
+  t: RecordType;
 }
 
 export interface TextRecord extends AbstractRecord {

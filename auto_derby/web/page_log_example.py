@@ -25,16 +25,16 @@ import web
 
 def _sample_text():
     return {
-        "t": "TEXT",
         "ts": datetime.datetime.now().isoformat(),
+        "t": "TEXT",
         "msg": "this is a text message",
     }
 
 
 def _sample_image():
     return {
-        "t": "IMAGE",
         "ts": datetime.datetime.now().isoformat(),
+        "t": "IMAGE",
         "url": "/files/img.png",
         "caption": "this is a image message",
     }
@@ -42,8 +42,8 @@ def _sample_image():
 
 def _sample_image2():
     return {
-        "t": "IMAGE",
         "ts": datetime.datetime.now().isoformat(),
+        "t": "IMAGE",
         "url": "https://httpbin.org/image/png",
         "caption": "this is a image message",
     }
