@@ -86,7 +86,7 @@ const props = defineProps({
 });
 const _ = props;
 const inputData = reactive({
-  id: pageData.defaultValue ?? 0,
+  id: props.pageData.defaultValue ?? 0,
   q: '',
 });
 
@@ -102,7 +102,7 @@ function matchItem(i: SingleModeItem, query: string): boolean {
 }
 
 const listData = computed(() =>
-  pageData.options
+  props.pageData.options
     .filter((i) => matchItem(i, inputData.q))
     .map((i) => {
       const isSelected = i.id === inputData.id;
@@ -156,7 +156,7 @@ const searchShortcuts = computed(() =>
 
 const currentOption = computed(
   () =>
-    pageData.options.find((i) => i.id === inputData.id) ?? {
+    props.pageData.options.find((i) => i.id === inputData.id) ?? {
       id: inputData.id,
       name: 'unknown',
       description: 'unknown',
