@@ -2,6 +2,7 @@
 # pyright: strict
 
 from __future__ import annotations
+import http
 
 import mimetypes
 import os
@@ -98,6 +99,36 @@ class Route(Middleware):
         except:
             ctx.path = raw_path
             raise
+
+
+class Path(Middleware):
+    def __init__(self, path: Text, inner: Middleware) -> None:
+        self.path = path
+        self.inner = inner
+
+    def handle(self, ctx: Context, next: Handler) -> None:
+        if ctx.path + "/" == self.path:
+            ctx.set_header("Location", self.path)
+            ctx.send_text(http.HTTPStatus.TEMPORARY_REDIRECT, "redirecting")
+            return
+        if ctx.path != self.path:
+            return next(ctx)
+        self.inner.handle(ctx, next)
+
+
+class Method(Middleware):
+    def __init__(
+        self,
+        methods: Sequence[Text],
+        inner: Middleware,
+    ) -> None:
+        self.inner = inner
+        self.methods = methods
+
+    def handle(self, ctx: Context, next: Handler) -> None:
+        if self.methods and ctx.method not in self.methods:
+            return next(ctx)
+        self.inner.handle(ctx, next)
 
 
 class Debug(Middleware):
