@@ -47,8 +47,11 @@ class FileWriter(Writer):
         if not self.path:
             return
         with self._lock:
-            with open(self.path, "rb") as f:
-                shutil.copyfileobj(f, w)
+            try:
+                with open(self.path, "rb") as f:
+                    shutil.copyfileobj(f, w)
+            except FileNotFoundError:
+                pass
 
 
 class QueueWriter(Writer):
@@ -61,6 +64,7 @@ class QueueWriter(Writer):
 
     def close(self) -> None:
         self._closed = True
+        self.write(b"")
 
     def closed(self) -> bool:
         return self._closed
