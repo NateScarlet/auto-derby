@@ -19,3 +19,9 @@ input.spin-button-none {
     -moz-appearance: textfield; /* Firefox */
   }
 }
+
+@layer {
+  .flex-center {
+    @apply items-center justify-center
+  }
+}

@@ -1,7 +1,8 @@
 <template>
   <figure>
-    <img :src="value.url" />
     <figcaption>{{ value.caption }}</figcaption>
+    <hr class="mb-1 border-theme-text border-opacity-30" />
+    <img :src="value.url" />
   </figure>
 </template>
 

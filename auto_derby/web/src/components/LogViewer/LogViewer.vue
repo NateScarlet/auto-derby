@@ -1,5 +1,5 @@
 <template>
-  <ol ref="el" class="max-h-screen p-4 overflow-auto space-y-2">
+  <ol ref="el" class="max-h-screen p-4 overflow-auto space-y-1">
     <template v-for="(i, index) in records" :key="index">
       <ListItem
         class="bg-white rounded"
@@ -7,6 +7,12 @@
         :lineno="index + 1"
       ></ListItem>
     </template>
+    <div v-if="records.length === 0" class="flex flex-center h-full">
+      <div class="text-center">
+        <h1 class="text-2xl">Log Viewer</h1>
+        <p>no record</p>
+      </div>
+    </div>
   </ol>
 </template>
 

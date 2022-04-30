@@ -1,7 +1,9 @@
 <template>
-  <div class="container m-auto">
-    <div class="p-1">
+  <div class="container m-auto h-screen overflow-hidden flex flex-col">
+    <div class="p-1 flex-none">
+      <div v-if="loadingCount === 0" class="text-center">log stream closed</div>
       <button
+        v-else
         type="button"
         class="bg-white rounded px-4"
         @click="paused = !paused"
@@ -11,8 +13,7 @@
         </svg>
       </button>
     </div>
-    <LogViewer :records="records"></LogViewer>
-    <div v-if="loadingCount === 0" class="text-center">log end</div>
+    <LogViewer class="flex-auto" :records="records"></LogViewer>
   </div>
 </template>
 
