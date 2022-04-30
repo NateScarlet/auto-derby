@@ -40,35 +40,52 @@ def _sample_text():
     }
 
 
-def _sample_image():
+def _sample_screenshot():
     return {
         "ts": _ts(),
         "lv": _random_level(),
         "t": "IMAGE",
-        "url": "/files/img.png",
-        "caption": "this is a image message",
+        "url": "/files/screenshot.png",
+        "caption": "this is a screenshot image ",
     }
 
 
-def _sample_image2():
+def _sample_small_image():
+    return {
+        "ts": _ts(),
+        "lv": _random_level(),
+        "t": "IMAGE",
+        "url": "/files/small.png",
+        "caption": "this is a small message",
+    }
+
+
+def _sample_internet_image():
     return {
         "ts": _ts(),
         "lv": _random_level(),
         "t": "IMAGE",
         "url": "https://httpbin.org/image/png",
-        "caption": "this is a image message",
+        "caption": "this is a internet message",
     }
 
 
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.INFO)
-    img_data = io.BytesIO()
-    Image.new("RGB", (200, 200), (255, 0, 0)).save(img_data, "PNG"),
-    samples = [_sample_text] * 10 + [
-        _sample_image,
-        _sample_image2,
-    ]
+    small_image = io.BytesIO()
+    Image.new("RGB", (150, 16), (255, 0, 0)).save(small_image, "PNG"),
+    screenshot_image = io.BytesIO()
+    Image.new("RGB", (540, 960), (0, 255, 0)).save(screenshot_image, "PNG"),
+    samples = (
+        [_sample_text] * 10
+        + [_sample_small_image] * 10
+        + [
+            _sample_screenshot,
+            _sample_internet_image,
+            _sample_screenshot,
+        ]
+    )
     with web.Stream("", "text/plain") as stream, web.create_server(
         ("127.0.0.1", 8300),
         web.Blob(
@@ -83,9 +100,16 @@ if __name__ == "__main__":
         web.page.ASSETS,
         web.Path("/stream", stream),
         web.Path(
-            "/files/img.png",
+            "/files/small.png",
             web.Blob(
-                img_data.getvalue(),
+                small_image.getvalue(),
+                "image/png",
+            ),
+        ),
+        web.Path(
+            "/files/screenshot.png",
+            web.Blob(
+                screenshot_image.getvalue(),
                 "image/png",
             ),
         ),
