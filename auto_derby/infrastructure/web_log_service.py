@@ -17,7 +17,7 @@ from typing import Any, Dict, Optional, Text
 import PIL.Image
 
 from .. import imagetools, web
-from ..log import Image, LogService
+from ..log import Image, Level, Service
 from ..web import Webview
 
 _LOGGER = logging.getLogger(__name__)
@@ -38,7 +38,7 @@ def _image_data_url(img: PIL.Image.Image) -> Text:
     return f"data:image/png;base64,{data}"
 
 
-class WebLogService(LogService):
+class WebLogService(Service):
     default_webview: Webview = _DefaultWebview()
     default_port = 8400
     default_host = "127.0.0.1"
@@ -102,28 +102,16 @@ class WebLogService(LogService):
         self._s.write(data)
         self._s.write(b"\n")
 
-    def _text(self, msg: Text):
-        self._line({"t": "TEXT", "msg": msg})
+    def _text(self, level: Level, msg: Text):
+        self._line({"t": "TEXT", "lv": level, "msg": msg})
 
-    def _image(self, caption: Text, url: Text):
-        self._line({"t": "IMAGE", "caption": caption, "url": url})
+    def _image(self, level: Level, caption: Text, url: Text):
+        self._line({"t": "IMAGE", "lv": level, "caption": caption, "url": url})
 
-    def debug(self, msg: Text, /):
-        self._text("DEBUG: %s\n" % msg)
+    def text(self, msg: Text, /, *, level: Level = Level.INFO):
+        self._text(level, msg)
 
-    def warn(self, msg: Text, /):
-        self._text("WARNING: %s\n" % msg)
-
-    def info(self, msg: Text, /):
-        self._text("INFO: %s\n" % msg)
-
-    def error(self, msg: Text, /):
-        self._text("ERROR: %s\n" % msg)
-
-    def image_url(self, caption: Text, url: Text, /):
-        self._image(caption, url)
-
-    def image(self, caption: Text, image: Image):
+    def image(self, caption: Text, image: Image, /, *, level: Level = Level.INFO):
 
         if isinstance(image, PIL.Image.Image):
             pil_img = image
@@ -133,12 +121,13 @@ class WebLogService(LogService):
         n_pixels = pil_img.width * pil_img.height
         if n_pixels < 400 * 200:
             url = _image_data_url(pil_img)
-            self.image_url(caption, url)
+            self._image(level, caption, url)
             return
         if not self.image_path:
             self._text(
+                level,
                 "%s w=%d h=%d (not record large image unless WebLogService.image_path set)"
-                % (caption, pil_img.width, pil_img.height)
+                % (caption, pil_img.width, pil_img.height),
             )
             return
 
@@ -148,4 +137,4 @@ class WebLogService(LogService):
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         pil_img.save(dst)
         url = "/images/" + pathname
-        self.image_url(caption, url)
+        self._image(level, caption, url)

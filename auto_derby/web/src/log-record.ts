@@ -3,10 +3,17 @@ export enum RecordType {
   IMAGE = 'IMAGE',
 }
 
+export enum LogLevel {
+  DEBUG = 'DEBUG',
+  INFO = 'INFO',
+  WARN = 'WARN',
+  ERROR = 'ERROR',
+}
 export interface AbstractRecord {
   /** iso8601 timestamp */
   ts: string;
   t: RecordType;
+  lv: LogLevel;
 }
 
 export interface TextRecord extends AbstractRecord {

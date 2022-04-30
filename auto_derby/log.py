@@ -2,6 +2,7 @@
 # pyright: strict
 
 from __future__ import annotations
+import enum
 
 from typing import Protocol, Text, Union
 import PIL.Image
@@ -10,41 +11,24 @@ import numpy as np
 Image = Union[PIL.Image.Image, np.ndarray]
 
 
-class LogService(Protocol):
-    def debug(self, msg: Text, /):
+class Level(enum.Enum):
+    DEBUG = "DEBUG"
+    INFO = "INFO"
+    WARN = "WARN"
+    ERROR = "ERROR"
+
+
+class Service(Protocol):
+    def text(self, msg: Text, /, *, level: Level = Level.INFO):
         ...
 
-    def warn(self, msg: Text, /):
-        ...
-
-    def info(self, msg: Text, /):
-        ...
-
-    def error(self, msg: Text, /):
-        ...
-
-    def image(self, caption: Text, image: Image):
-        ...
-
-    def image_url(self, caption: Text, url: Text, /):
+    def image(self, caption: Text, image: Image, /, *, level: Level = Level.INFO):
         ...
 
 
-class NoOpLogService(LogService):
-    def debug(self, msg: Text, /):
+class NoOpService(Service):
+    def text(self, msg: Text, /, *, level: Level = Level.INFO):
         pass
 
-    def warn(self, msg: Text, /):
-        pass
-
-    def info(self, msg: Text, /):
-        pass
-
-    def error(self, msg: Text, /):
-        pass
-
-    def image(self, caption: Text, image: Union[Image, np.ndarray]):
-        pass
-
-    def image_url(self, caption: Text, url: Text, /):
+    def image(self, caption: Text, image: Image, *, level: Level = Level.INFO):
         pass

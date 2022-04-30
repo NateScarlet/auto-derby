@@ -1,6 +1,6 @@
-from .log import LogService, NoOpLogService as _DefaultLogService
+from .log import Service, NoOpService as _DefaultLogService, Level as LogLevel
 from ._config import config
 from .plugin import Plugin
 
 
-log: LogService = _DefaultLogService()
+log: Service = _DefaultLogService()
