@@ -94,7 +94,7 @@ class WebLogService(Service):
     def _line(self, fields: Dict[Text, Any]):
         data = json.dumps(
             {
-                "ts": datetime.now().isoformat(),
+                "ts": datetime.utcnow().isoformat(),
                 "t": fields["t"],
                 **fields,
             }

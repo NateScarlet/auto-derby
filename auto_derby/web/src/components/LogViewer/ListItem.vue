@@ -1,6 +1,7 @@
 <template>
   <li class="group">
     <span>{{ lineno }}</span>
+    <span>{{ value.lv }}</span>
     <span class="invisible group-hover:visible">
       {{ value.ts }}
     </span>
