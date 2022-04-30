@@ -1,21 +1,21 @@
 <template>
-  <li class="group p-1">
-    <div class="flex gap-2">
-      <div class="w-24 flex-none">
-        <div class="w-full text-center rounded" v-bind="levelAttrs">
-          {{ value.lv }}
-        </div>
-        <div class="text-xs hidden group-hover:block text-center">
+  <li class="p-1 bg-white rounded border border-gray-300">
+    <div class="">
+      <span class="w-24 inline-block text-center" v-bind="levelAttrs">
+        {{ value.lv }}
+      </span>
+      <span class="text-xs float-right text-gray-400">
+        <span>
+          {{ lineno }}
+        </span>
+        <span class="dot mx-1"></span>
+        <span>
           {{ timeText }}
-        </div>
-      </div>
-      <div class="flex-auto">
-        <Component :is="itemClass.component" :value="value"></Component>
-      </div>
-      <span class="text-xs float-right">
-        {{ lineno }}
+        </span>
       </span>
     </div>
+    <hr class="border-gray-300 my-1" />
+    <Component :is="itemClass.component" :value="value"></Component>
   </li>
 </template>
 <script lang="ts">
@@ -71,19 +71,19 @@ const levelAttrs = computed(() => {
   switch (props.value.lv) {
     case LogLevel.DEBUG:
       return {
-        class: 'text-gray-500',
+        class: 'text-gray-400 bg-gray-800',
       };
     case LogLevel.INFO:
       return {
-        class: 'bg-gray-200',
+        class: 'bg-gray-300',
       };
     case LogLevel.WARN:
       return {
-        class: 'bg-orange-500 text-white',
+        class: 'bg-orange-500 text-orange-800',
       };
     case LogLevel.ERROR:
       return {
-        class: 'bg-red-500 text-white',
+        class: 'bg-red-500 text-red-800',
       };
     default:
       assertNever(props.value.lv);

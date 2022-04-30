@@ -13,7 +13,10 @@
         </svg>
       </button>
     </div>
-    <LogViewer class="flex-auto" :records="records"></LogViewer>
+    <LogViewer
+      class="flex-auto m-auto w-full max-w-2xl"
+      :records="records"
+    ></LogViewer>
   </div>
 </template>
 

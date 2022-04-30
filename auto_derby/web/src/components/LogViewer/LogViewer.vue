@@ -11,11 +11,7 @@
     appear
   >
     <template v-for="(i, index) in records" :key="index">
-      <ListItem
-        class="bg-white rounded"
-        :value="i"
-        :lineno="index + 1"
-      ></ListItem>
+      <ListItem :value="i" :lineno="index + 1"></ListItem>
     </template>
     <div v-if="records.length === 0" class="flex flex-center h-full">
       <div class="text-center">
