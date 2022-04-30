@@ -1,5 +1,5 @@
 <template>
-  <div>unsupported item type: {{ value.t }}</div>
+  <div>unsupported item: {{ value }}</div>
 </template>
 
 <script setup lang="ts">

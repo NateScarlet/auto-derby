@@ -23,9 +23,18 @@ from PIL import Image
 import web
 
 
+def _ts():
+    return datetime.datetime.utcnow().isoformat()
+
+
+def _random_level():
+    return random.choice(("DEBUG", "INFO", "WARN", "ERROR"))
+
+
 def _sample_text():
     return {
-        "ts": datetime.datetime.now().isoformat(),
+        "ts": _ts(),
+        "lv": _random_level(),
         "t": "TEXT",
         "msg": "this is a text message",
     }
@@ -33,7 +42,8 @@ def _sample_text():
 
 def _sample_image():
     return {
-        "ts": datetime.datetime.now().isoformat(),
+        "ts": _ts(),
+        "lv": _random_level(),
         "t": "IMAGE",
         "url": "/files/img.png",
         "caption": "this is a image message",
@@ -42,7 +52,8 @@ def _sample_image():
 
 def _sample_image2():
     return {
-        "ts": datetime.datetime.now().isoformat(),
+        "ts": _ts(),
+        "lv": _random_level(),
         "t": "IMAGE",
         "url": "https://httpbin.org/image/png",
         "caption": "this is a image message",

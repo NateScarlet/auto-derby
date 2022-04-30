@@ -95,6 +95,7 @@ class WebLogService(Service):
         data = json.dumps(
             {
                 "ts": datetime.utcnow().isoformat(),
+                "lv": fields["lv"],
                 "t": fields["t"],
                 **fields,
             }

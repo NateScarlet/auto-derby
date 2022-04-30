@@ -60,11 +60,15 @@ class QueueWriter(Writer):
         self._closed = False
 
     def write(self, data: bytes) -> None:
+        if self._closed:
+            raise ValueError("queue writer closed")
         self._q.put(data)
 
     def close(self) -> None:
+        if self._closed:
+            return
         self._closed = True
-        self.write(b"")
+        self._q.put(b"")
 
     def closed(self) -> bool:
         return self._closed
@@ -108,12 +112,14 @@ class Stream(Middleware):
         ctx.status_code = 200
         ctx.set_header("Content-Type", self._mimetype)
         ctx.start_stream()
-        with contextlib.closing(QueueWriter()) as w:
+        with contextlib.closing(ResponseWriter(ctx)) as w, contextlib.closing(
+            QueueWriter()
+        ) as q:
             with self._lock:
-                self._writers.append(w)
-            self._f.copy_to(ResponseWriter(ctx))
+                self._writers.append(q)
+            self._f.copy_to(w)
             while not w.closed():
-                ctx.write_bytes(w.get())
+                w.write(q.get())
 
     def close(self):
         with self._lock:
