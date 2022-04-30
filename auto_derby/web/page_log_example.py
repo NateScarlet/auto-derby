@@ -56,7 +56,7 @@ def _sample_small_image():
         "lv": _random_level(),
         "t": "IMAGE",
         "url": "/files/small.png",
-        "caption": "this is a small message",
+        "caption": "this is a small image",
     }
 
 
@@ -66,7 +66,7 @@ def _sample_internet_image():
         "lv": _random_level(),
         "t": "IMAGE",
         "url": "https://httpbin.org/image/png",
-        "caption": "this is a internet message",
+        "caption": "this is a internet image",
     }
 
 
