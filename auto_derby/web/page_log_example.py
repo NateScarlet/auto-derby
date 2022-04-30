@@ -24,7 +24,7 @@ import web
 
 
 def _ts():
-    return datetime.datetime.utcnow().isoformat()
+    return datetime.datetime.now().astimezone().isoformat()
 
 
 def _random_level():
