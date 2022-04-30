@@ -16,13 +16,14 @@
     <LogViewer
       class="flex-auto m-auto w-full max-w-2xl"
       :records="records"
+      :paused="paused"
     ></LogViewer>
   </div>
 </template>
 
 <script setup lang="ts">
 import useCleanup from '@/composables/useCleanup';
-import type { LogRecord, TextRecord } from '@/log-record';
+import type { LogRecord } from '@/log-record';
 import type { PageDataLog } from '@/page-data';
 import readLineStream from '@/utils/readLineStream';
 import withLoading from '@/utils/withLoading';
@@ -40,25 +41,9 @@ const props = defineProps({
 });
 
 const records = reactive([] as LogRecord[]);
-const recordBuffer = [] as LogRecord[];
 
 const paused = ref(false);
-const flushRecordBuffer = () => {
-  if (paused.value) {
-    return;
-  }
-  records.push(...recordBuffer);
-  recordBuffer.length = 0;
-};
-const pushRecord = (v: TextRecord) => {
-  recordBuffer.push(v);
-  flushRecordBuffer();
-};
-watch(paused, (paused) => {
-  if (!paused) {
-    flushRecordBuffer();
-  }
-});
+
 const loadingCount = ref(0);
 const { addCleanup, cleanup } = useCleanup();
 
@@ -78,7 +63,7 @@ watch(
         stream: body,
         onLine: (line) => {
           try {
-            pushRecord(Object.freeze(JSON.parse(line)));
+            records.push(Object.freeze(JSON.parse(line)));
           } catch (err) {
             app.message.error(`line parsing failed: ${err}`);
           }
