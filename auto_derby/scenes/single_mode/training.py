@@ -535,11 +535,8 @@ def _recognize_soul(
     imagetools.fill_area(fg_mask2, (0,), size_lt=100)
     fg_img = cv2.copyTo(masked_img, fg_mask2)
     empty_mask = imagetools.constant_color_key(fg_img, (126, 121, 121))
+    auto_derby.log.image("soul", img, level=LogLevel.DEBUG)
     if os.getenv("DEBUG") == __name__ + "[partner]":
-        _LOGGER.debug(
-            "soul: img=%s",
-            imagetools.image_hash(img, save_path=training.g.image_path),
-        )
         cv2.imshow("soul", cv_img)
         cv2.imshow("sharpened", shapened_img)
         cv2.imshow("right_bottom_icon", imagetools.cv_image(right_bottom_icon_img))
@@ -564,11 +561,8 @@ def _recognize_partner_icon(
 ) -> Optional[training.Partner]:
     rp = mathtools.ResizeProxy(img.width)
     icon_img = img.crop(bbox)
+    auto_derby.log.image("partner icon", icon_img, level=LogLevel.DEBUG)
     if os.getenv("DEBUG") == __name__ + "[partner]":
-        _LOGGER.debug(
-            "icon: img=%s",
-            imagetools.image_hash(icon_img, save_path=training.g.image_path),
-        )
         cv2.imshow("icon_img", imagetools.cv_image(icon_img))
         cv2.waitKey()
         cv2.destroyAllWindows()
@@ -601,7 +595,7 @@ def _recognize_partner_icon(
     self.type = _recognize_type_color(rp, icon_img)
     if soul >= 0 and self.type == Partner.TYPE_OTHER:
         self.type = Partner.TYPE_TEAMMATE
-    _LOGGER.debug("partner: %s", self)
+    auto_derby.log.text("partner: %s" % self, level=LogLevel.DEBUG)
     return self
 
 
@@ -670,13 +664,6 @@ def _effect_recognitions(
 
 
 def _recognize_training(ctx: Context, img: Image) -> Training:
-    if training.g.image_path:
-        image_id = imagetools.md5(
-            imagetools.cv_image(img.convert("RGB")),
-            save_path=training.g.image_path,
-            save_mode="RGB",
-        )
-        _LOGGER.debug("from_training_scene: image=%s", image_id)
     auto_derby.log.image("recognize training", img, level=LogLevel.DEBUG)
     rp = mathtools.ResizeProxy(img.width)
 

@@ -1,9 +1,10 @@
 <template>
   <li class="p-1 bg-white rounded border border-gray-300">
-    <div class="">
+    <div class="space-x-1">
       <span class="w-24 inline-block text-center" v-bind="levelAttrs">
         {{ value.lv }}
       </span>
+      <span>{{ value.source }}</span>
       <span class="text-sm float-right text-gray-400">
         <span>
           {{ timeText }}

@@ -12,8 +12,9 @@ export enum LogLevel {
 export interface AbstractRecord {
   /** iso8601 timestamp */
   ts: string;
-  t: RecordType;
   lv: LogLevel;
+  t: RecordType;
+  source?: string;
 }
 
 export interface TextRecord extends AbstractRecord {

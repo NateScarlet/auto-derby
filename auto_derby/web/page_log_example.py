@@ -36,6 +36,7 @@ def _sample_text():
         "ts": _ts(),
         "lv": _random_level(),
         "t": "TEXT",
+        "source": "page_log_example",
         "msg": "this is a text message",
     }
 
@@ -45,6 +46,7 @@ def _sample_screenshot():
         "ts": _ts(),
         "lv": _random_level(),
         "t": "IMAGE",
+        "source": "page_log_example",
         "url": "/files/screenshot.png",
         "caption": "this is a screenshot image ",
     }
@@ -55,6 +57,7 @@ def _sample_small_image():
         "ts": _ts(),
         "lv": _random_level(),
         "t": "IMAGE",
+        "source": "page_log_example",
         "url": "/files/small.png",
         "caption": "this is a small image",
     }
@@ -65,6 +68,7 @@ def _sample_internet_image():
         "ts": _ts(),
         "lv": _random_level(),
         "t": "IMAGE",
+        "source": "page_log_example",
         "url": "https://httpbin.org/image/png",
         "caption": "this is a internet image",
     }

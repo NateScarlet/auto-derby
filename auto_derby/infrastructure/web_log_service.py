@@ -10,6 +10,7 @@ import json
 import logging
 import os
 import threading
+import traceback
 import webbrowser
 from datetime import datetime
 from typing import Any, Dict, Optional, Text
@@ -39,6 +40,7 @@ def _image_data_url(img: PIL.Image.Image) -> Text:
 
 
 class WebLogService(Service):
+    _infra_module_prefix = ".".join(__name__.split(".")[:-1]) + "."
     default_webview: Webview = _DefaultWebview()
     default_port = 8400
     default_host = "127.0.0.1"
@@ -91,12 +93,22 @@ class WebLogService(Service):
     def __del__(self):
         self._s.close()
 
+    def _source(self) -> Text:
+        stack_level = 0
+        for f, lineno in traceback.walk_stack(None):
+            stack_level += 1
+            name = f.f_globals.get("__name__")
+            if name and not name.startswith(self._infra_module_prefix):
+                return f"{name}:{lineno}"
+        return ""
+
     def _line(self, fields: Dict[Text, Any]):
         data = json.dumps(
             {
                 "ts": datetime.now().astimezone().isoformat(),
                 "lv": fields["lv"],
                 "t": fields["t"],
+                "source": self._source(),
                 **fields,
             }
         ).encode("utf-8")

@@ -92,7 +92,7 @@ def main():
             auto_derby.log,
             WebLogService(),
         )
-        time.sleep(1) # wait browser
+        time.sleep(1)  # wait browser
 
     if not job:
         LOGGER.error(
@@ -114,7 +114,7 @@ if __name__ == "__main__":
         level=logging.INFO,
         datefmt="%H:%M:%S",
     )
-    auto_derby.log = LoggingLogService(logging.Logger("auto_derby"))
+    auto_derby.log = LoggingLogService()
 
     LOG_PATH = config.LOG_PATH
     if LOG_PATH and LOG_PATH != "-":
