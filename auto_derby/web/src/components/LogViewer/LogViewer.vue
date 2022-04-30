@@ -1,5 +1,15 @@
 <template>
-  <ol ref="el" class="max-h-screen p-4 overflow-auto space-y-1">
+  <TransitionGroup
+    ref="el"
+    class="max-h-screen p-4 overflow-y-auto overflow-x-hidden space-y-1"
+    tag="ol"
+    move-class="transition ease-in-out duration-300"
+    enter-from-class="opacity-0 transform translate-x-8"
+    enter-active-class="transition-all ease-in-out duration-500 relative"
+    enter-to-class="opacity-100"
+    level-to-class="opacity-0"
+    appear
+  >
     <template v-for="(i, index) in records" :key="index">
       <ListItem
         class="bg-white rounded"
@@ -13,12 +23,12 @@
         <p>no record</p>
       </div>
     </div>
-  </ol>
+  </TransitionGroup>
 </template>
 
 <script setup lang="ts">
 import type { LogRecord } from '@/log-record';
-import type { PropType } from 'vue';
+import type { PropType, TransitionGroup } from 'vue';
 import { ref, toRef, watch } from 'vue';
 import ListItem from '@/components/LogViewer/ListItem.vue';
 
@@ -29,7 +39,9 @@ const props = defineProps({
   },
 });
 const records = toRef(props, 'records');
-const el = ref<HTMLOListElement>();
+const el = ref<
+  InstanceType<typeof TransitionGroup> & { $el: HTMLOListElement }
+>();
 
 watch(
   [el, records],
@@ -37,9 +49,13 @@ watch(
     if (!el) {
       return;
     }
-    el.scroll({
-      top: el.scrollHeight,
-    });
+
+    setTimeout(() => {
+      el.$el.scroll({
+        top: el.$el.scrollHeight,
+        behavior: 'smooth',
+      });
+    }, 500);
   },
   { deep: true }
 );
