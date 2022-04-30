@@ -50,6 +50,7 @@
 <script setup lang="ts">
 import useCleanup from '@/composables/useCleanup';
 import type { LogRecord } from '@/log-record';
+import { RecordType } from '@/log-record';
 import type { PageDataLog } from '@/page-data';
 import readLineStream from '@/utils/readLineStream';
 import withLoading from '@/utils/withLoading';
@@ -58,6 +59,7 @@ import type { PropType } from 'vue';
 import { watch, reactive, ref } from 'vue';
 import LogViewer from '@/components/LogViewer/LogViewer.vue';
 import app from '@/services';
+import loadImage from '@/utils/loadImage';
 
 const props = defineProps({
   pageData: {
@@ -67,6 +69,13 @@ const props = defineProps({
 });
 
 const records = reactive([] as LogRecord[]);
+
+const pushRecord = async (v: LogRecord) => {
+  if (v.t === RecordType.IMAGE) {
+    await loadImage(v.url);
+  }
+  records.push(v);
+};
 
 const paused = ref(false);
 
@@ -87,9 +96,9 @@ watch(
 
       await readLineStream({
         stream: body,
-        onLine: (line) => {
+        onLine: async (line) => {
           try {
-            records.push(Object.freeze(JSON.parse(line)));
+            await pushRecord(Object.freeze(JSON.parse(line)));
           } catch (err) {
             app.message.error(`line parsing failed: ${err}`);
           }

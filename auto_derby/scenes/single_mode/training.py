@@ -8,9 +8,11 @@ import os
 from concurrent import futures
 from typing import Callable, Iterator, Optional, Tuple
 
+import auto_derby
 import cast_unknown as cast
 import cv2
 import numpy as np
+from auto_derby import LogLevel
 from auto_derby.single_mode.context import Context
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
@@ -20,7 +22,6 @@ from ...single_mode import Training, training
 from ...single_mode.training import Partner
 from ..scene import Scene, SceneHolder
 from .command import CommandScene
-import auto_derby
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -676,7 +677,7 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
             save_mode="RGB",
         )
         _LOGGER.debug("from_training_scene: image=%s", image_id)
-    auto_derby.log.image("recognize training", img)
+    auto_derby.log.image("recognize training", img, level=LogLevel.DEBUG)
     rp = mathtools.ResizeProxy(img.width)
 
     self = Training.new()

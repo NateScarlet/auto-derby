@@ -33,7 +33,7 @@
     <div v-if="records.length === 0" class="flex flex-center h-full">
       <div class="text-center">
         <h1 class="text-2xl">Log Viewer</h1>
-        <p>no record</p>
+        <p>waiting for record</p>
       </div>
     </div>
   </TransitionGroup>

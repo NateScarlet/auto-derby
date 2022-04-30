@@ -104,10 +104,10 @@ class WebLogService(Service):
         self._s.write(b"\n")
 
     def _text(self, level: Level, msg: Text):
-        self._line({"t": "TEXT", "lv": level, "msg": msg})
+        self._line({"t": "TEXT", "lv": level.value, "msg": msg})
 
     def _image(self, level: Level, caption: Text, url: Text):
-        self._line({"t": "IMAGE", "lv": level, "caption": caption, "url": url})
+        self._line({"t": "IMAGE", "lv": level.value, "caption": caption, "url": url})
 
     def text(self, msg: Text, /, *, level: Level = Level.INFO):
         self._text(level, msg)

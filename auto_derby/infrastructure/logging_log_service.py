@@ -41,8 +41,5 @@ class LoggingLogService(Service):
 
         self._l.log(
             self._level_of(level),
-            "%s: w=%d h=%d",
             caption,
-            img.width,
-            img.height,
         )

@@ -15,6 +15,7 @@ import numpy as np
 from PIL.Image import Image
 
 from .. import imagetools, mathtools, terminal
+import auto_derby
 
 LOGGER = logging.getLogger(__name__)
 
@@ -135,5 +136,5 @@ def get_choice(event_screen: Image) -> int:
         ret = g.choices[event_id]
     else:
         ret = _prompt_choice(event_id)
-    LOGGER.info("event: id=%s choice=%d", event_id, ret)
+    auto_derby.log.image("event: id=%s choice=%d" % (event_id, ret), event_screen)
     return ret

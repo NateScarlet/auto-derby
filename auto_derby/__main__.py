@@ -92,6 +92,7 @@ def main():
             auto_derby.log,
             WebLogService(),
         )
+        time.sleep(1) # wait browser
 
     if not job:
         LOGGER.error(
