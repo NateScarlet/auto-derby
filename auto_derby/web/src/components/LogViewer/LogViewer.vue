@@ -3,12 +3,7 @@
     ref="el"
     class="max-h-screen p-4 overflow-y-auto overflow-x-hidden space-y-1"
     tag="ol"
-    move-class="transition ease-in-out duration-300"
-    enter-from-class="opacity-0 transform translate-x-8"
-    enter-active-class="transition-all ease-in-out duration-500 relative"
-    enter-to-class="opacity-100"
-    level-to-class="opacity-0"
-    appear
+    v-bind="transitionGroupAttrs"
   >
     <template v-if="hasPrevious">
       <button
@@ -47,11 +42,14 @@
 <script setup lang="ts">
 import type { LogRecord } from '@/log-record';
 import type { PropType, TransitionGroup } from 'vue';
-import { watch, watchEffect, computed, ref, toRef } from 'vue';
+import { nextTick, watch, watchEffect, computed, ref, toRef } from 'vue';
 import ListItem from '@/components/LogViewer/ListItem.vue';
 import computedWith from '@/utils/computedWith';
 import useInfiniteScroll from '@/composables/useInfiniteScroll';
 import usePause from '@/composables/usePause';
+import useTransform from '@/composables/useTransform';
+import clamp from '@/utils/clamp';
+import { throttle } from 'lodash-es';
 
 const props = defineProps({
   records: {
@@ -68,10 +66,20 @@ const props = defineProps({
 });
 const paused = toRef(props, 'paused');
 const records = toRef(props, 'records');
+
+const transitionGroupAttrs = computed(() => {
+  if (props.paused) {
+    return;
+  }
+  return {
+    enterFromClass: 'opacity-0 transform translate-x-8',
+    enterActiveClass: 'transition-all ease-in-out duration-500 relative',
+    enterToClass: 'opacity-100',
+  };
+});
 const el = ref<
   InstanceType<typeof TransitionGroup> & { $el: HTMLOListElement }
 >();
-const topIndex = ref(0);
 
 const scrollContainer = computed(() => el.value?.$el);
 const totalCount = usePause(
@@ -84,6 +92,11 @@ const totalCount = usePause(
   ),
   paused
 );
+const topIndex = useTransform(
+  ref(0),
+  (v) => v,
+  (v) => clamp(v, 0, totalCount.value - 1)
+);
 const hasPrevious = computed(() => {
   return topIndex.value > 0;
 });
@@ -92,23 +105,44 @@ const hasNext = computed(() => {
 });
 
 const itemByIndex = (index: number) => {
-  return scrollContainer.value?.querySelector(`[data-index="${index}"]`);
+  return scrollContainer.value?.querySelector<HTMLLIElement>(
+    `li[data-index="${index}"]`
+  );
 };
 
-const onScrollToTop = () => {
+const scrollViewport = (offset: number) => {
+  if (offset === 0) {
+    return;
+  }
+  const topIndexBefore = topIndex.value;
+  topIndex.value += offset;
+  const topIndexAfter = topIndex.value;
+  const actualOffset = topIndexAfter - topIndexBefore;
+  if (actualOffset < 0) {
+    nextTick(() => {
+      const itemBefore = itemByIndex(topIndexBefore);
+      const itemAfter = itemByIndex(topIndexAfter);
+      const el = scrollContainer.value;
+
+      if (itemAfter && itemBefore && el) {
+        el.scrollTop -= itemAfter.offsetTop - itemBefore.offsetTop;
+      }
+    });
+  }
+};
+
+const onScrollToTop = throttle(() => {
   if (!hasPrevious.value) {
     return;
   }
-  const topItem = itemByIndex(topIndex.value);
-  topIndex.value -= Math.round(props.size / 2);
-  topItem?.scrollIntoView();
-};
-const onScrollToBottom = () => {
+  scrollViewport(-Math.round(props.size / 2));
+}, 100);
+const onScrollToBottom = throttle(() => {
   if (!hasNext.value) {
     return;
   }
-  topIndex.value += Math.round(props.size / 2);
-};
+  scrollViewport(Math.round(props.size / 2));
+}, 100);
 
 useInfiniteScroll(scrollContainer, {
   onScrollToTop,
@@ -137,12 +171,12 @@ watch(
       return;
     }
 
-    setTimeout(() => {
+    nextTick(() => {
       el.scroll({
         top: el.scrollHeight,
         behavior: 'smooth',
       });
-    }, 500);
+    });
   },
   { deep: true }
 );
