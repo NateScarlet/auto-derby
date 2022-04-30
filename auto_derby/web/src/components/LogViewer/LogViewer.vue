@@ -1,7 +1,7 @@
 <template>
   <TransitionGroup
     ref="el"
-    class="max-h-screen p-4 overflow-y-auto overflow-x-hidden space-y-1"
+    class="max-h-screen overflow-y-auto overflow-x-hidden space-y-1"
     tag="ol"
     v-bind="transitionGroupAttrs"
   >
