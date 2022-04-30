@@ -98,6 +98,7 @@ watch(
     } catch (err) {
       app.message.error(`stream read failed: ${err}`);
     }
+    app.message.info('stream closed');
   }),
   { immediate: true }
 );

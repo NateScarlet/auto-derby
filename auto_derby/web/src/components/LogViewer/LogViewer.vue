@@ -75,6 +75,9 @@ const transitionGroupAttrs = computed(() => {
     enterFromClass: 'opacity-0 transform translate-x-8',
     enterActiveClass: 'transition-all ease-in-out duration-500 relative',
     enterToClass: 'opacity-100',
+    leaveFromClass: 'h-full max-h-fit',
+    leaveToClass: 'h-0',
+    leaveActiveClass: 'transition-all ease-in-out duration-500 overflow-hidden',
   };
 });
 const el = ref<
@@ -147,6 +150,7 @@ const onScrollToBottom = throttle(() => {
 useInfiniteScroll(scrollContainer, {
   onScrollToTop,
   onScrollToBottom,
+  margin: (el) => el.offsetHeight * 0.3,
 });
 
 const visibleRecords = computedWith([totalCount, topIndex], () =>

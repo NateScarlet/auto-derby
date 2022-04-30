@@ -4,13 +4,13 @@
       <span class="w-24 inline-block text-center" v-bind="levelAttrs">
         {{ value.lv }}
       </span>
-      <span class="text-xs float-right text-gray-400">
+      <span class="text-sm float-right text-gray-400">
         <span>
-          {{ lineno }}
+          {{ timeText }}
         </span>
         <span class="dot mx-1"></span>
         <span>
-          {{ timeText }}
+          {{ lineno }}
         </span>
       </span>
     </div>
