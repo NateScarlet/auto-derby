@@ -1,8 +1,8 @@
 <template>
   <div ref="el">
-    <figure class="flex items-start bg-checkerboard p-px">
-      <img ref="img" :src="value.url" />
-      <template v-if="layersExpanded">
+    <figure class="flex flex-wrap items-start bg-checkerboard p-px relative">
+      <img ref="img" :src="selectedLayer.url" />
+      <template v-if="expandLayers">
         <template v-for="({ name, url }, index) in layers" :key="index">
           <figure>
             <img :src="url" />
@@ -10,13 +10,9 @@
           </figure>
         </template>
       </template>
-      <template v-else>
-        <template v-if="selectedLayer">
-          <figure>
-            <img :src="selectedLayer.url" />
-            <figcaption>{{ selectedLayer.name }}</figcaption>
-          </figure>
-        </template>
+    </figure>
+    <template v-if="!expandLayers">
+      <div class="space-x-1">
         <template
           v-for="{ label, inputAttrs, key } in selectedLayerInputData"
           :key="key"
@@ -26,14 +22,14 @@
             <span>{{ label }}</span>
           </label>
         </template>
-      </template>
-    </figure>
+      </div>
+    </template>
     <figcaption>{{ value.caption }}</figcaption>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { ImageRecord } from '@/log-record';
+import type { ImageLayer, ImageRecord } from '@/log-record';
 import type { PropType } from 'vue';
 import { computed, ref } from 'vue';
 import useElementSize from '@/composables/useElementSize';
@@ -49,15 +45,20 @@ const layers = computed(() => props.value.layers ?? []);
 const img = ref<HTMLImageElement>();
 const el = ref<HTMLElement>();
 const selectedLayerIndex = ref(0);
+const mainLayer = computed<ImageLayer>(() => ({
+  name: 'main',
+  url: props.value.url,
+}));
 const selectedLayer = computed(() => {
-  const index = selectedLayerIndex.value;
+  const index = selectedLayerIndex.value - 1;
   const v = layers.value;
   if (index in v) {
     return v[index];
   }
+  return mainLayer.value;
 });
 const selectedLayerInputData = computed(() =>
-  layers.value.map(({ name }, index) => ({
+  [mainLayer.value, ...layers.value].map(({ name }, index) => ({
     key: index,
     label: name,
     inputAttrs: {
@@ -74,7 +75,7 @@ const selectedLayerInputData = computed(() =>
 );
 const { width } = useElementSize(img);
 const { width: elWidth } = useElementSize(el);
-const layersExpanded = computed(
+const expandLayers = computed(
   () => width.value * (layers.value.length + 1) < elWidth.value - 2
 );
 </script>

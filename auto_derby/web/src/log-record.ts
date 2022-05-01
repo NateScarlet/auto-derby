@@ -31,6 +31,7 @@ export interface ImageRecord extends AbstractRecord {
   t: RecordType.IMAGE;
   url: string;
   caption: string;
+  /** layers image size should be same as main image (slight difference is allowed) */
   layers?: ImageLayer[];
 }
 
