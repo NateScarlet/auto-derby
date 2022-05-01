@@ -111,10 +111,13 @@ class Stream(Middleware):
         with contextlib.closing(ResponseWriter(ctx)) as w, contextlib.closing(
             QueueWriter()
         ) as q:
-            with self._lock:
-                self._writers.append(q)
             self._f.copy_to(w)
-            while not w.closed():
+            with self._lock:
+                if self._closed:
+                    q.close()
+                else:
+                    self._writers.append(q)
+            while not q.closed():
                 w.write(q.get())
 
     def close(self):

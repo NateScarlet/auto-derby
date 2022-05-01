@@ -8,6 +8,7 @@ import hashlib
 import io
 import os
 import threading
+import urllib.parse
 from pathlib import Path
 from typing import (
     Any,
@@ -22,8 +23,8 @@ from typing import (
     Type,
     TypeVar,
     Union,
-    cast as cast_type,
 )
+from typing import cast as cast_type
 
 import cast_unknown as cast
 import cv2
@@ -470,8 +471,9 @@ def auto_crop(cv_img: np.ndarray) -> np.ndarray:
     )
     return cv_img[t:b, l:r]
 
+
 def data_url(img: Image) -> Text:
     b = io.BytesIO()
     img.save(b, "PNG")
     data = base64.b64encode(b.getvalue()).decode("utf-8")
-    return f"data:image/png;base64,{data}"
+    return f"data:image/png;base64,{urllib.parse.quote(data)}"

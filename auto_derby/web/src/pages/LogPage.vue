@@ -100,7 +100,8 @@ watch(
           try {
             await pushRecord(Object.freeze(JSON.parse(line)));
           } catch (err) {
-            app.message.error(`line parsing failed: ${err}`);
+            const lineno = records.length + 1;
+            app.message.error(`line parsing failed: ${lineno}: ${err}`);
           }
         },
       });
