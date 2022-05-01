@@ -22,10 +22,16 @@ export interface TextRecord extends AbstractRecord {
   msg: String;
 }
 
+export interface ImageLayer {
+  name: string;
+  url: string;
+}
+
 export interface ImageRecord extends AbstractRecord {
   t: RecordType.IMAGE;
   url: string;
   caption: string;
+  layers?: ImageLayer[];
 }
 
 export type LogRecord = Readonly<TextRecord | ImageRecord>;

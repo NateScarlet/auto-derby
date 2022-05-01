@@ -2,7 +2,7 @@
 # pyright: strict
 
 from __future__ import annotations
-from typing import Sequence, Text
+from typing import Dict, Sequence, Text
 
 from auto_derby.log import Image, Level, Service
 
@@ -23,6 +23,14 @@ class MultiLogService(Service):
         for i in self._s:
             i.text(msg, level=level)
 
-    def image(self, caption: Text, image: Image, /, *, level: Level = Level.INFO):
+    def image(
+        self,
+        caption: Text,
+        image: Image,
+        /,
+        *,
+        level: Level = Level.INFO,
+        layers: Dict[Text, Image] = {},
+    ):
         for i in self._s:
-            i.image(caption, image, level=level)
+            i.image(caption, image, level=level, layers=layers)

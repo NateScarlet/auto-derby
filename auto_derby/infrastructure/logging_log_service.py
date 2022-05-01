@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import logging
 import traceback
-from typing import Any, Text, Tuple
+from typing import Any, Dict, Text, Tuple
 
 from auto_derby import imagetools
 
@@ -48,20 +48,23 @@ class LoggingLogService(Service):
             msg,
         )
 
-    def image(self, caption: Text, image: Image, *, level: Level = Level.INFO):
+    def image(
+        self,
+        caption: Text,
+        image: Image,
+        *,
+        level: Level = Level.INFO,
+        layers: Dict[Text, Image] = {},
+    ):
         img = imagetools.pil_image_of(image)
+        fields = {"caption": caption, "width": img.width, "height": img.height}
+        if layers:
+            fields["layers"] = ",".join(layers.keys())
         if img.width * img.height < 20000:
-            return self._log(
-                level,
-                "%s: %s",
-                caption,
-                imagetools.data_url(img),
-            )
-
-        self._log(
+            fields["url"] = imagetools.data_url(img)
+        fields_text = " ".join(f"{k}={v}" for k, v in fields.items())
+        return self._log(
             level,
-            "image %sx%s: %s",
-            img.width,
-            img.height,
-            caption,
+            "image: %s",
+            fields_text,
         )
