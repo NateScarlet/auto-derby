@@ -101,8 +101,11 @@ class WebLogService(Service):
         _LOGGER.info("web log service start at:\t%s", url)
         webview.open(url)
 
-    def __del__(self):
+    def close(self):
         self._s.close()
+
+    def __del__(self):
+        self.close()
 
     def _source(self) -> Text:
         stack_level = 0

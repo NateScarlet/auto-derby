@@ -105,10 +105,6 @@ class Stream(Middleware):
         self.on_close: Callable[[], None] = lambda: None
 
     def handle(self, ctx: Context, next: Handler) -> None:
-        with self._lock:
-            if self._closed:
-                return ctx.send_text(200, "stream closed")
-
         ctx.status_code = 200
         ctx.set_header("Content-Type", self._mimetype)
         ctx.start_stream()
