@@ -22,14 +22,13 @@ export const MessageList = defineComponent<
     return h(
       TransitionGroup,
       {
-        class: 'fixed top-0 w-screen flex flex-col items-center',
+        class: 'fixed top-2 w-screen flex flex-col items-center',
         appear: true,
         tag: 'ol',
-        moveClass: 'transition ease-in-out duration-200',
-        enterActiveClass: 'transition ease-in-out duration-300',
-        enterFromClass: 'opacity-0 transform -translate-y-full',
-        leaveActiveClass: 'transition ease-in-out duration-1000 absolute',
-        leaveToClass: 'transform -translate-y-full',
+        enterActiveClass: 'transition-all ease-in-out duration-300 absolute',
+        enterFromClass: 'transform -translate-y-full -mt-4',
+        leaveActiveClass: 'transition-all ease-int-out duration-300 absolute',
+        leaveToClass: 'transform -translate-y-full -mt-4',
       },
       () =>
         this.messages.map((i) => {
@@ -42,34 +41,61 @@ export const MessageList = defineComponent<
 });
 
 let nextKey = 0;
+const pendingMessages = [] as {
+  render: () => VNode;
+  onAppear: (close: () => void) => void;
+}[];
 
-/**
- * add a message to list using render function.
- * @param render message render function
- * @returns message close function.
- */
-export function message(render: () => VNode): () => void {
-  const key = nextKey;
-  nextKey += 1;
-
-  listData.messages.splice(0, 0, { key, render });
-  return () => {
-    const index = listData.messages.findIndex((i) => i.key === key);
-    if (index < 0) {
-      return;
+let isProcessing = false;
+const processMessages = async () => {
+  if (isProcessing) {
+    return;
+  }
+  isProcessing = true;
+  try {
+    while (pendingMessages.length > 0) {
+      const [{ render, onAppear }] = pendingMessages.splice(0, 1);
+      const key = nextKey;
+      nextKey += 1;
+      listData.messages.push({ key, render });
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise<void>((resolve) => {
+        const close = () => {
+          setTimeout(resolve, 500);
+          const index = listData.messages.findIndex((i) => i.key === key);
+          if (index < 0) {
+            return;
+          }
+          listData.messages.splice(index, 1);
+        };
+        onAppear(close);
+      });
     }
-    listData.messages.splice(index, 1);
-  };
+  } finally {
+    isProcessing = false;
+  }
+};
+
+function message(render: () => VNode): Promise<() => void> {
+  return new Promise((resolve) => {
+    pendingMessages.push({
+      render,
+      onAppear: (close) => {
+        resolve(close);
+      },
+    });
+    processMessages();
+  });
 }
 
 export default class VueMessageService implements MessageService {
-  info(text: string, duration = Math.min(3000, text.length * 200)): void {
-    const close = message(() =>
+  async info(text: string, duration = 1000 + text.length * 200): Promise<void> {
+    const close = await message(() =>
       h(
         'li',
         {
           class: [
-            'p-2 rounded max-w-md w-full shadow min-h-12 mt-2',
+            'p-2 rounded max-w-md w-full shadow min-h-12',
             'border-2 border-theme-toast',
             'flex flex-center',
             'bg-gray-50 text-theme-text break-all font-bold',
@@ -81,13 +107,16 @@ export default class VueMessageService implements MessageService {
     setTimeout(close, duration);
   }
 
-  error(text: string, duration = Math.min(3000, text.length * 200)): void {
-    const close = message(() =>
+  async error(
+    text: string,
+    duration = 1000 + text.length * 200
+  ): Promise<void> {
+    const close = await message(() =>
       h(
         'li',
         {
           class: [
-            'p-2 rounded max-w-md w-full shadow min-h-12 mt-2',
+            'p-2 rounded max-w-md w-full shadow min-h-12',
             'border-2 border-red-400',
             'flex flex-center',
             'bg-red-50 text-theme-text break-all font-bold',
@@ -103,6 +132,7 @@ export default class VueMessageService implements MessageService {
 if (isDevelopmentMode) {
   const s = new VueMessageService();
   s.info('test info');
+  s.info('test info2');
   setTimeout(() => {
     s.error('test error');
   }, 1e3);
