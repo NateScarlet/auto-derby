@@ -10,6 +10,11 @@
       gap-1
     "
   >
+    <LogViewer
+      class="flex-auto"
+      :records="records"
+      :paused="paused"
+    ></LogViewer>
     <div class="flex-none flex gap-1">
       <label class="flex flex-auto items-center">
         <svg class="inline align-top fill-current h-8" viewBox="0 0 24 24">
@@ -39,11 +44,6 @@
         </svg>
       </button>
     </div>
-    <LogViewer
-      class="flex-auto"
-      :records="records"
-      :paused="paused"
-    ></LogViewer>
   </div>
 </template>
 
@@ -60,6 +60,7 @@ import { watch, reactive, ref } from 'vue';
 import LogViewer from '@/components/LogViewer/LogViewer.vue';
 import app from '@/services';
 import loadImage from '@/utils/loadImage';
+import { isDevelopmentMode } from '@/settings';
 
 const props = defineProps({
   pageData: {
@@ -72,7 +73,11 @@ const records = reactive([] as LogRecord[]);
 
 const pushRecord = async (v: LogRecord) => {
   if (v.t === RecordType.IMAGE) {
-    await loadImage(v.url);
+    try {
+      await loadImage(v.url);
+    } catch (err) {
+      app.message.error(`load image failed: ${v.url}: ${err}`);
+    }
   }
   records.push(v);
 };
@@ -100,8 +105,11 @@ watch(
           try {
             await pushRecord(Object.freeze(JSON.parse(line)));
           } catch (err) {
-            const lineno = records.length + 1;
-            app.message.error(`line parsing failed: ${lineno}: ${err}`);
+            app.message.error(`line parsing failed: ${err}`);
+            if (isDevelopmentMode) {
+              // eslint-disable-next-line no-console
+              console.error({ err, line });
+            }
           }
         },
       });

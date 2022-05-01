@@ -82,6 +82,7 @@ export default defineConfig({
       '/stream': 'http://localhost:8300',
       '/log': 'http://localhost:8300',
       '/files': 'http://localhost:8300',
+      '/images': 'http://localhost:8300',
     },
   },
 });

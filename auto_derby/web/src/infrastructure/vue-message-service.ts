@@ -1,4 +1,5 @@
 import type { MessageService } from '@/services';
+import { isDevelopmentMode } from '@/settings';
 import type { VNode } from 'vue';
 import { TransitionGroup, defineComponent, h, reactive } from 'vue';
 
@@ -21,14 +22,14 @@ export const MessageList = defineComponent<
     return h(
       TransitionGroup,
       {
-        class: 'fixed top-0 right-4 flex flex-col-reverse items-end',
+        class: 'fixed top-0 w-screen flex flex-col items-center',
         appear: true,
         tag: 'ol',
         moveClass: 'transition ease-in-out duration-200',
         enterActiveClass: 'transition ease-in-out duration-300',
-        enterFromClass: 'opacity-0 transform translate-x-full',
-        leaveActiveClass: 'transition ease-in-out duration-1000',
-        leaveToClass: 'opacity-0',
+        enterFromClass: 'opacity-0 transform -translate-y-full',
+        leaveActiveClass: 'transition ease-in-out duration-1000 absolute',
+        leaveToClass: 'transform -translate-y-full',
       },
       () =>
         this.messages.map((i) => {
@@ -62,13 +63,17 @@ export function message(render: () => VNode): () => void {
 }
 
 export default class VueMessageService implements MessageService {
-  info(text: string, duration = 3000 + 200 * text.length): void {
+  info(text: string, duration = Math.min(3000, text.length * 200)): void {
     const close = message(() =>
       h(
         'li',
         {
-          class:
-            'p-3 rounded-sm w-64 mx-2 my-1 bg-gray-900 text-white break-all',
+          class: [
+            'p-2 rounded max-w-md w-full shadow min-h-12 mt-2',
+            'border-2 border-theme-toast',
+            'flex flex-center',
+            'bg-gray-50 text-theme-text break-all font-bold',
+          ],
         },
         text
       )
@@ -76,17 +81,29 @@ export default class VueMessageService implements MessageService {
     setTimeout(close, duration);
   }
 
-  error(text: string, duration = 3000 + 200 * text.length): void {
+  error(text: string, duration = Math.min(3000, text.length * 200)): void {
     const close = message(() =>
       h(
         'li',
         {
-          class:
-            'p-3 rounded-sm w-64 mx-2 my-1 bg-red-700 text-white break-all',
+          class: [
+            'p-2 rounded max-w-md w-full shadow min-h-12 mt-2',
+            'border-2 border-red-400',
+            'flex flex-center',
+            'bg-red-50 text-theme-text break-all font-bold',
+          ],
         },
         text
       )
     );
     setTimeout(close, duration);
   }
+}
+
+if (isDevelopmentMode) {
+  const s = new VueMessageService();
+  s.info('test info');
+  setTimeout(() => {
+    s.error('test error');
+  }, 1e3);
 }

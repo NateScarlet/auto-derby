@@ -8,7 +8,6 @@ import hashlib
 import io
 import os
 import threading
-import urllib.parse
 from pathlib import Path
 from typing import (
     Any,
@@ -476,4 +475,4 @@ def data_url(img: Image) -> Text:
     b = io.BytesIO()
     img.save(b, "PNG")
     data = base64.b64encode(b.getvalue()).decode("utf-8")
-    return f"data:image/png;base64,{urllib.parse.quote(data)}"
+    return f"data:image/png;base64,{data}"

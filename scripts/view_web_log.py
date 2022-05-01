@@ -23,24 +23,25 @@ def main():
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--path", default="debug/log.jsonl")
+    parser.add_argument("--path", "-p", default="debug/log.jsonl")
     parser.add_argument(
-        "--files",
-        help="log files folder path, defaults to `./files` relative to log path",
+        "--image-path",
+        help="log image folder path, defaults to `./images` relative to log path",
     )
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8300)
     args = parser.parse_args()
+    print(args)
     path = args.path
-    if args.files:
-        files = args.files
+    if args.image_path:
+        image_path = args.image_path
     else:
-        files = os.path.abspath(os.path.join(path, "../files"))
+        image_path = os.path.abspath(os.path.join(path, "../images"))
     s = WebLogService(
         host=args.host,
         port=args.port,
         buffer_path=path,
-        image_path=files,
+        image_path=image_path,
     )
     s.close()
     print("press Ctrl+C to stop")

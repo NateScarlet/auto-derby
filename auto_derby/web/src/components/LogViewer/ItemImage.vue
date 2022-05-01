@@ -16,7 +16,7 @@
       </template>
     </figure>
     <template v-if="!expandLayers">
-      <div class="space-x-1">
+      <div v-if="selectedLayerInputData.length > 1" class="space-x-1">
         <template
           v-for="{ label, inputAttrs, key } in selectedLayerInputData"
           :key="key"
