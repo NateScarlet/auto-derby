@@ -9,6 +9,7 @@
     "lint": "eslint . --ext js,ts,vue"
   },
   "dependencies": {
+    "@juggle/resize-observer": "^3.3.1",
     "@mdi/js": "^6.5.95",
     "@types/lodash-es": "^4.17.6",
     "lodash-es": "^4.17.21",

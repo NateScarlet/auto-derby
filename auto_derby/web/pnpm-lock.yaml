@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@babel/core': ^7.17.8
   '@babel/preset-env': ^7.16.11
+  '@juggle/resize-observer': ^3.3.1
   '@mdi/js': ^6.5.95
   '@tailwindcss/forms': ^0.5.0
   '@types/babel__core': ^7.1.18
@@ -31,6 +32,7 @@ specifiers:
   vue-tsc: ^0.29.8
 
 dependencies:
+  '@juggle/resize-observer': registry.npmmirror.com/@juggle/resize-observer/3.3.1
   '@mdi/js': registry.npmmirror.com/@mdi/js/6.5.95
   '@types/lodash-es': registry.npmmirror.com/@types/lodash-es/4.17.6
   lodash-es: registry.npmmirror.com/lodash-es/4.17.21
@@ -1576,6 +1578,12 @@ packages:
       '@jridgewell/resolve-uri': registry.npmmirror.com/@jridgewell/resolve-uri/3.0.5
       '@jridgewell/sourcemap-codec': registry.npmmirror.com/@jridgewell/sourcemap-codec/1.4.11
     dev: true
+
+  registry.npmmirror.com/@juggle/resize-observer/3.3.1:
+    resolution: {integrity: sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@juggle/resize-observer/-/resize-observer-3.3.1.tgz}
+    name: '@juggle/resize-observer'
+    version: 3.3.1
+    dev: false
 
   registry.npmmirror.com/@mdi/js/6.5.95:
     resolution: {integrity: sha512-x/bwEoAGP+Mo10Dfk5audNIPi7Yz8ZBrILcbXLW3ShOI/njpgodzpgpC2WYK3D2ZSC392peRRemIFb/JsyzzYQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@mdi/js/-/js-6.5.95.tgz}

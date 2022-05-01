@@ -44,6 +44,7 @@ class WebLogService(Service):
     _infra_module_prefix = ".".join(__name__.split(".")[:-1]) + "."
     _image_placeholder_svg_template = """\
 <svg width="540" height="200" version="1.1" viewBox="0 0 143 53" xmlns="http://www.w3.org/2000/svg">
+ <rect width="100%" height="100%" fill="#fff"/>
  <text font-family="sans-serif" font-size="10px"><tspan x="32" y="15">Image not saved</tspan></text>
  <text x="71" y="33" font-family="serif" font-size="5px" text-anchor="middle"><tspan x="71.4" y="33.1">reason:</tspan><tspan x="71.4" y="37.8">image save path not set</tspan><tspan x="71.4" y="42.6">and size greater than inline limit</tspan></text>
  <text x="42" y="25" font-family="sans-serif" font-size="6px"><tspan x="43.5" y="25.9">resolution={width}x{height}</tspan></text>

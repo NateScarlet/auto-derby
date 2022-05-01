@@ -150,7 +150,7 @@ const onScrollToBottom = throttle(() => {
 useInfiniteScroll(scrollContainer, {
   onScrollToTop,
   onScrollToBottom,
-  margin: (el) => el.offsetHeight * 0.3,
+  margin: (el) => Math.min(200, el.offsetHeight * 0.3),
 });
 
 const visibleRecords = computedWith([totalCount, topIndex], () =>
