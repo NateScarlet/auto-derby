@@ -1,10 +1,5 @@
 <template>
-  <TransitionGroup
-    ref="el"
-    class="max-h-screen overflow-y-auto overflow-x-hidden space-y-1"
-    tag="ol"
-    v-bind="transitionGroupAttrs"
-  >
+  <ol ref="el" class="max-h-screen overflow-y-auto overflow-x-hidden space-y-1">
     <template v-if="hasPrevious">
       <button
         type="button"
@@ -36,12 +31,12 @@
         <p>waiting for record</p>
       </div>
     </div>
-  </TransitionGroup>
+  </ol>
 </template>
 
 <script setup lang="ts">
 import type { LogRecord } from '@/log-record';
-import type { PropType, TransitionGroup } from 'vue';
+import type { PropType } from 'vue';
 import { nextTick, watch, watchEffect, computed, ref, toRef } from 'vue';
 import ListItem from '@/components/LogViewer/ListItem.vue';
 import computedWith from '@/utils/computedWith';
@@ -68,24 +63,9 @@ const props = defineProps({
 const paused = toRef(props, 'paused');
 const records = toRef(props, 'records');
 
-const transitionGroupAttrs = computed(() => {
-  if (props.paused) {
-    return;
-  }
-  return {
-    enterFromClass: 'opacity-0 transform translate-x-8',
-    enterActiveClass: 'transition-all ease-in-out duration-500 relative',
-    enterToClass: 'opacity-100',
-    leaveFromClass: 'h-full max-h-fit',
-    leaveToClass: 'h-0',
-    leaveActiveClass: 'transition-all ease-in-out duration-500 overflow-hidden',
-  };
-});
-const el = ref<
-  InstanceType<typeof TransitionGroup> & { $el: HTMLOListElement }
->();
+const el = ref<HTMLOListElement>();
 
-const scrollContainer = computed(() => el.value?.$el);
+const scrollContainer = el;
 const totalCountRaw = useDebounced(ref(props.records.length), 500, {
   leading: true,
 });
@@ -166,12 +146,12 @@ const visibleRecords = computedWith([totalCount, topIndex], () =>
 );
 watchEffect(() => {
   if (!props.paused) {
-    topIndex.value = Math.max(0, props.records.length - props.size);
+    topIndex.value = Math.max(0, totalCountRaw.value - props.size);
   }
 });
 
 watch(
-  [() => props.paused, scrollContainer, visibleRecords],
+  [() => props.paused, scrollContainer, totalCount],
   ([paused, el]) => {
     if (paused || !el) {
       return;

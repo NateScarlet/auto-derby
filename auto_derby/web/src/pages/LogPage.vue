@@ -58,7 +58,6 @@
 <script setup lang="ts">
 import useCleanup from '@/composables/useCleanup';
 import type { LogRecord } from '@/log-record';
-import { RecordType } from '@/log-record';
 import type { PageDataLog } from '@/page-data';
 import readLineStream from '@/utils/readLineStream';
 import withLoading from '@/utils/withLoading';
@@ -67,7 +66,6 @@ import type { PropType } from 'vue';
 import { watch, reactive, ref } from 'vue';
 import LogViewer from '@/components/LogViewer/LogViewer.vue';
 import app from '@/services';
-import loadImage from '@/utils/loadImage';
 import { isDevelopmentMode } from '@/settings';
 
 const props = defineProps({
@@ -80,13 +78,6 @@ const props = defineProps({
 const records = reactive([] as LogRecord[]);
 
 const pushRecord = async (v: LogRecord) => {
-  if (v.t === RecordType.IMAGE) {
-    try {
-      await loadImage(v.url);
-    } catch (err) {
-      app.message.error(`load image failed: ${v.url}: ${err}`);
-    }
-  }
   records.push(v);
 };
 
