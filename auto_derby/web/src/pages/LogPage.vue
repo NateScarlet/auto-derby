@@ -18,7 +18,7 @@
         <input
           class="flex-auto rounded border-gray-300"
           type="search"
-          placeholder="search: TODO"
+          placeholder="TODO: search"
         />
       </label>
       <button

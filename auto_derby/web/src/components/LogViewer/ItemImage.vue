@@ -1,12 +1,16 @@
 <template>
   <div ref="el">
-    <figure class="flex flex-wrap items-start bg-checkerboard p-px relative">
+    <figure
+      class="flex flex-wrap items-start bg-checkerboard p-px relative gap-2"
+    >
       <img ref="img" :src="selectedLayer.url" />
       <template v-if="expandLayers">
         <template v-for="({ name, url }, index) in layers" :key="index">
           <figure>
             <img :src="url" />
-            <figcaption>{{ name }}</figcaption>
+            <figcaption class="text-white bg-black bg-opacity-50 px-1">
+              {{ name }}
+            </figcaption>
           </figure>
         </template>
       </template>
@@ -75,7 +79,5 @@ const selectedLayerInputData = computed(() =>
 );
 const { width } = useElementSize(img);
 const { width: elWidth } = useElementSize(el);
-const expandLayers = computed(
-  () => width.value * (layers.value.length + 1) < elWidth.value - 2
-);
+const expandLayers = computed(() => width.value * 3 < elWidth.value - 20);
 </script>

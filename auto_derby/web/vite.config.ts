@@ -80,6 +80,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/stream': 'http://localhost:8300',
+      '/log': 'http://localhost:8300',
       '/files': 'http://localhost:8300',
     },
   },

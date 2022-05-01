@@ -28,8 +28,8 @@ def main():
         "--files",
         help="log files folder path, defaults to `./files` relative to log path",
     )
-    parser.add_argument("--host", default=WebLogService.default_host)
-    parser.add_argument("--port", type=int, default=WebLogService.default_port)
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8300)
     args = parser.parse_args()
     path = args.path
     if args.files:

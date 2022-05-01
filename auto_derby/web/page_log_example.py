@@ -2,7 +2,6 @@
 # pyright: strict
 
 from __future__ import annotations
-from typing import Any, Callable, Dict, Sequence, Text, Tuple
 
 if True:
     import os
@@ -14,11 +13,12 @@ import datetime
 import io
 import json
 import logging
-import urllib.parse
 import random
 import threading
 import time
+import urllib.parse
 import webbrowser
+from typing import Tuple
 
 from PIL import Image
 
@@ -142,31 +142,31 @@ def _constant(size: Tuple[int, int], color: Tuple[int, int, int]):
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.INFO)
-    samples: Sequence[Callable[[], Dict[Text, Any]]] = (
-        [_sample_text] * 10
-        + [_sample_small_image] * 10
-        + [
+    samples = [
+        *([_sample_text] * 10),
+        *([_sample_small_image] * 10),
+        *[
             _sample_screenshot,
             _sample_not_saved_image,
             _sample_internet_image,
             _sample_screenshot,
             _sample_small_layered_image,
             _sample_large_layered_image,
-        ]
-    )
+        ],
+    ]
     with web.Stream("", "text/plain") as stream, web.create_server(
         ("127.0.0.1", 8300),
         web.Blob(
             web.page.render(
                 {
                     "type": "LOG",
-                    "streamURL": "/stream",
+                    "streamURL": "/log",
                 }
             ).encode("utf-8"),
             "text/html; charset=utf-8",
         ),
         web.page.ASSETS,
-        web.Path("/stream", stream),
+        web.Path("/log", stream),
         web.Path(
             "/files/small.png",
             _constant((150, 16), (255, 255, 255)),
