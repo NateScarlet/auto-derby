@@ -50,6 +50,7 @@ import usePause from '@/composables/usePause';
 import useTransform from '@/composables/useTransform';
 import clamp from '@/utils/clamp';
 import { throttle } from 'lodash-es';
+import useDebounced from '@/composables/useDebounced';
 
 const props = defineProps({
   records: {
@@ -85,16 +86,17 @@ const el = ref<
 >();
 
 const scrollContainer = computed(() => el.value?.$el);
-const totalCount = usePause(
-  computedWith(
-    () => props.records,
-    () => {
-      return props.records.length;
-    },
-    { deep: true }
-  ),
-  paused
+const totalCountRaw = useDebounced(ref(props.records.length), 500, {
+  leading: true,
+});
+watch(
+  () => props.records.length,
+  (v) => {
+    totalCountRaw.value = v;
+  },
+  { deep: true }
 );
+const totalCount = usePause(totalCountRaw, paused);
 const topIndex = useTransform(
   ref(0),
   (v) => v,

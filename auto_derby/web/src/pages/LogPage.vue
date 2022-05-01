@@ -26,23 +26,31 @@
           placeholder="TODO: search"
         />
       </label>
-      <button
-        type="button"
-        class="
-          bg-white
-          rounded
-          border-gray-300
-          h-10
-          px-4
-          disabled:text-gray-200 disabled:cursor-not-allowed
-        "
-        :disabled="loadingCount === 0"
-        @click="paused = !paused"
+      <Transition
+        leave-from-class=""
+        leave-active-class="transition duration-300 ease-in-out"
+        leave-to-class="opacity-0 transform translate-x-full"
       >
-        <svg class="inline align-top fill-current h-8" viewBox="0 0 24 24">
-          <path :d="paused ? mdiPlay : mdiPause"></path>
-        </svg>
-      </button>
+        <button
+          v-if="loadingCount > 0"
+          type="button"
+          class="
+            bg-white
+            flex-initial
+            rounded
+            border-gray-300
+            h-10
+            px-4
+            disabled:text-gray-200 disabled:cursor-not-allowed
+          "
+          :disabled="loadingCount === 0"
+          @click="paused = !paused"
+        >
+          <svg class="inline align-top fill-current h-8" viewBox="0 0 24 24">
+            <path :d="paused ? mdiPlay : mdiPause"></path>
+          </svg>
+        </button>
+      </Transition>
     </div>
   </div>
 </template>
