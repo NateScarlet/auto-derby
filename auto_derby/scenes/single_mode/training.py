@@ -113,18 +113,21 @@ def _recognize_base_effect(img: Image) -> int:
     text_img = np.array(np.maximum(text_img, text_img_extra))
     imagetools.fill_area(text_img, (0,), size_lt=48)
 
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("sharpened_img", sharpened_img)
-        cv2.imshow("white_outline_img", white_outline_img)
-        cv2.imshow("white_outline_img_dilated", white_outline_img_dilated)
-        cv2.imshow("brown_outline_img", brown_outline_img)
-        cv2.imshow("bg_mask_img", bg_mask_img)
-        cv2.imshow("masked_img", masked_img)
-        cv2.imshow("text_img_extra", text_img_extra)
-        cv2.imshow("text_img", text_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    auto_derby.log.image(
+        "base effect",
+        img,
+        level=LogLevel.DEBUG,
+        layers={
+            "sharpened": sharpened_img,
+            "white_outline": white_outline_img,
+            "white_outline_dilated": white_outline_img_dilated,
+            "brown_outline": brown_outline_img,
+            "bg_mask": bg_mask_img,
+            "masked": masked_img,
+            "text_extra": text_img_extra,
+            "text": text_img,
+        },
+    )
 
     if cv2.countNonZero(text_img) < 100:
         # ignore skin match result
