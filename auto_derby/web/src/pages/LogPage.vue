@@ -16,8 +16,8 @@
       :records="records"
       :filter="logFilter"
     ></LogViewer>
-    <div class="flex">
-      <div class="space-x-2">
+    <div class="flex item-center">
+      <div class="space-x-2 flex items-center">
         <template
           v-for="{ key, level, count, inputAttrs } in levelListData"
           :key="key"
@@ -32,6 +32,22 @@
           </label>
         </template>
       </div>
+      <span class="flex-auto"></span>
+      <div>
+        <input
+          v-model.number="inputData.linenoGte"
+          type="number"
+          class="spin-button-none w-16 inline-block h-8 rounded border-gray-400"
+          @input="paused = true"
+        />
+        -
+        <input
+          v-model.number="inputData.linenoLte"
+          type="number"
+          class="spin-button-none w-16 inline-block h-8 rounded border-gray-400"
+          @input="paused = true"
+        />
+      </div>
     </div>
     <div class="flex-none flex gap-1">
       <label class="flex flex-auto items-center">
@@ -40,7 +56,7 @@
         </svg>
         <input
           v-model="inputData.query"
-          class="flex-auto rounded border-gray-300"
+          class="flex-auto rounded border-gray-400"
           type="search"
           placeholder="search"
         />
@@ -57,10 +73,10 @@
             bg-white
             flex-initial
             rounded
-            border-gray-300
             h-10
             px-4
             disabled:text-gray-200 disabled:cursor-not-allowed
+            border border-gray-400
           "
           :disabled="loadingCount === 0"
           @click="paused = !paused"
@@ -100,11 +116,19 @@ const props = defineProps({
 });
 
 const records = reactive([] as LogRecord[]);
-
+const loadingCount = ref(0);
+const inputData = reactive({
+  query: '',
+  linenoGte: 1,
+  linenoLte: 0,
+});
 const levelRecordCount = reactive(new Map<LogLevel, number>());
-
+const paused = ref(false);
 const pushRecord = async (v: LogRecord) => {
   levelRecordCount.set(v.lv, (levelRecordCount.get(v.lv) ?? 0) + 1);
+  if (!paused.value) {
+    inputData.linenoLte = records.length + 1;
+  }
   records.push(v);
 };
 
@@ -138,16 +162,17 @@ const levelListData = computed(() =>
   )
 );
 
-const paused = ref(false);
-
-const loadingCount = ref(0);
-const inputData = reactive({
-  query: '',
-});
 const logFilter = computed(() => {
-  const { query } = inputData;
+  const { query, linenoGte, linenoLte } = inputData;
   const level = enabledLevels.value;
-  return (v: LogRecord) => {
+  return (v: LogRecord, index: number) => {
+    const lineno = index + 1;
+    if (lineno < linenoGte) {
+      return false;
+    }
+    if (lineno > linenoLte) {
+      return false;
+    }
     if (!matchSearchKeys(query, searchKeys(v))) {
       return false;
     }

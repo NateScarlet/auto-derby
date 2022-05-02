@@ -22,7 +22,8 @@ export const MessageList = defineComponent<
     return h(
       TransitionGroup,
       {
-        class: 'fixed top-2 w-screen flex flex-col items-center',
+        class:
+          'fixed top-2 w-screen flex flex-col items-center pointer-events-none',
         appear: true,
         tag: 'ol',
         enterActiveClass: 'transition-all ease-in-out duration-300 absolute',
@@ -95,7 +96,7 @@ export default class VueMessageService implements MessageService {
         'li',
         {
           class: [
-            'p-2 rounded max-w-md w-full shadow min-h-12',
+            'p-2 rounded max-w-md w-full shadow min-h-12 pointer-events-auto',
             'border-2 border-theme-toast',
             'flex flex-center',
             'bg-gray-50 text-theme-text break-all font-bold',

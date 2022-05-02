@@ -62,7 +62,7 @@ const props = defineProps({
     type: Boolean,
   },
   filter: {
-    type: Function as PropType<(v: LogRecord) => boolean>,
+    type: Function as PropType<(v: LogRecord, index: number) => boolean>,
     default: () => true,
   },
 });
@@ -91,12 +91,6 @@ const topIndex = useTransform(
   (v) => v,
   (v) => clamp(v, 0, totalCount.value - 1)
 );
-const hasPrevious = computed(() => {
-  return topIndex.value > 0;
-});
-const hasNext = computed(() => {
-  return topIndex.value < totalCount.value - props.size;
-});
 
 const itemByIndex = (index: number) => {
   return scrollContainer.value?.querySelector<HTMLLIElement>(
@@ -135,6 +129,78 @@ const scrollViewport = (offset: number) => {
   }
 };
 
+const visibleRecords = computedWith(
+  [totalCount, topIndex, () => props.filter],
+  () => {
+    const { records, size, filter } = props;
+    const ret: {
+      value: LogRecord;
+      key: number;
+      index: number;
+    }[] = [];
+
+    for (let index = topIndex.value; index < records.length; index += 1) {
+      if (ret.length === size) {
+        break;
+      }
+      const i = records[index];
+      if (!filter(i, index)) {
+        continue;
+      }
+      ret.push({
+        value: i,
+        key: index,
+        index,
+      });
+    }
+    return ret;
+  }
+);
+watchEffect(() => {
+  if (!props.paused) {
+    topIndex.value = Math.max(0, totalCountRaw.value - props.size);
+  }
+});
+
+const hasPrevious = computed(() => {
+  if (topIndex.value === 0) {
+    return false;
+  }
+  for (let index = 0; index < records.value.length; index += 1) {
+    if (index >= topIndex.value) {
+      return false;
+    }
+    const i = records.value[index];
+    if (props.filter(i, index)) {
+      return true;
+    }
+  }
+  return false;
+});
+watchEffect(() => {
+  if (visibleRecords.value.length < props.size && hasPrevious.value) {
+    topIndex.value -= 1;
+  }
+});
+const hasNext = computed(() => {
+  if (visibleRecords.value.length === 0) {
+    return false;
+  }
+  const endRecord = visibleRecords.value[visibleRecords.value.length - 1];
+
+  for (
+    let index = endRecord.index + 1;
+    index < records.value.length;
+    index += 1
+  ) {
+    const i = records.value[index];
+    if (props.filter(i, index)) {
+      return true;
+    }
+  }
+  return false;
+});
+
 const onScrollToTop = throttle(() => {
   if (!hasPrevious.value) {
     return;
@@ -152,38 +218,6 @@ useInfiniteScroll(scrollContainer, {
   onScrollToTop,
   onScrollToBottom,
   margin: (el) => Math.min(200, el.offsetHeight * 0.3),
-});
-const visibleRecords = computedWith(
-  [totalCount, topIndex, () => props.filter],
-  () => {
-    const { records, size, filter } = props;
-    const ret: {
-      value: LogRecord;
-      key: number;
-      index: number;
-    }[] = [];
-
-    for (let index = topIndex.value; index < records.length; index += 1) {
-      if (ret.length === size) {
-        break;
-      }
-      const i = records[index];
-      if (!filter(i)) {
-        continue;
-      }
-      ret.push({
-        value: i,
-        key: index,
-        index,
-      });
-    }
-    return ret;
-  }
-);
-watchEffect(() => {
-  if (!props.paused) {
-    topIndex.value = Math.max(0, totalCountRaw.value - props.size);
-  }
 });
 
 watch(
