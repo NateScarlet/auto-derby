@@ -13,7 +13,7 @@
           :key="key"
         >
           <label class="inline-flex flex-center">
-            <input v-bind="inputAttrs" />
+            <input v-bind="inputAttrs" class="mx-1" />
             <LogLevelWidget
               :value="level"
               class="w-16 inline-block text-center"
