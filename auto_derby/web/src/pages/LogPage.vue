@@ -107,6 +107,7 @@ import useStringArray from '@/composables/useStringArray';
 import LogLevelWidget from '@/components/LogLevelWidget.vue';
 import matchSearchKeys from '@/utils/matchSearchKeys';
 import { sortBy } from 'lodash-es';
+import useStorage from '@/composables/useStorage';
 
 const props = defineProps({
   pageData: {
@@ -138,7 +139,7 @@ const levelOrder = [
   LogLevel.INFO,
   LogLevel.DEBUG,
 ];
-const enabledLevels = ref([
+const enabledLevels = useStorage(sessionStorage, 'log-viewer-enabled-levels', [
   LogLevel.ERROR,
   LogLevel.WARN,
   LogLevel.INFO,
