@@ -6,7 +6,7 @@
       :records="records"
       :filter="logFilter"
     ></LogViewer>
-    <div class="flex item-center">
+    <div class="flex item-center flex-wrap">
       <div class="space-x-2 flex items-center">
         <template
           v-for="{ key, level, count, inputAttrs } in levelListData"
@@ -18,12 +18,12 @@
               :value="level"
               class="w-16 inline-block text-center"
             ></LogLevelWidget>
-            <span>({{ count }})</span>
+            <span class="text-sm">({{ count }})</span>
           </label>
         </template>
       </div>
       <span class="flex-auto"></span>
-      <div>
+      <div class="flex-none">
         <input
           v-model.number="inputData.linenoGte"
           type="number"
@@ -120,13 +120,17 @@ watchEffect(() => {
 });
 const levelRecordCount = reactive(new Map<LogLevel, number>());
 const paused = ref(false);
+const totalCount = ref(0);
 const pushRecord = async (v: LogRecord) => {
   levelRecordCount.set(v.lv, (levelRecordCount.get(v.lv) ?? 0) + 1);
-  if (!paused.value) {
-    inputData.linenoLte = records.length + 1;
-  }
+  totalCount.value += 1;
   records.push(v);
 };
+watchEffect(() => {
+  if (!paused.value) {
+    inputData.linenoLte = totalCount.value;
+  }
+});
 
 const levelOrder = [
   LogLevel.ERROR,
@@ -208,6 +212,7 @@ watch(
     } catch (err) {
       app.message.error(`stream read failed: ${err}`);
     }
+    paused.value = true;
     app.message.info('stream closed');
   }),
   { immediate: true }

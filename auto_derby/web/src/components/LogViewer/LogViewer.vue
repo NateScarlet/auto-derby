@@ -1,5 +1,9 @@
 <template>
-  <ol ref="el" class="max-h-screen overflow-y-auto overflow-x-hidden space-y-1">
+  <ol
+    ref="el"
+    class="max-h-screen overflow-y-auto overflow-x-hidden space-y-1"
+    :class="[!paused ? 'overflow-y-hidden' : '']"
+  >
     <template v-if="hasPrevious">
       <button
         type="button"
@@ -46,8 +50,8 @@ import useTransform from '@/composables/useTransform';
 import clamp from '@/utils/clamp';
 import { throttle } from 'lodash-es';
 import useDebounced from '@/composables/useDebounced';
-import useEventListener from '@/composables/useEventListener';
 import usePropVModel from '@/composables/usePropVModel';
+import usePolling from '@/composables/usePolling';
 
 const props = defineProps({
   records: {
@@ -97,16 +101,6 @@ const itemElement = (index: number) => {
     `li[data-index="${index}"]`
   );
 };
-
-const onScrollBackward = () => {
-  paused.value = true;
-};
-
-useEventListener(scrollContainer, 'wheel', (e) => {
-  if (e.deltaY < 0) {
-    onScrollBackward();
-  }
-});
 
 const visibleRecords = computedWith(
   [totalCount, topIndex, () => props.filter],
@@ -241,20 +235,18 @@ useInfiniteScroll(scrollContainer, {
   margin: (el) => Math.min(el.clientHeight * 3, el.scrollHeight * 0.2),
 });
 
-watch(
-  [() => props.paused, scrollContainer, totalCount],
-  ([paused, el]) => {
-    if (paused || !el) {
-      return;
-    }
+usePolling(() => {
+  if (paused.value) {
+    return;
+  }
+  const el = scrollContainer.value;
+  if (!el) {
+    return;
+  }
 
-    nextTick(() => {
-      el.scroll({
-        top: el.scrollHeight,
-        behavior: 'smooth',
-      });
-    });
-  },
-  { deep: true }
-);
+  el.scroll({
+    top: el.scrollHeight,
+    behavior: 'smooth',
+  });
+});
 </script>
