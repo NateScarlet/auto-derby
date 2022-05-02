@@ -6,7 +6,7 @@
         class="w-full text-blue-500 underline"
         @click="onScrollToTop()"
       >
-        load previous records
+        load more records
       </button>
     </template>
     <template v-for="{ value, key, index } in visibleRecords" :key="key">
@@ -22,7 +22,7 @@
         class="w-full text-blue-500 underline"
         @click="onScrollToBottom()"
       >
-        load next records
+        load more records
       </button>
     </span>
     <div v-if="records.length === 0" class="flex flex-center h-full">
@@ -92,7 +92,7 @@ const topIndex = useTransform(
   (v) => clamp(v, 0, totalCount.value - 1)
 );
 
-const itemByIndex = (index: number) => {
+const itemElement = (index: number) => {
   return scrollContainer.value?.querySelector<HTMLLIElement>(
     `li[data-index="${index}"]`
   );
@@ -107,27 +107,6 @@ useEventListener(scrollContainer, 'wheel', (e) => {
     onScrollBackward();
   }
 });
-
-const scrollViewport = (offset: number) => {
-  if (offset === 0) {
-    return;
-  }
-  const topIndexBefore = topIndex.value;
-  topIndex.value += offset;
-  const topIndexAfter = topIndex.value;
-  const actualOffset = topIndexAfter - topIndexBefore;
-  if (actualOffset < 0) {
-    nextTick(() => {
-      const itemBefore = itemByIndex(topIndexBefore);
-      const itemAfter = itemByIndex(topIndexAfter);
-      const el = scrollContainer.value;
-
-      if (itemAfter && itemBefore && el) {
-        el.scrollTop -= itemAfter.offsetTop - itemBefore.offsetTop;
-      }
-    });
-  }
-};
 
 const visibleRecords = computedWith(
   [totalCount, topIndex, () => props.filter],
@@ -156,6 +135,48 @@ const visibleRecords = computedWith(
     return ret;
   }
 );
+
+const scrollAnchorElement = () => {
+  let ret: HTMLElement | undefined;
+  const container = scrollContainer.value;
+  if (!container) {
+    return ret;
+  }
+  visibleRecords.value.some((i) => {
+    const el = itemElement(i.index);
+    if (!el) {
+      return false;
+    }
+    if (container.scrollTop <= el.offsetTop) {
+      ret = el;
+      return true;
+    }
+    return false;
+  });
+  return ret;
+};
+const scrollViewport = (offset: number) => {
+  if (offset === 0) {
+    return;
+  }
+  topIndex.value += offset;
+
+  // recover scroll position
+  const el = scrollContainer.value;
+  if (!el) {
+    return;
+  }
+  const anchorEl = scrollAnchorElement();
+  if (!anchorEl) {
+    return;
+  }
+  // scroll top relative to anchor
+  const anchorTop = el.scrollTop - anchorEl.offsetTop;
+  nextTick(() => {
+    el.scrollTop = anchorEl.offsetTop + anchorTop;
+  });
+};
+
 watchEffect(() => {
   if (!props.paused) {
     topIndex.value = Math.max(0, totalCountRaw.value - props.size);
@@ -217,7 +238,7 @@ const onScrollToBottom = throttle(() => {
 useInfiniteScroll(scrollContainer, {
   onScrollToTop,
   onScrollToBottom,
-  margin: (el) => Math.min(200, el.offsetHeight * 0.3),
+  margin: (el) => Math.min(el.clientHeight * 3, el.scrollHeight * 0.2),
 });
 
 watch(
