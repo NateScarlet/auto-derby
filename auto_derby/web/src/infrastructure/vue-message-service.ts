@@ -90,7 +90,10 @@ function message(render: () => VNode): Promise<() => void> {
 }
 
 export default class VueMessageService implements MessageService {
-  async info(text: string, duration = 1000 + text.length * 200): Promise<void> {
+  async info(
+    text: string,
+    duration = Math.min(10e3, 1000 + text.length * 200)
+  ): Promise<void> {
     const close = await message(() =>
       h(
         'li',
@@ -110,7 +113,7 @@ export default class VueMessageService implements MessageService {
 
   async error(
     text: string,
-    duration = 1000 + text.length * 200
+    duration = Math.min(10e3, 1000 + text.length * 200)
   ): Promise<void> {
     const close = await message(() =>
       h(
