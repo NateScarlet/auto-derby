@@ -59,6 +59,10 @@ const props = defineProps({
   paused: {
     type: Boolean,
   },
+  filter: {
+    type: Function as PropType<(v: LogRecord) => boolean>,
+    default: () => true,
+  },
 });
 const paused = toRef(props, 'paused');
 const records = toRef(props, 'records');
@@ -66,7 +70,7 @@ const records = toRef(props, 'records');
 const el = ref<HTMLOListElement>();
 
 const scrollContainer = el;
-const totalCountRaw = useDebounced(ref(props.records.length), 500, {
+const totalCountRaw = useDebounced(ref(props.records.length), 100, {
   leading: true,
 });
 watch(
@@ -135,14 +139,32 @@ useInfiniteScroll(scrollContainer, {
   margin: (el) => Math.min(200, el.offsetHeight * 0.3),
 });
 
-const visibleRecords = computedWith([totalCount, topIndex], () =>
-  props.records
-    .slice(topIndex.value, topIndex.value + props.size)
-    .map((i, index) => ({
-      value: i,
-      key: topIndex.value + index,
-      index: topIndex.value + index,
-    }))
+const visibleRecords = computedWith(
+  [totalCount, topIndex, () => props.filter],
+  () => {
+    const { records, size, filter } = props;
+    const ret: {
+      value: LogRecord;
+      key: number;
+      index: number;
+    }[] = [];
+
+    for (let index = topIndex.value; index < records.length; index += 1) {
+      if (ret.length === size) {
+        break;
+      }
+      const i = records[index];
+      if (!filter(i)) {
+        continue;
+      }
+      ret.push({
+        value: i,
+        key: index,
+        index,
+      });
+    }
+    return ret;
+  }
 );
 watchEffect(() => {
   if (!props.paused) {

@@ -1,9 +1,10 @@
 <template>
   <li class="p-1 bg-white rounded border border-gray-300">
     <div class="space-x-1">
-      <span class="w-24 inline-block text-center" v-bind="levelAttrs">
-        {{ value.lv }}
-      </span>
+      <LogLevelWidget
+        class="w-24 inline-block text-center"
+        :value="value.lv"
+      ></LogLevelWidget>
       <span>{{ value.source }}</span>
       <span class="text-sm float-right text-gray-400">
         <span>
@@ -21,14 +22,16 @@
 </template>
 <script lang="ts">
 import type { LogRecord } from '@/log-record';
-import { LogLevel, RecordType } from '@/log-record';
+import { RecordType } from '@/log-record';
 import type { Component, PropType } from 'vue';
 import { computed } from 'vue';
 import ItemImageVue from '@/components/LogViewer/ItemImage.vue';
 import ItemTextVue from '@/components/LogViewer/ItemText.vue';
 import ItemDefaultVue from '@/components/LogViewer/ItemDefault.vue';
-import assertNever from '@/utils/assertNever';
+import LogLevelWidget from '@/components/LogLevelWidget.vue';
+</script>
 
+<script setup lang="ts">
 interface ItemClass {
   component: Component;
 }
@@ -38,9 +41,7 @@ const itemClasses = new Map<RecordType, ItemClass>([
   [RecordType.TEXT, { component: ItemTextVue }],
 ]);
 const defaultItemClass: ItemClass = { component: ItemDefaultVue };
-</script>
 
-<script setup lang="ts">
 const timeFormat = new Intl.DateTimeFormat(undefined, {
   dateStyle: 'short',
   timeStyle: 'medium',
@@ -67,28 +68,4 @@ const timeText = computed(() => {
 const itemClass = computed(
   () => itemClasses.get(props.value.t) ?? defaultItemClass
 );
-
-const levelAttrs = computed(() => {
-  switch (props.value.lv) {
-    case LogLevel.DEBUG:
-      return {
-        class: 'text-gray-400 bg-gray-800',
-      };
-    case LogLevel.INFO:
-      return {
-        class: 'bg-gray-300',
-      };
-    case LogLevel.WARN:
-      return {
-        class: 'bg-orange-500 text-orange-800',
-      };
-    case LogLevel.ERROR:
-      return {
-        class: 'bg-red-500 text-red-800',
-      };
-    default:
-      assertNever(props.value.lv);
-      return {};
-  }
-});
 </script>

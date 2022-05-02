@@ -77,6 +77,7 @@ import { singleModeItemSearchShortcuts } from '@/settings';
 import SingleModeItemVue from '@/components/SingleModeItem.vue';
 
 import { mdiMagnify } from '@mdi/js';
+import matchSearchKeys from '@/utils/matchSearchKeys';
 
 const props = defineProps({
   pageData: {
@@ -94,16 +95,9 @@ function itemSearchKeys(i: SingleModeItem): string[] {
   return [i.name, i.description];
 }
 
-function matchItem(i: SingleModeItem, query: string): boolean {
-  const searchKeys = itemSearchKeys(i);
-  return query
-    .split(' ')
-    .every((keyword) => searchKeys.some((key) => key.includes(keyword)));
-}
-
 const listData = computed(() =>
   props.pageData.options
-    .filter((i) => matchItem(i, inputData.q))
+    .filter((i) => matchSearchKeys(inputData.q, itemSearchKeys(i)))
     .map((i) => {
       const isSelected = i.id === inputData.id;
       return {
@@ -125,7 +119,7 @@ const listData = computed(() =>
 const searchShortcuts = computed(() =>
   singleModeItemSearchShortcuts.map((i) => {
     const matchCount = listData.value.filter((j) =>
-      matchItem(j.value, i)
+      matchSearchKeys(i, itemSearchKeys(j.value))
     ).length;
     return {
       key: i,

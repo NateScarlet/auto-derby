@@ -1,3 +1,5 @@
+import assertNever from '@/utils/assertNever';
+
 export enum RecordType {
   TEXT = 'TEXT',
   IMAGE = 'IMAGE',
@@ -19,7 +21,7 @@ export interface AbstractRecord {
 
 export interface TextRecord extends AbstractRecord {
   t: RecordType.TEXT;
-  msg: String;
+  msg: string;
 }
 
 export interface ImageLayer {
@@ -35,3 +37,22 @@ export interface ImageRecord extends AbstractRecord {
 }
 
 export type LogRecord = Readonly<TextRecord | ImageRecord>;
+
+export function searchKeys(v: LogRecord): string[] {
+  const { t, source } = v;
+  const ret: string[] = [];
+  if (source) {
+    ret.push(source);
+  }
+  switch (t) {
+    case RecordType.TEXT:
+      ret.push(v.msg);
+      break;
+    case RecordType.IMAGE:
+      ret.push(v.caption, ...(v.layers?.map((i) => i.name) ?? []));
+      break;
+    default:
+      assertNever(t);
+  }
+  return ret;
+}
