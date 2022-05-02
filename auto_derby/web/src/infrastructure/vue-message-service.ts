@@ -117,7 +117,7 @@ export default class VueMessageService implements MessageService {
         'li',
         {
           class: [
-            'p-2 rounded max-w-md w-full shadow min-h-12',
+            'p-2 rounded max-w-md w-full shadow min-h-12 pointer-events-auto',
             'border-2 border-red-400',
             'flex flex-center',
             'bg-red-50 text-theme-text break-all font-bold',

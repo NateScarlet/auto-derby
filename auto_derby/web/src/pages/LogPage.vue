@@ -1,15 +1,5 @@
 <template>
-  <div
-    class="
-      container
-      max-w-2xl
-      m-auto
-      h-screen
-      overflow-hidden
-      flex flex-col
-      gap-1
-    "
-  >
+  <div class="container max-w-2xl m-auto h-screen flex flex-col gap-1">
     <LogViewer
       v-model:paused="paused"
       class="flex-auto"
@@ -38,14 +28,14 @@
           v-model.number="inputData.linenoGte"
           type="number"
           class="spin-button-none w-16 inline-block h-8 rounded border-gray-400"
-          @input="paused = true"
+          @focus="paused = true"
         />
         -
         <input
           v-model.number="inputData.linenoLte"
           type="number"
           class="spin-button-none w-16 inline-block h-8 rounded border-gray-400"
-          @input="paused = true"
+          @focus="paused = true"
         />
       </div>
     </div>
@@ -99,7 +89,7 @@ import readLineStream from '@/utils/readLineStream';
 import withLoading from '@/utils/withLoading';
 import { mdiMagnify, mdiPause, mdiPlay } from '@mdi/js';
 import type { PropType } from 'vue';
-import { computed, watch, reactive, ref } from 'vue';
+import { watchEffect, computed, watch, reactive, ref } from 'vue';
 import LogViewer from '@/components/LogViewer/LogViewer.vue';
 import app from '@/services';
 import { isDevelopmentMode } from '@/settings';
@@ -122,6 +112,11 @@ const inputData = reactive({
   query: '',
   linenoGte: 1,
   linenoLte: 0,
+});
+watchEffect(() => {
+  if (inputData.linenoGte > inputData.linenoLte) {
+    inputData.linenoLte = inputData.linenoGte;
+  }
 });
 const levelRecordCount = reactive(new Map<LogLevel, number>());
 const paused = ref(false);
