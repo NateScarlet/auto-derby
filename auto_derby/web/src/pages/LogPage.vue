@@ -11,9 +11,9 @@
     "
   >
     <LogViewer
+      v-model:paused="paused"
       class="flex-auto"
       :records="records"
-      :paused="paused"
       :filter="logFilter"
     ></LogViewer>
     <div class="flex">

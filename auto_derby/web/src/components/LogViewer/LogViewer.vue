@@ -46,6 +46,8 @@ import useTransform from '@/composables/useTransform';
 import clamp from '@/utils/clamp';
 import { throttle } from 'lodash-es';
 import useDebounced from '@/composables/useDebounced';
+import useEventListener from '@/composables/useEventListener';
+import usePropVModel from '@/composables/usePropVModel';
 
 const props = defineProps({
   records: {
@@ -64,7 +66,10 @@ const props = defineProps({
     default: () => true,
   },
 });
-const paused = toRef(props, 'paused');
+const emit = defineEmits<{
+  (e: 'update:paused', v: boolean): void;
+}>();
+const paused = usePropVModel({ emit }, props, 'paused');
 const records = toRef(props, 'records');
 
 const el = ref<HTMLOListElement>();
@@ -98,6 +103,16 @@ const itemByIndex = (index: number) => {
     `li[data-index="${index}"]`
   );
 };
+
+const onScrollBackward = () => {
+  paused.value = true;
+};
+
+useEventListener(scrollContainer, 'wheel', (e) => {
+  if (e.deltaY < 0) {
+    onScrollBackward();
+  }
+});
 
 const scrollViewport = (offset: number) => {
   if (offset === 0) {
@@ -138,7 +153,6 @@ useInfiniteScroll(scrollContainer, {
   onScrollToBottom,
   margin: (el) => Math.min(200, el.offsetHeight * 0.3),
 });
-
 const visibleRecords = computedWith(
   [totalCount, topIndex, () => props.filter],
   () => {
