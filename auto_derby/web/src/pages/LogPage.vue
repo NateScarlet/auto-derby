@@ -98,6 +98,7 @@ import LogLevelWidget from '@/components/LogLevelWidget.vue';
 import matchSearchKeys from '@/utils/matchSearchKeys';
 import { sortBy } from 'lodash-es';
 import useStorage from '@/composables/useStorage';
+import limitTextLength from '@/utils/limitTextLength';
 
 const props = defineProps({
   pageData: {
@@ -198,10 +199,16 @@ watch(
       await readLineStream({
         stream: body,
         onLine: async (line) => {
+          // XXX: chrome response body includes chunked encoding syntax, use json syntax to ignore that
+          if (!line.startsWith('{')) {
+            return;
+          }
           try {
             await pushRecord(Object.freeze(JSON.parse(line)));
           } catch (err) {
-            app.message.error(`line parsing failed: ${err}`);
+            app.message.error(
+              `line parsing failed: '${limitTextLength(line, 80)}': ${err}`
+            );
             if (isDevelopmentMode) {
               // eslint-disable-next-line no-console
               console.error({ err, line });

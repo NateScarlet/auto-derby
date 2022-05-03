@@ -1,8 +1,8 @@
 <template>
   <ol
     ref="el"
-    class="max-h-screen overflow-y-auto overflow-x-hidden space-y-1"
-    :class="[!paused ? 'overflow-y-hidden' : '']"
+    class="max-h-screen overflow-x-hidden space-y-1"
+    :class="[paused ? 'overflow-y-auto' : 'overflow-y-hidden']"
   >
     <template v-if="hasPrevious">
       <button
@@ -29,7 +29,7 @@
         load more records
       </button>
     </span>
-    <div v-if="records.length === 0" class="flex flex-center h-full">
+    <div v-if="visibleRecords.length === 0" class="flex flex-center h-full">
       <div class="text-center">
         <h1 class="text-2xl">Log Viewer</h1>
         <p>waiting for record</p>
@@ -49,7 +49,6 @@ import usePause from '@/composables/usePause';
 import useTransform from '@/composables/useTransform';
 import clamp from '@/utils/clamp';
 import { throttle } from 'lodash-es';
-import useDebounced from '@/composables/useDebounced';
 import usePropVModel from '@/composables/usePropVModel';
 import usePolling from '@/composables/usePolling';
 
@@ -79,9 +78,7 @@ const records = toRef(props, 'records');
 const el = ref<HTMLOListElement>();
 
 const scrollContainer = el;
-const totalCountRaw = useDebounced(ref(props.records.length), 100, {
-  leading: true,
-});
+const totalCountRaw = ref(props.records.length);
 watch(
   () => props.records.length,
   (v) => {
@@ -198,6 +195,9 @@ watchEffect(() => {
   }
 });
 const hasNext = computed(() => {
+  if (!paused.value) {
+    return false;
+  }
   if (visibleRecords.value.length === 0) {
     return false;
   }
@@ -244,9 +244,7 @@ usePolling(() => {
     return;
   }
 
-  el.scroll({
-    top: el.scrollHeight,
-    behavior: 'smooth',
-  });
+  // manual smooth scroll, browsers has different behavior
+  el.scrollTop = el.scrollTop * 0.6 + (el.scrollHeight - el.offsetHeight) * 0.4;
 });
 </script>
