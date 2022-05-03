@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.23.0"
-RELEASE_DATE = datetime.fromtimestamp(1651588844)
-LAST_GIT_COMMIT_DESCRIBE = "v1.22.0-6-gd58dcdb"
-LAST_GIT_COMMIT_HASH = "d58dcdb215910a784b65e78010aabe6f26780aff"
+VERSION = "1.23.1"
+RELEASE_DATE = datetime.fromtimestamp(1651590153)
+LAST_GIT_COMMIT_DESCRIBE = "v1.23.0-2-gde52b3c"
+LAST_GIT_COMMIT_HASH = "de52b3c72af853e46bd4480f38b9ec873965da39"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1651588815)
-LAST_GIT_COMMIT_SUBJECT = "test: update rival race doctest"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1651590135)
+LAST_GIT_COMMIT_SUBJECT = "fix(single-mode): should log image when recognition failed"
 LAST_GIT_COMMIT_BODY = ""

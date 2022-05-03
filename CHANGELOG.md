@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.23.1](https://github.com/NateScarlet/auto-derby/compare/v1.23.0...v1.23.1) (2022-05-03)
+
+### Bug Fixes
+
+- **single-mode:** should log image when recognition failed ([de52b3c](https://github.com/NateScarlet/auto-derby/commit/de52b3c72af853e46bd4480f38b9ec873965da39))
+
 ## [1.23.0](https://github.com/NateScarlet/auto-derby/compare/v1.22.0...v1.23.0) (2022-05-03)
 
 ### Features
