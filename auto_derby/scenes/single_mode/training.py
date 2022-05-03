@@ -73,14 +73,9 @@ def _recognize_base_effect(img: Image) -> int:
         (59, 142, 226),
         threshold=0.85,
     )
-    _, non_brown_img = cv2.threshold(brown_img, 120, 255, cv2.THRESH_BINARY)
-    border_brown_img = imagetools.border_flood_fill(255 - non_brown_img)
+    _, non_brown_img = cv2.threshold(brown_img, 120, 255, cv2.THRESH_BINARY_INV)
+    border_brown_img = imagetools.border_flood_fill(non_brown_img)
     brown_outline_img = cv2.copyTo(brown_img, 255 - border_brown_img)
-    brown_outline_img = cv2.morphologyEx(
-        brown_outline_img,
-        cv2.MORPH_DILATE,
-        cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3)),
-    )
 
     bg_mask_img = imagetools.bg_mask_by_outline(brown_outline_img)
     masked_img = cv2.copyTo(masked_img, 255 - bg_mask_img)
@@ -118,6 +113,9 @@ def _recognize_base_effect(img: Image) -> int:
             "sharpened": sharpened_img,
             "white_outline": white_outline_img,
             "white_outline_dilated": white_outline_img_dilated,
+            "brown": brown_img,
+            "non_brown": non_brown_img,
+            "border_brown": border_brown_img,
             "brown_outline": brown_outline_img,
             "bg_mask": bg_mask_img,
             "masked": masked_img,
@@ -664,7 +662,6 @@ def _effect_recognitions(
 
 
 def _recognize_training(ctx: Context, img: Image) -> Training:
-    app.log.image("recognize training", img, level=app.DEBUG)
     rp = mathtools.ResizeProxy(img.width)
 
     self = Training.new()
@@ -713,7 +710,7 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
     self.vitality = _estimate_vitality(ctx, self)
     self.failure_rate = _recognize_failure_rate(rp, self, img)
     self.partners = tuple(_recognize_partners(ctx, img))
-
+    app.log.image("%s" % self, img, level=app.DEBUG)
     return self
 
 
