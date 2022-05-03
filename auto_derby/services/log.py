@@ -38,18 +38,3 @@ class Service(Protocol):
         layers: Dict[Text, Image] = {},
     ):
         ...
-
-
-class NoOpService(Service):
-    def text(self, msg: Text, /, *, level: Level = Level.INFO):
-        pass
-
-    def image(
-        self,
-        caption: Text,
-        image: Image,
-        *,
-        level: Level = Level.INFO,
-        layers: Dict[Text, Image] = {},
-    ):
-        pass

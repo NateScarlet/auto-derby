@@ -4,7 +4,7 @@
 from __future__ import annotations
 from typing import Dict, Sequence, Text
 
-from auto_derby.log import Image, Level, Service
+from auto_derby.services.log import Image, Level, Service
 
 
 class MultiLogService(Service):

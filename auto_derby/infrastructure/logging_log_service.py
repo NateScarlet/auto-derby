@@ -9,7 +9,7 @@ from typing import Any, Dict, Text, Tuple
 
 from auto_derby import imagetools
 
-from ..log import Image, Level, Service
+from ..services.log import Image, Level, Service
 
 
 class LoggingLogService(Service):

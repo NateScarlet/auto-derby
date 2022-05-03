@@ -21,7 +21,7 @@ import PIL.Image
 from ..services import Cleanup
 
 from .. import imagetools, web
-from ..log import Image, Level, Service
+from ..services.log import Image, Level, Service
 from ..web import Webview
 
 _LOGGER = logging.getLogger(__name__)
