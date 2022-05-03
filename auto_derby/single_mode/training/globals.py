@@ -18,4 +18,4 @@ class g:
     target_levels: Dict[TrainingType, int] = {}
 
     # deprecated
-    image_path: str = "" # replaced by web log
+    image_path: str = ""  # replaced by web log

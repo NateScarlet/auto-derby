@@ -10,6 +10,7 @@ from typing import Protocol, Text
 
 _LOGGER = logging.getLogger(__name__)
 
+
 class Webview(Protocol):
     def open(self, url: Text) -> None:
         ...

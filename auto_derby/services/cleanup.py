@@ -16,6 +16,6 @@ class Service(Protocol):
 
     def __enter__(self) -> Service:
         ...
-    
+
     def __exit__(self, *_) -> None:
         ...
