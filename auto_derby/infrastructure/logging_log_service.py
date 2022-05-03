@@ -13,7 +13,7 @@ from ..services.log import Image, Level, Service
 
 class LoggingLogService(Service):
     _infra_module_prefix = ".".join(__name__.split(".")[:-1]) + "."
-    max_inline_image_pixels = 2000
+    max_inline_image_pixels = 5000
 
     def _find_logger(self) -> Tuple[logging.Logger, int]:
         stack_level = 0

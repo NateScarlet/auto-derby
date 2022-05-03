@@ -57,7 +57,7 @@ class WebLogService(Service):
     default_host = "127.0.0.1"
     default_buffer_path = ""
     default_image_path = ""
-    max_inline_image_pixels = 1000
+    max_inline_image_pixels = 5000
 
     def __init__(
         self,
