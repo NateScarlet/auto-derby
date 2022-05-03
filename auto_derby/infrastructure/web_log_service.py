@@ -14,9 +14,11 @@ import traceback
 import urllib.parse
 import webbrowser
 from datetime import datetime
-from typing import Any, Dict, Optional, Text
+from typing import Any, Dict, Optional, Text, Tuple
 
 import PIL.Image
+
+from ..services import Cleanup
 
 from .. import imagetools, web
 from ..log import Image, Level, Service
@@ -56,10 +58,11 @@ class WebLogService(Service):
     default_host = "127.0.0.1"
     default_buffer_path = ""
     default_image_path = ""
-    max_inline_image_pixels = 10000
+    max_inline_image_pixels = 1000
 
     def __init__(
         self,
+        cleanup: Cleanup,
         host: Optional[Text] = None,
         port: Optional[int] = None,
         webview: Optional[web.Webview] = None,
@@ -79,33 +82,49 @@ class WebLogService(Service):
         self.image_path = image_path
 
         self._s = web.Stream(buffer_path, "text/plain; charset=utf-8")
+        self._stop = threading.Event()
 
-        httpd = web.create_server(
-            (host, port),
-            web.Blob(
-                web.page.render(
-                    {
-                        "type": "LOG",
-                        "streamURL": "/log",
-                    }
-                ).encode("utf-8"),
-                "text/html; charset=utf-8",
-            ),
-            web.page.ASSETS,
-            web.Path("/log", self._s),
-            web.Route("/images/", web.Dir(self.image_path)),
-        )
-        threading.Thread(target=httpd.serve_forever, daemon=True).start()
-        host, port = httpd.server_address
-        url = f"http://{host}:{port}"
-        _LOGGER.info("web log service start at:\t%s", url)
-        webview.open(url)
+        def _run(address: Tuple[Text, int]):
+            with self._s, web.create_server(
+                address,
+                web.Blob(
+                    web.page.render(
+                        {
+                            "type": "LOG",
+                            "streamURL": "/log",
+                        }
+                    ).encode("utf-8"),
+                    "text/html; charset=utf-8",
+                ),
+                web.page.ASSETS,
+                web.Path("/log", self._s),
+                web.Route("/images/", web.Dir(self.image_path)),
+            ) as httpd:
+
+                def _on_stop():
+                    self._stop.wait()
+                    self._s.close()
+                    httpd.shutdown()
+
+                threading.Thread(target=_on_stop).start()
+                host, port = httpd.server_address
+                url = f"http://{host}:{port}"
+                _LOGGER.info("web log service start at:\t%s", url)
+                webview.open(url)
+                httpd.serve_forever()
+
+        threading.Thread(target=_run, args=((host, port),)).start()
+        cleanup.add(self.stop)
 
     def close(self):
         self._s.close()
 
+    def stop(self):
+        self._stop.set()
+
     def __del__(self):
         self.close()
+        self.stop()
 
     def _source(self) -> Text:
         stack_level = 0

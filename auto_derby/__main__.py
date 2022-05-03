@@ -87,25 +87,26 @@ def main():
         plugin.install(i)
     config.apply()
 
-    if not config.web_log_disabled:
-        auto_derby.log = MultiLogService(
-            auto_derby.log,
-            WebLogService(),
-        )
-        time.sleep(1)  # wait browser
+    with auto_derby.cleanup as cleanup:
+        if not config.web_log_disabled:
+            auto_derby.log = MultiLogService(
+                auto_derby.log,
+                WebLogService(cleanup),
+            )
+            time.sleep(1)  # wait browser
 
-    if not job:
-        LOGGER.error(
-            "unknown job: %s\navaliable jobs:\n  %s",
-            args.job,
-            "\n  ".join(avaliable_jobs.keys()),
-        )
-        exit(1)
+        if not job:
+            LOGGER.error(
+                "unknown job: %s\navaliable jobs:\n  %s",
+                args.job,
+                "\n  ".join(avaliable_jobs.keys()),
+            )
+            exit(1)
 
-    c = config.client()
-    c.setup()
-    clients.set_current(c)
-    job()
+        c = config.client()
+        c.setup()
+        clients.set_current(c)
+        job()
 
 
 if __name__ == "__main__":

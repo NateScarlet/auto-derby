@@ -14,6 +14,7 @@ from ..log import Image, Level, Service
 
 class LoggingLogService(Service):
     _infra_module_prefix = ".".join(__name__.split(".")[:-1]) + "."
+    max_inline_image_pixels = 2000
 
     def _find_logger(self) -> Tuple[logging.Logger, int]:
         stack_level = 0
@@ -60,7 +61,7 @@ class LoggingLogService(Service):
         fields = {"caption": caption, "width": img.width, "height": img.height}
         if layers:
             fields["layers"] = ",".join(layers.keys())
-        if img.width * img.height < 20000:
+        if img.width * img.height < self.max_inline_image_pixels:
             fields["url"] = imagetools.data_url(img)
         fields_text = " ".join(f"{k}={v}" for k, v in fields.items())
         return self._log(

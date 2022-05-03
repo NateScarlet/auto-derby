@@ -154,66 +154,83 @@ if __name__ == "__main__":
             _sample_large_layered_image,
         ],
     ]
-    with web.Stream("", "text/plain") as stream, web.create_server(
-        ("127.0.0.1", 8300),
-        web.Blob(
-            web.page.render(
-                {
-                    "type": "LOG",
-                    "streamURL": "/log",
-                }
-            ).encode("utf-8"),
-            "text/html; charset=utf-8",
-        ),
-        web.page.ASSETS,
-        web.Path("/log", stream),
-        web.Path(
-            "/files/small.png",
-            _constant((150, 16), (255, 255, 255)),
-        ),
-        web.Path(
-            "/files/small.red.png",
-            _constant((150, 16), (255, 0, 0)),
-        ),
-        web.Path(
-            "/files/small.green.png",
-            _constant((150, 16), (0, 255, 0)),
-        ),
-        web.Path(
-            "/files/small.blue.png",
-            _constant((150, 16), (0, 0, 255)),
-        ),
-        web.Path(
-            "/files/screenshot.png",
-            _constant((540, 960), (0, 255, 0)),
-        ),
-        web.Path(
-            "/files/large.png",
-            _constant((540, 960), (255, 255, 255)),
-        ),
-        web.Path(
-            "/files/large.red.png",
-            _constant((540, 960), (255, 0, 0)),
-        ),
-        web.Path(
-            "/files/large.green.png",
-            _constant((540, 960), (0, 255, 0)),
-        ),
-        web.Path(
-            "/files/large.blue.png",
-            _constant((540, 960), (0, 0, 255)),
-        ),
-        web.Route("/dir/", web.Dir(os.path.dirname(__file__))),
-        web.middleware.Debug(),
-    ) as httpd:
-        host, port = httpd.server_address
-        url = f"http://{host}:{port}"
-        print(f"run at: {url}\npress Ctrl+C to stop")
-        webbrowser.open(url)
-        threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    stream = web.Stream("", "text/plain")
+
+    stop = threading.Event()
+
+    def _run():
+        with web.create_server(
+            ("127.0.0.1", 8300),
+            web.Blob(
+                web.page.render(
+                    {
+                        "type": "LOG",
+                        "streamURL": "/log",
+                    }
+                ).encode("utf-8"),
+                "text/html; charset=utf-8",
+            ),
+            web.page.ASSETS,
+            web.Path("/log", stream),
+            web.Path(
+                "/files/small.png",
+                _constant((150, 16), (255, 255, 255)),
+            ),
+            web.Path(
+                "/files/small.red.png",
+                _constant((150, 16), (255, 0, 0)),
+            ),
+            web.Path(
+                "/files/small.green.png",
+                _constant((150, 16), (0, 255, 0)),
+            ),
+            web.Path(
+                "/files/small.blue.png",
+                _constant((150, 16), (0, 0, 255)),
+            ),
+            web.Path(
+                "/files/screenshot.png",
+                _constant((540, 960), (0, 255, 0)),
+            ),
+            web.Path(
+                "/files/large.png",
+                _constant((540, 960), (255, 255, 255)),
+            ),
+            web.Path(
+                "/files/large.red.png",
+                _constant((540, 960), (255, 0, 0)),
+            ),
+            web.Path(
+                "/files/large.green.png",
+                _constant((540, 960), (0, 255, 0)),
+            ),
+            web.Path(
+                "/files/large.blue.png",
+                _constant((540, 960), (0, 0, 255)),
+            ),
+            web.Route("/dir/", web.Dir(os.path.dirname(__file__))),
+            web.middleware.Debug(),
+        ) as httpd:
+
+            def _cleanup():
+                stop.wait()
+                stream.close()
+                httpd.shutdown()
+
+            threading.Thread(target=_cleanup).start()
+            host, port = httpd.server_address
+            url = f"http://{host}:{port}"
+            print(f"run at: {url}\npress Ctrl+C to stop")
+            webbrowser.open(url)
+            httpd.serve_forever()
+
+    threading.Thread(target=_run).start()
+    try:
         while True:
-            if not random.randint(0, 20):
-                stream.write("bad value\n".encode("utf-8"))
+            # if not random.randint(0, 20):
+            #     stream.write("bad value\n".encode("utf-8"))
             sample = json.dumps(random.choice(samples)())
             stream.write((sample + "\n").encode("utf-8"))
             time.sleep(0.5)
+    finally:
+        stop.set()

@@ -11,12 +11,11 @@ if True:
 
 
 import argparse
-
-import time
-from auto_derby.infrastructure.web_log_service import WebLogService
 import logging
+import time
 
-_LOGGER = logging.getLogger(__name__)
+import auto_derby
+from auto_derby.infrastructure.web_log_service import WebLogService
 
 
 def main():
@@ -31,22 +30,22 @@ def main():
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8300)
     args = parser.parse_args()
-    print(args)
     path = args.path
     if args.image_path:
         image_path = args.image_path
     else:
         image_path = os.path.abspath(os.path.join(path, "../images"))
-    s = WebLogService(
-        host=args.host,
-        port=args.port,
-        buffer_path=path,
-        image_path=image_path,
-    )
-    s.close()
-    print("press Ctrl+C to stop")
-    while True:
-        time.sleep(1000)  # serve forever
+    with auto_derby.cleanup as cleanup:
+        WebLogService(
+            cleanup,
+            host=args.host,
+            port=args.port,
+            buffer_path=path,
+            image_path=image_path,
+        )
+        print("press Ctrl+C to stop")
+        while True:
+            time.sleep(1000)  # serve forever
 
 
 if __name__ == "__main__":
