@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.22.0"
-RELEASE_DATE = datetime.fromtimestamp(1650993158)
-LAST_GIT_COMMIT_DESCRIBE = "v1.21.2-18-g0e6a85a"
-LAST_GIT_COMMIT_HASH = "0e6a85ada5912693f18b12ee38759822aae18c4f"
+VERSION = "1.23.0"
+RELEASE_DATE = datetime.fromtimestamp(1651588844)
+LAST_GIT_COMMIT_DESCRIBE = "v1.22.0-6-gd58dcdb"
+LAST_GIT_COMMIT_HASH = "d58dcdb215910a784b65e78010aabe6f26780aff"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1650991304)
-LAST_GIT_COMMIT_SUBJECT = "feat(plugin): auto_crane: adjust press duration"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1651588815)
+LAST_GIT_COMMIT_SUBJECT = "test: update rival race doctest"
 LAST_GIT_COMMIT_BODY = ""

@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.23.0](https://github.com/NateScarlet/auto-derby/compare/v1.22.0...v1.23.0) (2022-05-03)
+
+### Features
+
+- **web:** use web to log image ([f5260a1](https://github.com/NateScarlet/auto-derby/commit/f5260a1337580395eff77ef11b9f227838ca3647))
+
+### Bug Fixes
+
+- **plugin:** race_campaign: update data ([fc45a9f](https://github.com/NateScarlet/auto-derby/commit/fc45a9f5b7d86b2054d63b4069dfead7e9b42613))
+- **single-mode:** error while recognizing training ([2e272ba](https://github.com/NateScarlet/auto-derby/commit/2e272ba30db68614fb93e1953973adfc9f1a7c80)), closes [#303](https://github.com/NateScarlet/auto-derby/issues/303)
+- **single-mode:** update game data ([6266e31](https://github.com/NateScarlet/auto-derby/commit/6266e315f4d8b9b43e371f0827e79e6f9464ae4f))
+
 ## [1.22.0](https://github.com/NateScarlet/auto-derby/compare/v1.21.2...v1.22.0) (2022-04-26)
 
 ### Features
