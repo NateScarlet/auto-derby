@@ -662,55 +662,59 @@ def _effect_recognitions(
 
 
 def _recognize_training(ctx: Context, img: Image) -> Training:
-    rp = mathtools.ResizeProxy(img.width)
+    try:
+        rp = mathtools.ResizeProxy(img.width)
 
-    self = Training.new()
-    self.confirm_position = next(
-        template.match(
-            img,
-            template.Specification(
-                templates.SINGLE_MODE_TRAINING_CONFIRM, threshold=0.8
+        self = Training.new()
+        self.confirm_position = next(
+            template.match(
+                img,
+                template.Specification(
+                    templates.SINGLE_MODE_TRAINING_CONFIRM, threshold=0.8
+                ),
+            )
+        )[1]
+        radius = rp.vector(30, 540)
+        for t, center in zip(
+            Training.ALL_TYPES,
+            (
+                rp.vector2((78, 850), 540),
+                rp.vector2((171, 850), 540),
+                rp.vector2((268, 850), 540),
+                rp.vector2((367, 850), 540),
+                rp.vector2((461, 850), 540),
             ),
-        )
-    )[1]
-    radius = rp.vector(30, 540)
-    for t, center in zip(
-        Training.ALL_TYPES,
-        (
-            rp.vector2((78, 850), 540),
-            rp.vector2((171, 850), 540),
-            rp.vector2((268, 850), 540),
-            rp.vector2((367, 850), 540),
-            rp.vector2((461, 850), 540),
-        ),
-    ):
-        if mathtools.distance(self.confirm_position, center) < radius:
-            self.type = t
-            break
-    else:
-        raise ValueError(
-            "unknown type for confirm position: %s" % self.confirm_position
+        ):
+            if mathtools.distance(self.confirm_position, center) < radius:
+                self.type = t
+                break
+        else:
+            raise ValueError(
+                "unknown type for confirm position: %s" % self.confirm_position
+            )
+
+        self.level = _recognize_level(
+            tuple(cast.list_(img.getpixel(rp.vector2((10, 200), 540)), int))
         )
 
-    self.level = _recognize_level(
-        tuple(cast.list_(img.getpixel(rp.vector2((10, 200), 540)), int))
-    )
+        for bbox_group, recognize in _effect_recognitions(ctx, rp):
+            self.speed += recognize(img.crop(bbox_group[0]))
+            self.stamina += recognize(img.crop(bbox_group[1]))
+            self.power += recognize(img.crop(bbox_group[2]))
+            self.guts += recognize(img.crop(bbox_group[3]))
+            self.wisdom += recognize(img.crop(bbox_group[4]))
+            self.skill += recognize(img.crop(bbox_group[5]))
 
-    for bbox_group, recognize in _effect_recognitions(ctx, rp):
-        self.speed += recognize(img.crop(bbox_group[0]))
-        self.stamina += recognize(img.crop(bbox_group[1]))
-        self.power += recognize(img.crop(bbox_group[2]))
-        self.guts += recognize(img.crop(bbox_group[3]))
-        self.wisdom += recognize(img.crop(bbox_group[4]))
-        self.skill += recognize(img.crop(bbox_group[5]))
-
-    # TODO: recognize vitality
-    # plugin hook
-    self._use_estimate_vitality = True  # type: ignore
-    self.vitality = _estimate_vitality(ctx, self)
-    self.failure_rate = _recognize_failure_rate(rp, self, img)
-    self.partners = tuple(_recognize_partners(ctx, img))
-    app.log.image("%s" % self, img, level=app.DEBUG)
+        # TODO: recognize vitality
+        # plugin hook
+        self._use_estimate_vitality = True  # type: ignore
+        self.vitality = _estimate_vitality(ctx, self)
+        self.failure_rate = _recognize_failure_rate(rp, self, img)
+        self.partners = tuple(_recognize_partners(ctx, img))
+        app.log.image("%s" % self, img, level=app.DEBUG)
+    except Exception as ex:
+        app.log.image(("training recognition failed: %s" % ex), img, level=app.ERROR)
+        raise ex
     return self
 
 
