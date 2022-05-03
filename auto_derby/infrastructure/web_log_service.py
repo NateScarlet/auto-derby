@@ -79,6 +79,7 @@ class WebLogService(Service):
         if image_path is None:
             image_path = self.default_image_path
         self.image_path = image_path
+        self._always_inline_image = not buffer_path
 
         self._s = web.Stream(buffer_path, "text/plain; charset=utf-8")
         self._stop = threading.Event()
@@ -156,7 +157,7 @@ class WebLogService(Service):
     def _image_url(self, image: Image) -> Text:
         pil_img = imagetools.pil_image_of(image)
         n_pixels = pil_img.width * pil_img.height
-        if n_pixels < self.max_inline_image_pixels:
+        if self._always_inline_image or n_pixels < self.max_inline_image_pixels:
             return _image_data_url(pil_img)
         if not self.image_path:
             svg = self._image_placeholder_svg_template.format(
