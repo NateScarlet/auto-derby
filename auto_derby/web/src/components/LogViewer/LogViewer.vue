@@ -32,7 +32,8 @@
     <div v-if="visibleRecords.length === 0" class="flex flex-center h-full">
       <div class="text-center">
         <h1 class="text-2xl">Log Viewer</h1>
-        <p>waiting for record</p>
+        <p v-if="!paused">waiting for record</p>
+        <p v-else>no matched record</p>
       </div>
     </div>
   </ol>
@@ -46,11 +47,10 @@ import ListItem from '@/components/LogViewer/ListItem.vue';
 import computedWith from '@/utils/computedWith';
 import useInfiniteScroll from '@/composables/useInfiniteScroll';
 import usePause from '@/composables/usePause';
-import useTransform from '@/composables/useTransform';
-import clamp from '@/utils/clamp';
 import { throttle } from 'lodash-es';
 import usePropVModel from '@/composables/usePropVModel';
 import usePolling from '@/composables/usePolling';
+import useDebounced from '@/composables/useDebounced';
 
 const props = defineProps({
   records: {
@@ -78,7 +78,8 @@ const records = toRef(props, 'records');
 const el = ref<HTMLOListElement>();
 
 const scrollContainer = el;
-const totalCountRaw = ref(props.records.length);
+// avoid update too fast when reading from buffer.
+const totalCountRaw = useDebounced(ref(props.records.length), 50);
 watch(
   () => props.records.length,
   (v) => {
@@ -87,12 +88,7 @@ watch(
   { deep: true }
 );
 const totalCount = usePause(totalCountRaw, paused);
-const topIndex = useTransform(
-  ref(0),
-  (v) => v,
-  (v) => clamp(v, 0, totalCount.value - 1)
-);
-
+const topIndex = ref(0);
 const itemElement = (index: number) => {
   return scrollContainer.value?.querySelector<HTMLLIElement>(
     `li[data-index="${index}"]`
@@ -146,7 +142,7 @@ const scrollAnchorElement = () => {
   });
   return ret;
 };
-const scrollViewport = (offset: number) => {
+const scrollViewport = throttle((offset: number) => {
   if (offset === 0) {
     return;
   }
@@ -166,7 +162,7 @@ const scrollViewport = (offset: number) => {
   nextTick(() => {
     el.scrollTop = anchorEl.offsetTop + anchorTop;
   });
-};
+}, 100);
 
 watchEffect(() => {
   if (!props.paused) {
@@ -216,18 +212,18 @@ const hasNext = computed(() => {
   return false;
 });
 
-const onScrollToTop = throttle(() => {
+const onScrollToTop = () => {
   if (!hasPrevious.value) {
     return;
   }
   scrollViewport(-Math.round(props.size / 2));
-}, 100);
-const onScrollToBottom = throttle(() => {
+};
+const onScrollToBottom = () => {
   if (!hasNext.value) {
     return;
   }
   scrollViewport(Math.round(props.size / 2));
-}, 100);
+};
 
 useInfiniteScroll(scrollContainer, {
   onScrollToTop,

@@ -96,7 +96,7 @@ import { isDevelopmentMode } from '@/settings';
 import useStringArray from '@/composables/useStringArray';
 import LogLevelWidget from '@/components/LogLevelWidget.vue';
 import matchSearchKeys from '@/utils/matchSearchKeys';
-import { sortBy } from 'lodash-es';
+import { sortBy, throttle } from 'lodash-es';
 import useStorage from '@/composables/useStorage';
 import limitTextLength from '@/utils/limitTextLength';
 
@@ -122,16 +122,26 @@ watchEffect(() => {
 const levelRecordCount = reactive(new Map<LogLevel, number>());
 const paused = ref(false);
 const totalCount = ref(0);
-const pushRecord = async (v: LogRecord) => {
-  levelRecordCount.set(v.lv, (levelRecordCount.get(v.lv) ?? 0) + 1);
-  totalCount.value += 1;
-  records.push(v);
-};
-watchEffect(() => {
-  if (!paused.value) {
+const recordBuffer = [] as LogRecord[];
+const flushRecords = throttle(
+  () => {
+    const b = recordBuffer.slice();
+    recordBuffer.length = 0;
+    totalCount.value += b.length;
+    records.push(...b);
+    b.forEach((v) => {
+      levelRecordCount.set(v.lv, (levelRecordCount.get(v.lv) ?? 0) + 1);
+    });
+
     inputData.linenoLte = totalCount.value;
-  }
-});
+  },
+  100,
+  { trailing: true }
+);
+const pushRecord = async (v: LogRecord) => {
+  recordBuffer.push(v);
+  flushRecords();
+};
 
 const levelOrder = [
   LogLevel.ERROR,
@@ -219,6 +229,7 @@ watch(
     } catch (err) {
       app.message.error(`stream read failed: ${err}`);
     }
+    flushRecords();
     paused.value = true;
     app.message.info('stream closed');
   }),

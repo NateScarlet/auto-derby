@@ -14,7 +14,7 @@ import argparse
 import logging
 import time
 
-import auto_derby
+from auto_derby import app
 from auto_derby.infrastructure.web_log_service import WebLogService
 
 
@@ -35,14 +35,15 @@ def main():
         image_path = args.image_path
     else:
         image_path = os.path.abspath(os.path.join(path, "../images"))
-    with auto_derby.app.cleanup as cleanup:
-        WebLogService(
+    with app.cleanup as cleanup:
+        s = WebLogService(
             cleanup,
             host=args.host,
             port=args.port,
             buffer_path=path,
             image_path=image_path,
         )
+        s.close()
         print("press Ctrl+C to stop")
         while True:
             time.sleep(1000)  # serve forever
