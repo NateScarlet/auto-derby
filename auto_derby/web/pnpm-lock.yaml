@@ -3,9 +3,11 @@ lockfileVersion: 5.3
 specifiers:
   '@babel/core': ^7.17.8
   '@babel/preset-env': ^7.16.11
+  '@juggle/resize-observer': ^3.3.1
   '@mdi/js': ^6.5.95
   '@tailwindcss/forms': ^0.5.0
   '@types/babel__core': ^7.1.18
+  '@types/lodash-es': ^4.17.6
   '@types/node': '14'
   '@typescript-eslint/eslint-plugin': 5.13.0
   '@typescript-eslint/parser': 5.13.0
@@ -19,6 +21,7 @@ specifiers:
   eslint-plugin-import: 2.25.4
   eslint-plugin-prettier: 4.0.0
   eslint-plugin-vue: 8.0.3
+  lodash-es: ^4.17.21
   postcss: ^8.4.12
   prettier: 2.4.1
   sass: ^1.49.9
@@ -29,7 +32,10 @@ specifiers:
   vue-tsc: ^0.29.8
 
 dependencies:
+  '@juggle/resize-observer': registry.npmmirror.com/@juggle/resize-observer/3.3.1
   '@mdi/js': registry.npmmirror.com/@mdi/js/6.5.95
+  '@types/lodash-es': registry.npmmirror.com/@types/lodash-es/4.17.6
+  lodash-es: registry.npmmirror.com/lodash-es/4.17.21
   vue: registry.npmmirror.com/vue/3.2.31
 
 devDependencies:
@@ -1573,6 +1579,12 @@ packages:
       '@jridgewell/sourcemap-codec': registry.npmmirror.com/@jridgewell/sourcemap-codec/1.4.11
     dev: true
 
+  registry.npmmirror.com/@juggle/resize-observer/3.3.1:
+    resolution: {integrity: sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@juggle/resize-observer/-/resize-observer-3.3.1.tgz}
+    name: '@juggle/resize-observer'
+    version: 3.3.1
+    dev: false
+
   registry.npmmirror.com/@mdi/js/6.5.95:
     resolution: {integrity: sha512-x/bwEoAGP+Mo10Dfk5audNIPi7Yz8ZBrILcbXLW3ShOI/njpgodzpgpC2WYK3D2ZSC392peRRemIFb/JsyzzYQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@mdi/js/-/js-6.5.95.tgz}
     name: '@mdi/js'
@@ -1656,6 +1668,20 @@ packages:
     name: '@types/json5'
     version: 0.0.29
     dev: true
+
+  registry.npmmirror.com/@types/lodash-es/4.17.6:
+    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/lodash-es/-/lodash-es-4.17.6.tgz}
+    name: '@types/lodash-es'
+    version: 4.17.6
+    dependencies:
+      '@types/lodash': registry.npmmirror.com/@types/lodash/4.14.182
+    dev: false
+
+  registry.npmmirror.com/@types/lodash/4.14.182:
+    resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/lodash/-/lodash-4.14.182.tgz}
+    name: '@types/lodash'
+    version: 4.14.182
+    dev: false
 
   registry.npmmirror.com/@types/node/14.18.12:
     resolution: {integrity: sha512-q4jlIR71hUpWTnGhXWcakgkZeHa3CCjcQcnuzU8M891BAWA2jHiziiWEPEkdS5pFsz7H9HJiy8BrK7tBRNrY7A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/node/-/node-14.18.12.tgz}
@@ -3896,6 +3922,12 @@ packages:
       p-locate: registry.npmmirror.com/p-locate/2.0.0
       path-exists: registry.npmmirror.com/path-exists/3.0.0
     dev: true
+
+  registry.npmmirror.com/lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lodash-es/-/lodash-es-4.17.21.tgz}
+    name: lodash-es
+    version: 4.17.21
+    dev: false
 
   registry.npmmirror.com/lodash.debounce/4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz}

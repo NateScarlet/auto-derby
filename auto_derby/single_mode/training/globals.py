@@ -16,4 +16,6 @@ class g:
     training_class: Type[Training]
     partner_class: Type[Partner]
     target_levels: Dict[TrainingType, int] = {}
-    image_path: str = ""
+
+    # deprecated
+    image_path: str = ""  # replaced by web log

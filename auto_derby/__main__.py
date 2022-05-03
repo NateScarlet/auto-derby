@@ -14,7 +14,10 @@ import webbrowser
 import win32con
 import win32gui
 
-from . import __version__, clients, config, jobs, plugin, templates, version
+from . import __version__, clients, config, jobs, plugin, templates, version, app
+from .infrastructure.logging_log_service import LoggingLogService
+from .infrastructure.multi_log_service import MultiLogService
+from .infrastructure.web_log_service import WebLogService
 
 LOGGER = logging.getLogger(__name__)
 
@@ -82,18 +85,26 @@ def main():
         plugin.install(i)
     config.apply()
 
-    if not job:
-        LOGGER.error(
-            "unknown job: %s\navaliable jobs:\n  %s",
-            args.job,
-            "\n  ".join(avaliable_jobs.keys()),
-        )
-        exit(1)
+    with app.cleanup as cleanup:
+        if not config.web_log_disabled:
+            app.log = MultiLogService(
+                app.log,
+                WebLogService(cleanup),
+            )
+            time.sleep(1)  # wait browser
 
-    c = config.client()
-    c.setup()
-    clients.set_current(c)
-    job()
+        if not job:
+            LOGGER.error(
+                "unknown job: %s\navaliable jobs:\n  %s",
+                args.job,
+                "\n  ".join(avaliable_jobs.keys()),
+            )
+            exit(1)
+
+        c = config.client()
+        c.setup()
+        clients.set_current(c)
+        job()
 
 
 if __name__ == "__main__":
@@ -102,6 +113,8 @@ if __name__ == "__main__":
         level=logging.INFO,
         datefmt="%H:%M:%S",
     )
+    app.log = LoggingLogService()
+
     LOG_PATH = config.LOG_PATH
     if LOG_PATH and LOG_PATH != "-":
         handler = logging.handlers.RotatingFileHandler(

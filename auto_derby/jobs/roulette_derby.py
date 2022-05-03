@@ -2,7 +2,7 @@
 # pyright: strict
 
 
-from .. import action, templates
+from .. import action, templates, app, template
 import time
 
 
@@ -23,4 +23,9 @@ def roulette_derby():
             if not action.count_image(templates.ROULETTE_DERBY_TAP_BUTTON_DISABLED):
                 continue
             return
+        if tmpl.name in (
+            templates.ROULETTE_DERBY_GET,
+            templates.ROULETTE_DERBY_REWARD_TEXT,
+        ):
+            app.log.image(tmpl.name, template.screenshot())
         action.tap(pos)

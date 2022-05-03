@@ -7,6 +7,7 @@ import warnings
 from typing import Callable, Dict, Text
 
 from auto_derby.constants import TrainingType
+from auto_derby.infrastructure.web_log_service import WebLogService
 
 from . import ocr, plugin, single_mode, template, terminal, window, data
 from .clients import ADBClient, Client
@@ -77,6 +78,15 @@ class config:
     )
     ocr_data_path = os.getenv("AUTO_DERBY_OCR_LABEL_PATH", "data/ocr_labels.csv")
     ocr_image_path = os.getenv("AUTO_DERBY_OCR_IMAGE_PATH", "")
+    web_log_disabled = os.getenv("AUTO_DERBY_WEB_LOG_DISABLED", "").lower() == "true"
+    web_log_buffer_path = os.getenv(
+        "AUTO_DERBY_WEB_LOG_BUFFER_PATH",
+        WebLogService.default_buffer_path,
+    )
+    web_log_image_path = os.getenv(
+        "AUTO_DERBY_WEB_LOG_IMAGE_PATH",
+        WebLogService.default_image_path,
+    )
     last_screenshot_save_path = os.getenv("AUTO_DERBY_LAST_SCREENSHOT_SAVE_PATH", "")
     pause_if_race_order_gt = int(os.getenv("AUTO_DERBY_PAUSE_IF_RACE_ORDER_GT", "5"))
     single_mode_event_image_path = os.getenv(
@@ -182,6 +192,8 @@ class config:
         terminal.g.pause_sound_path = cls.terminal_pause_sound_path
         terminal.g.prompt_sound_path = cls.terminal_prompt_sound_path
         window.g.use_legacy_screenshot = cls.use_legacy_screenshot
+        WebLogService.default_image_path = cls.web_log_image_path
+        WebLogService.default_buffer_path = cls.web_log_buffer_path
 
 
 config.apply()

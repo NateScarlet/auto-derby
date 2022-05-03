@@ -19,3 +19,12 @@ input.spin-button-none {
     -moz-appearance: textfield; /* Firefox */
   }
 }
+
+@layer {
+  .flex-center {
+    @apply items-center justify-center
+  }
+    .bg-checkerboard {
+    background-image: url('./assets/checkerboard.svg');
+  }
+}

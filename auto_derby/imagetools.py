@@ -2,8 +2,10 @@
 # pyright: strict
 """tools for image processing.  """
 
+import base64
 import csv
 import hashlib
+import io
 import os
 import threading
 from pathlib import Path
@@ -20,8 +22,8 @@ from typing import (
     Type,
     TypeVar,
     Union,
-    cast as cast_type,
 )
+from typing import cast as cast_type
 
 import cast_unknown as cast
 import cv2
@@ -127,6 +129,12 @@ def pil_image(img: np.ndarray) -> Image:
     if img.shape[2:] == (3,):
         return fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
     return fromarray(img)
+
+
+def pil_image_of(img: Union[np.ndarray, Image]) -> Image:
+    if isinstance(img, Image):
+        return img
+    return pil_image(img)
 
 
 def compare_color(
@@ -461,3 +469,10 @@ def auto_crop(cv_img: np.ndarray) -> np.ndarray:
         )
     )
     return cv_img[t:b, l:r]
+
+
+def data_url(img: Image) -> Text:
+    b = io.BytesIO()
+    img.save(b, "PNG")
+    data = base64.b64encode(b.getvalue()).decode("utf-8")
+    return f"data:image/png;base64,{data}"

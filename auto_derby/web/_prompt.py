@@ -8,11 +8,14 @@ import http
 import http.server
 import logging
 import os
-import webbrowser
-from typing import Any, Dict, Optional, Protocol, Text
 import time
+import webbrowser
+from typing import Any, Dict, Optional, Text
+
 from . import handler
 from .context import Context
+from .webview import Webview
+from ._create_server import create_server
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -52,14 +55,6 @@ class _PromptMiddleware(handler.Middleware):
             ctx.request_server_shutdown()
         else:
             next(ctx)
-
-
-class Webview(Protocol):
-    def open(self, url: Text) -> None:
-        ...
-
-    def shutdown(self) -> None:
-        ...
 
 
 class _DefaultWebview(Webview):
@@ -106,14 +101,6 @@ class _DefaultWebview(Webview):
             pass
 
 
-class NoOpWebview(Webview):
-    def open(self, url: Text) -> None:
-        pass
-
-    def shutdown(self) -> None:
-        pass
-
-
 class g:
     default_webview = _DefaultWebview()
     disabled = bool(os.getenv("CI"))
@@ -134,23 +121,7 @@ def prompt(
     port = port or g.default_port
     webview = webview or g.default_webview
     pm = _PromptMiddleware(html)
-    h = handler.from_middlewares((pm,) + middlewares)
-    with http.server.ThreadingHTTPServer(
-        (host, port),
-        handler.to_http_handler_class(h),
-        bind_and_activate=False,
-    ) as httpd:
-        httpd.allow_reuse_address = False
-        while True:
-            try:
-                httpd.server_bind()
-                break
-            except OSError:
-                if port >= max_port:
-                    raise
-                port += 1
-                httpd.server_address = (httpd.server_address[0], port)
-        httpd.server_activate()
+    with create_server((host, port), *(pm, *middlewares), max_port=max_port) as httpd:
         host, port = httpd.server_address
         url = f"http://{host}:{port}"
         webview.open(url)

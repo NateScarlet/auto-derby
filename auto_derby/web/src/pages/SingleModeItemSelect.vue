@@ -77,6 +77,7 @@ import { singleModeItemSearchShortcuts } from '@/settings';
 import SingleModeItemVue from '@/components/SingleModeItem.vue';
 
 import { mdiMagnify } from '@mdi/js';
+import matchSearchKeys from '@/utils/matchSearchKeys';
 
 const props = defineProps({
   pageData: {
@@ -86,7 +87,7 @@ const props = defineProps({
 });
 const _ = props;
 const inputData = reactive({
-  id: pageData.defaultValue ?? 0,
+  id: props.pageData.defaultValue ?? 0,
   q: '',
 });
 
@@ -94,16 +95,9 @@ function itemSearchKeys(i: SingleModeItem): string[] {
   return [i.name, i.description];
 }
 
-function matchItem(i: SingleModeItem, query: string): boolean {
-  const searchKeys = itemSearchKeys(i);
-  return query
-    .split(' ')
-    .every((keyword) => searchKeys.some((key) => key.includes(keyword)));
-}
-
 const listData = computed(() =>
-  pageData.options
-    .filter((i) => matchItem(i, inputData.q))
+  props.pageData.options
+    .filter((i) => matchSearchKeys(inputData.q, itemSearchKeys(i)))
     .map((i) => {
       const isSelected = i.id === inputData.id;
       return {
@@ -125,7 +119,7 @@ const listData = computed(() =>
 const searchShortcuts = computed(() =>
   singleModeItemSearchShortcuts.map((i) => {
     const matchCount = listData.value.filter((j) =>
-      matchItem(j.value, i)
+      matchSearchKeys(i, itemSearchKeys(j.value))
     ).length;
     return {
       key: i,
@@ -156,7 +150,7 @@ const searchShortcuts = computed(() =>
 
 const currentOption = computed(
   () =>
-    pageData.options.find((i) => i.id === inputData.id) ?? {
+    props.pageData.options.find((i) => i.id === inputData.id) ?? {
       id: inputData.id,
       name: 'unknown',
       description: 'unknown',

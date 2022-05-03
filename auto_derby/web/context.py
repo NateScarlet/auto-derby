@@ -2,6 +2,7 @@
 # pyright: strict
 
 from __future__ import annotations
+from collections import defaultdict
 
 import email.utils
 import io
@@ -10,7 +11,7 @@ import shutil
 import threading
 import urllib.parse
 from http.server import BaseHTTPRequestHandler
-from typing import Any, BinaryIO, Dict, List, Text
+from typing import Any, BinaryIO, DefaultDict, Dict, List, Text
 
 
 class Context:
@@ -18,7 +19,7 @@ class Context:
         self._req = req
         self._req_body = io.BytesIO()
         self._res_body = io.BytesIO()
-        self._res_headers: Dict[Text, List[Text]] = {}
+        self._res_headers: DefaultDict[Text, List[Text]] = defaultdict(lambda: [])
 
         self.request_headers = req.headers
         self.method = req.command
@@ -33,6 +34,7 @@ class Context:
         self.status_code = 0
         self.encoding = "utf-8"
         self.header_written = False
+        self._is_stream = False
         self._write_ended = False
 
     def params(self, key: Text) -> List[Text]:
@@ -86,15 +88,43 @@ class Context:
         r.end_headers()
         self.header_written = True
 
+    def start_stream(self):
+        if "chunked" not in self._res_headers["Transfer-Encoding"]:
+            self._res_headers["Transfer-Encoding"] += ["chunked"]
+        self.end_headers()
+        self._is_stream = True
+
+    def _write_chunked(self, data: bytes):
+        w = self._req.wfile
+        w.write(b"%X\r\n" % len(data))
+        w.write(data)
+        w.write(b"\r\n")
+        w.flush()
+
     def write_bytes(self, data: bytes):
+        if self._is_stream:
+            return self._write_chunked(data)
         self._res_body.write(data)
+
+    def writer_closed(self):
+        return self._req.wfile.closed
 
     def write_string(self, data: str):
         self.write_bytes(data.encode(self.encoding, "surrogateescape"))
 
     def write_file(self, f: BinaryIO):
-        w = self._req_body
-        if self._res_headers["Content-Length"]:
+        if self._is_stream:
+            ctx = self
+
+            class _Writer:
+                def write(self, data: bytes):
+                    ctx.write_bytes(data)
+
+            shutil.copyfileobj(f, _Writer())
+            return
+
+        w = self._res_body
+        if "Content-Length" in self._res_headers:
             self.end_headers()
             w = self._req.wfile
         shutil.copyfileobj(f, w)
@@ -102,11 +132,17 @@ class Context:
     def end_write(self):
         if self._write_ended:
             return
-        data = self._res_body.getvalue()
-        self.set_header("Content-Length", str(len(data)))
-        self.end_headers()
-        w = self._req.wfile
-        w.write(data)
+        if self._req.wfile.closed:
+            self._write_ended = True
+            return
+        if self._is_stream:
+            self.write_bytes(b"")
+        else:
+            data = self._res_body.getvalue()
+            self.set_header("Content-Length", str(len(data)))
+            self.end_headers()
+            w = self._req.wfile
+            w.write(data)
         self._write_ended = True
 
     def send_blob(self, status_code: int, data: bytes):

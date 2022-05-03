@@ -1,7 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from .. import action, config, templates
+from .. import action, app, config, template, templates
 from ..scenes.scene import Scene
 from ..scenes.team_race import CompetitorMenuScene
 from ..scenes.unknown import UnknownScene
@@ -46,8 +46,6 @@ def team_race():
                 action.wait_tap_image(templates.RACE_ITEM_PARFAIT)
             else:
                 scene.choose(ctx, 1)
-        elif name == templates.TEAM_RACE_NEXT_BUTTON:
-            action.tap(pos)
         elif name == templates.RP_NOT_ENOUGH:
             break
         elif name == templates.CONNECTING:
@@ -55,4 +53,5 @@ def team_race():
         elif name == templates.LIMITED_SALE_OPEN:
             config.on_limited_sale()
         else:
+            app.log.image("tap: %s" % name, template.screenshot())
             action.tap(pos)

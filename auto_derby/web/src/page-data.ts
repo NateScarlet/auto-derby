@@ -4,6 +4,7 @@ import { isDevelopmentMode } from './settings';
 
 export enum PageType {
   SINGLE_MODE_ITEM_SELECT = 'SINGLE_MODE_ITEM_SELECT',
+  LOG = 'LOG',
 }
 
 export interface SingleModeItem {
@@ -20,7 +21,12 @@ export interface PageDataSingleModeItemSelect {
   defaultValue?: number;
 }
 
-export type PageData = PageDataSingleModeItemSelect;
+export interface PageDataLog {
+  type: PageType.LOG;
+  streamURL: string;
+}
+
+export type PageData = PageDataSingleModeItemSelect | PageDataLog;
 
 function getPageData(): PageData {
   const el = document.getElementById('data');
@@ -41,6 +47,11 @@ function getPageData(): PageData {
             .split('\n')
             .filter((i) => i)
             .map((i) => JSON.parse(i)),
+        };
+      case PageType.LOG:
+        return {
+          type: PageType.LOG,
+          streamURL: '/log',
         };
       default:
         assertNever(tp);

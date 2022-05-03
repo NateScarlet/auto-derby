@@ -14,7 +14,7 @@ import cv2
 import numpy as np
 from PIL.Image import Image, fromarray
 
-from . import data, imagetools, terminal
+from . import data, imagetools, terminal, app
 
 LOGGER = logging.getLogger(__name__)
 
@@ -96,6 +96,7 @@ def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
         # avoid show image during loop
         raise terminal.PromptDisabled
     ret = ""
+    app.log.image("ocr prompt", img)
     close_img = imagetools.show(fromarray(_pad_img(img)), h)
     try:
         while len(ret) != 1:

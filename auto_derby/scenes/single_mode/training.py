@@ -11,12 +11,11 @@ from typing import Callable, Iterator, Optional, Tuple
 import cast_unknown as cast
 import cv2
 import numpy as np
-from auto_derby.single_mode.context import Context
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from ... import action, imagetools, mathtools, ocr, template, templates
-from ...single_mode import Training, training
+from ... import action, app, imagetools, mathtools, ocr, template, templates
+from ...single_mode import Context, Training, training
 from ...single_mode.training import Partner
 from ..scene import Scene, SceneHolder
 from .command import CommandScene
@@ -111,18 +110,21 @@ def _recognize_base_effect(img: Image) -> int:
     text_img = np.array(np.maximum(text_img, text_img_extra))
     imagetools.fill_area(text_img, (0,), size_lt=48)
 
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("sharpened_img", sharpened_img)
-        cv2.imshow("white_outline_img", white_outline_img)
-        cv2.imshow("white_outline_img_dilated", white_outline_img_dilated)
-        cv2.imshow("brown_outline_img", brown_outline_img)
-        cv2.imshow("bg_mask_img", bg_mask_img)
-        cv2.imshow("masked_img", masked_img)
-        cv2.imshow("text_img_extra", text_img_extra)
-        cv2.imshow("text_img", text_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "base effect",
+        img,
+        level=app.DEBUG,
+        layers={
+            "sharpened": sharpened_img,
+            "white_outline": white_outline_img,
+            "white_outline_dilated": white_outline_img_dilated,
+            "brown_outline": brown_outline_img,
+            "bg_mask": bg_mask_img,
+            "masked": masked_img,
+            "text_extra": text_img_extra,
+            "text": text_img,
+        },
+    )
 
     if cv2.countNonZero(text_img) < 100:
         # ignore skin match result
@@ -533,11 +535,8 @@ def _recognize_soul(
     imagetools.fill_area(fg_mask2, (0,), size_lt=100)
     fg_img = cv2.copyTo(masked_img, fg_mask2)
     empty_mask = imagetools.constant_color_key(fg_img, (126, 121, 121))
+    app.log.image("soul", img, level=app.DEBUG)
     if os.getenv("DEBUG") == __name__ + "[partner]":
-        _LOGGER.debug(
-            "soul: img=%s",
-            imagetools.image_hash(img, save_path=training.g.image_path),
-        )
         cv2.imshow("soul", cv_img)
         cv2.imshow("sharpened", shapened_img)
         cv2.imshow("right_bottom_icon", imagetools.cv_image(right_bottom_icon_img))
@@ -562,11 +561,8 @@ def _recognize_partner_icon(
 ) -> Optional[training.Partner]:
     rp = mathtools.ResizeProxy(img.width)
     icon_img = img.crop(bbox)
+    app.log.image("partner icon", icon_img, level=app.DEBUG)
     if os.getenv("DEBUG") == __name__ + "[partner]":
-        _LOGGER.debug(
-            "icon: img=%s",
-            imagetools.image_hash(icon_img, save_path=training.g.image_path),
-        )
         cv2.imshow("icon_img", imagetools.cv_image(icon_img))
         cv2.waitKey()
         cv2.destroyAllWindows()
@@ -599,7 +595,7 @@ def _recognize_partner_icon(
     self.type = _recognize_type_color(rp, icon_img)
     if soul >= 0 and self.type == Partner.TYPE_OTHER:
         self.type = Partner.TYPE_TEAMMATE
-    _LOGGER.debug("partner: %s", self)
+    app.log.text("partner: %s" % self, level=app.DEBUG)
     return self
 
 
@@ -668,13 +664,7 @@ def _effect_recognitions(
 
 
 def _recognize_training(ctx: Context, img: Image) -> Training:
-    if training.g.image_path:
-        image_id = imagetools.md5(
-            imagetools.cv_image(img.convert("RGB")),
-            save_path=training.g.image_path,
-            save_mode="RGB",
-        )
-        _LOGGER.debug("from_training_scene: image=%s", image_id)
+    app.log.image("recognize training", img, level=app.DEBUG)
     rp = mathtools.ResizeProxy(img.width)
 
     self = Training.new()

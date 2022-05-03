@@ -77,4 +77,12 @@ export default defineConfig({
   },
   define,
   plugins: [vue(), preload()],
+  server: {
+    proxy: {
+      '/stream': 'http://localhost:8300',
+      '/log': 'http://localhost:8300',
+      '/files': 'http://localhost:8300',
+      '/images': 'http://localhost:8300',
+    },
+  },
 });
