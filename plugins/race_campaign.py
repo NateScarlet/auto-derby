@@ -143,31 +143,31 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# 春のGⅠ記念ミッション　第２弾 天皇賞（春）
+# 春のGⅠ記念ミッション　第２弾 NHKマイルC
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 4, 25, 11, 0, tzinfo=JST),
-        datetime.datetime(2022, 5, 2, 3, 59, tzinfo=JST),
-        "天皇賞（春）",
+        datetime.datetime(2022, 5, 2, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 5, 9, 3, 59, tzinfo=JST),
+        "NHKマイルカップ",
         order_lte=1,
     ),
 )
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 4, 25, 11, 0, tzinfo=JST),
-        datetime.datetime(2022, 5, 2, 3, 59, tzinfo=JST),
-        "日経賞",
-        order_lte=1,
+        datetime.datetime(2022, 5, 2, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 5, 9, 3, 59, tzinfo=JST),
+        "アーリントンカップ",
+        order_lte=3,
     ),
 )
 
 _add_compagin(
     OneTimeCampaign(
-        datetime.datetime(2022, 4, 25, 11, 0, tzinfo=JST),
-        datetime.datetime(2022, 5, 2, 3, 59, tzinfo=JST),
-        "阪神大賞典",
-        order_lte=1,
+        datetime.datetime(2022, 5, 2, 4, 0, tzinfo=JST),
+        datetime.datetime(2022, 5, 9, 3, 59, tzinfo=JST),
+        "ニュージーランドトロフィー",
+        order_lte=3,
     ),
 )
