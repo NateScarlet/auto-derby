@@ -1,6 +1,8 @@
 <template>
   <div class="bg-gray-200 text-theme-text min-h-screen">
-    <div class="absolute right-0 top-0 text-gray-400">{{ version }}</div>
+    <div class="absolute top-0 right-0 text-gray-400 hidden lg:block">
+      {{ version }}
+    </div>
     <component :is="page.component" :page-data="pageData"></component>
     <MessageList class="messages z-20"></MessageList>
   </div>
