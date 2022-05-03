@@ -8,17 +8,14 @@ import os
 from concurrent import futures
 from typing import Callable, Iterator, Optional, Tuple
 
-import auto_derby
 import cast_unknown as cast
 import cv2
 import numpy as np
-from auto_derby import LogLevel
-from auto_derby.single_mode.context import Context
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from ... import action, imagetools, mathtools, ocr, template, templates
-from ...single_mode import Training, training
+from ... import action, app, imagetools, mathtools, ocr, template, templates
+from ...single_mode import Context, Training, training
 from ...single_mode.training import Partner
 from ..scene import Scene, SceneHolder
 from .command import CommandScene
@@ -113,10 +110,10 @@ def _recognize_base_effect(img: Image) -> int:
     text_img = np.array(np.maximum(text_img, text_img_extra))
     imagetools.fill_area(text_img, (0,), size_lt=48)
 
-    auto_derby.log.image(
+    app.log.image(
         "base effect",
         img,
-        level=LogLevel.DEBUG,
+        level=app.DEBUG,
         layers={
             "sharpened": sharpened_img,
             "white_outline": white_outline_img,
@@ -538,7 +535,7 @@ def _recognize_soul(
     imagetools.fill_area(fg_mask2, (0,), size_lt=100)
     fg_img = cv2.copyTo(masked_img, fg_mask2)
     empty_mask = imagetools.constant_color_key(fg_img, (126, 121, 121))
-    auto_derby.log.image("soul", img, level=LogLevel.DEBUG)
+    app.log.image("soul", img, level=app.DEBUG)
     if os.getenv("DEBUG") == __name__ + "[partner]":
         cv2.imshow("soul", cv_img)
         cv2.imshow("sharpened", shapened_img)
@@ -564,7 +561,7 @@ def _recognize_partner_icon(
 ) -> Optional[training.Partner]:
     rp = mathtools.ResizeProxy(img.width)
     icon_img = img.crop(bbox)
-    auto_derby.log.image("partner icon", icon_img, level=LogLevel.DEBUG)
+    app.log.image("partner icon", icon_img, level=app.DEBUG)
     if os.getenv("DEBUG") == __name__ + "[partner]":
         cv2.imshow("icon_img", imagetools.cv_image(icon_img))
         cv2.waitKey()
@@ -598,7 +595,7 @@ def _recognize_partner_icon(
     self.type = _recognize_type_color(rp, icon_img)
     if soul >= 0 and self.type == Partner.TYPE_OTHER:
         self.type = Partner.TYPE_TEAMMATE
-    auto_derby.log.text("partner: %s" % self, level=LogLevel.DEBUG)
+    app.log.text("partner: %s" % self, level=app.DEBUG)
     return self
 
 
@@ -667,7 +664,7 @@ def _effect_recognitions(
 
 
 def _recognize_training(ctx: Context, img: Image) -> Training:
-    auto_derby.log.image("recognize training", img, level=LogLevel.DEBUG)
+    app.log.image("recognize training", img, level=app.DEBUG)
     rp = mathtools.ResizeProxy(img.width)
 
     self = Training.new()

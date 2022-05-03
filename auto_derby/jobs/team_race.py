@@ -1,11 +1,10 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from .. import action, config, templates, template
+from .. import action, app, config, template, templates
 from ..scenes.scene import Scene
 from ..scenes.team_race import CompetitorMenuScene
 from ..scenes.unknown import UnknownScene
-import auto_derby
 
 
 class _Context:
@@ -54,5 +53,5 @@ def team_race():
         elif name == templates.LIMITED_SALE_OPEN:
             config.on_limited_sale()
         else:
-            auto_derby.log.image("tap: %s" % name, template.screenshot())
+            app.log.image("tap: %s" % name, template.screenshot())
             action.tap(pos)

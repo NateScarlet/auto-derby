@@ -14,12 +14,10 @@ import webbrowser
 import win32con
 import win32gui
 
+from . import __version__, clients, config, jobs, plugin, templates, version, app
 from .infrastructure.logging_log_service import LoggingLogService
 from .infrastructure.multi_log_service import MultiLogService
 from .infrastructure.web_log_service import WebLogService
-
-from . import __version__, clients, config, jobs, plugin, templates, version
-import auto_derby
 
 LOGGER = logging.getLogger(__name__)
 
@@ -87,10 +85,10 @@ def main():
         plugin.install(i)
     config.apply()
 
-    with auto_derby.cleanup as cleanup:
+    with app.cleanup as cleanup:
         if not config.web_log_disabled:
-            auto_derby.log = MultiLogService(
-                auto_derby.log,
+            app.log = MultiLogService(
+                app.log,
                 WebLogService(cleanup),
             )
             time.sleep(1)  # wait browser
@@ -115,7 +113,7 @@ if __name__ == "__main__":
         level=logging.INFO,
         datefmt="%H:%M:%S",
     )
-    auto_derby.log = LoggingLogService()
+    app.log = LoggingLogService()
 
     LOG_PATH = config.LOG_PATH
     if LOG_PATH and LOG_PATH != "-":

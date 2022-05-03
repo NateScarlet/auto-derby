@@ -19,7 +19,7 @@ from typing import Any, Dict, Optional, Text, Tuple
 import PIL.Image
 
 from .. import imagetools, web
-from ..services import Cleanup
+from ..services.cleanup import Service as Cleanup
 from ..services.log import Image, Level, Service
 from ..web import Webview
 

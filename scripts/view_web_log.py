@@ -35,7 +35,7 @@ def main():
         image_path = args.image_path
     else:
         image_path = os.path.abspath(os.path.join(path, "../images"))
-    with auto_derby.cleanup as cleanup:
+    with auto_derby.app.cleanup as cleanup:
         WebLogService(
             cleanup,
             host=args.host,
