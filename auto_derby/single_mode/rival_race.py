@@ -29,12 +29,12 @@ class Repository(Protocol):
         >>> r = RivalRace.repository
 
         Get by name:
-        >>> print(list(r.find(name="TODO")))
-        RivalRace<スペシャルウィーク#1001>
+        >>> print(next(r.find(name="コスモス賞")))
+        RivalRace<コスモス賞:タマモクロス#1021,ゴールドシチー#1040>
 
         Get by character and turn:
-        >>> print(list(r.find(player_charecter_id=1001, turn=21)))
-        RivalRace<スペシャルウィーク#1001>
+        >>> print(next(r.find(character_id=1001, turn=21)))
+        RivalRace<京王杯ジュニアステークス:スペシャルウィーク#1001,グラスワンダー#1011>
 
         Iterate all:
         >>> for i in r.find():
@@ -76,7 +76,13 @@ class RivalRace:
         )
 
     def __str__(self):
-        return f"RivalRace<{self.name}#{self.character_ids}>"
+        character_text = ",".join(
+            [
+                f"{name}#{id_}"
+                for name, id_ in zip(self.character_names, self.character_ids)
+            ]
+        )
+        return f"RivalRace<{self.name}:{character_text}>"
 
 
 class JSONLRepository(Repository):
