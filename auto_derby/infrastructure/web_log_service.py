@@ -18,9 +18,8 @@ from typing import Any, Dict, Optional, Text, Tuple
 
 import PIL.Image
 
-from ..services import Cleanup
-
 from .. import imagetools, web
+from ..services import Cleanup
 from ..services.log import Image, Level, Service
 from ..web import Webview
 

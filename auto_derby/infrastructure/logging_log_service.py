@@ -7,8 +7,7 @@ import logging
 import traceback
 from typing import Any, Dict, Text, Tuple
 
-from auto_derby import imagetools
-
+from .. import imagetools
 from ..services.log import Image, Level, Service
 
 

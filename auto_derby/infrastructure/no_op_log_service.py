@@ -2,9 +2,10 @@
 # pyright: strict
 
 from __future__ import annotations
+
 from typing import Dict, Text
 
-from auto_derby.services.log import Image, Level, Service
+from ..services.log import Image, Level, Service
 
 
 class NoOpService(Service):
