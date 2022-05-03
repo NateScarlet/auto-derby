@@ -44,18 +44,21 @@ def to_http_handler_class(h: Handler, methods: Sequence[Text] = ()):
     class _Handler(http.server.BaseHTTPRequestHandler):
         protocol_version = "HTTP/1.1"
 
+        def handle(self) -> None:
+            try:
+                return super().handle()
+            except (ConnectionAbortedError, ConnectionResetError):
+                pass
+
         def do_HEAD(self):
             ctx = Context(self)
             h(ctx)
             ctx.end_headers()
 
         def do_GET(self):
-            try:
-                ctx = Context(self)
-                h(ctx)
-                ctx.end_write()
-            except (ConnectionAbortedError, ConnectionResetError):
-                pass
+            ctx = Context(self)
+            h(ctx)
+            ctx.end_write()
 
         do_POST = do_GET
         do_DELETE = do_GET
