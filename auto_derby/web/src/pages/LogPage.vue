@@ -209,10 +209,6 @@ watch(
       await readLineStream({
         stream: body,
         onLine: async (line) => {
-          // XXX: chrome response body includes chunked encoding syntax, use json syntax to ignore that
-          if (!line.startsWith('{')) {
-            return;
-          }
           try {
             await pushRecord(Object.freeze(JSON.parse(line)));
           } catch (err) {
