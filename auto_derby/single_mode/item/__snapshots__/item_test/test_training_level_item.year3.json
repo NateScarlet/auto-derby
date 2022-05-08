@@ -1,0 +1,27 @@
+{
+  "スピードトレーニング嘆願書": {
+    "exchange": 0,
+    "expectedExchange": 52.0,
+    "shouldUseDirectly": true
+  },
+  "スタミナトレーニング嘆願書": {
+    "exchange": 0,
+    "expectedExchange": 52.0,
+    "shouldUseDirectly": true
+  },
+  "パワートレーニング嘆願書": {
+    "exchange": 0,
+    "expectedExchange": 52.0,
+    "shouldUseDirectly": true
+  },
+  "根性トレーニング嘆願書": {
+    "exchange": 0,
+    "expectedExchange": 52.0,
+    "shouldUseDirectly": true
+  },
+  "賢さトレーニング嘆願書": {
+    "exchange": 0,
+    "expectedExchange": 52.0,
+    "shouldUseDirectly": true
+  }
+}

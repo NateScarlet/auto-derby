@@ -64,6 +64,29 @@ def test_training_buff_item():
         )
 
 
+def test_training_level_item():
+    def _contexts():
+        yield from test_sample.contexts()
+
+        ctx1 = test_sample.simple_context()
+        ctx1.training_levels = {i: 5 for i in TrainingType}
+        yield "max-level", ctx1
+
+    for name, ctx in _contexts():
+        _test.snapshot_match(
+            {
+                i.name: {
+                    "exchange": i.exchange_score(ctx),
+                    "expectedExchange": i.expected_exchange_score(ctx),
+                    "shouldUseDirectly": i.should_use_directly(ctx),
+                }
+                for i in _iterate_item()
+                if any(e for e in i.effects if e.type == e.TYPE_TRAINING_LEVEL)
+            },
+            name=name,
+        )
+
+
 def test_race_reward_item():
     hammer_1 = game_data.get(51)
     hammer_1.price = hammer_1.original_price

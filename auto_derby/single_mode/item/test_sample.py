@@ -25,6 +25,7 @@ def simple_context():
     ctx1.wisdom = 150
     ctx1.vitality = 0.7
     ctx1.trainings = tuple(i for _, i in trainings())
+    ctx1.training_levels = {i: 1 for i in TrainingType}
     return ctx1
 
 
