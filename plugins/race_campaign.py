@@ -143,31 +143,10 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# 春のGⅠ記念ミッション　第２弾 NHKマイルC
+# 春のGⅠ記念ミッション　第２弾 ヴィクトリアマイル
 
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2022, 5, 2, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 5, 9, 3, 59, tzinfo=JST),
-        "NHKマイルカップ",
-        order_lte=1,
-    ),
-)
-
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2022, 5, 2, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 5, 9, 3, 59, tzinfo=JST),
-        "アーリントンカップ",
-        order_lte=3,
-    ),
-)
-
-_add_compagin(
-    OneTimeCampaign(
-        datetime.datetime(2022, 5, 2, 4, 0, tzinfo=JST),
-        datetime.datetime(2022, 5, 9, 3, 59, tzinfo=JST),
-        "ニュージーランドトロフィー",
-        order_lte=3,
-    ),
-)
+_start = datetime.datetime(2022, 5, 9, 4, 0, tzinfo=JST)
+_end = datetime.datetime(2022, 5, 16, 3, 59, tzinfo=JST)
+_add_compagin(OneTimeCampaign(_start, _end, "阪神ウマ娘ステークス", order_lte=2))
+_add_compagin(OneTimeCampaign(_start, _end, "福島ウマ娘ステークス", order_lte=2))
+_add_compagin(OneTimeCampaign(_start, _end, "ヴィクトリアマイル", order_lte=1))
