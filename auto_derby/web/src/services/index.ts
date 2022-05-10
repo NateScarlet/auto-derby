@@ -2,14 +2,14 @@ import VueMessageService from '@/infrastructure/vue-message-service';
 import type MessageService from '@/services/message';
 
 export { MessageService };
-export interface Application {
+export interface Services {
   message: MessageService;
 }
-export function defineApplication(v: Application): Application {
+
+function defineServices(v: Services): Services {
   return v;
 }
 
-const app = defineApplication({
+export default defineServices({
   message: new VueMessageService(),
 });
-export default app;

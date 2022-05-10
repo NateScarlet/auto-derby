@@ -91,7 +91,7 @@ import { mdiMagnify, mdiPause, mdiPlay } from '@mdi/js';
 import type { PropType } from 'vue';
 import { watchEffect, computed, watch, reactive, ref } from 'vue';
 import LogViewer from '@/components/LogViewer/LogViewer.vue';
-import app from '@/services';
+import services from '@/services';
 import { isDevelopmentMode } from '@/settings';
 import useStringArray from '@/composables/useStringArray';
 import LogLevelWidget from '@/components/LogLevelWidget.vue';
@@ -212,7 +212,7 @@ watch(
           try {
             await pushRecord(Object.freeze(JSON.parse(line)));
           } catch (err) {
-            app.message.error(
+            services.message.error(
               `line parsing failed: '${limitTextLength(line, 80)}': ${err}`
             );
             if (isDevelopmentMode) {
@@ -223,11 +223,11 @@ watch(
         },
       });
     } catch (err) {
-      app.message.error(`stream read failed: ${err}`);
+      services.message.error(`stream read failed: ${err}`);
     }
     flushRecords();
     paused.value = true;
-    app.message.info('stream closed');
+    services.message.info('stream closed');
   }),
   { immediate: true }
 );
