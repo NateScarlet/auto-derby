@@ -16,8 +16,6 @@ from PIL.Image import Image
 
 from .. import imagetools, mathtools, terminal, app
 
-LOGGER = logging.getLogger(__name__)
-
 
 class g:
     event_image_path: str = ""
@@ -121,14 +119,16 @@ def get_choice(event_screen: Image) -> int:
     b_img[t:b, l:r] = cv_options_img
 
     event_id = imagetools.md5(b_img, save_path=g.event_image_path)
-
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("option_mask", option_mask)
-        cv2.imshow("cv_event_name_img", cv_event_name_img)
-        cv2.imshow("cv_options_img", cv_options_img)
-        cv2.imshow("b_img", b_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "binary event screen",
+        b_img,
+        layers={
+            "option_mask": option_mask,
+            "event_name": cv_event_name_img,
+            "options": cv_options_img,
+        },
+        level=app.DEBUG,
+    )
 
     reload_on_demand()
     if event_id in g.choices:
@@ -137,3 +137,9 @@ def get_choice(event_screen: Image) -> int:
         ret = _prompt_choice(event_id)
     app.log.image("event: id=%s choice=%d" % (event_id, ret), event_screen)
     return ret
+
+
+# DEPRECATED
+
+
+globals()["LOGGER"] = logging.getLogger(__name__)
