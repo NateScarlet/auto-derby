@@ -1,10 +1,8 @@
 import auto_derby
-from auto_derby import window
+from auto_derby import window, app
 
 
 import logging
-
-_LOGGER = logging.getLogger(__name__)
 
 
 def _log_process(pid: int):
@@ -18,18 +16,23 @@ def _log_process(pid: int):
         processes = wmi.ExecQuery("Select * from win32_process")
         for p in processes:
             if p.ProcessId == pid:
-                _LOGGER.debug(
-                    "process %d: name='%s' executable='%s' command='%s'",
-                    p.ProcessId,
-                    p.Name,
-                    p.ExecutablePath,
-                    p.CommandLine,
+                app.log.text(
+                    "process %d: name='%s' executable='%s' command='%s'"
+                    % (
+                        p.ProcessId,
+                        p.Name,
+                        p.ExecutablePath,
+                        p.CommandLine,
+                    ),
+                    level=app.DEBUG,
                 )
                 break
         else:
-            _LOGGER.debug("process not found: %d", pid)
+            app.log.text("process not found: %d" % pid, level=app.DEBUG)
     except Exception as ex:
-        _LOGGER.error("log process failed: pid=%d error='%s'", pid, ex)
+        app.log.text(
+            "log process failed: pid=%d error='%s'" % (pid, ex), level=app.ERROR
+        )
 
 
 class Plugin(auto_derby.Plugin):
@@ -37,18 +40,19 @@ class Plugin(auto_derby.Plugin):
         import win32process
         import win32gui
 
-        _LOGGER.setLevel(logging.DEBUG)
         next_cb = window.g.on_foreground_will_change
 
         def cb():
             h_wnd = win32gui.GetForegroundWindow()
             text = win32gui.GetWindowText(h_wnd)
             thread_id, process_id = win32process.GetWindowThreadProcessId(h_wnd)
-            _LOGGER.debug(
-                "foreground window: process_id=%d thread_id=%d text='%s'",
-                process_id,
-                thread_id,
-                text,
+            app.log.text(
+                "foreground window: process_id=%d thread_id=%d text='%s'"
+                % (
+                    process_id,
+                    thread_id,
+                    text,
+                )
             )
             _log_process(process_id)
             next_cb()

@@ -1,18 +1,12 @@
 # -*- coding=UTF-8 -*-
 
-import auto_derby
-from auto_derby import mathtools
-
 from typing import Tuple
 
-
-import logging
+import auto_derby
+from auto_derby import app, mathtools
 from auto_derby.single_mode.context import Context
-
-from auto_derby.single_mode.race.race import Race
 from auto_derby.single_mode.race import race_result
-
-_LOGGER = logging.getLogger(__name__)
+from auto_derby.single_mode.race.race import Race
 
 
 class _g:
@@ -32,7 +26,7 @@ def _raw_is_year2_target_pending(ctx: Context) -> bool:
             winning_count += 1
         if winning_count >= 4:
             return False
-    _LOGGER.info("year2 target pending: %d/4", winning_count)
+    app.log.text("year2 target pending: %d/4" % winning_count)
     return True
 
 
