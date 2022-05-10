@@ -2,16 +2,13 @@
 # -*- coding=UTF-8 -*-
 from __future__ import annotations
 
-import logging
 from typing import Text, Tuple, TYPE_CHECKING
-
-from ... import mathtools
-
-_LOGGER = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from ..context import Context
     from .race import Race
+
+from ... import mathtools, app
 
 
 def compute(
@@ -316,7 +313,7 @@ def compute(
     ret *= 1 - hp_penality
     ret *= 1 - wis_penality
 
-    _LOGGER.debug(
+    app.log.text(
         (
             "style: "
             "score=%d "
@@ -330,20 +327,23 @@ def compute(
             "pow=%0.2f/%0.2f "
             "gut=%0.2f "
             "wis=%0.2f"
+        )
+        % (
+            ret,
+            block_rate,
+            block_penality,
+            hp_penality,
+            wis_penality,
+            spd,
+            expected_spd,
+            sta,
+            hp,
+            expected_hp,
+            pow_,
+            expected_pow,
+            gut,
+            wis,
         ),
-        ret,
-        block_rate,
-        block_penality,
-        hp_penality,
-        wis_penality,
-        spd,
-        expected_spd,
-        sta,
-        hp,
-        expected_hp,
-        pow_,
-        expected_pow,
-        gut,
-        wis,
+        level=app.DEBUG,
     )
     return ret

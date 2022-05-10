@@ -5,16 +5,13 @@ from __future__ import annotations
 
 import datetime
 import json
-import logging
 import os
 from typing import Any, Dict, Iterator, List, Optional, Text
 
 from ..context import Context
 from .globals import g
 from .race import Race
-from ... import filetools
-
-_LOGGER = logging.getLogger(__name__)
+from ... import filetools, app
 
 
 class RaceResult:
@@ -58,9 +55,9 @@ class RaceResult:
             except FileNotFoundError:
                 pass
             if size > g.result_max_bytes:
-                _LOGGER.info(
-                    "data file large than %.2fMiB, remove records that older than 90 days",
-                    g.result_max_bytes / (1 << 20),
+                app.log.text(
+                    "data file large than %.2fMiB, remove records that older than 90 days"
+                    % (g.result_max_bytes / (1 << 20)),
                 )
                 prune(datetime.datetime.now() - datetime.timedelta(days=-90))
 

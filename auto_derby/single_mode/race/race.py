@@ -10,17 +10,14 @@ from auto_derby.constants import RuningStyle
 
 import hashlib
 import json
-import logging
 import math
 
-from ... import mathtools
+from ... import mathtools, app
 from . import race_score, runing_style_score
 from .globals import g
 
 if TYPE_CHECKING:
     from ..context import Context
-
-_LOGGER = logging.getLogger(__name__)
 
 
 class _g:
@@ -237,11 +234,14 @@ class Race:
             )
         )
         estimate_order = min(self.entry_count, estimate_order)
-        _LOGGER.debug(
-            "estimate order: race=%s, order=%d, style_scores=%s",
-            self,
-            estimate_order,
-            " ".join(f"{i:.2f}" for i in style_scores),
+        app.log.text(
+            "estimate order: race=%s, order=%d, style_scores=%s"
+            % (
+                self,
+                estimate_order,
+                " ".join(f"{i:.2f}" for i in style_scores),
+            ),
+            level=app.DEBUG,
         )
         return estimate_order
 
