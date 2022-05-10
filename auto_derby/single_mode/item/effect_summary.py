@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import logging
 from collections import defaultdict
 from copy import deepcopy
 from typing import (
@@ -20,7 +19,8 @@ from typing import (
     TypeVar,
 )
 
-from ... import mathtools
+
+from ... import mathtools, app
 from ...constants import Mood, TrainingType
 from .. import condition
 from ..context import Context
@@ -31,9 +31,6 @@ from .globals import g
 
 if TYPE_CHECKING:
     from .item import Item
-
-
-_LOGGER = logging.getLogger(__name__)
 
 
 _effect_reducers: List[_EffectReducer] = []
@@ -204,7 +201,10 @@ class EffectSummary:
             explain += f"no failure;"
             t_after.failure_rate = 0
         if explain and g.explain_effect_summary:
-            _LOGGER.debug("apply to training: %s->%s: %s", training, t_after, explain)
+            app.log.text(
+                "apply to training: %s->%s: %s" % (training, t_after, explain),
+                level=app.DEBUG,
+            )
         assert 0.0 <= t_after.failure_rate <= 1.0, t_after.failure_rate
         return t_after
 
@@ -239,8 +239,9 @@ class EffectSummary:
             t_before.vitality /= 1 + r
 
         if explain and g.explain_effect_summary:
-            _LOGGER.debug(
-                "revert from training: %s->%s: %s", training, t_before, explain
+            app.log.text(
+                "revert from training: %s->%s: %s" % (training, t_before, explain),
+                level=app.DEBUG,
             )
         return t_before, es_remains
 
@@ -256,7 +257,7 @@ class EffectSummary:
             explain = f"{r*100:+.0f}% reward;"
             r_after.raward_buff += r
         if explain and g.explain_effect_summary:
-            _LOGGER.debug("apply to race: %s: %s", race, explain)
+            app.log.text("apply to race: %s: %s" % (race, explain), level=app.DEBUG)
         return r_after
 
     def apply_to_context(self, ctx: Context) -> Context:
@@ -328,7 +329,7 @@ class EffectSummary:
             explain += f"remove condition {','.join(condition.get(i).name for i in c)};"
             ctx_after.conditions.difference_update(c)
         if explain and g.explain_effect_summary:
-            _LOGGER.debug("apply to context: %s", explain)
+            app.log.text("apply to context: %s" % explain, level=app.DEBUG)
         return ctx_after
 
 

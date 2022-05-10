@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import io
-import logging
 from typing import Any, Text
 from uuid import uuid4
 
@@ -13,12 +12,10 @@ from PIL.Image import Image
 from auto_derby import mathtools
 
 
-from ... import data, imagetools, web, texttools
+from ... import data, imagetools, web, texttools, app
 from . import game_data
 from .globals import g
 from .item import Item
-
-_LOGGER = logging.getLogger(__name__)
 
 
 class _g:
@@ -46,7 +43,7 @@ def reload_on_demand() -> None:
 def _prompt(img: Image, h: Text, defaultValue: int) -> Item:
     if g.prompt_disabled:
         ret = game_data.get(defaultValue)
-        _LOGGER.warning("using low similarity item: %s", ret)
+        app.log.image("using low similarity item: %s" % ret, img, level=app.WARN)
         return ret
     img_data = io.BytesIO()
     img.save(img_data, "PNG")
@@ -71,7 +68,7 @@ def _prompt(img: Image, h: Text, defaultValue: int) -> Item:
     if not ret:
         raise ValueError("invalid item id: %s" % form_id)
     _g.labels.label(h, ret.id)
-    _LOGGER.info("labeled: hash=%s, value=%s", h, ret)
+    app.log.image("labeled: hash=%s, value=%s" % (h, ret), img)
     return ret
 
 
@@ -99,11 +96,10 @@ def _default_name_label_similarity_threshold(item: Item) -> float:
         ),
     )
     if ret > 0.8:
-        _LOGGER.debug(
-            "use higher name label similarity threshold %.2f for %s due to similar item name: %s",
-            ret,
-            item.name,
-            match and match.name,
+        app.log.text(
+            "use higher name label similarity threshold %.2f for %s due to similar item name: %s"
+            % (ret, item.name, match and match.name),
+            level=app.DEBUG,
         )
     return ret
 
@@ -122,7 +118,7 @@ def from_name_image(img: Image) -> Item:
     if _g.labels.is_empty():
         return _prompt(img, h, 0)
     res = _g.labels.query(h)
-    _LOGGER.debug("query label: %s by %s", res, h)
+    app.log.image("query label: %s by %s" % (res, h), img, level=app.DEBUG)
     item = game_data.get(res.value)
     if item and res.similarity > _name_label_similarity_threshold(item):
         return item

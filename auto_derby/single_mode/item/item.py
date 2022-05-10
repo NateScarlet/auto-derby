@@ -3,20 +3,18 @@
 
 from __future__ import annotations
 
-import logging
 from copy import deepcopy
 from typing import TYPE_CHECKING, Any, Dict, Text, Tuple
 
 import numpy as np
 
-from ... import mathtools
+from ... import mathtools, app
 from .. import condition, race, training
 from ..training import Training
 from .effect import Effect
 from .effect_summary import EffectSummary
 from .globals import g
 
-_LOGGER = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from ..commands import Command
@@ -144,8 +142,9 @@ class Item:
             explain = "{s:.2f} by max vitality"
 
         if g.explain_score and explain:
-            _LOGGER.debug(
-                "%s effect score: %.2f for %s: %s", self, ret, command, explain
+            app.log.text(
+                "%s effect score: %.2f for %s: %s" % (self, ret, command, explain),
+                level=app.DEBUG,
             )
         return ret
 
@@ -184,7 +183,10 @@ class Item:
             ret *= 1 + r
 
         if g.explain_score and explain:
-            _LOGGER.debug("%s expected effect score: %.2f: %s", self, ret, explain)
+            app.log.text(
+                "%s expected effect score: %.2f: %s" % (self, ret, explain),
+                level=app.DEBUG,
+            )
         assert ret >= 0, ret
         return ret
 
@@ -383,7 +385,9 @@ class Item:
             ret *= 1 + r
 
         if g.explain_score and explain:
-            _LOGGER.debug("%s exchange score: %.2f: %s", self, ret, explain)
+            app.log.text(
+                "%s exchange score: %.2f: %s" % (self, ret, explain), level=app.DEBUG
+            )
         return ret
 
     def expected_exchange_score(self, ctx: Context) -> float:
@@ -420,7 +424,10 @@ class Item:
             ret *= 1 + r
 
         if g.explain_score and explain:
-            _LOGGER.debug("%s expected exchange score: %.2f: %s", self, ret, explain)
+            app.log.text(
+                "%s expected exchange score: %.2f: %s" % (self, ret, explain),
+                level=app.DEBUG,
+            )
         assert ret >= 0, ret
         return ret
 

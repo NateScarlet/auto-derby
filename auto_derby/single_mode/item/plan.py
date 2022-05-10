@@ -3,14 +3,12 @@
 
 from __future__ import annotations
 
-import logging
 import time
 from typing import TYPE_CHECKING, Iterator, Optional, Sequence, Tuple
 
+from ... import app
 from .effect_summary import EffectSummary
 from .globals import g
-
-_LOGGER = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from ..commands import Command
@@ -75,14 +73,17 @@ def compute(
     effort: Optional[float] = None,
 ) -> Plan:
     effort = effort or g.default_plan_effort
-    _LOGGER.debug("start compute for: %s, effort=%d", command, effort)
+    app.log.text(
+        "start compute for: %s, effort=%d" % (command, effort), level=app.DEBUG
+    )
     deadline = time.perf_counter() + effort
     plan: Plan = (0, ())
     plan_price = 0
     for score, items in iterate(ctx, command, tuple(ctx.items), EffectSummary()):
         if time.perf_counter() > deadline:
-            _LOGGER.warning(
-                "effort limit reached, plan for %s may not be best", command
+            app.log.text(
+                "effort limit reached, plan for %s may not be best" % command,
+                level=app.WARN,
             )
             break
         if score < plan[0]:
@@ -92,7 +93,9 @@ def compute(
             continue
         plan_price = price
         plan = (score, items)
-        _LOGGER.debug(
-            "score:\t%.2f(%d coin)\t%s", score, price, ",".join(i.name for i in items)
+        app.log.text(
+            "score:\t%.2f(%d coin)\t%s"
+            % (score, price, ",".join(i.name for i in items)),
+            level=app.DEBUG,
         )
     return plan
