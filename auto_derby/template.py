@@ -13,7 +13,7 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import open as open_image
 
-from . import clients, imagetools, mathtools, filetools
+from . import clients, imagetools, mathtools, filetools, app
 
 LOGGER = logging.getLogger(__name__)
 
@@ -164,11 +164,12 @@ def _match_one(
         cv_pos = np.full(cv_img.shape[:2], 255.0, dtype=np.uint8)
     res = cv2.matchTemplate(cv_img, cv_tmpl, cv2.TM_CCOEFF_NORMED)
     if tmpl.name == _DEBUG_TMPL:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("cv_tmpl", cv_tmpl)
-        cv2.imshow("match", res)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+        app.log.image(
+            "match template",
+            cv_img,
+            layers={"tmpl": cv_tmpl, "match": res},
+            level=app.DEBUG,
+        )
     reverse_rp = mathtools.ResizeProxy(g.screenshot_width)
     while True:
         mask = cv_pos[0 : res.shape[0], 0 : res.shape[1]]
