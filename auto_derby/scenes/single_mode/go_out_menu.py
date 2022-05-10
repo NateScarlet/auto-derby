@@ -3,19 +3,15 @@
 
 from __future__ import annotations
 
-import logging
-import os
 from typing import Iterator, Text
 
 import cv2
 from PIL.Image import Image
 
 
-from ... import action, imagetools, mathtools, ocr, template, templates, texttools
+from ... import action, imagetools, mathtools, ocr, template, templates, texttools, app
 from ...single_mode import Context, go_out
 from ..scene import Scene, SceneHolder
-
-_LOGGER = logging.getLogger(__name__)
 
 
 def _recognize_name(img: Image) -> Text:
@@ -23,11 +19,14 @@ def _recognize_name(img: Image) -> Text:
     cv_img = imagetools.cv_image(img.convert("L"))
     _, binary_img = cv2.threshold(cv_img, 120, 255, cv2.THRESH_BINARY_INV)
 
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "name",
+        cv_img,
+        layers={
+            "binary": binary_img,
+        },
+        level=app.DEBUG,
+    )
 
     text = ocr.text(imagetools.pil_image(binary_img))
     return texttools.choose(text, go_out.g.names)
@@ -45,37 +44,40 @@ def _recognize_type(rp: mathtools.ResizeProxy, img: Image) -> int:
 
 
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> go_out.Option:
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("img", imagetools.cv_image(img))
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    try:
 
-    v = go_out.Option.new()
-    rp = mathtools.ResizeProxy(img.width)
-    v.type = _recognize_type(rp, img)
-    if v.type == go_out.Option.TYPE_SUPPORT:
-        event1_pos = rp.vector2((338 - 18, 353 - 286), 500)
-        event2_pos = rp.vector2((375 - 18, 353 - 286), 500)
-        event3_pos = rp.vector2((413 - 18, 353 - 286), 500)
-        event4_pos = rp.vector2((450 - 18, 353 - 286), 500)
-        event5_pos = rp.vector2((489 - 18, 353 - 286), 500)
+        v = go_out.Option.new()
+        rp = mathtools.ResizeProxy(img.width)
+        v.type = _recognize_type(rp, img)
+        if v.type == go_out.Option.TYPE_SUPPORT:
+            event1_pos = rp.vector2((338 - 18, 353 - 286), 500)
+            event2_pos = rp.vector2((375 - 18, 353 - 286), 500)
+            event3_pos = rp.vector2((413 - 18, 353 - 286), 500)
+            event4_pos = rp.vector2((450 - 18, 353 - 286), 500)
+            event5_pos = rp.vector2((489 - 18, 353 - 286), 500)
 
-        v.current_event_count = 0
-        v.total_event_count = 5
-        for pos in (
-            event1_pos,
-            event2_pos,
-            event3_pos,
-            event4_pos,
-            event5_pos,
-        ):
-            is_gray = imagetools.compare_color(img.getpixel(pos), (231, 227, 225)) > 0.9
-            if not is_gray:
-                v.current_event_count += 1
+            v.current_event_count = 0
+            v.total_event_count = 5
+            for pos in (
+                event1_pos,
+                event2_pos,
+                event3_pos,
+                event4_pos,
+                event5_pos,
+            ):
+                is_gray = (
+                    imagetools.compare_color(img.getpixel(pos), (231, 227, 225)) > 0.9
+                )
+                if not is_gray:
+                    v.current_event_count += 1
 
-        name_bbox = rp.vector4((95, 16, 316, 40), 540)
-        v.name = _recognize_name(img.crop(name_bbox))
-    return v
+            name_bbox = rp.vector4((95, 16, 316, 40), 540)
+            v.name = _recognize_name(img.crop(name_bbox))
+        app.log.image("recognize: %s" % v, img, level=app.DEBUG)
+        return v
+    except Exception as ex:
+        app.log.image("recognition failed: %s" % ex, img, level=app.ERROR)
+        raise
 
 
 def _recognize_menu(img: Image) -> Iterator[go_out.Option]:
