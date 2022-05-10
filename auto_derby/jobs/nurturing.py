@@ -6,7 +6,7 @@ import logging
 import time
 from typing import Callable, Iterator, List, Text, Tuple, Union
 
-from .. import action, config, template, templates
+from .. import action, app, config, template, templates
 from ..constants import RacePrediction
 from ..scenes.single_mode import (
     AoharuBattleConfirmScene,
@@ -19,9 +19,6 @@ from ..scenes.single_mode import (
 )
 from ..scenes.single_mode.item_menu import ItemMenuScene
 from ..single_mode import Context, commands, event, item
-
-LOGGER = logging.getLogger(__name__)
-
 
 ALL_OPTIONS = [
     templates.SINGLE_MODE_OPTION1,
@@ -53,7 +50,7 @@ def _handle_shop(ctx: Context, cs: CommandScene):
         reverse=True,
     )
 
-    LOGGER.info("shop items")
+    app.log.text("shop items")
     cart_items: List[item.Item] = []
     total_price = 0
     for s, es, i in scores_of_items:
@@ -69,7 +66,7 @@ def _handle_shop(ctx: Context, cs: CommandScene):
             status = "<in cart>"
             cart_items.append(i)
             total_price += i.price
-        LOGGER.info("score:\t%2.2f/%2.2f:\t%s\t%s", s, es, i, status)
+        app.log.text("score:\t%2.2f/%2.2f:\t%s\t%s" % (s, es, i, status))
     scene.exchange_items(ctx, cart_items)
 
     cs.enter(ctx)
@@ -124,16 +121,18 @@ def _handle_turn(ctx: Context):
     turn_commands = tuple(commands.from_context(ctx))
     _handle_shop(ctx, scene)
     ctx.next_turn()
-    LOGGER.info("context: %s", ctx)
+    app.log.text("context: %s" % ctx)
     for i in ctx.items:
-        LOGGER.info("item:\t#%s\tx%s\t%s", i.id, i.quantity, i.name)
+        app.log.text("item:\t#%s\tx%s\t%s" % (i.id, i.quantity, i.name))
     command_plans = sorted(
         (_CommandPlan(ctx, i) for i in turn_commands),
         key=lambda x: x.score,
         reverse=True,
     )
     for cp in command_plans:
-        LOGGER.info("score:\t%2.2f\t%s;%s", cp.score, cp.command.name(), cp.explain())
+        app.log.text(
+            "score:\t%2.2f\t%s;%s" % (cp.score, cp.command.name(), cp.explain())
+        )
     try:
         command_plans[0].execute(ctx)
     except RaceTurnsIncorrect:
@@ -174,7 +173,7 @@ def _ac_handle_turn(ac: _ActionContext):
     try:
         action.wait_image_stable(ac.tmpl, timeout=3)
     except TimeoutError:
-        LOGGER.warning("command scene enter timeout, return to main loop")
+        app.log.text("command scene enter timeout, return to main loop", level=app.WARN)
         return
     _handle_turn(ac.ctx)
 
@@ -185,7 +184,7 @@ class _SingleModeEnd(StopIteration):
 
 def _handle_end(ac: _ActionContext):
     ctx = ac.ctx
-    LOGGER.info("end: %s", ctx)
+    app.log.text("end: %s" % ctx)
     config.on_single_mode_end(ctx)
     raise _SingleModeEnd
 
@@ -328,3 +327,7 @@ def nurturing():
             spec[_spec_key(tmpl)](ac)
         except _SingleModeEnd:
             break
+
+
+# DEPRECATED
+globals()["LOGGER"] = logging.getLogger(__name__)
