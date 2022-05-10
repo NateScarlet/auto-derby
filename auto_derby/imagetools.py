@@ -473,6 +473,8 @@ def auto_crop(cv_img: np.ndarray) -> np.ndarray:
 
 def data_url(img: Image) -> Text:
     b = io.BytesIO()
+    if img.mode in ("I", "F"):
+        img = img.convert("L")
     img.save(b, "PNG")
     data = base64.b64encode(b.getvalue()).decode("utf-8")
     return f"data:image/png;base64,{data}"

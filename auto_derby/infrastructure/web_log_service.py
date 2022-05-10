@@ -3,9 +3,7 @@
 
 from __future__ import annotations
 
-import base64
 import hashlib
-import io
 import json
 import logging
 import os
@@ -16,7 +14,6 @@ import webbrowser
 from datetime import datetime
 from typing import Any, Dict, Optional, Text, Tuple
 
-import PIL.Image
 
 from .. import imagetools, web
 from ..services.cleanup import Service as Cleanup
@@ -32,13 +29,6 @@ class _DefaultWebview(Webview):
 
     def shutdown(self) -> None:
         pass
-
-
-def _image_data_url(img: PIL.Image.Image) -> Text:
-    b = io.BytesIO()
-    img.save(b, "PNG")
-    data = base64.b64encode(b.getvalue()).decode("utf-8")
-    return f"data:image/png;base64,{data}"
 
 
 class WebLogService(Service):
@@ -158,7 +148,7 @@ class WebLogService(Service):
         pil_img = imagetools.pil_image_of(image)
         n_pixels = pil_img.width * pil_img.height
         if self._always_inline_image or n_pixels < self.max_inline_image_pixels:
-            return _image_data_url(pil_img)
+            return imagetools.data_url(pil_img)
         if not self.image_path:
             svg = self._image_placeholder_svg_template.format(
                 width=pil_img.width,
