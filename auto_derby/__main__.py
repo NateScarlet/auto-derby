@@ -19,11 +19,9 @@ from .infrastructure.logging_log_service import LoggingLogService
 from .infrastructure.multi_log_service import MultiLogService
 from .infrastructure.web_log_service import WebLogService
 
-LOGGER = logging.getLogger(__name__)
-
 
 def main():
-    LOGGER.info(f"auto_derby: {__version__.VERSION} ({__version__.RELEASE_DATE})")
+    app.log.text(f"auto_derby: {__version__.VERSION} ({__version__.RELEASE_DATE})")
     if config.CHECK_UPDATE:
         version.check_update()
     avaliable_jobs = {
@@ -71,9 +69,9 @@ def main():
                     webbrowser.open("dmmgameplayer://umamusume/cl/general/umamusume")
                     while not c:
                         time.sleep(1)
-                        LOGGER.info("waiting game launch")
+                        app.log.text("waiting game launch")
                         c = clients.DMMClient.find()
-                    LOGGER.info("game window: %s", c.h_wnd)
+                    app.log.text("game window: %s" % c.h_wnd)
                 else:
                     exit(1)
             return c
@@ -94,10 +92,10 @@ def main():
             time.sleep(1)  # wait browser
 
         if not job:
-            LOGGER.error(
-                "unknown job: %s\navaliable jobs:\n  %s",
-                args.job,
-                "\n  ".join(avaliable_jobs.keys()),
+            app.log.text(
+                "unknown job: %s\navaliable jobs:\n  %s"
+                % (args.job, "\n  ".join(avaliable_jobs.keys())),
+                level=app.ERROR,
             )
             exit(1)
 
@@ -138,6 +136,9 @@ if __name__ == "__main__":
         main()
     except SystemExit:
         raise
-    except:
-        LOGGER.exception("unexpected exception")
+    except Exception as ex:
+        app.log.text("unexpected exception: %s" % ex, level=app.ERROR)
         exit(1)
+
+# DEPRECATED
+globals()["LOGGER"] = logging.getLogger(__name__)

@@ -12,7 +12,7 @@ from typing import Dict
 
 import cast_unknown as cast
 
-LOGGER = logging.getLogger(__name__)
+from . import app
 
 
 class Plugin(ABC):
@@ -40,9 +40,13 @@ def reload():
         module = importlib.util.module_from_spec(spec)
         loader = cast.instance(spec.loader, SourceFileLoader)
         loader.exec_module(module)
-    LOGGER.debug("loaded: %s", ", ".join(g.plugins.keys()))
+    app.log.text("loaded: %s" % ", ".join(g.plugins.keys()), level=app.DEBUG)
 
 
 def install(name: str) -> None:
     g.plugins[name].install()
-    LOGGER.info("installed: %s", name)
+    app.log.text("installed: %s" % name, level=app.DEBUG)
+
+
+# DEPRECATED
+globals()["LOGGER"] = logging.getLogger(__name__)

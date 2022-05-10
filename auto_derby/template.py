@@ -15,7 +15,6 @@ from PIL.Image import open as open_image
 
 from . import clients, imagetools, mathtools, filetools, app
 
-LOGGER = logging.getLogger(__name__)
 
 TARGET_WIDTH = 540
 
@@ -44,7 +43,7 @@ def screenshot(*, max_age: float = 1) -> Image:
                 g.last_screenshot_save_path,
             ) as p:
                 new_img.save(p, format="PNG")
-        LOGGER.debug("screenshot")
+        app.log.text("screenshot", level=app.DEBUG)
         _g.cached_screenshot = (dt.datetime.now(), new_img)
     return _g.cached_screenshot[1]
 
@@ -58,7 +57,7 @@ def _cv_image(img: Image):
 
 def load(name: Text) -> Image:
     if name not in _LOADED_TEMPLATES:
-        LOGGER.debug("load: %s", name)
+        app.log.text("load: %s" % name, level=app.DEBUG)
         # rp = mathtools.ResizeProxy(_g.screenshot_width)
         img = open_image(pathlib.Path(__file__).parent / "templates" / name)
         # img = imagetools.resize(img, width=rp.vector(img.width, TARGET_WIDTH))
@@ -75,7 +74,7 @@ def try_load(name: Text) -> Optional[Image]:
     try:
         return load(name)
     except Exception as ex:
-        LOGGER.debug("can not load: %s: %s", name, ex)
+        app.log.text("can not load: %s: %s" % (name, ex), level=app.DEBUG)
         _NOT_EXISTED_NAMES.add(name)
         return None
 
@@ -121,8 +120,10 @@ class Specification:
                 min_diff *= -1
 
             lightness_similarity = 1 - (abs(max_diff + min_diff) / 2)
-            LOGGER.debug(
-                "lightness match: tmpl=%s, similarity=%.3f", self, lightness_similarity
+            app.log.text(
+                "lightness match: tmpl=%s, similarity=%.3f"
+                % (self, lightness_similarity),
+                level=app.DEBUG,
             )
             if lightness_similarity < self.threshold:
                 return False
@@ -177,11 +178,15 @@ def _match_one(
         x, y = max_loc
         client_pos = reverse_rp.vector2((x, y), TARGET_WIDTH)
         if max_val < tmpl.threshold or not tmpl.match(img, client_pos):
-            LOGGER.debug(
-                "not match: tmpl=%s, pos=%s, similarity=%.3f", tmpl, max_loc, max_val
+            app.log.text(
+                "not match: tmpl=%s, pos=%s, similarity=%.3f"
+                % (tmpl, max_loc, max_val),
+                level=app.DEBUG,
             )
             break
-        LOGGER.info("match: tmpl=%s, pos=%s, similarity=%.2f", tmpl, max_loc, max_val)
+        app.log.text(
+            "match: tmpl=%s, pos=%s, similarity=%.2f" % (tmpl, max_loc, max_val)
+        )
         yield (tmpl, client_pos)
 
         # mark position unavailable to avoid overlap
@@ -197,4 +202,8 @@ def match(
             match_count += 1
             yield j
     if match_count == 0:
-        LOGGER.info("no match: tmpl=%s", tmpl)
+        app.log.text("no match: tmpl=%s" % tmpl)
+
+
+# DEPRECATED
+globals()["LOGGER"] = logging.getLogger(__name__)

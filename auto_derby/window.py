@@ -17,7 +17,7 @@ import win32con
 import win32gui
 import win32ui
 
-LOGGER = logging.getLogger(__name__)
+from . import app
 
 
 class _g:
@@ -80,9 +80,9 @@ def set_client_size(h_wnd: int, width: int, height: int):
     init()
     left, top, right, bottom = win32gui.GetWindowRect(h_wnd)
     _, _, w, h = win32gui.GetClientRect(h_wnd)
-    LOGGER.info("width=%s height=%s", w, h)
+    app.log.text("width=%s height=%s" % (w, h))
     if h == height and w == width:
-        LOGGER.info("already in wanted size")
+        app.log.text("already in wanted size")
         return
     borderWidth = right - left - w
     borderHeight = bottom - top - h
@@ -109,14 +109,17 @@ def topmost(h_wnd: int):
 
 def set_foreground(h_wnd: int) -> None:
     g.on_foreground_will_change()
-    LOGGER.debug("set foreground window: h_wnd=%s", h_wnd)
+    app.log.text("set foreground window: h_wnd=%s" % h_wnd, level=app.DEBUG)
     try:
         win32gui.SetForegroundWindow(h_wnd)
     except Exception as ex:
-        LOGGER.warning(
-            "set foreground window failed: h_wnd=%s error='%s'",
-            h_wnd,
-            ex,
+        app.log.text(
+            "set foreground window failed: h_wnd=%s error='%s'"
+            % (
+                h_wnd,
+                ex,
+            ),
+            level=app.WARN,
         )
 
 
@@ -130,7 +133,7 @@ def set_forground(h_wnd: int) -> None:
 @contextlib.contextmanager
 def recover_foreground():
     h_wnd = win32gui.GetForegroundWindow()
-    LOGGER.debug("foreground window: h_wnd=%s", h_wnd)
+    app.log.text("foreground window: h_wnd=%s" % h_wnd, level=app.DEBUG)
     g.on_foreground_will_change()
     yield
     time.sleep(0.1)  # switch too fast may cause issue
@@ -213,7 +216,7 @@ PW_CLIENT_ONLY = 1 << 0
 # https://stackoverflow.com/a/40042587
 PW_RENDERFULLCONTENT = 1 << 1 if _WIN32_WINNT >= _WIN32_WINNT_WINBLUE else 0
 if PW_RENDERFULLCONTENT == 0:
-    LOGGER.info(
+    app.log.text(
         (
             "background screenshot not work before windows8.1, "
             "will use legacy screenshot."
@@ -255,3 +258,7 @@ def screenshot(h_wnd: int) -> PIL.Image.Image:
     if g.use_legacy_screenshot:
         return screenshot_pil_crop(h_wnd)
     return screenshot_print_window(h_wnd)
+
+
+# DEPRECATED
+globals()["LOGGER"] = logging.getLogger(__name__)

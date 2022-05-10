@@ -4,11 +4,9 @@
 from __future__ import annotations
 
 import itertools
-import logging
 from typing import Dict, Iterable, Iterator, Text, Tuple
 
-_LOGGER = logging.getLogger(__name__)
-
+from . import app
 
 _SIMILARITIES: Dict[Tuple[Text, Text], float] = dict()
 
@@ -141,15 +139,18 @@ def choose(v: Text, options: Iterable[Text], threshold: float = 0.5) -> Text:
         reverse=True,
     )
     if not option_with_similarites:
-        _LOGGER.warning("choose: empty options")
+        app.log.text("choose: empty options", level=app.WARN)
         return v
     res, similarity = option_with_similarites[0]
-    _LOGGER.debug(
-        "choose: text='%s' match='%s' similarity=%.3f threshold=%.3f",
-        v,
-        res,
-        similarity,
-        threshold,
+    app.log.text(
+        "choose: text='%s' match='%s' similarity=%.3f threshold=%.3f"
+        % (
+            v,
+            res,
+            similarity,
+            threshold,
+        ),
+        level=app.DEBUG,
     )
     if similarity < threshold:
         return v
