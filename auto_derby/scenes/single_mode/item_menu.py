@@ -3,14 +3,14 @@
 
 from __future__ import annotations
 
+import traceback
 from collections import defaultdict
 from typing import Any, DefaultDict, Dict, Iterator, Sequence, Text, Tuple
 
 import cv2
 from PIL.Image import Image
 
-
-from ... import action, imagetools, mathtools, ocr, template, templates, app
+from ... import action, app, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
 from ...single_mode.item import Item, ItemList
 from ..scene import Scene, SceneHolder
@@ -65,8 +65,10 @@ def _recognize_item(rp: mathtools.ResizeProxy, img: Image, disabled: bool) -> It
         v.disabled = disabled
         app.log.image(("recognize: %s" % v), img, level=app.DEBUG)
         return v
-    except Exception as ex:
-        app.log.image(("recognition failed: %s" % ex), img, level=app.ERROR)
+    except:
+        app.log.image(
+            ("recognition failed: %s" % traceback.format_exc()), img, level=app.ERROR
+        )
         raise
 
 

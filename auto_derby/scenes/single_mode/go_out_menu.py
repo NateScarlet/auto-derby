@@ -3,13 +3,13 @@
 
 from __future__ import annotations
 
+import traceback
 from typing import Iterator, Text
 
 import cv2
 from PIL.Image import Image
 
-
-from ... import action, imagetools, mathtools, ocr, template, templates, texttools, app
+from ... import action, app, imagetools, mathtools, ocr, template, templates, texttools
 from ...single_mode import Context, go_out
 from ..scene import Scene, SceneHolder
 
@@ -75,8 +75,10 @@ def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> go_out.Option:
             v.name = _recognize_name(img.crop(name_bbox))
         app.log.image("recognize: %s" % v, img, level=app.DEBUG)
         return v
-    except Exception as ex:
-        app.log.image("recognition failed: %s" % ex, img, level=app.ERROR)
+    except:
+        app.log.image(
+            "recognition failed: %s" % traceback.format_exc(), img, level=app.ERROR
+        )
         raise
 
 

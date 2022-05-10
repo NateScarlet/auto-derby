@@ -8,13 +8,14 @@ import logging
 import logging.handlers
 import os
 import time
+import traceback
 import warnings
 import webbrowser
 
 import win32con
 import win32gui
 
-from . import __version__, clients, config, jobs, plugin, templates, version, app
+from . import __version__, app, clients, config, jobs, plugin, templates, version
 from .infrastructure.logging_log_service import LoggingLogService
 from .infrastructure.multi_log_service import MultiLogService
 from .infrastructure.web_log_service import WebLogService
@@ -136,8 +137,10 @@ if __name__ == "__main__":
         main()
     except SystemExit:
         raise
-    except Exception as ex:
-        app.log.text("unexpected exception: %s" % ex, level=app.ERROR)
+    except:
+        app.log.text(
+            "unexpected exception: %s" % traceback.format_exc(), level=app.ERROR
+        )
         exit(1)
 
 # DEPRECATED

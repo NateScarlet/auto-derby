@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import traceback
 from concurrent import futures
 from typing import Callable, Iterator, Optional, Tuple
 
@@ -17,7 +18,6 @@ from ...single_mode import Context, Training, training
 from ...single_mode.training import Partner
 from ..scene import Scene, SceneHolder
 from .command import CommandScene
-
 
 _TRAINING_CONFIRM = template.Specification(
     templates.SINGLE_MODE_TRAINING_CONFIRM, threshold=0.8
@@ -721,9 +721,13 @@ def _recognize_training(ctx: Context, img: Image) -> Training:
         self.failure_rate = _recognize_failure_rate(rp, self, img)
         self.partners = tuple(_recognize_partners(ctx, img))
         app.log.image("%s" % self, img, level=app.DEBUG)
-    except Exception as ex:
-        app.log.image(("training recognition failed: %s" % ex), img, level=app.ERROR)
-        raise ex
+    except:
+        app.log.image(
+            ("training recognition failed: %s" % traceback.format_exc()),
+            img,
+            level=app.ERROR,
+        )
+        raise
     return self
 
 
