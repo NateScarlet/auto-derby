@@ -1,21 +1,14 @@
 # -*- coding=UTF-8 -*-
 
-from abc import abstractmethod
-import auto_derby
-from auto_derby import single_mode
-
-
-from typing import List, Text
 import datetime
+from abc import abstractmethod
+from typing import List, Text
 
-import logging
+import auto_derby
+from auto_derby import app, single_mode
 from auto_derby.single_mode.context import Context
-
-from auto_derby.single_mode.race.race import Race
 from auto_derby.single_mode.race import race_result
-
-_LOGGER = logging.getLogger(__name__)
-
+from auto_derby.single_mode.race.race import Race
 
 JST = datetime.timezone(datetime.timedelta(hours=9), name="JST")
 
@@ -122,11 +115,11 @@ class Plugin(auto_derby.Plugin):
 
     def install(self) -> None:
         if not _CAMPAIGNS:
-            _LOGGER.info("no race campaign today")
+            app.log.text("no race campaign today")
             return
 
         for i in _CAMPAIGNS:
-            _LOGGER.info("race campaign: %s~%s %s", i.start, i.end, i.race_name)
+            app.log.text("race campaign: %s~%s %s" % (i.start, i.end, i.race_name))
 
         class Race(auto_derby.config.single_mode_race_class):
             def score(self, ctx: single_mode.Context) -> float:
