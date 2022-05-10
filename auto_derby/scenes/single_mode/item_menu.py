@@ -66,7 +66,7 @@ def _recognize_item(rp: mathtools.ResizeProxy, img: Image, disabled: bool) -> It
         app.log.image(("recognize: %s" % v), img, level=app.DEBUG)
         return v
     except Exception as ex:
-        app.log.image(("recognize failed: %s" % ex), img, level=app.ERROR)
+        app.log.image(("recognition failed: %s" % ex), img, level=app.ERROR)
         raise
 
 
