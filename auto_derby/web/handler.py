@@ -4,13 +4,11 @@
 from __future__ import annotations
 
 import http.server
-import logging
 from http import HTTPStatus
 from typing import Any, Callable, Protocol, Sequence, Text
 
 from .context import Context
-
-_LOGGER = logging.getLogger(__name__)
+from .. import app
 
 Handler = Callable[[Context], None]
 
@@ -65,9 +63,9 @@ def to_http_handler_class(h: Handler, methods: Sequence[Text] = ()):
         do_PUT = do_GET
 
         def log_error(self, format: str, *args: Any) -> None:
-            _LOGGER.error(format, *args)
+            app.log.text(format % args, level=app.ERROR)
 
         def log_message(self, format: str, *args: Any) -> None:
-            _LOGGER.info(format, *args)
+            app.log.text(format % args)
 
     return _Handler

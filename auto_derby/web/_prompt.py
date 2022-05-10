@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import http
 import http.server
-import logging
 import os
 import time
 import webbrowser
@@ -17,7 +16,7 @@ from .context import Context
 from .webview import Webview
 from ._create_server import create_server
 
-_LOGGER = logging.getLogger(__name__)
+from .. import app
 
 
 class _PromptMiddleware(handler.Middleware):
@@ -80,7 +79,7 @@ class _DefaultWebview(Webview):
             import win32api
             import win32con
         except ImportError:
-            _LOGGER.info(
+            app.log.text(
                 "`win32api`/`win32con` module not found, browser tab need to be closed manually"
             )
             return
@@ -125,8 +124,8 @@ def prompt(
         host, port = httpd.server_address
         url = f"http://{host}:{port}"
         webview.open(url)
-        _LOGGER.info(f"prompt at: {url}")
+        app.log.text(f"prompt at: {url}")
         httpd.serve_forever()
     webview.shutdown()
-    _LOGGER.info("form data: %s", pm.data)
+    app.log.text("form data: %s" % pm.data)
     return pm.data
