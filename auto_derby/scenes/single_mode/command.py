@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import os
 import time
 from typing import Any, Dict, Text
 
@@ -11,7 +10,7 @@ import cv2
 import numpy as np
 from auto_derby.single_mode.context import Context
 
-from ... import action, imagetools, ocr, single_mode, template, templates, terminal
+from ... import action, imagetools, ocr, single_mode, template, templates, terminal, app
 from ...scenes import Scene
 from ..scene import Scene, SceneHolder
 
@@ -44,12 +43,14 @@ def _recognize_climax_grade_point(ctx: Context):
         255,
         type=cv2.THRESH_BINARY_INV,
     )
-
-    if os.getenv("DEBUG") == __name__ + "[grade_point]":
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "climax grade point",
+        cv_img,
+        level=app.DEBUG,
+        layers={
+            "binary": binary_img,
+        },
+    )
     text = ocr.text(imagetools.pil_image(binary_img))
     ctx.grade_point = int(text.rstrip("pt").replace(",", ""))
 
@@ -69,11 +70,14 @@ def _recognize_shop_coin(ctx: Context):
     img = imagetools.resize(img, height=32)
     cv_img = np.asarray(img.convert("L"))
     _, binary_img = cv2.threshold(cv_img, 100, 255, cv2.THRESH_BINARY_INV)
-    if os.getenv("DEBUG") == __name__ + "[shop_coin]":
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "shop coin",
+        cv_img,
+        level=app.DEBUG,
+        layers={
+            "binary": binary_img,
+        },
+    )
     text = ocr.text(imagetools.pil_image(binary_img))
     ctx.shop_coin = int(text.replace(",", ""))
 
