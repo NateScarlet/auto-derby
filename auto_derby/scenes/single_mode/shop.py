@@ -3,14 +3,12 @@
 
 from __future__ import annotations
 
-import logging
-import os
 from typing import Any, Dict, Iterator, Sequence, Text, Tuple
 
 import cv2
 from PIL.Image import Image
 
-from ... import action, imagetools, mathtools, ocr, template, templates
+from ... import action, app, imagetools, mathtools, ocr, template, templates
 from ...single_mode import Context, item
 from ...single_mode.item import Item
 from ..scene import Scene, SceneHolder
@@ -18,20 +16,18 @@ from ..vertical_scroll import VerticalScroll
 from .command import CommandScene
 from .shop_exchanged_item_menu import ShopExchangedItemMenuScene
 
-_LOGGER = logging.getLogger(__name__)
-
 
 def _title_image(rp: mathtools.ResizeProxy, item_img: Image) -> Image:
     bbox = rp.vector4((100, 10, 375, 32), 540)
     cv_img = imagetools.cv_image(item_img.crop(bbox).convert("L"))
     _, binary_img = cv2.threshold(cv_img, 120, 255, cv2.THRESH_BINARY_INV)
     binary_img = imagetools.auto_crop(binary_img)
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("item_img", imagetools.cv_image(item_img))
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "title image",
+        cv_img,
+        layers={"binary": binary_img},
+        level=app.DEBUG,
+    )
     return imagetools.pil_image(binary_img)
 
 
@@ -49,12 +45,12 @@ def _recognize_price(rp: mathtools.ResizeProxy, item_img: Image) -> int:
     else:
         cv_img = 255 - imagetools.cv_image(price_img.convert("L"))
         _, binary_img = cv2.threshold(cv_img, 120, 255, cv2.THRESH_BINARY)
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("item_img", imagetools.cv_image(item_img))
-        cv2.imshow("pink_mask", pink_mask)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "price image",
+        price_img,
+        layers={"pink_mask": pink_mask, "binary": binary_img},
+        level=app.DEBUG,
+    )
     text = ocr.text(imagetools.pil_image(binary_img))
     return int(text)
 
@@ -134,7 +130,7 @@ class ShopScene(Scene):
             if static:
                 break
         if not self.items:
-            _LOGGER.warning("not found any items")
+            app.log.text("not found any items", level=app.WARN)
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
@@ -149,10 +145,10 @@ class ShopScene(Scene):
                     continue
                 if ctx.items.get(match.id).quantity >= match.max_quantity:
                     remains.remove(match)
-                    _LOGGER.warning("skip due to max quantity: %s", match)
+                    app.log.text("skip due to max quantity: %s" % match, level=app.WARN)
                     continue
 
-                _LOGGER.info("exchange: %s", match)
+                app.log.text("exchange: %s" % match)
                 action.tap(pos)
                 ctx.shop_coin -= match.price
                 remains.remove(match)
@@ -161,13 +157,13 @@ class ShopScene(Scene):
 
         while self._scroll.next():
             for i in remains:
-                _LOGGER.debug("exchange remain: %s", i)
+                app.log.text("exchange remain: %s" % i, level=app.DEBUG)
             _select_visible_items()
             if not remains:
                 break
         self._scroll.complete()
         for i in remains:
-            _LOGGER.warning("exchange remain: %s", i)
+            app.log.text("exchange remain: %s" % i, level=app.WARN)
 
         if selected:
             action.wait_tap_image(templates.SINGLE_MODE_SHOP_DECIDE_BUTTON)
