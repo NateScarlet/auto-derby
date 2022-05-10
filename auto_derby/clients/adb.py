@@ -16,8 +16,7 @@ from adb_shell.auth.keygen import keygen
 from adb_shell.auth.sign_pythonrsa import PythonRSASigner
 
 from .client import Client
-
-LOGGER = logging.getLogger(__name__)
+from .. import app
 
 
 class ADBClient(Client):
@@ -52,7 +51,7 @@ class ADBClient(Client):
     def tap(self, point: Tuple[int, int]) -> None:
         x, y = point
         command = f"input tap {x} {y}"
-        LOGGER.debug("tap: %s", command)
+        app.log.text("tap: %s" % command, level=app.DEBUG)
         res = self.device.shell(command)
         assert not res, res
         time.sleep(self.action_wait)
@@ -71,7 +70,10 @@ class ADBClient(Client):
         if self._width > self._height:
             # handle orientation
             self._height, self._width = self._width, self._height
-        LOGGER.debug("screen size: width=%d height=%d", self.width, self.height)
+        app.log.text(
+            "screen size: width=%d height=%d" % (self.width, self.height),
+            level=app.DEBUG,
+        )
 
     def _screenshot_init(self) -> PIL.Image.Image:
         screenshot_perf: List[Tuple[Callable[[], PIL.Image.Image], int]] = []
@@ -85,16 +87,18 @@ class ADBClient(Client):
             extrema: Tuple[int, int] = img.convert("L").getextrema()  # type: ignore
             min_color, max_color = extrema
             is_constant = min_color == max_color
-            LOGGER.debug(
-                "screenshot method performance: name=%s perf_counter_ns=%d",
-                screenshot_method.__name__,
-                perf_counter_ns,
+            app.log.text(
+                "screenshot method performance: name=%s perf_counter_ns=%d"
+                % (
+                    screenshot_method.__name__,
+                    perf_counter_ns,
+                ),
+                level=app.DEBUG,
             )
             if is_constant:
-                LOGGER.info(
-                    "skip screenshot method that returns constant image: name=%s color=%s",
-                    screenshot_method.__name__,
-                    min_color,
+                app.log.text(
+                    "skip screenshot method that returns constant image: name=%s color=%s"
+                    % (screenshot_method.__name__, min_color),
                 )
             else:
                 screenshot_perf.append((screenshot_method, perf_counter_ns))
@@ -102,10 +106,9 @@ class ADBClient(Client):
             raise RuntimeError("no screenshot method avaliable")
         screenshot_perf = sorted(screenshot_perf, key=lambda x: x[1])
         self._screenshot, perf = screenshot_perf[0]
-        LOGGER.info(
-            "selected screenshot method: name=%s perf_counter_ns=%d",
-            self._screenshot.__name__,
-            perf,
+        app.log.text(
+            "selected screenshot method: name=%s perf_counter_ns=%d"
+            % (self._screenshot.__name__, perf),
         )
         return self._screenshot()
 
@@ -155,10 +158,14 @@ class ADBClient(Client):
             dy = int(dy * 400 / duration_ms)
             duration_ms = 400
         command = f"input swipe {x1} {y1} {x2} {y2} {duration_ms}"
-        LOGGER.debug("swipe: %s", command)
+        app.log.text("swipe: %s" % command, level=app.DEBUG)
         res = self.device.shell(
             command,
             read_timeout_s=10 + duration,
         )
         assert not res, res
         time.sleep(self.action_wait)
+
+
+# DEPRECATED
+globals()["LOGGER"] = logging.getLogger(__name__)

@@ -12,10 +12,8 @@ import win32con
 import win32gui
 
 from .client import Client
-from .. import window
+from .. import window, app
 
-
-LOGGER = logging.getLogger(__name__)
 
 _IS_ADMIN = bool(windll.shell32.IsUserAnAdmin())
 
@@ -52,17 +50,21 @@ class DMMClient(Client):
             raise PermissionError("DMMClient: require admin permission")
         self.set_size(540, 960)
         window.set_foreground(self.h_wnd)
-        LOGGER.info("foregrounded game window: handle=%s", self.h_wnd)
+        app.log.text("foregrounded game window: handle=%s" % self.h_wnd)
 
     def screenshot(self) -> PIL.Image.Image:
         return window.screenshot(self.h_wnd)
 
     def tap(self, point: Tuple[int, int]) -> None:
-        LOGGER.debug("tap: point=%s", point)
+        app.log.text("tap: point=%s" % point, level=app.DEBUG)
         window.click_at(self.h_wnd, point)
 
     def swipe(
         self, point: Tuple[int, int], *, dx: int, dy: int, duration: float = 1
     ) -> None:
-        LOGGER.debug("swipe: point=%s dx=%d dy=%d", point, dx, dy)
+        app.log.text("swipe: point=%s dx=%d dy=%d" % (point, dx, dy), level=app.DEBUG)
         window.drag_at(self.h_wnd, point, dx=dx, dy=dy, duration=duration)
+
+
+# DEPRECATED
+globals()["LOGGER"] = logging.getLogger(__name__)
