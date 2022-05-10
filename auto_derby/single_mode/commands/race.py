@@ -3,17 +3,14 @@
 
 from __future__ import annotations
 
-import logging
 from typing import Callable, Optional, Text
 
-from ... import action, templates, terminal
+from ... import action, templates, terminal, app, template
 from ...scenes import PaddockScene
 from ...scenes.single_mode import RaceMenuScene
 from .. import Context, Race, RaceResult
 from .command import Command
 from .globals import g
-
-_LOGGER = logging.getLogger(__name__)
 
 
 def _choose_running_style(ctx: Context, race1: Race) -> None:
@@ -21,7 +18,7 @@ def _choose_running_style(ctx: Context, race1: Race) -> None:
     style_scores = sorted(race1.style_scores_v2(ctx), key=lambda x: x[1], reverse=True)
 
     for style, score in style_scores:
-        _LOGGER.info("running style score:\t%.2f:\t%s", score, style)
+        app.log.text("running style score:\t%.2f:\t%s" % (score, style))
 
     scene.choose_runing_style(style_scores[0][0])
 
@@ -56,6 +53,7 @@ def _handle_race_result(ctx: Context, race: Race):
     res.race = race
 
     tmpl, pos = action.wait_image(*_RACE_ORDER_TEMPLATES.keys())
+    order_img = template.screenshot()
     res.order = _RACE_ORDER_TEMPLATES[tmpl.name]
     action.tap(pos)
 
@@ -77,7 +75,7 @@ def _handle_race_result(ctx: Context, race: Race):
     )
 
     res.is_failed = tmpl.name == templates.SINGLE_MODE_CONTINUE
-    _LOGGER.info("race result: %s", res)
+    app.log.image("race result: %s" % res, order_img)
     g.on_race_result(ctx, res)
     res.write()
 
