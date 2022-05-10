@@ -74,7 +74,7 @@ def compute(
 ) -> Plan:
     effort = effort or g.default_plan_effort
     app.log.text(
-        "start compute for: %s, effort=%d" % (command, effort), level=app.DEBUG
+        "start compute for: %s, effort=%.2f" % (command, effort), level=app.DEBUG
     )
     deadline = time.perf_counter() + effort
     plan: Plan = (0, ())
