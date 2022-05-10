@@ -3,22 +3,19 @@
 
 from __future__ import annotations
 
-import logging
-import os
 from collections import defaultdict
 from typing import Any, DefaultDict, Dict, Iterator, Sequence, Text, Tuple
 
 import cv2
 from PIL.Image import Image
 
-from ... import action, imagetools, mathtools, ocr, template, templates
+
+from ... import action, imagetools, mathtools, ocr, template, templates, app
 from ...single_mode import Context, item
 from ...single_mode.item import Item, ItemList
 from ..scene import Scene, SceneHolder
 from ..vertical_scroll import VerticalScroll
 from .command import CommandScene
-
-_LOGGER = logging.getLogger(__name__)
 
 
 def _title_image(rp: mathtools.ResizeProxy, item_img: Image, disabled: bool) -> Image:
@@ -31,12 +28,13 @@ def _title_image(rp: mathtools.ResizeProxy, item_img: Image, disabled: bool) -> 
         cv2.THRESH_BINARY_INV,
     )
     binary_img = imagetools.auto_crop(binary_img)
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("item_img", imagetools.cv_image(item_img))
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+
+    app.log.image(
+        "title image",
+        cv_img,
+        layers={"binary": binary_img},
+        level=app.DEBUG,
+    )
     return imagetools.pil_image(binary_img)
 
 
@@ -50,21 +48,26 @@ def _recognize_quantity(
     _, binary_img = cv2.threshold(
         cv_img, 120 if disabled else 160, 255, cv2.THRESH_BINARY_INV
     )
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("item_img", imagetools.cv_image(item_img))
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "recognize quantity",
+        cv_img,
+        layers={"binary": binary_img},
+        level=app.DEBUG,
+    )
     text = ocr.text(imagetools.pil_image(binary_img))
     return int(text)
 
 
 def _recognize_item(rp: mathtools.ResizeProxy, img: Image, disabled: bool) -> Item:
-    v = item.from_name_image(_title_image(rp, img, disabled))
-    v.quantity = _recognize_quantity(rp, img, disabled)
-    v.disabled = disabled
-    return v
+    try:
+        v = item.from_name_image(_title_image(rp, img, disabled))
+        v.quantity = _recognize_quantity(rp, img, disabled)
+        v.disabled = disabled
+        app.log.image(("recognize: %s" % v), img, level=app.DEBUG)
+        return v
+    except Exception as ex:
+        app.log.image(("recognize failed: %s" % ex), img, level=app.ERROR)
+        raise
 
 
 def _recognize_menu(img: Image, min_y: int) -> Iterator[Tuple[Item, Tuple[int, int]]]:
@@ -148,13 +151,11 @@ class ItemMenuScene(Scene):
                 self._scroll.on_end()
                 self._scroll.complete()
                 return
-            for i in new_items:
-                _LOGGER.debug("found: %s", i)
             self.items.update(*new_items)
             if static:
                 break
         if not self.items:
-            _LOGGER.warning("not found any item")
+            app.log.text("not found any item", level=app.WARN)
 
     def recognize(self, ctx: Context, *, static: bool = False) -> None:
         self._recognize_items(static)
@@ -179,10 +180,10 @@ class ItemMenuScene(Scene):
                 if match.id not in remains:
                     continue
                 if match.disabled:
-                    _LOGGER.warning("skip disabled: %s", match)
+                    app.log.text("skip disabled: %s" % match, level=app.WARN)
                     del remains[match.id]
                     continue
-                _LOGGER.info("select: %s", match)
+                app.log.text("select: %s" % match)
                 while remains[match.id]:
                     action.tap(pos)
                     remains[match.id] -= 1
@@ -194,7 +195,7 @@ class ItemMenuScene(Scene):
             for k, v in remains.items():
                 i = item.get(k)
                 i.quantity = v
-                _LOGGER.debug("use remain: %s", i)
+                app.log.text("use remain: %s" % i, level=app.DEBUG)
             _select_visible_items()
             if not remains:
                 break
@@ -209,4 +210,4 @@ class ItemMenuScene(Scene):
                 ctx.item_history.append(ctx, i)
 
         for i in remains:
-            _LOGGER.warning("use remain: %s", i)
+            app.log.text("use remain: %s" % i, level=app.WARN)

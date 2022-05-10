@@ -54,6 +54,8 @@ class Item:
             msg += f"@{self.price}"
         if self.quantity:
             msg += f"x{self.quantity}"
+        if self.disabled:
+            msg += "(disabled)"
         return f"Item<{self.name}#{self.id}{msg}>"
 
     def __bool__(self) -> bool:
