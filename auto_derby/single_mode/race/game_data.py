@@ -9,7 +9,6 @@ if TYPE_CHECKING:
 
 import json
 import logging
-import os
 import warnings
 
 import cv2
@@ -17,11 +16,9 @@ import numpy as np
 import PIL.Image
 import PIL.ImageOps
 
-from ... import imagetools, mathtools, ocr, template, templates, texttools
+from ... import imagetools, mathtools, ocr, template, templates, texttools, app
 from .globals import g
 from .race import Race
-
-LOGGER = logging.getLogger(__name__)
 
 
 class _g:
@@ -87,11 +84,14 @@ def _recognize_fan_count(img: PIL.Image.Image) -> int:
         cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
     )
     _, binary_img = cv2.threshold(cv_img, 60, 255, cv2.THRESH_BINARY_INV)
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "fan count",
+        cv_img,
+        level=app.DEBUG,
+        layers={
+            "binary": binary_img,
+        },
+    )
     text = ocr.text(imagetools.pil_image(binary_img))
     return int(text.rstrip("人").replace(",", ""))
 
@@ -114,11 +114,7 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
         cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
     )
     _, binary_img = cv2.threshold(cv_img, 60, 255, cv2.THRESH_BINARY_INV)
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image("spec", cv_img, level=app.DEBUG, layers={"binary": binary_img})
     text = ocr.text(imagetools.pil_image(binary_img))
     stadium, text = text[:2], text[2:]
     if text[0] == "芝":
@@ -213,7 +209,8 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
         screenshot,
         grade_color_pos,
     )
-    stadium, ground, distance, turn, track = _recognize_spec(screenshot.crop(spec_bbox))
+    spec_img = screenshot.crop(spec_bbox)
+    stadium, ground, distance, turn, track = _recognize_spec(spec_img)
     no1_fan_count = _recognize_fan_count(screenshot.crop(no1_fan_count_bbox))
 
     full_spec = (
@@ -226,7 +223,7 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
         grades,
     )
     for i in _find_by_spec(ctx, *full_spec):
-        LOGGER.info("image match: %s", i)
+        app.log.image("%s: %s" % (full_spec, i), spec_img)
         return i
 
     raise ValueError("find_by_race_details_image: no race match spec: %s", full_spec)
@@ -256,7 +253,8 @@ def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Iterator[Race
     no1_fan_count_bbox = _no1_fan_count_bbox(ctx, rp)
     grade_color_pos = _grade_color_pos(ctx, rp)
 
-    stadium, ground, distance, turn, track = _recognize_spec(img.crop(spec_bbox))
+    spec_img = img.crop(spec_bbox)
+    stadium, ground, distance, turn, track = _recognize_spec(spec_img)
     no1_fan_count = _recognize_fan_count(img.crop(no1_fan_count_bbox))
     grades = _recognize_grade(img, grade_color_pos)
     full_spec = (
@@ -270,10 +268,11 @@ def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Iterator[Race
     )
     match_count = 0
     for i in _find_by_spec(ctx, *full_spec):
-        LOGGER.info("image match: %s", i)
+        app.log.image("%s: %s" % (full_spec, i), spec_img)
         yield i
         match_count += 1
     if not match_count:
+        app.log.image("no race match: %s" % full_spec, spec_img, level=app.ERROR)
         raise ValueError("_find_by_race_menu_item: no race match spec: %s", full_spec)
 
 
@@ -306,3 +305,8 @@ def find_by_race_menu_image(
         bbox = _menu_item_bbox(ctx, pos, rp)
         for i in _find_by_race_menu_item(ctx, screenshot.crop(bbox)):
             yield i, pos
+
+
+# DEPRECATED
+
+globals()["LOGGER"] = logging.getLogger(__name__)
