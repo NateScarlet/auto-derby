@@ -3,13 +3,12 @@
 
 from __future__ import annotations
 
-import logging
 from abc import ABC, abstractmethod
 from typing import Protocol, Text, Type, TypeVar
 
 import cast_unknown as cast
 
-_LOGGER = logging.getLogger(__name__)
+from .. import app
 
 
 class SceneHolder(Protocol):
@@ -36,9 +35,9 @@ class Scene(AbstractScene):
     def enter(cls: Type[T], ctx: SceneHolder) -> T:
         name = cls.name()
         if ctx.scene.name() == name:
-            _LOGGER.debug("already in: %s", name)
+            app.log.text("already in: %s" % name, level=app.DEBUG)
         else:
-            _LOGGER.info("enter: %s -> %s", ctx.scene.name(), name)
+            app.log.text("enter: %s -> %s" % (ctx.scene.name(), name))
             ctx.scene = cls._enter(ctx)
-            _LOGGER.info("entered: %s", name)
+            app.log.text("entered: %s" % name)
         return cast.instance(ctx.scene, cls)
