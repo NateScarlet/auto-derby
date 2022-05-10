@@ -3,14 +3,13 @@
 
 from __future__ import annotations
 
-import os
 from typing import Optional, Tuple
 
 import cv2
 import numpy as np
 from PIL.Image import Image
 
-from ... import action, imagetools, mathtools, template, templates
+from ... import action, imagetools, mathtools, template, templates, app
 from ..scene import Scene, SceneHolder
 from ..unknown import UnknownScene
 
@@ -19,14 +18,19 @@ def _has_granted_reward(img: Image) -> bool:
     cv_img = imagetools.cv_image(imagetools.resize(img, height=25).convert("L"))
     blur_img = cv2.GaussianBlur(cv_img, (5, 9), 1)
     diff_img = blur_img - cv_img
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("blur_img", blur_img)
-        cv2.imshow("diff_img", diff_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    diff_avg = np.average(diff_img)
+    ret = diff_avg > 100
+    app.log.image(
+        "has granted reward: %s diff_avg=%s" % (ret, diff_avg),
+        cv_img,
+        level=app.DEBUG,
+        layers={
+            "blur": blur_img,
+            "diff": diff_img,
+        },
+    )
 
-    return np.average(diff_img) > 100
+    return ret
 
 
 def _iter_reward_bbox(rp: mathtools.ResizeProxy):
