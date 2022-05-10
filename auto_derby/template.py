@@ -202,7 +202,7 @@ def match(
             match_count += 1
             yield j
     if match_count == 0:
-        app.log.text("no match: tmpl=%s" % tmpl)
+        app.log.text(f"no match: tmpl={tmpl}")
 
 
 # DEPRECATED

@@ -56,7 +56,7 @@ class DMMClient(Client):
         return window.screenshot(self.h_wnd)
 
     def tap(self, point: Tuple[int, int]) -> None:
-        app.log.text("tap: point=%s" % point, level=app.DEBUG)
+        app.log.text(f"tap: point={point}", level=app.DEBUG)
         window.click_at(self.h_wnd, point)
 
     def swipe(
