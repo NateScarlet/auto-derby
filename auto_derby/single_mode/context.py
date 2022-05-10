@@ -3,17 +3,23 @@
 
 from __future__ import annotations
 
-from copy import deepcopy
-from typing import TYPE_CHECKING, Any, Dict, Iterator
-
-from auto_derby.character import Character
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Callable,
+    Dict,
+    Iterator,
+    List,
+    Set,
+    Text,
+    Tuple,
+    Type,
+)
 
 if TYPE_CHECKING:
     from . import go_out
 
-import logging
-import os
-from typing import Callable, List, Set, Text, Tuple, Type
+from copy import deepcopy
 
 import cast_unknown as cast
 import cv2
@@ -21,11 +27,10 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import fromarray as image_from_array
 
-from .. import imagetools, mathtools, ocr, scenes, template, templates, texttools
+from .. import app, imagetools, mathtools, ocr, scenes, template, templates, texttools
+from ..character import Character
 from ..constants import Mood, TrainingType
 from . import condition
-
-_LOGGER = logging.getLogger(__name__)
 
 
 class g:
@@ -62,16 +67,18 @@ def _ocr_date(ctx: Context, img: Image) -> Tuple[int, int, int]:
     )
     _, binary_img = cv2.threshold(masked_img, 200, 255, cv2.THRESH_BINARY)
     imagetools.fill_area(binary_img, (0,), size_lt=2)
-
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("sharpened_img", sharpened_img)
-        cv2.imshow("white_outline_img", white_outline_img)
-        cv2.imshow("bg_mask_img", bg_mask_img)
-        cv2.imshow("masked_img", masked_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "date",
+        cv_img,
+        level=app.DEBUG,
+        layers={
+            "sharppend": sharpened_img,
+            "white_outline": white_outline_img,
+            "bg_mask": bg_mask_img,
+            "masked": masked_img,
+            "binary": binary_img,
+        },
+    )
 
     text = ocr.text(image_from_array(binary_img))
 
@@ -126,11 +133,7 @@ def _recognize_fan_count(img: Image) -> int:
         cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
     )
     _, binary_img = cv2.threshold(cv_img, 50, 255, cv2.THRESH_BINARY_INV)
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image("fan count", cv_img, level=app.DEBUG, layers={"binary": binary_img})
     text = ocr.text(imagetools.pil_image(binary_img))
     return int(text.rstrip("人").replace(",", ""))
 
@@ -155,13 +158,15 @@ def _recognize_status(img: Image) -> Tuple[int, Text]:
     imagetools.fill_area(
         text_img, (0,), mode=cv2.RETR_LIST, size_lt=round(h * 0.2**2)
     )
-
-    if os.getenv("DEBUG") == __name__:
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("blurred_img", blurred_img)
-        cv2.imshow("text_img", text_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+    app.log.image(
+        "status",
+        cv_img,
+        level=app.DEBUG,
+        layers={
+            "blurred": blurred_img,
+            "text": text_img,
+        },
+    )
 
     text = ocr.text(imagetools.pil_image(text_img))
     ret = Context.status_by_name(text)
@@ -184,12 +189,7 @@ def _recognize_property(img: Image) -> int:
     cv_img = np.asarray(img.convert("L"))
     _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
     imagetools.fill_area(binary_img, (0,), size_lt=3)
-    if os.getenv("DEBUG") == __name__ + "[property]":
-        cv2.imshow("cv_img", cv_img)
-        cv2.imshow("binary_img", binary_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
-
+    app.log.image("property", cv_img, layers={"binary": binary_img})
     return int(ocr.text(imagetools.pil_image(binary_img)))
 
 
@@ -218,7 +218,7 @@ def _recognize_scenario(rp: mathtools.ResizeProxy, img: Image) -> Text:
             break
         except StopIteration:
             pass
-    _LOGGER.debug("_recognize_scenario: %s", ret)
+    app.log.text("_recognize_scenario: %s" % ret, level=app.DEBUG)
     return ret
 
 
@@ -358,7 +358,7 @@ class Context:
 
         while self._next_turn_cb:
             self._next_turn_cb.pop()()
-        _LOGGER.info("next turn: %s", self)
+        app.log.text("next turn: %s" % self)
 
     def defer_next_turn(self, cb: Callable[[], None]) -> None:
         self._next_turn_cb.append(cb)
