@@ -16,8 +16,6 @@ from PIL.Image import Image, fromarray
 
 from . import data, imagetools, terminal, app
 
-LOGGER = logging.getLogger(__name__)
-
 
 class _g:
     labels = imagetools.CSVImageHashMap(str)
@@ -84,11 +82,11 @@ def _pad_img(img: np.ndarray, padding: int = _PREVIEW_PADDING) -> np.ndarray:
 def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
     # TODO: use web prompt
     if g.prompt_disabled:
-        LOGGER.warning(
-            "using low similarity label: hash=%s, value=%s, similarity=%s",
-            h,
-            value,
-            similarity,
+        app.log.image(
+            "using low similarity label: hash=%s, value=%s, similarity=%s"
+            % (h, value, similarity),
+            img,
+            level=app.WARN,
         )
         return value
 
@@ -115,7 +113,7 @@ def _prompt(img: np.ndarray, h: Text, value: Text, similarity: float) -> Text:
     finally:
         close_img()
     _g.labels.label(h, ret)
-    LOGGER.info("labeled: hash=%s, value=%s", h, ret)
+    app.log.image("labeled: hash=%s, value=%s" % (h, ret), img)
     return ret
 
 
@@ -125,7 +123,11 @@ def _text_from_image(img: np.ndarray, threshold: float = 0.8) -> Text:
     if _g.labels.is_empty():
         return _prompt(img, h, "", 0)
     res = _g.labels.query(h)
-    LOGGER.debug("query label: %s by %s", res, h)
+    app.log.image(
+        "query label: %s by %s" % (res, h),
+        img,
+        level=app.DEBUG,
+    )
     if res.similarity > threshold:
         return res.value
     return _prompt(img, h, res.value, res.similarity)
@@ -198,7 +200,7 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
     contours, _ = cv2.findContours(binary_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
     if len(contours) == 0:
-        LOGGER.debug("ocr result is empty")
+        app.log.image("ocr result is empty", img, level=app.DEBUG)
         return ""
 
     contours_with_bbox = sorted(
@@ -319,21 +321,28 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
         for bbox, _ in cropped_char_img_list:
             l, t, r, b = bbox
             cv2.rectangle(cropped_chars_img, (l, t), (r, b), (0, 0, 255), thickness=1)
-        cv2.imshow("ocr input", cv_img)
-        cv2.imshow("ocr binary", binary_img)
-        cv2.imshow("ocr segmentation", segmentation_img)
-        cv2.imshow("ocr chars", chars_img)
-        cv2.imshow("ocr cropped chars", cropped_chars_img)
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+        app.log.image(
+            "text",
+            cv_img,
+            level=app.DEBUG,
+            layers={
+                "binary": binary_img,
+                "segmentation": segmentation_img,
+                "chars": chars_img,
+                "cropped chars": cropped_chars_img,
+            },
+        )
+    else:
+        app.log.image("text", cv_img, level=app.DEBUG, layers={"binary": binary_img})
 
     for _, i in cropped_char_img_list:
         ret += _text_from_image(i, threshold)
 
-    LOGGER.debug("ocr result: %s", ret)
+    app.log.text("ocr result: %s" % ret, level=app.DEBUG)
 
     return ret
 
 
 # DEPRECATED
 g.labels = _g.labels._labels  # type: ignore
+globals()["LOGGER"] = logging.getLogger(__name__)
