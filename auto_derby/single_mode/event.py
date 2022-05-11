@@ -121,7 +121,7 @@ def get_choice(event_screen: Image) -> int:
     event_id = imagetools.md5(b_img, save_path=g.event_image_path)
     app.log.image(
         "binary event screen",
-        b_img,
+        b_img.astype(np.uint8),
         layers={
             "option_mask": option_mask,
             "event_name": cv_event_name_img,
