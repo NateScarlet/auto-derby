@@ -2,14 +2,10 @@
 # pyright: strict
 """tools for image processing.  """
 
-import base64
-import csv
-import hashlib
-import io
-import os
-import threading
-from pathlib import Path
+from __future__ import annotations
+
 from typing import (
+    TYPE_CHECKING,
     Any,
     Callable,
     Dict,
@@ -23,6 +19,21 @@ from typing import (
     TypeVar,
     Union,
 )
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from PIL.Image import _Writeable as _PILWritable  # type: ignore
+
+    _PILSaveTarget = Union[str, bytes, Path, _PILWritable]
+
+import base64
+import csv
+import hashlib
+import io
+import os
+import threading
+from pathlib import Path
 from typing import cast as cast_type
 
 import cast_unknown as cast
@@ -471,10 +482,17 @@ def auto_crop(cv_img: np.ndarray) -> np.ndarray:
     return cv_img[t:b, l:r]
 
 
-def data_url(img: Image) -> Text:
-    b = io.BytesIO()
+def save_png(
+    img: Image,
+    fp: _PILSaveTarget,
+) -> None:
     if img.mode in ("I", "F"):
         img = img.convert("L")
-    img.save(b, "PNG")
+    img.save(fp, "PNG")
+
+
+def data_url(img: Image) -> Text:
+    b = io.BytesIO()
+    save_png(img, b)
     data = base64.b64encode(b.getvalue()).decode("utf-8")
     return f"data:image/png;base64,{data}"

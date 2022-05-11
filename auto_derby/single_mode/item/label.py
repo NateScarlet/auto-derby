@@ -46,7 +46,7 @@ def _prompt(img: Image, h: Text, defaultValue: int) -> Item:
         app.log.image("using low similarity item: %s" % ret, img, level=app.WARN)
         return ret
     img_data = io.BytesIO()
-    img.save(img_data, "PNG")
+    imagetools.save_png(img, img_data)
 
     token = uuid4().hex
     form_data = web.prompt(

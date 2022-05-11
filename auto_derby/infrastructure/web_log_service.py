@@ -159,7 +159,7 @@ class WebLogService(Service):
         pathname = f"{h[0]}/{h[1:3]}/{h[3:]}.png"
         dst = os.path.join(self.image_path, pathname)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
-        pil_img.save(dst)
+        imagetools.save_png(pil_img, dst)
         return "/images/" + pathname
 
     def image(
