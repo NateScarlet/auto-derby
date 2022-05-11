@@ -7,7 +7,7 @@ if True:
     import os
     import sys
 
-    sys.path.insert(0, os.path.join(__file__, "../.."))
+    sys.path.insert(0, os.path.join(__file__, "../../.."))
 
 import datetime
 import io
@@ -22,7 +22,7 @@ from typing import Tuple
 
 from PIL import Image
 
-import web
+from auto_derby import web
 
 
 def _ts():
@@ -133,6 +133,22 @@ def _sample_large_layered_image():
     }
 
 
+def _sample_inconsistent_layer_size_image():
+    return {
+        "ts": _ts(),
+        "lv": _random_level(),
+        "t": "IMAGE",
+        "source": "page_log_example",
+        "url": "/files/large.png",
+        "layers": [
+            {"name": "red-small", "url": "/files/small.red.png"},
+            {"name": "green-large", "url": "/files/large.green.png"},
+            {"name": "blue-small", "url": "/files/small.blue.png"},
+        ],
+        "caption": "this is a image has inconsistent layer size",
+    }
+
+
 def _constant(size: Tuple[int, int], color: Tuple[int, int, int]):
     b = io.BytesIO()
     Image.new("RGB", size, color).save(b, "PNG")
@@ -152,6 +168,7 @@ if __name__ == "__main__":
             _sample_screenshot,
             _sample_small_layered_image,
             _sample_large_layered_image,
+            _sample_inconsistent_layer_size_image,
         ],
     ]
     stream = web.Stream("", "text/plain")
