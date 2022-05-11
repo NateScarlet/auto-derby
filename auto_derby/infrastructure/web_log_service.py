@@ -135,8 +135,7 @@ class WebLogService(Service):
                 **fields,
             }
         ).encode("utf-8")
-        self._s.write(data)
-        self._s.write(b"\n")
+        self._s.write(data + b"\n")
 
     def _text(self, level: Level, msg: Text):
         self._line({"t": "TEXT", "lv": level.value, "msg": msg})
