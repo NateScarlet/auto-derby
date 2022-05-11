@@ -228,7 +228,7 @@ const onScrollToBottom = () => {
 useInfiniteScroll(scrollContainer, {
   onScrollToTop,
   onScrollToBottom,
-  margin: (el) => Math.min(el.clientHeight * 3, el.scrollHeight * 0.2),
+  margin: (el) => Math.min(el.clientHeight * 0.5, el.scrollHeight * 0.2),
 });
 
 usePolling(() => {
