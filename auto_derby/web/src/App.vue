@@ -15,6 +15,7 @@ import DefaultPageVue from '@/pages/DefaultPage.vue';
 import SingleModeItemSelectVue from '@/pages/SingleModeItemSelect.vue';
 import LogPageVue from '@/pages/LogPage.vue';
 import { MessageList } from '@/infrastructure/vue-message-service';
+import PluginSelectVue from '@/pages/PluginSelect.vue';
 
 const version = __VERSION__;
 interface Page {
@@ -24,6 +25,7 @@ interface Page {
 const pages = new Map<PageType, Page>([
   [PageType.SINGLE_MODE_ITEM_SELECT, { component: SingleModeItemSelectVue }],
   [PageType.LOG, { component: LogPageVue }],
+  [PageType.PLUGIN_SELECT, { component: PluginSelectVue }],
 ]);
 
 const page: Page = pages.get(pageData.type) ?? {

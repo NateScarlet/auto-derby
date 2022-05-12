@@ -1,5 +1,5 @@
 <template>
-  <ol>
+  <ol class="space-y-2 p-1">
     <template v-for="{ itemAttrs, key } in listData" :key="key">
       <PluginListItem v-bind="itemAttrs"></PluginListItem>
     </template>
@@ -12,6 +12,7 @@ import useStringArray from '@/composables/useStringArray';
 import type { Plugin } from '@/page-data';
 import type { PropType } from 'vue';
 import { computed } from 'vue';
+import PluginListItem from '@/components/PluginListItem.vue';
 
 const props = defineProps({
   modelValue: {
@@ -34,11 +35,16 @@ const { toggle } = useStringArray(localModelValue);
 
 const listData = computed(() =>
   props.items.map((i) => {
+    const selected = localModelValue.value.includes(i.name);
     return {
       key: i.name,
       itemAttrs: {
         value: i,
-        selected: localModelValue.value.includes(i.name),
+        class: [
+          'border border-2 cursor-pointer',
+          selected ? 'border-theme-green' : 'border-gray-200',
+        ],
+        selected,
         'onUpdate:selected': () => {
           toggle(i.name);
         },

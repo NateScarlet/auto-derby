@@ -1,13 +1,19 @@
 <template>
-  <form action="javascript:void(0)" @submit="submit()">
-    <PluginList v-model="formData.value" :items="pageData.plugins"></PluginList>
-    <button
-      type="submit"
-      class="bg-theme-green text-white rounded p-2 font-bold"
-    >
-      確認
-    </button>
-  </form>
+  <div class="max-w-lg m-auto flex flex-col overflow-hidden h-screen">
+    <PluginList
+      v-model="formData.value"
+      :items="pageData.plugins"
+      class="flex-auto overflow-auto"
+    ></PluginList>
+    <form class="flex-none" action="javascript:void(0)" @submit="submit()">
+      <button
+        type="submit"
+        class="bg-theme-green text-white rounded p-2 font-bold w-full"
+      >
+        確認
+      </button>
+    </form>
+  </div>
 </template>
 
 <script setup lang="ts">
