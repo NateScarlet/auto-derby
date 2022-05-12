@@ -9,6 +9,7 @@ specifiers:
   '@types/babel__core': ^7.1.19
   '@types/lodash-es': ^4.17.6
   '@types/node': 14.18.17
+  '@types/sortablejs': ^1.13.0
   '@typescript-eslint/eslint-plugin': 5.23.0
   '@typescript-eslint/parser': 5.23.0
   '@vitejs/plugin-vue': ^2.3.3
@@ -25,6 +26,7 @@ specifiers:
   postcss: ^8.4.13
   prettier: 2.6.2
   sass: ^1.51.0
+  sortablejs: ^1.15.0
   tailwindcss: ^3.0.24
   typescript: ^4.6.4
   vite: ^2.9.9
@@ -35,7 +37,9 @@ dependencies:
   '@juggle/resize-observer': registry.npmmirror.com/@juggle/resize-observer/3.3.1
   '@mdi/js': registry.npmmirror.com/@mdi/js/6.6.96
   '@types/lodash-es': registry.npmmirror.com/@types/lodash-es/4.17.6
+  '@types/sortablejs': registry.npmmirror.com/@types/sortablejs/1.13.0
   lodash-es: registry.npmmirror.com/lodash-es/4.17.21
+  sortablejs: registry.npmmirror.com/sortablejs/1.15.0
   vue: registry.npmmirror.com/vue/3.2.33
 
 devDependencies:
@@ -1460,11 +1464,10 @@ packages:
     dev: true
 
   registry.npmmirror.com/@babel/traverse/7.17.10:
-    resolution: {integrity: sha512-PQO8sDIJ8SIwipTPiR71kJQCKQYB5NGImbOviK8K+kg5xkNSYXLBupuX9QhatFowrsvo9Hj8WgArg3W7ijNAQw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@babel/traverse/-/traverse-7.17.9.tgz}
+    resolution: {integrity: sha512-VmbrTHQteIdUUQNTb+zE12SHS/xQVIShmBPhlNP12hD5poF2pbITW1Z4172d03HegaQWhLffdkRJYtAzp0AGcw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@babel/traverse/-/traverse-7.17.10.tgz}
     name: '@babel/traverse'
-    version: 7.17.9
+    version: 7.17.10
     engines: {node: '>=6.9.0'}
-    deprecated: '[WARNING] Use 7.17.9 instead of 7.17.10, reason: https://github.com/babel/babel/issues/14525'
     dependencies:
       '@babel/code-frame': registry.npmmirror.com/@babel/code-frame/7.16.7
       '@babel/generator': registry.npmmirror.com/@babel/generator/7.17.10
@@ -1675,6 +1678,12 @@ packages:
     name: '@types/node'
     version: 14.18.17
     dev: true
+
+  registry.npmmirror.com/@types/sortablejs/1.13.0:
+    resolution: {integrity: sha512-C3064MH72iEfeGCYEGCt7FCxXoAXaMPG0QPnstcxvPmbl54erpISu06d++FY37Smja64iWy5L8wOyHHBghWbJQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/sortablejs/-/sortablejs-1.13.0.tgz}
+    name: '@types/sortablejs'
+    version: 1.13.0
+    dev: false
 
   registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.23.0_c63nfttrfhylg3zmgcxfslaw44:
     resolution: {integrity: sha512-hEcSmG4XodSLiAp1uxv/OQSGsDY6QN3TcRU32gANp+19wGE1QQZLRS8/GV58VRUoXhnkuJ3ZxNQ3T6Z6zM59DA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.23.0.tgz}
@@ -4409,6 +4418,12 @@ packages:
     version: 3.0.0
     engines: {node: '>=8'}
     dev: true
+
+  registry.npmmirror.com/sortablejs/1.15.0:
+    resolution: {integrity: sha512-bv9qgVMjUMf89wAvM6AxVvS/4MX3sPeN0+agqShejLU5z5GX4C75ow1O2e5k4L6XItUyAK3gH6AxSbXrOM5e8w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/sortablejs/-/sortablejs-1.15.0.tgz}
+    name: sortablejs
+    version: 1.15.0
+    dev: false
 
   registry.npmmirror.com/source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/source-map-js/-/source-map-js-1.0.2.tgz}

@@ -19,6 +19,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     token = uuid.uuid4().hex
+    plugin.reload()
     print(
         web.prompt(
             web.page.render(
@@ -33,7 +34,7 @@ if __name__ == "__main__":
                 }
             ),
             web.page.ASSETS,
-            web.middleware.Debug(),
+            # web.middleware.Debug(),
             web.middleware.TokenAuth(token, ("POST",)),
         )
     )

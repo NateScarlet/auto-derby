@@ -28,7 +28,8 @@ function one<T>(v: T | T[]): T {
 
 export const preload = (): Plugin => ({
   name: 'preload',
-  async transformIndexHtml(html) {
+  async transformIndexHtml(html, ctx) {
+    const isServe = ctx.server != null;
     const res = one(
       await build({
         root: __dirname,
@@ -36,6 +37,9 @@ export const preload = (): Plugin => ({
         plugins: [],
         resolve: { alias },
         define,
+        // XXX: nested build will change parent mode, cause vue devtools not work.
+        mode: isServe ? 'development' : 'production',
+        logLevel: 'error',
         build: {
           write: false,
           target: false,
@@ -76,7 +80,10 @@ export default defineConfig({
     alias,
   },
   define,
-  plugins: [vue(), preload()],
+  plugins: [
+    vue(),
+    // preload()
+  ],
   server: {
     proxy: {
       '/stream': 'http://localhost:8300',

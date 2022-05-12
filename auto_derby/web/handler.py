@@ -45,6 +45,11 @@ def to_http_handler_class(h: Handler, methods: Sequence[Text] = ()):
         def handle(self) -> None:
             try:
                 return super().handle()
+            except ValueError as ex:
+                if "readline of closed file" in str(ex):
+                    pass
+                else:
+                    raise
             except (ConnectionAbortedError, ConnectionResetError):
                 pass
 

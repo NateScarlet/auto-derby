@@ -71,7 +71,10 @@ function getPageData(): PageData {
           streamURL: '/log',
         };
       case PageType.PLUGIN_SELECT:
-        return pluginSelectPageData as PageDataPluginSelect;
+        return {
+          ...pluginSelectPageData,
+          submitURL: 'https://httpbin.org/status/200',
+        } as PageDataPluginSelect;
       default:
         assertNever(tp);
         window.location.href = `/?type=${PageType.SINGLE_MODE_ITEM_SELECT}`;

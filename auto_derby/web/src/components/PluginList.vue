@@ -1,9 +1,11 @@
 <template>
-  <ol class="space-y-2 p-1">
-    <template v-for="{ itemAttrs, key } in listData" :key="key">
-      <PluginListItem v-bind="itemAttrs"></PluginListItem>
-    </template>
-  </ol>
+  <div>
+    <ol class="space-y-2 p-1">
+      <template v-for="{ itemAttrs, key } in listData" :key="key">
+        <PluginListItem v-bind="itemAttrs"></PluginListItem>
+      </template>
+    </ol>
+  </div>
 </template>
 
 <script setup lang="ts">
