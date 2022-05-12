@@ -1,0 +1,141 @@
+{
+  "type": "PLUGIN_SELECT",
+  "plugins": [
+    {
+      "name": "afk",
+      "doc": ""
+    },
+    {
+      "name": "auto_crane",
+      "doc": ""
+    },
+    {
+      "name": "debug_item_effect",
+      "doc": ""
+    },
+    {
+      "name": "debug_window",
+      "doc": ""
+    },
+    {
+      "name": "example_custom_client",
+      "doc": ""
+    },
+    {
+      "name": "example_custom_context",
+      "doc": ""
+    },
+    {
+      "name": "example_custom_item_score",
+      "doc": ""
+    },
+    {
+      "name": "example_custom_race_score",
+      "doc": ""
+    },
+    {
+      "name": "example_custom_training_partner_score",
+      "doc": ""
+    },
+    {
+      "name": "example_custom_training_score",
+      "doc": ""
+    },
+    {
+      "name": "example_oguri_cap",
+      "doc": ""
+    },
+    {
+      "name": "example_power_level5",
+      "doc": "Earn second name `努力の天才`"
+    },
+    {
+      "name": "example_smart_falcon",
+      "doc": ""
+    },
+    {
+      "name": "example_tamamo_cross",
+      "doc": ""
+    },
+    {
+      "name": "expose_web_log",
+      "doc": "make web log public visible"
+    },
+    {
+      "name": "hello_world",
+      "doc": ""
+    },
+    {
+      "name": "less_op",
+      "doc": "Use this after other plugin, reduce op/pre-op race score."
+    },
+    {
+      "name": "limited_sale_buy_everything",
+      "doc": ""
+    },
+    {
+      "name": "limited_sale_buy_first_3",
+      "doc": ""
+    },
+    {
+      "name": "limited_sale_ignore",
+      "doc": ""
+    },
+    {
+      "name": "limited_sale_close",
+      "doc": ""
+    },
+    {
+      "name": "more_g1",
+      "doc": "Use this after other plugin, increase g1 score if estimate order <= 3."
+    },
+    {
+      "name": "no_event_prompt",
+      "doc": ""
+    },
+    {
+      "name": "no_item_prompt",
+      "doc": ""
+    },
+    {
+      "name": "no_ocr_prompt",
+      "doc": ""
+    },
+    {
+      "name": "no_race_retry",
+      "doc": ""
+    },
+    {
+      "name": "pause_before_command",
+      "doc": ""
+    },
+    {
+      "name": "pause_before_race_continue",
+      "doc": ""
+    },
+    {
+      "name": "pause_on_last_turn",
+      "doc": "Pause on last turn, not work when start from year 4."
+    },
+    {
+      "name": "race_campaign",
+      "doc": "Pick race by compagin."
+    },
+    {
+      "name": "SSR樫本理子",
+      "doc": "Use this when friend cards include SSR樫本理子.\n    Multiple friend type support card is not supported yet."
+    },
+    {
+      "name": "SSR駿川たづな",
+      "doc": "Use this when friend cards include SSR駿川たづな.\n    Multiple friend type support card is not supported."
+    },
+    {
+      "name": "umapyoi",
+      "doc": "Auto play umapyoi legend."
+    },
+    {
+      "name": "use_legacy_screenshot",
+      "doc": ""
+    }
+  ]
+}

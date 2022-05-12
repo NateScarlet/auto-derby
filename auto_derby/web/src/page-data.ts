@@ -1,10 +1,12 @@
 import rawItemData from 'auto-derby/data/single_mode_items.jsonl?raw';
 import assertNever from '@/utils/assertNever';
+import pluginSelectPageData from '@/samples/plugin_select.json';
 import { isDevelopmentMode } from './settings';
 
 export enum PageType {
   SINGLE_MODE_ITEM_SELECT = 'SINGLE_MODE_ITEM_SELECT',
   LOG = 'LOG',
+  PLUGIN_SELECT = 'PLUGIN_SELECT',
 }
 
 export interface SingleModeItem {
@@ -26,7 +28,22 @@ export interface PageDataLog {
   streamURL: string;
 }
 
-export type PageData = PageDataSingleModeItemSelect | PageDataLog;
+export interface Plugin {
+  name: string;
+  doc: string;
+}
+
+export interface PageDataPluginSelect {
+  type: PageType.PLUGIN_SELECT;
+  plugins: Plugin[];
+  submitURL?: string;
+  defaultValue?: string[];
+}
+
+export type PageData =
+  | PageDataSingleModeItemSelect
+  | PageDataLog
+  | PageDataPluginSelect;
 
 function getPageData(): PageData {
   const el = document.getElementById('data');
@@ -53,6 +70,8 @@ function getPageData(): PageData {
           type: PageType.LOG,
           streamURL: '/log',
         };
+      case PageType.PLUGIN_SELECT:
+        return pluginSelectPageData as PageDataPluginSelect;
       default:
         assertNever(tp);
         window.location.href = `/?type=${PageType.SINGLE_MODE_ITEM_SELECT}`;
