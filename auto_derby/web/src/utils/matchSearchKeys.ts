@@ -3,6 +3,9 @@ export default function matchSearchKeys(
   searchKeys: string[]
 ): boolean {
   return query
+    .toLowerCase()
     .split(' ')
-    .every((keyword) => searchKeys.some((key) => key.includes(keyword)));
+    .every((keyword) =>
+      searchKeys.some((key) => key.toLowerCase().includes(keyword))
+    );
 }
