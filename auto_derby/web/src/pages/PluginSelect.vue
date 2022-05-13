@@ -13,6 +13,7 @@
         <PluginList
           v-model="formData.value"
           :items="pageData.plugins"
+          class="h-full"
         ></PluginList>
       </template>
       <template v-else-if="tab === Tab.SORT">
