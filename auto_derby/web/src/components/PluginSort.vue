@@ -75,10 +75,10 @@ const { order, sortRef } = useSortable(
   }))
 );
 
+const version = ref(0);
 const itemID = (v: string, index: number) => {
-  return `${v}@${index}`;
+  return `${v}@${index}-v${version.value}`;
 };
-
 const listData = computed(() =>
   localModelValue.value.map((i, index) => {
     const key = itemID(i, index);
@@ -86,7 +86,7 @@ const listData = computed(() =>
       key,
       value: i,
       itemAttrs: {
-        dataId: key,
+        'data-id': key,
       },
       copyButtonAttrs: {
         type: 'button' as const,
@@ -107,5 +107,6 @@ const listData = computed(() =>
 );
 watch(order, () => {
   sortRef(localModelValue, itemID);
+  version.value += 1;
 });
 </script>
