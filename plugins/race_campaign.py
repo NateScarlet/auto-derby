@@ -111,7 +111,7 @@ def _add_compagin(
 
 
 class Plugin(auto_derby.Plugin):
-    """Pick race by compagin."""
+    """Pick race by campaign."""
 
     def install(self) -> None:
         if not _CAMPAIGNS:

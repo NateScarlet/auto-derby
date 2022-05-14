@@ -85,6 +85,18 @@ $mainWindow.Content.FindName('choosePythonExecutablePathButton').add_Click(
     }
 )
 
+$mainWindow.Content.FindName('selectPluginButton').add_Click( 
+    {
+        $env:AUTO_DERBY_PLUGINS = $data.Plugins
+        & $data.PythonExecutablePath "$PSScriptRoot\select_plugin.py" | ForEach-Object {
+            Write-Host $_
+            if ($_.StartsWith("AUTO_DERBY_PLUGINS=")) {
+                $data.Plugins = $_.Substring(19)
+            }
+        }
+    }
+)
+
 
 if (-not $mainWindow.ShowDialog()) {
     "Cancelled"
@@ -119,8 +131,8 @@ if ($data.Debug) {
     $env:AUTO_DERBY_OCR_IMAGE_PATH = "debug/ocr_images"
     $env:AUTO_DERBY_SINGLE_MODE_EVENT_IMAGE_PATH = "debug/single_mode_event_images"
     $env:AUTO_DERBY_SINGLE_MODE_TRAINING_IMAGE_PATH = "debug/single_mode_training_images"
-    $env:AUTO_DERBY_WEB_LOG_BUFFER_PATH="debug/log.jsonl"
-    $env:AUTO_DERBY_WEB_LOG_IMAGE_PATH="debug/images"
+    $env:AUTO_DERBY_WEB_LOG_BUFFER_PATH = "debug/log.jsonl"
+    $env:AUTO_DERBY_WEB_LOG_IMAGE_PATH = "debug/images"
     & "$WorkspaceFolder/auto_derby/launcher/rotate_debug_data.ps1"
 }
 

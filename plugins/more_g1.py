@@ -22,3 +22,4 @@ auto_derby.plugin.register(__name__, Plugin())
 
 # Deprecated: remove at next major version
 auto_derby.plugin.register("prefer_g1", Plugin())
+auto_derby.plugin.deprecate("prefer_g1", "renamed to `more_g1`")

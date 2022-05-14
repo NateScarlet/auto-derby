@@ -82,8 +82,16 @@
 
     <StackPanel Grid.Row="6">
       <Label>Plugins seperated by comma</Label>
-      <TextBox Text="{Binding Plugins, UpdateSourceTrigger=PropertyChanged}"
-        MaxLines="1" />
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition Width="80" />
+        </Grid.ColumnDefinitions>
+        <TextBox Text="{Binding Plugins, UpdateSourceTrigger=PropertyChanged}"
+          MaxLines="1" />
+        <Button x:Name="selectPluginButton"
+          Grid.Column="1">select...</Button>
+      </Grid>
     </StackPanel>
 
     <Button x:Name="startButton"

@@ -21,6 +21,10 @@ class Plugin(ABC):
         ...
 
 
+class _g:
+    deprecations: Dict[str, str] = {}
+
+
 class g:
     plugins: Dict[str, Plugin] = {}
     path: str = ""
@@ -43,7 +47,24 @@ def reload():
     app.log.text("loaded: %s" % ", ".join(g.plugins.keys()), level=app.DEBUG)
 
 
+def deprecate(name: str, reason: str):
+    _g.deprecations[name] = reason
+
+
+def is_deprecated(name: str) -> bool:
+    return name in _g.deprecations
+
+
+def get_deprecation_reason(name: str) -> str:
+    return _g.deprecations.get(name, "")
+
+
 def install(name: str) -> None:
+    if is_deprecated(name):
+        app.log.text(
+            f"plugin '{name}' is deprecated: {get_deprecation_reason(name)}",
+            level=app.WARN,
+        )
     g.plugins[name].install()
     app.log.text("installed: %s" % name, level=app.DEBUG)
 
