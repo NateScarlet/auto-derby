@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://github.com/NateScarlet/auto-derby/compare/v1.23.2...v1.24.0) (2022-05-14)
+
+### Features
+
+- **launcher:** add web-based plugin select ([1ba50bf](https://github.com/NateScarlet/auto-derby/commit/1ba50bf5904d4a7bd6ad93a9cf316d918e7e099b))
+
+### Bug Fixes
+
+- png image save mode error ([e2c78ff](https://github.com/NateScarlet/auto-derby/commit/e2c78fff42ab2df12117399d417482c8c641a88a))
+- **single-mode:** update game data ([d8e7d80](https://github.com/NateScarlet/auto-derby/commit/d8e7d807ffab041b77e9ad554e5190b3d5d7b669))
+- **web:** error caused by concurrent log write ([d056c78](https://github.com/NateScarlet/auto-derby/commit/d056c786cbf67b878f433d1568faafbdc9ad221d))
+- **web:** log viewer freeze on level disabled ([2398b5d](https://github.com/NateScarlet/auto-derby/commit/2398b5d6daf2e22274b48edafc66a8aed8e8460f))
+- **web:** log: handle inconsistent image layer size ([c3a5781](https://github.com/NateScarlet/auto-derby/commit/c3a578194876d8fa5176104fa66f980c62328e30))
+
+### Performance
+
+- **web:** improve log viewer ([47327da](https://github.com/NateScarlet/auto-derby/commit/47327dab08104887ca9419d906b492dc2cd3d632))
+
 ## [1.23.2](https://github.com/NateScarlet/auto-derby/compare/v1.23.1...v1.23.2) (2022-05-09)
 
 ### Bug Fixes
