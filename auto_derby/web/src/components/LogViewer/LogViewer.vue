@@ -174,7 +174,7 @@ const hasPrevious = computed(() => {
   if (topIndex.value === 0) {
     return false;
   }
-  for (let index = 0; index < records.value.length; index += 1) {
+  for (let index = 0; index < totalCount.value; index += 1) {
     if (index >= topIndex.value) {
       return false;
     }
@@ -185,11 +185,6 @@ const hasPrevious = computed(() => {
   }
   return false;
 });
-watchEffect(() => {
-  if (visibleRecords.value.length < props.size && hasPrevious.value) {
-    topIndex.value -= 1;
-  }
-});
 const hasNext = computed(() => {
   if (!paused.value) {
     return false;
@@ -199,17 +194,42 @@ const hasNext = computed(() => {
   }
   const endRecord = visibleRecords.value[visibleRecords.value.length - 1];
 
-  for (
-    let index = endRecord.index + 1;
-    index < records.value.length;
-    index += 1
-  ) {
+  for (let index = endRecord.index + 1; index < totalCount.value; index += 1) {
     const i = records.value[index];
     if (props.filter(i, index)) {
       return true;
     }
   }
   return false;
+});
+
+watchEffect(() => {
+  if (visibleRecords.value.length > 0) {
+    topIndex.value = visibleRecords.value[0].index;
+  }
+});
+
+watchEffect(() => {
+  const { size, filter } = props;
+
+  const maxMatchCount = size - visibleRecords.value.length;
+  if (maxMatchCount <= 0) {
+    return;
+  }
+  let matchCount = 0;
+  let newTopIndex = topIndex.value;
+  if (hasPrevious.value) {
+    for (let i = topIndex.value - 1; i >= 0; i -= 1) {
+      if (matchCount === maxMatchCount) {
+        break;
+      }
+      if (filter(records.value[i], i)) {
+        newTopIndex = i;
+        matchCount += 1;
+      }
+    }
+  }
+  topIndex.value = newTopIndex;
 });
 
 const onScrollToTop = () => {
