@@ -1,7 +1,8 @@
 <template>
   <div class="container max-w-2xl m-auto h-screen flex flex-col gap-1">
     <LogViewer
-      v-model:paused="paused"
+      v-model:end-index="endIndex"
+      :paused="paused"
       class="flex-auto"
       :records="records"
       :filter="logFilter"
@@ -23,20 +24,25 @@
         </template>
       </div>
       <span class="flex-auto"></span>
-      <div class="flex-none">
+      <div class="flex-none flex items-center w-48">
         <input
-          v-model.number="inputData.linenoGte"
+          v-model.number="inputData.endLineno"
+          :max="totalCount"
+          :min="1"
           type="number"
-          class="spin-button-none w-16 inline-block h-8 rounded border-gray-400"
-          @focus="paused = true"
+          class="spin-button-none flex-auto w-0 text-center h-8 rounded border-gray-400"
+          @focus="onEndLinenoInputFocus"
         />
-        -
-        <input
-          v-model.number="inputData.linenoLte"
-          type="number"
-          class="spin-button-none w-16 inline-block h-8 rounded border-gray-400"
-          @focus="paused = true"
-        />
+        <button
+          v-if="inputData.endLineno != totalCount"
+          type="button"
+          class="bg-white rounded border px-2 border-gray-400 hover:bg-gray-200 h-8"
+          @click="inputData.endLineno = totalCount"
+        >
+          <svg class="inline align-top fill-current h-8" viewBox="0 0 24 24">
+            <path :d="mdiSkipNext"></path>
+          </svg>
+        </button>
       </div>
     </div>
     <div class="flex-none flex gap-1">
@@ -59,15 +65,7 @@
         <button
           v-if="loadingCount > 0"
           type="button"
-          class="
-            bg-white
-            flex-initial
-            rounded
-            h-10
-            px-4
-            disabled:text-gray-200 disabled:cursor-not-allowed
-            border border-gray-400
-          "
+          class="bg-white flex-initial rounded h-10 px-4 disabled:text-gray-200 disabled:cursor-not-allowed border border-gray-400"
           :disabled="loadingCount === 0"
           @click="paused = !paused"
         >
@@ -87,9 +85,9 @@ import { LogLevel, searchKeys } from '@/log-record';
 import type { PageDataLog } from '@/page-data';
 import readLineStream from '@/utils/readLineStream';
 import withLoading from '@/utils/withLoading';
-import { mdiMagnify, mdiPause, mdiPlay } from '@mdi/js';
+import { mdiMagnify, mdiPause, mdiPlay, mdiSkipNext } from '@mdi/js';
 import type { PropType } from 'vue';
-import { watchEffect, computed, watch, reactive, ref } from 'vue';
+import { toRef, computed, watch, reactive, ref } from 'vue';
 import LogViewer from '@/components/LogViewer/LogViewer.vue';
 import services from '@/services';
 import { isDevelopmentMode } from '@/settings';
@@ -99,6 +97,7 @@ import matchSearchKeys from '@/utils/matchSearchKeys';
 import { sortBy, throttle } from 'lodash-es';
 import useStorage from '@/composables/useStorage';
 import limitTextLength from '@/utils/limitTextLength';
+import useTransform from '@/composables/useTransform';
 
 const props = defineProps({
   pageData: {
@@ -111,14 +110,13 @@ const records = reactive([] as LogRecord[]);
 const loadingCount = ref(0);
 const inputData = reactive({
   query: '',
-  linenoGte: 1,
-  linenoLte: 0,
+  endLineno: 0,
 });
-watchEffect(() => {
-  if (inputData.linenoGte > inputData.linenoLte) {
-    inputData.linenoLte = inputData.linenoGte;
-  }
-});
+const endIndex = useTransform(
+  toRef(inputData, 'endLineno'),
+  (i) => i - 1,
+  (i) => i + 1
+);
 const levelRecordCount = reactive(new Map<LogLevel, number>());
 const paused = ref(false);
 const totalCount = ref(0);
@@ -133,7 +131,7 @@ const flushRecords = throttle(
       levelRecordCount.set(v.lv, (levelRecordCount.get(v.lv) ?? 0) + 1);
     });
 
-    inputData.linenoLte = totalCount.value;
+    inputData.endLineno = totalCount.value;
   },
   100,
   { trailing: true }
@@ -174,16 +172,9 @@ const levelListData = computed(() =>
 );
 
 const logFilter = computed(() => {
-  const { query, linenoGte, linenoLte } = inputData;
+  const { query } = inputData;
   const level = enabledLevels.value;
-  return (v: LogRecord, index: number) => {
-    const lineno = index + 1;
-    if (lineno < linenoGte) {
-      return false;
-    }
-    if (lineno > linenoLte) {
-      return false;
-    }
+  return (v: LogRecord) => {
     if (!matchSearchKeys(query, searchKeys(v))) {
       return false;
     }
@@ -231,4 +222,13 @@ watch(
   }),
   { immediate: true }
 );
+
+const onEndLinenoInputFocus = (e: Event) => {
+  const el = e.target;
+  if (!(el instanceof HTMLInputElement)) {
+    return;
+  }
+  el.select();
+  paused.value = true;
+};
 </script>
