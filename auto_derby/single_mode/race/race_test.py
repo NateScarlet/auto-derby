@@ -166,7 +166,6 @@ def test_find_by_race_detail_image_issue58():
 
     assert race1.name == "宝塚記念", race1.name
     assert race1.stadium == "京都", race1.stadium
-    assert race1.characters == {"メジロマックイーン", "メジロライアン", "ライスシャワー"}, race1.characters
 
 
 def test_find_by_race_menu_image():
