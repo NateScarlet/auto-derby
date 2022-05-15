@@ -83,6 +83,8 @@ def _recognize_shop_coin(ctx: Context):
 
 
 class CommandScene(Scene):
+    max_recognition_retry = 10
+
     def __init__(self) -> None:
         super().__init__()
         self.has_health_care = False
@@ -179,7 +181,7 @@ class CommandScene(Scene):
         class local:
             next_retry_count = 0
 
-        max_retry = 0 if static else 10
+        max_retry = 0 if static else self.max_recognition_retry
 
         def _recognize_static():
             ctx.update_by_command_scene(template.screenshot())
