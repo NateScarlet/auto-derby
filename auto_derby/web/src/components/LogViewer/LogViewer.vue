@@ -49,6 +49,7 @@ import useInfiniteScroll from '@/composables/useInfiniteScroll';
 import { throttle } from 'lodash-es';
 import usePropVModel from '@/composables/usePropVModel';
 import usePolling from '@/composables/usePolling';
+import useStabled from '@/composables/useStabled';
 
 const props = defineProps({
   records: {
@@ -80,7 +81,7 @@ const records = toRef(props, 'records');
 const recordByIndex = (index: number): LogRecord | undefined => {
   return records.value[index];
 };
-const endIndex = usePropVModel({ emit }, props, 'endIndex');
+const endIndex = useStabled(usePropVModel({ emit }, props, 'endIndex'), 10);
 const el = ref<HTMLOListElement>();
 
 const scrollContainer = el;
