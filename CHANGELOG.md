@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.25.0](https://github.com/NateScarlet/auto-derby/compare/v1.24.0...v1.25.0) (2022-05-16)
+
+### Features
+
+- **plugin:** add `fast_fail` plugin ([486d23a](https://github.com/NateScarlet/auto-derby/commit/486d23a6d28230757cbd95809ec72a9763f3ec93))
+
+### Bug Fixes
+
+- **plugin:** race_campaign: update data ([383fac1](https://github.com/NateScarlet/auto-derby/commit/383fac115958a00efd0feb8ec125fc7768d27392))
+
+### Performance
+
+- **web:** handle large log load ([792f510](https://github.com/NateScarlet/auto-derby/commit/792f510b0f550ef9cc09d31e79e827903d585d6b))
+
 ## [1.24.0](https://github.com/NateScarlet/auto-derby/compare/v1.23.2...v1.24.0) (2022-05-14)
 
 ### Features
