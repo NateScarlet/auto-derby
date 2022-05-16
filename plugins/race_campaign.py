@@ -136,10 +136,10 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# 春のGⅠ記念ミッション　第２弾 ヴィクトリアマイル
+# 春のGⅠ記念ミッション　第２弾 オークス
 
-_start = datetime.datetime(2022, 5, 9, 4, 0, tzinfo=JST)
-_end = datetime.datetime(2022, 5, 16, 3, 59, tzinfo=JST)
-_add_compagin(OneTimeCampaign(_start, _end, "阪神ウマ娘ステークス", order_lte=2))
-_add_compagin(OneTimeCampaign(_start, _end, "福島ウマ娘ステークス", order_lte=2))
-_add_compagin(OneTimeCampaign(_start, _end, "ヴィクトリアマイル", order_lte=1))
+_start = datetime.datetime(2022, 5, 16, 4, 0, tzinfo=JST)
+_end = datetime.datetime(2022, 5, 23, 3, 59, tzinfo=JST)
+_add_compagin(OneTimeCampaign(_start, _end, "フローラステークス", order_lte=2))
+_add_compagin(OneTimeCampaign(_start, _end, "桜花賞", order_lte=5))
+_add_compagin(OneTimeCampaign(_start, _end, "オークス", order_lte=1))
