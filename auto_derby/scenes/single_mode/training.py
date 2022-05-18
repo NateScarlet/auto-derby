@@ -261,9 +261,9 @@ def _recognize_failure_rate(
 ) -> float:
     x, y = trn.confirm_position
     bbox = (
-        x + rp.vector(20, 540),
+        x + rp.vector(15, 540),
         y + rp.vector(-155, 540),
-        x + rp.vector(70, 540),
+        x + rp.vector(75, 540),
         y + rp.vector(-120, 540),
     )
     rate_img = imagetools.cv_image(imagetools.resize(img.crop(bbox), height=48))
