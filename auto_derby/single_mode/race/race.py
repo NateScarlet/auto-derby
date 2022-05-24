@@ -92,6 +92,8 @@ class Race:
 
         self.reward_buff = 0.0
 
+        self.run_style = RunningStyle.UNKNOWN
+
     def clone(self):
         return deepcopy(self)
 

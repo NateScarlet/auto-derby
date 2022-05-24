@@ -8,6 +8,7 @@ import functools
 
 
 class RunningStyle(enum.Enum):
+    UNKNOWN = 0
     LEAD = 1
     HEAD = 2
     MIDDLE = 3

@@ -20,7 +20,16 @@ def _choose_running_style(ctx: Context, race1: Race) -> None:
     for style, score in style_scores:
         app.log.text("running style score:\t%.2f:\t%s" % (score, style))
 
-    scene.choose_running_style(style_scores[0][0])
+    style = style_scores[0][0]
+    race1.run_style = style
+    # Skip choosing style if same with previous.
+    try:
+        perv_style = next(ctx.race_history.iterate(last=1))[1].run_style
+        if style == perv_style:
+            return
+    except StopIteration:
+        pass
+    scene.choose_running_style(style)
 
 
 _RACE_ORDER_TEMPLATES = {
@@ -131,9 +140,9 @@ class RaceCommand(Command):
                 break
             app.device.tap(action.template_rect(tmpl, pos))
         ctx.race_turns.add(ctx.turn_count())
-        ctx.race_history.append(ctx, self.race)
 
         _choose_running_style(ctx, race1)
+        ctx.race_history.append(ctx, self.race)
 
         _handle_race_result(ctx, race1)
         ctx.fan_count = 0  # request update in next turn
