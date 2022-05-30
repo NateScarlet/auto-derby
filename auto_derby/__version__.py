@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.25.0"
-RELEASE_DATE = datetime.fromtimestamp(1652705021)
-LAST_GIT_COMMIT_DESCRIBE = "v1.24.0-5-g383fac1"
-LAST_GIT_COMMIT_HASH = "383fac115958a00efd0feb8ec125fc7768d27392"
+VERSION = "1.25.1"
+RELEASE_DATE = datetime.fromtimestamp(1653919251)
+LAST_GIT_COMMIT_DESCRIBE = "v1.25.0-2-g0891867"
+LAST_GIT_COMMIT_HASH = "08918679cb668c23a9fdd840e81f6e0ed32def2a"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1652704741)
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1653919160)
 LAST_GIT_COMMIT_SUBJECT = "fix(plugin): race_campaign: update data"
 LAST_GIT_COMMIT_BODY = ""
