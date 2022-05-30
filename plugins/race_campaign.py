@@ -98,7 +98,7 @@ class OneTimeCampaign(Campaign):
 _CAMPAIGNS: List[Campaign] = []
 
 
-def _add_compagin(
+def _add_campaign(
     c: Campaign,
 ) -> None:
 
@@ -136,10 +136,10 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# 春のGⅠ記念ミッション　第２弾 オークス
+# 春のGⅠ記念ミッション　第２弾 安田記念
 
-_start = datetime.datetime(2022, 5, 16, 4, 0, tzinfo=JST)
-_end = datetime.datetime(2022, 5, 23, 3, 59, tzinfo=JST)
-_add_compagin(OneTimeCampaign(_start, _end, "フローラステークス", order_lte=2))
-_add_compagin(OneTimeCampaign(_start, _end, "桜花賞", order_lte=5))
-_add_compagin(OneTimeCampaign(_start, _end, "オークス", order_lte=1))
+_start = datetime.datetime(2022, 5, 23, 4, 0, tzinfo=JST)
+_end = datetime.datetime(2022, 6, 6, 3, 59, tzinfo=JST)
+_add_campaign(OneTimeCampaign(_start, _end, "京王杯スプリングカップ", order_lte=1))
+_add_campaign(OneTimeCampaign(_start, _end, "マイラーズカップ", order_lte=1))
+_add_campaign(OneTimeCampaign(_start, _end, "安田記念", order_lte=1))
