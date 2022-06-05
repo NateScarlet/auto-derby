@@ -37,13 +37,20 @@ class Plugin(auto_derby.Plugin):
                 return 0
 
         class _Context(Context):
+            @property
+            def shop_coin(self):
+                return 0
+
+            @shop_coin.setter
+            def shop_coin(self, v):
+                pass
+
             def next_turn(self) -> None:
                 super().next_turn()
                 app.log.text(
                     "plugin `fast_fail` installed, nurturing is expected to fail",
                     level=app.WARN,
                 )
-                self.shop_coin = 0
 
         CommandScene.max_recognition_retry = 0
         auto_derby.config.single_mode_ignore_training_commands = lambda *_, **__: True
