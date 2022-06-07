@@ -16,7 +16,7 @@ def resize_proxy() -> mathtools.ResizeProxy:
 
 def tap(point: Tuple[int, int]):
     clients.current().tap(point)
-    template.invalidate_screeshot()
+    template.invalidate_screenshot()
 
 
 def count_image(*tmpl: Union[Text, template.Specification]) -> int:
@@ -125,7 +125,7 @@ def wait_tap_image(
 
 def swipe(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.1):
     clients.current().swipe(point, dx=dx, dy=dy, duration=duration)
-    template.invalidate_screeshot()
+    template.invalidate_screenshot()
 
 
 def reset_client_size() -> None:

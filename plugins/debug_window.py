@@ -1,8 +1,7 @@
+# spell-checker: word winmgmts
+
 import auto_derby
 from auto_derby import window, app
-
-
-import logging
 
 
 def _log_process(pid: int):

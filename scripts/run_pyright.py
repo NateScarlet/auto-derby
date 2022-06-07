@@ -8,11 +8,13 @@ import os
 import sys
 
 import subprocess
+import shutil
 
 
 def main():
+    command = ["pyright"] if shutil.which("pyright") else ["npx", "pyright"]
     subprocess.call(
-        ["npx", "pyright"],
+        command,
         env={
             **os.environ,
             "PATH": os.path.pathsep.join(

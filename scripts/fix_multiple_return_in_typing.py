@@ -1,5 +1,6 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
+# spell-checker: word Decomp Meanshift
 
 from typing import Text
 import re

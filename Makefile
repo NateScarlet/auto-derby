@@ -9,6 +9,7 @@ test:
 lint:
 	py -3.8 ./scripts/run_pyright.py
 	py -3.8 -m black -t py38 --check --diff .
+	py -3.8 ./scripts/run_cspell.py
 
 .PHONY: format
 format:

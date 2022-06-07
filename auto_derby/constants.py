@@ -76,7 +76,7 @@ class Mood(enum.Enum):
         import warnings
 
         warnings.warn(
-            "Mood as a tuple is depreacted, use Mood.training_rate or Mood.race_rate instead",
+            "Mood as a tuple is deprecated, use Mood.training_rate or Mood.race_rate instead",
             DeprecationWarning,
         )
         if key == 0:
@@ -98,4 +98,5 @@ class Mood(enum.Enum):
 
 
 # deprecated variables
+# spell-checker: disable
 globals()["RuningStyle"] = RunningStyle

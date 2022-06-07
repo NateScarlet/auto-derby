@@ -56,7 +56,7 @@ def use_screenshot(name: Text):
     # resize old test data
     if img.width == 466:
         img = img.resize((540, 960))
-    template.invalidate_screeshot()
+    template.invalidate_screenshot()
     clients.set_current(ImageClient(img))
     template.g.screenshot_width = img.width
     return img, mathtools.ResizeProxy(img.width)

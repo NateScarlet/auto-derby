@@ -1,6 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
-"""umamusume pertty derby automation.  """
+# spell-checker: word HWND TOPMOST NOTOPMOST WINBLUE RENDERFULLCONTENT getwindowsversion
+"""umamusume pretty derby automation.  """
 
 import contextlib
 import logging
@@ -123,13 +124,6 @@ def set_foreground(h_wnd: int) -> None:
         )
 
 
-def set_forground(h_wnd: int) -> None:
-    import warnings
-
-    warnings.warn("use set_foreground instead", DeprecationWarning)
-    return set_foreground(h_wnd)
-
-
 @contextlib.contextmanager
 def recover_foreground():
     h_wnd = win32gui.GetForegroundWindow()
@@ -189,7 +183,7 @@ def move_at(h_wnd: int, point: Tuple[int, int]):
 
 def screenshot_pil_crop(h_wnd: int) -> PIL.Image.Image:
     init()
-    # XXX: BitBlt capture not work, background window is not supportted
+    # XXX: BitBlt capture not work, background window is not supported
     # Maybe use WindowsGraphicsCapture like obs do
     with topmost(h_wnd):
         # not use GetWindowRect to exclude border
@@ -261,4 +255,13 @@ def screenshot(h_wnd: int) -> PIL.Image.Image:
 
 
 # DEPRECATED
+# spell-checker: disable
+
 globals()["LOGGER"] = logging.getLogger(__name__)
+
+
+def set_forground(h_wnd: int) -> None:
+    import warnings
+
+    warnings.warn("use set_foreground instead", DeprecationWarning)
+    return set_foreground(h_wnd)

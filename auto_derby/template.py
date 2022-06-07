@@ -23,7 +23,7 @@ class _g:
     cached_screenshot = (dt.datetime.fromtimestamp(0), Image())
 
 
-def invalidate_screeshot():
+def invalidate_screenshot():
     _g.cached_screenshot = (dt.datetime.fromtimestamp(0), Image())
 
 
@@ -206,4 +206,6 @@ def match(
 
 
 # DEPRECATED
+# spell-checker: disable
 globals()["LOGGER"] = logging.getLogger(__name__)
+globals()["invalidate_screeshot"] = invalidate_screenshot

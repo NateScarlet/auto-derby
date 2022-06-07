@@ -1,6 +1,7 @@
 # -*- coding=UTF-8 -*-
 
 # pyright: strict
+# spell-checker: word keybd KEYEVENTF KEYUP
 
 from __future__ import annotations
 

@@ -94,6 +94,7 @@ def compute(
         "G": (0.1, 0.4),
     }[distance[1]]
 
+    # spell-checker: word runningstyle
     # proper running style
     # from master.mdb `race_proper_runningstyle_rate` table
 
