@@ -35,8 +35,8 @@ def _race_reward(ctx: Context, race: Race, order: int) -> Tuple[int, int]:
 def compute(ctx: Context, race: Race) -> float:
     estimate_order = race.estimate_order(ctx)
     prop, skill = _race_reward(ctx, race, estimate_order)
-    prop *= 1 + race.raward_buff
-    skill *= 1 + race.raward_buff
+    prop *= 1 + race.reward_buff
+    skill *= 1 + race.reward_buff
 
     fan_count = race.fan_counts[estimate_order - 1]
 

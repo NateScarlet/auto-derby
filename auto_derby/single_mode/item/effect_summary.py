@@ -255,7 +255,7 @@ class EffectSummary:
         r = self.race_reward_buff.total_rate()
         if r:
             explain = f"{r*100:+.0f}% reward;"
-            r_after.raward_buff += r
+            r_after.reward_buff += r
         if explain and g.explain_effect_summary:
             app.log.text("apply to race: %s: %s" % (race, explain), level=app.DEBUG)
         return r_after

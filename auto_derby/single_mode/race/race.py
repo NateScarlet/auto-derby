@@ -90,7 +90,7 @@ class Race:
         self.grade_points: Tuple[int, ...] = ()
         self.shop_coins: Tuple[int, ...] = ()
 
-        self.raward_buff = 0.0
+        self.reward_buff = 0.0
 
     def clone(self):
         return deepcopy(self)
@@ -280,6 +280,14 @@ class Race:
         if ctx.fan_count < self.min_fan_count:
             return False
 
+    @property
+    def _reward_buff_alias(self):
+        return self.reward_buff
+
+    @_reward_buff_alias.setter
+    def _reward_buff_alias(self, v: float):
+        self.reward_buff = v
+
 
 g.race_class = Race
 
@@ -288,3 +296,4 @@ g.race_class = Race
 # spell-checker: disable
 Race.TRACE_OUT_TO_IN = Race.TRACK_OUT_TO_IN  # type: ignore
 Race.is_avaliable = Race.is_available  # type: ignore
+Race.raward_buff = Race._reward_buff_alias  # type: ignore

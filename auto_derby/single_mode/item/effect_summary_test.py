@@ -51,7 +51,7 @@ def test_reduce_on_training():
 
 
 def _race_buff_data(r: Race):
-    return {"rewardBuff": r.raward_buff, "fanCounts": r.fan_counts}
+    return {"rewardBuff": r.reward_buff, "fanCounts": r.fan_counts}
 
 
 def test_apply_to_race():
