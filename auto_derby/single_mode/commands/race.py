@@ -20,7 +20,7 @@ def _choose_running_style(ctx: Context, race1: Race) -> None:
     for style, score in style_scores:
         app.log.text("running style score:\t%.2f:\t%s" % (score, style))
 
-    scene.choose_runing_style(style_scores[0][0])
+    scene.choose_running_style(style_scores[0][0])
 
 
 _RACE_ORDER_TEMPLATES = {

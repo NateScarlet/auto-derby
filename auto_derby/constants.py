@@ -7,7 +7,7 @@ import enum
 import functools
 
 
-class RuningStyle(enum.Enum):
+class RunningStyle(enum.Enum):
     LEAD = 1
     HEAD = 2
     MIDDLE = 3
@@ -95,3 +95,7 @@ class Mood(enum.Enum):
     @property
     def race_rate(self):
         return self.value[1]
+
+
+# deprecated variables
+globals()["RuningStyle"] = RunningStyle
