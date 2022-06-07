@@ -72,7 +72,7 @@ def _ocr_date(ctx: Context, img: Image) -> Tuple[int, int, int]:
         cv_img,
         level=app.DEBUG,
         layers={
-            "sharppend": sharpened_img,
+            "sharpened": sharpened_img,
             "white_outline": white_outline_img,
             "bg_mask": bg_mask_img,
             "masked": masked_img,
@@ -307,7 +307,7 @@ class Context:
         # 長距離：2401m以上
         self.long = Context.STATUS_NONE
 
-        # Runing style status
+        # Running style status
         # https://umamusume.cygames.jp/#/help?p=3
         # 作戦には以下の4つがあります。
         # ・逃げ：スタート直後から先頭に立ち、そのまま最後まで逃げ切る作戦。
@@ -498,7 +498,7 @@ class Context:
         import warnings
 
         warnings.warn(
-            "Context.condition is Depreacted, use conditions (with `s`) instead.",
+            "Context.condition is Deprecated, use conditions (with `s`) instead.",
             DeprecationWarning,
         )
         ret = 0
@@ -513,7 +513,7 @@ class Context:
         import warnings
 
         warnings.warn(
-            "Context.condition is Depreacted, use conditions (with `s`) instead.",
+            "Context.condition is Deprecated, use conditions (with `s`) instead.",
             DeprecationWarning,
         )
         self.conditions.clear()

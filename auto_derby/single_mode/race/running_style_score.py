@@ -276,7 +276,7 @@ def compute(
         * block_factor
     )
     block_rate = min(1.0, block_rate)
-    block_penality = mathtools.interpolate(
+    block_penalty = mathtools.interpolate(
         int(block_rate * 10000),
         (
             (0, 0),
@@ -286,7 +286,7 @@ def compute(
         ),
     )
 
-    hp_penality = mathtools.interpolate(
+    hp_penalty = mathtools.interpolate(
         int(hp / expected_hp * 10000),
         (
             (0, 1.0),
@@ -296,9 +296,9 @@ def compute(
             (10000, 0),
         ),
     )
-    hp_penality = min(1, hp_penality)
+    hp_penalty = min(1, hp_penalty)
 
-    wis_penality = mathtools.interpolate(
+    wis_penalty = mathtools.interpolate(
         int(wis / expected_wis * 10000),
         (
             (0, 0.3),
@@ -309,18 +309,18 @@ def compute(
     )
 
     ret = spd / expected_spd * 10000
-    ret *= 1 - block_penality
-    ret *= 1 - hp_penality
-    ret *= 1 - wis_penality
+    ret *= 1 - block_penalty
+    ret *= 1 - hp_penalty
+    ret *= 1 - wis_penalty
 
     app.log.text(
         (
             "style: "
             "score=%d "
             "block_rate=%.2f "
-            "block_penality=%.2f "
-            "hp_penality=%0.2f "
-            "wis_penality=%0.2f "
+            "block_penalty=%.2f "
+            "hp_penalty=%0.2f "
+            "wis_penalty=%0.2f "
             "spd=%0.2f/%0.2f "
             "sta=%0.2f "
             "hp=%0.2f/%0.2f "
@@ -331,9 +331,9 @@ def compute(
         % (
             ret,
             block_rate,
-            block_penality,
-            hp_penality,
-            wis_penality,
+            block_penalty,
+            hp_penalty,
+            wis_penalty,
             spd,
             expected_spd,
             sta,

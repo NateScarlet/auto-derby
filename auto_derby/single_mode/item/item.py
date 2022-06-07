@@ -288,7 +288,7 @@ class Item:
                 f"{s:.2f} by {len(race_scores)} sample races from {sample_source};"
             )
             ret += s
-        # atleast one race reward buff for year4
+        # at least one race reward buff for year4
         if es.race_reward_buff.total_rate() > 0.3 and self not in ctx.items:
             s = 10
             explain += f"{s:.2f} by race reward buff;"

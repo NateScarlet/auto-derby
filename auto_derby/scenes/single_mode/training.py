@@ -226,7 +226,7 @@ def _recognize_red_effect(img: Image) -> int:
         cv_img,
         level=app.DEBUG,
         layers={
-            "sharppend": sharpened_img,
+            "sharpened": sharpened_img,
             "white_outline": white_outline_img,
             "red_outline": red_outline_img,
             "masked": masked_img,
@@ -529,9 +529,9 @@ def _recognize_soul(
     bg_mask1 = imagetools.border_flood_fill(blue_outline_img)
     fg_mask1 = 255 - bg_mask1
     masked_img = cv2.copyTo(cv_img, fg_mask1)
-    shapened_img = imagetools.mix(imagetools.sharpen(masked_img, 1), masked_img, 0.5)
+    sharpened_img = imagetools.mix(imagetools.sharpen(masked_img, 1), masked_img, 0.5)
     white_outline_img = imagetools.constant_color_key(
-        shapened_img,
+        sharpened_img,
         (255, 255, 255),
         (252, 251, 251),
         (248, 227, 159),
@@ -549,7 +549,7 @@ def _recognize_soul(
         img,
         level=app.DEBUG,
         layers={
-            "sharpened": shapened_img,
+            "sharpened": sharpened_img,
             "right_bottom_icon": right_bottom_icon_img,
             "blue_outline": blue_outline_img,
             "white_outline": white_outline_img,

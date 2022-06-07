@@ -119,11 +119,11 @@ def compute(ctx: Context, race: Race) -> float:
         ),
     )
 
-    status_penality = 0
+    status_penalty = 0
     if race.distance_status(ctx) < ctx.STATUS_B:
-        status_penality += 10
+        status_penalty += 10
     if race.ground_status(ctx) < ctx.STATUS_B:
-        status_penality += 10
+        status_penalty += 10
     return (
         fan_score
         + prop
@@ -132,5 +132,5 @@ def compute(ctx: Context, race: Race) -> float:
         + scenario_score
         - continuous_race_penalty
         - fail_penalty
-        - status_penality
+        - status_penalty
     )

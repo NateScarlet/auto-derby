@@ -1,1 +1,1 @@
-"""Service interfaces, implementation code should go to infrastracture package."""
+"""Service interfaces, implementation code should go to infrastructure package."""

@@ -5,7 +5,7 @@ from . import test_sample
 from ... import _test
 
 
-def _iter_effect_summarys():
+def _iter_effect_summary():
     for i in game_data.iterate():
         yield i.name, i.effect_summary()
 
@@ -13,7 +13,7 @@ def _iter_effect_summarys():
 def test_apply_to_context():
     for name, ctx in test_sample.contexts():
         _test.snapshot_match(
-            {name: es.apply_to_context(ctx) for name, es in _iter_effect_summarys()},
+            {name: es.apply_to_context(ctx) for name, es in _iter_effect_summary()},
             name=name,
         )
 
@@ -26,7 +26,7 @@ def test_apply_to_training():
                     t_name: es.apply_to_training(ctx, t)
                     for t_name, t in test_sample.trainings()
                 }
-                for name, es in _iter_effect_summarys()
+                for name, es in _iter_effect_summary()
                 if es.training_effect_buff
                 or es.training_vitality_debuff
                 or es.training_no_failure
@@ -42,7 +42,7 @@ def test_reduce_on_training():
                 t_name: es.reduce_on_training(t)[0]
                 for t_name, t in test_sample.trainings()
             }
-            for name, es in _iter_effect_summarys()
+            for name, es in _iter_effect_summary()
             if es.training_effect_buff
             or es.training_vitality_debuff
             or es.training_no_failure
@@ -62,7 +62,7 @@ def test_apply_to_race():
                 r.name: _race_buff_data(es.apply_to_race(ctx, r))
                 for r in test_sample.races()
             }
-            for name, es in _iter_effect_summarys()
+            for name, es in _iter_effect_summary()
             if es.race_fan_buff or es.race_reward_buff
         },
     )

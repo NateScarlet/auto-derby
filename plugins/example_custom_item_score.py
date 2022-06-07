@@ -16,7 +16,7 @@ class Plugin(auto_derby.Plugin):
                 if self.name == "プリティーミラー":
                     ret += 10
 
-                # increse for item can add condition "愛嬌○"
+                # increase for item can add condition "愛嬌○"
                 if any(condition.get(i).name == "愛嬌○" for i in es.condition_add):
                     ret += 10
                 return ret

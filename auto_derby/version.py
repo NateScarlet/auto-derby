@@ -47,7 +47,7 @@ def latest() -> Text:
             try:
                 done, jobs = futures.wait(jobs, return_when=futures.FIRST_COMPLETED)
                 url, ret = done.pop().result()
-                app.log.text("lastest: %s from %s" % (ret, url))
+                app.log.text("latest: %s from %s" % (ret, url))
                 return ret
             except:
                 pass

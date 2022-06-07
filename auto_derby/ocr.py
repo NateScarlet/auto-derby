@@ -177,7 +177,7 @@ _LINE_HEIGHT = 32
 
 
 def text(img: Image, *, threshold: float = 0.8) -> Text:
-    """Regcognize text line, background color should be black.
+    """Recognize text line, background color should be black.
 
     Args:
         img (Image): Preprocessed text line.

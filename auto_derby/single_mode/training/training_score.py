@@ -116,9 +116,9 @@ def compute(ctx: Context, trn: Training) -> float:
     elif trn.level > target_level:
         target_level_score -= (trn.level - target_level) * 5
 
-    fail_penality = 0
+    fail_penalty = 0
     if trn.type != trn.TYPE_WISDOM:
-        fail_penality = mathtools.interpolate(
+        fail_penalty = mathtools.interpolate(
             t_now,
             (
                 (0, 30),
@@ -132,5 +132,5 @@ def compute(ctx: Context, trn: Training) -> float:
         (spd + sta + pow_ + gut + wis + skill + partner + target_level_score + hint)
         * success_rate
         + vit
-        - fail_penality * trn.failure_rate
+        - fail_penalty * trn.failure_rate
     )

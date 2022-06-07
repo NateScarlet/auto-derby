@@ -876,7 +876,7 @@ All notable changes to this project will be documented in this file. See [standa
 - **single-mode:** wrong continuous race count ([f8b54df](https://github.com/NateScarlet/auto-derby/commit/f8b54df93e2c5e830cca3d40144a54a730ce5fa8))
 - **single-mode:** wrong date ocr input image ([26bcdba](https://github.com/NateScarlet/auto-derby/commit/26bcdbaaa7b4d57ef0f3fb19924f6f894d1b758b))
 - **single-mode:** wrong date ocr result ([62a5c7b](https://github.com/NateScarlet/auto-derby/commit/62a5c7b546c63789e71415c135bae0d14be6f4b4)), closes [#12](https://github.com/NateScarlet/auto-derby/issues/12)
-- **single-mode:** wrong race block penality ([6bc58b8](https://github.com/NateScarlet/auto-derby/commit/6bc58b8b67d64baf0a586a31445ec2e91b60345b))
+- **single-mode:** wrong race block penalty ([6bc58b8](https://github.com/NateScarlet/auto-derby/commit/6bc58b8b67d64baf0a586a31445ec2e91b60345b))
 - **single-mode:** wrong race years ([21ebf41](https://github.com/NateScarlet/auto-derby/commit/21ebf411cf10bf0cd3bfef04757a13c7298fcb97))
 - **team-race:** handle granted reward ([231a861](https://github.com/NateScarlet/auto-derby/commit/231a86180ca6431814660234da959b93bb35d458))
 - **team-race:** handle high score updated ([7ba095f](https://github.com/NateScarlet/auto-derby/commit/7ba095fb06595da175357a15029d04ae68508556))

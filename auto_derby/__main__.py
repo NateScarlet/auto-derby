@@ -1,6 +1,6 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
-"""umamusume pertty derby automation.  """
+"""umamusume pretty derby automation.  """
 
 
 import argparse

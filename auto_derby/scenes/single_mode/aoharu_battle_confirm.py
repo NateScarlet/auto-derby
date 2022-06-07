@@ -25,7 +25,7 @@ def _recognize_predictions(
         (constants.RaceType.DART, rp.vector4((429, 505, 505, 533), 540)),
     )
 
-    predition_templates = (
+    prediction_templates = (
         (constants.RacePrediction.HONNMEI, templates.PREDICTION_DOUBLE_CIRCLE),
         (constants.RacePrediction.TAIKOU, templates.PREDICTION_CIRCLE_OUTLINE),
         # TODO: add template for this
@@ -35,7 +35,7 @@ def _recognize_predictions(
 
     for t, bbox in bbox_list:
         img = screenshot.crop(bbox)
-        for p, tmpl in predition_templates:
+        for p, tmpl in prediction_templates:
             try:
                 next(
                     template.match(
