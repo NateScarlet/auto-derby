@@ -103,7 +103,7 @@ class ADBClient(Client):
             else:
                 screenshot_perf.append((screenshot_method, perf_counter_ns))
         if not screenshot_perf:
-            raise RuntimeError("no screenshot method avaliable")
+            raise RuntimeError("no screenshot method available")
         screenshot_perf = sorted(screenshot_perf, key=lambda x: x[1])
         self._screenshot, perf = screenshot_perf[0]
         app.log.text(

@@ -70,7 +70,7 @@ def find(ctx: Context) -> Iterator[Race]:
     if ctx.date[1:] == (0, 0):
         return
     for i in find_by_date(ctx.date):
-        if i.is_avaliable(ctx) == False:
+        if i.is_available(ctx) == False:
             continue
         # target race should be excluded when finding available race
         if i.is_target_race(ctx):

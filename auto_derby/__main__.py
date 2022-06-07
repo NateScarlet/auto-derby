@@ -25,7 +25,7 @@ def main():
     app.log.text(f"auto_derby: {__version__.VERSION} ({__version__.RELEASE_DATE})")
     if config.CHECK_UPDATE:
         version.check_update()
-    avaliable_jobs = {
+    available_jobs = {
         "team_race": jobs.team_race,
         "champions_meeting": jobs.champions_meeting,
         "legend_race": jobs.legend_race,
@@ -49,7 +49,7 @@ def main():
         default=config.ADB_ADDRESS,
     )
     args = parser.parse_args()
-    job = avaliable_jobs.get(args.job)
+    job = available_jobs.get(args.job)
     config.ADB_ADDRESS = args.adb
 
     def _client() -> clients.Client:
@@ -94,8 +94,8 @@ def main():
 
         if not job:
             app.log.text(
-                "unknown job: %s\navaliable jobs:\n  %s"
-                % (args.job, "\n  ".join(avaliable_jobs.keys())),
+                "unknown job: %s\navailable jobs:\n  %s"
+                % (args.job, "\n  ".join(available_jobs.keys())),
                 level=app.ERROR,
             )
             exit(1)

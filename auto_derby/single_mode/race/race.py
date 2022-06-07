@@ -264,7 +264,7 @@ class Race:
         if len(self.characters) < 10:
             return True
 
-    def is_avaliable(self, ctx: Context) -> Optional[bool]:
+    def is_available(self, ctx: Context) -> Optional[bool]:
         """return None when result is unknown."""
 
         if ctx.date == (1, 0, 0) and self.grade != self.GRADE_DEBUT:
@@ -285,4 +285,6 @@ g.race_class = Race
 
 
 # Deprecated members, removal on v2
+# spell-checker: disable
 Race.TRACE_OUT_TO_IN = Race.TRACK_OUT_TO_IN  # type: ignore
+Race.is_avaliable = Race.is_available  # type: ignore
