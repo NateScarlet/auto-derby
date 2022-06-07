@@ -105,7 +105,7 @@ def _estimate_failure_rate(ctx: Context, trn: Training) -> float:
 class EffectSummary:
     def __init__(self) -> None:
         self.speed = 0
-        self.statmia = 0
+        self.stamina = 0
         self.power = 0
         self.guts = 0
         self.wisdom = 0
@@ -279,9 +279,9 @@ class EffectSummary:
                 ctx.speed + self.speed, min_property, max_property
             )
             explain += f"{ctx_after.speed - ctx.speed:+d} speed;"
-        if self.statmia:
+        if self.stamina:
             ctx_after.stamina = mathtools.clamp(
-                ctx.stamina + self.statmia, min_property, max_property
+                ctx.stamina + self.stamina, min_property, max_property
             )
             explain += f"{ctx_after.stamina - ctx.stamina:+d} stamina;"
         if self.power:
@@ -332,6 +332,14 @@ class EffectSummary:
             app.log.text("apply to context: %s" % explain, level=app.DEBUG)
         return ctx_after
 
+    @property
+    def _stamina_alias(self):
+        return self.stamina
+
+    @_stamina_alias.setter
+    def _stamina_alias(self, v: int):
+        self.stamina = v
+
 
 if TYPE_CHECKING:
     _EffectReducer = Callable[[Item, Effect, EffectSummary], bool]
@@ -362,7 +370,7 @@ def _(item: Item, effect: Effect, summary: EffectSummary):
         summary.speed += value
         return True
     if prop == Effect.PROPERTY_STAMINA:
-        summary.statmia += value
+        summary.stamina += value
         return True
     if prop == Effect.PROPERTY_POWER:
         summary.power += value
@@ -374,7 +382,7 @@ def _(item: Item, effect: Effect, summary: EffectSummary):
         summary.wisdom += value
         return True
     if prop == Effect.PROPERTY_STAMINA:
-        summary.statmia += value
+        summary.stamina += value
         return True
     if prop == Effect.PROPERTY_MAX_VITALITY:
         summary.max_vitality += value
@@ -551,3 +559,8 @@ def _(item: Item, effect: Effect, summary: EffectSummary):
         summary.character_friendship[c] = summary.character_friendship.get(c, 0) + value
         return True
     return False
+
+
+# deprecated members
+# spell-checker: disable
+EffectSummary.statmia = EffectSummary._stamina_alias  # type: ignore
