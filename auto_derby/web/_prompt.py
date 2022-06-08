@@ -8,16 +8,16 @@ from __future__ import annotations
 import http
 import http.server
 import os
+import threading
 import time
 import webbrowser
 from typing import Any, Dict, Optional, Text
 
+from .. import app
 from . import handler
+from ._create_server import create_server
 from .context import Context
 from .webview import Webview
-from ._create_server import create_server
-
-from .. import app
 
 
 class _PromptMiddleware(handler.Middleware):
@@ -121,10 +121,25 @@ def prompt(
     port = port or g.default_port
     webview = webview or g.default_webview
     pm = _PromptMiddleware(html)
-    with create_server((host, port), *(pm, *middlewares), max_port=max_port) as httpd:
+    with create_server(
+        (host, port),
+        *(pm, *middlewares),
+        max_port=max_port,
+        # XXX: ThreadingHTTPServer.shutdown not work
+        # https://github.com/python/cpython/issues/84485
+        server_class=http.server.HTTPServer,
+    ) as httpd:
         host, port = httpd.server_address
         url = f"http://{host}:{port}"
-        webview.open(url)
+
+        def _open_url():
+            # XXX: need threading server to allow pre-opened socket
+            time.sleep(0.1)
+            webview.open(url)
+
+        threading.Thread(
+            target=_open_url,
+        ).start()
         app.log.text(f"prompt at: {url}")
         httpd.serve_forever()
     webview.shutdown()

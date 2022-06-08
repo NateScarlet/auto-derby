@@ -16,9 +16,8 @@ from auto_derby import web, single_mode
 from PIL import Image
 import io
 
-if __name__ == "__main__":
 
-    logging.basicConfig(level=logging.INFO)
+def main():
     img_data = io.BytesIO()
     Image.new("RGB", (200, 200), (255, 0, 0)).save(img_data, "PNG"),
 
@@ -48,3 +47,11 @@ if __name__ == "__main__":
             web.middleware.TokenAuth(token, ("POST",)),
         )
     )
+
+
+if __name__ == "__main__":
+
+    logging.basicConfig(level=logging.INFO)
+
+    main()
+    main()
