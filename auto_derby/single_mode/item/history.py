@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import List, Tuple
+from typing import Callable, List, Tuple
 
 from ..context import Context
 from .item import Item
@@ -34,3 +34,14 @@ class History:
 
     def effect_summary(self, ctx: Context) -> EffectSummary:
         return self.effect_summary_at(ctx.turn_count_v2())
+
+    def effect_summary_delta(self) -> Callable[[], EffectSummary]:
+        index = len(self._l)
+
+        def _getter():
+            es = EffectSummary()
+            for _, i in self._l[index:]:
+                es.add(i)
+            return es
+
+        return _getter

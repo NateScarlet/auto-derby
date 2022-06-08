@@ -113,13 +113,32 @@ class _CommandPlan:
         return msg
 
 
+def _has_command_changing_effect(es: item.EffectSummary) -> bool:
+    if es.training_levels:
+        return True
+    if es.training_partner_reassign:
+        return True
+    if es.training_effect_buff:
+        return True
+    if es.training_no_failure:
+        return True
+    if es.training_vitality_debuff:
+        return True
+    return False
+
+
 def _handle_turn(ctx: Context):
     scene = CommandScene.enter(ctx)
     scene.recognize(ctx)
-    _handle_item_list(ctx, scene)
-    # see training before shop
+    # see training before use items
     turn_commands = tuple(commands.from_context(ctx))
+    es_delta = ctx.item_history.effect_summary_delta()
+    _handle_item_list(ctx, scene)
     _handle_shop(ctx, scene)
+    while _has_command_changing_effect(es_delta()):
+        turn_commands = tuple(commands.from_context(ctx))
+        es_delta = ctx.item_history.effect_summary_delta()
+        _handle_item_list(ctx, scene)
     ctx.next_turn()
     app.log.text("context: %s" % ctx)
     for i in ctx.items:
