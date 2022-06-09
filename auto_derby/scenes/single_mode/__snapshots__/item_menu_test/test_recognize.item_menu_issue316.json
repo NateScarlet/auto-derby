@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": 16,
+      "name": "バイタル20",
+      "quantity": 3,
+      "disabled": false
+    },
+    {
+      "id": 34,
+      "name": "アロマディフューザー",
+      "quantity": 2,
+      "disabled": true
+    },
+    {
+      "id": 47,
+      "name": "スタミナアンクルウェイト",
+      "quantity": 2,
+      "disabled": false
+    },
+    {
+      "id": 50,
+      "name": "健康祈願のお守り",
+      "quantity": 1,
+      "disabled": true
+    },
+    {
+      "id": 51,
+      "name": "蹄鉄ハンマー・匠",
+      "quantity": 1,
+      "disabled": false
+    }
+  ]
+}

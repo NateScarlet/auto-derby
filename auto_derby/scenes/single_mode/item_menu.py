@@ -212,4 +212,4 @@ class ItemMenuScene(Scene):
                 ctx.item_history.append(ctx, i)
 
         for i in remains:
-            app.log.text("use remain: %s" % i, level=app.WARN)
+            app.log.text("use remain: %s" % item.get(i), level=app.WARN)

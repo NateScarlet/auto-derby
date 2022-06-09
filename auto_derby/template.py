@@ -168,7 +168,7 @@ def _match_one(
         app.log.image(
             "match template",
             cv_img,
-            layers={"tmpl": cv_tmpl, "match": res},
+            layers={"tmpl": cv_tmpl, "match": res.astype(np.uint8)},
             level=app.DEBUG,
         )
     reverse_rp = mathtools.ResizeProxy(g.screenshot_width)
