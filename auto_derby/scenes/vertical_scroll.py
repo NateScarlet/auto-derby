@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Tuple
 
 
-from .. import action
+from .. import action, app
 
 
 class VerticalScroll:
@@ -64,6 +64,11 @@ class VerticalScroll:
             self._same_direction_count = 1
         self._last_direction = direction
         if self._same_direction_count >= self._max_same_direction_count:
+            app.log.text(
+                "scrolled in same direction %d times, assuming end is reached"
+                % self._same_direction_count,
+                level=app.WARN,
+            )
             self.on_end()
 
         return True
