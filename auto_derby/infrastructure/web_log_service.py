@@ -69,7 +69,7 @@ class WebLogService(Service):
         if image_path is None:
             image_path = self.default_image_path
         self.image_path = image_path
-        self._always_inline_image = not buffer_path
+        self._always_inline_image = not buffer_path or buffer_path == ":memory:"
 
         self._s = web.Stream(buffer_path, "text/plain; charset=utf-8")
         self._stop = threading.Event()

@@ -134,7 +134,7 @@ def prompt(
 
         def _open_url():
             # XXX: need threading server to allow pre-opened socket
-            time.sleep(0.1)
+            time.sleep(1)
             webview.open(url)
 
         threading.Thread(

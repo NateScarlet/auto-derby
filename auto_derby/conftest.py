@@ -15,6 +15,7 @@ def _app():
         if not os.getenv("CI"):
             app.log = WebLogService(
                 app.cleanup,
+                buffer_path=":memory:",
             )
             time.sleep(1)  # wait browser
         yield app

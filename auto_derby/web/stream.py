@@ -8,6 +8,7 @@ import queue
 import shutil
 import threading
 from typing import Callable, List, Protocol, Text
+import io
 
 from .context import Context
 from .handler import Handler, Middleware
@@ -25,7 +26,16 @@ class Writer(Protocol):
         ...
 
 
-class FileWriter(Writer):
+class Reader(Protocol):
+    def copy_to(self, w: Writer) -> None:
+        ...
+
+
+class Buffer(Writer, Reader, Protocol):
+    pass
+
+
+class FileWriter(Buffer):
     def __init__(self, path: Text) -> None:
         self.path = path
         self._lock = threading.Lock()
@@ -50,6 +60,29 @@ class FileWriter(Writer):
             try:
                 with open(self.path, "rb") as f:
                     shutil.copyfileobj(f, w)
+            except FileNotFoundError:
+                pass
+
+
+class MemoryBuffer(Buffer):
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self._b = io.BytesIO()
+
+    def write(self, data: bytes) -> None:
+        with self._lock:
+            self._b.write(data)
+
+    def close(self) -> None:
+        self._b.close()
+
+    def closed(self) -> bool:
+        return self._b.closed
+
+    def copy_to(self, w: Writer):
+        with self._lock:
+            try:
+                shutil.copyfileobj(self._b, w)
             except FileNotFoundError:
                 pass
 
@@ -97,7 +130,9 @@ class Stream(Middleware):
         buffer_path: Text,
         mimetype: Text,
     ) -> None:
-        self._f = FileWriter(buffer_path)
+        self._f: Buffer = FileWriter(buffer_path)
+        if buffer_path == ":memory:":
+            self._f = MemoryBuffer()
         self._lock = threading.Lock()
         self._writers: List[Writer] = [self._f]
         self._closed = False
