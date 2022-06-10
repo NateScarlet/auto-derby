@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.0](https://github.com/NateScarlet/auto-derby/compare/v1.25.1...v1.26.0) (2022-06-10)
+
+### Features
+
+- **nurturing:** handle command changing item effect ([7324324](https://github.com/NateScarlet/auto-derby/commit/7324324e6c9e201b94f8935aac28791769e746a3))
+- **plugin:** fast_fail: ignore shop ([fae374f](https://github.com/NateScarlet/auto-derby/commit/fae374f57fab16ff6d08a9a5b9a21ac23e96c9a8))
+
+### Bug Fixes
+
+- **single-mode:** can not recognize disabled item ([14650c8](https://github.com/NateScarlet/auto-derby/commit/14650c8541ea9f349a094bcfc24fe07b55e4e694)), closes [#316](https://github.com/NateScarlet/auto-derby/issues/316)
+- **single-mode:** second item prompt not work ([d49e7a6](https://github.com/NateScarlet/auto-derby/commit/d49e7a6cdffa7b25bc2ada1da9ebbead22343f36)), closes [#315](https://github.com/NateScarlet/auto-derby/issues/315)
+
 ## [1.25.1](https://github.com/NateScarlet/auto-derby/compare/v1.25.0...v1.25.1) (2022-05-30)
 
 ### Bug Fixes
