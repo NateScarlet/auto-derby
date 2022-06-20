@@ -189,7 +189,7 @@ def _recognize_property(img: Image) -> int:
     cv_img = np.asarray(img.convert("L"))
     _, binary_img = cv2.threshold(cv_img, 160, 255, cv2.THRESH_BINARY_INV)
     imagetools.fill_area(binary_img, (0,), size_lt=3)
-    app.log.image("property", cv_img, layers={"binary": binary_img})
+    app.log.image("property", cv_img, layers={"binary": binary_img}, level=app.DEBUG)
     return int(ocr.text(imagetools.pil_image(binary_img)))
 
 

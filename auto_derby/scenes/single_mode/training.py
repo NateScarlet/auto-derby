@@ -385,6 +385,7 @@ def _recognize_has_training(
     app.log.image(
         "has training: %s mask_avg=%0.2f" % (ret, mask_avg),
         icon_img,
+        level=app.DEBUG,
         layers={
             "mark": mask,
         },
