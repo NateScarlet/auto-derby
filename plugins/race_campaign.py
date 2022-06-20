@@ -136,10 +136,8 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# 春のGⅠ記念ミッション　第２弾 安田記念
+# 春のGⅠ記念ミッション　第２弾 宝塚記念
 
-_start = datetime.datetime(2022, 5, 23, 4, 0, tzinfo=JST)
-_end = datetime.datetime(2022, 6, 6, 3, 59, tzinfo=JST)
-_add_campaign(OneTimeCampaign(_start, _end, "京王杯スプリングカップ", order_lte=1))
-_add_campaign(OneTimeCampaign(_start, _end, "マイラーズカップ", order_lte=1))
-_add_campaign(OneTimeCampaign(_start, _end, "安田記念", order_lte=1))
+_start = datetime.datetime(2022, 6, 20, 4, 0, tzinfo=JST)
+_end = datetime.datetime(2022, 6, 27, 3, 59, tzinfo=JST)
+_add_campaign(OneTimeCampaign(_start, _end, "宝塚記念", order_lte=1))
