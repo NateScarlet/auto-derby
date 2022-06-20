@@ -9,12 +9,12 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.26.0"
-RELEASE_DATE = datetime.fromtimestamp(1654852347)
-LAST_GIT_COMMIT_DESCRIBE = "v1.25.1-12-gd4ba311"
-LAST_GIT_COMMIT_HASH = "d4ba3119521784b52555e306653bb5f551f9ee80"
+VERSION = "1.26.1"
+RELEASE_DATE = datetime.fromtimestamp(1655736023)
+LAST_GIT_COMMIT_DESCRIBE = "v1.26.0-2-g3af33f5"
+LAST_GIT_COMMIT_HASH = "3af33f539e7f1a496a748ed2d80570190b869c47"
 LAST_GIT_COMMIT_AUTHOR_NAME = "NateScarlet"
 LAST_GIT_COMMIT_AUTHOR_EMAIL = "NateScarlet@Gmail.com"
-LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1654794352)
-LAST_GIT_COMMIT_SUBJECT = "chore: add scorll warning"
+LAST_GIT_COMMIT_AUTHOR_DATE = datetime.fromtimestamp(1655735888)
+LAST_GIT_COMMIT_SUBJECT = "fix(plugin): race_campaign: update data"
 LAST_GIT_COMMIT_BODY = ""
