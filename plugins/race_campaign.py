@@ -141,3 +141,12 @@ auto_derby.plugin.register(__name__, Plugin())
 _start = datetime.datetime(2022, 6, 20, 4, 0, tzinfo=JST)
 _end = datetime.datetime(2022, 6, 27, 3, 59, tzinfo=JST)
 _add_campaign(OneTimeCampaign(_start, _end, "宝塚記念", order_lte=1))
+
+
+# GⅠ記念ミッション　帝王賞
+
+_start = datetime.datetime(2022, 6, 23, 11, 0, tzinfo=JST)
+_end = datetime.datetime(2022, 6, 30, 3, 59, tzinfo=JST)
+_add_campaign(OneTimeCampaign(_start, _end, "アンタレスステークス", order_lte=1))
+_add_campaign(OneTimeCampaign(_start, _end, "平安ステークス", order_lte=1))
+_add_campaign(OneTimeCampaign(_start, _end, "帝王賞", order_lte=1))
