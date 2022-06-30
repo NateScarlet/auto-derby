@@ -186,6 +186,11 @@ class ItemMenuScene(Scene):
                 if match.id not in remains:
                     continue
                 if match.disabled:
+                    if match.auto_used():
+                        ctx.items.remove(match.id, remains[match.id])
+                        for _ in range(remains[match.id]):
+                            ctx.item_history.append(ctx, match)
+
                     app.log.text("skip disabled: %s" % match, level=app.WARN)
                     del remains[match.id]
                     continue
