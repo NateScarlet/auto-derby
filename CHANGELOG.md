@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.3](https://github.com/NateScarlet/auto-derby/compare/v1.26.2...v1.26.3) (2022-07-02)
+
+### Bug Fixes
+
+- **plugin:** race_campaign: update data ([f8bb5c7](https://github.com/NateScarlet/auto-derby/commit/f8bb5c75dee414b51d505dfa29396d41d7392c64))
+
 ## [1.26.2](https://github.com/NateScarlet/auto-derby/compare/v1.26.1...v1.26.2) (2022-06-23)
 
 ### Bug Fixes
