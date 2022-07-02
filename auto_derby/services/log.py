@@ -19,12 +19,6 @@ class Level(enum.Enum):
 
 
 class Service(Protocol):
-    """
-    NOTICE: this interface is unstable,
-
-    change of this interface will not been considered as breaking change until 2022-06-01.
-    """
-
     def text(self, msg: Text, /, *, level: Level = Level.INFO):
         ...
 
