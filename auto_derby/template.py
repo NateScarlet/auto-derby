@@ -1,8 +1,8 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 """template matching.  """
+from __future__ import annotations
 
-import datetime as dt
 import logging
 import os
 import pathlib
@@ -13,39 +13,15 @@ import numpy as np
 from PIL.Image import Image
 from PIL.Image import open as open_image
 
-from . import clients, imagetools, mathtools, filetools, app
+from . import imagetools, mathtools, app
 
 
 TARGET_WIDTH = 540
 
 
-class _g:
-    cached_screenshot = (dt.datetime.fromtimestamp(0), Image())
-
-
-def invalidate_screenshot():
-    _g.cached_screenshot = (dt.datetime.fromtimestamp(0), Image())
-
-
 class g:
     last_screenshot_save_path: str = ""
     screenshot_width = TARGET_WIDTH
-
-
-def screenshot(*, max_age: float = 1) -> Image:
-    cached_time, _ = _g.cached_screenshot
-    if cached_time < dt.datetime.now() - dt.timedelta(seconds=max_age):
-        new_img = clients.current().screenshot()
-        g.screenshot_width = new_img.width
-        new_img = new_img.convert("RGB")
-        if g.last_screenshot_save_path:
-            with filetools.atomic_save_path(
-                g.last_screenshot_save_path,
-            ) as p:
-                new_img.save(p, format="PNG")
-        app.log.text("screenshot", level=app.DEBUG)
-        _g.cached_screenshot = (dt.datetime.now(), new_img)
-    return _g.cached_screenshot[1]
 
 
 _LOADED_TEMPLATES: Dict[Text, Image] = {}
@@ -86,6 +62,12 @@ def add_middle_ext(name: Text, value: Text) -> Text:
 
 
 class Specification:
+    @classmethod
+    def from_input(cls, input: Input) -> Specification:
+        if isinstance(input, Specification):
+            return input
+        return Specification(input)
+
     def __init__(
         self,
         name: Text,
@@ -136,11 +118,12 @@ class Specification:
         return f"tmpl<{self.name}+{self.pos}>" if self.pos else f"tmpl<{self.name}>"
 
 
+Input = Union[Text, Specification]
 _DEBUG_TMPL = os.getenv("DEBUG_TMPL") or "debug.png"
 
 
 def _match_one(
-    img: Image, tmpl: Union[Text, Specification]
+    img: Image, tmpl: Input
 ) -> Iterator[Tuple[Specification, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(TARGET_WIDTH)
     cv_img = _cv_image(
@@ -152,8 +135,7 @@ def _match_one(
             ),
         )
     )
-    if not isinstance(tmpl, Specification):
-        tmpl = Specification(tmpl)
+    tmpl = Specification.from_input(tmpl)
 
     pos = tmpl.load_pos()
     pil_tmpl = load(tmpl.name)
@@ -207,5 +189,22 @@ def match(
 
 # DEPRECATED
 # spell-checker: disable
+def _legacy_screenshot(*, max_age: float = 1) -> Image:
+    import warnings
+
+    warnings.warn("use `app.device.screenshot` instead", DeprecationWarning)
+    return app.device.screenshot(max_age=max_age)
+
+
+def _legacy_invalidate_screenshot():
+    import warnings
+
+    warnings.warn(
+        "screenshot invalidation is handled by device service", DeprecationWarning
+    )
+
+
 globals()["LOGGER"] = logging.getLogger(__name__)
-globals()["invalidate_screeshot"] = invalidate_screenshot
+globals()["invalidate_screeshot"] = _legacy_invalidate_screenshot
+globals()["invalidate_screenshot"] = _legacy_invalidate_screenshot
+globals()["screenshot"] = _legacy_screenshot

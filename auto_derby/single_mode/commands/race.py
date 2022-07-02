@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import Callable, Optional, Text
 
-from ... import action, templates, terminal, app, template
+from ... import action, templates, terminal, app
 from ...scenes import PaddockScene
 from ...scenes.single_mode import RaceMenuScene
 from .. import Context, Race, RaceResult
@@ -53,9 +53,10 @@ def _handle_race_result(ctx: Context, race: Race):
     res.race = race
 
     tmpl, pos = action.wait_image(*_RACE_ORDER_TEMPLATES.keys())
-    order_img = template.screenshot()
+    order_img = app.device.screenshot()
+
     res.order = _RACE_ORDER_TEMPLATES[tmpl.name]
-    action.tap(pos)
+    app.device.tap(action.template_rect(tmpl, pos))
 
     if ctx.scenario == ctx.SCENARIO_CLIMAX and ctx.date[0] < 4:
         tmpl, pos = action.wait_image_stable(
@@ -64,10 +65,10 @@ def _handle_race_result(ctx: Context, race: Race):
             templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_DRAW,
             templates.SINGLE_MODE_CLIMAX_RIVAL_RACE_LOSE,
         )
-        action.tap(pos)
+        app.device.tap(action.template_rect(tmpl, pos))
         if tmpl.name != templates.CLOSE_BUTTON:
             _, pos = action.wait_image_stable(templates.CLOSE_BUTTON)
-            action.tap(pos)
+            app.device.tap(action.template_rect(tmpl, pos))
 
     tmpl, pos = action.wait_image_stable(
         templates.GREEN_NEXT_BUTTON,
@@ -86,7 +87,7 @@ def _handle_race_result(ctx: Context, race: Race):
             _handle_race_result(ctx, race)
             return
 
-    action.tap(pos)
+    app.device.tap(action.template_rect(tmpl, pos))
     if res.is_failed:
         ctx.mood = {
             ctx.MOOD_VERY_BAD: ctx.MOOD_BAD,
@@ -128,7 +129,7 @@ class RaceCommand(Command):
             )
             if tmpl.name == templates.RACE_RESULT_BUTTON:
                 break
-            action.tap(pos)
+            app.device.tap(action.template_rect(tmpl, pos))
         ctx.race_turns.add(ctx.turn_count())
         ctx.race_history.append(ctx, self.race)
 

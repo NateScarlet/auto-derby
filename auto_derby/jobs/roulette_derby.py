@@ -2,7 +2,7 @@
 # pyright: strict
 
 
-from .. import action, templates, app, template
+from .. import action, templates, app
 import time
 
 
@@ -27,5 +27,5 @@ def roulette_derby():
             templates.ROULETTE_DERBY_GET,
             templates.ROULETTE_DERBY_REWARD_TEXT,
         ):
-            app.log.image(tmpl.name, template.screenshot())
-        action.tap(pos)
+            app.log.image(tmpl.name, app.device.screenshot())
+        app.device.tap(action.template_rect(tmpl, pos))

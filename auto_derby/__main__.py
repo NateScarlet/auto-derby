@@ -16,6 +16,7 @@ import win32con
 import win32gui
 
 from . import __version__, app, clients, config, jobs, plugin, templates, version
+from .infrastructure.client_device_service import ClientDeviceService
 from .infrastructure.logging_log_service import LoggingLogService
 from .infrastructure.multi_log_service import MultiLogService
 from .infrastructure.web_log_service import WebLogService
@@ -102,7 +103,7 @@ def main():
 
         c = config.client()
         c.setup()
-        clients.set_current(c)
+        app.device = ClientDeviceService(c)
         job()
 
 

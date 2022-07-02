@@ -4,8 +4,10 @@
 from __future__ import annotations
 from typing import Tuple
 
+from auto_derby import action
 
-from .. import action, app
+
+from .. import app
 
 
 class VerticalScroll:
@@ -51,13 +53,15 @@ class VerticalScroll:
             return True
         direction = 1 if self._position < 0.5 else -1
 
-        action.swipe(
-            self._origin,
-            dy=-self._page_size * direction,
+        rp = action.resize_proxy()
+
+        app.device.swipe(
+            (*self._origin, *rp.vector2((0, 5), 540)),
+            (self._origin[0], self._origin[1] - self._page_size * direction, 10, 10),
             duration=0.2,
         )
         # prevent inertial scrolling
-        action.tap(self._origin)
+        app.device.tap((*self._origin, *rp.vector2((5, 5), 540)))
         if self._last_direction == direction:
             self._same_direction_count += 1
         else:

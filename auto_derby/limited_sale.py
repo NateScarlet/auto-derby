@@ -3,19 +3,19 @@
 
 from __future__ import annotations
 
-from . import action, app, template, templates
+from . import action, app, templates
 
 
 def buy_first_n(n: int) -> None:
     rp = action.resize_proxy()
     action.wait_tap_image(templates.GO_TO_LIMITED_SALE)
     action.wait_image(templates.CLOSE_NOW_BUTTON)
-    app.log.image("limited sale: buy first %d" % n, template.screenshot())
+    app.log.image("limited sale: buy first %d" % n, app.device.screenshot())
     item_count = 0
-    for _, pos in action.match_image_until_disappear(
+    for tmpl, pos in action.match_image_until_disappear(
         templates.EXCHANGE_BUTTON, sort=lambda x: sorted(x, key=lambda i: i[1][1])
     ):
-        action.tap(pos)
+        app.device.tap(action.template_rect(tmpl, pos))
         action.wait_tap_image(templates.EXCHANGE_CONFIRM_BUTTON)
         for _ in action.match_image_until_disappear(templates.CONNECTING):
             pass
@@ -24,17 +24,17 @@ def buy_first_n(n: int) -> None:
         item_count += 1
         if n > 0 and item_count >= n:
             break
-        action.swipe(
-            rp.vector2((17, 540), 540),
-            dy=rp.vector(-40, 540),
+        app.device.swipe(
+            rp.vector4((17, 540, 10, 10), 540),
+            rp.vector4((17, 500, 10, 10), 540),
             duration=0.2,
         )
 
     action.wait_tap_image(templates.CLOSE_NOW_BUTTON)
     action.wait_tap_image(templates.GREEN_OK_BUTTON)
     action.wait_image(templates.RETURN_BUTTON)
-    for _, pos in action.match_image_until_disappear(templates.RETURN_BUTTON):
-        action.tap(pos)
+    for tmpl, pos in action.match_image_until_disappear(templates.RETURN_BUTTON):
+        app.device.tap(action.template_rect(tmpl, pos))
 
 
 def ignore() -> None:

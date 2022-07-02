@@ -61,7 +61,7 @@ def _recognize_item(rp: mathtools.ResizeProxy, img: Image) -> Item:
     return v
 
 
-def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
+def _recognize_menu(img: Image) -> Iterator[Tuple[Item, app.Rect]]:
     rp = mathtools.ResizeProxy(img.width)
 
     y_min = rp.vector(390, 540)
@@ -83,6 +83,8 @@ def _recognize_menu(img: Image) -> Iterator[Tuple[Item, Tuple[int, int]]]:
         yield _recognize_item(rp, img.crop(bbox)), (
             rp.vector(450, 540),
             y - rp.vector(15, 540),
+            rp.vector(10, 540),
+            rp.vector(10, 540),
         )
 
 
@@ -119,7 +121,7 @@ class ShopScene(Scene):
         while self._scroll.next():
             new_items = tuple(
                 i
-                for i, _ in _recognize_menu(template.screenshot())
+                for i, _ in _recognize_menu(app.device.screenshot())
                 if i not in self.items
             )
             if not new_items:
@@ -140,7 +142,7 @@ class ShopScene(Scene):
         selected: Sequence[Item] = list()
 
         def _select_visible_items() -> None:
-            for match, pos in _recognize_menu(template.screenshot()):
+            for match, pos in _recognize_menu(app.device.screenshot()):
                 if match not in remains:
                     continue
                 if ctx.items.get(match.id).quantity >= match.max_quantity:
@@ -149,7 +151,7 @@ class ShopScene(Scene):
                     continue
 
                 app.log.text("exchange: %s" % match)
-                action.tap(pos)
+                app.device.tap(pos)
                 ctx.shop_coin -= match.price
                 remains.remove(match)
                 selected.append(match)

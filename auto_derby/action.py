@@ -1,27 +1,20 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from . import mathtools
-from . import template
 import time
 from typing import Callable, Iterable, Iterator, Text, Tuple, TypeVar, Union
 
-from . import clients
+from . import app, mathtools, template
 
 
 def resize_proxy() -> mathtools.ResizeProxy:
     """Resize proxy to current client width."""
-    return mathtools.ResizeProxy(clients.current().width)
-
-
-def tap(point: Tuple[int, int]):
-    clients.current().tap(point)
-    template.invalidate_screenshot()
+    return mathtools.ResizeProxy(app.device.width())
 
 
 def count_image(*tmpl: Union[Text, template.Specification]) -> int:
     ret = 0
-    for _ in template.match(template.screenshot(), *tmpl):
+    for _ in template.match(app.device.screenshot(), *tmpl):
         ret += 1
     return ret
 
@@ -35,7 +28,7 @@ def match_image_until_disappear(
 ) -> Iterator[Tuple[template.Specification, Tuple[int, int]]]:
     while True:
         count = 0
-        for i in sort(template.match(template.screenshot(max_age=0), *tmpl)):
+        for i in sort(template.match(app.device.screenshot(max_age=0), *tmpl)):
             count += 1
             yield i
             break  # actions will make screenshot outdate
@@ -50,7 +43,7 @@ def wait_image(
     deadline = time.time() + timeout
     while True:
         try:
-            return next(template.match(template.screenshot(max_age=0), *tmpl))
+            return next(template.match(app.device.screenshot(max_age=0), *tmpl))
         except StopIteration:
             if time.time() > deadline:
                 raise TimeoutError()
@@ -94,18 +87,27 @@ def run_with_retry(fn: Callable[[], T], max_retry: int = 10, delay: float = 1) -
 def wait_image_disappear(*tmpl: Union[Text, template.Specification]) -> None:
     while True:
         try:
-            next(template.match(template.screenshot(max_age=0), *tmpl))
+            next(template.match(app.device.screenshot(max_age=0), *tmpl))
             time.sleep(0.5)
         except StopIteration:
             break
 
 
+def template_rect(tmpl: template.Input, pos: Tuple[int, int]) -> app.Rect:
+    rp = resize_proxy()
+    img = template.load(template.Specification.from_input(tmpl).name)
+
+    return (*pos, *rp.vector2((img.width, img.height), template.TARGET_WIDTH))
+
+
 def tap_image(
-    name: Union[Text, template.Specification], *, x: int = 0, y: int = 0
+    tmpl: Union[Text, template.Specification], *, x: int = 0, y: int = 0
 ) -> bool:
     try:
-        name, pos = next(template.match(template.screenshot(), name))
-        tap((pos[0] + x, pos[1] + y))
+        tmpl, pos = next(template.match(app.device.screenshot(), tmpl))
+        img = template.load(tmpl.name)
+        w, h = resize_proxy().vector2((img.width, img.height), template.TARGET_WIDTH)
+        app.device.tap((pos[0] + x, pos[1] + y, w - x, h - y))
         return True
     except StopIteration:
         return False
@@ -114,21 +116,36 @@ def tap_image(
 def wait_tap_image(
     name: Union[Text, template.Specification], *, x: int = 0, y: int = 0
 ) -> None:
-    _, last_pos = wait_image(name)
+    tmpl, last_pos = wait_image(name)
     while True:
-        _, pos = wait_image(name)
+        tmpl, pos = wait_image(name)
         if pos == last_pos:
             break
         last_pos = pos
-    tap((pos[0] + x, pos[1] + y))
+    img = template.load(tmpl.name)
+    w, h = resize_proxy().vector2((img.width, img.height), template.TARGET_WIDTH)
+    app.device.tap((pos[0] + x, pos[1] + y, w - x, h - y))
 
 
-def swipe(point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.1):
-    clients.current().swipe(point, dx=dx, dy=dy, duration=duration)
-    template.invalidate_screenshot()
+# DEPRECATED
 
 
-def reset_client_size() -> None:
-    client = clients.current()
-    if isinstance(client, clients.DMMClient):
-        client.setup()
+def _legacy_reset_client_size() -> None:
+    app.device.reset_size()
+
+
+def _legacy_tap(point: Tuple[int, int]):
+    x, y = point
+    app.device.tap((x, y, 5, 5))
+
+
+def _legacy_swipe(
+    point: Tuple[int, int], *, dx: int = 0, dy: int = 0, duration: float = 0.1
+):
+    x, y = point
+    app.device.swipe((x, y, 5, 5), (x + dx, y + dy, 5, 5), duration=duration)
+
+
+globals()["tap"] = _legacy_tap
+globals()["swipe"] = _legacy_swipe
+globals()["reset_client_size"] = _legacy_reset_client_size

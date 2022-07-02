@@ -31,7 +31,7 @@ ALL_OPTIONS = [
 
 def _handle_option():
     time.sleep(0.2)  # wait animation
-    ans = event.get_choice(template.screenshot(max_age=0))
+    ans = event.get_choice(app.device.screenshot(max_age=0))
     action.tap_image(ALL_OPTIONS[ans - 1])
 
 
@@ -177,7 +177,7 @@ def _pass(ac: _ActionContext):
 
 
 def _tap(ac: _ActionContext):
-    action.tap(ac.pos)
+    app.device.tap(action.template_rect(ac.tmpl, ac.pos))
 
 
 def _cancel(ac: _ActionContext):
@@ -283,7 +283,7 @@ def _handle_aoharu_team_race(ac: _ActionContext):
         templates.SINGLE_MODE_AOHARU_RACE_RESULT_BUTTON,
         templates.SINGLE_MODE_AOHARU_MAIN_RACE_BUTTON,
     )
-    action.tap(pos)
+    app.device.tap(action.template_rect(tmpl, pos))
     if tmpl.name == templates.SINGLE_MODE_AOHARU_MAIN_RACE_BUTTON:
         action.wait_tap_image(templates.GO_TO_RACE_BUTTON)
         action.wait_tap_image(templates.RACE_START_BUTTON)
@@ -293,7 +293,7 @@ def _handle_aoharu_team_race(ac: _ActionContext):
             templates.SKIP_BUTTON,
             templates.SINGLE_MODE_RACE_NEXT_BUTTON,
         )
-        action.tap(pos)
+        app.device.tap(action.template_rect(tmpl, pos))
         if tmpl.name == templates.SINGLE_MODE_RACE_NEXT_BUTTON:
             break
 

@@ -41,9 +41,32 @@ class Client(ABC):
         ...
 
 
-def current() -> Client:
+# DEPRECATED:
+
+
+def _legacy_current() -> Client:
+    import warnings
+
+    warnings.warn(
+        "use `app.device` instead",
+        DeprecationWarning,
+    )
     return _g.current_client
 
 
-def set_current(c: Client) -> None:
+def _legacy_set_current(c: Client) -> None:
+    import warnings
+
+    warnings.warn(
+        "use `app.device = ClientDeviceService(c)` instead",
+        DeprecationWarning,
+    )
+    from .. import app
+    from ..infrastructure.client_device_service import ClientDeviceService
+
+    app.device = ClientDeviceService(c)
     _g.current_client = c
+
+
+globals()["current"] = _legacy_current
+globals()["set_current"] = _legacy_set_current

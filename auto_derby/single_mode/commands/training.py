@@ -6,7 +6,7 @@ from __future__ import annotations
 import time
 from typing import Text
 
-from ... import action, template
+from ... import action, app
 from ...scenes import UnknownScene
 from ...scenes.single_mode import TrainingScene
 from .. import Context, Training, item
@@ -25,11 +25,13 @@ class TrainingCommand(Command):
         g.on_command(ctx, self)
         TrainingScene.enter(ctx)
         x, y = self.training.confirm_position
-        current_training = Training.from_training_scene_v2(ctx, template.screenshot())
+        rp = action.resize_proxy()
+        w, h = rp.vector2((30, 80), 540)
+        current_training = Training.from_training_scene_v2(ctx, app.device.screenshot())
         if current_training.type != self.training.type:
-            action.tap((x, y))
+            app.device.tap((x, y - h, w, h))
             time.sleep(0.1)
-        action.tap((x, y))
+        app.device.tap((x, y - h, w, h))
         ctx.training_history.append(ctx, current_training)
         UnknownScene.enter(ctx)
 

@@ -3,7 +3,7 @@
 
 from typing import Text
 
-from .. import action, config, templates, template
+from .. import action, config, templates, template, app
 
 
 def daily_race(race_name: Text):
@@ -39,9 +39,9 @@ def daily_race(race_name: Text):
         elif name == templates.LIMITED_SALE_OPEN:
             config.on_limited_sale()
         elif name == templates.DAILY_RACE_REWARD_CLEAR:
-            _, pos = sorted(
-                template.match(template.screenshot(), tmpl), key=lambda x: x[1]
+            tmpl, pos = sorted(
+                template.match(app.device.screenshot(), tmpl), key=lambda x: x[1]
             )[0]
-            action.tap(pos)
+            app.device.tap(action.template_rect(tmpl, pos))
         else:
-            action.tap(pos)
+            app.device.tap(action.template_rect(tmpl, pos))

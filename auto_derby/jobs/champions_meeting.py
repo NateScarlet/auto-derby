@@ -3,7 +3,7 @@
 
 import time
 
-from .. import action, templates
+from .. import action, templates, app
 
 
 def champions_meeting():
@@ -34,4 +34,4 @@ def champions_meeting():
                 exit(0)
             action.wait_tap_image(templates.GREEN_OK_BUTTON)
         else:
-            action.tap(pos)
+            app.device.tap(action.template_rect(tmpl, pos))

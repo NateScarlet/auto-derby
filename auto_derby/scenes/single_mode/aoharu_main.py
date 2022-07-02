@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+from auto_derby import imagetools
 
-from ... import action, templates
+
+from ... import action, templates, app
 from ...scenes import Scene
 from ..scene import Scene, SceneHolder
 
@@ -26,7 +28,7 @@ class AoharuMainScene(Scene):
 
     def go_race(self) -> None:
         rp = action.resize_proxy()
-        action.tap(rp.vector2((265, 805), 540))
+        app.device.tap(rp.vector4(imagetools.rect_from_bbox((195, 786, 343, 842)), 540))
 
     def recognize(self) -> None:
         self.is_final = (

@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import time
 
-from ... import action, single_mode, template, templates
+from ... import action, single_mode, templates, app
 from ...single_mode.race import Race, find_by_race_menu_image
 from ..scene import Scene, SceneHolder
 from ..vertical_scroll import VerticalScroll
@@ -44,7 +44,7 @@ class RaceMenuScene(Scene):
         rp = action.resize_proxy()
         if tmpl.name == templates.SINGLE_MODE_FORMAL_RACE_BANNER:
             y += rp.vector(60, 540)
-        action.tap((x, y))
+        app.device.tap(action.template_rect(tmpl, (x, y)))
         if tmpl.name == templates.SINGLE_MODE_SCHEDULED_RACE_OPENING_BANNER:
             action.wait_tap_image(templates.SINGLE_MODE_GO_TO_SCHEDULED_RACE_BUTTON)
         tmpl, _ = action.wait_image(
@@ -61,13 +61,14 @@ class RaceMenuScene(Scene):
         return cls()
 
     def first_race(self, ctx: single_mode.Context) -> Race:
-        return next(find_by_race_menu_image(ctx, template.screenshot()))[0]
+        return next(find_by_race_menu_image(ctx, app.device.screenshot()))[0]
 
     def choose_race(self, ctx: single_mode.Context, race: Race) -> None:
         time.sleep(0.2)  # wait animation
+        rp = action.resize_proxy()
         while self._scroll.next():
-            for race2, pos in find_by_race_menu_image(ctx, template.screenshot()):
+            for race2, pos in find_by_race_menu_image(ctx, app.device.screenshot()):
                 if race2 == race:
-                    action.tap(pos)
+                    app.device.tap((*pos, *rp.vector2((200, 20), 540)))
                     return
         raise ValueError("not found: %s" % race)

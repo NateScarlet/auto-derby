@@ -1,7 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from .. import action, app, config, template, templates
+from .. import action, app, config, templates
 from ..scenes.scene import Scene
 from ..scenes.team_race import CompetitorMenuScene
 from ..scenes.unknown import UnknownScene
@@ -40,7 +40,10 @@ def team_race():
             scene = CompetitorMenuScene.enter(ctx)
             granted_reward_pos = scene.locate_granted_reward()
             if granted_reward_pos:
-                action.tap(granted_reward_pos)
+                rp = action.resize_proxy()
+                w, h = rp.vector2((350, 40), 540)
+                x, y = granted_reward_pos
+                app.device.tap((x - w, y - h, w, h))
                 UnknownScene.enter(ctx)
                 action.wait_tap_image(templates.GREEN_NEXT_BUTTON)
                 action.wait_tap_image(templates.RACE_ITEM_PARFAIT)
@@ -53,5 +56,5 @@ def team_race():
         elif name == templates.LIMITED_SALE_OPEN:
             config.on_limited_sale()
         else:
-            app.log.image("tap: %s" % name, template.screenshot())
-            action.tap(pos)
+            app.log.image("tap: %s" % name, app.device.screenshot())
+            app.device.tap(action.template_rect(tmpl, pos))

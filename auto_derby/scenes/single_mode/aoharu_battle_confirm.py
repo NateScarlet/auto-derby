@@ -3,12 +3,11 @@
 
 from __future__ import annotations
 
-from PIL.Image import Image
-from auto_derby import constants, template
-
 from typing import Any, Dict, Iterator, Text, Tuple
 
-from ... import action, templates, mathtools
+from PIL.Image import Image
+
+from ... import action, app, constants, mathtools, template, templates
 from ...scenes import Scene
 from ..scene import Scene, SceneHolder
 
@@ -70,4 +69,4 @@ class AoharuBattleConfirmScene(Scene):
         return cls()
 
     def recognize_predictions(self) -> None:
-        self.predictions = dict(_recognize_predictions(template.screenshot()))
+        self.predictions = dict(_recognize_predictions(app.device.screenshot()))

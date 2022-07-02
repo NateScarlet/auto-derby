@@ -24,7 +24,7 @@ def _recognize_climax_grade_point(ctx: Context):
         return
     rp = action.resize_proxy()
     bbox = rp.vector4((10, 185, 119, 218), 540)
-    img = template.screenshot().crop(bbox)
+    img = app.device.screenshot().crop(bbox)
     x, _ = next(
         template.match(
             img,
@@ -57,7 +57,7 @@ def _recognize_climax_grade_point(ctx: Context):
 
 def _recognize_shop_coin(ctx: Context):
     rp = action.resize_proxy()
-    screenshot = template.screenshot()
+    screenshot = app.device.screenshot()
     _, pos = next(template.match(screenshot, templates.SINGLE_MODE_COMMAND_SHOP))
     x, y = pos
     bbox = (
@@ -139,14 +139,14 @@ class CommandScene(Scene):
         )
         time.sleep(0.2)  # wait animation
         action.wait_image(templates.SINGLE_MODE_CLASS_DETAIL_TITLE)
-        ctx.update_by_class_detail(template.screenshot())
+        ctx.update_by_class_detail(app.device.screenshot())
         action.wait_tap_image(templates.CLOSE_BUTTON)
 
     def recognize_status(self, ctx: single_mode.Context):
         action.wait_tap_image(templates.SINGLE_MODE_CHARACTER_DETAIL_BUTTON)
         time.sleep(0.2)  # wait animation
         action.wait_image(templates.SINGLE_MODE_CHARACTER_DETAIL_TITLE)
-        ctx.update_by_character_detail(template.screenshot())
+        ctx.update_by_character_detail(app.device.screenshot())
         action.wait_tap_image(templates.CLOSE_BUTTON)
 
     def recognize_commands(self, ctx: single_mode.Context) -> None:
@@ -175,7 +175,7 @@ class CommandScene(Scene):
             ctx.scene = self
 
     def recognize(self, ctx: single_mode.Context, *, static: bool = False):
-        action.reset_client_size()
+        app.device.reset_size()
         # animation may not finished
         # https://github.com/NateScarlet/auto-derby/issues/201
         class local:
@@ -184,7 +184,7 @@ class CommandScene(Scene):
         max_retry = 0 if static else self.max_recognition_retry
 
         def _recognize_static():
-            ctx.update_by_command_scene(template.screenshot())
+            ctx.update_by_command_scene(app.device.screenshot())
             self.recognize_commands(ctx)
             if self.has_shop:
                 _recognize_shop_coin(ctx)

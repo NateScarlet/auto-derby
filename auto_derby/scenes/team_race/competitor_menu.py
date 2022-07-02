@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 from PIL.Image import Image
 
-from ... import action, imagetools, mathtools, template, templates, app
+from ... import action, imagetools, mathtools, templates, app
 from ..scene import Scene, SceneHolder
 from ..unknown import UnknownScene
 
@@ -50,7 +50,7 @@ class CompetitorMenuScene(Scene):
 
     def locate_granted_reward(self) -> Optional[Tuple[int, int]]:
         rp = action.resize_proxy()
-        screenshot = template.screenshot()
+        screenshot = app.device.screenshot()
         for bbox in _iter_reward_bbox(rp):
             if _has_granted_reward(screenshot.crop(bbox)):
                 return (bbox[0], bbox[1])
@@ -60,7 +60,14 @@ class CompetitorMenuScene(Scene):
         rp = action.resize_proxy()
         for i, bbox in enumerate(_iter_reward_bbox(rp)):
             if i == index:
-                action.tap((bbox[0], bbox[1]))
+                app.device.tap(
+                    (
+                        bbox[0],
+                        bbox[1],
+                        30,
+                        30,
+                    )
+                )
                 UnknownScene.enter(ctx)
                 return
         raise IndexError(index)

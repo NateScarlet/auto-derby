@@ -1,10 +1,10 @@
 # pyright: strict
 
 from __future__ import annotations
-from auto_derby import template
+from ... import imagetools, template
 
 
-from ... import action, templates
+from ... import action, templates, app
 from ...scenes import Scene
 from ..scene import Scene, SceneHolder
 
@@ -31,9 +31,9 @@ class AoharuCompetitorScene(Scene):
 
     def choose_competitor(self, index: int) -> None:
         rp = action.resize_proxy()
-        pos = (
-            rp.vector2((180, 225), 540),
-            rp.vector2((180, 410), 540),
-            rp.vector2((180, 600), 540),
+        rect = (
+            rp.vector4(imagetools.rect_from_bbox((25, 151, 500, 292)), 540),
+            rp.vector4(imagetools.rect_from_bbox((25, 410, 500, 512)), 540),
+            rp.vector4(imagetools.rect_from_bbox((25, 549, 500, 714)), 540),
         )[index]
-        action.tap(pos)
+        app.device.tap(rect)

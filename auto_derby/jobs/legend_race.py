@@ -1,7 +1,7 @@
 # -*- coding=UTF-8 -*-
 # pyright: strict
 
-from .. import action, templates, config
+from .. import action, templates, config, app
 
 
 def legend_race():
@@ -25,7 +25,7 @@ def legend_race():
         elif name == templates.LIMITED_SALE_OPEN:
             config.on_limited_sale()
         elif name == templates.LEGEND_RACE_COLLECT_ALL_REWARD:
-            action.tap(pos)
+            app.device.tap(action.template_rect(tmpl, pos))
             return
         else:
-            action.tap(pos)
+            app.device.tap(action.template_rect(tmpl, pos))

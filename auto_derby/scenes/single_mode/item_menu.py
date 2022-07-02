@@ -72,7 +72,7 @@ def _recognize_item(rp: mathtools.ResizeProxy, img: Image, disabled: bool) -> It
         raise
 
 
-def _recognize_menu(img: Image, min_y: int) -> Iterator[Tuple[Item, Tuple[int, int]]]:
+def _recognize_menu(img: Image, min_y: int) -> Iterator[Tuple[Item, app.Rect]]:
     rp = mathtools.ResizeProxy(img.width)
 
     min_y = rp.vector(min_y, 540)
@@ -98,6 +98,8 @@ def _recognize_menu(img: Image, min_y: int) -> Iterator[Tuple[Item, Tuple[int, i
         yield _recognize_item(rp, img.crop(bbox), disabled), (
             x + rp.vector(360, 540),
             y,
+            rp.vector(10, 540),
+            rp.vector(10, 540),
         )
 
 
@@ -146,7 +148,7 @@ class ItemMenuScene(Scene):
         while self._scroll.next():
             new_items = tuple(
                 i
-                for i, _ in _recognize_menu(template.screenshot(), self._item_min_y)
+                for i, _ in _recognize_menu(app.device.screenshot(), self._item_min_y)
                 if i not in self.items
             )
             if not new_items:
@@ -178,7 +180,9 @@ class ItemMenuScene(Scene):
         selected: Sequence[Item] = []
 
         def _select_visible_items() -> None:
-            for match, pos in _recognize_menu(template.screenshot(), self._item_min_y):
+            for match, button_rect in _recognize_menu(
+                app.device.screenshot(), self._item_min_y
+            ):
                 if match.id not in remains:
                     continue
                 if match.disabled:
@@ -187,7 +191,7 @@ class ItemMenuScene(Scene):
                     continue
                 app.log.text("select: %s" % match)
                 while remains[match.id]:
-                    action.tap(pos)
+                    app.device.tap(button_rect)
                     remains[match.id] -= 1
                     selected.append(match)
                 del remains[match.id]

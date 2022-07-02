@@ -112,4 +112,4 @@ class GoOutMenuScene(Scene):
         return cls()
 
     def recognize(self, ctx: Context) -> None:
-        ctx.go_out_options = tuple(_recognize_menu(template.screenshot()))
+        ctx.go_out_options = tuple(_recognize_menu(app.device.screenshot()))

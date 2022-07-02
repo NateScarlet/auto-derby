@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import time
 
-from .. import action, templates
+from .. import action, templates, app
 from .scene import Scene, SceneHolder
 from ..constants import RunningStyle
 
@@ -31,8 +31,8 @@ class PaddockScene(Scene):
         action.wait_tap_image(templates.RACE_RUNNING_STYLE_CHANGE_BUTTON)
         _, pos = action.wait_image(templates.RACE_CONFIRM_BUTTON)
         time.sleep(0.5)
-        action.tap(button_pos)
-        action.tap(pos)
+        app.device.tap((*button_pos, 20, 20))
+        app.device.tap((*pos, 100, 20))
 
 
 # deprecated members:

@@ -313,7 +313,7 @@ def _iter_training_images(static: bool):
     rp = action.resize_proxy()
     radius = rp.vector(30, 540)
     _, first_confirm_pos = action.wait_image(_TRAINING_CONFIRM)
-    yield template.screenshot()
+    yield app.device.screenshot()
     if static:
         return
     seen_confirm_pos = {
@@ -328,10 +328,10 @@ def _iter_training_images(static: bool):
     ):
         if mathtools.distance(first_confirm_pos, pos) < radius:
             continue
-        action.tap(pos)
+        app.device.tap((*pos, *rp.vector2((20, 20), 540)))
         _, pos = action.wait_image(_TRAINING_CONFIRM)
         if pos not in seen_confirm_pos:
-            yield template.screenshot()
+            yield app.device.screenshot()
             seen_confirm_pos.add(pos)
 
 
