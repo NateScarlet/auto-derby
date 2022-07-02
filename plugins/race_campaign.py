@@ -136,17 +136,13 @@ class Plugin(auto_derby.Plugin):
 auto_derby.plugin.register(__name__, Plugin())
 
 
-# 春のGⅠ記念ミッション　第２弾 宝塚記念
+# シーク・ソルヴ・サマーウォーク！
 
-_start = datetime.datetime(2022, 6, 20, 4, 0, tzinfo=JST)
-_end = datetime.datetime(2022, 6, 27, 3, 59, tzinfo=JST)
-_add_campaign(OneTimeCampaign(_start, _end, "宝塚記念", order_lte=1))
-
-
-# GⅠ記念ミッション　帝王賞
-
-_start = datetime.datetime(2022, 6, 23, 11, 0, tzinfo=JST)
-_end = datetime.datetime(2022, 6, 30, 3, 59, tzinfo=JST)
-_add_campaign(OneTimeCampaign(_start, _end, "アンタレスステークス", order_lte=1))
-_add_campaign(OneTimeCampaign(_start, _end, "平安ステークス", order_lte=1))
-_add_campaign(OneTimeCampaign(_start, _end, "帝王賞", order_lte=1))
+_start = datetime.datetime(2022, 6, 30, 11, 0, tzinfo=JST)
+_end = datetime.datetime(2022, 7, 11, 10, 59, tzinfo=JST)
+_add_campaign(OneTimeCampaign(_start, _end, "大阪杯", order_lte=3))
+_add_campaign(OneTimeCampaign(_start, _end, "オークス", order_lte=3))
+_add_campaign(OneTimeCampaign(_start, _end, "安田記念", order_lte=3))
+_add_campaign(OneTimeCampaign(_start, _end, "スプリンターズステークス", order_lte=3))
+_add_campaign(OneTimeCampaign(_start, _end, "秋華賞", order_lte=3))
+_add_campaign(OneTimeCampaign(_start, _end, "マイルチャンピオンシップ", order_lte=3))
