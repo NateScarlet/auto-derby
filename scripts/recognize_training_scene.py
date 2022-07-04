@@ -14,8 +14,9 @@ if True:
 import argparse
 
 import PIL.Image
-from auto_derby import single_mode, template, config
+from auto_derby import single_mode, config, app
 from auto_derby.single_mode import Context
+from auto_derby.infrastructure.image_device_service import ImageDeviceService
 
 
 def main():
@@ -45,7 +46,7 @@ def main():
         "climax": Context.SCENARIO_CLIMAX,
     }.get(args.scenario, args.scenario)
     image = PIL.Image.open(image_path)
-    template.g.screenshot_width = image.width
+    app.device = ImageDeviceService(image)
     ctx = Context.new()
     ctx.scenario = scenario
     training = single_mode.Training.from_training_scene_v2(ctx, image)

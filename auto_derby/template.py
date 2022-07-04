@@ -21,7 +21,19 @@ TARGET_WIDTH = 540
 
 class g:
     last_screenshot_save_path: str = ""
-    screenshot_width = TARGET_WIDTH
+
+    @property
+    def _legacy_screenshot_width(self):
+        import warnings
+
+        warnings.warn("use app.device.width() instead", DeprecationWarning)
+        return app.device.width()
+
+    @_legacy_screenshot_width.setter
+    def _legacy_screenshot_width(self, v: int):
+        import warnings
+
+        warnings.warn("use app.device.width() instead", DeprecationWarning)
 
 
 _LOADED_TEMPLATES: Dict[Text, Image] = {}
@@ -34,9 +46,7 @@ def _cv_image(img: Image):
 def load(name: Text) -> Image:
     if name not in _LOADED_TEMPLATES:
         app.log.text("load: %s" % name, level=app.DEBUG)
-        # rp = mathtools.ResizeProxy(_g.screenshot_width)
         img = open_image(pathlib.Path(__file__).parent / "templates" / name)
-        # img = imagetools.resize(img, width=rp.vector(img.width, TARGET_WIDTH))
         _LOADED_TEMPLATES[name] = img
     return _LOADED_TEMPLATES[name]
 
@@ -131,7 +141,7 @@ def _match_one(
             img,
             width=rp.vector(
                 img.width,
-                g.screenshot_width,
+                app.device.width(),
             ),
         )
     )
@@ -153,7 +163,7 @@ def _match_one(
             layers={"tmpl": cv_tmpl, "match": res.astype(np.uint8)},
             level=app.DEBUG,
         )
-    reverse_rp = mathtools.ResizeProxy(g.screenshot_width)
+    reverse_rp = mathtools.ResizeProxy(app.device.width())
     while True:
         mask = cv_pos[0 : res.shape[0], 0 : res.shape[1]]
         _, max_val, _, max_loc = cv2.minMaxLoc(res, mask=mask)
@@ -208,3 +218,4 @@ globals()["LOGGER"] = logging.getLogger(__name__)
 globals()["invalidate_screeshot"] = _legacy_invalidate_screenshot
 globals()["invalidate_screenshot"] = _legacy_invalidate_screenshot
 globals()["screenshot"] = _legacy_screenshot
+g.screenshot_width = g._legacy_screenshot_width  # type: ignore

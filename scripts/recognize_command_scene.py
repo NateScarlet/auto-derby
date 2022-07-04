@@ -14,7 +14,8 @@ if True:
 import argparse
 
 import PIL.Image
-from auto_derby import single_mode, template
+from auto_derby import single_mode, app
+from auto_derby.infrastructure.image_device_service import ImageDeviceService
 
 
 def main():
@@ -27,7 +28,7 @@ def main():
         logging.getLogger("auto_derby").setLevel(logging.DEBUG)
     image_path = args.image
     image = PIL.Image.open(image_path)
-    template.g.screenshot_width = image.width
+    app.device = ImageDeviceService(image)
     ctx = single_mode.Context()
     ctx.update_by_command_scene(image)
     print(ctx)

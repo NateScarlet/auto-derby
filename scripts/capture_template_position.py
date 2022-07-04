@@ -2,19 +2,21 @@
 # pyright: strict
 
 if True:
-    import sys
     import os
+    import sys
 
     sys.path.insert(0, os.path.join(__file__, "../.."))
 
 
-from typing import Text
-import cv2
-from auto_derby import template, templates, imagetools
-import pathlib
-import PIL.Image
-import numpy as np
 import argparse
+import pathlib
+from typing import Text
+
+import cv2
+import numpy as np
+import PIL.Image
+from auto_derby import app, imagetools, template, templates
+from auto_derby.infrastructure.image_device_service import ImageDeviceService
 
 _TEMPLATES_PATH = pathlib.Path(templates.__file__).parent
 
@@ -42,7 +44,7 @@ def create_pos_mask(
     threshold: float,
     padding: int,
 ):
-    template.g.screenshot_width = game_img.width
+    app.device = ImageDeviceService(game_img)
     pos_name = template.add_middle_ext(name, "pos")
     pos_img = template.try_load(pos_name)
 

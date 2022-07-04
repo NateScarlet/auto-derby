@@ -15,8 +15,8 @@ from typing import (
 
 import PIL.Image
 
-from . import clients, mathtools, template, config, data, app
-from .infrastructure.client_device_service import ClientDeviceService
+from . import mathtools, config, data, app
+from .infrastructure.image_device_service import ImageDeviceService
 
 
 def ignore_user_data():
@@ -28,37 +28,13 @@ def ignore_user_data():
 DATA_PATH = Path(__file__).parent / "test_data"
 
 
-class ImageClient(clients.Client):
-    def __init__(self, img: PIL.Image.Image):
-        super().__init__()
-        self.image = img
-
-    @property
-    def width(self) -> int:
-        return self.image.width
-
-    @property
-    def height(self) -> int:
-        return self.image.height
-
-    def screenshot(self) -> PIL.Image.Image:
-        return self.image
-
-    def tap(self, point: Tuple[int, int]) -> None:
-        raise NotImplementedError()
-
-    def swipe(self, point: Tuple[int, int]) -> None:
-        raise NotImplementedError()
-
-
 def use_screenshot(name: Text):
     ignore_user_data()
     img = PIL.Image.open(DATA_PATH / name).convert("RGB")
     # resize old test data
     if img.width == 466:
         img = img.resize((540, 960))
-    app.device = ClientDeviceService(ImageClient(img))
-    template.g.screenshot_width = img.width
+    app.device = ImageDeviceService(img)
     return img, mathtools.ResizeProxy(img.width)
 
 
