@@ -3,8 +3,8 @@
 
 from __future__ import annotations
 
+import copy
 from collections import defaultdict
-from copy import deepcopy
 from typing import (
     TYPE_CHECKING,
     Any,
@@ -54,6 +54,11 @@ class Buff:
 class BuffList:
     def __init__(self, v: Iterable[Buff] = ()) -> None:
         self._l: List[Buff] = list(v)
+
+    def clone(self) -> BuffList:
+        obj = self.__class__()
+        obj._l = self._l.copy()
+        return obj
 
     def __iter__(self):
         yield from self._l
@@ -133,6 +138,23 @@ class EffectSummary:
         self.unknown_effects: Sequence[Effect] = ()
         self.known_effects: Sequence[Effect] = ()
 
+    def clone(self) -> EffectSummary:
+        obj = copy.copy(self)
+        obj.condition_add = self.condition_add.copy()
+        obj.condition_remove = self.condition_remove.copy()
+        obj.training_levels = self.training_levels.copy()
+        obj.training_effect_buff = self.training_effect_buff.copy()
+        for k, v in obj.training_effect_buff.items():
+            obj.training_effect_buff[k] = v.clone()
+        obj.training_vitality_debuff = self.training_vitality_debuff.copy()
+        for k, v in obj.training_vitality_debuff.items():
+            obj.training_vitality_debuff[k] = v.clone()
+        obj.race_fan_buff = self.race_fan_buff.clone()
+        obj.race_reward_buff = self.race_reward_buff.clone()
+        obj.character_friendship = self.character_friendship.copy()
+
+        return obj
+
     def add(self, item: Item, age: int = 0):
         for effect in item.effects:
             if effect.turn_count < age:
@@ -149,9 +171,6 @@ class EffectSummary:
                     *self.unknown_effects,
                     effect,
                 )
-
-    def clone(self) -> EffectSummary:
-        return deepcopy(self)
 
     def apply_to_training(self, ctx: Context, training: Training) -> Training:
         """

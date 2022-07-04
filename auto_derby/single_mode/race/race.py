@@ -2,7 +2,7 @@
 # -*- coding=UTF-8 -*-
 from __future__ import annotations
 
-from copy import deepcopy
+import copy
 from typing import TYPE_CHECKING, Any, Dict, Iterator, Optional, Set, Text, Tuple
 
 from auto_derby.constants import RunningStyle
@@ -94,8 +94,8 @@ class Race:
 
         self.run_style = RunningStyle.UNKNOWN
 
-    def clone(self):
-        return deepcopy(self)
+    def clone(self) -> Race:
+        return copy.copy(self)
 
     def to_dict(self) -> Dict[Text, Any]:
         return {

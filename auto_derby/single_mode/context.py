@@ -19,7 +19,7 @@ from typing import (
 if TYPE_CHECKING:
     from . import go_out
 
-from copy import deepcopy
+import copy
 
 import cast_unknown as cast
 import cv2
@@ -345,6 +345,16 @@ class Context:
         self.items_last_updated_turn = 0
         self.item_history = item.History()
 
+    def clone(self) -> Context:
+        obj = copy.copy(self)
+        obj.conditions = self.conditions.copy()
+        obj.training_levels = self.training_levels.copy()
+        obj.items = self.items.clone()
+        obj.items_last_updated_turn = 0
+        obj.item_history = self.item_history
+
+        return obj
+
     def target_grade_point(self) -> int:
         if self.date[1:] == (0, 0):
             return 0
@@ -640,9 +650,6 @@ class Context:
             d["gradePoint"] = self.grade_point
             d["shopCoin"] = self.shop_coin
         return d
-
-    def clone(self):
-        return deepcopy(self)
 
     @classmethod
     def status_by_name(cls, name: Text) -> Tuple[int, Text]:

@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from copy import deepcopy
+import copy
 from typing import TYPE_CHECKING, Any, Dict, Text, Tuple
 
 import numpy as np
@@ -39,6 +39,9 @@ class Item:
         self.price = 0
         self.quantity = 0
         self.disabled = False
+
+    def clone(self) -> Item:
+        return copy.copy(self)
 
     def __eq__(self, other: object) -> bool:
         return isinstance(other, Item) and self._equal_key() == other._equal_key()
@@ -82,9 +85,6 @@ class Item:
         v.effect_priority = d["effectPriority"]
         v.effects = tuple(Effect.from_dict(i) for i in d["effects"])
         return v
-
-    def clone(self):
-        return deepcopy(self)
 
     def effect_summary(self) -> EffectSummary:
         es = EffectSummary()
