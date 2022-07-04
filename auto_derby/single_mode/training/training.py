@@ -2,7 +2,6 @@
 # pyright: strict
 from __future__ import annotations
 
-from copy import deepcopy
 from typing import Tuple
 
 from PIL.Image import Image
@@ -49,6 +48,25 @@ class Training:
         self.confirm_position: Tuple[int, int] = (0, 0)
         self.partners: Tuple[Partner, ...] = ()
 
+    def clone(self) -> Training:
+        obj = self.__class__()
+        obj.level = self.level
+        obj.type = self.type
+
+        obj.speed = self.speed
+        obj.stamina = self.stamina
+        obj.power = self.power
+        obj.guts = self.guts
+        obj.wisdom = self.wisdom
+        obj.skill = self.skill
+        obj.vitality = self.vitality
+        obj._use_estimate_vitality = self._use_estimate_vitality
+        obj.failure_rate = self.failure_rate
+        obj.confirm_position = self.confirm_position
+        obj.partners = self.partners
+
+        return obj
+
     def __str__(self):
 
         named_data = (
@@ -79,9 +97,6 @@ class Training:
             ).strip()
             + ">"
         )
-
-    def clone(self):
-        return deepcopy(self)
 
     def score(self, ctx: Context) -> float:
         return training_score.compute(ctx, self)

@@ -12,6 +12,11 @@ class ItemList:
     def __init__(self) -> None:
         self._m: Dict[int, Item] = {}
 
+    def clone(self) -> ItemList:
+        obj = self.__class__()
+        obj._m = self._m.copy()
+        return obj
+
     def __contains__(self, value: Item) -> bool:
         return self.get(value.id).quantity > 0
 

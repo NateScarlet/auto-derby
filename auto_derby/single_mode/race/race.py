@@ -2,8 +2,8 @@
 # -*- coding=UTF-8 -*-
 from __future__ import annotations
 
-from copy import deepcopy
 from typing import TYPE_CHECKING, Any, Dict, Iterator, Optional, Set, Text, Tuple
+
 
 from auto_derby.constants import RunningStyle
 
@@ -92,8 +92,30 @@ class Race:
 
         self.reward_buff = 0.0
 
-    def clone(self):
-        return deepcopy(self)
+    def clone(self) -> Race:
+        obj = self.__class__()
+        obj.name = self.name
+        obj.stadium = self.stadium
+        obj.permission = self.permission
+        obj.month = self.month
+        obj.half = self.half
+        obj.grade = self.grade
+        obj.entry_count = self.entry_count
+        obj.distance = self.distance
+        obj.min_fan_count = self.min_fan_count
+
+        obj.ground = self.ground
+        obj.track = self.track
+        obj.turn = self.turn
+        obj.target_statuses = self.target_statuses
+        obj.fan_counts = self.fan_counts
+        obj.characters = self.characters
+        obj.grade_points = self.grade_points
+        obj.shop_coins = self.shop_coins
+
+        obj.reward_buff = self.reward_buff
+
+        return obj
 
     def to_dict(self) -> Dict[Text, Any]:
         return {
