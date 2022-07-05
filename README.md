@@ -114,3 +114,22 @@ single_mode_training_images 为异步截取的训练画面，训练相关问题�
 ```powershell
 Get-ChildItem -File -Recurse .\debug\single_mode_training_images | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 5
 ```
+
+## 贡献代码
+
+PR 提到开发 (dev) 分支，CI 会自动跑测试。
+
+一个 PR 只解决一个问题。
+
+开发依赖在 dev-requirements.txt。
+
+运行命令时候可用的环境变量见 .env.example，推荐用 godotenv 工具来执行命令。
+
+如果 CI lint 阶段出错，运行 `make format` 应该能自动修复。
+
+本地跑测试使用 `make test`。
+
+添加新图片模版后使用 `make -C auto-derby/templates` 生成索引。
+
+限制图片模版位置使用 `./scripts/capture_template_position.py` 或者用画图编辑。
+画图编辑完后推荐运行 `make -C auto-derby/templates {模版名称}.pos.png` 来将图片转为 1bit 深度来减小体积。
