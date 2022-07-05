@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.4](https://github.com/NateScarlet/auto-derby/compare/v1.26.3...v1.26.4) (2022-07-05)
+
+### Bug Fixes
+
+- should deprecate template.g.screenshot_width ([9dcacbf](https://github.com/NateScarlet/auto-derby/commit/9dcacbf1427ee055b44a38f1d841747620c3a390)), closes [#322](https://github.com/NateScarlet/auto-derby/issues/322)
+
+### Performance
+
+- avoid unnecessary deepcopy ([bf45a5b](https://github.com/NateScarlet/auto-derby/commit/bf45a5b03a67fcb0fe5ddfb715068908d8db7d17))
+
 ## [1.26.3](https://github.com/NateScarlet/auto-derby/compare/v1.26.2...v1.26.3) (2022-07-02)
 
 ### Bug Fixes
