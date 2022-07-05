@@ -3,17 +3,17 @@
 
 from __future__ import annotations
 
+import copy
 from typing import TYPE_CHECKING, Any, Dict, Text, Tuple
 
 import numpy as np
 
-from ... import mathtools, app
+from ... import app, mathtools
 from .. import condition, race, training
 from ..training import Training
 from .effect import Effect
 from .effect_summary import EffectSummary
 from .globals import g
-
 
 if TYPE_CHECKING:
     from ..commands import Command
@@ -40,17 +40,7 @@ class Item:
         self.disabled = False
 
     def clone(self) -> Item:
-        obj = self.__class__()
-        obj.id = self.id
-        obj.name = self.name
-        obj.description = self.description
-        obj.original_price = self.original_price
-        obj.max_quantity = self.max_quantity
-        obj.effect_priority = self.effect_priority
-        obj.effects = self.effects
-        obj.price = self.price
-        obj.quantity = self.quantity
-        obj.disabled = self.disabled
+        obj = copy.copy(self)
         return obj
 
     def __eq__(self, other: object) -> bool:

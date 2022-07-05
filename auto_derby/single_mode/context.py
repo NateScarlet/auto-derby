@@ -16,10 +16,10 @@ from typing import (
     Type,
 )
 
-
 if TYPE_CHECKING:
     from . import go_out
 
+import copy
 
 import cast_unknown as cast
 import cv2
@@ -346,55 +346,10 @@ class Context:
         self.item_history = item.History()
 
     def clone(self) -> Context:
-        obj = self.__class__()
-        obj.character = self.character
-        obj.speed = self.speed
-        obj.stamina = self.stamina
-        obj.power = self.power
-        obj.guts = self.guts
-        obj.wisdom = self.wisdom
-        obj.date = self.date
-        obj.vitality = self.vitality
-        obj.max_vitality = self.max_vitality
-        obj.mood = self.mood
+        obj = copy.copy(self)
         obj.conditions = self.conditions.copy()
-        obj.fan_count = self.fan_count
-        obj.is_after_winning = self.is_after_winning
-
-        obj._extra_turn_count = self._extra_turn_count
-        obj.target_fan_count = self.target_fan_count
-
-        obj.turf = self.turf
-        obj.dart = self.dart
-
-        obj.sprint = self.sprint
-        obj.mile = self.mile
-        obj.intermediate = self.intermediate
-        obj.long = self.long
-
-        obj.lead = self.lead
-        obj.head = self.head
-        obj.middle = self.middle
-        obj.last = self.last
-
-        obj.scene = self.scene
-        obj.go_out_options = self.go_out_options
-        obj.scenario = self.scenario
-
-        obj.grade_point = self.grade_point
-        obj.shop_coin = self.shop_coin
-
-        obj.training_history = self.training_history
-        obj.trainings = self.trainings
         obj.training_levels = self.training_levels.copy()
-
-        obj.race_turns = self.race_turns
-        obj.race_history = self.race_history
-
         obj.items = self.items.clone()
-        obj.items_last_updated_turn = 0
-        obj.item_history = self.item_history
-
         return obj
 
     def target_grade_point(self) -> int:

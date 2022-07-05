@@ -2,10 +2,12 @@
 # pyright: strict
 
 from __future__ import annotations
+
+import copy
 from typing import Dict, Iterator
 
-from .item import Item
 from . import game_data
+from .item import Item
 
 
 class ItemList:
@@ -13,7 +15,7 @@ class ItemList:
         self._m: Dict[int, Item] = {}
 
     def clone(self) -> ItemList:
-        obj = self.__class__()
+        obj = copy.copy(self)
         obj._m = self._m.copy()
         return obj
 

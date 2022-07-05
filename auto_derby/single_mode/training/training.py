@@ -2,6 +2,7 @@
 # pyright: strict
 from __future__ import annotations
 
+import copy
 from typing import Tuple
 
 from PIL.Image import Image
@@ -49,22 +50,7 @@ class Training:
         self.partners: Tuple[Partner, ...] = ()
 
     def clone(self) -> Training:
-        obj = self.__class__()
-        obj.level = self.level
-        obj.type = self.type
-
-        obj.speed = self.speed
-        obj.stamina = self.stamina
-        obj.power = self.power
-        obj.guts = self.guts
-        obj.wisdom = self.wisdom
-        obj.skill = self.skill
-        obj.vitality = self.vitality
-        obj._use_estimate_vitality = self._use_estimate_vitality
-        obj.failure_rate = self.failure_rate
-        obj.confirm_position = self.confirm_position
-        obj.partners = self.partners
-
+        obj = copy.copy(self)
         return obj
 
     def __str__(self):

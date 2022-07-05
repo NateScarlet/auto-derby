@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import copy
 from collections import defaultdict
 from typing import (
     TYPE_CHECKING,
@@ -18,8 +19,7 @@ from typing import (
     TypeVar,
 )
 
-
-from ... import mathtools, app
+from ... import app, mathtools
 from ...constants import Mood, TrainingType
 from .. import condition
 from ..context import Context
@@ -55,7 +55,7 @@ class BuffList:
         self._l: List[Buff] = list(v)
 
     def clone(self) -> BuffList:
-        obj = self.__class__()
+        obj = copy.copy(self)
         obj._l = self._l.copy()
         return obj
 
@@ -138,15 +138,7 @@ class EffectSummary:
         self.known_effects: Sequence[Effect] = ()
 
     def clone(self) -> EffectSummary:
-        obj = self.__class__()
-        obj.speed = self.speed
-        obj.stamina = self.stamina
-        obj.power = self.power
-        obj.guts = self.guts
-        obj.wisdom = self.wisdom
-        obj.vitality = self.vitality
-        obj.max_vitality = self.max_vitality
-        obj.mood = self.mood
+        obj = copy.copy(self)
         obj.condition_add = self.condition_add.copy()
         obj.condition_remove = self.condition_remove.copy()
         obj.training_levels = self.training_levels.copy()
@@ -156,15 +148,9 @@ class EffectSummary:
         obj.training_vitality_debuff = self.training_vitality_debuff.copy()
         for k, v in obj.training_vitality_debuff.items():
             obj.training_vitality_debuff[k] = v.clone()
-        obj.training_partner_reassign = self.training_partner_reassign
-        obj.training_no_failure = self.training_no_failure
         obj.race_fan_buff = self.race_fan_buff.clone()
         obj.race_reward_buff = self.race_reward_buff.clone()
-        obj.support_friendship = self.support_friendship
         obj.character_friendship = self.character_friendship.copy()
-        obj.unknown_effects = self.unknown_effects
-        obj.known_effects = self.known_effects
-
         return obj
 
     def add(self, item: Item, age: int = 0):
