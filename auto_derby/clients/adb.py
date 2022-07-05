@@ -134,8 +134,8 @@ class ADBClient(Client):
         # https://developer.android.com/reference/android/graphics/PixelFormat#RGBA_8888
         assert pixel_format == 1, "unsupported pixel format: %s" % pixel_format
         img = PIL.Image.frombuffer(
-            "RGBA", (width, height), img_data[12:], "raw", "RGBX", 0, 1
-        ).convert("RGBA")
+            "RGB", (width, height), img_data[12:], "raw", "RGBX", 0, 1
+        ).convert("RGB")
         return img
 
     def setup(self) -> None:
