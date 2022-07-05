@@ -41,7 +41,7 @@ class ClientDeviceService(Service):
 
         cached_time, _ = self._cached_screenshot
         if cached_time < dt.datetime.now() - dt.timedelta(seconds=max_age):
-            new_img = self._c.screenshot()
+            new_img = self._c.screenshot().convert("RGB")
             if template.g.last_screenshot_save_path:
                 with filetools.atomic_save_path(
                     template.g.last_screenshot_save_path,
