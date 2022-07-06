@@ -105,6 +105,7 @@ def _recognize_menu(img: Image, min_y: int) -> Iterator[Tuple[Item, app.Rect]]:
 
 class ItemMenuScene(Scene):
     _item_min_y = 130
+    _supports_auto_use = False
 
     def __init__(self) -> None:
         super().__init__()
@@ -178,6 +179,7 @@ class ItemMenuScene(Scene):
         for i in items:
             remains[i.id] += i.quantity or 1
         selected: Sequence[Item] = []
+        has_selected: bool = False
 
         def _select_visible_items() -> None:
             for match, button_rect in _recognize_menu(
@@ -186,10 +188,16 @@ class ItemMenuScene(Scene):
                 if match.id not in remains:
                     continue
                 if match.disabled:
-                    app.log.text("skip disabled: %s" % match, level=app.WARN)
+                    if self._supports_auto_use and match.can_be_auto_used():
+                        # add remains[match.id] times matched item into selected
+                        selected.extend((match,) * remains[match.id])
+                    else:
+                        app.log.text("skip disabled: %s" % match, level=app.WARN)
                     del remains[match.id]
                     continue
                 app.log.text("select: %s" % match)
+                nonlocal has_selected
+                has_selected = True
                 while remains[match.id]:
                     app.device.tap(button_rect)
                     remains[match.id] -= 1
@@ -208,9 +216,10 @@ class ItemMenuScene(Scene):
         self._scroll.complete()
 
         if selected:
-            action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
-            action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
-            self._after_use_confirm(ctx)
+            if has_selected:
+                action.wait_tap_image(templates.SINGLE_MODE_SHOP_USE_CONFIRM_BUTTON)
+                action.wait_tap_image(templates.SINGLE_MODE_ITEM_USE_BUTTON)
+                self._after_use_confirm(ctx)
             for i in selected:
                 ctx.items.remove(i.id, 1)
                 ctx.item_history.append(ctx, i)

@@ -455,5 +455,15 @@ class Item:
             return False
         return True
 
+    def can_be_auto_used(self) -> bool:
+        """auto used item by setting
+        ※自動使用の対象となる育成グッズは、「基礎能力アップ」「トレーニングLvアップ」
+        の効果がある育成グッズです。 see https://dmg.umamusume.jp/news/detail?id=831
+        """
+        es = self.effect_summary()
+        if es.training_levels:
+            return True
+        return (es.speed + es.stamina + es.power + es.guts + es.wisdom) > 0
+
 
 g.item_class = Item
