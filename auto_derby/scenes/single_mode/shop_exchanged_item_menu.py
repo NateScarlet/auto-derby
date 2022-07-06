@@ -13,6 +13,7 @@ from .item_menu import ItemMenuScene
 
 class ShopExchangedItemMenuScene(ItemMenuScene):
     _item_min_y = 194
+    _supports_auto_use = True
 
     @classmethod
     def name(cls) -> Text:
