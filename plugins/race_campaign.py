@@ -146,3 +146,10 @@ _add_campaign(OneTimeCampaign(_start, _end, "安田記念", order_lte=3))
 _add_campaign(OneTimeCampaign(_start, _end, "スプリンターズステークス", order_lte=3))
 _add_campaign(OneTimeCampaign(_start, _end, "秋華賞", order_lte=3))
 _add_campaign(OneTimeCampaign(_start, _end, "マイルチャンピオンシップ", order_lte=3))
+
+
+# G1 記念ミッション ジャパンダートダービー#
+_start = datetime.datetime(2022, 7, 7, 4, 0, tzinfo=JST)
+_end = datetime.datetime(2022, 7, 14, 3, 59, tzinfo=JST)
+_add_campaign(OneTimeCampaign(_start, _end, "ジャパンダートダービー", order_lte=1))
+_add_campaign(OneTimeCampaign(_start, _end, "ユニコーンステークス", order_lte=1))
