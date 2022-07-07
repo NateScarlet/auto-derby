@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.5](https://github.com/NateScarlet/auto-derby/compare/v1.26.4...v1.26.5) (2022-07-07)
+
+### Bug Fixes
+
+- **plugin:** race_campaign: update data ([9b46b63](https://github.com/NateScarlet/auto-derby/commit/9b46b636d5838c82a541001b57dabb0f0c1a7a04))
+- should convert screenshot format ([6dfecac](https://github.com/NateScarlet/auto-derby/commit/6dfecacd1bb13301c56862a9f828fa3f15e5ed15)), closes [#328](https://github.com/NateScarlet/auto-derby/issues/328)
+
 ## [1.26.4](https://github.com/NateScarlet/auto-derby/compare/v1.26.3...v1.26.4) (2022-07-05)
 
 ### Bug Fixes
