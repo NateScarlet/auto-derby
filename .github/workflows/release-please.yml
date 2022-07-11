@@ -1,0 +1,14 @@
+on:
+  push:
+    branches:
+      - dev
+name: release-please
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: simple
+          default-branch: dev
+          version-file: version
