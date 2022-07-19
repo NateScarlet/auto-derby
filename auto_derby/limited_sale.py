@@ -29,6 +29,10 @@ def buy_first_n(n: int) -> None:
             rp.vector4((14, 500, 6, 10), 540),
             duration=0.2,
         )
+        # prevent inertial scrolling
+        app.device.tap(
+            rp.vector4((14, 500, 6, 10), 540),
+        )
 
     action.wait_tap_image(templates.CLOSE_NOW_BUTTON)
     action.wait_tap_image(templates.GREEN_OK_BUTTON)
