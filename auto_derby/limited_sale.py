@@ -25,8 +25,8 @@ def buy_first_n(n: int) -> None:
         if n > 0 and item_count >= n:
             break
         app.device.swipe(
-            rp.vector4((17, 540, 10, 10), 540),
-            rp.vector4((17, 500, 10, 10), 540),
+            rp.vector4((14, 540, 6, 10), 540),
+            rp.vector4((14, 500, 6, 10), 540),
             duration=0.2,
         )
 
