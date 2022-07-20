@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.0](https://github.com/NateScarlet/auto-derby/compare/v1.26.5...v1.27.0) (2022-07-20)
+
+
+### Features
+
+* adapt game setting 'auto use item' ([327b13f](https://github.com/NateScarlet/auto-derby/commit/327b13f219e7b341601095b09179c337c4f87783))
+
+
+### Bug Fixes
+
+* **limited-sale:** correct swipe area ([59d450f](https://github.com/NateScarlet/auto-derby/commit/59d450fe62cfdf91cda4f9680e3c1bc3ad0061f4))
+* **limited-sale:** handle inertial scrolling ([7650232](https://github.com/NateScarlet/auto-derby/commit/76502325fdec4816072754f9196ed013f69c9d1f))
+
 ## [1.26.5](https://github.com/NateScarlet/auto-derby/compare/v1.26.4...v1.26.5) (2022-07-07)
 
 ### Bug Fixes
