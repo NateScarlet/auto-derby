@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 from datetime import datetime
 
-VERSION = "1.26.5"  # x-release-please-version
+VERSION = "1.27.1"  # x-release-please-version
 
 # deprecated
 
