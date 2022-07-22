@@ -23,7 +23,7 @@ from .infrastructure.web_log_service import WebLogService
 
 
 def main():
-    app.log.text(f"auto_derby: {__version__.VERSION} ({__version__.RELEASE_DATE})")
+    app.log.text(f"auto_derby: {__version__.VERSION}")
     if config.CHECK_UPDATE:
         version.check_update()
     available_jobs = {

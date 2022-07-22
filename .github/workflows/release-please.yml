@@ -12,3 +12,5 @@ jobs:
           release-type: simple
           default-branch: dev
           version-file: version
+          extra-files: |
+            auto_derby/__version__.py
