@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.1](https://github.com/NateScarlet/auto-derby/compare/v1.27.0...v1.27.1) (2022-07-22)
+
+
+### Bug Fixes
+
+* should update version variable during release ([26e2d0e](https://github.com/NateScarlet/auto-derby/commit/26e2d0e9e27bd570436a0621d2f5d2d04731d537)), closes [#335](https://github.com/NateScarlet/auto-derby/issues/335)
+
 ## [1.27.0](https://github.com/NateScarlet/auto-derby/compare/v1.26.5...v1.27.0) (2022-07-20)
 
 
