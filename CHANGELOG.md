@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.2](https://github.com/NateScarlet/auto-derby/compare/v1.27.1...v1.27.2) (2022-08-05)
+
+
+### Bug Fixes
+
+* remove coding.net from vesion check url ([0d665f0](https://github.com/NateScarlet/auto-derby/commit/0d665f06f34ea3475283d85b5be45cfc33ab0980))
+
 ## [1.27.1](https://github.com/NateScarlet/auto-derby/compare/v1.27.0...v1.27.1) (2022-07-22)
 
 
