@@ -19,7 +19,7 @@ from concurrent import futures
 _VERSION_URLS = (
     "https://cdn.jsdelivr.net/gh/NateScarlet/auto-derby@master/version",
     "https://github.com/NateScarlet/auto-derby/raw/master/version",
-    "https://natescarlet.coding.net/p/github/d/auto-derby/git/raw/master/version",
+    "https://ghproxy.com/https://github.com/NateScarlet/auto-derby/raw/master/version",
 )
 _CHANGELOG_URL = "https://github.com/NateScarlet/auto-derby/blob/master/CHANGELOG.md"
 
