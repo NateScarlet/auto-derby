@@ -304,6 +304,15 @@ def test_find_by_race_menu_image_10():
     _test.snapshot_match(res)
 
 
+def test_find_by_race_menu_image_11():
+    ctx = Context.new()
+    ctx.date = (2, 6, 1)
+    ctx.scenario = ctx.SCENARIO_CLIMAX
+    img, _ = _test.use_screenshot("single_mode/race_menu_11.png")
+    res = sorted(race.find_by_race_menu_image(ctx, img), key=lambda x: x[1][1])
+    _test.snapshot_match(res)
+
+
 def test_find_by_race_menu_image_issue112():
     ctx = Context.new()
     ctx.date = (1, 12, 1)
