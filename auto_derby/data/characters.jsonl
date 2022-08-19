@@ -50,7 +50,7 @@
 {"id": 1050, "name": "ナリタタイシン", "realName": "ナリタタイシン", "katakana": "ナリタタイシン", "voice": "渡部恵子", "birthday": [1990, 6, 10], "gender": "STALLION"}
 {"id": 1051, "name": "ニシノフラワー", "realName": "ニシノフラワー", "katakana": "ニシノフラワー", "voice": "河井晴菜", "birthday": [1989, 4, 19], "gender": "MARE"}
 {"id": 1052, "name": "ハルウララ", "realName": "ハルウララ", "katakana": "ハルウララ", "voice": "首藤志奈", "birthday": [1996, 2, 27], "gender": "MARE"}
-{"id": 1053, "name": "バンブーメモリー", "realName": "バンブーメモリー", "katakana": "バンブーメモリー", "voice": "藍原ことみ", "birthday": [1985, 1, 1], "gender": "STALLION"}
+{"id": 1053, "name": "バンブーメモリー", "realName": "バンブーメモリー", "katakana": "バンブーメモリー", "voice": "藍原ことみ", "birthday": [1985, 5, 14], "gender": "STALLION"}
 {"id": 1054, "name": "ビコーペガサス", "realName": "ビコーペガサス", "katakana": "ビコーペガサス", "voice": "田中あいみ", "birthday": [1991, 2, 8], "gender": "STALLION"}
 {"id": 1055, "name": "マーベラスサンデー", "realName": "マーベラスサンデー", "katakana": "マーベラスサンデー", "voice": "三宅麻理恵", "birthday": [1992, 1, 1], "gender": "STALLION"}
 {"id": 1056, "name": "マチカネフクキタル", "realName": "マチカネフクキタル", "katakana": "マチカネフクキタル", "voice": "新田ひより", "birthday": [1994, 5, 22], "gender": "STALLION"}
@@ -74,9 +74,13 @@
 {"id": 1074, "name": "メジロブライト", "realName": "メジロブライト", "katakana": "メジロブライト", "voice": "大西綺華", "birthday": [1994, 4, 19], "gender": "STALLION"}
 {"id": 1077, "name": "ナリタトップロード", "realName": "ナリタトップロード", "katakana": "ナリタトップロード", "voice": "中村カンナ", "birthday": [1996, 4, 4], "gender": "STALLION"}
 {"id": 1078, "name": "ヤマニンゼファー", "realName": "ヤマニンゼファー", "katakana": "ヤマニンゼファー", "voice": "今泉りおな", "birthday": [1988, 5, 27], "gender": "STALLION"}
+{"id": 1098, "name": "コパノリッキー", "realName": "コパノリッキー", "katakana": "コパノリッキー", "voice": "稲垣好", "birthday": [2010, 3, 24], "gender": "STALLION"}
+{"id": 1099, "name": "ホッコータルマエ", "realName": "ホッコータルマエ", "katakana": "ホッコータルマエ", "voice": "菊池紗矢香", "birthday": [2009, 5, 26], "gender": "STALLION"}
+{"id": 1100, "name": "ワンダーアキュート", "realName": "ワンダーアキュート", "katakana": "ワンダーアキュート", "voice": "須藤叶希", "birthday": [2006, 3, 14], "gender": "STALLION"}
 {"id": 2001, "name": "ハッピーミーク", "realName": "ハッピーミーク", "katakana": "ハッピーミーク", "voice": "吉咲みゆ", "birthday": [1971, 3, 15], "gender": "STALLION"}
 {"id": 2002, "name": "ビターグラッセ", "realName": "ビターグラッセ", "katakana": "ビターグラッセ", "voice": "島田愛野", "birthday": [1971, 4, 11], "gender": "STALLION"}
 {"id": 2003, "name": "リトルココン", "realName": "リトルココン", "katakana": "リトルココン", "voice": "白砂沙帆", "birthday": [1971, 6, 5], "gender": "STALLION"}
+{"id": 2004, "name": "モンジュー", "realName": "モンジュー", "katakana": "モンジュー", "voice": "櫻庭有紗", "birthday": [1996, 4, 4], "gender": "STALLION"}
 {"id": 9001, "name": "駿川たづな", "realName": "駿川たづな", "katakana": "ハヤカワタヅナ", "voice": "藤井ゆきよ", "birthday": [1948, 5, 2], "gender": "MARE"}
 {"id": 9002, "name": "秋川理事長", "realName": "秋川やよい", "katakana": "アキカワヤヨイ", "voice": "水橋かおり", "birthday": [1971, 3, 15], "gender": "STALLION"}
 {"id": 9003, "name": "乙名史記者", "realName": "乙名史悦子", "katakana": "オトナシエツコ", "voice": "陶山恵実里", "birthday": [1971, 3, 15], "gender": "STALLION"}
