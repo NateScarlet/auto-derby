@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.3](https://github.com/NateScarlet/auto-derby/compare/v1.27.2...v1.27.3) (2022-08-19)
+
+
+### Bug Fixes
+
+* **single-mode:** update game data ([d79182a](https://github.com/NateScarlet/auto-derby/commit/d79182a2b848f9474c85fa2ef03cabe15d64c374)), closes [#345](https://github.com/NateScarlet/auto-derby/issues/345)
+
 ## [1.27.2](https://github.com/NateScarlet/auto-derby/compare/v1.27.1...v1.27.2) (2022-08-05)
 
 
