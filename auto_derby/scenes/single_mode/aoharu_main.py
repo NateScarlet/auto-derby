@@ -24,6 +24,7 @@ class AoharuMainScene(Scene):
         if ctx.scene.name() == "single-mode-aoharu-competitor":
             action.wait_tap_image(templates.RETURN_BUTTON)
         action.wait_image(templates.SINGLE_MODE_AOHARU_FORMAL_RACE_BANNER)
+        action.wait_image_disappear(templates.CONNECTING)
         return cls()
 
     def go_race(self) -> None:
