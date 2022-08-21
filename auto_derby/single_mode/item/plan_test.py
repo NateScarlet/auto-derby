@@ -1,7 +1,8 @@
 from auto_derby.constants import TrainingType
 from auto_derby.single_mode.commands.training import TrainingCommand
+from auto_derby.single_mode.race.race import Race, RaceFilters
 from auto_derby.single_mode.training.training import Training
-from . import plan, test_sample, item_list, game_data
+from . import plan, test_sample
 from .globals import g
 
 from ..commands import RaceCommand
@@ -21,7 +22,13 @@ def test_duplicated_effect():
     race.reload_on_demand()
     s, items = plan.compute(
         ctx,
-        RaceCommand(next(i for i in race.g.races if i.name == "トゥインクルスタークライマックス 第3戦")),
+        RaceCommand(
+            next(
+                Race.repository.find(
+                    filter_by=RaceFilters(name=("トゥインクルスタークライマックス 第3戦",))
+                )
+            )
+        ),
     )
     assert s > 0
     assert len(items) == 1

@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 
-from typing import Tuple, Type, TYPE_CHECKING
+from typing import Type, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .race import Race
@@ -14,5 +14,12 @@ class g:
     data_path: str = ""
     result_path: str = ""
     result_max_bytes: int = 10 << 20
-    races: Tuple[Race, ...] = ()
     race_class: Type[Race]
+
+    @property
+    @classmethod
+    def _deprecated_races(cls):
+        return tuple(Race.repository.find())
+
+
+g.races = g._deprecated_races  # type: ignore

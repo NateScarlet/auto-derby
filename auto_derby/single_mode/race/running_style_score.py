@@ -40,21 +40,23 @@ def compute(
     wis *= ctx.mood.race_rate
 
     base_speed_coefficient = 1
-    for i in race.target_statuses:
-        base_speed_coefficient *= 1 + 0.1 * min(
-            2,
-            int(
-                {
-                    race.TARGET_STATUS_SPEED: ctx.speed,
-                    race.TARGET_STATUS_POWER: ctx.power,
-                    race.TARGET_STATUS_STAMINA: ctx.stamina,
-                    race.TARGET_STATUS_GUTS: ctx.guts,
-                    race.TARGET_STATUS_WISDOM: ctx.wisdom,
-                }[i]
-                / 300
-            ),
-        )
-    spd *= base_speed_coefficient
+    course = None if len(race.courses) != 1 else race.courses[0]
+    if course:
+        for i in course.target_statuses:
+            base_speed_coefficient *= 1 + 0.1 * min(
+                2,
+                int(
+                    {
+                        course.TARGET_STATUS_SPEED: ctx.speed,
+                        course.TARGET_STATUS_POWER: ctx.power,
+                        course.TARGET_STATUS_STAMINA: ctx.stamina,
+                        course.TARGET_STATUS_GUTS: ctx.guts,
+                        course.TARGET_STATUS_WISDOM: ctx.wisdom,
+                    }[i]
+                    / 300
+                ),
+            )
+        spd *= base_speed_coefficient
 
     # TODO: race field affect
 
@@ -68,7 +70,7 @@ def compute(
 
     # proper ground
     # from master.mdb `race_proper_ground_rate` table
-    ground = race.ground_status(ctx)
+    ground = race.courses[0].ground_status(ctx)
     ground_rate = {
         "S": 1.05,
         "A": 1.0,
@@ -82,7 +84,7 @@ def compute(
 
     # proper distance
     # from master.mdb `race_proper_distance_rate` table
-    distance = race.distance_status(ctx)
+    distance = race.courses[0].distance_status(ctx)
     d_spd_rate, d_pow_rate = {
         "S": (1.05, 1.0),
         "A": (1.0, 1.0),
@@ -152,7 +154,7 @@ def compute(
     )
     sta += wis_as_sta
 
-    hp = race.distance + hp_factor * 0.8 * sta
+    hp = race.courses[0].distance + hp_factor * 0.8 * sta
     expected_spd = (
         mathtools.interpolate(
             ctx.turn_count(),
@@ -173,7 +175,7 @@ def compute(
             race.GRADE_DEBUT: 0.6,
         }[race.grade]
         * mathtools.interpolate(
-            race.distance,
+            race.courses[0].distance,
             (
                 (0, 1.1),
                 (1200, 1.05),
@@ -183,7 +185,7 @@ def compute(
         )
     )
     expected_hp = (
-        race.distance
+        race.courses[0].distance
         * mathtools.interpolate(
             ctx.turn_count(),
             (
@@ -215,7 +217,7 @@ def compute(
             ),
         )
         * mathtools.interpolate(
-            race.distance,
+            race.courses[0].distance,
             (
                 (0, 0.8),
                 (1600, 1),
@@ -266,7 +268,7 @@ def compute(
             ),
         )
         * mathtools.interpolate(
-            race.distance,
+            race.courses[0].distance,
             (
                 (0, 2.0),
                 (1200, 2.0),

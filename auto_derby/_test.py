@@ -47,7 +47,15 @@ class SupportsToDict(Protocol):
         ...
 
 
+@runtime_checkable
+class SupportsToSnapshot(Protocol):
+    def to_snapshot(self) -> Any:
+        ...
+
+
 def _json_transform(v: object) -> object:
+    if isinstance(v, SupportsToSnapshot):
+        return _json_transform(v.to_snapshot())
     if isinstance(v, SupportsToDict):
         return {k: _json_transform(v) for k, v in v.to_dict().items()}
     if isinstance(v, dict):

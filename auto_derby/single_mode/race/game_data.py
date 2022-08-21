@@ -2,14 +2,12 @@
 # -*- coding=UTF-8 -*-
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Iterator, Text, Tuple
+from typing import TYPE_CHECKING, Iterator, Tuple
 
 if TYPE_CHECKING:
     from ..context import Context
 
-import json
 import logging
-import warnings
 
 import cv2
 import numpy as np
@@ -17,46 +15,12 @@ import PIL.Image
 import PIL.ImageOps
 
 from ... import imagetools, mathtools, ocr, template, templates, texttools, app
-from .globals import g
-from .race import Race
-
-
-class _g:
-    loaded_data_path = ""
-
-
-def _iter_races():
-    with open(g.data_path, "r", encoding="utf-8") as f:
-        for line in f:
-            yield Race.new().from_dict(json.loads(line))
-
-
-def _load_legacy_json():
-    warnings.warn(
-        "json race data support will be removed at next major version, use jsonl instead",
-        DeprecationWarning,
-    )
-    with open(g.data_path, "r", encoding="utf-8") as f:
-        g.races = tuple(Race.new().from_dict(i) for i in json.load(f))
-
-
-def reload() -> None:
-    if g.data_path.endswith(".json"):
-        _load_legacy_json()
-        return
-    g.races = tuple(_iter_races())
-    _g.loaded_data_path = g.data_path
-
-
-def reload_on_demand() -> None:
-    if _g.loaded_data_path != g.data_path:
-        reload()
+from .race import Course, Race
 
 
 def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
-    reload_on_demand()
     year, month, half = date
-    for i in g.races:
+    for i in Race.repository.find():
         if year not in i.years:
             continue
         if date == (1, 0, 0) and i.grade != Race.GRADE_DEBUT:
@@ -97,18 +61,18 @@ def _recognize_fan_count(img: PIL.Image.Image) -> int:
 
 
 _TURN_TRACK_SPEC = {
-    "左·内": (Race.TURN_LEFT, Race.TRACK_IN),
-    "右·内": (Race.TURN_RIGHT, Race.TRACK_IN),
-    "左": (Race.TURN_LEFT, Race.TRACK_MIDDLE),
-    "右": (Race.TURN_RIGHT, Race.TRACK_MIDDLE),
-    "左·外": (Race.TURN_LEFT, Race.TRACK_OUT),
-    "右·外": (Race.TURN_RIGHT, Race.TRACK_OUT),
-    "直線": (Race.TURN_NONE, Race.TRACK_MIDDLE),
-    "右·外→内": (Race.TURN_RIGHT, Race.TRACK_OUT_TO_IN),
+    "左·内": (Course.TURN_LEFT, Course.TRACK_IN),
+    "右·内": (Course.TURN_RIGHT, Course.TRACK_IN),
+    "左": (Course.TURN_LEFT, Course.TRACK_MIDDLE),
+    "右": (Course.TURN_RIGHT, Course.TRACK_MIDDLE),
+    "左·外": (Course.TURN_LEFT, Course.TRACK_OUT),
+    "右·外": (Course.TURN_RIGHT, Course.TRACK_OUT),
+    "直線": (Course.TURN_NONE, Course.TRACK_MIDDLE),
+    "右·外→内": (Course.TURN_RIGHT, Course.TRACK_OUT_TO_IN),
 }
 
 
-def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
+def _recognize_course(img: PIL.Image.Image) -> Course:
     cv_img = imagetools.cv_image(imagetools.resize(img.convert("L"), height=32))
     cv_img = imagetools.level(
         cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
@@ -119,10 +83,10 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
     stadium, text = text[:2], text[2:]
     if text[0] == "芝":
         text = text[1:]
-        ground = Race.GROUND_TURF
+        ground = Course.GROUND_TURF
     elif text[0] == "ダ":
         text = text[3:]
-        ground = Race.GROUND_DART
+        ground = Course.GROUND_DART
     else:
         raise ValueError("_recognize_spec: invalid spec: %s", text)
 
@@ -130,7 +94,13 @@ def _recognize_spec(img: PIL.Image.Image) -> Tuple[Text, int, int, int, int]:
 
     turn, track = _TURN_TRACK_SPEC[texttools.choose(text, _TURN_TRACK_SPEC.keys())]
 
-    return stadium, ground, distance, turn, track
+    return Course(
+        stadium=stadium,
+        ground=ground,
+        distance=distance,
+        track=track,
+        turn=turn,
+    )
 
 
 def _recognize_grade(
@@ -165,29 +135,21 @@ def _match_scenario(ctx: Context, race: Race) -> bool:
 
 def _find_by_spec(
     ctx: Context,
-    stadium: Text,
-    ground: int,
-    distance: int,
-    turn: int,
-    track: int,
+    course: Course,
     no1_fan_count: int,
     grades: Tuple[int, ...],
 ):
-    full_spec = (stadium, ground, distance, turn, track, no1_fan_count)
+
     for i in find_by_date(ctx.date):
         if i.grade not in grades:
             continue
         if not _match_scenario(ctx, i):
             continue
-        if full_spec == (
-            i.stadium,
-            i.ground,
-            i.distance,
-            i.turn,
-            i.track,
-            i.fan_counts[0],
-        ):
-            yield i
+        if course not in i.courses:
+            continue
+        if i.fan_counts[0] != no1_fan_count:
+            continue
+        yield i
 
 
 def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race:
@@ -210,15 +172,11 @@ def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race
         grade_color_pos,
     )
     spec_img = screenshot.crop(spec_bbox)
-    stadium, ground, distance, turn, track = _recognize_spec(spec_img)
+    course = _recognize_course(spec_img)
     no1_fan_count = _recognize_fan_count(screenshot.crop(no1_fan_count_bbox))
 
     full_spec = (
-        stadium,
-        ground,
-        distance,
-        turn,
-        track,
+        course,
         no1_fan_count,
         grades,
     )
@@ -254,15 +212,11 @@ def _find_by_race_menu_item(ctx: Context, img: PIL.Image.Image) -> Iterator[Race
     grade_color_pos = _grade_color_pos(ctx, rp)
 
     spec_img = img.crop(spec_bbox)
-    stadium, ground, distance, turn, track = _recognize_spec(spec_img)
+    course = _recognize_course(spec_img)
     no1_fan_count = _recognize_fan_count(img.crop(no1_fan_count_bbox))
     grades = _recognize_grade(img, grade_color_pos)
     full_spec = (
-        stadium,
-        ground,
-        distance,
-        turn,
-        track,
+        course,
         no1_fan_count,
         grades,
     )
@@ -309,4 +263,15 @@ def find_by_race_menu_image(
 
 # DEPRECATED
 
+
+def _deprecated_reload() -> None:
+    pass
+
+
+def _deprecated_reload_on_demand() -> None:
+    pass
+
+
 globals()["LOGGER"] = logging.getLogger(__name__)
+globals()["reload"] = _deprecated_reload
+globals()["reload_on_demand"] = _deprecated_reload_on_demand

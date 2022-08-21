@@ -10,8 +10,8 @@ from typing import Any, Dict, Iterator, List, Optional, Text
 
 from ..context import Context
 from .globals import g
-from .race import Race
-from ... import filetools, app
+from .race import Race, RaceFilters
+from ... import filetools, app, __version__
 
 
 class RaceResult:
@@ -29,7 +29,10 @@ class RaceResult:
         return {
             "time": self.time.isoformat(),
             "order": self.order,
-            "race": self.race.to_dict(),
+            "race": {
+                "id": self.race.id,
+                "name": self.race.name,
+            },
             "ctx": self.ctx.to_dict(),
             "is_failed": self.is_failed,
         }
@@ -38,7 +41,18 @@ class RaceResult:
     def from_dict(cls, data: Dict[Text, Any]) -> RaceResult:
         ret = cls()
         ret.time = datetime.datetime.fromisoformat(data["time"])
-        ret.race = Race.from_dict(data["race"])
+        race_data = data["race"]
+        race_loaded = False
+        if "id" in race_data:
+            try:
+                ret.race = Race.repository.get(race_data["id"])
+                race_loaded = True
+            except:
+                pass
+        if not race_loaded:
+            ret.race = next(
+                Race.repository.find(filter_by=RaceFilters(name=(race_data["name"],)))
+            )
         ret.ctx = Context.from_dict(data["ctx"])
         ret.order = data["order"]
         ret.is_failed = data["is_failed"]

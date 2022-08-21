@@ -10,14 +10,24 @@ if True:
 
     sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from typing import Dict, Iterator, Set, Text, Tuple
+from typing import Any, Dict, Iterator, Set, Text, Tuple
 import sqlite3
 import argparse
 import os
 import contextlib
-from auto_derby.single_mode.race import Race, g
-import json
-import pathlib
+from auto_derby.single_mode.race import Race
+
+
+from auto_derby.single_mode.race.race import Course
+
+_ID_NAMESPACE = (
+    (
+        # manually increase this before add new entry in middle
+        1
+    )
+    .to_bytes(2, "big")
+    .hex()
+)
 
 
 def _get_fan_set(db: sqlite3.Connection, fan_set_id: int) -> Tuple[int, ...]:
@@ -105,6 +115,49 @@ SELECT
     return tuple(v for _, v in sorted(d.items()))
 
 
+def _race_courses(db: sqlite3.Connection, course_set: int) -> Iterator[Course]:
+
+    with contextlib.closing(
+        db.execute(
+            """
+SELECT 
+  t1.distance,
+  t1.ground,
+  t1.inout,
+  t1.turn,
+  t2.text AS stadium,
+  t3.target_status_1,
+  t3.target_status_2
+  FROM race_course_set as t1
+  LEFT JOIN text_data AS t2 ON t2.category = 35 AND t2."index" = t1.race_track_id
+  LEFT JOIN race_course_set_status AS t3 ON t3.course_set_status_id = t1.course_set_status_id
+  WHERE t1.id = ?
+;
+""",
+            (course_set,),
+        )
+    ) as cur:
+        for (
+            distance,
+            ground,
+            inout,
+            turn,
+            stadium,
+            target_status_1,
+            target_status_2,
+        ) in cur:
+            yield Course(
+                stadium=stadium,
+                ground=ground,
+                distance=distance,
+                track=inout,
+                turn=turn,
+                target_statuses=tuple(
+                    i for i in (target_status_1, target_status_2) if i
+                ),
+            )
+
+
 def _read_master_mdb(path: Text) -> Iterator[Race]:
 
     db = sqlite3.connect(path)
@@ -112,7 +165,6 @@ def _read_master_mdb(path: Text) -> Iterator[Race]:
         """
 SELECT
   t4.text,
-  t7.text AS stadium,
   t1.month,
   t1.half,
   t3.grade,
@@ -120,34 +172,24 @@ SELECT
   t1.need_fan_count,
   t1.fan_set_id,
   t3.entry_num,
-  t5.distance,
-  t5.ground,
-  t5.inout,
-  t5.turn,
+  t3.course_set,
   t1.program_group,
-  COALESCE(t8.race_group_id, 0),
-  t6.target_status_1,
-  t6.target_status_2
+  COALESCE(t8.race_group_id, 0)
   FROM single_mode_program AS t1
   LEFT JOIN race_instance AS t2 ON t1.race_instance_id = t2.id
   LEFT JOIN race AS t3 ON t2.race_id = t3.id
   LEFT JOIN text_data AS t4 ON t4.category = 28 AND t2.id = t4."index"
-  LEFT JOIN race_course_set AS t5 ON t5.id = t3.course_set
-  LEFT JOIN race_course_set_status AS t6 ON t6.course_set_status_id = t5.course_set_status_id
-  LEFT JOIN text_data AS t7 ON t7.category = 35 AND t7."index" = t5.race_track_id
   LEFT JOIN single_mode_race_group AS t8 ON t8.race_program_id = t1.program_group
-  ORDER BY t1.race_permission, t1.month, t1.half, t3.grade DESC
+  ORDER BY t1.race_permission, t1.month, t1.half, t3.grade, t1.id DESC
 ;
     """
     )
 
     with contextlib.closing(cur):
         for i in cur:
-            assert len(i) == 17, i
             v = Race()
             (
                 v.name,
-                v.stadium,
                 v.month,
                 v.half,
                 v.grade,
@@ -155,20 +197,60 @@ SELECT
                 v.min_fan_count,
                 fan_set_id,
                 v.entry_count,
-                v.distance,
-                v.ground,
-                v.track,
-                v.turn,
+                course_set_id,
                 program_group,
                 race_group,
-            ) = i[:-2]
-            v.target_statuses = tuple(j for j in i[-2:] if j)
+            ) = i
+            v.courses = tuple(_race_courses(db, course_set_id))
             v.fan_counts = _get_fan_set(db, fan_set_id)
             if program_group:
                 v.characters = _program_group_characters(db, program_group)
             v.grade_points = _race_grade_points(db, race_group, v.grade)
             v.shop_coins = _race_shop_coins(db, v.grade)
             yield v
+
+
+def _merge_races(ordered_input: Iterator[Race]) -> Iterator[Race]:
+    def _dict_key(do: Race):
+        return (
+            do.name,
+            do.min_fan_count,
+            do.fan_counts,
+            tuple(sorted(do.characters)),
+            do.shop_coins,
+            do.grade_points,
+            do.entry_count,
+        )
+
+    m: Dict[Any, Race] = {}
+
+    def _flush():
+        yield from sorted(m.values(), key=lambda x: x.name)
+        m.clear()
+
+    def _group_key(do: Race):
+        return (do.permission, do.month, do.half, do.grade)
+
+    next_id = 1
+
+    last_group_key = _group_key(Race())
+    for i in ordered_input:
+        gk = _group_key(i)
+        if gk != last_group_key:
+            yield from _flush()
+            last_group_key = gk
+        dk = _dict_key(i)
+        if dk in m:
+            match = m[dk]
+            match.courses = tuple(
+                (*match.courses, *(i for i in i.courses if i not in match.courses))
+            )
+        else:
+            i.id = f"{_ID_NAMESPACE}-{next_id.to_bytes(2, 'big').hex()}"
+            next_id += 1
+            m[dk] = i
+
+    yield from _flush()
 
 
 def main():
@@ -183,10 +265,7 @@ def main():
     args = parser.parse_args()
     path: Text = args.path
 
-    with pathlib.Path(g.data_path).open("w", encoding="utf-8") as f:
-        for race in _read_master_mdb(path):
-            json.dump(race.to_dict(), f, ensure_ascii=False)
-            f.write("\n")
+    Race.repository.replace_data(_merge_races(_read_master_mdb(path)))
 
 
 if __name__ == "__main__":

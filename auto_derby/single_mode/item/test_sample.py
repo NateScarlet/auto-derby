@@ -1,3 +1,4 @@
+from auto_derby.single_mode.race.race import Race
 from ...constants import Mood, TrainingType
 from .. import race
 
@@ -134,7 +135,6 @@ def trainings():
 
 
 def races():
-    race.game_data.reload_on_demand()
     names = {
         "ジュニア級未勝利戦",
         "朝日杯フューチュリティステークス",
@@ -144,7 +144,7 @@ def races():
         "有馬記念",
         "ジャパンダートダービー",
     }
-    for i in race.game_data.g.races:
+    for i in Race.repository.find():
         if i.name in names:
             yield i
             names.remove(i.name)

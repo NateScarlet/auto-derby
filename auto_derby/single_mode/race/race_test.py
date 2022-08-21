@@ -11,7 +11,6 @@ def test_find_by_race_detail_image():
     _test.snapshot_match(race1)
 
     assert race1.name == "弥生賞", race1.name
-    assert race1.stadium == "中山", race1.stadium
 
 
 def test_find_by_race_detail_image_2():
@@ -22,7 +21,6 @@ def test_find_by_race_detail_image_2():
     _test.snapshot_match(race1)
 
     assert race1.name == "NHKマイルカップ", race1.name
-    assert race1.stadium == "東京", race1.stadium
 
 
 def test_find_by_race_detail_image_3():
@@ -33,7 +31,6 @@ def test_find_by_race_detail_image_3():
     _test.snapshot_match(race1)
 
     assert race1.name == "昇竜ステークス", race1.name
-    assert race1.stadium == "中京", race1.stadium
 
 
 def test_find_by_race_detail_image_4():
@@ -44,7 +41,6 @@ def test_find_by_race_detail_image_4():
     _test.snapshot_match(race1)
 
     assert race1.name == "ダイヤモンドステークス", race1.name
-    assert race1.stadium == "東京", race1.stadium
 
 
 def test_find_by_race_detail_image_5():
@@ -55,7 +51,6 @@ def test_find_by_race_detail_image_5():
     _test.snapshot_match(race1)
 
     assert race1.name == "菊花賞", race1.name
-    assert race1.stadium == "京都", race1.stadium
 
 
 def test_find_by_race_detail_image_6():
@@ -66,7 +61,6 @@ def test_find_by_race_detail_image_6():
     _test.snapshot_match(race1)
 
     assert race1.name == "宝塚記念", race1.name
-    assert race1.stadium == "阪神", race1.stadium
 
 
 def test_find_by_race_detail_image_7():
@@ -77,7 +71,6 @@ def test_find_by_race_detail_image_7():
     _test.snapshot_match(race1)
 
     assert race1.name == "URAファイナルズ準決勝", race1.name
-    assert race1.stadium == "阪神", race1.stadium
 
 
 def test_find_by_race_detail_image_8():
@@ -88,7 +81,6 @@ def test_find_by_race_detail_image_8():
     _test.snapshot_match(race1)
 
     assert race1.name == "ジュニア級メイクデビュー", race1.name
-    assert race1.stadium == "札幌", race1.stadium
 
 
 def test_find_by_race_detail_image_9():
@@ -99,7 +91,6 @@ def test_find_by_race_detail_image_9():
     _test.snapshot_match(race1)
 
     assert race1.name == "紫菊賞", race1.name
-    assert race1.stadium == "京都", race1.stadium
 
 
 def test_find_by_race_detail_image_10():
@@ -120,7 +111,6 @@ def test_find_by_race_detail_image_11():
     _test.snapshot_match(race1)
 
     assert race1.name == "忘れな草賞", race1.name
-    assert race1.stadium == "阪神", race1.stadium
     assert race1.characters == set(), race1.characters
 
 
@@ -132,7 +122,6 @@ def test_find_by_race_detail_image_issue31():
     _test.snapshot_match(race1)
 
     assert race1.name == "東京優駿（日本ダービー）", race1.name
-    assert race1.stadium == "東京", race1.stadium
 
 
 def test_find_by_race_detail_image_issue49():
@@ -143,7 +132,6 @@ def test_find_by_race_detail_image_issue49():
     _test.snapshot_match(race1)
 
     assert race1.name == "コスモス賞", race1.name
-    assert race1.stadium == "札幌", race1.stadium
 
 
 def test_find_by_race_detail_image_issue54():
@@ -154,7 +142,6 @@ def test_find_by_race_detail_image_issue54():
     _test.snapshot_match(race1)
 
     assert race1.name == "ルミエールオータムダッシュ", race1.name
-    assert race1.stadium == "新潟", race1.stadium
 
 
 def test_find_by_race_detail_image_issue58():
@@ -165,7 +152,6 @@ def test_find_by_race_detail_image_issue58():
     _test.snapshot_match(race1)
 
     assert race1.name == "宝塚記念", race1.name
-    assert race1.stadium == "京都", race1.stadium
 
 
 def test_find_by_race_menu_image():
@@ -177,7 +163,6 @@ def test_find_by_race_menu_image():
 
     assert pos1 == (203, 586), pos1
     assert race1.name == "ジュニア級メイクデビュー", race1.name
-    assert race1.stadium == "札幌", race1.stadium
     assert race1.characters == {"ゴールドシップ", "エアグルーヴ", "ナリタタイシン"}, race1.characters
 
 
@@ -191,12 +176,10 @@ def test_find_by_race_menu_image_2():
 
     assert pos1 == (203, 586), pos1
     assert race1.name == "アルテミスステークス", race1.name
-    assert race1.stadium == "東京", race1.stadium
     assert race1.characters == set(), race1.characters
 
     assert pos2 == (203, 701), pos2
     assert race2.name == "アイビーステークス", race2.name
-    assert race2.stadium == "東京", race2.stadium
     assert race2.characters == set(), race2.characters
 
 
@@ -209,7 +192,6 @@ def test_find_by_race_menu_image_3():
 
     assert pos1 == (203, 646), pos1
     assert race1.name == "萩ステークス", race1.name
-    assert race1.stadium == "京都", race1.stadium
     assert race1.characters == set(), race1.characters
 
 
@@ -223,12 +205,10 @@ def test_find_by_race_menu_image_4():
 
     assert pos1 == (203, 585), pos1
     assert race1.name == "萩ステークス", race1.name
-    assert race1.stadium == "京都", race1.stadium
     assert race1.characters == set(), race1.characters
 
     assert pos2 == (203, 700), pos2
     assert race2.name == "なでしこ賞", race2.name
-    assert race2.stadium == "京都", race2.stadium
     assert race2.characters == set(), race2.characters
 
 
@@ -255,17 +235,14 @@ def test_find_by_race_menu_image_6():
 
     assert pos1 == (203, 595), pos1
     assert race1.name == "もちの木賞", race1.name
-    assert race1.stadium == "京都", race1.stadium
     assert race1.characters == set(), race1.characters
 
     assert pos2 == (203, 710), pos2
     assert race2.name == "ベゴニア賞", race2.name
-    assert race2.stadium == "東京", race2.stadium
     assert race2.characters == set(), race2.characters
 
     assert pos3 == (203, 710), pos3
     assert race3.name == "赤松賞", race3.name
-    assert race3.stadium == "東京", race3.stadium
     assert race3.characters == set(), race3.characters
 
 
@@ -341,12 +318,10 @@ def test_find_by_race_menu_image_issue112():
 
     assert pos1 == (203, 586), pos1
     assert race1.name == "さざんか賞", race1.name
-    assert race1.stadium == "阪神", race1.stadium
     assert race1.characters == set(), race1.characters
 
     assert pos2 == (203, 701), pos2
     assert race2.name == "朝日杯フューチュリティステークス", race2.name
-    assert race2.stadium == "阪神", race2.stadium
     assert race2.characters == set(), race2.characters
 
 

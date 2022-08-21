@@ -120,9 +120,9 @@ def compute(ctx: Context, race: Race) -> float:
     )
 
     status_penalty = 0
-    if race.distance_status(ctx) < ctx.STATUS_B:
+    if any(course.distance_status(ctx) < ctx.STATUS_B for course in race.courses):
         status_penalty += 10
-    if race.ground_status(ctx) < ctx.STATUS_B:
+    if any(course.ground_status(ctx) < ctx.STATUS_B for course in race.courses):
         status_penalty += 10
     return (
         fan_score
