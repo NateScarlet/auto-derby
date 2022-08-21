@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.4](https://github.com/NateScarlet/auto-derby/compare/v1.27.3...v1.27.4) (2022-08-21)
+
+
+### Bug Fixes
+
+* **single-mode:** handle multi course race ([548c5c8](https://github.com/NateScarlet/auto-derby/commit/548c5c82eb6b1f89f97ced97a006005fbece079c)), closes [#351](https://github.com/NateScarlet/auto-derby/issues/351)
+* **single-mode:** should wait aoharu main scene connecting ([418eb20](https://github.com/NateScarlet/auto-derby/commit/418eb2073499a28246aeb065e6cbe39bb589162a)), closes [#348](https://github.com/NateScarlet/auto-derby/issues/348)
+* wrong logging format ([d5de069](https://github.com/NateScarlet/auto-derby/commit/d5de069c331d87bff4e4da0c35f016c69908a982)), closes [#350](https://github.com/NateScarlet/auto-derby/issues/350)
+
 ## [1.27.3](https://github.com/NateScarlet/auto-derby/compare/v1.27.2...v1.27.3) (2022-08-19)
 
 
