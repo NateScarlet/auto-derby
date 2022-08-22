@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.5](https://github.com/NateScarlet/auto-derby/compare/v1.27.4...v1.27.5) (2022-08-22)
+
+
+### Bug Fixes
+
+* **single-mode:** unable to choose multi course race in menu ([fac5fb7](https://github.com/NateScarlet/auto-derby/commit/fac5fb7ab491e415a901bb475cd2174a1660a7a5))
+
 ## [1.27.4](https://github.com/NateScarlet/auto-derby/compare/v1.27.3...v1.27.4) (2022-08-21)
 
 
