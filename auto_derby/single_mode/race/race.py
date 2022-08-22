@@ -44,14 +44,32 @@ class Course:
     GROUND_TURF = 1
     GROUND_DART = 2
 
+    _GROUND_TEXT = {
+        GROUND_DART: "dart",
+        GROUND_TURF: "turf",
+    }
+
     TRACK_MIDDLE = 1
     TRACK_IN = 2
     TRACK_OUT = 3
     TRACK_OUT_TO_IN = 4
 
+    _TRACK_TEXT = {
+        TRACK_MIDDLE: "",
+        TRACK_IN: "内",
+        TRACK_OUT: "外",
+        TRACK_OUT_TO_IN: "外→内",
+    }
+
     TURN_RIGHT = 1
     TURN_LEFT = 2
     TURN_NONE = 4
+
+    _TURN_TEXT = {
+        TURN_RIGHT: "右",
+        TURN_LEFT: "左",
+        TURN_NONE: "直線",
+    }
 
     TARGET_STATUS_SPEED = 1
     TARGET_STATUS_STAMINA = 2
@@ -77,10 +95,13 @@ class Course:
         self.target_statuses = target_statuses
 
     def __str__(self):
-        ground_text = {self.GROUND_DART: "dart", self.GROUND_TURF: "turf"}.get(
-            self.ground, self.ground
-        )
-        return f"Course<{self.stadium} {ground_text} {self.distance}m>"
+        ground_text = self._GROUND_TEXT.get(self.ground, self.ground)
+        turn_text = self._TURN_TEXT.get(self.turn, self.turn)
+        track_text = self._TRACK_TEXT.get(self.track, self.track)
+        if track_text:
+            track_text = f"·{track_text}"
+
+        return f"Course<{self.stadium} {ground_text} {self.distance}m {turn_text}{track_text}>"
 
     def __eq__(self, o: object) -> bool:
         if not isinstance(o, Course):

@@ -18,7 +18,7 @@ from ... import imagetools, mathtools, ocr, template, templates, texttools, app
 from .race import Course, Race
 
 
-def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
+def _find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
     year, month, half = date
     for i in Race.repository.find():
         if year not in i.years:
@@ -33,13 +33,16 @@ def find_by_date(date: Tuple[int, int, int]) -> Iterator[Race]:
 def find(ctx: Context) -> Iterator[Race]:
     if ctx.date[1:] == (0, 0):
         return
-    for i in find_by_date(ctx.date):
+    for i in _find_by_date(ctx.date):
         if i.is_available(ctx) == False:
             continue
         # target race should be excluded when finding available race
         if i.is_target_race(ctx):
             continue
         yield i
+
+
+# DEPRECATED
 
 
 def _recognize_fan_count(img: PIL.Image.Image) -> int:
@@ -140,7 +143,7 @@ def _find_by_spec(
     grades: Tuple[int, ...],
 ):
 
-    for i in find_by_date(ctx.date):
+    for i in _find_by_date(ctx.date):
         if i.grade not in grades:
             continue
         if not _match_scenario(ctx, i):
@@ -152,7 +155,9 @@ def _find_by_spec(
         yield i
 
 
-def find_by_race_detail_image(ctx: Context, screenshot: PIL.Image.Image) -> Race:
+def _deprecated_find_by_race_detail_image(
+    ctx: Context, screenshot: PIL.Image.Image
+) -> Race:
     rp = mathtools.ResizeProxy(screenshot.width)
 
     grade_color_pos = rp.vector2((45, 92), 466)
@@ -251,7 +256,7 @@ def _menu_item_bbox(
     )
 
 
-def find_by_race_menu_image(
+def _deprecated_find_by_race_menu_image(
     ctx: Context, screenshot: PIL.Image.Image
 ) -> Iterator[Tuple[Race, Tuple[int, int]]]:
     rp = mathtools.ResizeProxy(screenshot.width)
@@ -259,9 +264,6 @@ def find_by_race_menu_image(
         bbox = _menu_item_bbox(ctx, pos, rp)
         for i in _find_by_race_menu_item(ctx, screenshot.crop(bbox)):
             yield i, pos
-
-
-# DEPRECATED
 
 
 def _deprecated_reload() -> None:
@@ -275,3 +277,6 @@ def _deprecated_reload_on_demand() -> None:
 globals()["LOGGER"] = logging.getLogger(__name__)
 globals()["reload"] = _deprecated_reload
 globals()["reload_on_demand"] = _deprecated_reload_on_demand
+globals()["find_by_race_menu_image"] = _deprecated_find_by_race_menu_image
+globals()["find_by_race_detail_image"] = _deprecated_find_by_race_detail_image
+globals()["find_by_date"] = _find_by_date

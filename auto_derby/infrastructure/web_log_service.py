@@ -73,6 +73,7 @@ class WebLogService(Service):
 
         self._s = web.Stream(buffer_path, "text/plain; charset=utf-8")
         self._stop = threading.Event()
+        ready = threading.Event()
 
         def _run(address: Tuple[Text, int]):
             with self._s, web.create_server(
@@ -101,10 +102,12 @@ class WebLogService(Service):
                 url = f"http://{host}:{port}"
                 _LOGGER.info("web log service start at:\t%s", url)
                 webview.open(url)
+                ready.set()
                 httpd.serve_forever()
 
         threading.Thread(target=_run, args=((host, port),)).start()
         cleanup.add(self.stop)
+        ready.wait()
 
     def close(self):
         self._s.close()
