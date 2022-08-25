@@ -101,19 +101,13 @@ py -3.8 -m auto_derby 工作名称
 
 ### debug
 
-调试数据，`.1` `.2` `.3` 后缀的文件夹为之前调试数据的备份
+调试数据，`.1` `.2` `.3` 后缀的文件夹为之前调试数据的备份。
 
 last_screenshot.png 为脚本最后看到的游戏画面。
+界面识别相关问题不要提供在出错后手动进行的截图。
 
 log.jsonl 和 images 为网页日志内容和图片，可用 ./scripts/view_web_log.py 查看。
-
-single_mode_training_images 为异步截取的训练画面，训练相关问题需要其中的最近 5 张。
-
-获取最近 5 张训练画面的 powershell 命令：
-
-```powershell
-Get-ChildItem -File -Recurse .\debug\single_mode_training_images | Sort-Object -Property LastWriteTime -Descending | Select-Object -First 5
-```
+训练识别相关问题因为是异步处理的截图，光提供 last_screenshot 没有用。
 
 ## 贡献代码
 
