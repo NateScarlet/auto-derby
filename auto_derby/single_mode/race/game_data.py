@@ -36,9 +36,6 @@ def find(ctx: Context) -> Iterator[Race]:
     for i in _find_by_date(ctx.date):
         if i.is_available(ctx) == False:
             continue
-        # target race should be excluded when finding available race
-        if i.is_target_race(ctx):
-            continue
         yield i
 
 

@@ -10,7 +10,7 @@ if True:
 
     sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from typing import Any, Dict, Iterator, Set, Text, Tuple
+from typing import Any, Dict, Iterator, Text, Tuple
 import sqlite3
 import argparse
 import os
@@ -23,7 +23,7 @@ from auto_derby.single_mode.race.race import Course
 _ID_NAMESPACE = (
     (
         # manually increase this before add new entry in middle
-        1
+        2
     )
     .to_bytes(2, "big")
     .hex()
@@ -45,23 +45,6 @@ SELECT fan_count
         )
     ) as cur:
         return tuple(i[0] for i in cur.fetchall())
-
-
-def _program_group_characters(db: sqlite3.Connection, program_group: int) -> Set[Text]:
-    with contextlib.closing(
-        db.execute(
-            """
-SELECT t2.text
-  FROM single_mode_chara_program as t1
-  LEFT JOIN text_data AS t2 ON t2.category = 182 AND t1.chara_id = t2."index"
-  WHERE program_group = ?
-  ORDER BY t2.text
-;
-""",
-            (program_group,),
-        )
-    ) as cur:
-        return set(i[0] for i in cur.fetchall())
 
 
 def _race_grade_points(db: sqlite3.Connection, group: int, grade: int) -> Tuple[int]:
@@ -115,7 +98,9 @@ SELECT
     return tuple(v for _, v in sorted(d.items()))
 
 
-def _race_courses(db: sqlite3.Connection, course_set: int) -> Iterator[Course]:
+def _race_courses(
+    db: sqlite3.Connection, course_set: int, entry_num: int
+) -> Iterator[Course]:
 
     with contextlib.closing(
         db.execute(
@@ -152,6 +137,7 @@ SELECT
                 distance=distance,
                 track=inout,
                 turn=turn,
+                entry_count=entry_num,
                 target_statuses=tuple(
                     i for i in (target_status_1, target_status_2) if i
                 ),
@@ -173,7 +159,6 @@ SELECT
   t1.fan_set_id,
   t3.entry_num,
   t3.course_set,
-  t1.program_group,
   COALESCE(t8.race_group_id, 0)
   FROM single_mode_program AS t1
   LEFT JOIN race_instance AS t2 ON t1.race_instance_id = t2.id
@@ -196,15 +181,12 @@ SELECT
                 v.permission,
                 v.min_fan_count,
                 fan_set_id,
-                v.entry_count,
+                entry_num,
                 course_set_id,
-                program_group,
                 race_group,
             ) = i
-            v.courses = tuple(_race_courses(db, course_set_id))
+            v.courses = tuple(_race_courses(db, course_set_id, entry_num))
             v.fan_counts = _get_fan_set(db, fan_set_id)
-            if program_group:
-                v.characters = _program_group_characters(db, program_group)
             v.grade_points = _race_grade_points(db, race_group, v.grade)
             v.shop_coins = _race_shop_coins(db, v.grade)
             yield v
@@ -216,10 +198,8 @@ def _merge_races(ordered_input: Iterator[Race]) -> Iterator[Race]:
             do.name,
             do.min_fan_count,
             do.fan_counts,
-            tuple(sorted(do.characters)),
             do.shop_coins,
             do.grade_points,
-            do.entry_count,
         )
 
     m: Dict[Any, Race] = {}
