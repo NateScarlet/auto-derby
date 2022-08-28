@@ -4,11 +4,25 @@ from __future__ import annotations
 
 from typing import Text, Tuple, TYPE_CHECKING
 
+
 if TYPE_CHECKING:
     from ..context import Context
-    from .race import Race
+    from .race import Race, Course
 
 from ... import mathtools, app
+
+
+def _get_course(ctx: Context, race: Race) -> Course:
+    if len(race.courses) == 1:
+        return race.courses[0]
+
+    def _sort_key(course: Course):
+        return (
+            -course.ground_status(ctx)[0],
+            -course.distance_status(ctx)[0],
+        )
+
+    return sorted(race.courses, key=_sort_key)[0]
 
 
 def compute(
@@ -40,23 +54,22 @@ def compute(
     wis *= ctx.mood.race_rate
 
     base_speed_coefficient = 1
-    course = None if len(race.courses) != 1 else race.courses[0]
-    if course:
-        for i in course.target_statuses:
-            base_speed_coefficient *= 1 + 0.1 * min(
-                2,
-                int(
-                    {
-                        course.TARGET_STATUS_SPEED: ctx.speed,
-                        course.TARGET_STATUS_POWER: ctx.power,
-                        course.TARGET_STATUS_STAMINA: ctx.stamina,
-                        course.TARGET_STATUS_GUTS: ctx.guts,
-                        course.TARGET_STATUS_WISDOM: ctx.wisdom,
-                    }[i]
-                    / 300
-                ),
-            )
-        spd *= base_speed_coefficient
+    course = _get_course(ctx, race)
+    for i in course.target_statuses:
+        base_speed_coefficient *= 1 + 0.1 * min(
+            2,
+            int(
+                {
+                    course.TARGET_STATUS_SPEED: ctx.speed,
+                    course.TARGET_STATUS_POWER: ctx.power,
+                    course.TARGET_STATUS_STAMINA: ctx.stamina,
+                    course.TARGET_STATUS_GUTS: ctx.guts,
+                    course.TARGET_STATUS_WISDOM: ctx.wisdom,
+                }[i]
+                / 300
+            ),
+        )
+    spd *= base_speed_coefficient
 
     # TODO: race field affect
 
@@ -70,7 +83,7 @@ def compute(
 
     # proper ground
     # from master.mdb `race_proper_ground_rate` table
-    ground = race.courses[0].ground_status(ctx)
+    ground = course.ground_status(ctx)
     ground_rate = {
         "S": 1.05,
         "A": 1.0,
@@ -84,7 +97,7 @@ def compute(
 
     # proper distance
     # from master.mdb `race_proper_distance_rate` table
-    distance = race.courses[0].distance_status(ctx)
+    distance = course.distance_status(ctx)
     d_spd_rate, d_pow_rate = {
         "S": (1.05, 1.0),
         "A": (1.0, 1.0),
@@ -154,7 +167,7 @@ def compute(
     )
     sta += wis_as_sta
 
-    hp = race.courses[0].distance + hp_factor * 0.8 * sta
+    hp = course.distance + hp_factor * 0.8 * sta
     expected_spd = (
         mathtools.interpolate(
             ctx.turn_count(),
@@ -175,7 +188,7 @@ def compute(
             race.GRADE_DEBUT: 0.6,
         }[race.grade]
         * mathtools.interpolate(
-            race.courses[0].distance,
+            course.distance,
             (
                 (0, 1.1),
                 (1200, 1.05),
@@ -185,7 +198,7 @@ def compute(
         )
     )
     expected_hp = (
-        race.courses[0].distance
+        course.distance
         * mathtools.interpolate(
             ctx.turn_count(),
             (
@@ -217,7 +230,7 @@ def compute(
             ),
         )
         * mathtools.interpolate(
-            race.courses[0].distance,
+            course.distance,
             (
                 (0, 0.8),
                 (1600, 1),
@@ -268,7 +281,7 @@ def compute(
             ),
         )
         * mathtools.interpolate(
-            race.courses[0].distance,
+            course.distance,
             (
                 (0, 2.0),
                 (1200, 2.0),
