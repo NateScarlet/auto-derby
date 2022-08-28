@@ -474,6 +474,11 @@ def auto_crop(cv_img: np.ndarray) -> np.ndarray:
     return cv_img[t:b, l:r]
 
 
+def auto_crop_pil(pil_img: Image) -> Image:
+    bbox = pil_img.getbbox()
+    return pil_img.crop(bbox)
+
+
 def data_url(img: Image) -> Text:
     b = io.BytesIO()
     img.save(b, "PNG")

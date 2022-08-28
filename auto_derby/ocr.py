@@ -188,7 +188,11 @@ def text(img: Image, *, threshold: float = 0.8) -> Text:
     reload_on_demand()
     ret = ""
 
+    img = imagetools.auto_crop_pil(img)
     w, h = img.width, img.height
+    if h * w == 0:
+        app.log.text("ocr result is empty", level=app.DEBUG)
+        return ""
 
     if img.height < _LINE_HEIGHT:
         w = round(_LINE_HEIGHT / h * w)
