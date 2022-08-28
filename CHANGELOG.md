@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.0](https://github.com/NateScarlet/auto-derby/compare/v1.27.5...v1.28.0) (2022-08-28)
+
+
+### Features
+
+* **single-mode:** adjust running style score for multi course race ([388b717](https://github.com/NateScarlet/auto-derby/commit/388b7171f7bdcd994570885291b357ad97509138))
+
+
+### Bug Fixes
+
+* **single-mode:** can not choose races that has variable entry count ([a9b7076](https://github.com/NateScarlet/auto-derby/commit/a9b7076b543173c25f590a14f54155687b89814f)), closes [#353](https://github.com/NateScarlet/auto-derby/issues/353)
+* **single-mode:** error while recognizing race menu ([80f64bf](https://github.com/NateScarlet/auto-derby/commit/80f64bf57c23a4d3bdb94a967263d3f5ecfb3d21)), closes [#358](https://github.com/NateScarlet/auto-derby/issues/358)
+
 ## [1.27.5](https://github.com/NateScarlet/auto-derby/compare/v1.27.4...v1.27.5) (2022-08-22)
 
 
