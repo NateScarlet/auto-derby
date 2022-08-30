@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.1](https://github.com/NateScarlet/auto-derby/compare/v1.28.0...v1.28.1) (2022-08-30)
+
+
+### Bug Fixes
+
+* **single-mode:** error while recognizing race menu ([658e3d5](https://github.com/NateScarlet/auto-derby/commit/658e3d576b5ca70a188b42401ed641389689fedb)), closes [#360](https://github.com/NateScarlet/auto-derby/issues/360)
+* **single-mode:** wrong date comparison ([61933bf](https://github.com/NateScarlet/auto-derby/commit/61933bf314099e500174913eae63488e577c2a6d))
+* **web:** memory buffer not work ([cb3425a](https://github.com/NateScarlet/auto-derby/commit/cb3425a669f234240912bf830f29094ce7f92ebb))
+
 ## [1.28.0](https://github.com/NateScarlet/auto-derby/compare/v1.27.5...v1.28.0) (2022-08-28)
 
 
