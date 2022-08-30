@@ -82,6 +82,7 @@ class MemoryBuffer(Buffer):
     def copy_to(self, w: Writer):
         with self._lock:
             try:
+                self._b.seek(0)
                 shutil.copyfileobj(self._b, w)
             except FileNotFoundError:
                 pass
