@@ -42,7 +42,7 @@ def default_score(ctx: Context) -> float:
         ret += 10
     if ctx.date[1:] in ((6, 2),):
         ret += 20
-    if ctx.date in ((4, 0, 0)):
+    if ctx.date in ((4, 0, 0),):
         ret -= 20
     return ret
 

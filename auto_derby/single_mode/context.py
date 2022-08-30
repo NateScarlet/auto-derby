@@ -600,7 +600,7 @@ class Context:
             expected_score += 20
         if self.is_summer_camp and self.vitality < 0.8:
             expected_score += 10
-        if self.date in ((4, 0, 0)):
+        if self.date in ((4, 0, 0),):
             expected_score -= 20
         if can_heal_condition:
             expected_score += (
