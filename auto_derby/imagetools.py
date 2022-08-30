@@ -475,6 +475,7 @@ def auto_crop(cv_img: np.ndarray) -> np.ndarray:
 
 
 def auto_crop_pil(pil_img: Image) -> Image:
+    # spell-checker: word getbbox
     bbox = pil_img.getbbox()
     return pil_img.crop(bbox)
 
