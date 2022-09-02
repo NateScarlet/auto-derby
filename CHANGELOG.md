@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.2](https://github.com/NateScarlet/auto-derby/compare/v1.28.1...v1.28.2) (2022-09-02)
+
+
+### Bug Fixes
+
+* wrong `imagetools.rect_from_bbox` result ([59f44c8](https://github.com/NateScarlet/auto-derby/commit/59f44c85655746d64b89bc61fe330a2e962b4403)), closes [#364](https://github.com/NateScarlet/auto-derby/issues/364)
+
 ## [1.28.1](https://github.com/NateScarlet/auto-derby/compare/v1.28.0...v1.28.1) (2022-08-30)
 
 
