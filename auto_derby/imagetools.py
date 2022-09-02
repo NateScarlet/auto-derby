@@ -461,7 +461,7 @@ def bbox_from_rect(rect: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]
 
 def rect_from_bbox(bbox: Tuple[int, int, int, int]) -> Tuple[int, int, int, int]:
     l, t, r, b = bbox
-    x, y, w, h = l, b, r - l, b - t
+    x, y, w, h = l, t, r - l, b - t
     return x, y, w, h
 
 
