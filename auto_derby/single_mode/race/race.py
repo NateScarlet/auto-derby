@@ -87,6 +87,7 @@ class Course:
         turn: int,
         entry_count: int = 0,
         target_statuses: Tuple[int, ...] = (),
+        no1_fan_count: int = 0,
     ) -> None:
         self.stadium = stadium
         self.ground = ground
@@ -95,6 +96,7 @@ class Course:
         self.turn = turn
         self.entry_count = entry_count
         self.target_statuses = target_statuses
+        self.no1_fan_count = no1_fan_count
 
     def __str__(self):
         ground_text = self._GROUND_TEXT.get(self.ground, self.ground)
@@ -102,8 +104,11 @@ class Course:
         track_text = self._TRACK_TEXT.get(self.track, self.track)
         if track_text:
             track_text = f"·{track_text}"
+        fan_text = ""
+        if self.no1_fan_count:
+            fan_text = f" +{self.no1_fan_count:,}人"
 
-        return f"Course<{self.stadium} {ground_text} {self.distance}m {turn_text}{track_text}>"
+        return f"Course<{self.stadium} {ground_text} {self.distance}m {turn_text}{track_text}{fan_text}>"
 
     def __eq__(self, o: object) -> bool:
         if not isinstance(o, Course):

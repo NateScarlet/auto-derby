@@ -43,6 +43,10 @@ def _race_by_course(ctx: Context, course: Course) -> Iterator[Race]:
             continue
         if i.is_available(ctx) == False:
             continue
+        if course not in i.courses:
+            continue
+        if course.no1_fan_count and i.fan_counts[0] != course.no1_fan_count:
+            continue
         yield i
 
 
@@ -116,6 +120,30 @@ def _course_bbox(ctx: Context, rp: mathtools.ResizeProxy):
     return rp.vector4((221, 12, 488, 30), 492)
 
 
+def _no1_fan_count_bbox(ctx: Context, rp: mathtools.ResizeProxy):
+    if ctx.scenario == ctx.SCENARIO_CLIMAX:
+        return rp.vector4((208, 78, 361, 95), 492)
+    return rp.vector4((207, 54, 360, 72), 492)
+
+
+def _recognize_fan_count(img: app.Image) -> int:
+    cv_img = imagetools.cv_image(imagetools.resize(img.convert("L"), height=32))
+    cv_img = imagetools.level(
+        cv_img, np.percentile(cv_img, 1), np.percentile(cv_img, 90)
+    )
+    _, binary_img = cv2.threshold(cv_img, 60, 255, cv2.THRESH_BINARY_INV)
+    app.log.image(
+        "fan count",
+        cv_img,
+        level=app.DEBUG,
+        layers={
+            "binary": binary_img,
+        },
+    )
+    text = ocr.text(imagetools.pil_image(binary_img))
+    return int(text.rstrip("人").replace(",", ""))
+
+
 def _recognize_menu(
     ctx: Context, screenshot: imagetools.Image
 ) -> Iterator[Tuple[Course, Tuple[int, int]]]:
@@ -125,10 +153,18 @@ def _recognize_menu(
         bbox = _menu_item_bbox(ctx, pos, rp)
         item_img = screenshot.crop(bbox)
         app.log.image("race menu item", item_img, level=app.DEBUG)
-        course_bbox = _course_bbox(ctx, mathtools.ResizeProxy(item_img.width))
+        item_rp = mathtools.ResizeProxy(item_img.width)
+
+        course_bbox = _course_bbox(ctx, item_rp)
         course_img = item_img.crop(course_bbox)
         app.log.image("race menu item course", course_img, level=app.DEBUG)
         course = _recognize_course(course_img)
+
+        no1_fan_count_bbox = _no1_fan_count_bbox(ctx, item_rp)
+        fan_count_img = item_img.crop(no1_fan_count_bbox)
+        app.log.image("race menu item fan count", fan_count_img, level=app.DEBUG)
+        course.no1_fan_count = _recognize_fan_count(fan_count_img)
+
         yield course, pos
 
 
@@ -186,7 +222,10 @@ class RaceMenuScene(Scene):
         rp = action.resize_proxy()
         while self._scroll.next():
             for course, pos in self.visible_courses(ctx):
-                if course in race.courses:
-                    app.device.tap((*pos, *rp.vector2((200, 20), 540)))
-                    return
+                if course.no1_fan_count != race.fan_counts[0]:
+                    continue
+                if course not in race.courses:
+                    continue
+                app.device.tap((*pos, *rp.vector2((200, 20), 540)))
+                return
         raise ValueError("not found: %s" % race)
