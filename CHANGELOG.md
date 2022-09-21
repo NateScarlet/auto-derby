@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.3](https://github.com/NateScarlet/auto-derby/compare/v1.28.2...v1.28.3) (2022-09-21)
+
+
+### Bug Fixes
+
+* **single-mode:** should recognize race no1 fan count ([8fa5341](https://github.com/NateScarlet/auto-derby/commit/8fa5341058b6854761837d41448bd412eed43de3)), closes [#368](https://github.com/NateScarlet/auto-derby/issues/368)
+* update data ([30c39f9](https://github.com/NateScarlet/auto-derby/commit/30c39f92d4b788cfdb95ac6d591a38db6caa794f))
+
 ## [1.28.2](https://github.com/NateScarlet/auto-derby/compare/v1.28.1...v1.28.2) (2022-09-02)
 
 
