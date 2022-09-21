@@ -1,29 +1,12 @@
 # -*- coding=UTF-8 -*-
-# pyright: strict
+# pyright: strict,reportUnusedImport=false
 
 from __future__ import annotations
 
-from ..services.device import Rect, Service, Image
+import warnings
 
+from .null_device_service import NullDeviceService as _NullDeviceService
 
-class NoOpDeviceService(Service):
-    def height(self) -> int:
-        return 0
+warnings.warn("renamed to null_device_service", DeprecationWarning)
 
-    def width(self) -> int:
-
-        return 0
-
-    def screenshot(self, *, max_age: float = 1) -> Image:
-        raise NotImplementedError()
-
-    def reset_size(
-        self,
-    ) -> None:
-        pass
-
-    def tap(self, area: Rect) -> None:
-        pass
-
-    def swipe(self, start: Rect, end: Rect, *, duration: float = 0.1) -> None:
-        pass
+globals()["NoOpDeviceService"] = _NullDeviceService

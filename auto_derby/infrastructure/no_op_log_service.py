@@ -1,23 +1,12 @@
 # -*- coding=UTF-8 -*-
-# pyright: strict
+# pyright: strict,reportUnusedImport=false
 
 from __future__ import annotations
 
-from typing import Dict, Text
+import warnings
 
-from ..services.log import Image, Level, Service
+from .null_log_service import NullLogService as _NullLogService
 
+warnings.warn("renamed to null_log_service", DeprecationWarning)
 
-class NoOpService(Service):
-    def text(self, msg: Text, /, *, level: Level = Level.INFO):
-        pass
-
-    def image(
-        self,
-        caption: Text,
-        image: Image,
-        *,
-        level: Level = Level.INFO,
-        layers: Dict[Text, Image] = {},
-    ):
-        pass
+globals()["NoOpService"] = _NullLogService
