@@ -39,7 +39,7 @@
 {"id": 1039, "name": "カワカミプリンセス", "realName": "カワカミプリンセス", "katakana": "カワカミプリンセス", "voice": "高橋花林", "birthday": [2003, 6, 5], "gender": "MARE"}
 {"id": 1040, "name": "ゴールドシチー", "realName": "ゴールドシチー", "katakana": "ゴールドシチー", "voice": "香坂さき", "birthday": [1984, 4, 16], "gender": "STALLION"}
 {"id": 1041, "name": "サクラバクシンオー", "realName": "サクラバクシンオー", "katakana": "サクラバクシンオー", "voice": "三澤紗千香", "birthday": [1989, 4, 14], "gender": "STALLION"}
-{"id": 1042, "name": "シーキングザパール", "realName": "シーキングザパール", "katakana": "シーキングザパール", "voice": "福原綾香", "birthday": [1994, 1, 1], "gender": "MARE"}
+{"id": 1042, "name": "シーキングザパール", "realName": "シーキングザパール", "katakana": "シーキングザパール", "voice": "福原綾香", "birthday": [1994, 4, 16], "gender": "MARE"}
 {"id": 1043, "name": "シンコウウインディ", "realName": "シンコウウインディ", "katakana": "シンコウウインディ", "voice": "高田憂希", "birthday": [1993, 1, 1], "gender": "STALLION"}
 {"id": 1044, "name": "スイープトウショウ", "realName": "スイープトウショウ", "katakana": "スイープトウショウ", "voice": "杉浦しおり", "birthday": [2001, 5, 9], "gender": "MARE"}
 {"id": 1045, "name": "スーパークリーク", "realName": "スーパークリーク", "katakana": "スーパークリーク", "voice": "優木かな", "birthday": [1985, 5, 27], "gender": "STALLION"}
@@ -72,8 +72,12 @@
 {"id": 1072, "name": "ヤエノムテキ", "realName": "ヤエノムテキ", "katakana": "ヤエノムテキ", "voice": "日原あゆみ", "birthday": [1985, 4, 11], "gender": "STALLION"}
 {"id": 1073, "name": "ツルマルツヨシ", "realName": "ツルマルツヨシ", "katakana": "ツルマルツヨシ", "voice": "青山吉能", "birthday": [1995, 4, 6], "gender": "STALLION"}
 {"id": 1074, "name": "メジロブライト", "realName": "メジロブライト", "katakana": "メジロブライト", "voice": "大西綺華", "birthday": [1994, 4, 19], "gender": "STALLION"}
+{"id": 1076, "name": "サクラローレル", "realName": "サクラローレル", "katakana": "サクラローレル", "voice": "真野美月", "birthday": [1991, 5, 8], "gender": "STALLION"}
 {"id": 1077, "name": "ナリタトップロード", "realName": "ナリタトップロード", "katakana": "ナリタトップロード", "voice": "中村カンナ", "birthday": [1996, 4, 4], "gender": "STALLION"}
 {"id": 1078, "name": "ヤマニンゼファー", "realName": "ヤマニンゼファー", "katakana": "ヤマニンゼファー", "voice": "今泉りおな", "birthday": [1988, 5, 27], "gender": "STALLION"}
+{"id": 1085, "name": "ダイイチルビー", "realName": "ダイイチルビー", "katakana": "ダイイチルビー", "voice": "礒部花凜", "birthday": [1987, 4, 15], "gender": "MARE"}
+{"id": 1087, "name": "アストンマーチャン", "realName": "アストンマーチャン", "katakana": "アストンマーチャン", "voice": "井上ほの花", "birthday": [2004, 3, 5], "gender": "MARE"}
+{"id": 1093, "name": "ケイエスミラクル", "realName": "ケイエスミラクル", "katakana": "ケイエスミラクル", "voice": "佐藤日向", "birthday": [1988, 3, 16], "gender": "STALLION"}
 {"id": 1098, "name": "コパノリッキー", "realName": "コパノリッキー", "katakana": "コパノリッキー", "voice": "稲垣好", "birthday": [2010, 3, 24], "gender": "STALLION"}
 {"id": 1099, "name": "ホッコータルマエ", "realName": "ホッコータルマエ", "katakana": "ホッコータルマエ", "voice": "菊池紗矢香", "birthday": [2009, 5, 26], "gender": "STALLION"}
 {"id": 1100, "name": "ワンダーアキュート", "realName": "ワンダーアキュート", "katakana": "ワンダーアキュート", "voice": "須藤叶希", "birthday": [2006, 3, 14], "gender": "STALLION"}
@@ -87,3 +91,4 @@
 {"id": 9004, "name": "桐生院トレーナー", "realName": "桐生院葵", "katakana": "キリュウインアオイ", "voice": "岡咲美保", "birthday": [1971, 3, 15], "gender": "STALLION"}
 {"id": 9005, "name": "安心沢刺々美", "realName": "安心沢刺々美", "katakana": "アンシンザワササミ", "voice": "井上喜久子", "birthday": [1971, 3, 15], "gender": "STALLION"}
 {"id": 9006, "name": "樫本理子", "realName": "樫本理子", "katakana": "カシモトリコ", "voice": "朴璐美", "birthday": [1971, 7, 1], "gender": "STALLION"}
+{"id": 9008, "name": "ライトハロー", "realName": "ライトハロー", "katakana": "ライトハロー", "voice": "植田佳奈", "birthday": [1800, 1, 1], "gender": "MARE"}
