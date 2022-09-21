@@ -13,11 +13,6 @@ Rect = Tuple[int, int, int, int]  # (x, y, w, h)
 
 
 class Service(Protocol):
-    """
-    NOTICE: this interface is unstable,
-    change of this interface will not been considered as breaking change until 2022-08-01.
-    """
-
     def height(self) -> int:
         ...
 
