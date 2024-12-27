@@ -1,3 +1,9 @@
+> **仓库归档**：
+> 
+> 作者去玩别的游戏了
+> 
+> 有需要可以检查有没有在维护的[衍生分支](https://github.com/NateScarlet/auto-derby/network)可以满足需求
+
 # auto-derby
 
 ![version](https://img.shields.io/github/v/tag/NateScarlet/auto-derby?label=version)
